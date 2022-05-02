@@ -4,6 +4,10 @@ import { connect } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import MainPage from "pages/MainPage";
+import SignInPage from "pages/RegistrationPage/SignInPage";
+import SignUpPage from "pages/RegistrationPage/SignUpPage";
+import FindPWPage from "pages/RegistrationPage/FindPWPage";
+import MyDetailPage from "pages/UserPage/MyDetailPage";
 
 class App extends Component {
   render() {
@@ -11,7 +15,11 @@ class App extends Component {
     return(
         <BrowserRouter>
           <Routes>
-            <Route exact path="/" component={MainPage} />
+            <Route path="/" element={<MainPage/>} />
+            <Route path="/login" element={<SignInPage/>} />
+            <Route path="/join" element={<SignUpPage/>} />
+            <Route path="/findPW" element={<FindPWPage/>} />
+            <Route path="/myDetail" element={<MyDetailPage/>} />
           </Routes>
         </BrowserRouter>
     )
