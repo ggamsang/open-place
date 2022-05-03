@@ -4,6 +4,7 @@ class Main extends Component {
   render() {
     return (
     <React.Fragment>
+      main
     </React.Fragment>
     )
   }
