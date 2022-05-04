@@ -8,7 +8,7 @@ const Wrapper = styled.div`
     width: 360px;
     height: 187px;
     border-radius: 6px;
-    overflow-y: scroll;
+    overflow-y: hidden;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
     ::-webkit-scrollbar { /* WebKit */
@@ -37,38 +37,47 @@ const Wrapper = styled.div`
             }
         }
     }
+    scroll-snap-type: x mandatory;	
+	display: flex;
+	-webkit-overflow-scrolling: touch;
+	overflow-x: scroll;
 `;
 const Slide = styled.div`
     min-width: 360px;
     width: 360px;
     height: 187px;
     background-image: url(${prop => prop.url});
-    background-size: cover;
     color: #FFF;
     position: relative;
-
+	scroll-snap-align: start;
+	text-align: center;
+    background-size: cover;
+	position: relative;
     .para1 {
         position: absolute;
         left: 17px; 
         top: 65px;       
-        font-family: 'Montserrat';
-        font-weight: Bold;
+        font-family: Montserrat;
+        font-weight: 700;
         font-size: 20px;
         line-height: 20px;
+        text-align: left;
     }
     .para2 {
         width: 99.39px;
         height: 34.79px;
         position: absolute;
-        align-items: center;
         top: 69.61px;
         right: 15.31px;
         border-radius: 33px;
         background-image: linear-gradient(132deg, #9672FB, #D772FB);
         font-family: Pretendard;
-        font-weight: SemiBold;
+        font-weight: 400;
         font-size: 17px;
         line-height: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 `;
 

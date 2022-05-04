@@ -1,8 +1,7 @@
 // REACT //
 import React, { Component } from "react";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 import MainPage from "pages/MainPage";
 import SignInPage from "pages/RegistrationPage/SignInPage";
 import SignUpPage from "pages/RegistrationPage/SignUpPage";
