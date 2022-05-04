@@ -17,14 +17,7 @@ const Client = styled.div`
   }
 
   .wrap_children {
-    min-width: ${
-      props=>window.location.pathname == "/"?
-      props.hidemenu == true? "900px":"1000px":"1000px"
-    };
-    max-width: 1920px;
     width: 100%;
-    // margin-left: auto;
-    // margin-right: auto;
   }
   @media only screen and (min-width : 0px) and (max-width : 1920px) {
     // display:flex;

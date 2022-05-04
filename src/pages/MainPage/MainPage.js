@@ -4,9 +4,8 @@ import MainContainer from 'containers/MainContainer/MainContainer'
 
 class MainPage extends Component {
   render() {
-    return (
-    <ClientTemplate>
-        <MainContainer {...this.props} />
+    return (<ClientTemplate>
+      <MainContainer {...this.props} />
     </ClientTemplate>)
   }
 }
