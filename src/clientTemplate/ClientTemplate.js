@@ -9,34 +9,6 @@ const Client = styled.div`
   width:100%;
   overflow-y: overlay;
   overflow-x: overlay;
-  ${window.location.pathname == "/" ?
-    null :
-    `
-    padding-top:90px;
-    `
-  }
-
-  .wrap_children {
-    min-width: ${
-      props=>window.location.pathname == "/"?
-      props.hidemenu == true? "900px":"1000px":"1000px"
-    };
-    max-width: 1920px;
-    width: 100%;
-    // margin-left: auto;
-    // margin-right: auto;
-  }
-  @media only screen and (min-width : 0px) and (max-width : 1920px) {
-    // display:flex;
-    // justify-content:flex-start;
-    display: flex;
-    flex-direction: column;
-  }
-  @media only screen and (min-width : 1920px) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 `;
 const Wrapper = styled.div`
   width: 100%;
