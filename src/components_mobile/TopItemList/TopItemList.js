@@ -8,7 +8,7 @@ const Wrapper = styled.div`
 const Title = styled.div`
     margin: auto;
     width: max-content;
-    font-family: 'Pretendard';
+    font-family: Pretendard;
     font-weight: 500;
     font-size: 24px;
     line-height: 29px;
