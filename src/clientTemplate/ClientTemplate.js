@@ -11,12 +11,12 @@ class ClientTemplate extends Component {
   render() {
     return (<Wrapper>
 
-      {/* {this.props.children} */}
+      {this.props.children}
 
-      <BottomMenu />
 
       {/* <Footer /> */}
 
+      <BottomMenu />
     </Wrapper>);
   }
 }

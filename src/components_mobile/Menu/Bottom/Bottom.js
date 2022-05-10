@@ -1,171 +1,131 @@
 import React from 'react';
 import styled from 'styled-components';
-import iPlay from "resources/menu-icon-hang.png";
-import iLearn from "resources/menu-icon-learn.png";
-import iMake from "resources/menu-icon-make.png";
-import iChat from "resources/menu-icon-chat.png";
-import shapeLogin from "resources/login_button_shape.svg";
-import shapeSignup from "resources/signup_button_shape.svg";
+import shapeRectangle from "resources/Rectangle.svg";
+import shapeLogin from "resources/login.svg";
+import shapeSignup from "resources/signup.svg";
+import logo from "resources/logo_xxxhdpi.png";
 
+import { IconPLAY, IconLEARN, IconMAKE, IconCOMMUNITY } from 'resources/iconPack';
+
+const WIDTH = 335
 const Wrapper = styled.div`
+
     width: 100%;
-    height: 124px;
-    position: relative;
-
-    *{border: 1px dashed #999;}
-
-    .top {
-        display: flex;
-        justify-content: space-between;
-        
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    .absolute { position: absolute;}
+   *{
+       padding: 0;
+       margin: 0;
+       border: 1px solid green;
     }
-    .middle { position: absolute;}
-    .bottom {
+
+    .login {
+        pading: 0;
         margin: 0;
-        margin-top: 6px;
-        padding-right: 13px;
-        padding-left: 13px;
-        display: flex;
-        justify-content: space-between;
-        height: 92px;
+        width: 113px;
+        height: 26px;
+        background-image: url(${shapeLogin});
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat; 
+    }
+    .signup {
+        width: 113px;
+        height: 26px;
+        background-image: url(${shapeSignup});
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat; 
         
-        img {
-            width: 22px;
-            height: 22px;
-            background-size: contain;
-            background-repeat: no-repeat;
-
-        }
-        .text {
-            font-family: Pretendard;
-            font-size: 12px;
-            font-weight: 500;
-            text-align: left;
-            line-height: 12px;
-            color: #4A4B4D;
-        }
-        .icon-wrapper {
+        span {
             width: max-content;
-            height: 50px;
-
-            .img {
-                width: max-content;
-                margin: auto;
-            }
-            :last-child {
-                margin-left: 39px;
-            }
+            color: white;
+            font-family: Pretendard;
+            font-weight: black;
+            font-size: 11px;
+            text-align: center;
         }
-        .chunker {
+    }
+    .background {
+        width: ${WIDTH}px;
+        height: 55px;
+        background-image: url(${shapeRectangle});
+        background-position: center center;
+        background-repeat: no-repeat; 
+        position: relative;
+       
+    }
+    .logo {
+        position: absolute;
+        width: 75px;
+        height: 75px;
+    }
+    ul {
+        list-style: none;
+
+        li {
             display: flex;
-            flex-direction: row;
-            align-items: center;
+            flex-direction: column;
+            margin: auto;
         }
     }
-`;
-const LoginButtonWrapper = styled.div`
-    width: 113px;
-    height: 26px;
-    background-image: url(${shapeLogin});
-    background-size: cover;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    .row {
+        width: ${WIDTH}px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
 
-    .text {
-        width: max-content;
+    .right-margin42{ margin-right: 40px; }
+    .left-margin42{ margin-left: 40px; }
+    .right-margin22{ margin-right: 22px; }
+    .left-margin22{ margin-left: 22px; }
+    .left-margin35{ margin-left: 35px; }
+    span {
         font-family: Pretendard;
-        font-weight: 800;
+        font-weight: 700;
         font-size: 11px;
         text-align: center;
-        line-height: 11px;
+        line-height: 14px;
         color: #FFF;
-        height: 11px;
+    }
+    .topmargin3 {
+        margin-top: 3px;
+    }
+    .bottommargin {
+        margin-bottom: 23px;
     }
 `;
-const SignupButtonWrapper = styled.div`
-    width: 113px;
-    height: 26px;
-    background-image: url(${shapeSignup});
-    background-size: cover;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-    .text {
-        width: max-content;
-        height: 11px;
-        font-family: Pretendard;
-        font-weight: 800;
-        font-size: 11px;
-        text-align: center;
-        line-height: 11px;
-        color: #FFF;
-    }
-`;
 
 class Bottom extends React.Component {
     render() {
-        return (
-            <Wrapper>
-
-                <div className='top'>
-                    {/* 로그인 아닐 때, */}
-                    <LoginButtonWrapper>
-                        <div></div>
-                        <div className="text">
-                            로그인하기
-                        </div>
-                    </LoginButtonWrapper>
-
-                    <SignupButtonWrapper>
-                        <div></div>
-                        <div className="text">
-                            회원가입
-                        </div>
-                    </SignupButtonWrapper>
+        return (<Wrapper>
+            <div className='row'>
+                <div className='login'>
+                    <span>로그인하기</span>
                 </div>
-
-                <div className='middle'>
-                    {/* 나는 아이콘! */}
+                <div className='signup'>
+                    <span>회원가입</span>
                 </div>
-
-                <div className='bottom'>
-                    <div className='chunker'>
-                        <div className='icon-wrapper'>
-                            <div className='img'>
-                                <img alt={"icon"} src={iPlay} />
-                            </div>
-                            <div>놀기</div>
-                        </div>
-                        <div className='icon-wrapper'>
-                            <div className='img'>
-                                <img alt={"icon"} src={iLearn} />
-                            </div>
-                            <div>배우기</div>
-                        </div>
-                    </div>
-
-                    <div className='chunker'>
-                        <div className='icon-wrapper'>
-                            <div className='img'>
-                                <img alt={"icon"} src={iMake} />
-                            </div>
-                            <div>만들기</div>
-                        </div>
-                        <div className='icon-wrapper'>
-                            <div className='img'>
-                                <img alt={"icon"} src={iChat} />
-                            </div>
-                            <div>소통하기</div>
-                        </div>
-                    </div>
-
-                </div>
-            </Wrapper>
-        )
+            </div>
+            <div className='row background topmargin3'>
+                <ul className='row'>
+                    <li className='left-margin35'><IconPLAY /></li>
+                    <li className='right-margin42'><IconLEARN /></li>
+                </ul>
+                <ul className='row'>
+                    <li className='left-margin42'><IconMAKE /></li>
+                    <li className='right-margin22'><IconCOMMUNITY /></li>
+                </ul>
+            </div>
+            <img alt="icon" className="logo" src={logo} />
+        </Wrapper>)
     }
 }
+
 export default Bottom;
