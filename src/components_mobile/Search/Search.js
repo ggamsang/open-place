@@ -3,8 +3,10 @@ import styledComponents from 'styled-components';
 import zoombg from "resources/zoom.png";
 import filterbg from "resources/filter.png";
 
+const WIDTH = 335;
 const Wrapper = styledComponents.div`
-    width: 100vw;
+    width: ${WIDTH}px;
+    margin: auto;
 `;
 const InputWrapper = styledComponents.div`
     margin: auto;
@@ -12,8 +14,8 @@ const InputWrapper = styledComponents.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    max-width: 360px;
-    width: 360px;
+    max-width: ${WIDTH}px;
+    width: 100%;
     height: 35px;
     border-radius: 6px;
     background-color: white;
@@ -61,12 +63,10 @@ const InputWrapper = styledComponents.div`
         margin-left: 15px;
     }
 `;
-const Zoom = () => <div style={{}}>&nbsp;</div>
-const Filter = () => <div style={{}}>&nbsp;</div>
 
 class Search extends React.Component {
     handleKeyDown = e => {
-        if (e.key === "Enter") {
+        if (e.key === "Enter" && e.target.value) {
             alert(e.target.value);
         }
     }
@@ -78,11 +78,9 @@ class Search extends React.Component {
         return (<Wrapper>
             <InputWrapper>
                 <span className="zoom" onClick={() => this.handleZoomClicked()}>
-                    <Zoom />
                 </span>
                 <input id="search" placeholder='경험 찾아보기' onKeyDown={e => this.handleKeyDown(e)} />
                 <span className='filter'>
-                    <Filter />
                 </span>
             </InputWrapper>
         </Wrapper>);
