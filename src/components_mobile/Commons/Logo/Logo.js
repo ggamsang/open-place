@@ -20,6 +20,7 @@ const Wrapper = styled.div`
         position:absolute;
         bottom:0px;
         font-family:Montserrat;
+        font-weight:bold;
         font-size:${resolution(32)}px;
         color:white;
         text-shadow:5px 5px 6px #00000029;        
@@ -49,19 +50,28 @@ const Wrapper_small = styled.div`
 `
 
 class Logo extends Component {
+  constructor(props){
+      super(props);
+      this.onClickEvent = this.onClickEvent.bind(this);
+  }
+
+  onClickEvent = () =>{
+    this.props.onClickEvent();
+  }
+
   render() {
     return (
     <React.Fragment>
         {
             this.props.type == 'big'?
-            <Wrapper>
-                <img src={OWD_logo_small}/>
+            <Wrapper onClick={this.onClickEvent}>
+                <img style={this.props.style} src={OWD_logo_small}/>
                 <div className='text'>{this.props.text}</div>
             </Wrapper>
             :
             this.props.type=='small'?
-            <Wrapper_small>
-                <img src={OWD_logo_small}/>
+            <Wrapper_small onClick={this.onClickEvent}>
+                <img style={this.props.style} src={OWD_logo_small}/>
                 <div className='text'>{this.props.text}</div>
             </Wrapper_small>
             :
