@@ -70,8 +70,8 @@ const Wrapper = styled.div`
     }
 `;
 const Slide = styled.div`
-    min-width: 360px;
-    width: 360px;
+    min-width: ${WIDTH}px;
+    width: 100%;
     height: 187px;
     background-image: url(${prop => prop.url});
     color: #FFF;
@@ -120,14 +120,29 @@ const Slide = styled.div`
 const strDETAILS = "더 알아보기";
 const strNewExperience1 = "매일 새로운 경험";
 const strNewExperience2 = "OPEN MARKET";
+
 class Slider extends React.Component {
-    getwidth = () => {
+    pages = ['', '', '', '']
+    constructor(prop) {
+        super(prop);
+        this.state = {
+            active: 1
+        }
+    }
+    goto = (slide) => {
         const node = document.getElementById('slide');
-        console.log(node.scrollLeft);
+        node.scrollTo({ left: slide * WIDTH, behavior: 'smooth' });
+    }
+
+    handleScroll = () => {
+        const node = document.getElementById('slide');
+        if (node.scrollLeft % WIDTH === 0) {
+            this.setState({ active: Math.floor(node.scrollLeft / WIDTH) + 1 });
+        }
     }
     render() {
         return (
-            <Wrapper id="slide" onClick={() => this.getwidth()}>
+            <Wrapper id="slide" onScroll={() => this.handleScroll()} >
 
                 <Slide url={img0}>
                     <div className='para1'>
@@ -141,15 +156,19 @@ class Slider extends React.Component {
                         </div>
                     </div>
                 </Slide>
-                <Slide url={img0} />
+                <Slide url={'https://i.picsum.photos/id/1011/5472/3648.jpg?hmac=Koo9845x2akkVzVFX3xxAc9BCkeGYA9VRVfLE4f0Zzk'} />
                 <Slide url={img0} />
                 <Slide url={img0} />
 
                 <ul className='pagination'>
-                    <li className='active'>&nbsp;</li>
-                    <li>&nbsp;</li>
-                    <li>&nbsp;</li>
-                    <li>&nbsp;</li>
+                    {this.pages.map((e, i) =>
+                        <li
+                            key={i}
+                            onClick={() => this.goto(i)}
+                            className={i + 1 === this.state.active ? 'active' : ''}>
+                            {e}
+                        </li>
+                    )}
                 </ul>
             </Wrapper>);
     }
