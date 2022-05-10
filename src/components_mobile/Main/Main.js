@@ -4,6 +4,7 @@ import Search from 'components_mobile/Search';
 import Slide from 'components_mobile/Slide';
 import TopItemList from 'components_mobile/TopItemList';
 import styled from 'styled-components';
+import Fade from 'react-reveal/Fade';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -29,16 +30,17 @@ class Main extends Component {
   render() {
     return (
       <Wrapper>
+
+        <Fade>
         <GradationCard angle={30} />
         <ContentWrapper>
-
           <Search />
 
           <Slide />
 
           <TopItemList />
-
         </ContentWrapper>
+          </Fade>
       </Wrapper>
     )
   }

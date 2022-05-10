@@ -3,8 +3,6 @@ import styled/*, { keyframes }*/ from "styled-components";
 // import Footer from "components_mobile/Footer"
 import BottomMenu from "components_mobile/Menu/Bottom";
 
-const Wrapper = styled.div` `;
-
 const Client = styled.div`
   position:absolute;
   top: 0px;
@@ -23,9 +21,9 @@ class ClientTemplate extends Component {
   render() {
     return (<Wrapper>
 
-      {/* {this.props.children} */}
+      {this.props.children}
 
-      <BottomMenu />
+      {/* <BottomMenu /> */}
 
       {/* <Footer /> */}
 

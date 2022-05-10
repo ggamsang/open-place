@@ -101,7 +101,7 @@ class SignIn extends Component {
       return (
         <Wrapper>
         <div className='box alignCenter justifyCenter'>
-          <Logo type="big" text={"OPEN MARKET"}/>
+          <Logo onClickEvent={()=>window.location.href = "/"} type="big" text={"OPEN MARKET"}/>
         </div>
         <div className='box column alignCenter'>
             <div className='inputBox'>

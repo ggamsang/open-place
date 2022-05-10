@@ -42,7 +42,7 @@ const Wrapper = styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
-    .text{
+    .text_{
       width:100%;
       height:${resolution(31)}px;
       display:flex;justify-content:center;align-items:center;
@@ -81,6 +81,8 @@ class SignUp extends Component {
     onClickAllAgree = ()=>{
       console.log(this.state.agreeAll)
       this.setState({agreeAll:!this.state.agreeAll});
+      this.setState({agree1:!this.state.agreeAll});
+      this.setState({agree2:!this.state.agreeAll});
     }
     onClickAgree1 = ()=>{
       this.setState({agree1:!this.state.agree1});
@@ -93,7 +95,7 @@ class SignUp extends Component {
       return (
         <Wrapper>
         <div className='box alignCenter justifyCenter'>
-          <Logo type="small" text={"OPEN MARKET"}/>
+          <Logo onClickEvent={()=>window.location.href = "/login"} type="small" text={"OPEN MARKET"}/>
         </div>
         <div className='inputBox'>
           <InputNormal onChangeValue={this.onChangeId}
@@ -119,35 +121,9 @@ class SignUp extends Component {
         </div>
         <div className='buttonWrap'>
             <GradientButton  onClickEvent={()=>window.location.href="/join"} text="가입하기" width={292} height={52} front={'#365AF1'} end={'#FF4343'} deg={270} radius={28}/>
-            <div className="text">이미 계정이 있으신가요?</div>
-            <GradientButton  onClickEvent={()=>{}} style={{marginBottom:"20px"}} text="로그인" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28}/>
+            <div className="text_">이미 계정이 있으신가요?</div>
+            <GradientButton  onClickEvent={()=>window.location.href="/login"} style={{marginBottom:"20px"}} text="로그인" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28}/>
         </div>
-        {/* <div className='box column alignCenter'>
-            <div className='inputBox'>
-
-            <InputNormal
-                         onChangeValue={this.onChangeId} 
-                         onClear={()=>{this.setState({user_id:"",login:Login.ready})}} 
-                         value={this.state.user_id}  placeholder={"아이디를 입력하세요"} 
-
-                         width={300} height={48} fontSize={17} color={"#EAF2FE"} radius={3} warning={this.state.login == Login.failed}/>
-            
-            <Warning warning={this.state.login==Login.failed}>{ this.state.login==Login.failed && <Fade><div>{ "아이디 혹은 비밀번호가 틀립니다."}</div></Fade> }</Warning>
-                        
-            <InputNormal type="password" 
-                         onChangeValue={this.onChangePassword} 
-                         onClear={()=>{this.setState({password:"",login:Login.ready})}} 
-                         value={this.state.password} placeholder={"비밀번호를 입력하세요"} 
-                         
-                         width={300} height={48} fontSize={17} color={"#EAF2FE"} radius={3} warning={this.state.login == Login.failed}/>
-            </div>
-            <GradientButton  onClickEvent={this.onClickLogin} style={{marginBottom:"20px"}} text="로그인" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28}/>
-            <GradientButton  onClickEvent={()=>window.location.href="/join"} style={{marginBottom:"20px"}} text="회원가입" width={292} height={52} front={'#365AF1'} end={'#FF4343'} deg={270} radius={28}/>
-          <div className='login_button_wrap'>
-            <ImageButton style={{marginRight:"6px",marginLeft:"6px"}} width={50} height={50} color={"#1877F2"} radius={25}/>
-            <ImageButton style={{marginRight:"6px",marginLeft:"6px"}} width={50} height={50} color={"#F14336"} radius={25}/>
-          </div>
-        </div>     */}
         </Wrapper>   
       );
     }
