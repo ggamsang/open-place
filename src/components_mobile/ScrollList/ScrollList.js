@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Item from "commons/Item";
+import { WIDTH } from "constant";
 
-const WIDTH = 335;
 const Wrapper = styled.div`
     -ms-overflow-style: none; /* Internet Explorer 10+ */
     scrollbar-width: none; /* Firefox */

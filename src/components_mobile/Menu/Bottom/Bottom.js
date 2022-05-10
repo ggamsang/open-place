@@ -15,12 +15,13 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: fixed;
+    // position: fixed;
     .absolute { position: absolute;}
+
    *{
        padding: 0;
        margin: 0;
-       border: 1px solid green;
+    //    border: 1px solid green;
     }
 
     .login {
@@ -32,6 +33,10 @@ const Wrapper = styled.div`
         background-position: center center;
         background-size: cover;
         background-repeat: no-repeat; 
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .signup {
         width: 113px;
@@ -40,6 +45,10 @@ const Wrapper = styled.div`
         background-position: center center;
         background-size: cover;
         background-repeat: no-repeat; 
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
         
         span {
             width: max-content;
@@ -63,6 +72,8 @@ const Wrapper = styled.div`
         position: absolute;
         width: 75px;
         height: 75px;
+        top: -60%;
+        left: 40%;
     }
     ul {
         list-style: none;
@@ -105,6 +116,7 @@ const Wrapper = styled.div`
 class Bottom extends React.Component {
     render() {
         return (<Wrapper>
+
             <div className='row'>
                 <div className='login'>
                     <span>로그인하기</span>
@@ -118,12 +130,14 @@ class Bottom extends React.Component {
                     <li className='left-margin35'><IconPLAY /></li>
                     <li className='right-margin42'><IconLEARN /></li>
                 </ul>
+
+                <img alt="icon" className="logo" src={logo} />
+
                 <ul className='row'>
                     <li className='left-margin42'><IconMAKE /></li>
                     <li className='right-margin22'><IconCOMMUNITY /></li>
                 </ul>
             </div>
-            <img alt="icon" className="logo" src={logo} />
         </Wrapper>)
     }
 }

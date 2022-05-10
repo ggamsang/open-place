@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import img0 from "resources/sample-image-01.png";
 import arrow from "resources/arrow-right.png";
+import { WIDTH } from "constant"
 
-const WIDTH = 335
 const Wrapper = styled.div`
     margin: auto;
     margin-top: 10px;
@@ -19,26 +19,6 @@ const Wrapper = styled.div`
     }
     display: flex;
     position: relative;
-    .dots {
-        padding: 0;
-        margin: 0;
-        position: absolute;
-        top: 162px;
-        list-style: none;
-        display: flex;
-        flex-direction: row;
-
-        li {
-            width: 8px;
-            height: 8px;
-            border-radius: 23px;
-            background-color: #ECF1F7;
-            margin-right: 8px;
-            :last-child {
-                margin-right: 0px;
-            }
-        }
-    }
     scroll-snap-type: x mandatory;	
 	display: flex;
 	-webkit-overflow-scrolling: touch;
@@ -129,21 +109,21 @@ class Slider extends React.Component {
             active: 1
         }
     }
-    goto = (slide) => {
+
+    goto = async (slide) => {
         const node = document.getElementById('slide');
-        node.scrollTo({ left: slide * WIDTH, behavior: 'smooth' });
+        await node.scrollTo({ left: slide * WIDTH, behavior: 'smooth' });
     }
 
     handleScroll = () => {
         const node = document.getElementById('slide');
-        if (node.scrollLeft % WIDTH === 0) {
-            this.setState({ active: Math.floor(node.scrollLeft / WIDTH) + 1 });
-        }
+        // if (node.scrollLeft % WIDTH === 0) { }
+        this.setState({ active: Math.floor(node.scrollLeft / WIDTH) + 1 });
     }
+
     render() {
         return (
             <Wrapper id="slide" onScroll={() => this.handleScroll()} >
-
                 <Slide url={img0}>
                     <div className='para1'>
                         {strNewExperience1}<br />
