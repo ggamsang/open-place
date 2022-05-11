@@ -2,7 +2,7 @@ import React from 'react';
 import ClientTemplate from 'clientTemplate/ClientTemplate';
 import TermsOfServiceContainer from 'containers/TermsOfServiceContainer/TermsOfServiceContainer';
 
-class TermsOfService extends React.Component {
+class TermsOfServicePage extends React.Component {
   render() {
     return (
       <ClientTemplate dont_need_footer={true}>
@@ -12,4 +12,4 @@ class TermsOfService extends React.Component {
   }
 }
 
-export default TermsOfService;
+export default TermsOfServicePage;
