@@ -8,8 +8,11 @@ import Fade from 'react-reveal/Fade';
 
 const Wrapper = styled.div`
   width: 100%;
+  position: relative;
 `;
 const GradationCard = styled.div`
+  position: absolute;
+  top: 0;
   width: 100%;
   height: 220px;
   background-size: 200% 200%;
@@ -17,32 +20,40 @@ const GradationCard = styled.div`
   background-image: linear-gradient(${prop => prop.angle}deg, #501B1B, #655FFA, #D30E0E);
 `;
 const ContentWrapper = styled.div`
-  transform: translate(0px, -170px);
+  z-index: 1;
+  position: relative;
+  .blanker {
+    height: 49px;
+  }
 `;
 
 class Main extends Component {
   componentDidMount() {
-    fetch(host)
-      .then(res => res.json())
-      .then(d => console.log({d}))
-      .catch(e => console.error(e));
+    // fetch(host)
+    // .then(res => res.json())
+    // .then(d => console.log({ d }))
+    // .catch(e => console.error(e));
   }
   render() {
-    return (
-      <Wrapper>
 
-        <Fade>
-        <GradationCard angle={30} />
-        <ContentWrapper>
-          <Search />
+    return (<Wrapper>
+  <Fade>
+      <GradationCard angle={30} />
 
-          <Slide />
+      <ContentWrapper>
 
-          <TopItemList />
-        </ContentWrapper>
-          </Fade>
-      </Wrapper>
-    )
+        <div className='blanker'>&nbsp;</div>
+
+        <Search />
+
+        <Slide />
+
+        <TopItemList />
+
+      </ContentWrapper>
+  </Fade>
+</Wrapper>)
+
   }
 }
 

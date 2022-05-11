@@ -11,6 +11,7 @@ const Wrapper = styled.div`
     padding-right: 14px;
     padding-left: 13px;
     padding-bottom: 14px;
+    
     .sub-wrapper {
         margin-top: 5px;
     }

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Item from "commons/Item";
+import { WIDTH } from "constant";
 
 const Wrapper = styled.div`
     -ms-overflow-style: none; /* Internet Explorer 10+ */
@@ -8,12 +9,15 @@ const Wrapper = styled.div`
     &::-webkit-scrollbar {
         display: none;
     }
+    margin: auto;
+    width: ${WIDTH}px;
 `;
 
 class ScrollList extends React.Component {
     render() {
         const { list } = this.props;
-        console.log({ list })
+        // console.log({ list })
+
         return (<Wrapper>
             {list && list.length > 0 && list.map((item, index) =>
                 item.type === "item"
