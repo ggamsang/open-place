@@ -11,8 +11,9 @@ const Wrapper = styled.div`
     position: fixed;
     bottom: 23px;
     &.up {
+      margin-top: 30px;
       position: relative;
-      bottom: 100px;
+      // bottom: 100px;
     }
     width: 100%;
   }
@@ -37,10 +38,12 @@ const Wrapper = styled.div`
   }
 `;
 
+const GAP = 600;
+
 class ClientTemplate extends Component {
   constructor(props) {
     super(props);
-    this.state = { up: false, }
+    this.state = { up: false, login: false }
   }
   componentDidMount() {
     window.addEventListener('scroll', e => this.handleScroll(e));
@@ -54,7 +57,7 @@ class ClientTemplate extends Component {
         return;
       }
       console.log(rect.height + rect.y);
-      if (rect.height + rect.y < 600) {
+      if (rect.height + rect.y < GAP) {
         this.setState({ up: true });
       } else {
         this.setState({ up: false });
@@ -65,7 +68,7 @@ class ClientTemplate extends Component {
   render() {
 
     return (<>
-
+      <button style={{ position: "absolute", zIndex: "998", left: "60px" }} onClick={() => this.setState({ login: !this.state.login })}>demo:{this.state.login ? "로그아웃" : "로그인"}</button>
       {/* alarm */}
       <AlarmContainer />
 
@@ -77,13 +80,13 @@ class ClientTemplate extends Component {
         </div>
 
         <div id="nav" className={this.state.up ? 'nav up' : 'nav'}>
-          <BottomMenu />
+          <BottomMenu up={this.state.up} login={this.state.login} />
         </div>
 
         <div className='bottom'>
-          {this.props.dont_need_footer
-            ? <></>
-            : <Footer />}
+          <div style={{ height: "10px" }}></div>
+          <Footer />
+          {/* {this.props.dont_need_footer ? <></> : <></>} */}
         </div>
 
         <div id='dimmer'> &nbsp; </div>
