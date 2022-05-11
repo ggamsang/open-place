@@ -4,24 +4,21 @@ import shapeRectangle from "resources/Rectangle.svg";
 import shapeLogin from "resources/login.svg";
 import shapeSignup from "resources/signup.svg";
 import logo from "resources/logo_xxxhdpi.png";
+import { WIDTH } from 'constant';
 
 import { IconPLAY, IconLEARN, IconMAKE, IconCOMMUNITY } from 'resources/iconPack';
 
-const WIDTH = 335
 const Wrapper = styled.div`
-
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    // position: fixed;
     .absolute { position: absolute;}
 
    *{
        padding: 0;
        margin: 0;
-    //    border: 1px solid green;
     }
 
     .login {
