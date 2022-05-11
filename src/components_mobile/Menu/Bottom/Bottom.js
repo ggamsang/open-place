@@ -4,9 +4,13 @@ import shapeRectangle from "resources/Rectangle.svg";
 import shapeLogin from "resources/login.svg";
 import shapeSignup from "resources/signup.svg";
 import logo from "resources/logo_xxxhdpi.png";
+import arrow from "resources/Iconly-Bold-light-outline-arrow.svg";
 import { WIDTH } from 'constant';
 
+import profile from "resources/Profile.svg";
 import { IconPLAY, IconLEARN, IconMAKE, IconCOMMUNITY } from 'resources/iconPack';
+import { Fade } from 'react-reveal';
+import { goto } from 'smallfuncs';
 
 const Wrapper = styled.div`
     width: 100%;
@@ -46,6 +50,15 @@ const Wrapper = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        
+        .profile {
+            width: 11px;
+            height: 13px;
+            background-size: cover;
+            background-image: url(${profile});
+            background-position: center center;
+            margin-right: 8.5px;
+        }
         
         span {
             width: max-content;
@@ -111,24 +124,49 @@ const Wrapper = styled.div`
 
 
 class Bottom extends React.Component {
+    gotoTop = () => {
+        const template = document.getElementById('body') || document.documentElement;
+        console.log(template, template.scrollHeight)
+        template && template.scrollTo({ top: 0, behavior: "smooth" });
+    }
     render() {
         return (<Wrapper>
 
-            <div className='row'>
-                <div className='login'>
-                    <span>로그인하기</span>
+            {this.props.login
+                ? <div className='row'>
+                    <div className='login' onClick={() => goto("CREATE-ITEM")}>
+                        <span> + 경험등록하기 </span>
+                    </div>
+                    <div className='signup' onClick={() => goto("MYDETAIL")}>
+                        <div className='profile' />
+                        {/* <img src={profile} /> */}
+                        <span>마이페이지</span>
+                    </div>
                 </div>
-                <div className='signup'>
-                    <span>회원가입</span>
+
+                : <div className='row'>
+                    <div className='login' onClick={() => goto("LOGIN")}>
+                        <span> + 로그인하기</span>
+                    </div>
+                    <div className='signup' onClick={() => goto("SIGNUP")}>
+                        <div className='profile' />
+                        {/* <img src={profile} /> */}
+                        <span>회원가입</span>
+                    </div>
                 </div>
-            </div>
+            }
             <div className='row background topmargin3'>
                 <ul className='row'>
                     <li className='left-margin35'><IconPLAY /></li>
                     <li className='right-margin42'><IconLEARN /></li>
                 </ul>
 
-                <img alt="icon" className="logo" src={logo} />
+                <Fade>
+                    {this.props.up
+                        ? <img alt="icon" onClick={() => this.gotoTop()} className="logo" src={arrow} />
+                        : <img alt="icon" onClick={() => goto("MAIN")} className="logo" src={logo} />
+                    }
+                </Fade>
 
                 <ul className='row'>
                     <li className='left-margin42'><IconMAKE /></li>
