@@ -81,7 +81,9 @@ class ClientTemplate extends Component {
         </div>
 
         <div className='bottom'>
-          <Footer />
+          {this.props.dont_need_footer
+            ? <></>
+            : <Footer />}
         </div>
 
         <div id='dimmer'> &nbsp; </div>

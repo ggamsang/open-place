@@ -8,6 +8,7 @@ import SignUpPage from "pages/RegistrationPage/SignUpPage";
 import FindPWPage from "pages/RegistrationPage/FindPWPage";
 import MyDetailPage from "pages/UserPage/MyDetailPage";
 import IntroPage from "pages/IntroPage";
+import TermsOfServicePage from "pages/TermsOfServicePage";
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
           <Route path="/join" element={<SignUpPage />} />
           <Route path="/findPW" element={<FindPWPage />} />
           <Route path="/myDetail" element={<MyDetailPage />} />
+          <Route path="/termsofservice" element={<TermsOfServicePage />} />
         </Routes>
       </BrowserRouter>
     )
