@@ -9,6 +9,11 @@ import Fade from 'react-reveal/Fade';
 const Wrapper = styled.div`
   width: 100%;
   position: relative;
+  .search_box{
+    width:100%;
+    display:flex;
+    justify-content:center;
+  }
 `;
 const GradationCard = styled.div`
   position: absolute;
@@ -43,8 +48,7 @@ class Main extends Component {
       <ContentWrapper>
 
         <div className='blanker'>&nbsp;</div>
-
-        <Search />
+        <div className='search_box'><Search /></div>
 
         <Slide />
 

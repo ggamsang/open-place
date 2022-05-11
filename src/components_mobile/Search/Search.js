@@ -5,8 +5,8 @@ import filterbg from "resources/filter.png";
 
 const WIDTH = 335;
 const Wrapper = styledComponents.div`
-    width: ${WIDTH}px;
-    margin: auto;
+    width: ${props=>props.width==null?WIDTH:props.width}px;
+    // margin: auto;
 `;
 const InputWrapper = styledComponents.div`
     margin: auto;
@@ -14,7 +14,7 @@ const InputWrapper = styledComponents.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    max-width: ${WIDTH}px;
+    width: ${props=>props.width==null?WIDTH:props.width}px;
     width: 100%;
     height: 35px;
     border-radius: 6px;
@@ -75,8 +75,8 @@ class Search extends React.Component {
         input.value && alert(input.value);
     }
     render() {
-        return (<Wrapper>
-            <InputWrapper>
+        return (<Wrapper width={this.props.width}>
+            <InputWrapper width={this.props.width}>
                 <span className="zoom" onClick={() => this.handleZoomClicked()}>
                 </span>
                 <input id="search" placeholder='경험 찾아보기' onKeyDown={e => this.handleKeyDown(e)} />
