@@ -4,7 +4,8 @@ import shapeRectangle from "resources/Rectangle.svg";
 import shapeLogin from "resources/login.svg";
 import shapeSignup from "resources/signup.svg";
 import logo from "resources/logo_xxxhdpi.png";
-import arrow from "resources/Iconly-Bold-light-outline-arrow.svg";
+// import arrow from "resources/Iconly-Bold-light-outline-arrow.svg";
+import arrow from "resources/Iconly-Bold-left-arrow.svg";
 import { WIDTH } from 'constant';
 
 import profile from "resources/Profile.svg";
