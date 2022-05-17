@@ -2,36 +2,48 @@ import React, { Component } from 'react'
 import styled/*, { keyframes }*/ from "styled-components";
 import Footer from "components_mobile/Footer"
 import BottomMenu from "components_mobile/Menu/Bottom";
+import AlarmContainer from "containers/AlarmContainer"
 
 const Wrapper = styled.div`
   z-index: 1;
   .nav {
-    z-index: 10;
+    z-index: 999;
     position: fixed;
     bottom: 23px;
     &.up {
+      margin-top: 30px;
       position: relative;
-      bottom: 100px;
+      // bottom: 100px;
     }
     width: 100%;
   }
   .main { }
+  .disabled {
+    pointer-events: none;
+  }
   .bottom {
     .blanker {
       height: 117px;
     }
   }
-  .damm {
-    position: relative;
-    z-index: 10;
-    height: 80px;
+  .dimmer {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    background: linear-gradient(180deg, #707070, #383838);
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    opacity: 50%;
   }
 `;
+
+const GAP = 600;
 
 class ClientTemplate extends Component {
   constructor(props) {
     super(props);
-    this.state = { up: false }
+    this.state = { up: false, login: false }
   }
   componentDidMount() {
     window.addEventListener('scroll', e => this.handleScroll(e));
@@ -45,7 +57,7 @@ class ClientTemplate extends Component {
         return;
       }
       console.log(rect.height + rect.y);
-      if (rect.height + rect.y < 600) {
+      if (rect.height + rect.y < GAP) {
         this.setState({ up: true });
       } else {
         this.setState({ up: false });
@@ -55,7 +67,12 @@ class ClientTemplate extends Component {
 
   render() {
 
-    return (
+    return (<>
+      <button style={{ position: "absolute", zIndex: "998", left: "60px" }} onClick={() => this.setState({ login: !this.state.login })}>demo:{this.state.login ? "로그아웃" : "로그인"}</button>
+      {/* alarm */}
+      <AlarmContainer />
+
+      {/*  */}
       <Wrapper id="client-template">
 
         <div id="main" className='main'>
@@ -63,15 +80,19 @@ class ClientTemplate extends Component {
         </div>
 
         <div id="nav" className={this.state.up ? 'nav up' : 'nav'}>
-          <BottomMenu />
+          <BottomMenu up={this.state.up} login={this.state.login} />
         </div>
 
         <div className='bottom'>
+          <div style={{ height: "10px" }}></div>
           <Footer />
-          {/* <div className='blanker'>&nbsp;</div> */}
+          {/* {this.props.dont_need_footer ? <></> : <></>} */}
         </div>
 
-      </Wrapper>);
+        <div id='dimmer'> &nbsp; </div>
+
+      </Wrapper>
+    </>);
   }
 }
 
