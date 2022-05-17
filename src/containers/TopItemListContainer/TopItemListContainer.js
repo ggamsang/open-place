@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ScrollList from "components_mobile/ScrollList"
+import { connect } from "react-redux";
+import { GetTopItemListRequest } from "actions/Items/TopList";
 
 const dummy = [
   {
@@ -24,12 +26,25 @@ const dummy = [
   }
 ]
 class TopItemListContainer extends Component {
+  async componentDidMount(){
+    await this.props.GetTopItemListRequest().then(async()=>{
 
+    });
+  }
   render() {
-    return (<React.Fragment>
-      <ScrollList list={dummy} />
+    console.log(this.props.topItemList);
+   return (<React.Fragment>
+      <ScrollList list={this.props.topItemList} />
     </React.Fragment>)
   }
 }
 
-export default TopItemListContainer;
+const mapStateToProps = (state) => ({
+  topItemList:state.TopList.status.itemList,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  GetTopItemListRequest: ()=>dispatch(GetTopItemListRequest())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopItemListContainer);

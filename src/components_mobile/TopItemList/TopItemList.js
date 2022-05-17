@@ -25,8 +25,6 @@ class TopItemList extends React.Component {
         return (<Wrapper>
             <Title>{strTopItemList}</Title>
             <TopItemListContainer />
-            <TopItemListContainer />
-            <TopItemListContainer />
         </Wrapper>);
     }
 }
