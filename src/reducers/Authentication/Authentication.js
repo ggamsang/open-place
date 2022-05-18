@@ -23,6 +23,8 @@ export default function Authentication(state, action) {
     state = initialState;
   }
 
+  console.log("track redux: ", action);
+  
   switch (action.type) {
     case types.SET_ACTIVE:
       return update(state, {

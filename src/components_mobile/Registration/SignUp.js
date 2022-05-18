@@ -65,10 +65,17 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      page1: true, page2: false,
-      first_name: "", last_name: "", phone: "", phoneChecked: false,
-      user_id: "", password: "", password2: "",
-      agreeAll: false, agree1: false, agree2: false,
+      page1: false,//true, 
+      page2: true,//false,
+      first_name: "", last_name: "",
+      phone: "",
+      phoneChecked: false,
+      user_id: "",
+      password: "",
+      password2: "",
+      agreeAll: false,
+      agree1: false,
+      agree2: false,
     }
     this.onChangeFirstName = this.onChangeFirstName.bind(this);
     this.onChangeLastName = this.onChangeLastName.bind(this);
@@ -84,24 +91,43 @@ class SignUp extends Component {
   }
 
   SignUp = () => {
+    const { user_id } = this.state;
+    if (!user_id) {
+      alert('아이디를 입력해주세요.');
+      return;
+    }
     const { agree1, agree2 } = this.state;
     if (!agree1 || !agree2) {
-      alert('동의가 필요합니다.');
+      alert('이용약관을 동의해주세요.');
       return;
     }
 
-    const { user_id, password, password2, first_name, last_name } = this.state;
+    const { password, password2, } = this.state;
+
     if (password != password2) {
-      alert('');
+      alert('비밀번호를 확인하여주세요.');
       return;
     }
+
+    const { first_name, last_name } = this.state;
     const data = {
       email: user_id,
       password: password,
       nickname: `${first_name} ${last_name}`
     }
-    console.log({ data });
-    this.props.requestSignUp && this.props.requestSignUp(data);
+
+    this.props.SignUpRequest &&
+      this.props.SignUpRequest(data)
+        .then(res => {
+          console.log(res);
+          if (res.type === "AUTH_SIGNUP_SUCCESS") {
+            alert('회원가입을 축하드립니다.');
+            window.location.href = "/";
+          }
+          else {
+            alert(res.detail + '와 같은 이유로 회원가입을 하지 못하였습니다.');
+          }
+        });
   };
 
   onChangeFirstName = (event) => {
@@ -151,6 +177,8 @@ class SignUp extends Component {
           <div className='box alignCenter justifyCenter'>
             <Logo onClickEvent={() => window.location.href = "/login"} type="small" text={"OPEN MARKET"} />
           </div>
+
+          {/*본인인증 */}
           <Fade when={this.state.page1}>
             <div className="box column alignCenter" style={{ display: `${this.state.page1 == false ? "none" : "flex"}` }}>
               <div className='inputBox'>
@@ -185,6 +213,8 @@ class SignUp extends Component {
               </div>
             </div>
           </Fade>
+
+          {/* id, pw, pw2 */}
           <Fade when={this.state.page2}>
             <div className="box column alignCenter" style={{ display: `${this.state.page2 == false ? "none" : "flex"}` }}>
               <div className='inputBox' style={{ marginTop: "32px" }}>
@@ -198,10 +228,14 @@ class SignUp extends Component {
                   placeholder={"비밀번호를 입력하세요"}
                   width={328} height={48} fontSize={17} color={"#EAF2FE"} radius={3} />
 
-                <InputNormal style={{ marginBottom: "16px" }} onChangeValue={this.onChangePassword2}
+                <InputNormal
+                  style={{ marginBottom: "16px" }}
+                  onChangeValue={this.onChangePassword2}
                   value={this.state.password2}
                   placeholder={"비밀번호를 한번 더 입력하세요"}
-                  width={328} height={48} fontSize={17} color={"#EAF2FE"} radius={3} />
+                  width={328} height={48} fontSize={17}
+                  color={"#EAF2FE"}
+                  radius={3} />
 
               </div>
               <div className='checkBoxWrap'>
