@@ -34,8 +34,8 @@ const Wrapper = styled.div`
     justify-content:center;
   }
 `
-const Warning= styled.div`
-  display:${props=>props.warning==true?"block":"none"};
+const Warning = styled.div`
+  display:${props => props.warning == true ? "block" : "none"};
   width:100%;
   font-family:Roboto;
   font-weight:Regular;
@@ -45,7 +45,7 @@ const Warning= styled.div`
   justify-content:center;
   align-items:center;
   height:16px;
-  animation:${props=>props.warning==true?"transHeightin 1s ease-in-out":"none"};
+  animation:${props => props.warning == true ? "transHeightin 1s ease-in-out" : "none"};
   animation-fill-mode: forwards;
   @keyframes transHeightin{
     0%{height:16px;}
@@ -56,82 +56,83 @@ const Warning= styled.div`
     100%{height:16pxpx;}
   }
 `
-const example={
-  id:'user01',
-  pw:'q1w2e3'
-}
-const Login = {
-  ready:"READY",
-  failed:"FAILED",
-  success:"SUCCESS"
-}
+const example = { id: 'user01', pw: 'q1w2e3' }
+const Login = { ready: "READY", failed: "FAILED", success: "SUCCESS" }
+
 class SignIn extends Component {
-    constructor(props){
-      super(props);
-      this.state = {
-        user_id:null,
-        password:null,
-        login:Login.ready,
-      }
-      this.onClickLogin = this.onClickLogin.bind(this);
-      this.onChangeId = this.onChangeId.bind(this);
-      this.onChangePassword = this.onChangePassword.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = {
+      user_id: null,
+      password: null,
+      login: Login.ready,
     }
+    this.onClickLogin = this.onClickLogin.bind(this);
+    this.onChangeId = this.onChangeId.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+  }
 
-    onClickLogin = () =>{
-      if(example.id == this.state.user_id
-        &&example.pw== this.state.password){
-        window.location.href = "/";
-      }else{
-        this.setState({login:Login.failed});
-      }
-    }
-    onChangeId = (event) =>{
-      this.setState({login:Login.ready,user_id:event.target.value});
-    }
-    onChangePassword = (event)=>{
-      this.setState({password:event.target.value});
-    }
+  onClickLogin = () => {
+    this.setState({ login: Login.ready });
+    const { user_id, password } = this.state;
+    this.props.SignInRequest &&
+      this.props.SignInRequest({ email: user_id, password: password })
+        .then(data => {
+          if (data.success) {
+            this.setState({ login: Login.success });
+            // window.location.href = '/';
+          } else {
+            this.setState({ login: Login.failed });
+          }
+        })
+    return;
+  }
+  onChangeId = (event) => {
+    this.setState({ login: Login.ready, user_id: event.target.value });
+  }
+  onChangePassword = (event) => {
+    this.setState({ password: event.target.value });
+  }
 
-    render() {
-      
-      const messageMargin = this.state.login != Login.failed? 16:26;
+  render() {
+    console.log(this.props);
 
+    const messageMargin = this.state.login != Login.failed ? 16 : 26;
 
-      return (
-        <Wrapper>
+    return (
+      <Wrapper>
         <div className='box alignCenter justifyCenter'>
-          <Logo onClickEvent={()=>window.location.href = "/"} type="big" text={"OPEN MARKET"}/>
+          <Logo onClickEvent={() => window.location.href = "/"} type="big" text={"OPEN MARKET"} />
         </div>
         <div className='box column alignCenter'>
-            <div className='inputBox'>
+          <div className='inputBox'>
 
             <InputNormal
-                         onChangeValue={this.onChangeId} 
-                         onClear={()=>{this.setState({user_id:"",login:Login.ready})}} 
-                         value={this.state.user_id}  placeholder={"아이디를 입력하세요"} 
+              onChangeValue={this.onChangeId}
+              onClear={() => { this.setState({ user_id: "", login: Login.ready }) }}
+              value={this.state.user_id} placeholder={"아이디를 입력하세요"}
 
-                         width={328} height={48} fontSize={17} color={"#EAF2FE"} radius={3} warning={this.state.login == Login.failed}/>
-            
-            <Warning warning={this.state.login==Login.failed}>{ this.state.login==Login.failed && <Fade><div>{ "아이디 혹은 비밀번호가 틀립니다."}</div></Fade> }</Warning>
-                        
-            <InputNormal type="password" 
-                         onChangeValue={this.onChangePassword} 
-                         onClear={()=>{this.setState({password:"",login:Login.ready})}} 
-                         value={this.state.password} placeholder={"비밀번호를 입력하세요"} 
-                         
-                         width={328} height={48} fontSize={17} color={"#EAF2FE"} radius={3} warning={this.state.login == Login.failed}/>
-            </div>
-            <GradientButton  onClickEvent={this.onClickLogin} style={{marginBottom:"20px"}} text="로그인" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28}/>
-            <GradientButton  onClickEvent={()=>window.location.href="/join"} style={{marginBottom:"20px"}} text="회원가입" width={292} height={52} front={'#365AF1'} end={'#FF4343'} deg={270} radius={28}/>
-          <div className='login_button_wrap'>
-            <ImageButton style={{marginRight:"6px",marginLeft:"6px"}} width={50} height={50} color={"#1877F2"} radius={25}/>
-            <ImageButton style={{marginRight:"6px",marginLeft:"6px"}} width={50} height={50} color={"#F14336"} radius={25}/>
+              width={328} height={48} fontSize={17} color={"#EAF2FE"} radius={3} warning={this.state.login == Login.failed} />
+
+            <Warning warning={this.state.login == Login.failed}>{this.state.login == Login.failed && <Fade><div>{"아이디 혹은 비밀번호가 틀립니다."}</div></Fade>}</Warning>
+
+            <InputNormal type="password"
+              onChangeValue={this.onChangePassword}
+              onClear={() => { this.setState({ password: "", login: Login.ready }) }}
+              value={this.state.password} placeholder={"비밀번호를 입력하세요"}
+
+              width={328} height={48} fontSize={17} color={"#EAF2FE"} radius={3} warning={this.state.login == Login.failed} />
           </div>
-        </div>    
-        </Wrapper>    
-      );
-    }
+          <GradientButton onClickEvent={this.onClickLogin} style={{ marginBottom: "20px" }} text="로그인" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28} />
+          <GradientButton onClickEvent={() => window.location.href = "/join"} style={{ marginBottom: "20px" }} text="회원가입" width={292} height={52} front={'#365AF1'} end={'#FF4343'} deg={270} radius={28} />
+          <div className='login_button_wrap'>
+            <ImageButton style={{ marginRight: "6px", marginLeft: "6px" }} width={50} height={50} color={"#1877F2"} radius={25} />
+            <ImageButton style={{ marginRight: "6px", marginLeft: "6px" }} width={50} height={50} color={"#F14336"} radius={25} />
+          </div>
+        </div>
+      </Wrapper>
+    );
   }
-  
-  export default SignIn;
+}
+
+export default SignIn;

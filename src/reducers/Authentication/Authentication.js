@@ -1,31 +1,33 @@
 import * as types from "actions/ActionTypes";
 import update from "react-addons-update";
 
+// initial state
 const initialState = {
-  login: {
-    status: "INIT"
-  },
+  isActive: "INIT",
+  login: { status: "INIT" },
+  check: { status: "INIT" },
   status: {
     valid: false,
-    isLoggedIn: false,
     token: null,
-    userInfo: null
-  },
-  check: {
-    status: "INIT"
+    userInfo: null,
+    isLoggedIn: false,
   },
   checkStatus: {
+    checkNickName: false,
     checkEmail: false,
-    checkNickNAme: false,
-    checkPayUser:false,
-  }
-};
-
+  },
+}
+// reducer
 export default function Authentication(state, action) {
-  if (typeof state === "undefined")
+  if (typeof state === "undefined") {
     state = initialState;
+  }
 
   switch (action.type) {
+    case types.SET_ACTIVE:
+      return update(state, {
+        isActive: { $set: action.active }
+      });
     case types.AUTH_CHECK_TOKEN:
       return update(state, {
         status: {
@@ -73,33 +75,7 @@ export default function Authentication(state, action) {
           checkEmail: { $set: action.checkEmail }
         }
       });
-
-      case types.AUTH_CHECK_PAYUSER:
-        return update(state, {
-          check: {
-            status: { $set: "WAITING" }
-          }
-        });
-      case types.AUTH_CHECK_PAYUSER_SUCCESS:
-        return update(state, {
-          check: {
-            status: { $set: "SUCCESS" }
-          },
-          checkStatus: {
-            checkPayUser: { $set: action.checkPayUser }
-          }
-        });
-      case types.AUTH_CHECK_PAYUSER_FAILURE:
-        return update(state, {
-          check: {
-            status: { $set: "FAILURE" }
-          },
-          checkStatus: {
-            checkPayUser: { $set: action.checkPayUser }
-          }
-        });
-
-      case types.AUTH_CHECK_NICKNAME:
+    case types.AUTH_CHECK_NICKNAME:
       return update(state, {
         check: {
           status: { $set: "WAITING" }
@@ -111,7 +87,7 @@ export default function Authentication(state, action) {
           status: { $set: "SUCCESS" }
         },
         checkStatus: {
-          checkNickNAme: { $set: action.checkNickNAme }
+          checkNickName: { $set: action.checkNickName }
         }
       });
     case types.AUTH_CHECK_NICKNAME_FAILURE:
@@ -120,7 +96,15 @@ export default function Authentication(state, action) {
           status: { $set: "FAILURE" }
         },
         checkStatus: {
-          checkNickNAme: { $set: action.checkNickNAme }
+          checkNickName: { $set: action.checkNickName }
+        }
+      });
+    case types.AUTH_SIGNIN_SUCCESS:
+      return update(state, {
+        status: {
+          valid: { $set: true },
+          isLoggedIn: { $set: true },
+          token: { $set: action.token }
         }
       });
     case types.AUTH_SIGNOUT:
