@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { goto } from 'smallfuncs';
 
 const Wrapper = styled.div`
     height: 80px;
@@ -46,14 +47,16 @@ const strAndroid = "Android";
 const strAbout = "About";
 const strCommunity = "Community";
 const strCompany = "Company";
+
 class Footer extends React.Component {
+
     render() {
         return (<Wrapper>
             <div>
                 <div className='text-main'>{strOpenPlace}</div>
                 <div className='sub-wrapper'>
-                    <div className="text-sub">{strUsePolicy}</div>
-                    <div className="text-sub">{strSecurity}</div>
+                    <div className="text-sub" onClick={() => goto("TERMS")}>{strUsePolicy}</div>
+                    <div className="text-sub" onClick={() => goto("PRIVACY")}>{strSecurity}</div>
                 </div>
             </div>
             <div>
@@ -67,7 +70,7 @@ class Footer extends React.Component {
                 <div className='text-main'>{strAbout}</div>
                 <div className='sub-wrapper'>
                     <div className="text-sub">{strCommunity}</div>
-                    <div className="text-sub">{strCompany}</div>
+                    <div className="text-sub" onClick={() => goto("INTRO")}>{strCompany}</div>
                 </div>
             </div>
         </Wrapper>)
