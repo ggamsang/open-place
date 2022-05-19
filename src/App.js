@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 // import { connect } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import MainPage from "pages/MainPage"; 
+import MainPage from "pages/MainPage";
 import CommunityPage from "pages/CommunityPage";
 import SignInPage from "pages/RegistrationPage/SignInPage";
 import SignUpPage from "pages/RegistrationPage/SignUpPage";
@@ -11,6 +11,7 @@ import MyDetailPage from "pages/UserPage/MyDetailPage";
 import IntroPage from "pages/IntroPage";
 import TermsOfServicePage from "pages/TermsOfServicePage";
 import PrivacyPolicyPage from "pages/PrivacyPolicyPage";
+import SearchPage from "pages/SearchPage";
 
 class App extends Component {
   render() {
@@ -26,6 +27,7 @@ class App extends Component {
           <Route path="/myDetail" element={<MyDetailPage />} />
           <Route path="/terms" element={<TermsOfServicePage />} />
           <Route path="/privacy" element={<PrivacyPolicyPage />} />
+          <Route path="/search/:keyword?" element={<SearchPage />} />
         </Routes>
       </BrowserRouter>
     )
