@@ -5,7 +5,7 @@ import TermsOfServiceContainer from 'containers/TermsOfServiceContainer/TermsOfS
 class TermsOfServicePage extends React.Component {
   render() {
     return (
-      <ClientTemplate dont_need_footer={true}>
+      <ClientTemplate i_dont_need_footer={true}>
         <TermsOfServiceContainer />
       </ClientTemplate>
     )

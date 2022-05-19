@@ -3,6 +3,7 @@ import React, { Component } from "react";
 // import { connect } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainPage from "pages/MainPage"; 
+import CommunityPage from "pages/CommunityPage";
 import SignInPage from "pages/RegistrationPage/SignInPage";
 import SignUpPage from "pages/RegistrationPage/SignUpPage";
 import FindPWPage from "pages/RegistrationPage/FindPWPage";
@@ -17,6 +18,7 @@ class App extends Component {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/community" element={<CommunityPage />} />
           <Route path="/intro" element={<IntroPage />} />
           <Route path="/login" element={<SignInPage />} />
           <Route path="/join" element={<SignUpPage />} />

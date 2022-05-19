@@ -120,69 +120,70 @@ const Menu = styled.div`
 `
 
 class MyDetail extends Component {
-    constructor(props){
-      super(props);
-      this.state={
-        open_bottom_menu:"none",
-      }
-      this.onClickPointMenu = this.onClickPointMenu.bind(this);
-      this.onClickLikeMenu = this.onClickLikeMenu.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = {
+      open_bottom_menu: "none",
+    }
+    this.onClickPointMenu = this.onClickPointMenu.bind(this);
+    this.onClickLikeMenu = this.onClickLikeMenu.bind(this);
 
-    }
-
-    onClickPointMenu = (event) =>{
-      this.setState({open_bottom_menu:this.state.open_bottom_menu!="point"?"point":"none"})
-    }
-    onClickLikeMenu = (event) =>{
-      this.setState({open_bottom_menu:this.state.open_bottom_menu!="like"?"like":"none"})
-    }
-
-    render() {
-      return (
-          <React.Fragment>
-            <Wrapper>
-              <div className="header">
-                <div className="searchbox">
-                  <div className='arrow_box'><img className='img_arrow' src={back_arrow}/></div><Search width={302}/>
-                </div>
-                <div className='profile'>
-                  <div className='thumbnail'/>
-                  <div className='user_name'>국민대학교 CRC</div>
-                  <div className='button_wrap'>
-                      <div className='button borderRight'>공유자<br/>등록수정</div>
-                      <div className='button borderRight'>프로필<br/>편집</div>
-                      <div className='button'><img className='notify' src={notification}/></div>
-                  </div>
-                </div>
-              
-              </div>
-              <Menu>
-                <div className='menu_wrap'>
-                  <div className='label'>내정보</div>
-                  <div className="menu_button" onClick={this.onClickPointMenu}><img src={star}/><div className='text'>포인트</div></div>  <div className='hrline'/>
-                        <Flip top opposite when={this.state.open_bottom_menu == "point"}>
-                              <div className='menu_bottom' style={{display:`${this.state.open_bottom_menu=="point"?"block":"none"}`}}>
-                                <div className='text'>포인트 충전</div>
-                                <div className='text'>결제내역</div>
-                              </div>  
-                        </Flip>
-                  <div className="menu_button"><img src={plus}/><div className='text'>등록 경험</div></div>  <div className='hrline'/>
-                  <div className="menu_button"><img src={work}/><div className='text'>판매 경험</div></div>  <div className='hrline'/>
-                  <div className="menu_button"><img src={buy}/><div className='text'>구매 경험</div></div>  <div className='hrline'/>
-                  <div className="menu_button" onClick={this.onClickLikeMenu}><img src={heart}/><div className='text'>관심</div></div>
-                  <Flip top opposite when={this.state.open_bottom_menu == "like"}>
-                              <div className='hrline'/>
-                              <div className='menu_bottom' style={{display:`${this.state.open_bottom_menu=="like"?"block":"none"}`}}>
-                                <div className='text'>관심 공유자</div>
-                                <div className='text'>관심 경험</div>
-                              </div>  
-                  </Flip>
-                </div>
-              </Menu>
-            </Wrapper>
-          </React.Fragment>
-      );
-    }
   }
-  
-  export default MyDetail;
+
+  onClickPointMenu = (event) => {
+    this.setState({ open_bottom_menu: this.state.open_bottom_menu != "point" ? "point" : "none" })
+  }
+  onClickLikeMenu = (event) => {
+    this.setState({ open_bottom_menu: this.state.open_bottom_menu != "like" ? "like" : "none" })
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <Wrapper>
+          <div className="header">
+            <div className="searchbox">
+              <div className='arrow_box'><img className='img_arrow' src={back_arrow} /></div>
+              <Search width={302} />
+            </div>
+            <div className='profile'>
+              <div className='thumbnail' />
+              <div className='user_name'>국민대학교 CRC</div>
+              <div className='button_wrap'>
+                <div className='button borderRight'>공유자<br />등록수정</div>
+                <div className='button borderRight'>프로필<br />편집</div>
+                <div className='button'><img className='notify' src={notification} /></div>
+              </div>
+            </div>
+
+          </div>
+          <Menu>
+            <div className='menu_wrap'>
+              <div className='label'>내정보</div>
+              <div className="menu_button" onClick={this.onClickPointMenu}><img src={star} /><div className='text'>포인트</div></div>  <div className='hrline' />
+              <Flip top opposite when={this.state.open_bottom_menu == "point"}>
+                <div className='menu_bottom' style={{ display: `${this.state.open_bottom_menu == "point" ? "block" : "none"}` }}>
+                  <div className='text'>포인트 충전</div>
+                  <div className='text'>결제내역</div>
+                </div>
+              </Flip>
+              <div className="menu_button"><img src={plus} /><div className='text'>등록 경험</div></div>  <div className='hrline' />
+              <div className="menu_button"><img src={work} /><div className='text'>판매 경험</div></div>  <div className='hrline' />
+              <div className="menu_button"><img src={buy} /><div className='text'>구매 경험</div></div>  <div className='hrline' />
+              <div className="menu_button" onClick={this.onClickLikeMenu}><img src={heart} /><div className='text'>관심</div></div>
+              <Flip top opposite when={this.state.open_bottom_menu == "like"}>
+                <div className='hrline' />
+                <div className='menu_bottom' style={{ display: `${this.state.open_bottom_menu == "like" ? "block" : "none"}` }}>
+                  <div className='text'>관심 공유자</div>
+                  <div className='text'>관심 경험</div>
+                </div>
+              </Flip>
+            </div>
+          </Menu>
+        </Wrapper>
+      </React.Fragment>
+    );
+  }
+}
+
+export default MyDetail;

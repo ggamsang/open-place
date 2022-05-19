@@ -3,7 +3,6 @@ import Alarm from "components_mobile/Alarm";
 
 const dummy = [
     { 'title': '같이모여서 공부해요!', 'content': 'alarm content' },
-    { 'title': '송편 같이 빚으실 분!!!', 'content': 'alarm content' },
     { 'title': '[광고]할인행사!!!', 'content': 'alarm content' },
     { 'title': '우리 아이템을 구매해주셔서 감사합니다!', 'content': 'alarm content' },
     { 'title': 'alarm title', 'content': 'alarm content' },
@@ -35,12 +34,14 @@ class AlarmContainer extends React.Component {
         main.classList.remove("disabled");
         console.log(main.classList)
     }
+
     render() {
         return (<>
             {this.state.active
                 ? <Alarm close={() => this.onClose()} list={this.state.alarm} />
                 : <button
-                    style={{ top: "0", zIndex: "999", position: "fixed" }}
+                    id="alarm-button"
+                    style={{ display: "none", top: "0", zIndex: "999", position: "fixed" }}
                     onClick={() => this.onOpen()}>alarm</button>
             }
         </>)

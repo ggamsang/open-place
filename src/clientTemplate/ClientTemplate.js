@@ -67,7 +67,7 @@ class ClientTemplate extends Component {
   }
 
   render() {
-    console.log(this.props, this.state);
+    // console.log(this.props, this.state);
 
     return (<>
       {/* <button style={{ position: "absolute", zIndex: "998", left: "60px" }} onClick={() => this.setState({ login: !this.state.login })}>demo:{this.state.login ? "로그아웃" : "로그인"}</button> */}
@@ -87,8 +87,9 @@ class ClientTemplate extends Component {
 
         <div className='bottom'>
           <div style={{ height: "10px" }}></div>
-          <Footer />
-          {/* {this.props.dont_need_footer ? <></> : <></>} */}
+          {this.props.i_dont_need_footer
+            ? <></>
+            : <Footer />}
         </div>
 
         <div id='dimmer'> &nbsp; </div>
