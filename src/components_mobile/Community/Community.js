@@ -149,7 +149,7 @@ class Community extends React.Component {
     super(props);
     this.state = {
       boardType: "free", /* "notice" */
-      pageType: "qlist",/* write */
+      pageType: "list",/* write */
 
       // write
       couldwrite: false,

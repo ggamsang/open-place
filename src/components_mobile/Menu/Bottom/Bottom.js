@@ -81,10 +81,24 @@ const Wrapper = styled.div`
     }
     .logo {
         position: absolute;
+        width: 85px;
+        height: 85px;
+        
+        top: -15%;
+        left: 37%;
+        z-index: 8888;
+        &.notloggedin {
+            top: -30%;
+        }
+    }
+    .arrow-resize {
         width: 75px;
         height: 75px;
-        top: -60%;
-        left: 40%;
+        top: -10%;
+        left: 39%;
+        &.notloggedin {
+            top: -2O%;
+        }
     }
     ul {
         list-style: none;
@@ -107,6 +121,7 @@ const Wrapper = styled.div`
     .right-margin22{ margin-right: 22px; }
     .left-margin22{ margin-left: 22px; }
     .left-margin35{ margin-left: 35px; }
+    .right-margin35{ margin-right: 35px; }
     span {
         font-family: Pretendard;
         font-weight: 700;
@@ -125,56 +140,94 @@ const Wrapper = styled.div`
 
 
 class Bottom extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            mainmenu: true,
+        };
+    }
     gotoTop = () => {
         const template = document.getElementById('body') || document.documentElement;
-        console.log(template, template.scrollHeight)
+        // console.log(template, template.scrollHeight)
         template && template.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    togleMainMenu = (e) => {
+        this.setState({ mainmenu: !this.state.mainmenu });
     }
     render() {
         return (<Wrapper>
 
-            {this.props.login
-                ? <div className='row'>
-                    <div className='login' onClick={() => goto("CREATE-ITEM")}>
-                        <span> + 경험등록하기 </span>
+            {!this.props.login ?
+                <div className='row'>
+                    {/* LOGIN */}
+                    <div className='side'>
+                        <div className='signup' onClick={this.togleMainMenu}>
+                            {this.state.mainmenu
+                                ? <span>메뉴닫기</span>
+                                : <span>메뉴보기</span>}
+                        </div>
+                        <div className='login' onClick={() => goto("create-item")}>
+                            <span>+경험등록하기</span>
+                        </div>
                     </div>
-                    <div className='signup' onClick={() => goto("MYDETAIL")}>
-                        <div className='profile' />
-                        {/* <img src={profile} /> */}
-                        <span>마이페이지</span>
+
+                    <Fade>
+                        {this.props.up
+                            ? <img alt="icon" onClick={() => this.gotoTop()} className="logo arrow-resize" src={arrow} />
+                            : <img alt="icon" onClick={() => goto("MAIN")} className="logo" src={logo} />
+                        }
+                    </Fade>
+
+                    <div className='side'>
+                        <div className='login' onclick={() => goto("mydetail")}>
+                            <span>게시글 등록하기</span>
+                        </div>
+                        <div className='signup' onclick={() => goto("mydetail")}>
+                            <div className='profile' />
+                            <span>마이페이지</span>
+                        </div>
                     </div>
                 </div>
 
                 : <div className='row'>
+                    {/* no LOGIN */}
                     <div className='login' onClick={() => goto("LOGIN")}>
                         <span> + 로그인하기</span>
                     </div>
+
+                    <Fade>
+                        {this.props.up
+                            ? <img
+                                alt="icon"
+                                onClick={() => this.gotoTop()}
+                                className="logo arrow-resize notloggedin"
+                                src={arrow} />
+                            : <img
+                                alt="icon"
+                                onClick={() => goto("MAIN")}
+                                className="logo notloggedin"
+                                src={logo} />}
+                    </Fade>
+
                     <div className='signup' onClick={() => goto("SIGNUP")}>
                         <div className='profile' />
-                        {/* <img src={profile} /> */}
                         <span>회원가입</span>
                     </div>
-                </div>
-            }
-            <div className='row background topmargin3'>
-                <ul className='row'>
-                    <li className='left-margin35'><IconPLAY /></li>
-                    <li className='right-margin42'><IconLEARN /></li>
-                </ul>
+                </div>}
 
-                <Fade>
-                    {this.props.up
-                        ? <img alt="icon" onClick={() => this.gotoTop()} className="logo" src={arrow} />
-                        : <img alt="icon" onClick={() => goto("MAIN")} className="logo" src={logo} />
-                    }
-                </Fade>
+            {this.state.mainmenu
+                && <div className='row background topmargin3'>
+                    <ul className='row'>
+                        <li onClick={() => goto("PLAY")} className='left-margin35'><IconPLAY /></li>
+                        <li onClick={() => goto("LEARN")}><IconLEARN /></li>
+                    </ul>
+                    <ul className='row'>
+                        <li onClick={() => goto("MAKE")}><IconMAKE /></li>
+                        <li onClick={() => goto("COMMUNITY")} className='right-margin35'><IconCOMMUNITY /></li>
+                    </ul>
+                </div>}
 
-                <ul className='row'>
-                    <li className='left-margin42'><IconMAKE /></li>
-                    <li className='right-margin22'><IconCOMMUNITY /></li>
-                </ul>
-            </div>
-        </Wrapper>)
+        </Wrapper >)
     }
 }
 
