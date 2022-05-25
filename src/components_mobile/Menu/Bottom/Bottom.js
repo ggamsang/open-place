@@ -149,7 +149,7 @@ class Bottom extends React.Component {
                     <div className='login' onClick={() => goto("LOGIN")}>
                         <span> + 로그인하기</span>
                     </div>
-                    <div className='signup' onClick={() => goto("SIGNUP")}>
+                    <div className='signup' onClick={() => goto("MYDETAIL")}>
                         <div className='profile' />
                         {/* <img src={profile} /> */}
                         <span>회원가입</span>

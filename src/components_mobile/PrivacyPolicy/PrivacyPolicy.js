@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { WIDTH } from 'constant';
-import Search from 'components_mobile/Search';
+import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -59,7 +59,7 @@ class PrivacyPolicy extends React.Component {
       <Wrapper>
         <div className='gradient'>
           <div className='blanker'>&nbsp;</div>
-          <Search />
+          <SearchForm />
           <div className='title'>개인정보 보호정책</div>
         </div>
 
