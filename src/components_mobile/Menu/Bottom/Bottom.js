@@ -194,7 +194,6 @@ class Bottom extends React.Component {
                     <div className='login' onClick={() => goto("LOGIN")}>
                         <span> + 로그인하기</span>
                     </div>
-
                     <Fade>
                         {this.props.up
                             ? <img

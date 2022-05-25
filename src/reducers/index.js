@@ -4,6 +4,6 @@ import { TopList } from "reducers/Items";
 import { combineReducers } from "redux";
 
 export default combineReducers({
-    Authentication,
+Authentication,
     TopList,
 });

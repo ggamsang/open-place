@@ -174,7 +174,7 @@ const SubMenu = styled.div`
   }
 `
 
-class MyDetail extends Component {
+class MyDetailChild extends Component {
     constructor(props){
       super(props);
       this.state={
@@ -183,6 +183,7 @@ class MyDetail extends Component {
       this.onClickPointMenu = this.onClickPointMenu.bind(this);
       this.onClickLikeMenu = this.onClickLikeMenu.bind(this);
       this.onClickHome = this.onClickHome.bind(this);
+
     }
 
     onClickPointMenu = (event) =>{
@@ -208,20 +209,7 @@ class MyDetail extends Component {
       return (
           <React.Fragment>
             <Wrapper>
-              <div className="header">
-                <div className='searchbox'><SearchForm/></div>
-                <div className='profile'>
-                  <div className='thumbnail'/>
-                  <div className='user_name'>국민대학교 CRC</div>
-                  <div className='button_wrap'>
-                      <div className='button borderRight'>공유자<br/>등록수정</div>
-                      <div className='button borderRight'>프로필<br/>편집</div>
-                      <div className='button'><img className='notify' src={notification}/></div>
-                  </div>
-                </div>
-              
-              </div>
-              {/* <Fade opposite when={this.state.main_menu}>
+              <Fade opposite when={this.state.main_menu}>
               <Menu style={{display:`${this.state.main_menu==true?"block":"none"}`}}>
                 <div className='menu_wrap'>
                   <div className='label'>내정보</div>
@@ -248,12 +236,12 @@ class MyDetail extends Component {
                     <div className="menu_button"><img src={plus}/><div className='text'>관심 경험</div></div>  <div className='hrline'/>
                  </div>
               </SubMenu>
-              </Fade> */}
-            <this.props.Outlet/>
+              </Fade>
             </Wrapper>
+            {/* <this.props.Outlet/> */}
           </React.Fragment>
       );
     }
   }
   
-export default MyDetail;
+  export default MyDetailChild;

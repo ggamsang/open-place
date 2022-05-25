@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import host from "config";
-import Search from 'components_mobile/Search';
 import Slide from 'components_mobile/Slide';
 import TopItemList from 'components_mobile/TopItemList';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
-
+import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 const Wrapper = styled.div`
   width: 100%;
   position: relative;
@@ -48,9 +47,8 @@ class Main extends Component {
         <ContentWrapper>
 
           <div className='blanker'>&nbsp;</div>
-          <div className='search_box'>
-            <Search width={291} />
-          </div>
+
+          <SearchForm/>
 
           <Slide />
 
@@ -59,7 +57,6 @@ class Main extends Component {
         </ContentWrapper>
       </Fade>
     </Wrapper>)
-
   }
 }
 

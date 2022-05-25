@@ -4,7 +4,7 @@ class MyDetailContainer extends Component {
     render() {
       return (
           <React.Fragment>
-            <MyDetail/>
+            <MyDetail Outlet={this.props.Outlet}/>
           </React.Fragment>
       );
     }
