@@ -183,7 +183,6 @@ class MyDetail extends Component {
       this.onClickPointMenu = this.onClickPointMenu.bind(this);
       this.onClickLikeMenu = this.onClickLikeMenu.bind(this);
       this.onClickHome = this.onClickHome.bind(this);
-
     }
 
     onClickPointMenu = (event) =>{
@@ -257,4 +256,4 @@ class MyDetail extends Component {
     }
   }
   
-  export default MyDetail;
+export default MyDetail;

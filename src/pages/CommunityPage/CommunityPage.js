@@ -1,15 +1,15 @@
 import React from 'react';
 import ClientTemplate from 'clientTemplate/ClientTemplate';
-import PrivacyPolicyContainer from 'containers/PrivacyPolicyContainer';
+import CommunityContainer from 'containers/CommunityContainer';
 
-class PrivacyPolicyPage extends React.Component {
+class CommunityPage extends React.Component {
   render() {
     return (
       <ClientTemplate i_dont_need_footer={true}>
-        <PrivacyPolicyContainer />
+        <CommunityContainer />
       </ClientTemplate>
     )
   }
 }
 
-export default PrivacyPolicyPage;
+export default CommunityPage;

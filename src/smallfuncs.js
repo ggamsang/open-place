@@ -8,6 +8,11 @@ export const goto = (type) => {
         case "MYDETAIL": window.location.href = "/myDetail/0"; break;
         case "CREATE-ITEM": window.location.href = "/createitem"; break;
         case "MAIN": window.location.href = "/"; break;
+
+        case "PLAY": window.location.href = "/play"; break;
+        case "LEARN": window.location.href = "/learn"; break;
+        case "MAKE": window.location.href = "/make"; break;
+        case "COMMUNITY": window.location.href = "/community"; break;
         default: break;
     }
 }

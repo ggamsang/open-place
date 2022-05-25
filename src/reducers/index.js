@@ -1,5 +1,5 @@
-import Authentication from "./Authentication";
-import {TopList} from "reducers/Items";
+import Authentication from "reducers/Authentication";
+import { TopList } from "reducers/Items";
 
 import { combineReducers } from "redux";
 

@@ -41,23 +41,22 @@ class Main extends Component {
   render() {
 
     return (<Wrapper>
-  <Fade>
-      <GradationCard angle={30} />
+      <Fade>
+        <GradationCard angle={30} />
 
-      <ContentWrapper>
+        <ContentWrapper>
 
-        <div className='blanker'>&nbsp;</div>
-        {/* <div className='search_box'><Search /></div> */}
-        <SearchForm/>
+          <div className='blanker'>&nbsp;</div>
 
-        <Slide />
+          <SearchForm/>
 
-        <TopItemList />
+          <Slide />
 
-      </ContentWrapper>
-  </Fade>
-</Wrapper>)
+          <TopItemList />
 
+        </ContentWrapper>
+      </Fade>
+    </Wrapper>)
   }
 }
 

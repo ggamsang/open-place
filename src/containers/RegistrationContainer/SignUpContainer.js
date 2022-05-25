@@ -1,14 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { connect } from "react-redux";
+import { SignUpRequest } from 'actions/Registration';
 import SignUp from 'components_mobile/Registration/SignUp';
 
-class SignUpContainer extends Component {
-    render() {
-      return (
-          <React.Fragment>
-              <SignUp/>
-          </React.Fragment>
-      );
-    }
+class SignUpContainer extends React.Component {
+  render() {
+    return (
+      <React.Fragment>
+        <SignUp {...this.props} />
+      </React.Fragment>
+    );
   }
-  
-  export default SignUpContainer;
+}
+
+const mapStateToProps = (state) => ({
+});
+const mapDispatchToProps = (dispatch) => ({
+  SignUpRequest: (data) => dispatch(SignUpRequest(data))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpContainer);

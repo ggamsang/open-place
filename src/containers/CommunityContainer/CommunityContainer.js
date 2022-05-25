@@ -1,11 +1,11 @@
 import React from 'react';
-import PrivacyPolicy from 'components_mobile/PrivacyPolicy';
+import Community from 'components_mobile/Community';
 
 class CommunityContainer extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <PrivacyPolicy />
+        <Community />
       </React.Fragment>
     )
   }

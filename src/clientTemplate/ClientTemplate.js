@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from "react-redux";
 import styled/*, { keyframes }*/ from "styled-components";
 import Footer from "components_mobile/Footer"
 import BottomMenu from "components_mobile/Menu/Bottom";
@@ -66,9 +67,10 @@ class ClientTemplate extends Component {
   }
 
   render() {
-
+    // console.log(this.props, this.state);
+    
     return (<>
-      <button style={{ position: "absolute", zIndex: "998", left: "60px" }} onClick={() => this.setState({ login: !this.state.login })}>demo:{this.state.login ? "로그아웃" : "로그인"}</button>
+      {/* <button style={{ position: "absolute", zIndex: "998", left: "60px" }} onClick={() => this.setState({ login: !this.state.login })}>demo:{this.state.login ? "로그아웃" : "로그인"}</button> */}
       {/* alarm */}
       <AlarmContainer />
 
@@ -85,8 +87,9 @@ class ClientTemplate extends Component {
 
         <div className='bottom'>
           <div style={{ height: "10px" }}></div>
-          <Footer />
-          {/* {this.props.dont_need_footer ? <></> : <></>} */}
+          {this.props.i_dont_need_footer
+            ? <></>
+            : <Footer />}
         </div>
 
         <div id='dimmer'> &nbsp; </div>
@@ -96,4 +99,9 @@ class ClientTemplate extends Component {
   }
 }
 
-export default ClientTemplate;
+const mapStateToProps = state => {
+  console.log("redux:", state);
+  return {}
+};
+const mapDispatchToProps = dispatch => ({}); 
+export default connect(mapStateToProps, mapDispatchToProps)(ClientTemplate);
