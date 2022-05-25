@@ -1,7 +1,7 @@
 // REACT //
 import React, { Component } from "react";
 // import { connect } from "react-redux";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, } from "react-router-dom";
 import MainPage from "pages/MainPage";
 import CommunityPage from "pages/CommunityPage";
 import SignInPage from "pages/RegistrationPage/SignInPage";
@@ -27,7 +27,9 @@ class App extends Component {
           <Route path="/myDetail" element={<MyDetailPage />} />
           <Route path="/terms" element={<TermsOfServicePage />} />
           <Route path="/privacy" element={<PrivacyPolicyPage />} />
-          <Route path="/search/:keyword?" element={<SearchPage />} />
+          <Route path="/search" element={<SearchPage />} >
+            <Route path=":keyword" element={<SearchPage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     )

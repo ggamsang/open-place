@@ -5,7 +5,7 @@ import filterbg from "resources/filter.png";
 
 const WIDTH = 335;
 const Wrapper = styledComponents.div`
-    width: ${props=>props.width==null?WIDTH:props.width}px;
+    width: ${props => props.width == null ? WIDTH : props.width}px;
     // margin: auto;
 `;
 const InputWrapper = styledComponents.div`
@@ -14,7 +14,7 @@ const InputWrapper = styledComponents.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: ${props=>props.width==null?WIDTH:props.width}px;
+    width: ${props => props.width == null ? WIDTH : props.width}px;
     width: 100%;
     height: 35px;
     border-radius: 6px;
@@ -65,14 +65,23 @@ const InputWrapper = styledComponents.div`
 `;
 
 class Search extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { keyword: this.props.keyword || "" }
+    }
+    goSearch = (keyword) => {
+        window.location.href = `/search/${keyword}`;
+    }
     handleKeyDown = e => {
         if (e.key === "Enter" && e.target.value) {
-            alert(e.target.value);
+            this.goSearch(e.target.value);
         }
     }
     handleZoomClicked = () => {
         const input = document.getElementById("search");
-        input.value && alert(input.value);
+        if (input.value === "") {
+            this.goSearch(input.value);
+        }
     }
     render() {
         return (<Wrapper width={this.props.width}>

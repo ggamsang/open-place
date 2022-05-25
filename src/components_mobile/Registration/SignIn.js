@@ -6,6 +6,8 @@ import GradientButton from 'components_mobile/Commons/Button/GradientButton';
 import ImageButton from 'components_mobile/Commons/Button/ImageButton';
 import InputNormal from 'components_mobile/Commons/Input/InputNormal';
 import Fade from 'react-reveal/Fade';
+import { SetSession } from 'modules/Sessions';
+import { TokenName } from 'constant';
 
 const Wrapper = styled.div`
   width:100vw;
@@ -79,6 +81,7 @@ class SignIn extends Component {
       this.props.SignInRequest({ email: user_id, password: password })
         .then(data => {
           if (data.success) {
+            SetSession(TokenName);
             this.setState({ login: Login.success });
             // window.location.href = '/';
           } else {

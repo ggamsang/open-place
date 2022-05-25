@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchList from "components_mobile/Search/SearchList"
+import SearchList from "components_mobile/Search/SearchList";
 
 class SearchContainer extends React.Component {
     // constructor(props) { super(props); }
@@ -8,6 +8,8 @@ class SearchContainer extends React.Component {
     onClose = () => { }
 
     render() {
+        console.log(this.props.keyword);
+
         return (<>
             <SearchList />
         </>)

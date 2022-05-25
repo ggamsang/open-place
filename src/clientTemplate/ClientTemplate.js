@@ -68,7 +68,7 @@ class ClientTemplate extends Component {
 
   render() {
     // console.log(this.props, this.state);
-
+    
     return (<>
       {/* <button style={{ position: "absolute", zIndex: "998", left: "60px" }} onClick={() => this.setState({ login: !this.state.login })}>demo:{this.state.login ? "로그아웃" : "로그인"}</button> */}
       {/* alarm */}
@@ -103,7 +103,5 @@ const mapStateToProps = state => {
   console.log("redux:", state);
   return {}
 };
-const mapDispatchToProps = dispatch => ({
-  // 
-});
+const mapDispatchToProps = dispatch => ({}); 
 export default connect(mapStateToProps, mapDispatchToProps)(ClientTemplate);
