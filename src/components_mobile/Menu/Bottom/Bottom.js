@@ -179,10 +179,10 @@ class Bottom extends React.Component {
                     </Fade>
 
                     <div className='side'>
-                        <div className='login' onClick={() => goto("mydetail")}>
+                        <div className='login' onClick={() => goto("LOGIN")}>
                             <span>게시글 등록하기</span>
                         </div>
-                        <div className='signup' onClick={() => goto("mydetail")}>
+                        <div className='signup' onClick={() => goto("MYDETAIL")}>
                             <div className='profile' />
                             <span>마이페이지</span>
                         </div>

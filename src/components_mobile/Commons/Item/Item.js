@@ -5,7 +5,7 @@ import StarRating from "commons/StarRating";
 import Tags from "commons/Tags";
 
 const Wrapper = styled.div`
-    width: 100%;
+    width: 335px;
     height: 211px;
     background-image: url(${prop => prop.bg});
     background-position: center center;

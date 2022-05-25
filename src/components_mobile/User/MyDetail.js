@@ -5,7 +5,7 @@ import { resolution } from 'commons/resolution';
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 
 
-
+import AlarmContainer from 'containers/AlarmContainer';
 import notification from 'source/Iconly-Bold-Notification.svg';
 import buy from 'source/Iconly-Bold-buy.svg';
 import heart from 'source/Iconly-Bold-Heart.svg';
@@ -14,6 +14,7 @@ import work from 'source/Iconly-Bold-Work.svg';
 import plus from 'source/Iconly-Bold-Plus.svg';
 
 import { Fade } from 'react-reveal';
+import { goto } from 'smallfuncs';
 
 
 
@@ -67,112 +68,6 @@ const Wrapper = styled.div`
   }
 `
 
-const Menu = styled.div`
-  width:100%;
-  .menu_wrap{
-    padding:16px 27px;
-    box-sizing:border-box;
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    .label{
-      width:100%;
-      font-family:Pretendard;
-      font-weight:Regular;
-      font-size:${resolution(14)}px;
-      color:#c1c1c1;
-      margin-bottom:8px;
-
-    }
-    .menu_button{
-      box-sizing:border-box;
-      width:100%;
-      height:${resolution(50)}px;
-      display:flex;
-      align-items:center;
-      box-shadow:0px 0px 10px #efefef;
-      padding:13px 17px;
-
-      img{
-        width:${resolution(20)}px;
-        height:${resolution(20)}px;
-        margin-right:30px;
-      }
-      .text{
-        font-family:Pretendard;
-        font-weight:Regular;
-        font-size:${resolution(14)}px;
-        color:black;
-      }
-    }
-    .hrline{width:100%;border:1px solid #FAFAFA;}
-    .menu_bottom{
-      box-shadow:0px 0px 10px #efefef;
-      padding:11px 68px 0px 68px;
-      .text{
-        font-family:Pretendard;
-        font-weight:Regular;
-        font-size:${resolution(12)}px;
-        color:black;
-        margin-bottom:11px;
-      }
-    }
-  }
-`
-
-
-const SubMenu = styled.div`
-  width:100%;
-  .menu_wrap{
-    padding:16px 27px;
-    box-sizing:border-box;
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    .label{
-      width:100%;
-      font-family:Pretendard;
-      font-weight:Regular;
-      font-size:${resolution(14)}px;
-      color:#c1c1c1;
-      margin-bottom:8px;
-
-    }
-    .menu_button{
-      box-sizing:border-box;
-      width:100%;
-      height:${resolution(50)}px;
-      display:flex;
-      align-items:center;
-      box-shadow:0px 0px 10px #efefef;
-      padding:13px 17px;
-
-      img{
-        width:${resolution(20)}px;
-        height:${resolution(20)}px;
-        margin-right:30px;
-      }
-      .text{
-        font-family:Pretendard;
-        font-weight:Regular;
-        font-size:${resolution(14)}px;
-        color:black;
-      }
-    }
-    .hrline{width:100%;border:1px solid #FAFAFA;}
-    .menu_bottom{
-      box-shadow:0px 0px 10px #efefef;
-      padding:11px 68px 0px 68px;
-      .text{
-        font-family:Pretendard;
-        font-weight:Regular;
-        font-size:${resolution(12)}px;
-        color:black;
-        margin-bottom:11px;
-      }
-    }
-  }
-`
 
 class MyDetail extends Component {
     constructor(props){
@@ -214,41 +109,12 @@ class MyDetail extends Component {
                   <div className='thumbnail'/>
                   <div className='user_name'>국민대학교 CRC</div>
                   <div className='button_wrap'>
-                      <div className='button borderRight'>공유자<br/>등록수정</div>
-                      <div className='button borderRight'>프로필<br/>편집</div>
+                      <div onClick={()=>goto("CREATE-SHARER")}  className='button borderRight'>공유자<br/>등록수정</div>
+                      <div onClick={()=>goto("MODIFY-SHARER")} className='button borderRight'>프로필<br/>편집</div>
                       <div className='button'><img className='notify' src={notification}/></div>
                   </div>
                 </div>
-              
               </div>
-              {/* <Fade opposite when={this.state.main_menu}>
-              <Menu style={{display:`${this.state.main_menu==true?"block":"none"}`}}>
-                <div className='menu_wrap'>
-                  <div className='label'>내정보</div>
-                  <div className="menu_button" onClick={this.onClickPointMenu}><img src={star}/><div className='text'>포인트</div></div>  <div className='hrline'/>
-                  <div className="menu_button"><img src={plus}/><div className='text'>등록 경험</div></div>  <div className='hrline'/>
-                  <div className="menu_button"><img src={work}/><div className='text'>판매 경험</div></div>  <div className='hrline'/>
-                  <div className="menu_button"><img src={buy}/><div className='text'>구매 경험</div></div>  <div className='hrline'/>
-                  <div className="menu_button" onClick={this.onClickLikeMenu}><img src={heart}/><div className='text'>관심</div></div>
-
-                </div>
-              </Menu>
-              </Fade>
-
-              <Fade opposite when={this.state.sub_menu1}>
-              <SubMenu >
-                 <div className='menu_wrap' style={{display:`${this.state.sub_menu1==true?"flex":"none"}`}}>
-                    <div onClick={this.onClickHome} className='label'> {"<"} 포인트</div>
-                    <div className="menu_button"><img src={plus}/><div className='text'>포인트 충전</div></div>  <div className='hrline'/>
-                    <div className="menu_button"><img src={plus}/><div className='text'>결제내역</div></div>  <div className='hrline'/>
-                 </div>
-                 <div className='menu_wrap' style={{display:`${this.state.sub_menu2==true?"flex":"none"}`}}>
-                    <div onClick={this.onClickHome} className='label'> {"<"} 관심</div>
-                    <div className="menu_button"><img src={plus}/><div className='text'>관심 공유자</div></div>  <div className='hrline'/>
-                    <div className="menu_button"><img src={plus}/><div className='text'>관심 경험</div></div>  <div className='hrline'/>
-                 </div>
-              </SubMenu>
-              </Fade> */}
             <this.props.Outlet/>
             </Wrapper>
           </React.Fragment>
