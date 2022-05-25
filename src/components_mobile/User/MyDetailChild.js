@@ -209,19 +209,6 @@ class MyDetailChild extends Component {
       return (
           <React.Fragment>
             <Wrapper>
-              <div className="header">
-                <div className='searchbox'><SearchForm/></div>
-                <div className='profile'>
-                  <div className='thumbnail'/>
-                  <div className='user_name'>국민대학교 CRC</div>
-                  <div className='button_wrap'>
-                      <div className='button borderRight'>공유자<br/>등록수정</div>
-                      <div className='button borderRight'>프로필<br/>편집</div>
-                      <div className='button'><img className='notify' src={notification}/></div>
-                  </div>
-                </div>
-              
-              </div>
               <Fade opposite when={this.state.main_menu}>
               <Menu style={{display:`${this.state.main_menu==true?"block":"none"}`}}>
                 <div className='menu_wrap'>
