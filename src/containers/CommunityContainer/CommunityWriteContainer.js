@@ -5,7 +5,7 @@ export class CommunityWriteContainer extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <CommunityWrite />
+        <CommunityWrite Outlet={this.props.Outlet} />
       </React.Fragment>
     )
   }
