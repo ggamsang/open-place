@@ -9,11 +9,12 @@ export const goto = (type) => {
         case "CREATE-ITEM": window.location.href = "/createitem"; break;
         case "CREATE-SHARER": window.location.href = "/createSharer"; break;
         case "MODIFY-SHARER": window.location.href = "/modifySharer"; break;
+        case "EXP-LIST": window.location.href = "/list"; break;
         case "MAIN": window.location.href = "/"; break;
 
-        case "PLAY": window.location.href = "/play"; break;
-        case "LEARN": window.location.href = "/learn"; break;
-        case "MAKE": window.location.href = "/make"; break;
+        case "PLAY": window.location.href = "/list"; break;
+        case "LEARN": window.location.href = "/list"; break;
+        case "MAKE": window.location.href = "/list"; break;
         case "COMMUNITY": window.location.href = "/community"; break;
         default: break;
     }

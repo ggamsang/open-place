@@ -17,7 +17,7 @@ import ModifySharerPage from "pages/SharerPage/ModifySharerPage";
 import SharerDetailPage from "pages/SharerPage/SharerDetailPage";
 import CommunityPage from "pages/CommunityPage";
 import SearchPage from "pages/SearchPage";
-
+import ExpListPage from "pages/ExpListPage";
 class App extends Component {
   render() {
     return (
@@ -28,6 +28,7 @@ class App extends Component {
           <Route path="/login" element={<SignInPage />} />
           <Route path="/join" element={<SignUpPage />} />
           <Route path="/findPW" element={<FindPWPage />} />
+          <Route path="/list" element={<ExpListPage />} />
           <Route path="/search" element={<SearchPage />} >
             <Route path=":keyword" element={<SearchPage />} />
           </Route>
