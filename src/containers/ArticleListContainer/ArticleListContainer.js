@@ -5,7 +5,7 @@ import ArticleList from "components_mobile/ArticleList";
 class ArticleListContainer extends React.Component {
     render() {
         return (<>
-            <ArticleList />
+            <ArticleList {...this.props} />
         </>)
     }
 }

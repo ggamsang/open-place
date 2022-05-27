@@ -142,15 +142,36 @@ const WriteForm = styled.form`
   }
 `;
 
-
-
-class Community extends React.Component {
+export class CommunityWrite extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       boardType: "free", /* "notice" */
       pageType: "list",/* write */
+
+      // write
+      couldwrite: false,
+      title: "",
+      content: "",
+      // 
     };
+  }
+  onChangeValueTitle = async (e) => {
+    await this.setState({ title: e.target.value });
+    if (this.state.content !== "" && this.state.title !== "") {
+      this.setState({ couldwrite: true });
+    }
+    else {
+      this.setState({ couldwrite: false })
+    }
+  }
+  onChangeValueContent = async (e) => {
+    await this.setState({ content: e.target.value });
+    if (this.state.content !== "" && this.state.title !== "") {
+      this.setState({ couldwrite: true });
+    } else {
+      this.setState({ couldwrite: false })
+    }
   }
   clickedButtonBSD = () => {
     this.setState({ boardType: "free" });
@@ -158,9 +179,34 @@ class Community extends React.Component {
   clickedButtonNotice = () => {
     this.setState({ boardType: "notice" });
   }
+  hideFloatingText = (e) => {
+    if (this.state.content === "") {
+      const node = document.getElementById("floating-text");
+      if (node) {
+        node.style.display = "none";
+      }
+    }
+  }
+  checkToShowFloatingText = (e) => {
+    if (this.state.content === "") {
+      const node = document.getElementById("floating-text");
+      if (node) {
+        node.style.display = "block";
+      }
+    }
+  }
+  onCancelWrite = () => {
+    this.setState({ pageType: "list", content: "", title: "", couldwrite: false });
+  }
+  onWrite = (e) => {
+    e.preventDefault();
+    const data = { content: this.state.content, title: this.state.title };
+    console.log({ data });
+  }
 
   render() {
     const { boardType, pageType } = this.state;
+    console.log(this.state.content);
 
     return (<Wrapper>
 
@@ -172,27 +218,78 @@ class Community extends React.Component {
           : <div className='title'>게시글 등록하기</div>}
       </div>
 
-      <>
-        <div className='top13 rows'>
+      {pageType === "list"
+        ? <>
+          <div className='top13 rows'>
 
-          <Button
-            active={boardType === "free"}
-            onClick={this.clickedButtonBSD}>
-            <div className="text">자유게시판</div>
-          </Button>
-          <Button
-            active={boardType === "notice"}
-            onClick={this.clickedButtonNotice}>
-            <div className="text">공지사항</div>
-          </Button>
-        </div>
+            <Button
+              active={boardType === "free"}
+              onClick={this.clickedButtonBSD}>
+              <div className="text">자유게시판</div>
+            </Button>
+            <Button
+              active={boardType === "notice"}
+              onClick={this.clickedButtonNotice}>
+              <div className="text">공지사항</div>
+            </Button>
+          </div>
 
-        <div className='article-list-wrapper'>
-          <ArticleListContainer boardType={boardType} />
-        </div>
-      </>
+          <div className='article-list-wrapper'>
+            <ArticleListContainer boardType={boardType} />
+          </div>
+        </>
+
+        : <>
+          {/* form */}
+          <WriteForm>
+            <div className='form'>
+              <div className='label'>게시글 작성</div>
+
+              <div className='rows top13'>
+                <div className='label'>
+                  제목<font color="red">*</font>
+                </div>
+
+                <div>
+                  <input
+                    value={this.state.title}
+                    onChange={this.onChangeValueTitle} />
+                </div>
+              </div>
+
+              <div className='t-area-wrapper'>
+                <div className='floating-text' id='floating-text'>
+                  <div className='label'>
+                    내용<font color="red">*</font>
+                  </div>
+                </div>
+
+                <textarea
+                  value={this.state.content}
+                  onFocus={this.hideFloatingText}
+                  onBlur={this.checkToShowFloatingText}
+                  onChange={this.onChangeValueContent} />
+              </div>
+
+            </div>
+            <div className='button-wrapper rows top13'>
+              <Button
+                disabled={!this.state.couldwrite}
+                onClick={this.onWrite}
+                active={this.state.couldwrite}>
+
+                <div className="text">등록하기</div>
+              </Button>
+
+              <Button
+                onClick={this.onCancelWrite}>
+
+                <div className="text">취소하기</div>
+              </Button>
+            </div>
+          </WriteForm>
+        </>}
+
     </Wrapper>);
   }
 }
-
-export default Community;
