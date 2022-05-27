@@ -5,7 +5,7 @@ import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 import Heart from "source/Iconly-heart-white.svg"
 import Heart_red from "source/Iconly-heart-red.svg"
 import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
-import SharerItemListContainer from 'containers/SharerItemListContainer';
+import SharerItemListContainer from 'containers/ListContainer/SellItemListContainer';
 
 const Wrapper = styled.div`
   width:100vw;

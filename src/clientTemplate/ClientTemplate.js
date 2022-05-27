@@ -33,7 +33,7 @@ const Wrapper = styled.div`
     top: 0;
     background: linear-gradient(180deg, #707070, #383838);
     width: 100%;
-    height: 100%;
+    height: 100vh;
     z-index: 99;
     opacity: 50%;
   }

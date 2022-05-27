@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ScrollList from "components_mobile/Commons/ScrollList"
 import { connect } from "react-redux";
-import { GetTopItemListRequest } from "actions/Items/TopList";
 
 const dummy = [
   {
@@ -25,26 +24,18 @@ const dummy = [
     url: "https://i.picsum.photos/id/1011/5472/3648.jpg?hmac=Koo9845x2akkVzVFX3xxAc9BCkeGYA9VRVfLE4f0Zzk"
   }
 ]
-class TopItemListContainer extends Component {
-  async componentDidMount(){
-    await this.props.GetTopItemListRequest().then(async()=>{
-
-    });
-  }
+class RegisterExpContainer extends Component {
   render() {
-    console.log(this.props.topItemList);
    return (<React.Fragment>
-      <ScrollList list={this.props.topItemList} />
+      <ScrollList list={dummy} />
     </React.Fragment>)
   }
 }
 
 const mapStateToProps = (state) => ({
-  topItemList:state.TopList.status.itemList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  GetTopItemListRequest: ()=>dispatch(GetTopItemListRequest())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopItemListContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterExpContainer);

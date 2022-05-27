@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ScrollList from "components_mobile/ScrollList"
+import ScrollList from "components_mobile/Commons/ScrollList"
 import { connect } from "react-redux";
 
 const dummy = [
@@ -24,7 +24,7 @@ const dummy = [
     url: "https://i.picsum.photos/id/1011/5472/3648.jpg?hmac=Koo9845x2akkVzVFX3xxAc9BCkeGYA9VRVfLE4f0Zzk"
   }
 ]
-class SellItemListContainer extends Component {
+class SellExpContainer extends Component {
   render() {
    return (<React.Fragment>
       <ScrollList list={dummy} />
@@ -38,4 +38,4 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SellItemListContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SellExpContainer);
