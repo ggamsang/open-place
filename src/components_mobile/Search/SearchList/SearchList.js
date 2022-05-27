@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Search from '../Search';
-import ScrollList from 'components_mobile/ScrollList';
+import ScrollList from 'components_mobile/Commons/ScrollList';
 // import { WIDTH } from "constant";
 
 const Wrapper = styled.div`

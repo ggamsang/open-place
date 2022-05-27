@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ScrollList from "components_mobile/ScrollList"
+import ScrollList from "components_mobile/Commons/ScrollList"
 import { connect } from "react-redux";
 
 const dummy = [
