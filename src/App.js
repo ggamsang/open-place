@@ -1,9 +1,8 @@
 // REACT //
-import React, { Component } from "react";
-// import { connect } from "react-redux";
+import React from "react";
 import { BrowserRouter, Route, Routes, } from "react-router-dom";
 import MainPage from "pages/MainPage";
-import CommunityPage from "pages/CommunityPage";
+import CommunityPage, { CommunityWritePage, CommunityDetailPage } from "pages/CommunityPage";
 import SignInPage from "pages/RegistrationPage/SignInPage";
 import SignUpPage from "pages/RegistrationPage/SignUpPage";
 import FindPWPage from "pages/RegistrationPage/FindPWPage";
@@ -18,31 +17,33 @@ import CreateSharerPage from "pages/SharerPage/CreateSharerPage";
 import ModifySharerPage from "pages/SharerPage/ModifySharerPage";
 import SharerDetailPage from "pages/SharerPage/SharerDetailPage";
 
-class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/community" element={<CommunityPage />} />
-          <Route path="/intro" element={<IntroPage />} />
-          <Route path="/login" element={<SignInPage />} />
-          <Route path="/join" element={<SignUpPage />} />
-          <Route path="/findPW" element={<FindPWPage />} />
-          <Route path="/myDetail" element={<MyDetailPage />}>
-            <Route path=":id" element={<MyDetailChild/>}/>
-          </Route>
-          <Route path="/terms" element={<TermsOfServicePage />} />
-          <Route path="/privacy" element={<PrivacyPolicyPage />} />
-          <Route path="/search" element={<SearchPage />} >
-            <Route path=":keyword" element={<SearchPage />} />
-          </Route>
-          <Route path="/createSharer" element={<CreateSharerPage/>}/>
-          <Route path="/modifySharer" element={<ModifySharerPage/>}/>
-          <Route path="/SharerDetail/:id" element={<SharerDetailPage/>}/>
-        </Routes>
-      </BrowserRouter>
-    )
-  }
+function App() {
+  return (<BrowserRouter>
+    <Routes>
+      <Route path="" element={<MainPage />} />
+      <Route path="community" element={<CommunityPage />} >
+        <Route path=":id" element={<CommunityDetailPage />} />
+        <Route path="write" element={<CommunityWritePage />} />
+      </Route>
+      <Route path="intro" element={<IntroPage />} />
+      <Route path="login" element={<SignInPage />} />
+      <Route path="join" element={<SignUpPage />} />
+      <Route path="findPW" element={<FindPWPage />} />
+      <Route path="myDetail" element={<MyDetailPage />}>
+        <Route path=":id" element={<MyDetailChild />} />
+      </Route>
+      <Route path="terms" element={<TermsOfServicePage />} />
+      <Route path="privacy" element={<PrivacyPolicyPage />} />
+      <Route path="search" element={<SearchPage />} >
+        <Route path=":keyword" element={<SearchPage />} />
+      </Route>
+      <Route path="createSharer" element={<CreateSharerPage />} />
+      <Route path="modifySharer" element={<ModifySharerPage />} />
+      <Route path="SharerDetail/:id" element={<SharerDetailPage />} />
+      <Route path="*" element={<div>NOT FOUND</div>} />
+    </Routes>
+  </BrowserRouter>
+  )
 }
+
 export default App;
