@@ -38,7 +38,7 @@ class SearchForm extends Component {
           <div onClick={this.onClickBack} className='arrow_box'>
             <img className='img_arrow' src={back_arrow} />
           </div>
-          <Search width={302} />
+          <Search width={302} keyword={this.props.keyword} />
         </SearchBox>
       </React.Fragment>
     )

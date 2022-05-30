@@ -67,7 +67,13 @@ const InputWrapper = styledComponents.div`
 class Search extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { keyword: this.props.keyword || "" }
+        this.state = { keyword: this.props.keyword }
+    }
+    componentDidMount() {
+        const node = document.getElementById('search');
+        if (node) {
+            node.value = this.props.keyword ? this.props.keyword : "";
+        }
     }
     goSearch = (keyword) => {
         window.location.href = `/search/${keyword}`;
@@ -79,7 +85,7 @@ class Search extends React.Component {
     }
     handleZoomClicked = () => {
         const input = document.getElementById("search");
-        if (input.value === "") {
+        if (input.value !== "") {
             this.goSearch(input.value);
         }
     }
