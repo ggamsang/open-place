@@ -1,4 +1,5 @@
 import React from 'react';
+import { goto } from 'smallfuncs';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -22,7 +23,6 @@ const Wrapper = styled.div`
             line-height: 18px;
             letter-spacing: 0px;
             color: #C1C1C1;
-            opacity: 1;
         }
         .title {
             width: 120px;
@@ -95,15 +95,17 @@ const dummy = [
 ];
 
 class ArticleList extends React.Component {
-
+    gotoDetail = id => {
+        goto("READ", id);
+    }
     render() {
-        
+
         const { articles = dummy } = this.props;
 
         return (<Wrapper>
 
             {articles.map((item, idx) =>
-                <div key={idx} className="line">
+                <div key={idx} className="line" onClick={e => this.gotoDetail(item.uid || idx)}>
                     <div className='header'>
                         {item.header}
                     </div>

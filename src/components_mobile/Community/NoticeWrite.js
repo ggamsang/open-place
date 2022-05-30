@@ -135,13 +135,17 @@ const WriteForm = styled.form`
     position: relative;
   }
   .floating-text {
+    width: max-content;
     position: absolute;
-    left: 40%;
-    top: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
 `;
 
-export class CommunityWrite extends React.Component {
+export class NoticeWrite extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -201,18 +205,12 @@ export class CommunityWrite extends React.Component {
       <div className='gradient'>
         <div className='blanker'>&nbsp;</div>
         <SearchForm />
-        {this.props.type === "free" || this.props.type == null
-          && <div className='title'>게시글 등록하기</div>}
-        {this.props.type === "noti"
-          && <div className='title'>공지사항 등록하기</div>}
+        <div className='title'>공지사항 등록하기</div>
       </div>
 
       <WriteForm>
         <div className='form'>
-          {this.props.type === "noti"
-            && <div className='label'>공지사항</div>}
-          {this.props.type === "free" || this.props.type == null
-            && <div className='label'>게시글 작성</div>}
+          <div className='label'>공지사항</div>
 
           <div className='rows top13'>
             <div className='label'>

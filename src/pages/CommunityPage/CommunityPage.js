@@ -6,7 +6,7 @@ class CommunityPage extends React.Component {
   render() {
     return (
       <ClientTemplate>
-        <CommunityContainer/>
+        <CommunityContainer />
       </ClientTemplate>
     )
   }

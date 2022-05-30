@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Search from 'components_mobile/Search';
 import ArticleListContainer from "containers/ArticleListContainer"
 import { WIDTH } from 'constant';
+import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 
 const Wrapper = styled.div`
   .blanker {
@@ -54,7 +54,6 @@ const Button = styled.button`
   background: ${prop => prop.active ? "#FF0000" : "#707070"};
   box-shadow: 2px 2px 3px #00000019;
   border-radius: 10px;
-  opacity: 1;
   border: none;
   outline: none;
   display: flex;
@@ -166,7 +165,7 @@ class Community extends React.Component {
 
       <div className='gradient'>
         <div className='blanker'>&nbsp;</div>
-        <Search />
+        <SearchForm />
         {pageType === "list"
           ? <div className='title'>커뮤니티</div>
           : <div className='title'>게시글 등록하기</div>}
@@ -191,6 +190,7 @@ class Community extends React.Component {
           <ArticleListContainer boardType={boardType} />
         </div>
       </>
+
     </Wrapper>);
   }
 }

@@ -4,10 +4,8 @@ import { CommunityWriteContainer } from 'containers/CommunityContainer';
 
 export class CommunityWritePage extends React.Component {
   render() {
-    return (
-      <ClientTemplate>
-        <CommunityWriteContainer />
-      </ClientTemplate>
-    )
+    return (<ClientTemplate>
+      <CommunityWriteContainer />
+    </ClientTemplate>)
   }
 }
