@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 import { WIDTH } from 'constant';
-import CommentListContainer from 'containers/CommentListContainer';
-
 
 const Wrapper = styled.div`
   margin-bottom: 150px; // 임시로 입력된 값입니다.
@@ -149,13 +147,13 @@ const DetailWrapper = styled.div`
   }
 `;
 
-export class CommunityDetail extends React.Component {
-  
+export class NoticeDetail extends React.Component {
+
   render() {
     const {
       uid = null,
-      title = '게시글제목',
-      content = '게시글내용 내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용',
+      title = '공지사항 제목',
+      content = ' 내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용',
       author = '작성자',
       date = '2022-05-01'
     } = this.props;
@@ -165,7 +163,7 @@ export class CommunityDetail extends React.Component {
       <div className='gradient'>
         <div className='blanker'>&nbsp;</div>
         <SearchForm />
-        <div className='title'>게시글 상세</div>
+        <div className='title'>공지사항 상세</div>
       </div>
 
       <DetailWrapper>
@@ -182,11 +180,9 @@ export class CommunityDetail extends React.Component {
           </div>
         </div>
 
-        <div className='content'>{content || "내용이 없습니다."}</div>
+        <div className='content'>{content}</div>
 
       </DetailWrapper>
-
-      <CommentListContainer id={uid} />
 
     </Wrapper >);
   }

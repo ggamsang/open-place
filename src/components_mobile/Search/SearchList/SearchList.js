@@ -56,7 +56,6 @@ const Button = styled.button`
   background: ${prop => prop.active ? "#FF0000" : "#707070"};
   box-shadow: 2px 2px 3px #00000019;
   border-radius: 10px;
-  opacity: 1;
   border: none;
   outline: none;
   display: flex;

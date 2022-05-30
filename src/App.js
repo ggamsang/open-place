@@ -23,10 +23,9 @@ function App() {
   return (<BrowserRouter>
     <Routes>
       <Route path="" element={<MainPage />} />
-      <Route path="community" element={<CommunityPage />} >
-        <Route path=":id" element={<CommunityDetailPage />} />
-        {/* <Route path="write" element={<CommunityWritePage />} /> */}
-      </Route>
+      <Route path="community" element={<CommunityPage />} />
+      <Route path="community/write" element={<CommunityWritePage />} />
+      <Route path="community/:id" element={<CommunityDetailPage />} />
       <Route path="intro" element={<IntroPage />} />
       <Route path="login" element={<SignInPage />} />
       <Route path="join" element={<SignUpPage />} />

@@ -1,4 +1,4 @@
-export const goto = (type) => {
+export const goto = (type, offset = null) => {
     switch (type) {
         case "PRIVACY": window.location.href = "/privacy"; break;
         case "TERMS": window.location.href = "/terms"; break;
@@ -16,6 +16,8 @@ export const goto = (type) => {
         case "LEARN": window.location.href = "/list"; break;
         case "MAKE": window.location.href = "/list"; break;
         case "COMMUNITY": window.location.href = "/community"; break;
+        case "WRITE": window.location.href = "/community/write"; break;
+        case "READ": window.location.href = "/community/" + offset; break;
         default: break;
     }
 }
