@@ -25,6 +25,7 @@ const GradationCard = styled.div`
 const ContentWrapper = styled.div`
   z-index: 1;
   position: relative;
+
   .blanker {
     height: 49px;
   }
