@@ -16,7 +16,7 @@ import CreateSharerPage from "pages/SharerPage/CreateSharerPage";
 import ModifySharerPage from "pages/SharerPage/ModifySharerPage";
 import SharerDetailPage from "pages/SharerPage/SharerDetailPage";
 import SearchPage from "pages/SearchPage";
-import ExpListPage from "pages/ExpListPage";
+import ExpListPage, { ExpDetailPage } from "pages/ExpPage";
 import styled from 'styled-components';
 
 
@@ -73,6 +73,7 @@ function App() {
             <Route path="/SharerDetail" element={<SharerDetailPage />}>
               <Route path=":id" element={<SharerDetailPage />} />
             </Route>
+            <Route path="exp/:id" element={<ExpDetailPage />} />
             <Route path="*" element={<div>NOT FOUND</div>} />
           </Routes>
         </BrowserRouter>
