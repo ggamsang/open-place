@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Search from '../Search';
+import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 import ScrollList from 'components_mobile/Commons/ScrollList';
 // import { WIDTH } from "constant";
 
@@ -86,12 +86,11 @@ const dummy = [
 class SearchList extends React.Component {
     render() {
         const { list = dummy } = this.props;
-
         return (<Wrapper>
 
             <div className='gradient'>
                 <div className='blanker'>&nbsp;</div>
-                <Search />
+                <SearchForm keyword={this.props.keyword} />
             </div>
 
             <div className='rows margin-top-9'>

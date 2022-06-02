@@ -6,10 +6,12 @@ import Heart from "source/Iconly-heart-white.svg"
 import Heart_red from "source/Iconly-heart-red.svg"
 import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
 import SharerItemListContainer from 'containers/ListContainer/SellItemListContainer';
+import { WIDTH } from 'constant';
 
 const Wrapper = styled.div`
-  width:100vw;
-  height:130vh;
+  // width:100vw;
+  width: ${WIDTH}px;
+  height: 100%; // 130vh;
   .header{
     width:100%;
     height:${resolution(290)}px;
@@ -97,7 +99,7 @@ const Detail = styled.div`
 
 const Sell = styled.div`
     box-sizing:border-box;
-    padding:0px 20px;
+    // padding:0px 20px;
     .title{
         width:100%;
         font: normal normal medium 18px/21px Pretendard;
@@ -154,6 +156,7 @@ class SharerDetail extends React.Component {
                         <div className='textBox' style={{width:"114px"}}>시/도</div>
                     </div>
             </div>
+            
             <ButtonNormal
                 width={335}
                 height={35}

@@ -12,9 +12,9 @@ const Wrapper = styled.div`
     &::-webkit-scrollbar {
         display: none;
     }
-    // margin: auto;
+    margin: auto;
     width: ${WIDTH}px;
-    margin:${props=>props.type=="sharer"?"none":"auto"};
+    // margin:${props => props.type == "sharer" ? "none" : "auto"};
 `;
 
 class ScrollList extends React.Component {
@@ -27,9 +27,9 @@ class ScrollList extends React.Component {
                 item.type == "item"
                     ? <Item key={index} {...item} />
                     :
-                item.type == "sharer"
-                    ? <Sharer key={index} {...item}/>
-                    : null)}
+                    item.type == "sharer"
+                        ? <Sharer key={index} {...item} />
+                        : null)}
         </Wrapper>);
     }
 }

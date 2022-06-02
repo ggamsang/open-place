@@ -4,9 +4,12 @@ import styled/*, { keyframes }*/ from "styled-components";
 import Footer from "components_mobile/Footer"
 import BottomMenu from "components_mobile/Menu/Bottom";
 import AlarmContainer from "containers/AlarmContainer"
+import { WIDTH } from 'constant';
 
 const Wrapper = styled.div`
   z-index: 1;
+  width: ${WIDTH}px;
+  // width: 100%;
   .nav {
     z-index: 999;
     position: fixed;
@@ -16,7 +19,7 @@ const Wrapper = styled.div`
       position: relative;
       // bottom: 100px;
     }
-    width: 100%;
+    // width: 100%;
   }
   .main { }
   .disabled {
