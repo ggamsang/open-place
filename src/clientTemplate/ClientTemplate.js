@@ -8,7 +8,7 @@ import { WIDTH } from 'constant';
 
 const Wrapper = styled.div`
   z-index: 1;
-  width: ${WIDTH}px;
+  // width: ${WIDTH}px;
   // width: 100%;
   .nav {
     z-index: 999;
@@ -19,7 +19,7 @@ const Wrapper = styled.div`
       position: relative;
       // bottom: 100px;
     }
-    // width: 100%;
+    width: 100%;
   }
   .main { }
   .disabled {

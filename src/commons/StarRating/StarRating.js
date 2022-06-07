@@ -8,7 +8,7 @@ const Wrapper = styled.div`
     .text {
         margin-left: 4.21px;
         font-family: Metropolis;
-        font-weight: 300;
+        font-weight: 500;
         font-size: 11px;
         line-height: 11px;
         text-align: left;

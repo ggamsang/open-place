@@ -17,8 +17,12 @@ import SharerDetailPage from "pages/SharerPage/SharerDetailPage";
 import SearchPage from "pages/SearchPage";
 import MessageListPage, { MessageDetailPage } from "pages/MessagePage";
 import ExpListPage, { ExpDetailPage } from "pages/ExpPage";
+import ExpDetailPage from "pages/ExpPage/ExpDetailPage/ExpDetailPage";
 import styled from 'styled-components';
 
+import MakeExpListPage from "pages/ExpPage/MakeExpListPage ";
+import PlayExpListPage from "pages/ExpPage/PlayExpListPage";
+import LearnExpListPage from "pages/ExpPage/LearnExpListPage";
 
 import { WIDTH } from "constant";
 // import bg from "resources/sample-image-01.png";
@@ -45,10 +49,9 @@ const Wrapper = styled.main`
 function App() {
 
   return (
-    <Wrapper>
-      {/* <img src={bg} alt="bg" className="bg" /> */}
-
-      <div className="content">
+    // <Wrapper>
+    //   <img src={bg} alt="bg" className="bg" />
+    //   <div className="content">
         <BrowserRouter>
           <Routes>
             <Route path="" element={<MainPage />} />
@@ -59,7 +62,9 @@ function App() {
             <Route path="login" element={<SignInPage />} />
             <Route path="join" element={<SignUpPage />} />
             <Route path="findPW" element={<FindPWPage />} />
-            <Route path="/list" element={<ExpListPage />} />
+            <Route path="play" element={<PlayExpListPage />} />
+            <Route path="make" element={<MakeExpListPage />} />
+            <Route path="learn" element={<LearnExpListPage />} />
             <Route path="myDetail" element={<MyDetailPage />}>
               <Route path=":id" element={<MyDetailChild />} />
             </Route>
@@ -80,9 +85,9 @@ function App() {
             <Route path="*" element={<div>NOT FOUND</div>} />
           </Routes>
         </BrowserRouter>
-      </div>
+    //   </div>
 
-    </Wrapper>
+    // </Wrapper>
 
   )
 }
