@@ -1,14 +1,9 @@
-import React, { Component } from 'react';
 import IntroContainer from 'containers/IntroContainer';
 
-class IntroPage extends Component {
-  render() {
-    return (
-    <React.Fragment>
-      <IntroContainer/>
-    </React.Fragment>
-    )
-  }
+function IntroPage() {
+  return (
+    <IntroContainer />
+  )
 }
 
 export default IntroPage;

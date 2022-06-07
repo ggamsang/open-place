@@ -4,9 +4,12 @@ import styled/*, { keyframes }*/ from "styled-components";
 import Footer from "components_mobile/Footer"
 import BottomMenu from "components_mobile/Menu/Bottom";
 import AlarmContainer from "containers/AlarmContainer"
+import { WIDTH } from 'constant';
 
 const Wrapper = styled.div`
   z-index: 1;
+  width: ${WIDTH}px;
+  // width: 100%;
   .nav {
     z-index: 999;
     position: fixed;
@@ -16,7 +19,7 @@ const Wrapper = styled.div`
       position: relative;
       // bottom: 100px;
     }
-    width: 100%;
+    // width: 100%;
   }
   .main { }
   .disabled {
@@ -24,7 +27,7 @@ const Wrapper = styled.div`
   }
   .bottom {
     .blanker {
-      height: 117px;
+      height: 120px;
     }
   }
   .dimmer {
@@ -68,7 +71,7 @@ class ClientTemplate extends Component {
 
   render() {
     // console.log(this.props, this.state);
-    
+
     return (<>
       {/* <button style={{ position: "absolute", zIndex: "998", left: "60px" }} onClick={() => this.setState({ login: !this.state.login })}>demo:{this.state.login ? "로그아웃" : "로그인"}</button> */}
       {/* alarm */}
@@ -85,10 +88,12 @@ class ClientTemplate extends Component {
         </div>
 
         <div className='bottom'>
-          <div style={{ height: "10px" }}></div>
-          {this.props.i_dont_need_footer
-            ? <></>
-            : <Footer />}
+          {/* <div className='blanker'>&nbsp;</div> */}
+          {/* {this.props.i_dont_need_footer */}
+          {/* ? <></> */}
+          {/* :  */}
+          <Footer />
+          {/* } */}
         </div>
 
         {/* <div id='dimmer'> &nbsp; </div> */}
@@ -97,10 +102,9 @@ class ClientTemplate extends Component {
     </>);
   }
 }
-
 const mapStateToProps = state => {
   console.log("redux:", state);
   return {}
 };
-const mapDispatchToProps = dispatch => ({}); 
+const mapDispatchToProps = dispatch => ({});
 export default connect(mapStateToProps, mapDispatchToProps)(ClientTemplate);

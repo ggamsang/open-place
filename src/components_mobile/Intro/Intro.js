@@ -6,10 +6,11 @@ import GradientButton from 'components_mobile/Commons/Button/GradientButton';
 import ImageButton from 'components_mobile/Commons/Button/ImageButton';
 import Fade from 'react-reveal/Fade';
 import Zoom from 'react-reveal/Zoom';
+import { WIDTH } from 'constant';
 
 const Wrapper = styled.div`
-  width:100vw;
-  height:100vh;
+  width: ${WIDTH}px; // width: 100vw;
+  height: 100vh;
   position:relative;
   .wrap{
     width:100%;
@@ -36,44 +37,44 @@ const Wrapper = styled.div`
 `
 const Loading = styled.div`
   .content{
-    width:100vw;
-    height:100vh;
-    position:absolute;
-    background: linear-gradient(205deg,#DA1313,#014FFF);
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    width: ${WIDTH}px; // width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background: linear-gradient(205deg, #DA1313, #014FFF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `
 class Intro extends Component {
   render() {
     return (
-    <Wrapper>
-      <Loading>
-        <div className='content'>
-        <Zoom>
-        <Logo type="big"/>
-        </Zoom>
-        </div>
-      </Loading>
-      <Fade delay={1500}>
-      <div className='wrap'>
-      <div className='box alignCenter justifyCenter'>
-        <Logo type="big" text={"OPEN MARKET \n 매일 새로운 경험"}/>
-      </div>
-      <div className='box column alignCenter'>
-        <GradientButton onClickEvent={()=>window.location.href="/login"} style={{marginTop:"60px",marginBottom:"20px"}} text="로그인" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28}/>
-        <GradientButton onClickEvent={()=>window.location.href="/join"} style={{marginBottom:"20px"}} text="회원가입" width={292} height={52} front={'#365AF1'} end={'#FF4343'} deg={270} radius={28}/>
-        <GradientButton onClickEvent={()=>window.location.href="/"} style={{marginBottom:"20px"}} text="둘러보기" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28}/>
-        <div className='login_button_wrap'>
-          <ImageButton style={{marginRight:"6px",marginLeft:"6px"}} width={50} height={50} color={"#1877F2"} radius={25}/>
-          <ImageButton style={{marginRight:"6px",marginLeft:"6px"}} width={50} height={50} color={"#F14336"} radius={25}/>
-        </div>
-      </div>  
-      </div>
-      </Fade>  
-      </Wrapper>    
-      )
+      <Wrapper>
+        <Loading>
+          <div className='content'>
+            <Zoom>
+              <Logo type="big" />
+            </Zoom>
+          </div>
+        </Loading>
+        <Fade delay={1500}>
+          <div className='wrap'>
+            <div className='box alignCenter justifyCenter'>
+              <Logo type="big" text={"OPEN MARKET \n 매일 새로운 경험"} />
+            </div>
+            <div className='box column alignCenter'>
+              <GradientButton onClickEvent={() => window.location.href = "/login"} style={{ marginTop: "60px", marginBottom: "20px" }} text="로그인" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28} />
+              <GradientButton onClickEvent={() => window.location.href = "/join"} style={{ marginBottom: "20px" }} text="회원가입" width={292} height={52} front={'#365AF1'} end={'#FF4343'} deg={270} radius={28} />
+              <GradientButton onClickEvent={() => window.location.href = "/"} style={{ marginBottom: "20px" }} text="둘러보기" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28} />
+              <div className='login_button_wrap'>
+                <ImageButton style={{ marginRight: "6px", marginLeft: "6px" }} width={50} height={50} color={"#1877F2"} radius={25} />
+                <ImageButton style={{ marginRight: "6px", marginLeft: "6px" }} width={50} height={50} color={"#F14336"} radius={25} />
+              </div>
+            </div>
+          </div>
+        </Fade>
+      </Wrapper>
+    )
   }
 }
 

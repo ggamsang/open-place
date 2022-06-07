@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Search from '../Search';
+import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 import ScrollList from 'components_mobile/Commons/ScrollList';
 // import { WIDTH } from "constant";
 
@@ -56,7 +56,6 @@ const Button = styled.button`
   background: ${prop => prop.active ? "#FF0000" : "#707070"};
   box-shadow: 2px 2px 3px #00000019;
   border-radius: 10px;
-  opacity: 1;
   border: none;
   outline: none;
   display: flex;
@@ -87,12 +86,11 @@ const dummy = [
 class SearchList extends React.Component {
     render() {
         const { list = dummy } = this.props;
-
         return (<Wrapper>
 
             <div className='gradient'>
                 <div className='blanker'>&nbsp;</div>
-                <Search />
+                <SearchForm keyword={this.props.keyword} />
             </div>
 
             <div className='rows margin-top-9'>

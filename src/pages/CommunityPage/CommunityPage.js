@@ -5,7 +5,7 @@ import CommunityContainer from 'containers/CommunityContainer';
 class CommunityPage extends React.Component {
   render() {
     return (
-      <ClientTemplate i_dont_need_footer={true}>
+      <ClientTemplate>
         <CommunityContainer />
       </ClientTemplate>
     )

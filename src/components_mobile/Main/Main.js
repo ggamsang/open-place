@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import host from "config";
+import React from 'react';
 import Slide from 'components_mobile/Slide';
 import TopItemList from 'components_mobile/TopItemList';
 import styled from 'styled-components';
@@ -26,38 +25,31 @@ const GradationCard = styled.div`
 const ContentWrapper = styled.div`
   z-index: 1;
   position: relative;
+
   .blanker {
     height: 49px;
   }
 `;
 
-class Main extends Component {
-  componentDidMount() {
-    // fetch(host)
-    // .then(res => res.json())
-    // .then(d => console.log({ d }))
-    // .catch(e => console.error(e));
-  }
-  render() {
+function Main() {
+  return (<Wrapper>
+    <Fade>
+      <GradationCard angle={30} />
 
-    return (<Wrapper>
-      <Fade>
-        <GradationCard angle={30} />
-
-        <ContentWrapper>
-
-          <div className='blanker'>&nbsp;</div>
+      <ContentWrapper>
+        <div className='blanker'>&nbsp;</div>
 
           <SearchForm isMain={true}/>
+        <Slide />
+        <TopItemList />
 
-          <Slide />
 
-          <TopItemList />
+      </ContentWrapper>
 
-        </ContentWrapper>
-      </Fade>
-    </Wrapper>)
-  }
+    </Fade>
+
+  </Wrapper>)
 }
+// }
 
 export default Main;

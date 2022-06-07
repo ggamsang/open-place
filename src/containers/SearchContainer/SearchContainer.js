@@ -8,10 +8,8 @@ class SearchContainer extends React.Component {
     onClose = () => { }
 
     render() {
-        console.log(this.props.keyword);
-
         return (<>
-            <SearchList />
+            <SearchList keyword={this.props.keyword} />
         </>)
     }
 }

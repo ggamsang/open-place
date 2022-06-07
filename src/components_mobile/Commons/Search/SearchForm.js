@@ -7,7 +7,6 @@ import back_arrow from 'source/Iconly-Bold-left-arrow.svg';
 import alarm from 'source/Iconly-alarm-white.svg'
 import { useNavigate } from 'react-router';
 import AlarmContainer from 'containers/AlarmContainer';
-// const navigate = useNavigate();
 
 const SearchBox = styled.div`
     width:100%;
@@ -20,29 +19,29 @@ const SearchBox = styled.div`
 `
 
 class SearchForm extends Component {
-  constructor(props){
-      super(props);
-      this.onClickEvent = this.onClickEvent.bind(this);
-      this.onClickBack = this.onClickBack.bind(this);
+  constructor(props) {
+    super(props);
+    this.onClickEvent = this.onClickEvent.bind(this);
+    this.onClickBack = this.onClickBack.bind(this);
   }
 
-  onClickEvent = () =>{
+  onClickEvent = () => {
     this.props.onClickEvent();
   }
-  onClickBack=()=>{
+  onClickBack = () => {
     window.history.go(-1);
   }
 
   render() {
-    
+
     return (
-    <React.Fragment>
+      <React.Fragment>
         <SearchBox>
             {this.props.isMain==null?<div onClick={this.onClickBack} className='arrow_box'><img className='img_arrow' src={back_arrow}/></div>:null}
-            <Search width={302}/>
+            <Search width={302} keyword={this.props.keyword} />
             {this.props.isMain!=null?<AlarmContainer/>:null}
         </SearchBox>
-    </React.Fragment>
+      </React.Fragment>
     )
   }
 }

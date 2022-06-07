@@ -9,11 +9,12 @@ import notification from 'source/Iconly-Bold-Notification.svg';
 
 import { Fade } from 'react-reveal';
 import { goto } from 'smallfuncs';
-
+import { WIDTH } from 'constant';
 
 
 const Wrapper = styled.div`
-  width:100vw;
+  // width:100vw;
+  width: ${WIDTH}px;
   height:130vh;
   .header{
     width:100%;
@@ -64,56 +65,64 @@ const Wrapper = styled.div`
 
 
 class MyDetail extends Component {
-    constructor(props){
-      super(props);
-      this.state={
-        main_menu:true,sub_menu1:false,sub_menu2:false,
-      }
-      this.onClickPointMenu = this.onClickPointMenu.bind(this);
-      this.onClickLikeMenu = this.onClickLikeMenu.bind(this);
-      this.onClickHome = this.onClickHome.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = {
+      main_menu: true, sub_menu1: false, sub_menu2: false,
     }
-
-    onClickPointMenu = (event) =>{
-      this.setState({main_menu:false});
-      setTimeout(()=>{
-        this.setState({sub_menu1:true,sub_menu2:false})
-      },1000)
-    }
-    onClickLikeMenu = (event) =>{
-      this.setState({main_menu:false})
-      setTimeout(()=>{
-        this.setState({sub_menu1:false,sub_menu2:true})
-      },1000)
-    }
-    onClickHome = (event)=>{
-      this.setState({sub_menu1:false,sub_menu2:false});
-      setTimeout(()=>{
-        this.setState({main_menu:true})
-      },1000)
-    }
-
-    render() {
-      return (
-          <React.Fragment>
-            <Wrapper>
-              <div className="header">
-                <div className='searchbox'><SearchForm/></div>
-                <div className='profile'>
-                  <div className='thumbnail'/>
-                  <div className='user_name'>국민대학교 CRC</div>
-                  <div className='button_wrap'>
-                      <div onClick={()=>goto("CREATE-SHARER")}  className='button borderRight'>공유자<br/>등록수정</div>
-                      <div onClick={()=>goto("MODIFY-SHARER")} className='button borderRight'>프로필<br/>편집</div>
-                      <div className='button'><img className='notify' src={notification}/></div>
-                  </div>
-                </div>
-              </div>
-            <this.props.Outlet/>
-            </Wrapper>
-          </React.Fragment>
-      );
-    }
+    this.onClickPointMenu = this.onClickPointMenu.bind(this);
+    this.onClickLikeMenu = this.onClickLikeMenu.bind(this);
+    this.onClickHome = this.onClickHome.bind(this);
   }
-  
+
+  onClickPointMenu = (event) => {
+    this.setState({ main_menu: false });
+    setTimeout(() => {
+      this.setState({ sub_menu1: true, sub_menu2: false })
+    }, 1000)
+  }
+  onClickLikeMenu = (event) => {
+    this.setState({ main_menu: false })
+    setTimeout(() => {
+      this.setState({ sub_menu1: false, sub_menu2: true })
+    }, 1000)
+  }
+  onClickHome = (event) => {
+    this.setState({ sub_menu1: false, sub_menu2: false });
+    setTimeout(() => {
+      this.setState({ main_menu: true })
+    }, 1000)
+  }
+
+  render() {
+    return (<Wrapper>
+      <div className="header">
+        <div className='searchbox'>
+          <SearchForm />
+        </div>
+        <div className='profile'>
+          <div className='thumbnail' />
+          <div className='user_name'>국민대학교 CRC</div>
+          <div className='button_wrap'>
+            <div className='button borderRight'
+              onClick={() => goto("CREATE-SHARER")}>
+              공유자<br />
+              등록수정
+            </div>
+            <div className='button borderRight'
+              onClick={() => goto("MODIFY-SHARER")} >
+              프로필<br />
+              편집
+            </div>
+            <div className='button'>
+              <img className='notify' src={notification} />
+            </div>
+          </div>
+        </div>
+      </div>
+      <this.props.Outlet />
+    </Wrapper>);
+  }
+}
+
 export default MyDetail;

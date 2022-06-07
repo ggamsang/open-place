@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import ArticleListContainer from "containers/ArticleListContainer"
-import { WIDTH } from 'constant';
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
+import { WIDTH } from 'constant';
+import { goto } from 'smallfuncs';
 
 const Wrapper = styled.div`
   .blanker {
@@ -141,58 +141,122 @@ const WriteForm = styled.form`
   }
 `;
 
-
-
-class Community extends React.Component {
+export class CommunityWrite extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      boardType: "free", /* "notice" */
-      pageType: "list",/* write */
+      couldwrite: false,
+      title: "",
+      content: "",
     };
   }
-  clickedButtonBSD = () => {
-    this.setState({ boardType: "free" });
+
+  onChangeValueTitle = async (e) => {
+    await this.setState({ title: e.target.value });
+    if (this.state.content !== "" && this.state.title !== "") {
+      this.setState({ couldwrite: true });
+    }
+    else {
+      this.setState({ couldwrite: false })
+    }
   }
-  clickedButtonNotice = () => {
-    this.setState({ boardType: "notice" });
+  onChangeValueContent = async (e) => {
+    await this.setState({ content: e.target.value });
+    if (this.state.content !== "" && this.state.title !== "") {
+      this.setState({ couldwrite: true });
+    } else {
+      this.setState({ couldwrite: false })
+    }
+  }
+  hideFloatingText = (e) => {
+    if (this.state.content === "") {
+      const node = document.getElementById("floating-text");
+      if (node) {
+        node.style.display = "none";
+      }
+    }
+  }
+  checkToShowFloatingText = (e) => {
+    if (this.state.content === "") {
+      const node = document.getElementById("floating-text");
+      if (node) {
+        node.style.display = "block";
+      }
+    }
+  }
+  onCancelWrite = (e) => {
+    e.preventDefault();
+    goto("COMMUNITY");
+    // this.setState({ pageType: "list", content: "", title: "", couldwrite: false });
+  }
+  onWrite = (e) => {
+    e.preventDefault();
+    const data = { content: this.state.content, title: this.state.title, type: this.props.type === "noti" ? "noti" : "free" };
+    console.log({ data });
   }
 
   render() {
-    const { boardType, pageType } = this.state;
 
     return (<Wrapper>
-
       <div className='gradient'>
         <div className='blanker'>&nbsp;</div>
         <SearchForm />
-        {pageType === "list"
-          ? <div className='title'>커뮤니티</div>
-          : <div className='title'>게시글 등록하기</div>}
+        {this.props.type === "free" || this.props.type == null
+          && <div className='title'>게시글 등록하기</div>}
+        {this.props.type === "noti"
+          && <div className='title'>공지사항 등록하기</div>}
       </div>
 
-      <>
-        <div className='top13 rows'>
+      <WriteForm>
+        <div className='form'>
+          {this.props.type === "noti"
+            && <div className='label'>공지사항</div>}
+          {this.props.type === "free" || this.props.type == null
+            && <div className='label'>게시글 작성</div>}
 
+          <div className='rows top13'>
+            <div className='label'>
+              제목<font color="red">*</font>
+            </div>
+
+            <div>
+              <input
+                value={this.state.title}
+                onChange={this.onChangeValueTitle} />
+            </div>
+          </div>
+
+          <div className='t-area-wrapper'>
+            <div className='floating-text' id='floating-text'>
+              <div className='label'>
+                내용<font color="red">*</font>
+              </div>
+            </div>
+
+            <textarea
+              value={this.state.content}
+              onFocus={this.hideFloatingText}
+              onBlur={this.checkToShowFloatingText}
+              onChange={this.onChangeValueContent} />
+          </div>
+
+        </div>
+        <div className='button-wrapper rows top13'>
           <Button
-            active={boardType === "free"}
-            onClick={this.clickedButtonBSD}>
-            <div className="text">자유게시판</div>
+            disabled={!this.state.couldwrite}
+            onClick={this.onWrite}
+            active={this.state.couldwrite}>
+
+            <div className="text">등록하기</div>
           </Button>
-          <Button
-            active={boardType === "notice"}
-            onClick={this.clickedButtonNotice}>
-            <div className="text">공지사항</div>
+
+          <Button onClick={this.onCancelWrite}>
+            <div className="text">취소하기</div>
           </Button>
         </div>
+      </WriteForm>
 
-        <div className='article-list-wrapper'>
-          <ArticleListContainer boardType={boardType} />
-        </div>
-      </>
 
     </Wrapper>);
   }
 }
-
-export default Community;
