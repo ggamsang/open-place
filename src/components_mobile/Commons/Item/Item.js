@@ -38,6 +38,13 @@ const Wrapper = styled.div`
 `;
 
 class Item extends React.Component {
+    constructor(props){
+        super(props);
+        this.onClickItem=this.onClickItem.bind(this);
+    }
+    onClickItem = (event) =>{
+        window.location.href="/exp/1"
+    }
     render() {
         const {
             url,
@@ -45,9 +52,9 @@ class Item extends React.Component {
             score,
             tags
         } = this.props;
-
+        
         return (
-            <Wrapper bg={url || noimage}>
+            <Wrapper bg={url || noimage} onClick={this.onClickItem}>
                 <div className='item-title'>{title || "title"}</div>
 
                 <div className='rate-and-tags'>

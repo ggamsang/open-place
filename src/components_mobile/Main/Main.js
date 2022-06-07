@@ -48,7 +48,7 @@ class Main extends Component {
 
           <div className='blanker'>&nbsp;</div>
 
-          <SearchForm/>
+          <SearchForm isMain={true}/>
 
           <Slide />
 

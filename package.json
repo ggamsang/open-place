@@ -10,6 +10,7 @@
     "create-react-class": "^15.7.0",
     "react": "^18.1.0",
     "react-addons-update": "^15.6.3",
+    "react-awesome-modal": "^2.0.5",
     "react-cache-buster": "^0.1.6",
     "react-dom": "^18.1.0",
     "react-redux": "7",

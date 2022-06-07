@@ -5,13 +5,7 @@ import { resolution } from 'commons/resolution';
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 
 
-import AlarmContainer from 'containers/AlarmContainer';
 import notification from 'source/Iconly-Bold-Notification.svg';
-import buy from 'source/Iconly-Bold-buy.svg';
-import heart from 'source/Iconly-Bold-Heart.svg';
-import star from 'source/Iconly-Bold-Star.svg';
-import work from 'source/Iconly-Bold-Work.svg';
-import plus from 'source/Iconly-Bold-Plus.svg';
 
 import { Fade } from 'react-reveal';
 import { goto } from 'smallfuncs';

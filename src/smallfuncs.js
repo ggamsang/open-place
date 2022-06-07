@@ -6,7 +6,7 @@ export const goto = (type) => {
         case "LOGIN": window.location.href = "/login"; break;
         case "SIGNUP": window.location.href = "/join"; break;
         case "MYDETAIL": window.location.href = "/myDetail/sub"; break;
-        case "CREATE-ITEM": window.location.href = "/createitem"; break;
+        case "CREATE-ITEM": window.location.href = "/createExp"; break;
         case "CREATE-SHARER": window.location.href = "/createSharer"; break;
         case "MODIFY-SHARER": window.location.href = "/modifySharer"; break;
         case "EXP-LIST": window.location.href = "/list"; break;

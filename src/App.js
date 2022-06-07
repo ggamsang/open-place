@@ -17,7 +17,10 @@ import ModifySharerPage from "pages/SharerPage/ModifySharerPage";
 import SharerDetailPage from "pages/SharerPage/SharerDetailPage";
 import CommunityPage from "pages/CommunityPage";
 import SearchPage from "pages/SearchPage";
-import ExpListPage from "pages/ExpListPage";
+import ExpListPage from "pages/ExpPage/ExpListPage";
+import ExpDetailPage from "pages/ExpPage/ExpDetailPage/ExpDetailPage";
+import CreateExpPage from "pages/ExpPage/CreateExpPage/CreateExpPage";
+import ModifyExpPage from "pages/ExpPage/ModifyExpPage/ModifyExpPage";
 class App extends Component {
   render() {
     return (
@@ -42,8 +45,14 @@ class App extends Component {
           <Route path="/SharerDetail" element={<SharerDetailPage/>}>
             <Route path=":id" element={<SharerDetailPage/>}/>
           </Route>
+          <Route path="/exp" element={<ExpDetailPage/>}>
+            <Route path=":id" element={<ExpDetailPage/>}/>
+          </Route>
           <Route path="/community" element={<CommunityPage/>}/>
-
+          <Route path="/createExp" element={<CreateExpPage/>}/>
+          <Route path="/modifyExp" element={<ModifyExpPage/>}>
+           <Route path=":id" element={<ModifyExpPage/>}/>
+          </Route>
 
         </Routes>
       </BrowserRouter>
