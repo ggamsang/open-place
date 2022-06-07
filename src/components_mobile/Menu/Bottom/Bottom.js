@@ -166,7 +166,7 @@ class Bottom extends React.Component {
                                 ? <span>메뉴닫기</span>
                                 : <span>메뉴보기</span>}
                         </div>
-                        <div className='login' onClick={() => goto("create-item")}>
+                        <div className='login' onClick={() => goto("CREATE-ITEM")}>
                             <span>+경험등록하기</span>
                         </div>
                     </div>

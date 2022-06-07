@@ -4,6 +4,7 @@ import ScrollList from 'components_mobile/Commons/ScrollList';
 import Search from 'components_mobile/Commons/Search';
 import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
 // import { WIDTH } from "constant";
+import { goto } from 'smallfuncs';
 
 const Wrapper = styled.div`
     -ms-overflow-style: none; /* Internet Explorer 10+ */
@@ -108,6 +109,7 @@ class ExpItemList extends React.Component {
 
             <div className='rows' style={{marginTop:"15px",marginBottom:"15px"}}>
                 <ButtonNormal
+                onClickEvent={() => goto("CREATE-ITEM")}
                 width={165}
                 height={35}
                 radius={10}

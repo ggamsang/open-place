@@ -1,5 +1,8 @@
 import React from 'react';
 import Alarm from "components_mobile/Alarm";
+import styled from 'styled-components';
+import alarm from 'source/Iconly-alarm-white.svg'
+import { resolution } from 'commons/resolution';
 
 const dummy = [
     { 'title': '같이모여서 공부해요!', 'content': 'alarm content' },
@@ -9,6 +12,15 @@ const dummy = [
     { 'title': 'alarm title', 'content': 'alarm content' },
     { 'title': 'alarm title', 'content': 'alarm content' }
 ]
+const AlarmBox = styled.div`
+    box-sizing:border-box;
+    width:${resolution(34)}px;
+    display:flex;
+    justify-content:center;
+    margin-right:10px;
+    .img_alarm{width:${resolution(27)}px;height:${resolution(27)}px;}
+
+`
 class AlarmContainer extends React.Component {
     constructor(props) {
         super(props);
@@ -37,13 +49,10 @@ class AlarmContainer extends React.Component {
 
     render() {
         return (<>
+            <AlarmBox onClick={this.onOpen} className='alarm_box'><img className='img_alarm' src={alarm}/></AlarmBox>
             {this.state.active
                 ? <Alarm close={() => this.onClose()} list={this.state.alarm} />
-                : <button
-                    id="alarm-button"
-                    style={{ display: "none", top: "0", zIndex: "999", position: "fixed" }}
-                    onClick={() => this.onOpen()}>alarm</button>
-            }
+                :null}
         </>)
     }
 }

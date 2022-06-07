@@ -39,11 +39,10 @@ function Main() {
       <ContentWrapper>
         <div className='blanker'>&nbsp;</div>
 
-        <SearchForm />
-
+          <SearchForm isMain={true}/>
         <Slide />
-
         <TopItemList />
+
 
       </ContentWrapper>
 

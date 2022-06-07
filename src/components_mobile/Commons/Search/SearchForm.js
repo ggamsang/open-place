@@ -4,16 +4,18 @@ import { resolution } from 'commons/resolution';
 
 import Search from 'components_mobile/Search';
 import back_arrow from 'source/Iconly-Bold-left-arrow.svg';
-// import { useNavigate } from 'react-router';
-// const navigate = useNavigate();
+import alarm from 'source/Iconly-alarm-white.svg'
+import { useNavigate } from 'react-router';
+import AlarmContainer from 'containers/AlarmContainer';
 
 const SearchBox = styled.div`
     width:100%;
-    // padding-top:50px;
     display:flex;
     align-items:center;
-  .arrow_box{width:${resolution(53)}px;display:flex;justify-content:center;}
+    justify-content:center;
+  .alarm_box{box-sizing:border-box;width:${resolution(34)}px;display:flex;justify-content:center;margin-left:10px;}
   .img_arrow{width:${resolution(27)}px;height:${resolution(19)}px;}
+
 `
 
 class SearchForm extends Component {
@@ -35,10 +37,9 @@ class SearchForm extends Component {
     return (
       <React.Fragment>
         <SearchBox>
-          <div onClick={this.onClickBack} className='arrow_box'>
-            <img className='img_arrow' src={back_arrow} />
-          </div>
-          <Search width={302} keyword={this.props.keyword} />
+            {this.props.isMain==null?<div onClick={this.onClickBack} className='arrow_box'><img className='img_arrow' src={back_arrow}/></div>:null}
+            <Search width={302} keyword={this.props.keyword} />
+            {this.props.isMain!=null?<AlarmContainer/>:null}
         </SearchBox>
       </React.Fragment>
     )

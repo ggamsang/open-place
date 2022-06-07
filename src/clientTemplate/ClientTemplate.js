@@ -37,7 +37,7 @@ const Wrapper = styled.div`
     background: linear-gradient(180deg, #707070, #383838);
     width: 100%;
     height: 100vh;
-    z-index: 99;
+    z-index: 1;
     opacity: 50%;
   }
 `;
@@ -75,11 +75,10 @@ class ClientTemplate extends Component {
     return (<>
       {/* <button style={{ position: "absolute", zIndex: "998", left: "60px" }} onClick={() => this.setState({ login: !this.state.login })}>demo:{this.state.login ? "로그아웃" : "로그인"}</button> */}
       {/* alarm */}
-      <AlarmContainer />
+      {/* <AlarmContainer /> */}
 
       {/*  */}
       <Wrapper id="client-template">
-
         <div id="main" className='main'>
           {this.props.children}
         </div>
@@ -97,7 +96,7 @@ class ClientTemplate extends Component {
           {/* } */}
         </div>
 
-        <div id='dimmer'> &nbsp; </div>
+        {/* <div id='dimmer'> &nbsp; </div> */}
 
       </Wrapper>
     </>);
