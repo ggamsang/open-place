@@ -3,36 +3,49 @@ import styled from 'styled-components';
 import noimage from "resources/sample-image-01.png";
 import StarRating from "commons/StarRating";
 import Tags from "commons/Tags";
+import { resolution } from 'commons/resolution';
+import heart from 'source/Iconly-heart-red.svg'
 
 const Wrapper = styled.div`
-    box-sizing:border-box;
-    // width: 335px;
-    height: 211px;
+    box-sizing:border-box;*{box-sizing:border-box;}
+    height: ${resolution(165)}px;
     background-image: url(${prop => prop.bg});
     background-position: center center;
     background-size: cover;
-    position: relative;
-
+    padding:16px 21px;
+    display:flex;
+    align-items:flex-end;
+    .summary_wrap{width:100%;}
+    .row{
+        width:100%;
+        display:flex;
+    }
     .item-title {
-        position: absolute;
-        width: max-content;
-        height: 19px;
-        top: 141px;
-        left: 21px;
-
-        font-size: 16px;
-        text-align: left;
-        font-weight: 700;
-        font-family: Pretendard;
-        color: #FFF;
-        line-height: 19px;
+        width:${resolution(132)}px;
+        font: normal normal bold 16px/19px Pretendard;
+        color:white;
+        font-weight:bold;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+    }
+    .imgheart{
+        width:23px;
+        height:23px;
+    }
+    .price{
+        margin-left:20px;
+        width:${resolution(80)}px;
+        font: normal normal bold 16px/19px Pretendard;
+        color:white;
+        font-weight:bold;
+    }
+    .like{
+        font: normal normal bold 12px/15px Pretendard;
+        color:white;
+        font-weight:bold;
     }
     .rate-and-tags {
-        position: absolute;
-        width: max-content;
-        height: 14.19px;
-        top: 173px;
-        left: 21px;
         display: flex;
     }
 `;
@@ -50,20 +63,29 @@ class Item extends React.Component {
             url,
             title,
             score,
-            tags
+            tags,
+            price,
+            like
         } = this.props;
         
         return (
             <Wrapper bg={url || noimage} onClick={this.onClickItem}>
-                <div className='item-title'>{title || "title"}</div>
-
-                <div className='rate-and-tags'>
-                    <StarRating score={score} />
-
-                    <Tags prestyle={{ "marginLeft": "16px" }} tags={tags || ['tag1', 'tag2', 'tag3']} />
-
+                <div className='summary_wrap'>
+                    <div className='row' style={{justifyContent:"space-between"}}>
+                        <div className='row'>
+                            <div className='item-title'>{title || "title"}</div>
+                            <div className='price'>{price || "58000￦"}</div>
+                        </div>
+                        <img className='imgheart' src={heart}/>
+                    </div>
+                    <div className='row' style={{justifyContent:"space-between"}}>
+                        <div className='rate-and-tags' >
+                                <StarRating score={score} />
+                                <Tags prestyle={{ "marginLeft": "16px" }} tags={tags || ['tag1', 'tag2', 'tag3']} />
+                        </div>
+                        <div className='like'>{943||like}</div>
+                    </div>
                 </div>
-
             </Wrapper>
         )
     }

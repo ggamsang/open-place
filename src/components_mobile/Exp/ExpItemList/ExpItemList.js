@@ -29,22 +29,23 @@ const Wrapper = styled.div`
 
         .title {
             margin: auto;
-            margin-top: 18px;
+            margin-top: 11px;
             color: white;
             width: max-content;
             text-align: center;
             font-family: Pretendard;
-            font-weight: 500;
+            font-weight: bold;
             font-size: 20px;
             line-height: 20px;
         }
         .tagBox{
             width:100%;
             box-sizing:border-box;
-            padding:20px 20px 34px 20px;
+            padding:12px 20px 12px 20px;
             .tagList{
+                box-shadow: 2px 2px 5px #00000029;
                 width:100%;
-                height:110px;
+                height:66px;
                 display:flex;
                 justify-content:center;
                 align-items:center;
@@ -67,32 +68,13 @@ const Wrapper = styled.div`
      }
 `;
 
-
-const dummy = [
-    {
-      type: "item", title: "스파게티 코드를 작성하자!", score: 4.3,
-      tags: ["tag1", "tag2", "tag3"],
-      url: "https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ"
-    },
-    {
-      type: "item", title: "멍때리며 놀자ㅡ!", score: 3.1,
-      tags: ["tag1", "tag2", "tag3"],
-      url: "https://i.picsum.photos/id/1012/3973/2639.jpg?hmac=s2eybz51lnKy2ZHkE2wsgc6S81fVD1W2NKYOSh8bzDc"
-    },
-    {
-      type: "item", title: "결혼은 이렇게!", score: 4.0,
-      tags: ["tag1", "tag2", "tag3"],
-      url: "https://i.picsum.photos/id/1013/4256/2832.jpg?hmac=UmYgZfqY_sNtHdug0Gd73bHFyf1VvzFWzPXSr5VTnDA"
-    },
-    {
-      type: "item", title: "앞 사람만 노 젖게 시키기", score: 3.5,
-      tags: ["tag1", "tag2",],
-      url: "https://i.picsum.photos/id/1011/5472/3648.jpg?hmac=Koo9845x2akkVzVFX3xxAc9BCkeGYA9VRVfLE4f0Zzk"
-    }
-  ]
 class ExpItemList extends React.Component {
+    constructor(props){
+        super(props);
+    }
     render() {
-        const { list = dummy } = this.props;
+        console.log(this.props)
+        const { list } = this.props;
 
         return (<Wrapper>
 

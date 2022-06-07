@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import ExpItemList from 'components_mobile/Exp/ExpItemList';
-
 const dummy = [
   {
     type: "item", title: "스파게티 코드를 작성하자!", score: 4.3,
@@ -24,10 +23,10 @@ const dummy = [
     url: "https://i.picsum.photos/id/1011/5472/3648.jpg?hmac=Koo9845x2akkVzVFX3xxAc9BCkeGYA9VRVfLE4f0Zzk"
   }
 ]
-class ExpListContainer extends React.Component {
+class LearnExpListContainer extends React.Component {
   render() {
    return (<React.Fragment>
-      <ExpItemList/>
+      <ExpItemList list={dummy}/>
     </React.Fragment>)
   }
 }
@@ -38,4 +37,4 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExpListContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(LearnExpListContainer);
