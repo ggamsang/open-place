@@ -23,32 +23,34 @@ const Wrapper = styled.div`
 	display: flex;
 	-webkit-overflow-scrolling: touch;
 	overflow-x: scroll;
-
-    .pagination {
-        position: fixed;
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        width: 56px;
-        height: 8px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        transform: translate(255%,2000%);
-        li {
-            opacity: 0.9;
-            background-color: #AAA;
-            width: 8px;
-            height: 8px;
-            border-radius: 100%;
-        }
-        .active {
-            opacity: 1;
-            background-color: #ECF1F7;
-        }
-        // border: 1px solid green;
-    }
 `;
+const PaginationDots = styled.div`   
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    width: 56px;
+    height: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    left: 50%;
+    top: 256px;
+    transform: translate(-50%, -50%);
+    
+    li {
+        opacity: 0.9;
+        background-color: #AAA;
+        width: 8px;
+        height: 8px;
+        border-radius: 100%;
+    }
+    .active {
+        opacity: 1;
+        background-color: #ECF1F7;
+    }
+    z-index: 999;
+`
 const Slide = styled.div`
     min-width: ${WIDTH}px;
     width: 100%;
@@ -122,7 +124,17 @@ class Slider extends React.Component {
     }
 
     render() {
-        return (
+        return (<div>
+            <PaginationDots>
+                {this.pages.map((e, i) =>
+                    <li
+                        key={i}
+                        onClick={() => this.goto(i)}
+                        className={i + 1 === this.state.active ? 'active' : ''}>
+                        {e}
+                    </li>
+                )}
+            </PaginationDots>
             <Wrapper id="slide" onScroll={() => this.handleScroll()} >
                 <Slide url={img0}>
                     <div className='para1'>
@@ -139,18 +151,10 @@ class Slider extends React.Component {
                 <Slide url={'https://i.picsum.photos/id/1011/5472/3648.jpg?hmac=Koo9845x2akkVzVFX3xxAc9BCkeGYA9VRVfLE4f0Zzk'} />
                 <Slide url={img0} />
                 <Slide url={img0} />
+            </Wrapper>
 
-                <ul className='pagination'>
-                    {this.pages.map((e, i) =>
-                        <li
-                            key={i}
-                            onClick={() => this.goto(i)}
-                            className={i + 1 === this.state.active ? 'active' : ''}>
-                            {e}
-                        </li>
-                    )}
-                </ul>
-            </Wrapper>);
+
+        </div>);
     }
 }
 export default Slider;

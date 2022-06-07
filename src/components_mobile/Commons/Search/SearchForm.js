@@ -37,9 +37,20 @@ class SearchForm extends Component {
     return (
       <React.Fragment>
         <SearchBox>
-            {this.props.isMain==null?<div onClick={this.onClickBack} className='arrow_box'><img className='img_arrow' src={back_arrow}/></div>:null}
-            <Search width={302} keyword={this.props.keyword} />
-            {this.props.isMain!=null?<AlarmContainer/>:null}
+          {this.props.isMain == null
+            && <div onClick={this.onClickBack} className='arrow_box'>
+              <img className='img_arrow' src={back_arrow} />
+            </div>}
+
+          <Search
+            width={302}
+            keyword={this.props.keyword}
+            placehoder={this.props.placehoder}
+            disabled_filter={this.props.disabled_filter} />
+
+          {this.props.isMain != null
+            && <AlarmContainer />}
+
         </SearchBox>
       </React.Fragment>
     )

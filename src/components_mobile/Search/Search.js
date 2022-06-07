@@ -92,11 +92,9 @@ class Search extends React.Component {
     render() {
         return (<Wrapper width={this.props.width}>
             <InputWrapper width={this.props.width}>
-                <span className="zoom" onClick={() => this.handleZoomClicked()}>
-                </span>
-                <input id="search" placeholder='경험 찾아보기' onKeyDown={e => this.handleKeyDown(e)} />
-                <span className='filter'>
-                </span>
+                <span className="zoom" onClick={() => this.handleZoomClicked()} />
+                <input id="search" placeholder={this.props.placeholder || '경험 찾아보기'} onKeyDown={e => this.handleKeyDown(e)} />
+                {this.props.disabled_filter == false && <span className='filter' />}
             </InputWrapper>
         </Wrapper>);
     }
