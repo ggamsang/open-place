@@ -60,7 +60,7 @@ class Sharer extends React.Component {
         } = this.props;
         console.log(this.props);
         return (
-            <Wrapper bg={url || noimage}>
+            <Wrapper bg={url || noimage} onClick={()=>window.location.href="/SharerDetail/1"}>
                 <div className='thumbnail'>
                     <div className='row'>
                         <div className='text'>{message}</div>

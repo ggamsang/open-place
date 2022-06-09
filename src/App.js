@@ -75,7 +75,7 @@ function App() {
             </Route>
             <Route path="createSharer" element={<CreateSharerPage />} />
             <Route path="modifySharer" element={<ModifySharerPage />} />
-            <Route path="/SharerDetail" element={<SharerDetailPage />}>
+            <Route path="SharerDetail" element={<SharerDetailPage />}>
               <Route path=":id" element={<SharerDetailPage />} />
             </Route>
             <Route path="exp/:id" element={<ExpDetailPage />} />
