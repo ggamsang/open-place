@@ -14,8 +14,8 @@ import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
 import { WIDTH } from 'constant';
 
 const Wrapper = styled.div`
-  witdh: ${WIDTH}px;
-  // width:100vw;
+  // witdh: ${WIDTH}px;
+  width:100vw;
   height:130vh;
   .header{
     width:100%;

@@ -23,8 +23,8 @@ import LikeSharerContainer from 'containers/MyDetail/LikeSharerContainer';
 import { WIDTH } from 'constant';
 
 const Wrapper = styled.div`
-  // width:100vw;
-  width: ${WIDTH}px;
+  width:100vw;
+  // width: ${WIDTH}px;
   height:130vh;
   .header{
     width:100%;
