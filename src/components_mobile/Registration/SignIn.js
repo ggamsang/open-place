@@ -10,7 +10,7 @@ import { SetSession } from 'modules/Sessions';
 import { TokenName } from 'constant';
 
 const Wrapper = styled.div`
-  width:100vw;
+  width:100%;
   height:100vh;
   background: linear-gradient(205deg,#3A58F5,#3A58F5);
   .box{

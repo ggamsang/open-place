@@ -9,7 +9,7 @@ import Zoom from 'react-reveal/Zoom';
 import { WIDTH } from 'constant';
 
 const Wrapper = styled.div`
-  width: ${WIDTH}px; // width: 100vw;
+  width: ${WIDTH}px; // width: 100%;
   height: 100vh;
   position:relative;
   .wrap{
@@ -37,7 +37,7 @@ const Wrapper = styled.div`
 `
 const Loading = styled.div`
   .content{
-    width: ${WIDTH}px; // width: 100vw;
+    width: ${WIDTH}px; // width: 100%;
     height: 100vh;
     position: absolute;
     background: linear-gradient(205deg, #DA1313, #014FFF);
