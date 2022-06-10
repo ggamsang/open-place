@@ -8,6 +8,7 @@ import SignUpPage from "pages/RegistrationPage/SignUpPage";
 import FindPWPage from "pages/RegistrationPage/FindPWPage";
 import MyDetailPage from "pages/UserPage/MyDetailPage";
 import MyDetailChild from "components_mobile/User/MyDetailChild";
+// import MyDetailContainer from "containers/UserContainer/MyDetailContainer";
 import IntroPage from "pages/IntroPage";
 import TermsOfServicePage from "pages/TermsOfServicePage";
 import PrivacyPolicyPage from "pages/PrivacyPolicyPage";
@@ -15,8 +16,8 @@ import CreateSharerPage from "pages/SharerPage/CreateSharerPage";
 import ModifySharerPage from "pages/SharerPage/ModifySharerPage";
 import SharerDetailPage from "pages/SharerPage/SharerDetailPage";
 import SearchPage from "pages/SearchPage";
+
 import MessageListPage, { MessageDetailPage } from "pages/MessagePage";
-import ExpListPage, { ExpDetailPage } from "pages/ExpPage";
 import ExpDetailPage from "pages/ExpPage/ExpDetailPage/ExpDetailPage";
 import styled from 'styled-components';
 
@@ -25,7 +26,7 @@ import PlayExpListPage from "pages/ExpPage/PlayExpListPage";
 import LearnExpListPage from "pages/ExpPage/LearnExpListPage";
 
 import { WIDTH } from "constant";
-// import bg from "resources/sample-image-01.png";
+import bg from "resources/sample-image-01.png";
 const Wrapper = styled.main`
   overflow: hidden;
   position: relative;

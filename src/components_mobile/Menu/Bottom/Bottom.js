@@ -83,9 +83,9 @@ const Wrapper = styled.div`
         position: absolute;
         width: 85px;
         height: 85px;
-        
-        top: -15%;
-        left: 37%;
+        transform: translate( -50%, -20%);
+        // top: -15%;
+        // left: 37%;
         z-index: 8888;
         &.notloggedin {
             top: -30%;
@@ -94,8 +94,9 @@ const Wrapper = styled.div`
     .arrow-resize {
         width: 75px;
         height: 75px;
-        top: -10%;
-        left: 39%;
+        // top: -10%;
+        // left: 39%;
+        transform: translate( -50%, -20%);
         &.notloggedin {
             top: -2O%;
         }
@@ -160,7 +161,7 @@ class Bottom extends React.Component {
             {!this.props.login ?
                 <div className='row'>
                     {/* LOGIN */}
-                    <div className='side'>
+                    <div >
                         <div className='signup' onClick={this.togleMainMenu}>
                             {this.state.mainmenu
                                 ? <span>메뉴닫기</span>
@@ -172,13 +173,15 @@ class Bottom extends React.Component {
                     </div>
 
                     <Fade>
-                        {this.props.up
-                            ? <img alt="icon" onClick={() => this.gotoTop()} className="logo arrow-resize" src={arrow} />
-                            : <img alt="icon" onClick={() => goto("MAIN")} className="logo" src={logo} />
-                        }
+                        <div >
+                            {this.props.up
+                                ? <img alt="icon" onClick={() => this.gotoTop()} className="logo arrow-resize" src={arrow} />
+                                : <img alt="icon" onClick={() => goto("MAIN")} className="logo" src={logo} />
+                            }
+                        </div>
                     </Fade>
 
-                    <div className='side'>
+                    <div >
                         <div className='login' onClick={() => goto("WRITE")}>
                             <span>게시글 등록하기</span>
                         </div>
