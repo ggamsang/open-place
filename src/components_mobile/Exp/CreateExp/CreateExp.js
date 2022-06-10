@@ -14,7 +14,7 @@ const Wrapper = styled.div`
     *{
       box-sizing:border-box;
     }
-    width:100vw;
+    width:100%;
     background: linear-gradient(205deg,#bf1d39,#8448b6);
     .header{
       width:100%;

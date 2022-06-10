@@ -9,7 +9,7 @@ import SharerItemListContainer from 'containers/ListContainer/SellItemListContai
 import { WIDTH } from 'constant';
 
 const Wrapper = styled.div`
-  width:100vw;
+  width:100%;
   // width: ${WIDTH}px;
   height: 100%; // 130vh;
   .header{

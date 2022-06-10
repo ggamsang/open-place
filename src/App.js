@@ -30,6 +30,9 @@ import bg from "resources/sample-image-01.png";
 const Wrapper = styled.main`
   overflow: hidden;
   position: relative;
+  // background-image: url(${bg});
+  // background-size: cover;
+  
   .bg {
     opacity: 0.1;
     position: absolute;
@@ -38,7 +41,7 @@ const Wrapper = styled.main`
     width: 100%;
     height: ${window.innerHeight}px;
   }
-  .content {
+  .appcontent {
     position: relative;
     width: ${WIDTH}px;
     height: 100%;
@@ -50,9 +53,9 @@ const Wrapper = styled.main`
 function App() {
 
   return (
-    // <Wrapper>
-    //   <img src={bg} alt="bg" className="bg" />
-    //   <div className="content">
+    <Wrapper>
+      {/* <img src={bg} alt="bg" className="bg" /> */}
+      <div className="appcontent">
         <BrowserRouter>
           <Routes>
             <Route path="" element={<MainPage />} />
@@ -86,9 +89,9 @@ function App() {
             <Route path="*" element={<div>NOT FOUND</div>} />
           </Routes>
         </BrowserRouter>
-    //   </div>
+      </div>
 
-    // </Wrapper>
+    </Wrapper>
 
   )
 }

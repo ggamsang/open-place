@@ -19,7 +19,7 @@ const Wrapper = styled.div`
       position: relative;
       // bottom: 100px;
     }
-    width: 100%;
+    // width: 100%;
   }
   .main { }
   .disabled {
@@ -95,9 +95,7 @@ class ClientTemplate extends Component {
           <Footer />
           {/* } */}
         </div>
-
         {/* <div id='dimmer'> &nbsp; </div> */}
-
       </Wrapper>
     </>);
   }

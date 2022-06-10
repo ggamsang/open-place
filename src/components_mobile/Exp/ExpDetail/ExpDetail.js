@@ -31,7 +31,8 @@ const dummy = [
   ]
 
 const Wrapper = styled.div`
-  width:100vw;
+  // width:100%;
+  width: 100%;
   height:max-content;
   min-height:100vh;
   background: linear-gradient(205deg,#bf1d39,#8448b6);
