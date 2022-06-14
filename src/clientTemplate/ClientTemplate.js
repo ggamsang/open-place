@@ -70,7 +70,6 @@ class ClientTemplate extends Component {
   }
 
   render() {
-    // console.log(this.props, this.state);
 
     return (<>
       {/* <button style={{ position: "absolute", zIndex: "998", left: "60px" }} onClick={() => this.setState({ login: !this.state.login })}>demo:{this.state.login ? "로그아웃" : "로그인"}</button> */}
