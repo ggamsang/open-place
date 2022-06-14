@@ -46,7 +46,7 @@ const Wrapper = styled.div`
         align-items:center;
         box-shadow: 2px 2px 5px #00000029;
 
-        .img{background-color:#E9E9E9;width:${resolution(100)}px;height:${resolution(100)}px;border-radius:${resolution(10)}px;object-fit:cover;}
+        .img_{background-color:#E9E9E9;width:${resolution(100)}px;height:${resolution(100)}px;border-radius:${resolution(10)}px;object-fit:cover;}
         .wrap{display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;margin-left:13px;}
         .label{font: normal normal medium 15px/18px Noto Sans KR;}
         .text{font: normal normal bold 15px/18px Noto Sans KR;}
@@ -157,7 +157,7 @@ class ModifyExp extends React.Component {
           </div>
           <div className='content'>
             <div className='whitebox'>
-                <img src={this.state.thumbnail} className="img"/>
+                <img src={this.state.thumbnail} className="img_"/>
                 <div className='wrap'>
                   <div style={{marginBottom:"9px"}}><span className="label">제목</span><sup style={{color:"red"}}>*</sup><span className="text">국민대CRC</span></div>
                   <label className="findThumbnailText" htmlFor="file">

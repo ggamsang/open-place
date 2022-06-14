@@ -25,6 +25,9 @@ import MakeExpListPage from "pages/ExpPage/MakeExpListPage ";
 import PlayExpListPage from "pages/ExpPage/PlayExpListPage";
 import LearnExpListPage from "pages/ExpPage/LearnExpListPage";
 
+import CreateExpPage from "pages/ExpPage/CreateExpPage/CreateExpPage";
+import ModifyExpPage from "pages/ExpPage/ModifyExpPage/ModifyExpPage";
+
 import { WIDTH } from "constant";
 import bg from "resources/sample-image-01.png";
 const Wrapper = styled.main`
@@ -47,6 +50,9 @@ const Wrapper = styled.main`
     height: 100%;
     margin: auto;
     background-color: white;
+    @media only screen and (min-width: 320px) and (max-width:500px){
+      width:100%;
+    }
   }
 `;
 
@@ -83,6 +89,10 @@ function App() {
               <Route path=":id" element={<SharerDetailPage />} />
             </Route>
             <Route path="exp/:id" element={<ExpDetailPage />} />
+            <Route path="createExp" element={<CreateExpPage />} />
+            <Route path="modifyExp" element={<ModifyExpPage />} >
+              <Route path=":id" element={<ModifyExpPage />} />
+            </Route>
             <Route path="message" element={<MessageListPage />} />
             <Route path="message/:id" element={<MessageDetailPage />} />
 
