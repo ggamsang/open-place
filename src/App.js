@@ -78,7 +78,6 @@ function App() {
             <Route path="myDetail" element={<MyDetailPage />}>
               <Route path=":id" element={<MyDetailChild />} />
             </Route>
-            <Route path="createExp" element={<CreateExpPage />}/>
             <Route path="terms" element={<TermsOfServicePage />} />
             <Route path="privacy" element={<PrivacyPolicyPage />} />
             <Route path="search" element={<SearchPage />} >
