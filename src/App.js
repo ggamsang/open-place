@@ -16,7 +16,6 @@ import CreateSharerPage from "pages/SharerPage/CreateSharerPage";
 import ModifySharerPage from "pages/SharerPage/ModifySharerPage";
 import SharerDetailPage from "pages/SharerPage/SharerDetailPage";
 import SearchPage from "pages/SearchPage";
-import CreateExpPage from "pages/ExpPage/CreateExpPage/CreateExpPage";
 
 import MessageListPage, { MessageDetailPage } from "pages/MessagePage";
 import ExpDetailPage from "pages/ExpPage/ExpDetailPage/ExpDetailPage";

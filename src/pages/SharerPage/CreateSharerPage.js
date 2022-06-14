@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import CreateSharerContainer from 'containers/SharerContainer/\bCreateSharerContainer';
+import ClientTemplate from 'clientTemplate/ClientTemplate';
 
 class CreateSharerPage extends Component {
     render() {
       return (
-          <React.Fragment>
+          <ClientTemplate>
             <CreateSharerContainer/>
-          </React.Fragment>
+          </ClientTemplate>
       );
     }
   }

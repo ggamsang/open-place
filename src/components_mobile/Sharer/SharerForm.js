@@ -7,6 +7,7 @@ import DropDownNormal from 'components_mobile/Commons/DropDown/DropDownNormal';
 import InputNormal from 'components_mobile/Commons/Input/InputNormal';
 
 const Wrap = styled.div`
+  box-sizing:border-box;
   .shadowBorderBox{
     box-sizing:border-box;
     width:100%;
@@ -42,7 +43,7 @@ class SharerForm extends React.Component {
             <div className='row' style={{marginTop:"11px"}}>
               <div className='label'>설명</div>
               <TextAreaNormal
-                width={240} height={100}
+                height={100}
                 color={"#E9E9E9"} fontSize={15} radius={10}
                 placeholder
                 ="설명을 입력하세요"
@@ -77,7 +78,7 @@ class SharerForm extends React.Component {
               <div className='label'>연락처</div>
               <InputNormal
                 fontSize={12}
-                width={240} height={31}
+                height={31}
                 color={"#E9E9E9"} radius={10}
                 placeholderColor={"#707070"}
                 placeholder="메일을 입력하고 [enter] 키를 누르세요."
@@ -88,6 +89,7 @@ class SharerForm extends React.Component {
             <div className='row' style={{marginTop:"11px"}}>
               <div className='label'>계좌번호</div>
               <DropDownNormal
+                style={{marginRight:"12px"}}
                 width={76} height={31}
                 radius={10}
                 placeholder="은행"
@@ -98,9 +100,8 @@ class SharerForm extends React.Component {
                 }
               />
               <InputNormal
-                style={{marginLeft:"12px"}}
                 fontSize={15}
-                width={151} height={31}
+                height={31}
                 color={"#E9E9E9"} radius={10}
                 placeholderColor={"#707070"}
                 placeholder="계좌번호"
