@@ -16,7 +16,7 @@ import CreateSharerPage from "pages/SharerPage/CreateSharerPage";
 import ModifySharerPage from "pages/SharerPage/ModifySharerPage";
 import SharerDetailPage from "pages/SharerPage/SharerDetailPage";
 import SearchPage from "pages/SearchPage";
-import CreateExpPage from "pages/ExpPage/CreateExpPage/CreateExpPage";
+
 
 import MessageListPage, { MessageDetailPage } from "pages/MessagePage";
 import ExpDetailPage from "pages/ExpPage/ExpDetailPage/ExpDetailPage";
@@ -79,7 +79,6 @@ function App() {
             <Route path="myDetail" element={<MyDetailPage />}>
               <Route path=":id" element={<MyDetailChild />} />
             </Route>
-            <Route path="createExp" element={<CreateExpPage />}/>
             <Route path="terms" element={<TermsOfServicePage />} />
             <Route path="privacy" element={<PrivacyPolicyPage />} />
             <Route path="search" element={<SearchPage />} >
