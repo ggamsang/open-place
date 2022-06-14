@@ -5,7 +5,7 @@ import { resolution } from 'commons/resolution';
 const TextAreaField = styled.textarea`
     box-sizing:border-box;
 
-    width:${resolution(props=>props.width)}px;
+    width:${resolution(props=>props.width==null?"100%":props.width+"px")};
     height:${resolution(props=>props.height)}px;
     min-width:${resolution(props=>props.width)}px;
     max-width:${resolution(props=>props.width)}px;
