@@ -17,7 +17,7 @@ const dummy = [
   {
     type: "item", title: "결혼은 이렇게!", score: 4.0,
     tags: ["tag1", "tag2", "tag3"],
-    url: "https://i.picsum.photos/id/1013/4256/2832.jpg?hmac=UmYgZfqY_sNtHdug0Gd73bHFyf1VvzFWzPXSr5VTnDA"
+    url: "https://i.picsum.photos/id/1065/3744/5616.jpg?hmac=V64psST3xnjnVwmIogHI8krnL3edsh_sy4HNc3dJ_xY"
   },
   {
     type: "item", title: "앞 사람만 노 젖게 시키기", score: 3.5,

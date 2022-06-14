@@ -8,8 +8,6 @@ import { WIDTH } from 'constant';
 
 const Wrapper = styled.div`
   z-index: 1;
-  // width: ${WIDTH}px;
-  // width: 100%;
   .nav {
     z-index: 999;
     position: fixed;
@@ -17,9 +15,7 @@ const Wrapper = styled.div`
     &.up {
       margin-top: 30px;
       position: relative;
-      // bottom: 100px;
     }
-    // width: 100%;
   }
   .main { }
   .disabled {
@@ -39,6 +35,11 @@ const Wrapper = styled.div`
     height: 100vh;
     z-index: 1;
     opacity: 50%;
+  }
+  @media only screen and (min-width: 320px) and (max-width:500px){
+   .nav{
+     width:${window.innerWidth}px;
+   }
   }
 `;
 
