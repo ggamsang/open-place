@@ -84,9 +84,7 @@ const Wrapper = styled.div`
         width: 85px;
         height: 85px;
         transform: translate( -50%, -20%);
-        // top: -15%;
-        // left: 37%;
-        z-index: 8888;
+        z-index: 9999;
         &.notloggedin {
             top: -30%;
         }
@@ -94,8 +92,6 @@ const Wrapper = styled.div`
     .arrow-resize {
         width: 75px;
         height: 75px;
-        // top: -10%;
-        // left: 39%;
         transform: translate( -50%, -20%);
         &.notloggedin {
             top: -2O%;
@@ -115,6 +111,11 @@ const Wrapper = styled.div`
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        // force react-reveal z-index
+        .react-reveal {
+            z-index: 9999;
+            margin-left: auto;
+        }
     }
 
     .right-margin42{ margin-right: 40px; }
@@ -137,8 +138,10 @@ const Wrapper = styled.div`
     .bottommargin {
         margin-bottom: 23px;
     }
+    .send-left {
+        margin-left: auto;
+    }
 `;
-
 
 class Bottom extends React.Component {
     constructor(props) {
@@ -149,10 +152,9 @@ class Bottom extends React.Component {
     }
     gotoTop = () => {
         const template = document.getElementById('body') || document.documentElement;
-        // console.log(template, template.scrollHeight)
         template && template.scrollTo({ top: 0, behavior: "smooth" });
     }
-    togleMainMenu = (e) => {
+    toggleMainMenu = _ => {
         this.setState({ mainmenu: !this.state.mainmenu });
     }
     render() {
@@ -161,8 +163,8 @@ class Bottom extends React.Component {
             {!this.props.login ?
                 <div className='row'>
                     {/* LOGIN */}
-                    <div >
-                        <div className='signup' onClick={this.togleMainMenu}>
+                    <div>
+                        <div className='signup' onClick={this.toggleMainMenu}>
                             {this.state.mainmenu
                                 ? <span>메뉴닫기</span>
                                 : <span>메뉴보기</span>}
@@ -173,15 +175,15 @@ class Bottom extends React.Component {
                     </div>
 
                     <Fade>
-                        <div >
-                            {this.props.up
+                        <div>
+                            {this.props.up && !this.props.force
                                 ? <img alt="icon" onClick={() => this.gotoTop()} className="logo arrow-resize" src={arrow} />
                                 : <img alt="icon" onClick={() => goto("MAIN")} className="logo" src={logo} />
                             }
                         </div>
                     </Fade>
 
-                    <div >
+                    <div className='send-left'>
                         <div className='login' onClick={() => goto("WRITE")}>
                             <span>게시글 등록하기</span>
                         </div>
@@ -229,7 +231,7 @@ class Bottom extends React.Component {
                     </ul>
                 </div>}
 
-        </Wrapper >)
+        </Wrapper>)
     }
 }
 

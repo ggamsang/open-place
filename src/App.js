@@ -76,7 +76,7 @@ function App() {
             <Route path="play" element={<PlayExpListPage />} />
             <Route path="make" element={<MakeExpListPage />} />
             <Route path="learn" element={<LearnExpListPage />} />
-            <Route path="my" element={<MyDetailPage />}>
+            <Route path="myDetail" element={<MyDetailPage />}>
               <Route path=":id" element={<MyDetailChild />} />
             </Route>
             <Route path="createExp" element={<CreateExpPage />}/>
