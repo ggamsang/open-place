@@ -73,11 +73,12 @@ const Wrapper = styled.div`
     .background {
         width: ${WIDTH}px;
         height: 55px;
-        background-image: url(${shapeRectangle});
-        background-position: center center;
-        background-repeat: no-repeat; 
+        // background-image: url(${shapeRectangle});
+        // background-position: center center;
+        // background-repeat: no-repeat; 
         position: relative;
-       
+        border-radius: 27.5px;
+        background-color: rgba(13, 13, 13, 0.82);
     }
     .logo {
         position: absolute;
