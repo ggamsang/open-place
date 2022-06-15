@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pagination } from 'semantic-ui-react';
 // import Pagination from 'semantic-ui-react-button-pagination';
-import { goto } from 'smallfuncs';
+import { goto } from 'navigator';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`

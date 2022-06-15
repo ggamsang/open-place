@@ -9,6 +9,7 @@ import CheckBoxNormal from 'components_mobile/Commons/CheckBox/CheckBoxNormal';
 import GradientButton from 'components_mobile/Commons/Button/GradientButton';
 
 import Fade from 'react-reveal/Fade';
+import { goto } from 'navigator';
 
 const Wrapper = styled.div`
   width:100%;
@@ -109,24 +110,35 @@ class SignUp extends Component {
       return;
     }
 
-    const { first_name, last_name } = this.state;
+    const { nick_name } = this.state;
+    if (!nick_name) {
+      alert('닉네임을 입력해주세요.');
+      return;
+    }
+
     const data = {
-      email: user_id,
+      id: user_id,
       password: password,
-      nickname: `${first_name} ${last_name}`
+      nick_name: nick_name,
     }
 
     this.props.SignUpRequest &&
       this.props.SignUpRequest(data)
         .then(res => {
-          console.log(res);
-          if (res.type === "AUTH_SIGNUP_SUCCESS") {
+          if (res.success) {
             alert('회원가입을 축하드립니다.');
-            window.location.href = "/";
+            goto("MAIN");
+          } else {
+            console.error(res.detail);
+            alert('회원가입실패');
           }
-          else {
-            alert(res.detail + '와 같은 이유로 회원가입을 하지 못하였습니다.');
-          }
+          // console.log(res);
+          // if (res.type === "AUTH_SIGNUP_SUCCESS") {
+          //   window.location.href = "/";
+          // }
+          // else {
+          //   alert(res.detail + '와 같은 이유로 회원가입을 하지 못하였습니다.');
+          // }
         });
   };
 
@@ -156,7 +168,9 @@ class SignUp extends Component {
   onChangePassword2 = (event) => {
     this.setState({ password2: event.target.value });
   }
-
+  onChangeNickname = (event) => {
+    this.setState({ nick_name: event.target.value });
+  }
   onClickAllAgree = () => {
     console.log(this.state.agreeAll)
     this.setState({ agreeAll: !this.state.agreeAll });
@@ -175,7 +189,7 @@ class SignUp extends Component {
       <React.Fragment>
         <Wrapper>
           <div className='box alignCenter justifyCenter'>
-            <Logo onClickEvent={() => window.location.href = "/login"} type="small" text={"OPEN MARKET"} />
+            <Logo onClickEvent={() => window.location.href = "/login"} type="small" text={"OPEN PLACE"} />
           </div>
 
           {/*본인인증 */}
@@ -233,6 +247,15 @@ class SignUp extends Component {
                   onChangeValue={this.onChangePassword2}
                   value={this.state.password2}
                   placeholder={"비밀번호를 한번 더 입력하세요"}
+                  width={328} height={48} fontSize={17}
+                  color={"#EAF2FE"}
+                  radius={3} />
+
+                <InputNormal
+                  style={{ marginBottom: "16px" }}
+                  onChangeValue={this.onChangeNickname}
+                  value={this.state.nick_name}
+                  placeholder={"닉네임 입력하세요"}
                   width={328} height={48} fontSize={17}
                   color={"#EAF2FE"}
                   radius={3} />

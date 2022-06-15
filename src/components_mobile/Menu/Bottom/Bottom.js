@@ -11,7 +11,7 @@ import { WIDTH } from 'constant';
 import profile from "resources/Profile.svg";
 import { IconPLAY, IconLEARN, IconMAKE, IconCOMMUNITY } from 'resources/iconPack';
 import { Fade } from 'react-reveal';
-import { goto } from 'smallfuncs';
+import { goto } from 'navigator';
 
 const Wrapper = styled.div`
     width: 100%;

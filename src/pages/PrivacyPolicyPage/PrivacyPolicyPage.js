@@ -1,5 +1,6 @@
 import React from 'react';
-import ClientTemplate from 'clientTemplate/ClientTemplate';
+import ClientTemplate from 'clientTemplate';
+
 import PrivacyPolicyContainer from 'containers/PrivacyPolicyContainer';
 
 class PrivacyPolicyPage extends React.Component {

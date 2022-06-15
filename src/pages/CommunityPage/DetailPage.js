@@ -1,5 +1,6 @@
 import React from 'react';
-import ClientTemplate from 'clientTemplate/ClientTemplate';
+import ClientTemplate from 'clientTemplate';
+
 import { CommunityDetailContainer } from 'containers/CommunityContainer';
 
 export class CommunityDetailPage extends React.Component {

@@ -101,7 +101,7 @@ const Slide = styled.div`
 
 const strDETAILS = "더 알아보기";
 const strNewExperience1 = "매일 새로운 경험";
-const strNewExperience2 = "OPEN MARKET";
+const strNewExperience2 = "OPEN PLACE";
 
 class Slider extends React.Component {
     pages = ['', '', '', '']

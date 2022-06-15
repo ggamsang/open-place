@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CreateSharerContainer from 'containers/SharerContainer/\bCreateSharerContainer';
-import ClientTemplate from 'clientTemplate/ClientTemplate';
+import ClientTemplate from 'clientTemplate';
+
 
 class CreateSharerPage extends Component {
     render() {
