@@ -21,6 +21,11 @@ const DropDown = styled.select`
 class DropDownNormal extends Component {
     constructor(props){
         super(props);
+        this.onChangeValue = this.onChangeValue.bind(this);
+    }
+
+    onChangeValue=async(event)=>{
+        this.props.onChangeValue && await this.props.onChangeValue(event);
     }
 
     render() {
@@ -29,7 +34,7 @@ class DropDownNormal extends Component {
         <React.Fragment>
             <DropDown
                 disabled={this.props.disabled}
-                onChange={this.props.onChangeValue}
+                onChange={this.onChangeValue}
                 style={this.props.style}
                 width={this.props.width}
                 height={this.props.height}
@@ -42,7 +47,7 @@ class DropDownNormal extends Component {
                 }
                 {
                     this.props.options&&this.props.options.map((item,index)=>{
-                        return <option value={index}>{item}</option>
+                        return <option key={index} value={index}>{item}</option>
                     })
                 }
 

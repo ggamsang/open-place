@@ -46,7 +46,7 @@ class AddContent extends Component {
                 <div onClick={this.props.onAddText} className='button_grey red'>텍스트 입력</div>
                 <div onClick={this.props.onAddTemplate} className='button_grey red'>템플릿 선택하기</div>
                 <div onClick={this.props.onCancel} className='button_grey black'>작업 취소</div>
-                <div onClick={this.props.onModify} className='button_red white'>수정하기</div>
+                <div onClick={this.props.onModify} className='button_red white'>등록하기</div>
             </Wrap>
         </React.Fragment>
     )

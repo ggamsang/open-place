@@ -72,15 +72,12 @@ class CreateExp extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            main:true,detail:false,like:false,tag:null,
-            thumbnail:null,title:null,type:null,info:null
+            tag:null,
+            thumbnail:null,thumbnail_name:null,title:null,type:null,info:null
         }
-        this.onClickMain = this.onClickMain.bind(this);
-        this.onClickDetail = this.onClickDetail.bind(this);
-        this.onClickLike = this.onClickLike.bind(this);
         this.onChangeThumbnail = this.onChangeThumbnail.bind(this);
         this.onChangeTitle=this.onChangeTitle.bind(this);
-        this.onChangeTag=this.onChangeTag.bind(this);
+        this.handleAddTag=this.handleAddTag.bind(this);
         this.onChangeType = this.onChangeType.bind(this);
         this.onChangeInfo=this.onChangeInfo.bind(this);
         this.onChangePrice=this.onChangePrice.bind(this);
@@ -88,16 +85,10 @@ class CreateExp extends React.Component {
         
       }
 
-    onClickMain = (event)=>{
-        this.setState({sub:false});
-        setTimeout(()=>{
-          this.setState({main:true})
-        },1000)
-    }
     onChangeTitle = (event) =>{
       this.setState({title:event.target.value})
     }
-    onChangeTag = (tag) =>{
+    handleAddTag = (tag) =>{
       this.setState({
         tag: tag.slice(),
       });
@@ -113,21 +104,12 @@ class CreateExp extends React.Component {
     onChangeInfo = (event)=>{
       this.setState({info:event.target.value})
     }
-    onClickDetail = (event)=>{
-        this.setState({main:false});
-        setTimeout(()=>{
-          this.setState({sub:true})
-        },1000)
-    }
-    onClickLike = (event)=>{
-        this.setState({like:!this.state.like});
-    }
     onChangeThumbnail = async (event) => {
         event.preventDefault();
         const reader = new FileReader();
         const file = event.target.files[0];
         const regExp = /.(jpe?g|png|bmp)$/i;
-        if (!regExp.test(file.name)) {
+        if (regExp&&!regExp.test(file.name)) {
           await alert('파일의 확장자가 올바른지 확인해주세요.', "확인");
           return;
         }
@@ -139,14 +121,35 @@ class CreateExp extends React.Component {
           }
         }
         reader.onloadend = () => {
-          this.setState({ thumbnail: reader.result });
+          this.setState({ thumbnail: reader.result, thumbnail_name: file.name })
         }
         if (event.target.files[0]) {
           reader.readAsDataURL(file);
         }
       };
-    onClickOK = (event) =>{
-      console.log(this.state)
+    onClickOK = async(event) =>{
+      // const {thumbnail,title,tag,info,price} = this.state;
+      // const data = {
+      //   title:title, taglist:tag, text:info, price:price,
+      //   files: [{ value: this.state.thumbnail, name: this.state.thumbnail_name }],
+      // }
+      const {thumbnail}=this.state;
+      const thumbnail_name="testThumbnail_name";
+      const title="testTitle";
+      const tag=[1,2,3];
+      const info="testText testText";
+      const type="1"
+      const price=50000;
+      let data = {
+        title:title, taglist:tag, text:info, price:price,type:type,
+        files: [],
+      }
+      console.log(thumbnail);
+      let file = { value: this.state.thumbnail, name: this.state.thumbnail_name, key: 0 };
+      await data.files.push(file);
+      
+      this.props.createExpRequest(data)
+      
     }
     render() {
         return (
@@ -182,11 +185,12 @@ class CreateExp extends React.Component {
             </div>
             <div className='row'>
               <div className='label'>태그<sup style={{color:"red"}}>*</sup></div>
-              <div><InputTag onChangeValue={this.onChangeType} width={"245"}/></div>
+              <div><InputTag getValue={this.handleAddTag} width={"245"}/></div>
             </div>
             <div className='row'>
               <div className='label'>경험 유형<sup style={{color:"red"}}>*</sup></div>
               <DropDownNormal
+                onChangeValue={this.onChangeType}
                 width={150} height={31}radius={10}
                 options={["놀기","배우기","만들기"]} />         
             </div>

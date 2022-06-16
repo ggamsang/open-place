@@ -72,12 +72,9 @@ class ModifyExp extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            main:true,detail:false,like:false,tag:null,
+            tag:null,
             thumbnail:null,title:null,type:null,info:null
         }
-        this.onClickMain = this.onClickMain.bind(this);
-        this.onClickDetail = this.onClickDetail.bind(this);
-        this.onClickLike = this.onClickLike.bind(this);
         this.onChangeThumbnail = this.onChangeThumbnail.bind(this);
         this.onChangeTitle=this.onChangeTitle.bind(this);
         this.onChangeTag=this.onChangeTag.bind(this);
@@ -88,12 +85,6 @@ class ModifyExp extends React.Component {
         
       }
 
-    onClickMain = (event)=>{
-        this.setState({sub:false});
-        setTimeout(()=>{
-          this.setState({main:true})
-        },1000)
-    }
     onChangeTitle = (event) =>{
       this.setState({title:event.target.value})
     }
@@ -112,15 +103,6 @@ class ModifyExp extends React.Component {
     }
     onChangeInfo = (event)=>{
       this.setState({info:event.target.value})
-    }
-    onClickDetail = (event)=>{
-        this.setState({main:false});
-        setTimeout(()=>{
-          this.setState({sub:true})
-        },1000)
-    }
-    onClickLike = (event)=>{
-        this.setState({like:!this.state.like});
     }
     onChangeThumbnail = async (event) => {
         event.preventDefault();
@@ -182,11 +164,12 @@ class ModifyExp extends React.Component {
             </div>
             <div className='row'>
               <div className='label'>태그<sup style={{color:"red"}}>*</sup></div>
-              <div><InputTag onChangeValue={this.onChangeType} width={"245"}/></div>
+              <div><InputTag getValue={this.handleAddTag} width={"245"}/></div>
             </div>
             <div className='row'>
               <div className='label'>경험 유형<sup style={{color:"red"}}>*</sup></div>
               <DropDownNormal
+                onChangeValue={this.onChangeType}
                 width={150} height={31}radius={10}
                 options={["놀기","배우기","만들기"]} />         
             </div>
