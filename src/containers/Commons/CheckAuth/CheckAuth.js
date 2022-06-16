@@ -46,15 +46,14 @@ export default function CheckAuth(Components) {
         render() {
             return !this.state.loading
                 ? <Components {...this.props} />
-                : (
-                    <Dimmer active>
-                        <Loader />Loading
-                    </Dimmer>
-                );
+                : <Dimmer active>
+                    <Loader />
+                </Dimmer>
         }
     }
     const mapStateToProps = (state) => {
         return {
+            isLoggedIn: state.Authentication.status.isLoggedIn,
             token: state.Authentication.status.token,
             loading: state.Authentication.status.loading,
             userInfo: state.Authentication.status.userInfo,

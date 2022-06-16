@@ -1,26 +1,24 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-
 import { resolution } from 'commons/resolution';
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
-
-
-
 import notification from 'source/Iconly-Bold-Notification.svg';
 import buy from 'source/Iconly-Bold-buy.svg';
 import heart from 'source/Iconly-Bold-Heart.svg';
 import star from 'source/Iconly-Bold-Star.svg';
 import work from 'source/Iconly-Bold-Work.svg';
 import plus from 'source/Iconly-Bold-Plus.svg';
-
 import { Fade } from 'react-reveal';
-
 import BuyExpContainer from 'containers/MyDetail/BuyExpContainer';
 import SellExpContainer from 'containers/MyDetail/SellExpContainer';
 import RegisterExpContainer from 'containers/MyDetail/RegisterExpContainer';
 import LikeExpContainer from 'containers/MyDetail/LikeExpContainer';
 import LikeSharerContainer from 'containers/MyDetail/LikeSharerContainer';
-import { WIDTH } from 'constant';
+import { TokenName, WIDTH } from 'constant';
+import { connect } from 'react-redux';
+import { SignOutRequest } from 'actions/Authentication';
+import { SetSession } from 'modules/Sessions';
+import { goto } from 'navigator';
 
 const Wrapper = styled.div`
   width:100%;
@@ -198,7 +196,10 @@ class MyDetailChild extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      main_menu: true, sub_menu1: false, sub_menu2: false, subMenu: "none",
+      main_menu: true,
+      sub_menu1: false,
+      sub_menu2: false,
+      subMenu: "none",
     }
     this.onClickPointMenu = this.onClickPointMenu.bind(this);
     this.onClickLikeMenu = this.onClickLikeMenu.bind(this);
@@ -211,6 +212,10 @@ class MyDetailChild extends Component {
     setTimeout(() => {
       this.setState({ sub_menu1: true, sub_menu2: false })
     }, 1000)
+  }
+  onClickLogout = async () => {
+    await this.props.SignOutRequest()
+    goto("MAIN");
   }
   onClickLikeMenu = (event) => {
     this.setState({ main_menu: false })
@@ -230,11 +235,11 @@ class MyDetailChild extends Component {
   }
 
   render() {
+    const { isLoggedIn } = this.props;
     return (
       <React.Fragment>
-        {
-          this.state.subMenu == "none" &&
-          <Wrapper>
+        {this.state.subMenu == "none"
+          && <Wrapper>
             <Fade opposite when={this.state.main_menu}>
               <Menu style={{ display: `${this.state.main_menu == true ? "block" : "none"}` }}>
                 <div className='menu_wrap'>
@@ -244,7 +249,10 @@ class MyDetailChild extends Component {
                   <div onClick={() => this.onClickSubMenu("sellExp")} className="menu_button" ><img src={work} /><div className='text'>판매 경험</div></div> <div className='hrline' />
                   <div onClick={() => this.onClickSubMenu("buyExp")} className="menu_button" ><img src={buy} /><div className='text'>구매 경험</div></div>  <div className='hrline' />
                   <div onClick={this.onClickLikeMenu} className="menu_button"><img src={heart} /><div className='text'>관심</div></div>
-
+                  <div onClick={this.onClickLogout} className="menu_button">
+                    {/* <img src={heart} /> */}
+                    <div className='text'>로그아웃</div>
+                  </div>
                 </div>
               </Menu>
             </Fade>
@@ -266,17 +274,42 @@ class MyDetailChild extends Component {
           </Wrapper>
         }
         <SubWrap>
-          {this.state.subMenu == "point" && <React.Fragment><div className='subTitle'>포인트 충전</div>디자인 필요</React.Fragment>}
-          {this.state.subMenu == "payment" && <React.Fragment><div className='subTitle'>충전 내역</div>디자인 필요</React.Fragment>}
-          {this.state.subMenu == "regExp" && <React.Fragment><div className='subTitle'>등록 경험</div><RegisterExpContainer /></React.Fragment>}
-          {this.state.subMenu == "sellExp" && <React.Fragment><div className='subTitle'>판매 경험</div><SellExpContainer /></React.Fragment>}
-          {this.state.subMenu == "buyExp" && <React.Fragment><div className='subTitle'>구매 경험</div><BuyExpContainer /></React.Fragment>}
-          {this.state.subMenu == "likeSharer" && <React.Fragment><div className='subTitle'>관심 공유자</div><LikeSharerContainer /></React.Fragment>}
-          {this.state.subMenu == "likeExp" && <React.Fragment><div className='subTitle'>관심 경험</div><LikeExpContainer /></React.Fragment>}
+          {this.state.subMenu == "point"
+            && <React.Fragment>
+              <div className='subTitle'>포인트 충전</div>디자인 필요</React.Fragment>}
+          {this.state.subMenu == "payment"
+            && <React.Fragment>
+              <div className='subTitle'>충전 내역</div>디자인 필요</React.Fragment>}
+          {this.state.subMenu == "regExp"
+            && <React.Fragment>
+              <div className='subTitle'>등록 경험</div><RegisterExpContainer /></React.Fragment>}
+          {this.state.subMenu == "sellExp"
+            && <React.Fragment>
+              <div className='subTitle'>판매 경험</div><SellExpContainer /></React.Fragment>}
+          {this.state.subMenu == "buyExp"
+            && <React.Fragment>
+              <div className='subTitle'>구매 경험</div><BuyExpContainer /></React.Fragment>}
+          {this.state.subMenu == "likeSharer"
+            && <React.Fragment>
+              <div className='subTitle'>관심 공유자</div><LikeSharerContainer /></React.Fragment>}
+          {this.state.subMenu == "likeExp"
+            && <React.Fragment>
+              <div className='subTitle'>관심 경험</div><LikeExpContainer /></React.Fragment>}
         </SubWrap>
       </React.Fragment>
     );
   }
 }
 
-export default MyDetailChild;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    SignOutRequest: () => dispatch(SignOutRequest()),
+  }
+};
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.Authentication.status.isLoggedIn,
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyDetailChild);
