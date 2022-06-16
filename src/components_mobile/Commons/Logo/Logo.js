@@ -14,16 +14,17 @@ const Wrapper = styled.div`
         object-fit:contain;
     }
     .text{
-        text-align:center;
-        width:100%;
-        height:${resolution(80)}px;
-        position:absolute;
-        bottom:0px;
-        font-family:Montserrat;
-        font-weight:bold;
-        font-size:${resolution(32)}px;
-        color:white;
-        text-shadow:5px 5px 6px #00000029;        
+        overflow-wrap: break-word;
+        text-align: center;
+        width: 100%;
+        height: ${resolution(80)}px;
+        position: absolute;
+        bottom: 0px;
+        font-family: Montserrat;
+        font-weight: bold;
+        font-size: ${resolution(32)}px;
+        color: white;
+        text-shadow: 5px 5px 6px #00000029;        
     }
 `
 const Wrapper_small = styled.div`
