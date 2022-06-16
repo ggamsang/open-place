@@ -28,15 +28,15 @@ export function SignOutRequest() {
   }
 }
 export function SignInRequest(data) {
-  // console.log(`${host}/user/signIn`, data)
   return (dispatch) => {
     dispatch(SignIn());
-    return fetch(`${host}/user/signIn`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      })
+    const url = `${host}/user/signIn`;
+    const opt = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    };
+    return fetch(url, opt)
       .then(res => res.json())
       .then(res => {
         if (res.success) {
@@ -55,9 +55,15 @@ export function SignInRequest(data) {
 export function CheckTokenRequest(token) {
   return (dispatch) => {
     dispatch(CheckToken());
-    return fetch(`${host}/users/check`, { headers: { 'x-access-token': token, 'Content-Type': 'application/json' } })
+    return fetch(`${host}/user/check`,
+      { headers: { 'x-access-token': token, 'Content-Type': 'application/json' } })
       .then(res => res.json())
-      .then(res => res.success ? dispatch(CheckTokenSuccess(res.info, token)) : dispatch(CheckTokenFailure()))
+      .then(res => {
+        console.log(res);
+        return res.success
+          ? dispatch(CheckTokenSuccess(res.info, token))
+          : dispatch(CheckTokenFailure())
+      })
       .catch(_ => dispatch(CheckTokenFailure()));
   };
 }
@@ -79,7 +85,7 @@ export function CheckEmailRequest(email) {
 export function CheckNickNameRequest(NickName) {
   return (dispatch) => {
     dispatch(CheckNickName());
-    return fetch(`${host}/users/checkNickName`, { headers: { 'Content-Type': 'application/json' }, method: "POST", body: JSON.stringify(NickName) })
+    return fetch(`${host}/user/checkNickName`, { headers: { 'Content-Type': 'application/json' }, method: "POST", body: JSON.stringify(NickName) })
       .then(res => res.json())
       .then(res => {
         if (res.success) {

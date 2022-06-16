@@ -1,5 +1,6 @@
 import { useParams } from 'react-router';
-import ClientTemplate from 'clientTemplate/ClientTemplate';
+import ClientTemplate from 'clientTemplate';
+
 import PlayExpListContainer from 'containers/ListContainer/ExpListContainer/PlayExpListContainer';
 
 function ExpListPage() {

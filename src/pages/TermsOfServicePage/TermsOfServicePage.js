@@ -1,5 +1,6 @@
 import React from 'react';
-import ClientTemplate from 'clientTemplate/ClientTemplate';
+import ClientTemplate from 'clientTemplate';
+
 import TermsOfServiceContainer from 'containers/TermsOfServiceContainer/TermsOfServiceContainer';
 
 class TermsOfServicePage extends React.Component {

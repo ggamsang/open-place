@@ -8,7 +8,7 @@ import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 import notification from 'source/Iconly-Bold-Notification.svg';
 
 import { Fade } from 'react-reveal';
-import { goto } from 'smallfuncs';
+import { goto } from 'navigator';
 import { WIDTH } from 'constant';
 
 

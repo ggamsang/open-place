@@ -1,5 +1,6 @@
 import { useParams } from 'react-router';
-import ClientTemplate from 'clientTemplate/ClientTemplate';
+import ClientTemplate from 'clientTemplate';
+
 import MakeExpListContainer from 'containers/ListContainer/ExpListContainer/MakeExpListContainer';
 
 function MakeExpListPage() {

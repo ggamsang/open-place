@@ -4,7 +4,7 @@
 import ClientTemplate from "clientTemplate/ClientTemplate";
 import styled from "styled-components";
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
-import { goto } from "smallfuncs";
+import { goto } from "navigator";
 
 const Peer = styled.div`
     box-sizing: border-box;

@@ -4,7 +4,7 @@ import ScrollList from 'components_mobile/Commons/ScrollList';
 import Search from 'components_mobile/Commons/Search';
 import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
 // import { WIDTH } from "constant";
-import { goto } from 'smallfuncs';
+import { goto } from 'navigator';
 
 const Wrapper = styled.div`
     -ms-overflow-style: none; /* Internet Explorer 10+ */

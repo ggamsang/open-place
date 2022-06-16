@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { goto } from 'smallfuncs';
+import { goto } from 'navigator';
 
 const Wrapper = styled.div`
     height: 80px;

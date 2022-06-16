@@ -1,4 +1,4 @@
-import ClientTemplate from 'clientTemplate/ClientTemplate'
+import ClientTemplate from 'clientTemplate'
 import MainContainer from 'containers/MainContainer/MainContainer'
 
 function MainPage() {

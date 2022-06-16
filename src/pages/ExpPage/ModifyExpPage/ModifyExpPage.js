@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ClientTemplate from 'clientTemplate/ClientTemplate';
+import ClientTemplate from 'clientTemplate';
+
 import { Outlet } from "react-router-dom";
 import ModifyExpContainer from 'containers/ExpContainer/ModifyExpContainer';
 

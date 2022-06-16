@@ -1,3 +1,6 @@
+import { LocalStorageName } from "constant";
+import jwt_decode from "jwt-decode";
+
 function storageAvailable(type) {
     try {
         var storage = window[type],
@@ -21,24 +24,55 @@ function storageAvailable(type) {
             storage.length !== 0;
     }
 }
-export function setCookie(cookie_name, value, days) {
-    const d = new Date();
-    alert(days);
-    alert(days);
-    d.setTime(d.getTime());
-    let expires = "expires=" + d.toUTCString();
-    document.cookie = `${cookie_name}=${value};${expires};path=/`;
+const setTokenCookie = (tname, tvalue) => {
+    const decode = jwt_decode(tvalue);
+    const date = new Date(0);
+    console.log({ decode });
+    date.setUTCSeconds(decode.exp);
+    const expires = `expires=${date.toUTCString()}`;
+    document.cookie = `${tname}=${tvalue};${expires};path=/`;
 }
+const setCookie = (cookie_name, value, days) => { ; }
 export const SetSession = (key, data) => {
     return new Promise((resolve, reject) => {
-        if (storageAvailable("localStorage")) {
+        if (storageAvailable(LocalStorageName)) {
             window.localStorage.setItem(key, data)
         } else {
-            setCookie(key, data, 7);
+            setTokenCookie(key, data);//setCookie(key, data);
         }
         if (data == null || data === "null") {
             window.localStorage.removeItem(key);
         }
         resolve(data);
+    });
+};
+export const getCookie = (cookie_name) => {
+    var x, y;
+    var val = document.cookie.split(';');
+
+    for (var i = 0; i < val.length; i++) {
+        x = val[i].substring(0, val[i].indexOf('='));
+        y = val[i].substring(val[i].indexOf('=') + 1);
+        x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
+        if (x === cookie_name) {
+            return y.toString('base64'); // unescape로 디코딩 후 값 리턴
+        }
+    }
+    return null;
+};
+
+export const GetSession = (key) => {
+    return new Promise((resolve, reject) => {
+        let token = null;
+        if (storageAvailable(LocalStorageName)) {
+            token = window.localStorage.getItem(key);
+        } else {
+            token = getCookie(key);
+        }
+        if (token === "null" || token == null) {
+            reject(null);
+        } else {
+            resolve(token);
+        }
     });
 };

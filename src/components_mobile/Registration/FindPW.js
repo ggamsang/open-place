@@ -123,7 +123,7 @@ class FindPW extends Component {
         <Fade when={this.state.page1}>
           <div className='content' style={{display:`${this.state.page1==false?"none":"block"}`}}>
           <div className='box alignCenter justifyCenter'>
-            <Logo type="big" text={"OPEN MARKET"}/>
+            <Logo type="big" text={"OPEN PLACE"}/>
           </div>
           <div style={{height:"50vh"}} className='box column alignCenter justifyCenter'>
               <GradientButton  onClickEvent={()=>{this.setState({page1:false});setTimeout(()=>this.setState({page2_1:true}),1000)}} style={{marginBottom:"20px"}} text="아이디 찾기" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28}/>
@@ -135,7 +135,7 @@ class FindPW extends Component {
         <Fade when={this.state.page2_1}>
         <div className='content' style={{display:`${this.state.page2_1==false?"none":"block"}`}}>
           <div className='box alignCenter justifyCenter'>
-          <Logo onClickEvent={()=>window.location.href = "/login"} type="small" text={"OPEN MARKET"}/>
+          <Logo onClickEvent={()=>window.location.href = "/login"} type="small" text={"OPEN PLACE"}/>
           </div>
 
         <div className="box column alignCenter">
@@ -175,7 +175,7 @@ class FindPW extends Component {
           <div className='content' style={{display:`${this.state.page2_2==false?"none":"block"}`}}>
             
             <div className='box alignCenter justifyCenter'>
-            <Logo onClickEvent={()=>window.location.href = "/login"} type="small" text={"OPEN MARKET"}/>
+            <Logo onClickEvent={()=>window.location.href = "/login"} type="small" text={"OPEN PLACE"}/>
             </div> 
 
             <div className="box column alignCenter justifyCenter"  style={{height:"35vh"}}>

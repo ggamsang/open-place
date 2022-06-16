@@ -8,6 +8,7 @@ import InputNormal from 'components_mobile/Commons/Input/InputNormal';
 import Fade from 'react-reveal/Fade';
 import { SetSession } from 'modules/Sessions';
 import { TokenName } from 'constant';
+import { goto } from 'navigator';
 
 const Wrapper = styled.div`
   width:100%;
@@ -78,12 +79,12 @@ class SignIn extends Component {
     this.setState({ login: Login.ready });
     const { user_id, password } = this.state;
     this.props.SignInRequest &&
-      this.props.SignInRequest({ email: user_id, password: password })
+      this.props.SignInRequest({ id: user_id, password: password })
         .then(data => {
           if (data.success) {
-            SetSession(TokenName);
+            // SetSession(TokenName);
             this.setState({ login: Login.success });
-            // window.location.href = '/';
+            // goto("MAIN");
           } else {
             this.setState({ login: Login.failed });
           }
@@ -98,14 +99,12 @@ class SignIn extends Component {
   }
 
   render() {
-    console.log(this.props);
-
     const messageMargin = this.state.login != Login.failed ? 16 : 26;
 
     return (
       <Wrapper>
         <div className='box alignCenter justifyCenter'>
-          <Logo onClickEvent={() => window.location.href = "/"} type="big" text={"OPEN MARKET"} />
+          <Logo onClickEvent={() => window.location.href = "/"} type="big" text={"OPEN PLACE"} />
         </div>
         <div className='box column alignCenter'>
           <div className='inputBox'>
@@ -126,7 +125,7 @@ class SignIn extends Component {
 
               width={328} height={48} fontSize={17} color={"#EAF2FE"} radius={3} warning={this.state.login == Login.failed} />
           </div>
-          <GradientButton onClickEvent={this.onClickLogin} style={{ marginBottom: "20px" }} text="로그인" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28} />
+          <GradientButton onClickEvent={() => this.onClickLogin()} style={{ marginBottom: "20px" }} text="로그인" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28} />
           <GradientButton onClickEvent={() => window.location.href = "/join"} style={{ marginBottom: "20px" }} text="회원가입" width={292} height={52} front={'#365AF1'} end={'#FF4343'} deg={270} radius={28} />
           <div className='login_button_wrap'>
             <ImageButton style={{ marginRight: "6px", marginLeft: "6px" }} width={50} height={50} color={"#1877F2"} radius={25} />
