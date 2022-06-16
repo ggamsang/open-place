@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ScrollList from "components_mobile/Commons/ScrollList"
 import { connect } from "react-redux";
-import { GetTopItemListRequest } from "actions/Items/TopList";
+import { GetTopItemListRequest } from "../../actions/Exp/TopList.js";
 
 const dummy = [
   {
@@ -32,7 +32,6 @@ class TopItemListContainer extends Component {
     });
   }
   render() {
-    console.log(this.props.topItemList);
    return (<React.Fragment>
       <ScrollList list={this.props.topItemList} />
     </React.Fragment>)

@@ -49,7 +49,7 @@ const PaginationDots = styled.div`
         opacity: 1;
         background-color: #ECF1F7;
     }
-    z-index: 999;
+    z-index: 70;
 `
 const Slide = styled.div`
     min-width: ${WIDTH}px;

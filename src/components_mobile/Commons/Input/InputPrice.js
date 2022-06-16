@@ -101,7 +101,7 @@ export class InputPrice extends Component {
         }
     }
     returnData = async e => {
-        this.props.getValue && await this.props.getValue(this.state.price);
+        this.props.onChangeValue && await this.props.onChangeValue(this.state.price);
     }
     init = async () => {
         await this.setState({ price: this.props.price || 0 });
