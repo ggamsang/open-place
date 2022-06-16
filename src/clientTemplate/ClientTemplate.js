@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import styled/*, { keyframes }*/ from "styled-components";
 import Footer from "components_mobile/Footer"
 import BottomMenu from "components_mobile/Menu/Bottom";
-import AlarmContainer from "containers/AlarmContainer"
-import { WIDTH } from 'constant';
+// import AlarmContainer from "containers/AlarmContainer"
+// import { WIDTH } from 'constant';
 
 const Wrapper = styled.div`
   z-index: 1;
@@ -51,6 +51,9 @@ class ClientTemplate extends Component {
     this.state = { up: false, login: false }
   }
   componentDidMount() {
+    if (this.props.isLoggedIn) {
+      this.setState({ login: true });
+    }
     window.addEventListener('scroll', e => this.handleScroll(e));
   }
 
@@ -72,10 +75,6 @@ class ClientTemplate extends Component {
 
   render() {
     return (<>
-      {/* <button style={{ position: "absolute", zIndex: "998", left: "60px" }} onClick={() => this.setState({ login: !this.state.login })}>demo:{this.state.login ? "로그아웃" : "로그인"}</button> */}
-      {/* alarm */}
-      {/* <AlarmContainer /> */}
-      {/*  */}
       <Wrapper id="client-template">
         <div id="main" className='main'>
           {this.props.children}
@@ -86,12 +85,8 @@ class ClientTemplate extends Component {
         </div>
 
         <div className='bottom'>
-          {/* <div className='blanker'>&nbsp;</div> */}
-          {/* {this.props.i_dont_need_footer */}
-          {/* ? <></> */}
-          {/* :  */}
           <Footer />
-          {/* } */}
+
         </div>
         {/* <div id='dimmer'> &nbsp; </div> */}
       </Wrapper>

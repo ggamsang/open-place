@@ -30,6 +30,7 @@ import ModifyExpPage from "pages/ExpPage/ModifyExpPage/ModifyExpPage";
 
 import { WIDTH } from "constant";
 import bg from "resources/sample-image-01.png";
+
 const Wrapper = styled.main`
   overflow: hidden;
   position: relative;
@@ -57,7 +58,6 @@ const Wrapper = styled.main`
 `;
 
 function App() {
-
   return (
     <Wrapper>
       {/* <img src={bg} alt="bg" className="bg" /> */}
@@ -95,7 +95,6 @@ function App() {
             </Route>
             <Route path="message" element={<MessageListPage />} />
             <Route path="message/:id" element={<MessageDetailPage />} />
-
             <Route path="*" element={<div>NOT FOUND</div>} />
           </Routes>
         </BrowserRouter>

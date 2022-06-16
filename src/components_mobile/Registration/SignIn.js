@@ -84,7 +84,7 @@ class SignIn extends Component {
           if (data.success) {
             // SetSession(TokenName);
             this.setState({ login: Login.success });
-            // goto("MAIN");
+            goto("MAIN");
           } else {
             this.setState({ login: Login.failed });
           }

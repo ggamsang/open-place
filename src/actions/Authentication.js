@@ -24,6 +24,7 @@ export const SetActive = (active) => ({ type: types.SET_ACTIVE, active })
 // api
 export function SignOutRequest() {
   return (dispatch) => {
+    SetSession(TokenName, null);
     return dispatch(SignOut())
   }
 }

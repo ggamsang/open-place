@@ -161,7 +161,7 @@ class Bottom extends React.Component {
     render() {
         return (<Wrapper>
 
-            {!this.props.login ?
+            {this.props.login ?
                 <div className='row'>
                     {/* LOGIN */}
                     <div>
@@ -195,30 +195,55 @@ class Bottom extends React.Component {
                     </div>
                 </div>
 
-                : <div className='row'>
-                    {/* no LOGIN */}
-                    <div className='login' onClick={() => goto("LOGIN")}>
-                        <span> + 로그인하기</span>
+                :
+                <div className='row'>
+                    <div>
+                        <div className='login' onClick={() => goto("LOGIN")}>
+                            <span>로그인</span>
+                        </div>
                     </div>
+
                     <Fade>
-                        {this.props.up
-                            ? <img
-                                alt="icon"
-                                onClick={() => this.gotoTop()}
-                                className="logo arrow-resize notloggedin"
-                                src={arrow} />
-                            : <img
-                                alt="icon"
-                                onClick={() => goto("MAIN")}
-                                className="logo notloggedin"
-                                src={logo} />}
+                        <div>
+                            {this.props.up && !this.props.force
+                                ? <img alt="icon" onClick={() => this.gotoTop()} className="logo arrow-resize" src={arrow} />
+                                : <img alt="icon" onClick={() => goto("MAIN")} className="logo" src={logo} />
+                            }
+                        </div>
                     </Fade>
 
-                    <div className='signup' onClick={() => goto("SIGNUP")}>
-                        <div className='profile' />
-                        <span>회원가입</span>
+                    <div className='send-left'>
+                        <div className='signup' onClick={() => goto("SIGNUP")}>
+                            <div className='profile' />
+                            <span>회원가입</span>
+                        </div>
                     </div>
-                </div>}
+                </div>
+                // <div className='row'>
+                //     {/* no LOGIN */}
+                //     <div className='login' onClick={() => goto("LOGIN")}>
+                //         <span> + 로그인하기</span>
+                //     </div>
+                //     <Fade>
+                //         {this.props.up
+                //             ? <img
+                //                 alt="icon"
+                //                 onClick={() => this.gotoTop()}
+                //                 className="logo arrow-resize notloggedin"
+                //                 src={arrow} />
+                //             : <img
+                //                 alt="icon"
+                //                 onClick={() => goto("MAIN")}
+                //                 className="logo notloggedin"
+                //                 src={logo} />}
+                //     </Fade>
+
+                //     <div className='signup' onClick={() => goto("SIGNUP")}>
+                //         <div className='profile' />
+                //         <span>회원가입</span>
+                //     </div>
+                // </div>
+            }
 
             {this.state.mainmenu
                 && <div className='row background topmargin3'>
