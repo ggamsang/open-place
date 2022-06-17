@@ -90,7 +90,7 @@ function App() {
             </Route>
             <Route path="exp/:id" element={<ExpDetailPage />} />
             <Route path="createExp" element={<CreateExpPage />} />
-            <Route path="modifyExp" element={<ModifyExpPage />} >
+            <Route path="modifyExp" >
               <Route path=":id" element={<ModifyExpPage />} />
             </Route>
             <Route path="message" element={<MessageListPage />} />
