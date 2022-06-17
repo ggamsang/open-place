@@ -27,8 +27,9 @@ class ButtonNormal extends Component {
     this.state={};
     this.onClickEvent = this.onClickEvent.bind(this);
   }
-  onClickEvent=()=>{
-    this.props.onClickEvent();
+  onClickEvent=async()=>{
+    // this.props.onClickEvent();
+    this.props.onClickEvent && await this.props.onClickEvent();
   }
 
   render() {

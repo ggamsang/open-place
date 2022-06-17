@@ -1,9 +1,14 @@
 import Authentication from "reducers/Authentication";
-import { TopList } from "reducers/Items";
+import { TopList,UpdateExp } from "reducers/Exp";
+import { AlarmList } from "reducers/Alarm";
+import { DefaultList } from "reducers/Commons/DefaultList";
 
 import { combineReducers } from "redux";
 
 export default combineReducers({
-Authentication,
+    Authentication,
     TopList,
+    AlarmList,
+    DefaultList,
+    UpdateExp,
 });
