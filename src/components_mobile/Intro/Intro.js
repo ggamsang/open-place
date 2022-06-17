@@ -61,7 +61,7 @@ class Intro extends Component {
         <Fade delay={1500}>
           <div className='wrap'>
             <div className='box alignCenter justifyCenter'>
-              <Logo type="big" text={"OPEN PLACE \n 매일 새로운 경험"} />
+              <Logo type="big" text={"OPEN PLACE 매일 새로운 경험"} />
             </div>
             <div className='box column alignCenter'>
               <GradientButton onClickEvent={() => goto("LOGIN")} style={{ marginTop: "60px", marginBottom: "20px" }} text="로그인" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28} />

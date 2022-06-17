@@ -3,11 +3,13 @@ import { connect } from "react-redux";
 import styled/*, { keyframes }*/ from "styled-components";
 import Footer from "components_mobile/Footer"
 import BottomMenu from "components_mobile/Menu/Bottom";
-// import AlarmContainer from "containers/AlarmContainer"
+// import NotificationContainer from "containers/NotificationContainer"
 // import { WIDTH } from 'constant';
 
 const Wrapper = styled.div`
   z-index: 1;
+  position: relative;
+
   .nav {
     z-index: 999;
     position: fixed;
@@ -30,6 +32,7 @@ const Wrapper = styled.div`
     pointer-events: none;
     position: fixed;
     top: 0;
+    left: 0;
     background: linear-gradient(180deg, #707070, #383838);
     width: 100%;
     height: 100vh;
@@ -88,7 +91,6 @@ class ClientTemplate extends Component {
           <Footer />
 
         </div>
-        {/* <div id='dimmer'> &nbsp; </div> */}
       </Wrapper>
     </>);
   }
