@@ -33,6 +33,7 @@ class DropDownNormal extends Component {
     return (
         <React.Fragment>
             <DropDown
+                value={this.props.value}
                 disabled={this.props.disabled}
                 onChange={this.onChangeValue}
                 style={this.props.style}
