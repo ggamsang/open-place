@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import iconClose from "resources/close.svg";
 import iconNoti from "resources/notification.png";
+import iconRead from "resources/read-icon.webp";
+
 const Wrapper = styled.div`
     width: 280px;
     height: 462px;
@@ -37,7 +39,12 @@ const Wrapper = styled.div`
         overflow: auto;
         padding: 0;
         margin: 0;
+        .read {
+            opacity: 0.7;
+        }
         .element {
+            position: relative;
+            border: 1px solid green;
             margin: auto;
             width: 247px;
             height: 53px;
@@ -53,7 +60,7 @@ const Wrapper = styled.div`
             text-align: center;
             justify-content: center;
             .title {
-                width: 200px;
+                // width: 200px;
                 inline-size: 190px; 
                 overflow: hidden;
                 height: 40px;
@@ -66,6 +73,35 @@ const Wrapper = styled.div`
                 color: #000000;
             }
         }
+    }
+    .icon-button {
+        border: none;
+        border-bottom: 1px solid #BBBBBB;
+        border-right: 1px solid #BBBBBB;
+        background: none;
+        width: max-content;
+        height: 20px
+        cursor: pointer;
+        background: #CDCDCD;
+        position: absolute;
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        top: 14px;
+        left: 7px;
+        outline: none;
+        img {
+            width: 20px;
+            height: 20px;
+        }
+        :hover {
+            background: #EEE;
+        }
+    }
+
+    .row {
+        display: flex;
+        flex-direction: row;
     }
 `;
 const CloseButton = styled.button`
@@ -87,9 +123,12 @@ const CloseButton = styled.button`
 
 `;
 
-class Alarm extends React.Component {
+class NotificationModal extends React.Component {
     handleClose = () => {
         this.props.close();
+    }
+    handleClicked = (id) => {
+        this.props.clicked(id);
     }
     render() {
         const { list } = this.props;
@@ -97,25 +136,32 @@ class Alarm extends React.Component {
         return (
             <Wrapper>
                 <div className='top'>
-                    <div className='noti' > </div>
-                    <CloseButton onClick={() => this.handleClose()}>
+                    <div className='noti'></div>
+                    <CloseButton onClick={this.handleClose}>
                         <img className="cross" src={iconClose} />
                     </CloseButton>
                 </div>
 
                 <ul className='list'>
-                    {list.map((item, index) =>
-                        <li className="element" key={index}>
-                            <div className='title'>
+                    {list.length > 0 && list.map(item =>
+                        <li key={item.uid}
+                            className={`${item.read === 1 && "read"} element row`}>
+                            <div
+                                onClick={e => e.stopPropagation()}
+                                className='title'>
                                 {item.title}
                             </div>
-                            {/* <div> {item.content} </div> */}
+                            {item.read === 0
+                                && <button
+                                    onClick={() => this.handleClicked(item.uid)}
+                                    className='icon-button'>
+                                    <img src={iconRead} />
+                                </button>}
                         </li>)}
                 </ul>
-
             </Wrapper>
         );
     }
 }
 
-export default Alarm;
+export default NotificationModal;

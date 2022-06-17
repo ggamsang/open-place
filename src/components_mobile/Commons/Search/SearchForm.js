@@ -6,7 +6,8 @@ import Search from 'components_mobile/Search';
 import back_arrow from 'source/Iconly-Bold-left-arrow.svg';
 import alarm from 'source/Iconly-alarm-white.svg'
 import { useNavigate } from 'react-router';
-import AlarmContainer from 'containers/AlarmContainer';
+import { connect } from 'react-redux';
+import NotificationContainer from 'containers/NotificationContainer';
 
 const SearchBox = styled.div`
     width:100%;
@@ -18,7 +19,7 @@ const SearchBox = styled.div`
 
 `
 
-class SearchForm extends Component {
+class SearchForms extends Component {
   constructor(props) {
     super(props);
     this.onClickEvent = this.onClickEvent.bind(this);
@@ -31,9 +32,14 @@ class SearchForm extends Component {
   onClickBack = () => {
     window.history.go(-1);
   }
+  componentDidUpdate(props) {
+    if (this.props.active && (props.active != this.props.active)) {
+      return true;
+    }
+  }
 
   render() {
-
+    const { isLoggedIn: active } = this.props;
     return (
       <React.Fragment>
         <SearchBox>
@@ -49,12 +55,19 @@ class SearchForm extends Component {
             disabled_filter={this.props.disabled_filter} />
 
           {this.props.isMain != null
-            && <AlarmContainer />}
+            && <NotificationContainer active={active} />}
 
         </SearchBox>
       </React.Fragment>
     )
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.Authentication.status.isLoggedIn,
+  }
+};
+const mapDispatchToProps = () => ({
 
-export default SearchForm;
+});
+export default connect(mapStateToProps, mapDispatchToProps)(SearchForms);

@@ -1,7 +1,6 @@
+// ACTIONS
 
 // SignIn
-
-// actions
 export const AUTH_SIGNIN = "AUTH_SIGNIN";
 export const AUTH_SIGNIN_SUCCESS = "AUTH_SIGNIN_SUCCESS";
 export const AUTH_SIGNIN_FAILURE = "AUTH_SIGNIN_FAILURE";
