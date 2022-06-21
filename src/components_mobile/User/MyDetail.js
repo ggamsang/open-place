@@ -10,6 +10,7 @@ import notification from 'source/Iconly-Bold-Notification.svg';
 import { Fade } from 'react-reveal';
 import { goto } from 'navigator';
 import { WIDTH } from 'constant';
+import NotificationContainer from 'containers/NotificationContainer';
 
 
 const Wrapper = styled.div`
@@ -95,6 +96,7 @@ class MyDetail extends Component {
   }
 
   render() {
+
     return (<Wrapper>
       <div className="header">
         <div className='searchbox'>
@@ -115,8 +117,9 @@ class MyDetail extends Component {
               편집
             </div>
             <div className='button'>
-              <img className='notify' src={notification} />
+              <NotificationContainer active={this.props.active} />
             </div>
+
           </div>
         </div>
       </div>

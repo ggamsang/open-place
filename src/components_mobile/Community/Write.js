@@ -187,12 +187,11 @@ export class CommunityWrite extends React.Component {
   onCancelWrite = (e) => {
     e.preventDefault();
     goto("COMMUNITY");
-    // this.setState({ pageType: "list", content: "", title: "", couldwrite: false });
   }
   onWrite = (e) => {
     e.preventDefault();
     const data = { content: this.state.content, title: this.state.title, type: this.props.type === "noti" ? "noti" : "free" };
-    console.log({ data });
+    this.props.Write(data);
   }
 
   render() {
@@ -201,18 +200,12 @@ export class CommunityWrite extends React.Component {
       <div className='gradient'>
         <div className='blanker'>&nbsp;</div>
         <SearchForm />
-        {this.props.type === "free" || this.props.type == null
-          && <div className='title'>게시글 등록하기</div>}
-        {this.props.type === "noti"
-          && <div className='title'>공지사항 등록하기</div>}
+        <div className='title'>게시글 등록하기</div>
       </div>
 
       <WriteForm>
         <div className='form'>
-          {this.props.type === "noti"
-            && <div className='label'>공지사항</div>}
-          {this.props.type === "free" || this.props.type == null
-            && <div className='label'>게시글 작성</div>}
+          <div className='label'>공지사항</div>
 
           <div className='rows top13'>
             <div className='label'>
@@ -255,7 +248,6 @@ export class CommunityWrite extends React.Component {
           </Button>
         </div>
       </WriteForm>
-
 
     </Wrapper>);
   }
