@@ -25,6 +25,12 @@ class MyDetailContainer extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return ({
+    isLoggedIn: state.Authentication.status.isLoggedIn,
+    user_detail: state.User.status.user_detail,
+  });
+}
 
 const mapStateToProps = (state) => ({
   isLoggedIn: state.Authentication.status.isLoggedIn,
