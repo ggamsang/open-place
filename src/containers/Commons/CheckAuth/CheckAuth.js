@@ -29,13 +29,13 @@ export default function CheckAuth(Components) {
                 .then((token) => {
                     this.props.CheckTokenRequest(token)
                         .then(async data => {
-                            console.log('check token request then ', data);
+                            // console.log('check token request then ', data);
                         })
                         .catch(async e => {
-                            console.log('check token request catch', e);
+                            // console.log('check token request catch', e);
                         });
                 }).catch(async data => {
-                    console.log('aaaaaa check token request catch', data);
+                    // console.log('aaaaaa check token request catch', data);
                     this.props.SignOutRequest();
                 })
                 .finally(() => {

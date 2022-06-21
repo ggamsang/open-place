@@ -130,6 +130,7 @@ class ModifyExp extends React.Component {
   onClickOK = async (event) => {
     const { thumbnail, title, tag, info, price, type } = this.state;
     const data = {
+      user_id:this.props.userInfo.uid,
       item_id:this.props.item_id,
       title: title, taglist: tag, info: info, price: price, type: type,
       files: [],

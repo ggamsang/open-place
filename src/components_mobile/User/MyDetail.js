@@ -120,7 +120,7 @@ class MyDetail extends Component {
           </div>
         </div>
       </div>
-      <this.props.Outlet />
+      <this.props.Outlet {...this.props}/>
     </Wrapper>);
   }
 }
