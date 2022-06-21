@@ -18,34 +18,19 @@ class MyDetailContainer extends Component {
   }
 
   render() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    console.log(this.props);
-=======
->>>>>>> 54181c2ac20288273292ddfd0517f9cbdf8c67f7
     return (
       this.props.isLoggedIn
         ? <MyDetail {...this.props} Outlet={this.props.Outlet} />
         : <div>로그인이 필요한 페이지입니다.</div>
     );
-<<<<<<< HEAD
-=======
-    return (this.props.isLoggedIn
-      ? <MyDetail Outlet={this.props.Outlet} />
-      : <div>로그인이 필요한 페이지입니다.</div>
-    )
->>>>>>> 5aebadf953718e9a52bb6c5bf9d95721b01e763c
   }
-=======
+}
 
->>>>>>> 54181c2ac20288273292ddfd0517f9cbdf8c67f7
-}
-const mapStateToProps = (state) => {
-  return ({
-    isLoggedIn: state.Authentication.status.isLoggedIn,
-    user_detail: state.User.status.user_detail,
-  });
-}
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.Authentication.status.isLoggedIn,
+  active: state.Authentication.status.active,
+  user_detail: state.User.status.user_detail,
+});
 const mapDispatchToProps = (dispatch) => {
   return ({
     getUserDetailRequest:(user_id)=>{dispatch(getUserDetailRequest(user_id))},
