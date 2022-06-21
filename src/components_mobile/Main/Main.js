@@ -35,17 +35,14 @@ const ContentWrapper = styled.div`
 function Main() {
   return (<Wrapper>
     <Fade>
+      <div className='blanker'>&nbsp;</div>
       <GradationCard angle={30} />
 
       <ContentWrapper>
-        <div className='blanker'>&nbsp;</div>
-
         <SearchForm isMain={true} />
-
         <Slide />
-
         <TopItemList />
-
+        <div className='blanker'>&nbsp;</div>
       </ContentWrapper>
 
     </Fade>

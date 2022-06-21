@@ -24,7 +24,7 @@ const Wrapper = styled.div`
 	-webkit-overflow-scrolling: touch;
 	overflow-x: scroll;
 `;
-const PaginationDots = styled.div`   
+const PaginationDots = styled.ul`   
     position: absolute;
     padding: 0;
     margin: 0;
@@ -35,8 +35,9 @@ const PaginationDots = styled.div`
     flex-direction: row;
     justify-content: space-between;
     left: 50%;
-    top: 256px;
-    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transform: translate(-50%, -210%);
+    z-index: 70;
     
     li {
         opacity: 0.9;
@@ -49,7 +50,6 @@ const PaginationDots = styled.div`
         opacity: 1;
         background-color: #ECF1F7;
     }
-    z-index: 70;
 `
 const Slide = styled.div`
     min-width: ${WIDTH}px;
@@ -124,17 +124,8 @@ class Slider extends React.Component {
     }
 
     render() {
-        return (<div>
-            <PaginationDots>
-                {this.pages.map((e, i) =>
-                    <li
-                        key={i}
-                        onClick={() => this.goto(i)}
-                        className={i + 1 === this.state.active ? 'active' : ''}>
-                        {e}
-                    </li>
-                )}
-            </PaginationDots>
+        return (<div style={{ position: "relative" }}>
+
             <Wrapper id="slide" onScroll={() => this.handleScroll()} >
                 <Slide url={img0}>
                     <div className='para1'>
@@ -151,9 +142,19 @@ class Slider extends React.Component {
                 <Slide url={'https://i.picsum.photos/id/1011/5472/3648.jpg?hmac=Koo9845x2akkVzVFX3xxAc9BCkeGYA9VRVfLE4f0Zzk'} />
                 <Slide url={img0} />
                 <Slide url={img0} />
+
             </Wrapper>
 
-
+            <PaginationDots>
+                {this.pages.map((e, i) =>
+                    <li
+                        key={i}
+                        onClick={() => this.goto(i)}
+                        className={i + 1 === this.state.active ? 'active' : ''}>
+                        {e}
+                    </li>
+                )}
+            </PaginationDots>
         </div>);
     }
 }

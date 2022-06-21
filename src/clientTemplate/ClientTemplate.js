@@ -46,7 +46,8 @@ const Wrapper = styled.div`
   }
 `;
 
-const GAP = window.innerHeight;//600;
+// const GAP = window.innerHeight//600;
+const GAP = 600;
 
 class ClientTemplate extends Component {
   constructor(props) {
