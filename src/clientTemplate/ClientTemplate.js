@@ -96,7 +96,7 @@ class ClientTemplate extends Component {
   }
 }
 const mapStateToProps = state => {
-  console.log("redux:", state);
+  // console.log("redux:", state);
   return {}
 };
 const mapDispatchToProps = dispatch => ({});

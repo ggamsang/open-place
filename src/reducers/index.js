@@ -4,7 +4,8 @@ import Notice from "reducers/Notice";
 import { TopList, UpdateExp } from "reducers/Exp";
 import { AlarmList } from "reducers/Alarm";
 import { DefaultList } from "reducers/Commons/DefaultList";
-
+import { MyDetail } from "reducers/User/MyDetail";
+import { User } from "reducers/User/User";
 import { combineReducers } from "redux";
 
 export default combineReducers({
@@ -15,4 +16,6 @@ export default combineReducers({
     UpdateExp,
     Community,
     Notice,
+    User,
+    MyDetail,
 });

@@ -17,6 +17,9 @@ import LikeSharerContainer from 'containers/MyDetail/LikeSharerContainer';
 import { TokenName, WIDTH } from 'constant';
 import { connect } from 'react-redux';
 import { SignOutRequest } from 'actions/Authentication';
+import {getUserPointRequest,setUserPointRequest,getUserPointHistoryReqeust,
+        getUserRegisterExpRequest,getUserSellExpRequest,getUserLikeSharerRequest,getUserLikeExpRequest} from "actions/User/MyDetail"
+
 import { SetSession } from 'modules/Sessions';
 import { goto } from 'navigator';
 
@@ -193,6 +196,9 @@ const SubWrap = styled.div`
 `
 
 class MyDetailChild extends Component {
+  async componentDidMount(){
+    await this.props.getUserPointRequest(1);
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -232,6 +238,23 @@ class MyDetailChild extends Component {
 
   onClickSubMenu = (sub) => {
     this.setState({ subMenu: sub })
+    //testDeta
+    if(sub=="point"){
+      this.props.getUserPointRequest(1);
+    }else if(sub=="payment"){
+      this.props.getUserPointHistoryReqeust(1,0);
+    }else if(sub=="regExp"){
+      this.props.getUserRegisterExpRequest(1,0);
+    }else if(sub=="sellExp"){
+      this.props.getUserSellExpRequest(1,0);
+    }else if(sub=="buyExp"){
+      this.props.getUserSellExpRequest(1,0);
+    }else if(sub=="likeSharer"){
+      this.props.getUserLikeSharerRequest(1,0);
+    }else if(sub=="likeExp"){
+      this.props.getUserLikeExpRequest(1,0);
+    }
+    // this.props.getUserLikeExpRequest(1,0);
   }
 
   render() {
@@ -304,11 +327,26 @@ class MyDetailChild extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     SignOutRequest: () => dispatch(SignOutRequest()),
+    getUserPointRequest:(user_id)=>{dispatch(getUserPointRequest(user_id))},
+    setUserPointRequest:(user_id,point,token)=>{dispatch(setUserPointRequest(user_id,point,token))},
+    getUserPointHistoryReqeust:(user_id,page)=>{dispatch(getUserPointHistoryReqeust(user_id,page))},
+    getUserRegisterExpRequest:(user_id,page)=>{dispatch(getUserRegisterExpRequest(user_id,page))},
+    getUserSellExpRequest:(user_id,page)=>(dispatch(getUserSellExpRequest(user_id,page))),
+    getUserLikeSharerRequest:(user_id,page)=>{dispatch(getUserLikeSharerRequest(user_id,page))},
+    getUserLikeExpRequest:(user_id,page)=>{dispatch(getUserLikeExpRequest(user_id,page))},
   }
 };
 const mapStateToProps = (state) => {
   return {
+    token: state.Authentication.status.token,
+    userInfo:state.Authentication.status.userInfo,
     isLoggedIn: state.Authentication.status.isLoggedIn,
+    user_point: state.MyDetail.status.user_point,
+    point_history: state.MyDetail.status.point_history,
+    register_exp: state.MyDetail.status.register_exp,
+    sell_exp: state.MyDetail.status.sell_exp,
+    like_sharer: state.MyDetail.status.like_sharer,
+    like_exp:state.MyDetail.status.like_exp,
   }
 };
 

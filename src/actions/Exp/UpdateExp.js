@@ -1,8 +1,6 @@
 import * as types from "actions/ActionTypes";
 import host from "config";
 
-// 메인 페이지 인기 아이템 리스트
-// place.opensrcdesign.com/api/
 export const createExpRequest = (data,token) => {
     return dispatch =>{
         dispatch(createExp());
