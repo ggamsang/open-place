@@ -130,8 +130,8 @@ class ModifyExp extends React.Component {
   onClickOK = async (event) => {
     const { thumbnail, title, tag, info, price, type } = this.state;
     const data = {
-      user_id:this.props.userInfo.uid,
-      item_id:this.props.item_id,
+      user_id: this.props.userInfo.uid,
+      item_id: this.props.item_id,
       title: title, taglist: tag, info: info, price: price, type: type,
       files: [],
     }
@@ -154,7 +154,7 @@ class ModifyExp extends React.Component {
         </div>
         <div className='content'>
           <div className='whitebox'>
-            <img src={this.state.thumbnail} className="img_" />
+            <img src={this.state.thumbnail} className="img_" alt="profile" />
             <div className='wrap'>
               <div style={{ marginBottom: "9px" }}><span className="label">제목</span><sup style={{ color: "red" }}>*</sup><span className="text">국민대CRC</span></div>
               <label className="findThumbnailText" htmlFor="file">
