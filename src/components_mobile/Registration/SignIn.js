@@ -97,39 +97,97 @@ class SignIn extends Component {
   onChangePassword = (event) => {
     this.setState({ password: event.target.value });
   }
-
+  handleEnterKey = (event) => {
+    if (event.key === "Enter") {
+      if (this.state.user_id && this.state.password) {
+        this.onClickLogin();
+      }
+    }
+  }
   render() {
     const messageMargin = this.state.login != Login.failed ? 16 : 26;
 
     return (
       <Wrapper>
         <div className='box alignCenter justifyCenter'>
-          <Logo onClickEvent={() => window.location.href = "/"} type="big" text={"OPEN PLACE"} />
+          <Logo
+            onClickEvent={() => window.location.href = "/"}
+            type="big"
+            text={"OPEN PLACE"} />
         </div>
         <div className='box column alignCenter'>
           <div className='inputBox'>
-
             <InputNormal
               onChangeValue={this.onChangeId}
-              onClear={() => { this.setState({ user_id: "", login: Login.ready }) }}
-              value={this.state.user_id} placeholder={"아이디를 입력하세요"}
+              onClear={() => {
+                this.setState({ user_id: "", login: Login.ready })
+              }}
+              value={this.state.user_id}
+              placeholder={"아이디를 입력하세요"}
+              onKeyPress={this.handleEnterKey}
+              width={328}
+              height={48}
+              fontSize={17}
+              color={"#EAF2FE"}
+              radius={3}
+              warning={this.state.login == Login.failed} />
 
-              width={328} height={48} fontSize={17} color={"#EAF2FE"} radius={3} warning={this.state.login == Login.failed} />
+            <Warning warning={this.state.login == Login.failed}>
+              {this.state.login == Login.failed
+                && <Fade>
+                  <div>{"아이디 혹은 비밀번호가 틀립니다."}</div>
+                </Fade>}
+            </Warning>
 
-            <Warning warning={this.state.login == Login.failed}>{this.state.login == Login.failed && <Fade><div>{"아이디 혹은 비밀번호가 틀립니다."}</div></Fade>}</Warning>
-
-            <InputNormal type="password"
+            <InputNormal
+              type="password"
               onChangeValue={this.onChangePassword}
-              onClear={() => { this.setState({ password: "", login: Login.ready }) }}
-              value={this.state.password} placeholder={"비밀번호를 입력하세요"}
-
-              width={328} height={48} fontSize={17} color={"#EAF2FE"} radius={3} warning={this.state.login == Login.failed} />
+              onClear={() => {
+                this.setState({ password: "", login: Login.ready })
+              }}
+              value={this.state.password}
+              placeholder={"비밀번호를 입력하세요"}
+              onKeyPress={this.handleEnterKey}
+              width={328}
+              height={48}
+              fontSize={17}
+              color={"#EAF2FE"}
+              radius={3}
+              warning={this.state.login == Login.failed} />
           </div>
-          <GradientButton onClickEvent={() => this.onClickLogin()} style={{ marginBottom: "20px" }} text="로그인" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28} />
-          <GradientButton onClickEvent={() => window.location.href = "/join"} style={{ marginBottom: "20px" }} text="회원가입" width={292} height={52} front={'#365AF1'} end={'#FF4343'} deg={270} radius={28} />
+          <GradientButton
+            onClickEvent={() => this.onClickLogin()}
+            style={{ marginBottom: "20px" }}
+            text="로그인"
+            width={292}
+            height={52}
+            front={'#FF4343'}
+            end={'#365AF1'}
+            deg={270}
+            radius={28} />
+          <GradientButton
+            onClickEvent={() => goto("SIGNUP")}
+            style={{ marginBottom: "20px" }}
+            text="회원가입"
+            width={292}
+            height={52}
+            front={'#365AF1'}
+            end={'#FF4343'}
+            deg={270}
+            radius={28} />
           <div className='login_button_wrap'>
-            <ImageButton style={{ marginRight: "6px", marginLeft: "6px" }} width={50} height={50} color={"#1877F2"} radius={25} />
-            <ImageButton style={{ marginRight: "6px", marginLeft: "6px" }} width={50} height={50} color={"#F14336"} radius={25} />
+            <ImageButton
+              style={{ marginRight: "6px", marginLeft: "6px" }}
+              width={50}
+              height={50}
+              color={"#1877F2"}
+              radius={25} />
+            <ImageButton
+              style={{ marginRight: "6px", marginLeft: "6px" }}
+              width={50}
+              height={50}
+              color={"#F14336"}
+              radius={25} />
           </div>
         </div>
       </Wrapper>
