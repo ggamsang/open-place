@@ -4,6 +4,7 @@ import TopItemList from 'components_mobile/TopItemList';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
+
 const Wrapper = styled.div`
   width: 100%;
   position: relative;
@@ -39,10 +40,11 @@ function Main() {
       <ContentWrapper>
         <div className='blanker'>&nbsp;</div>
 
-          <SearchForm isMain={true}/>
-        <Slide />
-        <TopItemList />
+        <SearchForm isMain={true} />
 
+        <Slide />
+
+        <TopItemList />
 
       </ContentWrapper>
 
@@ -50,6 +52,5 @@ function Main() {
 
   </Wrapper>)
 }
-// }
 
 export default Main;

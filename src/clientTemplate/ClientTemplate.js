@@ -46,7 +46,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const GAP = 600;
+const GAP = window.innerHeight;//600;
 
 class ClientTemplate extends Component {
   constructor(props) {
@@ -67,7 +67,7 @@ class ClientTemplate extends Component {
       if (!rect) {
         return;
       }
-      // console.log(rect.height + rect.y);
+      console.log(rect.height + rect.y);
       if (rect.height + rect.y < GAP) {
         this.setState({ up: true });
       } else {
