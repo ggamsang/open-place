@@ -63,10 +63,7 @@ export const getLocationListRequest = () => {
             headers: { "Content-Type": "application/json" }, method: "GET"
         })
             .then(res => res.json())
-            .then(data => {
-                dispatch(getLocationListSuccess(data ? data : []))
-            }
-            )
+            .then(data => dispatch(getLocationListSuccess(data ? data : [])))
             .catch(error => dispatch(getLocationListFailure()));
     }
 };

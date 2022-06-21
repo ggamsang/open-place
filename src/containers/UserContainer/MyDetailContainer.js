@@ -31,6 +31,12 @@ const mapStateToProps = (state) => {
     user_detail: state.User.status.user_detail,
   });
 }
+
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.Authentication.status.isLoggedIn,
+  active: state.Authentication.status.active,
+  user_detail: state.User.status.user_detail,
+});
 const mapDispatchToProps = (dispatch) => {
   return ({
     getUserDetailRequest:(user_id)=>{dispatch(getUserDetailRequest(user_id))},

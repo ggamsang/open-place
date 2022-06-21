@@ -95,7 +95,7 @@ const dummy = [
     { "header": "말머리", "title": "제목예시", "url": "https://i.picsum.photos/id/1011/5472/3648.jpg?hmac=Koo9845x2akkVzVFX3xxAc9BCkeGYA9VRVfLE4f0Zzk", "author": "국민대CRC", "date": "2022-05-19", },
 ];
 
-class ArticleList extends React.Component {
+class NoticeList extends React.Component {
     componentDidMount() {
         this.props.GetTotalCount();
         this.props.GetList(0);
@@ -109,11 +109,11 @@ class ArticleList extends React.Component {
     }
 
     render() {
-        const { articles = dummy } = this.props;
+        const { Notices = dummy } = this.props;
         console.log(this.props);
 
         return (<Wrapper>
-            {articles.map((item, idx) =>
+            {Notices.map((item, idx) =>
                 <div key={idx} className="line" onClick={e => this.gotoDetail(item.uid || idx)}>
                     <div className='header'>
                         {item.head}
@@ -146,4 +146,4 @@ class ArticleList extends React.Component {
         </Wrapper>)
     }
 }
-export default ArticleList;
+export default NoticeList;

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ArticleListContainer from "containers/ArticleListContainer"
+import NoticeListContainer from "containers/NoticeListContainer"
 import { WIDTH } from 'constant';
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 
@@ -70,76 +71,76 @@ const Button = styled.button`
     color: #FFFFFF;
   }
 `;
-const WriteForm = styled.form`
-// *{border: 1px dashed red;}
-  margin: auto;
-  margin-top: 14px;
-  width: ${WIDTH}px;
+// const WriteForm = styled.form`
+// // *{border: 1px dashed red;}
+//   margin: auto;
+//   margin-top: 14px;
+//   width: ${WIDTH}px;
 
-  .form {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 12px 12px 12px 12px;
-    background-color: #FFFFFF;
-    border: 1px solid #E9E9E9;
-    border-radius: 15px;
-    box-shadow: 2px 3px 5px -3px rgba(0,0,0,0.65);
-    -webkit-box-shadow: 2px 3px 5px -3px rgba(0,0,0,0.65);
+//   .form {
+//     display: flex;
+//     justify-content: center;
+//     flex-direction: column;
+//     padding: 12px 12px 12px 12px;
+//     background-color: #FFFFFF;
+//     border: 1px solid #E9E9E9;
+//     border-radius: 15px;
+//     box-shadow: 2px 3px 5px -3px rgba(0,0,0,0.65);
+//     -webkit-box-shadow: 2px 3px 5px -3px rgba(0,0,0,0.65);
 
-    input {
-      background-color: #E9E9E9; 
-      width: 275px;
-      height: 31px;
-      border: none;
-      border-radius: 10px;
-      box-sizing: border-box;
-    }
-    textarea {
-      display: flex;
-      margin: auto;
-      margin-top: 13px;
-      resize: none;
-      background-color: #E9E9E9; 
-      min-width: 311px;
-      width: 311px;
-      min-height: 237px;
-      border: none;
-      border-radius: 10px;
-      padding: 5px;
-      box-sizing: border-box;
-    }
-    .label {
-      margin: auto;
-      min-width: 36px;
-      height: 18px;
-      text-align: center;
-      font-weight: bold;
-      font-size: 15px;
-      line-height: 18px;
-      font-family: Pretendard;
-      letter-spacing: 0px;
-      color: #000000;
-    }
-    .title {
+//     input {
+//       background-color: #E9E9E9; 
+//       width: 275px;
+//       height: 31px;
+//       border: none;
+//       border-radius: 10px;
+//       box-sizing: border-box;
+//     }
+//     textarea {
+//       display: flex;
+//       margin: auto;
+//       margin-top: 13px;
+//       resize: none;
+//       background-color: #E9E9E9; 
+//       min-width: 311px;
+//       width: 311px;
+//       min-height: 237px;
+//       border: none;
+//       border-radius: 10px;
+//       padding: 5px;
+//       box-sizing: border-box;
+//     }
+//     .label {
+//       margin: auto;
+//       min-width: 36px;
+//       height: 18px;
+//       text-align: center;
+//       font-weight: bold;
+//       font-size: 15px;
+//       line-height: 18px;
+//       font-family: Pretendard;
+//       letter-spacing: 0px;
+//       color: #000000;
+//     }
+//     .title {
 
-    }
-    .content {
+//     }
+//     .content {
 
-    }
-  }
-  .button-wrapper {
+//     }
+//   }
+//   .button-wrapper {
 
-  }
-  .t-area-wrapper {
-    position: relative;
-  }
-  .floating-text {
-    position: absolute;
-    left: 40%;
-    top: 40%;
-  }
-`;
+//   }
+//   .t-area-wrapper {
+//     position: relative;
+//   }
+//   .floating-text {
+//     position: absolute;
+//     left: 40%;
+//     top: 40%;
+//   }
+// `;
 
 
 
@@ -148,7 +149,6 @@ class Community extends React.Component {
     super(props);
     this.state = {
       boardType: "free", /* "notice" */
-      pageType: "list",/* write */
     };
   }
   clickedButtonBSD = () => {
@@ -159,21 +159,19 @@ class Community extends React.Component {
   }
 
   render() {
-    const { boardType, pageType } = this.state;
+    const { boardType } = this.state;
 
     return (<Wrapper>
 
       <div className='gradient'>
         <div className='blanker'>&nbsp;</div>
         <SearchForm />
-        {pageType === "list"
-          ? <div className='title'>커뮤니티</div>
-          : <div className='title'>게시글 등록하기</div>}
+        {boardType === "free" && <div className='title'>커뮤니티</div>}
+        {boardType === "notice" && <div className='title'>게시글 등록하기</div>}
       </div>
 
       <>
         <div className='top13 rows'>
-
           <Button
             active={boardType === "free"}
             onClick={this.clickedButtonBSD}>
@@ -187,7 +185,8 @@ class Community extends React.Component {
         </div>
 
         <div className='article-list-wrapper'>
-          <ArticleListContainer boardType={boardType} />
+          {boardType === "free" && <ArticleListContainer />}
+          {boardType === "notice" && <NoticeListContainer />}
         </div>
       </>
 

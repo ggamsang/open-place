@@ -6,6 +6,7 @@ import { resolution } from 'commons/resolution';
 import NotificationModal from 'components_mobile/NotificationModal';
 import { connect } from "react-redux";
 import host from 'config';
+import { goto } from 'navigator';
 
 /*
 사용자가 notification아이콘을 눌렀을 때 요청하는 방식 두 가지로 나뉜다.
@@ -72,8 +73,14 @@ class NotificationContainer extends React.Component {
             this.NotificationRequest(this.props.token)
                 .then(notification => this.setState({ notification: notification }))
                 .catch(_ => this.setState({ notification: [] }));
+            this.setState({ active: true });
         }
-        this.setState({ active: true });
+        else {
+            alert('로그인해주세요.');
+            goto("LOGIN");
+        }
+
+        // TODO: dimmer 활성 및 main페이지 비활성
         // const dimmer = document.getElementById('dimmer');
         // dimmer && dimmer.classList.add("dimmer");
         // const main = document.getElementById('main');
