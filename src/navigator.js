@@ -18,7 +18,10 @@ export const goto = (type, offset = null) => {
         case "COMMUNITY": window.location.href = "/community"; break;
         case "WRITE": window.location.href = "/community/write"; break;
         case "READ": window.location.href = "/community/" + offset; break;
+        case "NOTICE": window.location.href = "/notice/" + offset; break;
         case "MESSAGE": window.location.href = `/message${offset && ('/' + offset)}`; break;
+
+        case "BACK": window.history.go(-1); break;
 
         default: break;
     }

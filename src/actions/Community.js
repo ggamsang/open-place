@@ -1,9 +1,7 @@
 import * as types from "actions/ActionTypes";
 import host from "config"
-const GET = {
-  headers: { "Content-Type": "application/json" },
-  method: "GET"
-};
+import { GET } from "constant";
+
 // action creators
 const GetArticleList = data => ({ type: types.GET_ARTICLE_LIST, payload: data });
 const ArticleListFail = () => ({ type: types.GET_ARTICLE_LIST_FAIL, payload: [] });
@@ -30,10 +28,7 @@ export const GetArticleListRequest = (page) => {
 export const GetTotalArticleCountRequest = () => {
   return dispatch => {
     const url = `${host}/community/list`;
-    return fetch(url, {
-      headers: { "Content-Type": "application/json" },
-      method: "GET"
-    })
+    return fetch(url, GET)
       .then(res => res.json())
       .then(data =>
         data.success

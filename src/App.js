@@ -4,14 +4,12 @@ import { BrowserRouter, Route, Routes, } from "react-router-dom";
 import MainPage from "pages/MainPage";
 import CommunityPage, { CommunityWritePage, CommunityDetailPage }
   from "pages/CommunityPage";
-import NoticePage, { NoticeDetailPage }
-  from "pages/NoticePage";
+import { NoticeDetailPage } from "pages/NoticePage";
 import SignInPage from "pages/RegistrationPage/SignInPage";
 import SignUpPage from "pages/RegistrationPage/SignUpPage";
 import FindPWPage from "pages/RegistrationPage/FindPWPage";
 import MyDetailPage from "pages/UserPage/MyDetailPage";
 import MyDetailChild from "components_mobile/User/MyDetailChild";
-// import MyDetailContainer from "containers/UserContainer/MyDetailContainer";
 import IntroPage from "pages/IntroPage";
 import TermsOfServicePage from "pages/TermsOfServicePage";
 import PrivacyPolicyPage from "pages/PrivacyPolicyPage";
@@ -71,7 +69,7 @@ function App() {
             <Route path="community" element={<CommunityPage />} />
             <Route path="community/:id" element={<CommunityDetailPage />} />
             <Route path="community/write" element={<CommunityWritePage />} />
-            <Route path="notice" element={<NoticePage />} />
+            {/* <Route path="notice" element={<NoticePage />} /> */}
             <Route path="notice/:id" element={<NoticeDetailPage />} />
             <Route path="intro" element={<IntroPage />} />
             <Route path="login" element={<SignInPage />} />

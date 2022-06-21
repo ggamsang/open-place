@@ -124,7 +124,7 @@ class ArticleList extends React.Component {
                     <div className='author'>
                         <Thumbnail url={item.url} />
                         &nbsp;
-                        {item.author}
+                        {item.nickname}
                     </div>
                     <div className='date'>
                         {DateFormat(item.update_time)}
