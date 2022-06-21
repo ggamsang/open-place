@@ -60,7 +60,7 @@ export function CheckTokenRequest(token) {
       { headers: { 'x-access-token': token, 'Content-Type': 'application/json' } })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
+        // console.log(res);
         return res.success
           ? dispatch(CheckTokenSuccess(res.info, token))
           : dispatch(CheckTokenFailure())

@@ -130,6 +130,7 @@ class CreateExp extends React.Component {
   onClickOK = async (event) => {
     const { thumbnail, title, tag, info, price, type } = this.state;
     const data = {
+      user_id:this.props.userInfo.uid,
       title: title, taglist: tag, info: info, price: price, type: type,
       files: [],
     }
@@ -144,6 +145,7 @@ class CreateExp extends React.Component {
 
   }
   render() {
+    console.log(this.props);
     return (
       <Wrapper>
         <div className='header'>

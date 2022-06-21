@@ -18,6 +18,7 @@ class ModifyExpContainer extends Component {
     category: state.DefaultList.status.category,
     exptype: state.DefaultList.status.exptype,
     token: state.Authentication.status.token,
+    userInfo: state.Authentication.status.userInfo,
   });
 
 const mapDispatchToProps = (dispatch) => ({

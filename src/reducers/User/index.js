@@ -1,2 +1,2 @@
 export * from "./User";
-export * from "./UpdateExp";
+export * from "./MyDetail";
