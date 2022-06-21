@@ -12,18 +12,25 @@ class MyDetailContainer extends Component {
     if (this.props.isLoggedIn) {
       ;
     } else {
-      alert('로그인해주세요.');
-      goto("LOGIN");
+      alert('로그인해주세요.')
+      goto("LOGIN")
     }
   }
 
   render() {
+<<<<<<< HEAD
     console.log(this.props);
     return (
       this.props.isLoggedIn
         ? <MyDetail {...this.props} Outlet={this.props.Outlet} />
         : <div>로그인이 필요한 페이지입니다.</div>
     );
+=======
+    return (this.props.isLoggedIn
+      ? <MyDetail Outlet={this.props.Outlet} />
+      : <div>로그인이 필요한 페이지입니다.</div>
+    )
+>>>>>>> 5aebadf953718e9a52bb6c5bf9d95721b01e763c
   }
 }
 const mapStateToProps = (state) => {

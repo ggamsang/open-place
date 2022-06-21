@@ -4,23 +4,12 @@ import { SignInRequest } from 'actions/Authentication';
 import SignIn from 'components_mobile/Registration/SignIn';
 
 class SignInContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    if (this.props.isLoggedIn) {
-      window.history.back();
-    }
-  }
   render() {
-    return (<SignIn {...this.props} //  SignInRequest={this.props.SignInRequest} />);
-    />);
+    return (<SignIn {...this.props} />);
   }
 }
 
-const mapStateToProps = (state) => ({
-  isLoggedIn: state.Authentication.status.isLoggedIn,
-  token: state.Authentication.status.token,
-  valid: state.Authentication.status.valid,
-});
+const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) => ({
   SignInRequest: (data) => dispatch(SignInRequest(data)),
 });
