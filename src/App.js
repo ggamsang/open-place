@@ -8,7 +8,7 @@ import SignUpPage from "pages/RegistrationPage/SignUpPage";
 import FindPWPage from "pages/RegistrationPage/FindPWPage";
 import MyDetailPage from "pages/UserPage/MyDetailPage";
 import MyDetailChild from "components_mobile/User/MyDetailChild";
-// import MyDetailContainer from "containers/UserContainer/MyDetailContainer";
+
 import IntroPage from "pages/IntroPage";
 import TermsOfServicePage from "pages/TermsOfServicePage";
 import PrivacyPolicyPage from "pages/PrivacyPolicyPage";
@@ -101,7 +101,6 @@ function App() {
       </div>
 
     </Wrapper>
-
   )
 }
 
