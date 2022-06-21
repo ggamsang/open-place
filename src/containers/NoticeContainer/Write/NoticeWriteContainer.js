@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { WriteArticleRequest, } from "actions/Community";
-import { CommunityWrite, } from 'components_mobile/Community';
+import NoticeWrite from 'components_mobile/Notice/Write';
 
-class CommunityWriteContainer extends React.Component {
+class NoticeWriteContainer extends React.Component {
   Write = (form) => {
     this.props.WriteArticleRequest({ token: this.props.token, form: form });
   }
   render() {
     return (<React.Fragment>
-      <CommunityWrite Write={this.Write} />
+      <NoticeWrite Write={this.Write} />
     </React.Fragment>);
   }
 }
@@ -21,4 +21,4 @@ const mapDispatchToProps = (dispatch) => ({
   WriteArticleRequest: (obj) => dispatch(WriteArticleRequest(obj)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CommunityWriteContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(NoticeWriteContainer);

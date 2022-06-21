@@ -16,7 +16,7 @@ import { WIDTH } from 'constant';
 const Wrapper = styled.div`
   width:100%;
   // width: ${WIDTH}px;
-  height: 130vh;
+  // height: 130vh;
   .header{
     width:100%;
     height:${resolution(290)}px;

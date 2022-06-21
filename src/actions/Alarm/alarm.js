@@ -1,14 +1,13 @@
 import * as types from "actions/ActionTypes";
 import host from "config";
+import { GET } from "constant";
 
 // 내 알림 리스트
 export const GetMyAlarmListRequest = (user_id) => {
     console.log("test alarm");
     return (dispatch) => {
       const url = `${host}/alarm/list/${user_id}`;
-      return fetch(url, {
-        headers: { "Content-Type": "application/json" }, method: "GET"
-      })
+      return fetch(url, GET)
         .then(res => res.json())
         .then(data => {
           dispatch(GetMyAlarmListSuccess(data ? data : []))

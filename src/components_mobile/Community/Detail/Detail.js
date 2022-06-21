@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 import { WIDTH } from 'constant';
+import CommentListContainer from 'containers/CommentListContainer';
+import DateFormat from 'modules/DateFormat';
+
 
 const Wrapper = styled.div`
   margin-bottom: 150px; // 임시로 입력된 값입니다.
@@ -147,23 +150,29 @@ const DetailWrapper = styled.div`
   }
 `;
 
-export class NoticeDetail extends React.Component {
+export default class CommunityDetail extends React.Component {
 
   render() {
     const {
       uid = null,
-      title = '공지사항 제목',
-      content = ' 내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용',
-      author = '작성자',
-      date = '2022-05-01'
+      title = '게시글 제목',
+      text = '게시글 내용',
+      nickname = '작성자',
+      create_time = '2022-01-01'
     } = this.props;
-
+    // "user_id": 1,
+    // "title": "목록테스트용",
+    // "head": "14th",
+    // "text": "커뮤니티 목록을 가져오기",
+    // "file_id_list": null,
+    // "create_time": "2022-06-20T13:44:09.000Z",
+    // "update_time": "2022-06-20T13:44:09.000Z"
     return (<Wrapper>
 
       <div className='gradient'>
         <div className='blanker'>&nbsp;</div>
         <SearchForm />
-        <div className='title'>공지사항 상세</div>
+        <div className='title'>게시글 상세</div>
       </div>
 
       <DetailWrapper>
@@ -172,17 +181,19 @@ export class NoticeDetail extends React.Component {
         <div className='center row'>
           <div className='row'>
             <div className='label split width70fix'>작성자</div>
-            <div className='author'>{author}</div>
+            <div className='author'>{nickname}</div>
           </div>
           <div className='row'>
             <div className='label split width70fix'>작성일자</div>
-            <div className='date'>{date}</div>
+            <div className='date'>{DateFormat(create_time)}</div>
           </div>
         </div>
 
-        <div className='content'>{content}</div>
+        <div className='content'>{text || "내용이 없습니다."}</div>
 
       </DetailWrapper>
+
+      <CommentListContainer id={uid} />
 
     </Wrapper >);
   }
