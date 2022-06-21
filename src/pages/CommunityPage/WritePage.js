@@ -1,12 +1,16 @@
 import React from 'react';
 import ClientTemplate from 'clientTemplate';
+// import { NoticeWriteContainer } from 'containers/NoticeContainer';
+// import { CommunityWriteContainer } from 'containers/CommunityContainer';
+import { useSearchParams } from 'react-router-dom';
 
-import { CommunityWriteContainer } from 'containers/CommunityContainer';
+export function CommunityWritePage() {
+  const [searchParams] = useSearchParams();
 
-export class CommunityWritePage extends React.Component {
-  render() {
-    return (<ClientTemplate>
-      <CommunityWriteContainer />
-    </ClientTemplate>)
-  }
+  return (<ClientTemplate>
+    {/* {searchParams.get('type') === "noti"
+      ? <NoticeWriteContainer />
+      : <CommunityWriteContainer />
+    } */}
+  </ClientTemplate>);
 }
