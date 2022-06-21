@@ -67,7 +67,7 @@ export const getLocationListRequest = () => {
                 dispatch(getLocationListSuccess(data ? data : []))
             }
             )
-            .catch(error => dispatch(getLocationListFailure()));p
+            .catch(error => dispatch(getLocationListFailure()));
     }
 };
 const getLocationListSuccess = (data) => ({ type: types.GET_DEFAULT_LOCATION_SUCCESS, location: data });
