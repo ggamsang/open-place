@@ -1,14 +1,14 @@
 import React from 'react';
-import Community from 'components_mobile/Community';
+import Notice from 'components_mobile/Community';
 
-class CommunityContainer extends React.Component {
+class NoticeContainer extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Community />
+        <Notice />
       </React.Fragment>
     )
   }
 }
 
-export default CommunityContainer;
+export default NoticeContainer;

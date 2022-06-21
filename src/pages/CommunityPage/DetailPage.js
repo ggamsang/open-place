@@ -1,14 +1,19 @@
 import React from 'react';
 import ClientTemplate from 'clientTemplate';
-// import { useSearchParams } from 'react-router-dom';
-// import { CommunityDetailContainer } from 'containers/CommunityContainer';
-// import { NoticeDetailContainer } from 'containers/NoticeContainer';
+import { useParams, useSearchParams } from 'react-router-dom';
+import CommunityDetailContainer from 'containers/CommunityContainer/Detail/CommunityDetailContainer';
+import NoticeDetailContainer from 'containers/NoticeContainer/Detail/NoticeDetailContainer';
 
 export function CommunityDetailPage() {
-  // const [searchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  const params = useParams();
+  const { id } = params;
+
   return (<ClientTemplate>
-    {/* {searchParams.get('type') === 'noti'
-      ? <NoticeDetailContainer />
-      : <CommunityDetailContainer />} */}
+
+    {searchParams.get('type') === 'noti'
+      ? <NoticeDetailContainer id={id} />
+      : <CommunityDetailContainer id={id} />}
+
   </ClientTemplate>)
 }
