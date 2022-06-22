@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import arrowBelow from 'resources/icons-chevron@2x.png';
 import profile from 'resources/Profile.svg';
 import { WIDTH } from 'constant';
+import DateFormat from 'modules/DateFormat';
 
 const Wrapper = styled.div`
     font-family: Noto Sans KR;
@@ -86,6 +87,10 @@ const Wrapper = styled.div`
         flex-direction: column;
         justify-content: space-between;
         .comment-text {
+            resize: none;
+            outline: none;
+            border: 1px solid rgba(128,128,128, 0.2);
+            background-color: #E9E9E9;
             text-align: left;
             font-weight: bold;
             font-size: 15px;
@@ -189,60 +194,84 @@ const Button = styled.button`
     color: #FFFFFF;
   }
 `;
-const dummy = [
-    { uid: 0, author: "댓/////글/////작//////성////////자", thumbnail: null, date: "-댓-글-작-성-일-자-", content: "댓글내용Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." },
-    { uid: 1, author: "댓/////글/////작//////성////////자", thumbnail: null, date: "-댓-글-작-성-일-자-", content: "댓글내용Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." },
-    { uid: 2, author: "댓/////글/////작//////성////////자", thumbnail: null, date: "-댓-글-작-성-일-자-", content: "댓글내용Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." },
-    { uid: 3, author: "댓/////글/////작//////성////////자", thumbnail: null, date: "-댓-글-작-성-일-자-", content: "댓글내용Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." }
-];
 
 class CommentList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { comment: "", whichOnePoppedUp: null }
+        this.state = {
+            whichOnePoppedUp: null,
+            isReply: null,
+        }
     }
-
-    gotoDetail = id => {/* goto("READ", id);*/ }
 
     popup = th => {
         this.setState({ whichOnePoppedUp: th });
     }
 
+    write = (parent) => {
+        const { userInfo, id, token } = this.props;
+        const node = document.getElementById('comment-text');
+        if (node) {
+            if (node.value !== "") {
+                this.props.CreateArticleCommentRequest(token, {
+                    user_id: userInfo.uid,
+                    comment: node.value,
+                    type: 'COMMUNITY',
+                    where: id,
+                }).then(() => {
+
+                    this.props.GetArticleCommentRequest(this.props.id);
+                }).then(() => {
+                    node.value = "";
+                })
+            } else {
+                alert('내용을 입력해주세요.');
+                node.focus();
+            }
+        }
+    }
+
+    delete = (id) => alert('delete');
+
+    reply = (id) => {
+        this.setState({ isReply: id });
+    };
+
     render() {
-
-        const { comments = dummy } = this.props;
-        const { comment, whichOnePoppedUp } = this.state;
-
-        return (<Wrapper>
-
+        const { userInfo, comment } = this.props;
+        const { whichOnePoppedUp, isReply } = this.state;
+        const CommentForm = (parent) =>
             <div className='comment-input-form'>
-                <div className='comment-text'>
-                    {comment || "댓글 내용 작성 필드"}
-                </div>
+                <textarea className='comment-text' id="comment-text" />
                 <div className='top10'>
-                    <Button>
+                    <Button onClick={() => this.write(parent)}>
                         <div className="text">댓글등록</div>
                     </Button>
                 </div>
             </div>
 
-            {comments.map((item, idx) =>
+        return (<Wrapper>
+
+            {isReply === null && (<CommentForm />)}
+
+            {comment.length > 0 ? comment.map((item, idx) =>
                 <div key={idx} className="line comment-list-wrapper">
 
-                    {idx === whichOnePoppedUp &&
-                        <div className='comment-popup'>
-                            <div onClick={() => alert('reply')}>답글</div>
-                            <div onClick={() => alert('delete')}>삭제하기</div>
+                    {(userInfo && idx === whichOnePoppedUp)
+                        && <div className='comment-popup'>
+                            <div onClick={() => this.reply(item.uid)}>답글</div>
+                            {item.user_id === userInfo.uid
+                                && <div onClick={() => this.delete(item.uid)}>삭제하기</div>}
                         </div>}
 
                     <div className='row hundred'>
                         <div className='row'>
                             <div className='profile'>
-                                <img src={item.thumbnail || profile} />
+                                <img src={item.s_img || profile} />
                             </div>
                             <div>
-                                <div className='author'>{item.author}</div>
-                                <div className='date'>{item.date}</div>
+                                <div className='author'>{item.nick_name}</div>
+                                <div className='date'>{DateFormat(item.update_time)}</div>
                             </div>
                         </div>
 
@@ -253,10 +282,18 @@ class CommentList extends React.Component {
                         </div>
 
                     </div>
+
                     <div className='content'>
-                        {item.content}
+                        {item.comment}
                     </div>
-                </div>)}
+
+                    {isReply === item.uid
+                        && (<CommentForm parent={item.uid} />)}
+
+                </div>)
+                : <div>
+                    &nbsp;
+                </div>}
 
         </Wrapper>)
     }

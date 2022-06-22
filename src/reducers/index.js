@@ -1,5 +1,6 @@
 import Authentication from "reducers/Authentication";
 import Community from "reducers/Community";
+import Comment from "reducers/Comment";
 import Notice from "reducers/Notice";
 import { TopList, UpdateExp } from "reducers/Exp";
 import { AlarmList } from "reducers/Alarm";
@@ -14,6 +15,7 @@ export default combineReducers({
     AlarmList,
     DefaultList,
     UpdateExp,
+    Comment,
     Community,
     Notice,
     User,

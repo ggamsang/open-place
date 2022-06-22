@@ -62,5 +62,3 @@ export const GetArticleDetailRequest = (id) => {
       .catch(err => dispatch(ArticleDetailFailed()))
   }
 };
-
-

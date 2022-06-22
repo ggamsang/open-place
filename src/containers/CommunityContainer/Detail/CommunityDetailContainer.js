@@ -1,14 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { GetArticleDetailRequest, } from 'actions/Community';
 import Detail from "components_mobile/Community/Detail";
+import { GetArticleDetailRequest } from 'actions/Community';
 
 class CommunityDetailContainer extends React.Component {
   componentDidMount() {
     this.GetDetail(this.props.id);
   }
-  // GetArticleComment = (id) =>
-  // this.props.GetArticleCommentRequest(id);
+
   GetDetail = (id) =>
     this.props.GetArticleDetailRequest(id);
 
@@ -26,7 +25,6 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   GetArticleDetailRequest: (id) => dispatch(GetArticleDetailRequest(id)),
-  // GetArticleCommentRequest: (id) => dispatch(GetArticleCommentRequest(id)),
 });
 
 export default
