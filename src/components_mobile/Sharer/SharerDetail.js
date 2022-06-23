@@ -158,6 +158,7 @@ class SharerDetail extends React.Component {
             </div>
             
             <ButtonNormal
+                onClickEvent={()=>window.location.href="/modifySharer"}
                 width={335}
                 height={35}
                 radius={10}

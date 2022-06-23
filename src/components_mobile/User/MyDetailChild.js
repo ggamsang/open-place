@@ -37,7 +37,7 @@ const Wrapper = styled.div`
     display:flex;
     align-items:center;
   }
-  .arrow_box{width:${resolution(53)}px;display:flex;justify-content:center;}
+  // .arrow_box{width:${resolution(53)}px;display:flex;justify-content:center;}
   .img_arrow{width:${resolution(27)}px;height:${resolution(19)}px;}
 
   .profile{
@@ -195,9 +195,9 @@ const SubWrap = styled.div`
 `
 
 class MyDetailChild extends Component {
-  async componentDidMount() {
-    await this.props.getUserPointRequest(1);
+  async componentDidMount(){
   }
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -238,22 +238,23 @@ class MyDetailChild extends Component {
   onClickSubMenu = (sub) => {
     this.setState({ subMenu: sub })
     //testDeta
-    if (sub === "point") {
-      this.props.getUserPointRequest(1);
-    } else if (sub === "payment") {
-      this.props.getUserPointHistoryReqeust(1, 0);
-    } else if (sub === "regExp") {
-      this.props.getUserRegisterExpRequest(1, 0);
-    } else if (sub === "sellExp") {
-      this.props.getUserSellExpRequest(1, 0);
-    } else if (sub === "buyExp") {
-      this.props.getUserSellExpRequest(1, 0);
-    } else if (sub === "likeSharer") {
-      this.props.getUserLikeSharerRequest(1, 0);
-    } else if (sub === "likeExp") {
-      this.props.getUserLikeExpRequest(1, 0);
+    const user_id = this.props.userInfo.uid;
+    if(sub=="point"){
+      this.props.getUserPointRequest(user_id);
+    }else if(sub=="payment"){
+      this.props.getUserPointHistoryReqeust(user_id,0);
+    }else if(sub=="regExp"){
+      this.props.getUserRegisterExpRequest(user_id,0);
+    }else if(sub=="sellExp"){
+      this.props.getUserSellExpRequest(user_id,0);
+    }else if(sub=="buyExp"){
+      this.props.getUserSellExpRequest(user_id,0);
+    }else if(sub=="likeSharer"){
+      this.props.getUserLikeSharerRequest(user_id,0);
+    }else if(sub=="likeExp"){
+      this.props.getUserLikeExpRequest(user_id,0);
     }
-    // this.props.getUserLikeExpRequest(1,0);
+    this.props.getUserLikeExpRequest(user_id,0);
   }
 
   render() {

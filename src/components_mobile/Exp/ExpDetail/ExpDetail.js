@@ -31,7 +31,6 @@ const dummy = [
   ]
 
 const Wrapper = styled.div`
-  // width:100%;
   width: 100%;
   height:max-content;
   min-height:100vh;
@@ -46,7 +45,6 @@ const Wrapper = styled.div`
     display:flex;
     align-items:center;
   }
-  .arrow_box{width:${resolution(53)}px;display:flex;justify-content:center;}
   .img_arrow{width:${resolution(27)}px;height:${resolution(19)}px;}
 
 
@@ -127,10 +125,17 @@ class ExpDetail extends React.Component {
         this.setState({like:!this.state.like});
     }
     onClickModify = (event) =>{
-      window.location.href = "/ModifyExp/1"
+      window.location.href = `/ModifyExp/${this.props.expDetail.uid}`
     }
 
     render() {
+        const {expDetail} = this.props;
+        let taglist = expDetail&&expDetail.taglist;
+        taglist = taglist&&taglist.replace("[","");
+        taglist = taglist&&taglist.replace("]","");
+        taglist = taglist && taglist.split(",")&&taglist.split(",").map((item,index)=>{
+          return item+" | ";
+        })
         return (
         <Wrapper>
             <div className='searchbox'><SearchForm/></div>
@@ -138,17 +143,19 @@ class ExpDetail extends React.Component {
             <section style={{display:`${this.state.main==true?"block":"none"}`}}>
                 <div className='content'>
                     <div className='title'><div/>경험정보<div/></div>
-                    <img src={dummy[2].url} className="img"/>
+                    <img src={expDetail&&expDetail.thumbnail} className="img"/>
                     <div className='summary'>
-                        <div className='label'>경험 제목</div>
+                        <div className='label'>{expDetail&&expDetail.title||"dummy"}</div>
                         <div className='detail'>
                             <img src={star} style={{width:"14px",height:"14px",marginRight:"5px"}}/><span className='score'>4.9</span>
-                            <span style={{marginLeft:"13px"}} className='writer'>작성자</span>
+                            <span style={{marginLeft:"13px"}} className='writer'>{expDetail&&expDetail.nick_name||"dummy"}</span>
                             <span style={{color:"red",margin:"0px 5px"}}>·</span>
-                            <span className='tags'>태그1 태그2 태그3 태그4</span>
+                            <span className='tags'>
+                              {taglist&&taglist||"dummy"}
+                            </span>
                         </div>
                         <div className='detail'>
-                            <span style={{marginRight:"14px"}} className='price'>58000</span>
+                            <span style={{marginRight:"14px"}} className='price'>₩{expDetail&&expDetail.price || "dummy"}</span>
                             <img style={{width:"14px",height:"14px",marginRight:"5px"}} src={heart}/>
                             <span className='like'>99</span>
                         </div>
@@ -182,7 +189,7 @@ class ExpDetail extends React.Component {
             <section style={{display:`${this.state.sub==true?"block":"none"}`}}>
                 <div className='content'>
                 <div className='title'><div onClick={this.onClickMain}>〈</div>상세정보<div/></div>
-                    <img src={dummy[2].url} className="img img2"/>
+                    <img src={expDetail&&expDetail.thumbnail} className="img img2"/>
 
                 <div style={{color:"white",padding:"100px 40px"}}>
                     상세 내용은 현재 논의중이며 블로그형, 프로젝트형, 그룹형 모두 다릅니다.

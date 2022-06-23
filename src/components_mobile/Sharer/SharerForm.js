@@ -5,10 +5,18 @@ import { resolution } from 'commons/resolution';
 import TextAreaNormal from 'components_mobile/Commons/TextArea/TextAreaNormal';
 import DropDownNormal from 'components_mobile/Commons/DropDown/DropDownNormal';
 import InputNormal from 'components_mobile/Commons/Input/InputNormal';
+import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
 
 const Wrap = styled.div`
   box-sizing:border-box;
+  .flex{
+    padding:10px;
+    display:flex;
+    align-items:center;
+  }
   .shadowBorderBox{
+    .img_{border:none;background-color:#E9E9E9;width:${resolution(100)}px;height:${resolution(100)}px;border-radius:${resolution(10)}px;object-fit:cover;}
+    .wrap{display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;margin-left:13px;}
     box-sizing:border-box;
     width:100%;
     box-shadow: 2px 2px 5px #00000029;
@@ -34,15 +42,103 @@ const Wrap = styled.div`
 
 
 class SharerForm extends React.Component {
+  async componentDidMount(){
+    this.props.location&&
+    await this.props.location.map((item,index)=>{
+
+    })
+  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      info:"",country:-1,city:-1,email:"",bank_code:null,bank_number:""
+    }
+    this.onChangeInfo = this.onChangeInfo.bind(this);
+    this.onChangeCountry = this.onChangeCountry.bind(this);
+    this.onChangeCity=this.onChangeCity.bind(this);
+    this.onChangeEmail=this.onChangeEmail.bind(this);
+    this.onChangeBankCode=this.onChangeBankCode.bind(this);
+    this.onChangeBankNumber=this.onChangeBankNumber.bind(this);
+    this.onChangeThumbnail = this.onChangeThumbnail.bind(this);
+  }
+
+  onChangeInfo = (event) => {
+    this.setState({info:event.target.value});
+    this.props.onChangeInfo(event.target.value);
+  }
+  onChangeCountry = (event) => {
+    this.setState({country:event.target.value});
+    this.props.onChangeCountry(event.target.value);
+  }
+  onChangeCity = (event) => {
+    this.setState({city:event.target.value});
+    this.props.onChangeCity(event.target.value);
+  }
+  onChangeEmail = (event) => {
+    this.setState({email:event.target.value});
+    this.props.onChangeEmail(event.target.value);
+  }
+  onChangeBankCode = (event) => {
+    this.setState({bank_code:event.target.value});
+    this.props.onChangeBankCode(event.target.value);
+  }
+  onChangeBankNumber = (event) => {
+    this.setState({bank_number:event.target.value});
+    this.props.onChangeBankNumber(event.target.value);
+  }
+  onChangeThumbnail = async (event) => {
+    event.preventDefault();
+    const reader = new FileReader();
+    const file = event.target.files[0];
+    const regExp = /.(jpe?g|png|bmp)$/i;
+    if (regExp && !regExp.test(file.name)) {
+      await alert('파일의 확장자가 올바른지 확인해주세요.', "확인");
+      return;
+    }
+    reader.onload = () => {
+      var image = new Image();
+      image.src = reader.result;
+      image.onload = () => {
+        this.setState({ is_rectangle: false, ratio: image.width / image.height, cropper: image.width / image.height !== 1.0 });
+      }
+    }
+    reader.onloadend = () => {
+      this.setState({ thumbnail: reader.result, thumbnail_name: file.name })
+      this.props.onChangeThumbnail(reader.result,file.name);
+    }
+    if (event.target.files[0]) {
+      reader.readAsDataURL(file);
+    }
+  };
   render() {
     return (
       <React.Fragment>
         <Wrap>
+        {/* <div className='shadowBorderBox flex'>
+            <img src={this.state.thumbnail} className="img_" />
+            <div className='wrap'>
+              <div style={{ marginBottom: "9px" }}><span className="text">{this.props.userInfo&&this.props.userInfo.nick_name||""} 프로필 썸네일</span></div>
+              <label className="findThumbnailText" htmlFor="file">
+                <ButtonNormal
+                  width={194}
+                  height={30}
+                  radius={10}
+                  fontSize={15}
+                  color={"red"}
+                  bgColor={"white"}
+                  border={"2px solid red"}
+                  text="썸네일 등록" />
+              </label>
+            </div>
+            <input hidden onChange={this.onChangeThumbnail} id="file" type="file" accept="image/png, image/bmp, image/jpeg, image/jpg" />
+          </div> */}
           <div className='shadowBorderBox'>
             <div className='title'>상세정보</div>
-            <div className='row' style={{marginTop:"11px"}}>
+            <div className='row' style={{ marginTop: "11px" }}>
               <div className='label'>설명</div>
               <TextAreaNormal
+                onChangeValue={this.onChangeInfo}
+                value={this.state.info}
                 height={100}
                 color={"#E9E9E9"} fontSize={15} radius={10}
                 placeholder
@@ -50,33 +146,37 @@ class SharerForm extends React.Component {
               />
             </div>
 
-            <div className='row' style={{marginTop:"11px"}}>
+            <div className='row' style={{ marginTop: "11px" }}>
               <div className='label'>위치</div>
               <DropDownNormal
+                onChangeValue={this.onChangeCountry}
+                value={this.state.country}
                 width={114} height={31}
                 radius={10}
                 disabled={true}
                 options={
-                  ["대한민국"]
+                  [{name:"대한민국"}]
                 }
-                
+
               />
               <DropDownNormal
-                style={{marginLeft:"12px"}}
+                onChangeValue={this.onChangeCity}
+                value={this.state.city}
+                style={{ marginLeft: "12px" }}
                 width={114} height={31}
                 radius={10}
                 placeholder="시/도"
                 options={
-                  ["서울특별시"
-                  ,"대구광역시"
-                  ,"부산광역시"]
+                  this.props.location
                 }
               />
             </div>
 
-            <div className='row' style={{marginTop:"11px"}}>
+            <div className='row' style={{ marginTop: "11px" }}>
               <div className='label'>연락처</div>
               <InputNormal
+                onChangeValue={this.onChangeEmail}
+                value={this.state.email}
                 fontSize={12}
                 height={31}
                 color={"#E9E9E9"} radius={10}
@@ -86,20 +186,22 @@ class SharerForm extends React.Component {
             </div>
 
 
-            <div className='row' style={{marginTop:"11px"}}>
+            <div className='row' style={{ marginTop: "11px" }}>
               <div className='label'>계좌번호</div>
               <DropDownNormal
-                style={{marginRight:"12px"}}
+                onChangeValue={this.onChangeBankCode}
+                value={this.state.bank_code}
+                style={{ marginRight: "12px" }}
                 width={76} height={31}
                 radius={10}
                 placeholder="은행"
                 options={
-                  ["국민"
-                  ,"신한"
-                  ,"우리"]
+                  this.props.bank_code
                 }
               />
               <InputNormal
+                onChangeValue={this.onChangeBankNumber}
+                value={this.state.bank_number}
                 fontSize={15}
                 height={31}
                 color={"#E9E9E9"} radius={10}
@@ -108,12 +210,12 @@ class SharerForm extends React.Component {
               />
             </div>
           </div>
-          <div className='shadowBorderBox' style={{marginTop:"19px"}}>
-              <div className='title'>공유자 인증하기</div>
-              <div style={{height:"90px"}}/>
+          <div className='shadowBorderBox' style={{ marginTop: "19px" }}>
+            <div className='title'>공유자 인증하기</div>
+            <div style={{ height: "90px" }} />
           </div>
         </Wrap>
-    </React.Fragment>
+      </React.Fragment>
     )
   }
 }

@@ -74,7 +74,8 @@ class Item extends React.Component {
         this.onClickItem = this.onClickItem.bind(this);
     }
     onClickItem = (event) => {
-        window.location.href = "/exp/1"
+        console.log(this.props);
+        window.location.href = `/exp/${this.props.uid}`
     }
     render() {
         const {
@@ -92,7 +93,7 @@ class Item extends React.Component {
                     <div className='row space-between'>
                         <div className='row'>
                             <div className='item-title'>{title || "title"}</div>
-                            <div className='price'>{price || "58000￦"}</div>
+                            <div className='price'>₩{price || "58000￦"}</div>
                         </div>
                         <img className='imgheart' src={heart} />
                     </div>

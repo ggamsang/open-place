@@ -40,7 +40,7 @@ export const createExpRequest = (data,token) => {
           .catch(err=>dispatch(updateExpFailure()))
     }
   };
-  const updateExp = () => ({ type: types.POST_MODIFY_EXP });
-  const updateExpSuccess = () => ({ type: types.POST_MODIFY_EXP_SUCCESS });
-  const updateExpFailure = () => ({ type: types.POST_MODIFY_EXP_FAILURE });
+  const updateExp = () => ({ type: types.UPDATE_MODIFY_EXP });
+  const updateExpSuccess = () => ({ type: types.UPDATE_MODIFY_EXP_SUCCESS });
+  const updateExpFailure = () => ({ type: types.UPDATE_MODIFY_EXP_FAILURE });
   

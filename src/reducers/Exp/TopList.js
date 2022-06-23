@@ -2,12 +2,12 @@ import * as types from "actions/ActionTypes";
 import update from "react-addons-update";
 
 const initialtate = {
-  TopList:{status:"INIT"},
+  TopExp:{status:"INIT"},
   status:{
-    itemList:[],
+    top_exp:[],
   }
 }
-export function TopList(state,action){
+export function TopExp(state,action){
     if(typeof state === "undefined"){
       state = initialtate;
     }
@@ -15,29 +15,29 @@ export function TopList(state,action){
     switch(action.type){
       case types.GET_TOP_ITEM_LIST_SUCCESS:
         return update(state,{
-          TopList:{
+          TopExp:{
             status:{$set:"SUCCESS"}
           },
           status:{
-            itemList:{$set:action.TopList},
+            top_exp:{$set:action.TopList},
           }
         });
       case types.GET_TOP_ITEM_LIST_FAILURE:
         return update(state,{
-          TopList:{
+          TopExp:{
             status:{$set:"FAILURE"}
           },
           status:{
-            ItemList:{$set:action.TopList}
+            top_exp:{$set:action.TopList}
           }
         });
       case types.GET_TOP_ITEM_LIST_CLEAR:
         return update(state,{
-          TopList:{
+          TopExp:{
             status:{$set:"SUCCESS"}
           },
           status:{
-            ItemList:{$set:action.TopList}
+            top_exp:{$set:action.TopList}
           }
         });
       default:
