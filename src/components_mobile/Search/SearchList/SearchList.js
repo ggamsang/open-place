@@ -79,13 +79,11 @@ const Button = styled.button`
 
 const dummy = [
     { type: "item", url: "https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ", title: "맛있는 디저트 만들기", score: 4.9, tags: ["카페마스터", "디저트",] },
-    { type: "item", url: "https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ", title: "히말라야 오르는 체력 만들기", score: 4.5, tags: ["뒷동산 아저씨", "운동",] },
-    { type: "item", url: "https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ", title: "히말라야 체력!!!", score: 1.1, tags: ["뒷동산 아저씨", "운동",] },
 ];
 
 class SearchList extends React.Component {
     render() {
-        const { list = dummy } = this.props;
+        const { list } = this.props;
         return (<Wrapper>
 
             <div className='gradient'>

@@ -99,6 +99,10 @@ const Wrapper = styled.div`
             letter-spacing: 0px;
             color: #000;
             height: 100%;
+            ::placeholder {
+                text-align: center;
+                font-weight: normal;
+            }
         }
         margin-bottom: 20px;
     }
@@ -234,7 +238,8 @@ class CommentList extends React.Component {
     delete = (id) => alert('delete');
 
     reply = (id) => {
-        this.setState({ isReply: id });
+        alert("reply!");
+        // this.setState({ isReply: id });
     };
 
     render() {
@@ -242,7 +247,11 @@ class CommentList extends React.Component {
         const { whichOnePoppedUp, isReply } = this.state;
         const CommentForm = (parent) =>
             <div className='comment-input-form'>
-                <textarea className='comment-text' id="comment-text" />
+                <textarea
+                    placeholder="댓글을 입력해주세요."
+                    className='comment-text'
+                    id="comment-text"
+                />
                 <div className='top10'>
                     <Button onClick={() => this.write(parent)}>
                         <div className="text">댓글등록</div>
