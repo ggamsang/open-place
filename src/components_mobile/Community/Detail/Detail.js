@@ -154,19 +154,14 @@ export default class CommunityDetail extends React.Component {
 
   render() {
     const {
+      id,
       uid = null,
       title = '게시글 제목',
       text = '게시글 내용',
       nickname = '작성자',
       create_time = '2022-01-01'
     } = this.props;
-    // "user_id": 1,
-    // "title": "목록테스트용",
-    // "head": "14th",
-    // "text": "커뮤니티 목록을 가져오기",
-    // "file_id_list": null,
-    // "create_time": "2022-06-20T13:44:09.000Z",
-    // "update_time": "2022-06-20T13:44:09.000Z"
+
     return (<Wrapper>
 
       <div className='gradient'>
@@ -193,7 +188,7 @@ export default class CommunityDetail extends React.Component {
 
       </DetailWrapper>
 
-      <CommentListContainer id={uid} />
+      <CommentListContainer id={id} />
 
     </Wrapper >);
   }
