@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     position: fixed;
     bottom: 23px;
     &.up {
-      margin-top: 30px;
+      margin-top: 230px;
       position: relative;
     }
   }

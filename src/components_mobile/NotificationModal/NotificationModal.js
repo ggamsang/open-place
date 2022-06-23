@@ -44,7 +44,7 @@ const Wrapper = styled.div`
         }
         .element {
             position: relative;
-            border: 1px solid green;
+            // border: 1px solid green;
             margin: auto;
             width: 247px;
             height: 53px;
@@ -143,7 +143,7 @@ class NotificationModal extends React.Component {
                 </div>
 
                 <ul className='list'>
-                    {list.length > 0 && list.map(item =>
+                    {list&&list.length > 0 && list.map(item =>
                         <li key={item.uid}
                             className={`${item.read === 1 && "read"} element row`}>
                             <div

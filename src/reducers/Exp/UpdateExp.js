@@ -29,19 +29,19 @@ export function UpdateExp(state, action) {
                     status: { $set: "FAILURE" }
                 }
             });
-        case types.POST_MODIFY_EXP:
+        case types.UPDATE_MODIFY_EXP:
             return update(state, {
                 UpdateExp: {
                     status: { $set: "WAITING" }
                 }
             });
-        case types.POST_MODIFY_EXP_SUCCESS:
+        case types.UPDATE_MODIFY_EXP_SUCCESS:
             return update(state, {
                 UpdateExp: {
                     status: { $set: "SUCCESS" }
                 }
             });
-        case types.POST_MODIFY_EXP_FAILURE:
+        case types.UPDATE_MODIFY_EXP_FAILURE:
             return update(state, {
                 UpdateExp: {
                     status: { $set: "FAILURE" }

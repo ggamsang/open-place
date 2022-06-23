@@ -25,7 +25,7 @@ const Wrapper = styled.div`
       display:flex;
       align-items:center;
     }
-    .arrow_box{width:${resolution(53)}px;display:flex;justify-content:center;}
+    // .arrow_box{width:${resolution(53)}px;display:flex;justify-content:center;}
     .img_arrow{width:${resolution(27)}px;height:${resolution(19)}px;}
 
     .title{
@@ -134,6 +134,7 @@ class CreateExp extends React.Component {
       title: title, taglist: tag, info: info, price: price, type: type,
       files: [],
     }
+
     console.log(data);
     let file = { value: this.state.thumbnail, name: this.state.thumbnail_name, key: 0 };
 
@@ -142,6 +143,9 @@ class CreateExp extends React.Component {
     if (info == null || info === "") return alert("내용을 입력하세요");
 
     this.props.createExpRequest(data, this.props.token)
+    .then(()=>{
+      window.history.go(-1);
+    })
 
   }
   render() {
@@ -187,7 +191,7 @@ class CreateExp extends React.Component {
               value={this.state.type}
               onChangeValue={this.onChangeType}
               width={150} height={31} radius={10}
-              options={["놀기", "배우기", "만들기"]} />
+              options={this.props.category} />
           </div>
           <div className='row'>
             <div className='label'>설명</div>

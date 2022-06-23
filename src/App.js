@@ -8,14 +8,16 @@ import { NoticeDetailPage } from "pages/NoticePage";
 import SignInPage from "pages/RegistrationPage/SignInPage";
 import SignUpPage from "pages/RegistrationPage/SignUpPage";
 import FindPWPage from "pages/RegistrationPage/FindPWPage";
-import MyDetailPage from "pages/UserPage/MyDetailPage";
+import MyDetailPage from "pages/UserPage/MyDetailPage/MyDetailPage";
 import MyDetailChild from "components_mobile/User/MyDetailChild";
+
 import IntroPage from "pages/IntroPage";
 import TermsOfServicePage from "pages/TermsOfServicePage";
 import PrivacyPolicyPage from "pages/PrivacyPolicyPage";
 import CreateSharerPage from "pages/SharerPage/CreateSharerPage";
 import ModifySharerPage from "pages/SharerPage/ModifySharerPage";
 import SharerDetailPage from "pages/SharerPage/SharerDetailPage";
+import ModifyUserPage from "pages/UserPage/ModifyUserPage/ModifyUserPage";
 import SearchPage from "pages/SearchPage";
 
 import MessageListPage, { MessageDetailPage } from "pages/MessagePage";
@@ -91,6 +93,7 @@ function App() {
             <Route path="SharerDetail" element={<SharerDetailPage />}>
               <Route path=":id" element={<SharerDetailPage />} />
             </Route>
+            <Route path="modifyUser" element={<ModifyUserPage />} />
             <Route path="exp/:id" element={<ExpDetailPage />} />
             <Route path="createExp" element={<CreateExpPage />} />
             <Route path="modifyExp" >

@@ -10,10 +10,14 @@ import { connect } from 'react-redux';
 import NotificationContainer from 'containers/NotificationContainer';
 
 const SearchBox = styled.div`
+  *{
+    border-box:box-sizing;
+  }
     width:100%;
     display:flex;
     align-items:center;
     justify-content:center;
+  .arrow_box{width:${resolution(27)}px;display:flex;justify-content:center;margin-right:10px;}
   .alarm_box{box-sizing:border-box;width:${resolution(34)}px;display:flex;justify-content:center;margin-left:10px;}
   .img_arrow{width:${resolution(27)}px;height:${resolution(19)}px;}
 

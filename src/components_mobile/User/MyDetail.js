@@ -10,8 +10,7 @@ import NotificationContainer from 'containers/NotificationContainer';
 
 const Wrapper = styled.div`
   width:100%;
-  // width: ${WIDTH}px;
-  // height:130vh;
+  height:130vh;
   .header{
     width:100%;
     height:${resolution(324)}px;
@@ -23,7 +22,6 @@ const Wrapper = styled.div`
     display:flex;
     align-items:center;
   }
-  .arrow_box{width:${resolution(53)}px;display:flex;justify-content:center;}
   .img_arrow{width:${resolution(27)}px;height:${resolution(19)}px;}
 
   .profile{
@@ -36,6 +34,8 @@ const Wrapper = styled.div`
       height:${resolution(100)}px;
       border-radius:50%;
       background-color:#efefef;
+      background-image: url(${prop => prop.url});
+      background-size:cover;
     }
     .user_name{
       margin-top:10px;
@@ -91,15 +91,15 @@ class MyDetail extends Component {
   }
 
   render() {
-
-    return (<Wrapper>
+    // const {l_img,nick_name} = this.props.userInfo;
+    return (<Wrapper url={this.props.userInfo&&this.props.userInfo.l_img||null}>
       <div className="header">
         <div className='searchbox'>
           <SearchForm />
         </div>
         <div className='profile'>
           <div className='thumbnail' />
-          <div className='user_name'>국민대학교 CRC</div>
+          <div className='user_name'>{this.props.userInfo&&this.props.userInfo.nick_name||"국민대학교 CRC"}</div>
           <div className='button_wrap'>
             <div className='button borderRight'
               onClick={() => goto("CREATE-SHARER")}>
@@ -107,7 +107,7 @@ class MyDetail extends Component {
               등록수정
             </div>
             <div className='button borderRight'
-              onClick={() => goto("MODIFY-SHARER")} >
+              onClick={() => goto("MODIFY-USER")} >
               프로필<br />
               편집
             </div>
