@@ -239,10 +239,10 @@ const MessageDetail = ({ send, chats, header, online, user_id }) => {
 
             <div className="send-wrapper">
                 <div>
-                    <input onChange={(e) => setText(e.target.value)} />
+                    <input value={text || ""} onChange={(e) => setText(e.target.value)} />
                     <button
                         disabled={text.trim().length === 0}
-                        onClick={() => send(text)}>
+                        onClick={() => { send(text); setText(""); }}>
                         전송
                     </button>
                 </div>

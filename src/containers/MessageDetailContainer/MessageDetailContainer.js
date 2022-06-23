@@ -17,7 +17,7 @@ class MessageDetailContainer extends React.Component {
 
     constructor(props) {
         super(props);
-        this.socket = null;
+        this.socket = Socket;
         this.state = { online: false };
         this.send = this.send.bind(this);
     }
@@ -28,8 +28,8 @@ class MessageDetailContainer extends React.Component {
             console.log(userInfo, token);
             this.GetDetail(0);
         }
-        if (this.socket == null && userInfo) {
-            this.socket = Socket.emit("alive", userInfo.uid);
+        if (userInfo) {
+            Socket.emit("alive", { gid: this.props.group_id, uid: userInfo.uid, });
 
             Socket.on("alive", (alive) => {
                 this.setState({
@@ -52,7 +52,7 @@ class MessageDetailContainer extends React.Component {
     }
 
     send = text =>
-        Socket.emit("chat", text);
+        Socket.emit("chat", { gid: this.props.group_id, uid: this.props.userInfo.uid, text: text });
 
     render() {
         const { online } = this.state;
