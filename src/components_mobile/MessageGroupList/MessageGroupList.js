@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from "styled-components";
-
 import { goto } from "navigator";
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
+import DateFormat from 'modules/DateFormat';
+import profile from 'resources/Profile.svg';
 
 const Peer = styled.div`
     box-sizing: border-box;
@@ -15,7 +16,7 @@ const Peer = styled.div`
     margin-bottom: 15px;
     
     .thumbnail {
-        background-image: url(${props => props.url});
+        background-image: url(${props => props.url || profile});
         width: 49px;
         height: 49px;
         border-radius: 100%;
@@ -111,14 +112,18 @@ const Wrapper = styled.div`
 class MessageGroupList extends React.Component {
     render() {
         const { groups = [] } = this.props;
-        const PeerElement = function ({ message_group_id, unread, url, nick, recent, date }) {
+        const PeerElement = function ({ message_group_id, unread, url, nick_name, message, create_at }) {
             return (<Peer onClick={() => goto("MESSAGE", message_group_id)} url={url} className="row">
-                <div className="thumbnail">{unread !== 0 && <div className="led">{unread}</div>}</div>
-                <div className="col text-wrapper">
-                    <div className="nick">{nick}</div>
-                    <div className="recent">{recent}</div>
+                <div className="thumbnail">
+                    <img src={url} className="thumbnail" />
+                    {/* {unread !== 0 && <div className="led">{unread}</div>} */}
                 </div>
-                <div className="date">{date}</div>
+                <div className="col text-wrapper">
+                    {message}
+                    <div className="nick">{nick_name}</div>
+                    <div className="recent">{message}</div>
+                </div>
+                <div className="date">{DateFormat(create_at)}</div>
             </Peer>);
         }
 
@@ -127,9 +132,10 @@ class MessageGroupList extends React.Component {
                 <div className='blanker'>&nbsp;</div>
                 <SearchForm placeholder={"대화상대 찾아보기"} disabled_filter keyword={null} />
             </div>
-            {groups.map((item, index) =>
-                <PeerElement key={index} {...item} />
-            )}
+            {groups && groups.length > 0
+                ? groups.map((item, index) =>
+                    <PeerElement key={index} {...item[0]} />)
+                : (<div></div>)}
         </Wrapper>);
     }
 }

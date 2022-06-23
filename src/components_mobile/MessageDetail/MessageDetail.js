@@ -71,6 +71,8 @@ const MessageWrapper = styled.div`
         background: #E9E9E9 0% 0% no-repeat padding-box;
         border-radius: 100%;
         background-image: url(${props => props.url});
+        background-size: cover;
+        background-position: center center;
     }
     .nick {
         margin-left: 10px;
@@ -96,7 +98,6 @@ const MessageWrapper = styled.div`
         overflow: auto;
 
         ::-webkit-scrollbar-track {
-            // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
             border-radius: 4px;
             background-color: #EEEEEE;
         }
@@ -106,7 +107,6 @@ const MessageWrapper = styled.div`
         }
         ::-webkit-scrollbar-thumb {
             border-radius: 4px;
-            // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
             background-color:  #707070;
         }
     }
@@ -146,8 +146,6 @@ const MessageWrapper = styled.div`
     }
 `;
 const ChatDiv = styled.div`
-// border: 1px dashed green;
-// *{ border: 1px dashed black }
     box-sizing: border-box;
     padding: 0px 10px;
 
@@ -161,20 +159,14 @@ const ChatDiv = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        letter-spacing: 0px;
+        font: normal normal normal 15px/18px Pretendard;
+        text-align: center;
+
         ${props => props.me
-        ? `
-        margin-left: auto;
-        text-align: center;
-        font: normal normal normal 15px/18px Pretendard;
-        letter-spacing: 0px;
-        color: #FFFFFF;
+        ? ` margin-left: auto; color: #FFFFFF;
         background: #707070 0% 0% no-repeat padding-box;`
-        : `
-        margin-right: auto;
-        text-align: center;
-        font: normal normal normal 15px/18px Pretendard;
-        letter-spacing: 0px;
-        color: #000000;
+        : ` margin-right: auto; color: #000000;
         background: #E9E9E9 0% 0% no-repeat padding-box;`}
     }
     .date {
@@ -235,20 +227,22 @@ const MessageDetail = ({ send, chats, header, online, user_id }) => {
             </div>
 
             <div className="chats">
-                {chats.map((item, index) =>
-                    <Chat {...item}
-                        key={index}
-                        me={item.user_id === user_id}
-                    />
-                )}
+                {chats
+                    .sort((a, b) => a.create_at < b.create_at)
+                    .map((item, index) =>
+                        <Chat {...item}
+                            key={index}
+                            me={item.user_id === user_id}
+                        />
+                    )}
             </div>
 
             <div className="send-wrapper">
                 <div>
-                    <input onChange={(e) => setText(e.target.value)} />
+                    <input value={text || ""} onChange={(e) => setText(e.target.value)} />
                     <button
                         disabled={text.trim().length === 0}
-                        onClick={() => send(text)}>
+                        onClick={() => { send(text); setText(""); }}>
                         전송
                     </button>
                 </div>
