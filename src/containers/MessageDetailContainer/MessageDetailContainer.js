@@ -1,31 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-    GetMessageDetailRequest, GetMessageOpponentInfoRequest
+    GetMessageDetailRequest,
+    GetMessageOpponentInfoRequest
 } from "actions/Message";
 import MessageDetail from 'components_mobile/MessageDetail';
 import Socket from 'modules/socket';
 
 class MessageDetailContainer extends React.Component {
+
     GetDetail = page => {
         const { token, group_id } = this.props;
         this.props.GetMessageDetailRequest(token, page, group_id);
         this.props.GetMessageOpponentInfoRequest(token, group_id);
     }
-    socket = null;
+
     constructor(props) {
         super(props);
+        this.socket = null;
         this.state = { online: false };
+        this.send = this.send.bind(this);
     }
 
     componentDidUpdate(props) {
         const { token, userInfo } = this.props;
-
         if (userInfo && token != null && props.token == null) {
             console.log(userInfo, token);
             this.GetDetail(0);
         }
-
         if (this.socket == null && userInfo) {
             this.socket = Socket.emit("alive", userInfo.uid);
 
@@ -44,17 +46,21 @@ class MessageDetailContainer extends React.Component {
             return true;
         }
     }
+
     componentWillUnmount() {
         this.socket = null;
     }
-    send = text => alert(text);
+
+    send = text =>
+        Socket.emit("chat", text);
+
     render() {
         const { online } = this.state;
         const { detail, opponent, userInfo } = this.props;
-
+        console.log("SORT:", detail, detail.sort((a, b) => a.uid > b.uid))
         return (<>
-            {detail && detail.length > 0 ?
-                <MessageDetail
+            {(detail && detail.length > 0)
+                ? <MessageDetail
                     send={this.send}
                     header={opponent}
                     user_id={userInfo && userInfo.uid}
