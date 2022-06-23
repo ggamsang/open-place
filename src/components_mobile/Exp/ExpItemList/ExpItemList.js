@@ -44,13 +44,30 @@ const Wrapper = styled.div`
             padding:12px 20px 12px 20px;
             .tagList{
                 box-shadow: 2px 2px 5px #00000029;
-                width:100%;
+                width: 100%;
+                overflow: auto;
                 height:66px;
-                display:flex;
-                justify-content:center;
-                align-items:center;
-                background-color:white;
+                display: flex;
+                flex-wrap: wrap;
+                // justify-content:center;
+                // align-items:center;
+                // background-color:white;
+                -ms-overflow-style: none; /* Internet Explorer 10+ */
+                scrollbar-width: none; /* Firefox */
+                &::-webkit-scrollbar {
+                    display: none;
+                }
                 border-radius:10px;
+                .tag {
+                    border-radius: 5px;
+                    font-family: Pretendard;
+                    background-color: white;
+                    width: max-content;
+                    height: 0.85rem;
+                    font-size: 0.85rem;
+                    margin: 5px;
+                    padding: 3px 5px;
+                }
             }
         }
     }
@@ -69,13 +86,22 @@ const Wrapper = styled.div`
 `;
 
 class ExpItemList extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
     render() {
         console.log(this.props)
         const { list } = this.props;
-
+        const tags = new Set();
+        list && list.map(item => {
+            item.taglist &&
+                item.taglist
+                    .replace("[", "")
+                    .replace("]", "")
+                    .split(",")
+                    .map(word => tags.has(word) == false && tags.add(word))
+        });
+        console.log(tags);
         return (<Wrapper>
 
             <div className='gradient'>
@@ -84,29 +110,31 @@ class ExpItemList extends React.Component {
                 <div className='title'>태그리스트</div>
                 <div className='tagBox'>
                     <div className='tagList'>
-
+                        {Array.from(tags).map(word =>
+                            <div className='tag' key={word}>{word}</div>)}
                     </div>
                 </div>
             </div>
 
-            <div className='rows' style={{marginTop:"15px",marginBottom:"15px"}}>
+            <div className='rows' style={{ marginTop: "15px", marginBottom: "15px" }}>
                 <ButtonNormal
-                onClickEvent={() => goto("CREATE-ITEM")}
-                width={165}
-                height={35}
-                radius={10}
-                fontSize={15}
-                bgColor={"#707070"}
-                text="경험 등록하기"
-                style={{marginRight:"25px"}}
+                    onClickEvent={() => goto("CREATE-ITEM")}
+                    width={165}
+                    height={35}
+                    radius={10}
+                    fontSize={15}
+                    // bgColor={this.props.userInfo ? "#F00" : "#707070"}
+                    bgColor={"#707070"}
+                    text="경험 등록하기"
+                    style={{ marginRight: "25px" }}
                 />
                 <ButtonNormal
-                width={165}
-                height={35}
-                radius={10}
-                fontSize={15}
-                bgColor={"#707070"}
-                text="인기순"
+                    width={165}
+                    height={35}
+                    radius={10}
+                    fontSize={15}
+                    bgColor={"#707070"}
+                    text="인기순"
                 />
             </div>
 
@@ -119,7 +147,7 @@ class ExpItemList extends React.Component {
             <div className='blanker'>&nbsp;</div>
             <div className='blanker'>&nbsp;</div>
 
-        </Wrapper>);
+        </Wrapper >);
     }
 }
 export default ExpItemList;

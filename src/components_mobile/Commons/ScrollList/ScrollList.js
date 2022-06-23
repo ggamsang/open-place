@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 class ScrollList extends React.Component {
     render() {
         const { list } = this.props;
-        // console.log({ list })
+        console.log("LIST:", { list })
 
         return (<Wrapper type={this.props.type}>
             {list && list.length > 0 && list.map((item, index) =>

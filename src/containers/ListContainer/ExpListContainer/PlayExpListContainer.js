@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import ExpItemList from 'components_mobile/Exp/ExpItemList';
+import { GET } from 'constant';
+import host from 'config';
 const dummy = [
   {
     type: "item", title: "앞 사람만 노 젖게 시키기", score: 3.5,
@@ -24,9 +26,21 @@ const dummy = [
   },
 ]
 class PlayExpListContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { list: dummy }
+  }
+  componentDidMount() {
+    const url = `${host}/item/play`;
+    fetch(url, GET)
+      .then(res => res.json())
+      .then(data => this.setState({ list: data.detail.map(item => item) }))
+      .catch(err => console.error(err))
+  }
   render() {
-   return (<React.Fragment>
-      <ExpItemList list={dummy}/>
+    const { list } = this.state;
+    return (<React.Fragment>
+      <ExpItemList list={list} />
     </React.Fragment>)
   }
 }
