@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { resolution } from 'commons/resolution';
-
+import profile from 'resources/Profile.svg';
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 import SharerForm from './SharerForm';
 
@@ -82,55 +82,63 @@ class CreateSharer extends React.Component {
   onCancel = () => {
     window.history.go(-1);
   }
+  componentDidUpdate(props) {
+    if (props.userInfo == null && this.props.userInfo)
+      return;
+  }
   render() {
-    const {l_img,nick_name} = this.props.userInfo;
+    const { userInfo } = this.props;
 
     return (
       <React.Fragment>
-        <Wrapper url={l_img||null}>
-          <div className="header">
-            <div className="searchbox"><SearchForm /></div>
-            <div className='profile'>
-              <div className='thumbnail' />
-              <div className='textWrap' style={{ marginTop: "20px" }}>
-                <div className='text' style={{ textAlign: "right" }}>{nick_name}</div>
-                <div className='vrline' style={{ marginLeft: "26px", marginRight: "26px" }} />
-                <div className='text' style={{ textAlign: "left" }}>#해쉬태그</div>
+        {userInfo
+          ? <Wrapper url={userInfo.l_img || profile}>
+            <div className="header">
+              <div className="searchbox"><SearchForm /></div>
+              <div className='profile'>
+                <div className='thumbnail' />
+                <div className='textWrap' style={{ marginTop: "20px" }}>
+                  <div className='text' style={{ textAlign: "right" }}>{userInfo.nick_name}</div>
+                  <div className='vrline' style={{ marginLeft: "26px", marginRight: "26px" }} />
+                  <div className='text' style={{ textAlign: "left" }}>#해쉬태그</div>
+                </div>
               </div>
             </div>
-          </div>
-          <Detail>
+            <Detail>
 
-            <SharerForm {...this.props}
-              onChangeInfo={(value) => this.setState({ info: value })}
-              onChangeCountry={(value) => this.setState({ country: value })}
-              onChangeCity={(value) => this.setState({ city: value })}
-              onChangeEmail={(value) => this.setState({ email: value })}
-              onChangeBankCode={(value) => this.setState({ bank_code: value })}
-              onChangeBankNumber={(value) => this.setState({ bank_number: value })}
-              onChangeThumbnail={(thumbnail, thumbnail_name) => this.setState({ thumbnail: thumbnail, thumbnail_name: thumbnail_name })}
-            />
-            
-            <ButtonNormal
-              onClickEvent={this.onSubmit}
-              width={335}
-              height={35}
-              radius={10}
-              bgColor={"#707070"}
-              text="등록하기"
-              style={{ marginTop: "20px" }}
-            />
-            <ButtonNormal
-              onClickEvent={this.onCancel}
-              width={335}
-              height={35}
-              radius={10}
-              bgColor={"#707070"}
-              text="뒤로가기"
-              style={{ marginTop: "10px" }}
-            />
-          </Detail>
-        </Wrapper>
+              <SharerForm {...this.props}
+                onChangeInfo={(value) => this.setState({ info: value })}
+                onChangeCountry={(value) => this.setState({ country: value })}
+                onChangeCity={(value) => this.setState({ city: value })}
+                onChangeEmail={(value) => this.setState({ email: value })}
+                onChangeBankCode={(value) => this.setState({ bank_code: value })}
+                onChangeBankNumber={(value) => this.setState({ bank_number: value })}
+                onChangeThumbnail={(thumbnail, thumbnail_name) => this.setState({ thumbnail: thumbnail, thumbnail_name: thumbnail_name })}
+              />
+
+              <ButtonNormal
+                onClickEvent={this.onSubmit}
+                width={335}
+                height={35}
+                radius={10}
+                bgColor={"#707070"}
+                text="등록하기"
+                style={{ marginTop: "20px" }}
+              />
+              <ButtonNormal
+                onClickEvent={this.onCancel}
+                width={335}
+                height={35}
+                radius={10}
+                bgColor={"#707070"}
+                text="뒤로가기"
+                style={{ marginTop: "10px" }}
+              />
+            </Detail>
+          </Wrapper>
+
+          : <>공유자 정보를 가져오고 있습니다.</>}
+
       </React.Fragment>
     )
   }

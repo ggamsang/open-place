@@ -20,16 +20,17 @@ const Wrapper = styled.div`
 class ScrollList extends React.Component {
     render() {
         const { list } = this.props;
-        // console.log({ list })
+        console.log("LIST:", { list })
 
         return (<Wrapper type={this.props.type}>
-            {list && list.length > 0 && list.map((item, index) =>
+            {list && list.length > 0 ? list.map((item, index) =>
                 item.type == "item"
                     ? <Item key={index} {...item} />
                     :
                     item.type == "sharer"
                         ? <Sharer key={index} {...item} />
-                        : null)}
+                        : null)
+                : <div>데이터가 없습니다.</div>}
         </Wrapper>);
     }
 }

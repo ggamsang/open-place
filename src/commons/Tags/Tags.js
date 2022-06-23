@@ -23,12 +23,16 @@ const Wrapper = styled.ul`
 class Tags extends React.Component {
     render() {
         const { tags, prestyle } = this.props;
+        const list =
+            (typeof tags === "string")
+                ? tags.replace("[", "").replace("]", "").split(",")
+                : tags;
         return (
             <Wrapper style={prestyle}>
-                {tags.map((tag, indx) =>
+                {list && list.map((tag, indx) =>
                     <li key={indx} className='tag'>
                         {tag}
-                        {indx < tags.length - 1 &&
+                        {indx < list.length - 1 &&
                             <font color="#E43903"> ·</font>}
                     </li>)}
             </Wrapper>

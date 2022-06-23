@@ -65,6 +65,7 @@ const Wrapper = styled.div`
 
     }
     }
+    margin-bottom: 120px;
 `
 
 class CreateExp extends React.Component {
@@ -143,9 +144,9 @@ class CreateExp extends React.Component {
     if (info == null || info === "") return alert("내용을 입력하세요");
 
     this.props.createExpRequest(data, this.props.token)
-    .then(()=>{
-      window.history.go(-1);
-    })
+      .then(() => {
+        window.history.go(-1);
+      })
 
   }
   render() {

@@ -83,17 +83,17 @@ class Item extends React.Component {
             title,
             score,
             tags,
+            taglist,
             price,
             like
         } = this.props;
-
         return (
             <Wrapper bg={url || noimage} onClick={this.onClickItem}>
                 <div className='summary_wrap'>
                     <div className='row space-between'>
                         <div className='row'>
                             <div className='item-title'>{title || "title"}</div>
-                            <div className='price'>₩{price || "58000￦"}</div>
+                            <div className='price'>₩{price || "58000"}</div>
                         </div>
                         <img className='imgheart' src={heart} />
                     </div>
@@ -101,7 +101,7 @@ class Item extends React.Component {
                         <div className='rate-and-tags' >
                             <StarRating score={score} />
                             <Tags prestyle={{ "marginLeft": "16px" }}
-                                tags={tags || ['tag1', 'tag2', 'tag3']} />
+                                tags={tags || taglist || ['tag1', 'tag2', 'tag3']} />
                         </div>
                         <div className='like'>{943 || like}</div>
                     </div>

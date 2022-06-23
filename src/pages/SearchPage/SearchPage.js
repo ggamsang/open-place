@@ -8,7 +8,6 @@ function SearchPage() {
 
   return (<ClientTemplate i_dont_need_footer={true}>
     <SearchContainer keyword={params.keyword} />
-
   </ClientTemplate>)
 }
 
