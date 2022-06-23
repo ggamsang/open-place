@@ -7,12 +7,12 @@ import {
 } from "actions/Notice";
 
 class NoticeListContainer extends React.Component {
-    GetList = (page) => {
+    GetList = (page) =>
         this.props.GetNoticeListRequest(page);
-    }
-    GetTotalCount = () => {
+
+    GetTotalCount = () =>
         this.props.GetTotalNoticeCountRequest();
-    }
+
 
     render() {
         return (<React.Fragment>
@@ -26,8 +26,8 @@ class NoticeListContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    Notices: state.Community.status.Notices,
-    total: state.Community.status.total,
+    notices: state.Notice.status.notices,
+    total: state.Notice.status.total,
 });
 const mapDispatchToProps = (dispatch) => ({
     GetNoticeListRequest: (page) => dispatch(GetNoticeListRequest(page)),

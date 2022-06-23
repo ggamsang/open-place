@@ -25,7 +25,6 @@ class MyDetailContainer extends Component {
     );
   }
 }
-
 const mapStateToProps = (state) => ({
   isLoggedIn: state.Authentication.status.isLoggedIn,
   active: state.Authentication.status.active,

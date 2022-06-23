@@ -92,7 +92,7 @@ const Thumbnail = styled.div`
     background-size: cover;
 `;
 const dummy = [
-    { "header": "말머리", "title": "제목예시", "url": "https://i.picsum.photos/id/1011/5472/3648.jpg?hmac=Koo9845x2akkVzVFX3xxAc9BCkeGYA9VRVfLE4f0Zzk", "author": "국민대CRC", "date": "2022-05-19", },
+    { "head": "공지", "title": "정기점검 안내", "url": "https://i.picsum.photos/id/1011/5472/3648.jpg?hmac=Koo9845x2akkVzVFX3xxAc9BCkeGYA9VRVfLE4f0Zzk", "author": "관리자", "update_time": new Date().getTime(), },
 ];
 
 class NoticeList extends React.Component {
@@ -100,31 +100,30 @@ class NoticeList extends React.Component {
         this.props.GetTotalCount();
         this.props.GetList(0);
     }
-    gotoDetail = id => {
-        goto("READ", id);
-    }
-    handleClick = async (e, page) => {
-        this.props.GetTotalCount();
-        await this.props.GetList(page.activePage - 1);
-    }
+    gotoDetail = id =>
+        goto("NOTICE", id);
+
+    handleClick = async (e, page) =>
+        this.props.GetTotalCount()
+            .then(this.props.GetList(page.activePage - 1))
+
 
     render() {
-        const { Notices = dummy } = this.props;
-        console.log(this.props);
+        const { notices = dummy } = this.props;
 
         return (<Wrapper>
-            {Notices.map((item, idx) =>
-                <div key={idx} className="line" onClick={e => this.gotoDetail(item.uid || idx)}>
+            {notices.map((item, idx) =>
+                <div key={idx} className="line" onClick={e => this.gotoDetail(item.uid)}>
                     <div className='header'>
                         {item.head}
                     </div>
                     <div className='title'>
-                        &nbsp; {item.title}
+                        {item.title}
                     </div>
                     <div className='author'>
-                        <Thumbnail url={item.url} />
-                        &nbsp;
-                        {item.author}
+                        <Thumbnail url={item.url} /> &nbsp;
+                        관리자
+                        {/* {item.author} */}
                     </div>
                     <div className='date'>
                         {DateFormat(item.update_time)}

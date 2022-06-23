@@ -6,6 +6,7 @@ const initialtate = {
   status: {
     articles: [],
     total: 0,
+    detail: null,
   }
 }
 export default function Community(state, action) {
@@ -21,6 +22,10 @@ export default function Community(state, action) {
       return update(state, { Community: { $set: action.type }, status: { articles: { $set: action.payload } } });
     case types.GET_ARTICLE_LIST_FAIL:
       return update(state, { Community: { $set: action.type }, status: { articles: { $set: [] } } });
+    case types.ARTICLE_DETAIL_SUCCESS:
+      return update(state, { Community: { $set: action.type }, status: { detail: { $set: action.payload } } });
+    case types.ARTICLE_DETAIL_FAILED:
+      return update(state, { Community: { $set: action.type }, status: { detail: { $set: null } } });
     default:
       return state;
   }

@@ -1,13 +1,12 @@
 import * as types from "actions/ActionTypes";
 import host from "config";
+import { GET } from "constant";
 
 // 디폴트 카테고리 불러오기
 export const getCategoryListRequest = () => {
     return (dispatch) => {
         const url = `${host}/defaultList/category`;
-        return fetch(url, {
-            headers: { "Content-Type": "application/json" }, method: "GET"
-        })
+        return fetch(url, GET)
             .then(res => res.json())
             .then(data => {
                 dispatch(getCategoryListSuccess(data ? data : []))
@@ -23,9 +22,7 @@ const getCategoryListFailure = () => ({ type: types.GET_DEFAULT_CATEGORY_FAILURE
 export const getExpTypeListReqeuest = () => {
     return (dispatch) => {
         const url = `${host}/defaultList/exptype`;
-        return fetch(url, {
-            headers: { "Content-Type": "application/json" }, method: "GET"
-        })
+        return fetch(url, GET)
             .then(res => res.json())
             .then(data => {
                 dispatch(getExpTypeListSuccess(data ? data : []))
@@ -41,9 +38,7 @@ const getExpTypeListFailure = () => ({ type: types.GET_DEFAULT_EXP_TYPE_FAILURE,
 export const getBankCodeListReqeust = () => {
     return (dispatch) => {
         const url = `${host}/defaultList/bankcode`;
-        return fetch(url, {
-            headers: { "Content-Type": "application/json" }, method: "GET"
-        })
+        return fetch(url, GET)
             .then(res => res.json())
             .then(data => {
                 dispatch(getBankCodeListSuccess(data ? data : []))
@@ -59,9 +54,7 @@ const getBankCodeListFailure = () => ({ type: types.GET_DEFAULT_BANKCODE_FAILURE
 export const getLocationListRequest = () => {
     return (dispatch) => {
         const url = `${host}/defaultList/location`;
-        return fetch(url, {
-            headers: { "Content-Type": "application/json" }, method: "GET"
-        })
+        return fetch(url, GET)
             .then(res => res.json())
             .then(data => dispatch(getLocationListSuccess(data ? data : [])))
             .catch(error => dispatch(getLocationListFailure()));

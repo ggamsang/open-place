@@ -130,7 +130,7 @@ class CreateExp extends React.Component {
   onClickOK = async (event) => {
     const { thumbnail, title, tag, info, price, type } = this.state;
     const data = {
-      user_id:this.props.userInfo.uid,
+      user_id: this.props.userInfo.uid,
       title: title, taglist: tag, info: info, price: price, type: type,
       files: [],
     }
@@ -139,8 +139,8 @@ class CreateExp extends React.Component {
     let file = { value: this.state.thumbnail, name: this.state.thumbnail_name, key: 0 };
 
     if (thumbnail != null) { await data.files.push(file); } // thumbnail 썸네일이 있을 경우에만 
-    if (title == null || title == "") return alert("제목을 입력하세요");
-    if (info == null || info == "") return alert("내용을 입력하세요");
+    if (title == null || title === "") return alert("제목을 입력하세요");
+    if (info == null || info === "") return alert("내용을 입력하세요");
 
     this.props.createExpRequest(data, this.props.token)
     .then(()=>{
@@ -158,7 +158,7 @@ class CreateExp extends React.Component {
         </div>
         <div className='content'>
           <div className='whitebox'>
-            <img src={this.state.thumbnail} className="img_" />
+            <img src={this.state.thumbnail} className="img_" alt="profile" />
             <div className='wrap'>
               <div style={{ marginBottom: "9px" }}><span className="label">제목</span><sup style={{ color: "red" }}>*</sup><span className="text">국민대CRC</span></div>
               <label className="findThumbnailText" htmlFor="file">

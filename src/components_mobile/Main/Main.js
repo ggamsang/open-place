@@ -4,6 +4,7 @@ import TopItemList from 'components_mobile/TopItemList';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
+
 const Wrapper = styled.div`
   width: 100%;
   position: relative;
@@ -34,22 +35,19 @@ const ContentWrapper = styled.div`
 function Main() {
   return (<Wrapper>
     <Fade>
+      <div className='blanker'>&nbsp;</div>
       <GradationCard angle={30} />
 
       <ContentWrapper>
-        <div className='blanker'>&nbsp;</div>
-
-          <SearchForm isMain={true}/>
+        <SearchForm isMain={true} />
         <Slide />
         <TopItemList />
-
-
+        <div className='blanker'>&nbsp;</div>
       </ContentWrapper>
 
     </Fade>
 
   </Wrapper>)
 }
-// }
 
 export default Main;

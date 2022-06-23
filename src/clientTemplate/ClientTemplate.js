@@ -46,6 +46,7 @@ const Wrapper = styled.div`
   }
 `;
 
+// const GAP = window.innerHeight;
 const GAP = 600;
 
 class ClientTemplate extends Component {
@@ -67,7 +68,9 @@ class ClientTemplate extends Component {
       if (!rect) {
         return;
       }
+
       // console.log(rect.height + rect.y);
+
       if (rect.height + rect.y < GAP) {
         this.setState({ up: true });
       } else {
@@ -77,27 +80,23 @@ class ClientTemplate extends Component {
   }
 
   render() {
-    return (<>
-      <Wrapper id="client-template">
-        <div id="main" className='main'>
-          {this.props.children}
-        </div>
+    return (<Wrapper id="client-template">
+      <div id="main" className='main'>
+        {this.props.children}
+      </div>
 
-        <div id="nav" className={this.state.up ? 'nav up' : 'nav'}>
-          <BottomMenu up={this.state.up} login={this.state.login} />
-        </div>
+      <div id="nav" className={this.state.up ? 'nav up' : 'nav'}>
+        <BottomMenu up={this.state.up} login={this.state.login} />
+      </div>
 
-        <div className='bottom'>
-          <Footer />
+      <div className='bottom'>
+        <Footer />
+      </div>
 
-        </div>
-      </Wrapper>
-    </>);
+    </Wrapper>);
   }
 }
-const mapStateToProps = state => {
-  // console.log("redux:", state);
-  return {}
-};
+
+const mapStateToProps = state => ({});
 const mapDispatchToProps = dispatch => ({});
 export default connect(mapStateToProps, mapDispatchToProps)(ClientTemplate);

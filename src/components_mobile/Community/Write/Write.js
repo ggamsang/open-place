@@ -141,13 +141,14 @@ const WriteForm = styled.form`
   }
 `;
 
-export class CommunityWrite extends React.Component {
+export default class CommunityWrite extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       couldwrite: false,
       title: "",
       content: "",
+      head: "",
     };
   }
 
@@ -157,8 +158,11 @@ export class CommunityWrite extends React.Component {
       this.setState({ couldwrite: true });
     }
     else {
-      this.setState({ couldwrite: false })
+      this.setState({ couldwrite: false });
     }
+  }
+  onChangeValueHead = async (e) => {
+    await this.setState({ head: e.target.value });
   }
   onChangeValueContent = async (e) => {
     await this.setState({ content: e.target.value });
@@ -190,8 +194,9 @@ export class CommunityWrite extends React.Component {
   }
   onWrite = (e) => {
     e.preventDefault();
-    const data = { content: this.state.content, title: this.state.title, type: this.props.type === "noti" ? "noti" : "free" };
-    this.props.Write(data);
+    const { content, title, head } = this.state;
+    const data = { text: content, title: title, head: head };
+    this.props.Write(data).then(goto("COMMUNITY"));
   }
 
   render() {
@@ -205,7 +210,7 @@ export class CommunityWrite extends React.Component {
 
       <WriteForm>
         <div className='form'>
-          <div className='label'>공지사항</div>
+          <div className='label'>게시글 작성</div>
 
           <div className='rows top13'>
             <div className='label'>
@@ -216,6 +221,18 @@ export class CommunityWrite extends React.Component {
               <input
                 value={this.state.title}
                 onChange={this.onChangeValueTitle} />
+            </div>
+          </div>
+
+          <div className='rows top13'>
+            <div className='label'>
+              말머리
+            </div>
+
+            <div>
+              <input
+                value={this.state.head}
+                onChange={this.onChangeValueHead} />
             </div>
           </div>
 

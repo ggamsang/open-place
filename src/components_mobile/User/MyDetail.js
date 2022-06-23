@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-
 import { resolution } from 'commons/resolution';
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
-
-
-import notification from 'source/Iconly-Bold-Notification.svg';
-
-import { Fade } from 'react-reveal';
+// import notification from 'source/Iconly-Bold-Notification.svg';
+// import { Fade } from 'react-reveal';
 import { goto } from 'navigator';
 import { WIDTH } from 'constant';
 import NotificationContainer from 'containers/NotificationContainer';
-
 
 const Wrapper = styled.div`
   width:100%;
@@ -123,7 +118,7 @@ class MyDetail extends Component {
           </div>
         </div>
       </div>
-      <this.props.Outlet {...this.props}/>
+      <this.props.Outlet {...this.props} />
     </Wrapper>);
   }
 }

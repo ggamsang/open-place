@@ -7,6 +7,7 @@ import NotificationModal from 'components_mobile/NotificationModal';
 import { connect } from "react-redux";
 import host from 'config';
 import { goto } from 'navigator';
+import { authGET } from 'constant';
 
 /*
 사용자가 notification아이콘을 눌렀을 때 요청하는 방식 두 가지로 나뉜다.
@@ -56,13 +57,7 @@ class NotificationContainer extends React.Component {
     NotificationRequest() {
         return new Promise((resolve, reject) => {
             const url = `${host}/noti`;
-            fetch(url, {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-access-token': this.props.token,
-                },
-            })
+            fetch(url, authGET(this.props.token))
                 .then(res => res.json())
                 .then(data => resolve(data))
                 .catch(err => reject(err));

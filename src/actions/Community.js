@@ -1,5 +1,6 @@
 import * as types from "actions/ActionTypes";
 import host from "config"
+import { GET } from "constant";
 
 // action creators
 const GetArticleList = data => ({ type: types.GET_ARTICLE_LIST, payload: data });
@@ -8,15 +9,14 @@ const GetTotalArticleCount = data => ({ type: types.GET_ARTICLE_TOTAL_COUNT, pay
 const ArticleCountFail = () => ({ type: types.GET_ARTICLE_COUNT_FAIL, payload: [] });
 const WriteArticleSuccess = () => ({ type: types.WRITE_ARTICLE, payload: [] });
 const WriteArticleFail = () => ({ type: types.WRITE_ARTICLE_FAIL, payload: [] });
+const ArticleDetailSuccess = (data) => ({ type: types.ARTICLE_DETAIL_SUCCESS, payload: data });
+const ArticleDetailFailed = () => ({ type: types.ARTICLE_DETAIL_FAILED, });
 
 // api
 export const GetArticleListRequest = (page) => {
   return dispatch => {
     const url = `${host}/community/list/${page}`;
-    return fetch(url, {
-      headers: { "Content-Type": "application/json" },
-      method: "GET"
-    })
+    return fetch(url, GET)
       .then(res => res.json())
       .then(data =>
         data.success
@@ -28,10 +28,7 @@ export const GetArticleListRequest = (page) => {
 export const GetTotalArticleCountRequest = () => {
   return dispatch => {
     const url = `${host}/community/list`;
-    return fetch(url, {
-      headers: { "Content-Type": "application/json" },
-      method: "GET"
-    })
+    return fetch(url, GET)
       .then(res => res.json())
       .then(data =>
         data.success
@@ -52,10 +49,18 @@ export const WriteArticleRequest = ({ form, token }) => {
       body: JSON.stringify(form)
     })
       .then(res => res.json())
-      .then(data =>
-        data.success
-          ? dispatch(WriteArticleSuccess(data.detail.total))
-          : WriteArticleFail([]))
+      .then(data => data.success && dispatch(WriteArticleSuccess(data.detail)))
       .catch(err => dispatch(WriteArticleFail()))
   }
 };
+export const GetArticleDetailRequest = (id) => {
+  return dispatch => {
+    const url = `${host}/community/${id}`;
+    return fetch(url, GET)
+      .then(res => res.json())
+      .then(data => dispatch(ArticleDetailSuccess(data.detail)))
+      .catch(err => dispatch(ArticleDetailFailed()))
+  }
+};
+
+

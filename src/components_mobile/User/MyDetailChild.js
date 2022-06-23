@@ -1,26 +1,25 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Fade } from 'react-reveal';
 import styled from 'styled-components';
 import { resolution } from 'commons/resolution';
-import SearchForm from 'components_mobile/Commons/Search/SearchForm';
-import notification from 'source/Iconly-Bold-Notification.svg';
 import buy from 'source/Iconly-Bold-buy.svg';
 import heart from 'source/Iconly-Bold-Heart.svg';
 import star from 'source/Iconly-Bold-Star.svg';
 import work from 'source/Iconly-Bold-Work.svg';
 import plus from 'source/Iconly-Bold-Plus.svg';
-import { Fade } from 'react-reveal';
 import BuyExpContainer from 'containers/MyDetail/BuyExpContainer';
 import SellExpContainer from 'containers/MyDetail/SellExpContainer';
 import RegisterExpContainer from 'containers/MyDetail/RegisterExpContainer';
 import LikeExpContainer from 'containers/MyDetail/LikeExpContainer';
 import LikeSharerContainer from 'containers/MyDetail/LikeSharerContainer';
-import { TokenName, WIDTH } from 'constant';
-import { connect } from 'react-redux';
+import { WIDTH } from 'constant';
 import { SignOutRequest } from 'actions/Authentication';
-import {getUserPointRequest,setUserPointRequest,getUserPointHistoryReqeust,
-        getUserRegisterExpRequest,getUserSellExpRequest,getUserLikeSharerRequest,getUserLikeExpRequest} from "actions/User/MyDetail"
-
-import { SetSession } from 'modules/Sessions';
+import {
+  getUserPointRequest, setUserPointRequest, getUserPointHistoryReqeust,
+  getUserRegisterExpRequest, getUserSellExpRequest, getUserLikeSharerRequest,
+  getUserLikeExpRequest
+} from "actions/User/MyDetail"
 import { goto } from 'navigator';
 
 const Wrapper = styled.div`
@@ -198,6 +197,7 @@ const SubWrap = styled.div`
 class MyDetailChild extends Component {
   async componentDidMount(){
   }
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -258,64 +258,64 @@ class MyDetailChild extends Component {
   }
 
   render() {
-    const { isLoggedIn } = this.props;
+    // const { isLoggedIn } = this.props;
     return (
       <React.Fragment>
-        {this.state.subMenu == "none"
+        {this.state.subMenu === "none"
           && <Wrapper>
             <Fade opposite when={this.state.main_menu}>
-              <Menu style={{ display: `${this.state.main_menu == true ? "block" : "none"}` }}>
+              <Menu style={{ display: `${this.state.main_menu === true ? "block" : "none"}` }}>
                 <div className='menu_wrap'>
                   <div className='label'>내정보</div>
-                  <div onClick={this.onClickPointMenu} className="menu_button" ><img src={star} /><div className='text'>포인트</div></div>  <div className='hrline' />
-                  <div onClick={() => this.onClickSubMenu("regExp")} className="menu_button" ><img src={plus} /><div className='text'>등록 경험</div></div> <div className='hrline' />
-                  <div onClick={() => this.onClickSubMenu("sellExp")} className="menu_button" ><img src={work} /><div className='text'>판매 경험</div></div> <div className='hrline' />
-                  <div onClick={() => this.onClickSubMenu("buyExp")} className="menu_button" ><img src={buy} /><div className='text'>구매 경험</div></div>  <div className='hrline' />
-                  <div onClick={this.onClickLikeMenu} className="menu_button"><img src={heart} /><div className='text'>관심</div></div>
+                  <div onClick={this.onClickPointMenu} className="menu_button" ><img alt="icon" src={star} /><div className='text'>포인트</div></div>  <div className='hrline' />
+                  <div onClick={() => this.onClickSubMenu("regExp")} className="menu_button" ><img alt="icon" src={plus} /><div className='text'>등록 경험</div></div> <div className='hrline' />
+                  <div onClick={() => this.onClickSubMenu("sellExp")} className="menu_button" ><img alt="icon" src={work} /><div className='text'>판매 경험</div></div> <div className='hrline' />
+                  <div onClick={() => this.onClickSubMenu("buyExp")} className="menu_button" ><img alt="icon" src={buy} /><div className='text'>구매 경험</div></div>  <div className='hrline' />
+                  <div onClick={this.onClickLikeMenu} className="menu_button"><img alt="icon" src={heart} /><div className='text'>관심</div></div>
                   <div onClick={this.onClickLogout} className="menu_button">
-                    {/* <img src={heart} /> */}
+                    {/* <img alt="icon" src={heart} /> */}
                     <div className='text'>로그아웃</div>
                   </div>
                 </div>
               </Menu>
             </Fade>
 
-            <Fade opposite when={this.state.sub_menu1 == true || this.state.sub_menu2}>
+            <Fade opposite when={this.state.sub_menu1 === true || this.state.sub_menu2}>
               <SubMenu >
-                <div className='menu_wrap' style={{ display: `${this.state.sub_menu1 == true ? "flex" : "none"}` }}>
+                <div className='menu_wrap' style={{ display: `${this.state.sub_menu1 === true ? "flex" : "none"}` }}>
                   <div onClick={this.onClickHome} className='label'> {"<"} 포인트</div>
-                  <div onClick={() => this.onClickSubMenu("point")} className="menu_button" ><img src={plus} /><div className='text'>포인트 충전</div></div>  <div className='hrline' />
-                  <div onClick={() => this.onClickSubMenu("payment")} className="menu_button" ><img src={plus} /><div className='text'>결제내역</div></div>  <div className='hrline' />
+                  <div onClick={() => this.onClickSubMenu("point")} className="menu_button" ><img alt="icon" src={plus} /><div className='text'>포인트 충전</div></div>  <div className='hrline' />
+                  <div onClick={() => this.onClickSubMenu("payment")} className="menu_button" ><img alt="icon" src={plus} /><div className='text'>결제내역</div></div>  <div className='hrline' />
                 </div>
-                <div className='menu_wrap' style={{ display: `${this.state.sub_menu2 == true ? "flex" : "none"}` }}>
+                <div className='menu_wrap' style={{ display: `${this.state.sub_menu2 === true ? "flex" : "none"}` }}>
                   <div onClick={this.onClickHome} className='label'> {"<"} 관심</div>
-                  <div onClick={() => this.onClickSubMenu("likeSharer")} className="menu_button"><img src={plus} /><div className='text'>관심 공유자</div></div>  <div className='hrline' />
-                  <div onClick={() => this.onClickSubMenu("likeExp")} className="menu_button"><img src={plus} /><div className='text'>관심 경험</div></div>  <div className='hrline' />
+                  <div onClick={() => this.onClickSubMenu("likeSharer")} className="menu_button"><img alt="icon" src={plus} /><div className='text'>관심 공유자</div></div>  <div className='hrline' />
+                  <div onClick={() => this.onClickSubMenu("likeExp")} className="menu_button"><img alt="icon" src={plus} /><div className='text'>관심 경험</div></div>  <div className='hrline' />
                 </div>
               </SubMenu>
             </Fade>
           </Wrapper>
         }
         <SubWrap>
-          {this.state.subMenu == "point"
+          {this.state.subMenu === "point"
             && <React.Fragment>
               <div className='subTitle'>포인트 충전</div>디자인 필요</React.Fragment>}
-          {this.state.subMenu == "payment"
+          {this.state.subMenu === "payment"
             && <React.Fragment>
               <div className='subTitle'>충전 내역</div>디자인 필요</React.Fragment>}
-          {this.state.subMenu == "regExp"
+          {this.state.subMenu === "regExp"
             && <React.Fragment>
               <div className='subTitle'>등록 경험</div><RegisterExpContainer /></React.Fragment>}
-          {this.state.subMenu == "sellExp"
+          {this.state.subMenu === "sellExp"
             && <React.Fragment>
               <div className='subTitle'>판매 경험</div><SellExpContainer /></React.Fragment>}
-          {this.state.subMenu == "buyExp"
+          {this.state.subMenu === "buyExp"
             && <React.Fragment>
               <div className='subTitle'>구매 경험</div><BuyExpContainer /></React.Fragment>}
-          {this.state.subMenu == "likeSharer"
+          {this.state.subMenu === "likeSharer"
             && <React.Fragment>
               <div className='subTitle'>관심 공유자</div><LikeSharerContainer /></React.Fragment>}
-          {this.state.subMenu == "likeExp"
+          {this.state.subMenu === "likeExp"
             && <React.Fragment>
               <div className='subTitle'>관심 경험</div><LikeExpContainer /></React.Fragment>}
         </SubWrap>
@@ -327,26 +327,26 @@ class MyDetailChild extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     SignOutRequest: () => dispatch(SignOutRequest()),
-    getUserPointRequest:(user_id)=>{dispatch(getUserPointRequest(user_id))},
-    setUserPointRequest:(user_id,point,token)=>{dispatch(setUserPointRequest(user_id,point,token))},
-    getUserPointHistoryReqeust:(user_id,page)=>{dispatch(getUserPointHistoryReqeust(user_id,page))},
-    getUserRegisterExpRequest:(user_id,page)=>{dispatch(getUserRegisterExpRequest(user_id,page))},
-    getUserSellExpRequest:(user_id,page)=>(dispatch(getUserSellExpRequest(user_id,page))),
-    getUserLikeSharerRequest:(user_id,page)=>{dispatch(getUserLikeSharerRequest(user_id,page))},
-    getUserLikeExpRequest:(user_id,page)=>{dispatch(getUserLikeExpRequest(user_id,page))},
+    getUserPointRequest: (user_id) => { dispatch(getUserPointRequest(user_id)) },
+    setUserPointRequest: (user_id, point, token) => { dispatch(setUserPointRequest(user_id, point, token)) },
+    getUserPointHistoryReqeust: (user_id, page) => { dispatch(getUserPointHistoryReqeust(user_id, page)) },
+    getUserRegisterExpRequest: (user_id, page) => { dispatch(getUserRegisterExpRequest(user_id, page)) },
+    getUserSellExpRequest: (user_id, page) => (dispatch(getUserSellExpRequest(user_id, page))),
+    getUserLikeSharerRequest: (user_id, page) => { dispatch(getUserLikeSharerRequest(user_id, page)) },
+    getUserLikeExpRequest: (user_id, page) => { dispatch(getUserLikeExpRequest(user_id, page)) },
   }
 };
 const mapStateToProps = (state) => {
   return {
     token: state.Authentication.status.token,
-    userInfo:state.Authentication.status.userInfo,
+    userInfo: state.Authentication.status.userInfo,
     isLoggedIn: state.Authentication.status.isLoggedIn,
     user_point: state.MyDetail.status.user_point,
     point_history: state.MyDetail.status.point_history,
     register_exp: state.MyDetail.status.register_exp,
     sell_exp: state.MyDetail.status.sell_exp,
     like_sharer: state.MyDetail.status.like_sharer,
-    like_exp:state.MyDetail.status.like_exp,
+    like_exp: state.MyDetail.status.like_exp,
   }
 };
 

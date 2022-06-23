@@ -145,7 +145,7 @@ const WriteForm = styled.form`
   }
 `;
 
-export class NoticeWrite extends React.Component {
+export default class NoticeWrite extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

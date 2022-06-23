@@ -1,5 +1,6 @@
 import * as types from "actions/ActionTypes";
 import host from "config";
+import { GET } from "constant";
 
 // 메인 페이지 인기 아이템 리스트
 // place.opensrcdesign.com/api/
@@ -19,4 +20,3 @@ export const getTopExpListRequest = () => {
   };
   const getTopExpListSuccess = (data) => ({ type: types.GET_TOP_ITEM_LIST_SUCCESS, TopList: data });
   const getTopExpListFailure = () => ({ type: types.GET_TOP_ITEM_LIST_FAILURE, TopList: [] });
-  

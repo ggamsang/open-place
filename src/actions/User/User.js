@@ -1,5 +1,6 @@
 import * as types from "actions/ActionTypes";
 import host from "config";
+import { GET } from "constant";
 
 // export const getUserDetail = (user_id) => {
 //     return dispatch =>{

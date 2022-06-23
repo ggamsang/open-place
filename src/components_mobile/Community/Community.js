@@ -167,7 +167,7 @@ class Community extends React.Component {
         <div className='blanker'>&nbsp;</div>
         <SearchForm />
         {boardType === "free" && <div className='title'>커뮤니티</div>}
-        {boardType === "notice" && <div className='title'>게시글 등록하기</div>}
+        {boardType === "notice" && <div className='title'>공지사항</div>}
       </div>
 
       <>
