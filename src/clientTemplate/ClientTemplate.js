@@ -68,9 +68,7 @@ class ClientTemplate extends Component {
       if (!rect) {
         return;
       }
-
       // console.log(rect.height + rect.y);
-
       if (rect.height + rect.y < GAP) {
         this.setState({ up: true });
       } else {

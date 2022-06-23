@@ -20,9 +20,6 @@ export const GetNoticeListRequest = (page) => {
         dispatch(GetNoticeList(data.detail))
         return data.success;
       })
-      // data.success
-      // ? dispatch(GetNoticeList(data.detail))
-      // : GetNoticeList([]))
       .catch(err => dispatch(NoticeListFail()))
   }
 };
