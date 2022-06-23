@@ -9,6 +9,7 @@ export const goto = (type, offset = null) => {
         case "CREATE-ITEM": window.location.href = "/createExp"; break;
         case "CREATE-SHARER": window.location.href = "/createSharer"; break;
         case "MODIFY-SHARER": window.location.href = "/modifySharer"; break;
+        case "MODIFY-USER": window.location.href = "/modifyUser"; break;
         case "EXP-LIST": window.location.href = "/list"; break;
         case "MAIN": window.location.href = "/"; break;
 

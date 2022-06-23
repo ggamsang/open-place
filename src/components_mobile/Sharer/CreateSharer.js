@@ -2,21 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { resolution } from 'commons/resolution';
 
-import back_arrow from 'source/Iconly-Bold-left-arrow.svg';
-
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 import SharerForm from './SharerForm';
 
-import TextAreaNormal from 'components_mobile/Commons/TextArea/TextAreaNormal';
-import DropDownNormal from 'components_mobile/Commons/DropDown/DropDownNormal';
-import InputNormal from 'components_mobile/Commons/Input/InputNormal';
 import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
 import { WIDTH } from 'constant';
 
 const Wrapper = styled.div`
+  // witdh: ${WIDTH}px;
   width:100%;
-  // width: ${WIDTH}px;
-  height: 130vh;
+  height:130vh;
   .header{
     width:100%;
     height:${resolution(290)}px;
@@ -28,7 +23,7 @@ const Wrapper = styled.div`
     display:flex;
     align-items:center;
   }
-  .arrow_box{width:${resolution(53)}px;display:flex;justify-content:center;}
+  // .arrow_box{width:${resolution(53)}px;display:flex;justify-content:center;}
   .img_arrow{width:${resolution(27)}px;height:${resolution(19)}px;}
 
   .profile{
@@ -41,6 +36,8 @@ const Wrapper = styled.div`
       height:${resolution(100)}px;
       border-radius:50%;
       background-color:#efefef;
+      background-image: url(${prop => prop.url});
+      background-size:cover;
     }
     .textWrap{
       width:100%;
@@ -65,37 +62,72 @@ const Detail = styled.div`
 
 
 class CreateSharer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      info: "", country: null, city: null, email: "", bank_code: null, bank_number: "",
+      thumbnail: null, thumbnail_name: "",
+    }
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onCancel = this.onCancel.bind(this);
+  }
+  onSubmit = async () => {
+    const { info, country, city, email, bank_code, bank_number, thumbnail, thumbnail_name } = this.state;
+    let data = {
+      info: info, country: country, city: city, email: email, bank_code: bank_code, bank_number: bank_number,
+    }
+    this.props.updateSharerProfileRequest(this.props.userInfo.uid, data, this.props.token)
+    window.history.go(-1);
+
+  }
+  onCancel = () => {
+    window.history.go(-1);
+  }
   render() {
+    const {l_img,nick_name} = this.props.userInfo;
+
     return (
       <React.Fragment>
-        <Wrapper>
+        <Wrapper url={l_img||null}>
           <div className="header">
-            <div className='searchbox'><SearchForm /></div>
+            <div className="searchbox"><SearchForm /></div>
             <div className='profile'>
               <div className='thumbnail' />
               <div className='textWrap' style={{ marginTop: "20px" }}>
-                <div className='text' style={{ textAlign: "right" }}>닉네임</div>
+                <div className='text' style={{ textAlign: "right" }}>{nick_name}</div>
                 <div className='vrline' style={{ marginLeft: "26px", marginRight: "26px" }} />
                 <div className='text' style={{ textAlign: "left" }}>#해쉬태그</div>
               </div>
             </div>
           </div>
           <Detail>
-            <SharerForm />
+
+            <SharerForm {...this.props}
+              onChangeInfo={(value) => this.setState({ info: value })}
+              onChangeCountry={(value) => this.setState({ country: value })}
+              onChangeCity={(value) => this.setState({ city: value })}
+              onChangeEmail={(value) => this.setState({ email: value })}
+              onChangeBankCode={(value) => this.setState({ bank_code: value })}
+              onChangeBankNumber={(value) => this.setState({ bank_number: value })}
+              onChangeThumbnail={(thumbnail, thumbnail_name) => this.setState({ thumbnail: thumbnail, thumbnail_name: thumbnail_name })}
+            />
+            
             <ButtonNormal
+              onClickEvent={this.onSubmit}
               width={335}
               height={35}
               radius={10}
               bgColor={"#707070"}
-              text="등록"
+              text="등록하기"
               style={{ marginTop: "20px" }}
             />
             <ButtonNormal
+              onClickEvent={this.onCancel}
               width={335}
               height={35}
               radius={10}
               bgColor={"#707070"}
-              text="취소"
+              text="뒤로가기"
               style={{ marginTop: "10px" }}
             />
           </Detail>

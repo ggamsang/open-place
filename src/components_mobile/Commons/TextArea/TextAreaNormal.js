@@ -28,14 +28,17 @@ const TextAreaField = styled.textarea`
 class TextAreaNormal extends Component {
     constructor(props){
         super(props);
+        this.onChangeValue = this.onChangeValue.bind(this);
     }
-
+    onChangeValue=async(event)=>{
+        this.props.onChangeValue && await this.props.onChangeValue(event);
+    }
     render() {
     const warning = this.props.warning;
     return (
         <React.Fragment>
             <TextAreaField
-                onChange={this.props.onChangeValue}
+                onChange={this.onChangeValue}
                 value={this.props.value}
                 placeholder={this.props.placeholder}
                 type={this.props.type==null?"text":this.props.type}

@@ -3,7 +3,7 @@ import host from "config";
 
 // 메인 페이지 인기 아이템 리스트
 // place.opensrcdesign.com/api/
-export const GetTopItemListRequest = () => {
+export const getTopExpListRequest = () => {
     return (dispatch) => {
       const url = `${host}/item/TopList`;
       return fetch(url, {
@@ -11,12 +11,12 @@ export const GetTopItemListRequest = () => {
       })
         .then(res => res.json())
         .then(data => {
-          dispatch(GetTopItemListSuccess(data ? data : []))
+          dispatch(getTopExpListSuccess(data ? data : []))
         }
           )
-        .catch(error => dispatch(GetTopItemListFailure()));
+        .catch(error => dispatch(getTopExpListFailure()));
     }
   };
-  const GetTopItemListSuccess = (data) => ({ type: types.GET_TOP_ITEM_LIST_SUCCESS, TopList: data });
-  const GetTopItemListFailure = () => ({ type: types.GET_TOP_ITEM_LIST_FAILURE, TopList: [] });
+  const getTopExpListSuccess = (data) => ({ type: types.GET_TOP_ITEM_LIST_SUCCESS, TopList: data });
+  const getTopExpListFailure = () => ({ type: types.GET_TOP_ITEM_LIST_FAILURE, TopList: [] });
   

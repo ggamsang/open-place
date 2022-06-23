@@ -1,1 +1,2 @@
-export * from "./MyDetailPage";
+export * from "./MyDetailContainer";
+export * from "./ModifyUserContainer";

@@ -2,14 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { resolution } from 'commons/resolution';
 
-import back_arrow from 'source/Iconly-Bold-left-arrow.svg';
-
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 import SharerForm from './SharerForm';
 
-import TextAreaNormal from 'components_mobile/Commons/TextArea/TextAreaNormal';
-import DropDownNormal from 'components_mobile/Commons/DropDown/DropDownNormal';
-import InputNormal from 'components_mobile/Commons/Input/InputNormal';
 import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
 import { WIDTH } from 'constant';
 
@@ -28,7 +23,7 @@ const Wrapper = styled.div`
     display:flex;
     align-items:center;
   }
-  .arrow_box{width:${resolution(53)}px;display:flex;justify-content:center;}
+  // .arrow_box{width:${resolution(53)}px;display:flex;justify-content:center;}
   .img_arrow{width:${resolution(27)}px;height:${resolution(19)}px;}
 
   .profile{
@@ -65,6 +60,31 @@ const Detail = styled.div`
 
 
 class ModifySharer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      info: "", country: null, city: null, email: "", bank_code: null, bank_number: "",
+      thumbnail: null, thumbnail_name: "",
+    }
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onCancel = this.onCancel.bind(this);
+  }
+  onSubmit = async () => {
+    const { info, country, city, email, bank_code, bank_number, thumbnail, thumbnail_name } = this.state;
+    let data = {
+      info: info, country: country, city: city, email: email, bank_code: bank_code, bank_number: bank_number,
+      // files: [],
+    }
+    // let file = { value: thumbnail, name: thumbnail_name, key: 0 };
+    // if (thumbnail != null) { await data.files.push(file); }
+    // console.log(data);
+    this.props.updateSharerProfileRequest(1, data, this.props.token);
+    window.history.go(-1);
+
+  }
+  onCancel = () => {
+    window.history.go(-1);
+  }
   render() {
     return (
       <React.Fragment>
@@ -81,8 +101,19 @@ class ModifySharer extends React.Component {
             </div>
           </div>
           <Detail>
-            <SharerForm />
+
+            <SharerForm {...this.props}
+              onChangeInfo={(value) => this.setState({ info: value })}
+              onChangeCountry={(value) => this.setState({ country: value })}
+              onChangeCity={(value) => this.setState({ city: value })}
+              onChangeEmail={(value) => this.setState({ email: value })}
+              onChangeBankCode={(value) => this.setState({ bank_code: value })}
+              onChangeBankNumber={(value) => this.setState({ bank_number: value })}
+              onChangeThumbnail={(thumbnail, thumbnail_name) => this.setState({ thumbnail: thumbnail, thumbnail_name: thumbnail_name })}
+            />
+            
             <ButtonNormal
+              onClickEvent={this.onSubmit}
               width={335}
               height={35}
               radius={10}
@@ -91,6 +122,7 @@ class ModifySharer extends React.Component {
               style={{ marginTop: "20px" }}
             />
             <ButtonNormal
+              onClickEvent={this.onCancel}
               width={335}
               height={35}
               radius={10}

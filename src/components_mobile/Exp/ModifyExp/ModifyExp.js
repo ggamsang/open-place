@@ -25,7 +25,7 @@ const Wrapper = styled.div`
       display:flex;
       align-items:center;
     }
-    .arrow_box{width:${resolution(53)}px;display:flex;justify-content:center;}
+    // .arrow_box{width:${resolution(53)}px;display:flex;justify-content:center;}
     .img_arrow{width:${resolution(27)}px;height:${resolution(19)}px;}
 
     .title{
@@ -73,7 +73,7 @@ class ModifyExp extends React.Component {
     super(props);
     this.state = {
       tag: null,
-      thumbnail: null, thumbnail_name: null, title: null, type: 0, info: null
+      thumbnail: null, thumbnail_name: null, title: null, type: 0, info: null, price:0,
     }
     this.onChangeThumbnail = this.onChangeThumbnail.bind(this);
     this.onChangeTitle = this.onChangeTitle.bind(this);
@@ -83,6 +83,24 @@ class ModifyExp extends React.Component {
     this.onChangePrice = this.onChangePrice.bind(this);
     this.onClickOK = this.onClickOK.bind(this);
 
+  }
+  async componentDidUpdate(prevProps){
+    if(JSON.stringify(prevProps.expDetail)!=JSON.stringify(this.props.expDetail)){
+      // let taglist = this.props.expDetail&&this.props.expDetail.taglist;
+      // taglist = taglist&&taglist.replace("[","");
+      // taglist = taglist&&taglist.replace("]","");
+      // taglist = taglist && taglist.split(",")&&taglist.split(",").map(async(item,index)=>{
+      //   return item+" | ";
+      // })   
+      await this.setState({
+        thumbnail:this.props.expDetail&&this.props.expDetail.thumbnail,
+        title:this.props.expDetail&&this.props.expDetail.title,
+        tag:this.props.expDetail&&this.props.expDetail.taglist,
+        type:this.props.expDetail&&this.props.expDetail.type,
+        info:this.props.expDetail&&this.props.expDetail.info,
+        price:this.props.expDetail&&this.props.expDetail.price,
+      })
+    }
   }
 
   onChangeTitle = (event) => {
@@ -129,7 +147,7 @@ class ModifyExp extends React.Component {
   };
   onClickOK = async (event) => {
     const { thumbnail, title, tag, info, price, type } = this.state;
-    const data = {
+    let data = {
       user_id:this.props.userInfo.uid,
       item_id:this.props.item_id,
       title: title, taglist: tag, info: info, price: price, type: type,
@@ -143,9 +161,15 @@ class ModifyExp extends React.Component {
     // if (info == null || info == "") return alert("내용을 입력하세요");
 
     this.props.updateExpRequest(data, this.props.token)
-
+    window.history.go(-1);
   }
   render() {
+    let taglist = this.state.tag||[];
+    taglist = taglist&&taglist!=""&&taglist.replace("[","");
+    taglist = taglist&&taglist!=""&&taglist.replace("]","");
+    taglist = taglist&&taglist!=""&&taglist.split(",");
+
+    console.log(taglist)
     return (
       <Wrapper>
         <div className='header'>
@@ -156,7 +180,7 @@ class ModifyExp extends React.Component {
           <div className='whitebox'>
             <img src={this.state.thumbnail} className="img_" />
             <div className='wrap'>
-              <div style={{ marginBottom: "9px" }}><span className="label">제목</span><sup style={{ color: "red" }}>*</sup><span className="text">국민대CRC</span></div>
+              <div style={{ marginBottom: "9px" }}><span className="label">제목</span><sup style={{ color: "red" }}>*</sup><span className="text">{this.state.title}</span></div>
               <label className="findThumbnailText" htmlFor="file">
                 <ButtonNormal
                   width={194}
@@ -174,12 +198,12 @@ class ModifyExp extends React.Component {
           <div className='row'>
             <div className='label'>제목<sup style={{ color: "red" }}>*</sup></div>
             <InputNormal onChangeValue={this.onChangeTitle}
-              value={this.state.value} placeholder={"제목을 입력하세요"} radius={10}
+              value={this.state.title} placeholder={"제목을 입력하세요"} radius={10}
               width={245} height={31} fontSize={14} color={"#E9E9E9"} />
           </div>
           <div className='row'>
             <div className='label'>태그<sup style={{ color: "red" }}>*</sup></div>
-            <div><InputTag getValue={this.handleAddTag} width={"245"} /></div>
+            <div><InputTag taglist={taglist} getValue={this.handleAddTag} width={"245"} /></div>
           </div>
           <div className='row'>
             <div className='label'>경험 유형<sup style={{ color: "red" }}>*</sup></div>
@@ -187,11 +211,12 @@ class ModifyExp extends React.Component {
               value={this.state.type}
               onChangeValue={this.onChangeType}
               width={150} height={31} radius={10}
-              options={["놀기", "배우기", "만들기"]} />
+              options={this.props.category} />
           </div>
           <div className='row'>
             <div className='label'>설명</div>
             <TextAreaNormal
+              value={this.state.info}
               onChangeValue={this.onChangeInfo}
               width={245} height={100}
               color={"#E9E9E9"} fontSize={15} radius={10}
@@ -202,7 +227,7 @@ class ModifyExp extends React.Component {
           <div className='row'>
             <div className='label'>가격</div>
             <div>
-              <InputPrice onChangeValue={this.onChangePrice} name="price" />
+              <InputPrice price={this.state.price} onChangeValue={this.onChangePrice} name="price" />
             </div>
           </div>
           <div className='row'>
