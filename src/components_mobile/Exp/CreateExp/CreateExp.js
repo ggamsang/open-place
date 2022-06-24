@@ -159,7 +159,11 @@ class CreateExp extends React.Component {
         </div>
         <div className='content'>
           <div className='whitebox'>
-            <img src={this.state.thumbnail} className="img_" alt="profile" />
+            {
+              this.state.thumbnail==null?
+              <div className='img_'/>:
+              <img src={this.state.thumbnail} className="img_" alt="profile" />              
+            }
             <div className='wrap'>
               <div style={{ marginBottom: "9px" }}><span className="label">제목</span><sup style={{ color: "red" }}>*</sup><span className="text">국민대CRC</span></div>
               <label className="findThumbnailText" htmlFor="file">
