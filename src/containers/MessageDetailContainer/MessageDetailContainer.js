@@ -9,24 +9,21 @@ import Socket from 'modules/socket';
 
 class MessageDetailContainer extends React.Component {
 
-    GetDetail = page => {
-        const { token, group_id } = this.props;
-        this.props.GetMessageDetailRequest(token, page, group_id);
-        this.props.GetMessageOpponentInfoRequest(token, group_id);
-    }
-
     constructor(props) {
         super(props);
         this.socket = Socket;
-        this.state = { online: false };
+        this.state = { online: false, more: true };
         this.send = this.send.bind(this);
     }
-
+    componentDidMount() {
+        const { token, group_id } = this.props;
+        this.props.GetMessageOpponentInfoRequest(token, group_id);
+    }
     componentDidUpdate(props) {
         const { token, userInfo } = this.props;
         if (userInfo && token != null && props.token == null) {
-            console.log(userInfo, token);
-            this.GetDetail(0);
+            // console.log(userInfo, token);
+            // this.GetDetail(0);
         }
         if (userInfo) {
             Socket.emit("alive", { gid: this.props.group_id, uid: userInfo.uid, });
@@ -46,28 +43,37 @@ class MessageDetailContainer extends React.Component {
             return true;
         }
     }
-
     componentWillUnmount() {
         this.socket = null;
     }
+    
+    GetDetail = page =>
+        this.props.GetMessageDetailRequest(
+            this.props.token, page, this.props.group_id);
 
     send = text =>
-        Socket.emit("chat", { gid: this.props.group_id, uid: this.props.userInfo.uid, text: text });
+        Socket.emit("chat", {
+            gid: this.props.group_id,
+            uid: this.props.userInfo.uid,
+            text: text
+        });
 
     render() {
         const { online } = this.state;
         const { detail, opponent, userInfo } = this.props;
-        console.log("SORT:", detail, detail.sort((a, b) => a.uid > b.uid))
+
         return (<>
-            {(detail && detail.length > 0)
-                ? <MessageDetail
-                    send={this.send}
-                    header={opponent}
-                    user_id={userInfo && userInfo.uid}
-                    chats={detail}
-                    online={online}
-                />
-                : null}
+            {/* {(detail && detail.length > 0)
+                ?  */}
+            <MessageDetail
+                getMore={this.GetDetail}
+                send={this.send}
+                header={opponent}
+                user_id={userInfo && userInfo.uid}
+                chats={detail}
+                online={online}
+            />
+            {/* : null} */}
         </>);
     }
 }

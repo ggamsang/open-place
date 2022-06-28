@@ -1,9 +1,10 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 // // import { Button } from "commons/Button/Button";
 import SearchForm from "components_mobile/Commons/Search/SearchForm";
 import profile from 'resources/Profile.svg';
 import DateFormat from "modules/DateFormat";
+import { Fade } from "react-reveal";
 
 const Wrapper = styled.div`
     -ms-overflow-style: none; /* Internet Explorer 10+ */
@@ -152,21 +153,28 @@ const ChatDiv = styled.div`
     .text {
         box-sizing: border-box;
         padding: 0px 20px;
-        width: max-content;
+        // width: max-content;
+        max-width: 250px;
         min-height: 30px;
         border-radius: 22px;
-        text-align: center;
+        // text-align: center;
         display: flex;
-        justify-content: center;
+        // justify-content: center;
         align-items: center;
         letter-spacing: 0px;
         font: normal normal normal 15px/18px Pretendard;
         text-align: center;
 
         ${props => props.me
-        ? ` margin-left: auto; color: #FFFFFF;
+        ? `
+        text-align: right;
+        justify-content: end;
+        margin-left: auto; color: #FFFFFF;
         background: #707070 0% 0% no-repeat padding-box;`
-        : ` margin-right: auto; color: #000000;
+        : `
+        text-align: left;
+        justify-content: start;
+        margin-right: auto; color: #000000;
         background: #E9E9E9 0% 0% no-repeat padding-box;`}
     }
     .date {
@@ -190,66 +198,100 @@ const Chat = function ({ me, message, create_at }) {
     </ChatDiv>);
 }
 
-// const dummy = {
-//     header: { url: '', nick: '회원닉네임', online: false, },
-//     chats: [
-//         { uid: 0, me: true, content: '(나)텍스트내용좌우여백20', date: '2020.7.31(금) 오후 16:19' },
-//         { uid: 1, me: false, content: '(너)텍스트내용좌우여백20', date: '2020.7.31(금) 오후 16:19' },
-//         { uid: 2, me: true, content: '(나)끝말잇기!! 텍스트!', date: '2020.7.31(금) 오후 16:19' },
-//         { uid: 3, me: false, content: '(너)트랙터!', date: '2020.7.31(금) 오후 16:19' },
-//         { uid: 4, me: true, content: '(나)터미널.', date: '2020.7.31(금) 오후 16:19' },
-//         { uid: 5, me: false, content: '(너)널판지', date: '2020.7.31(금) 오후 16:19' },
-//         { uid: 6, me: true, content: '(나)지렁이', date: '2020.7.31(금) 오후 16:19' },
-//         { uid: 7, me: false, content: '(너)이삿짐', date: '2020.7.31(금) 오후 16:19' },
-//         { uid: 8, me: true, content: '(나)지미집', date: '2020.7.31(금) 오후 16:19' },
-//         { uid: 9, me: false, content: '(너)집에가자!!!', date: '2020.7.31(금) 오후 16:19' },
-//     ],
-//     online: true,
-// }
+class MessageDetail extends React.Component {
+    constructor(props) {
+        super(props);
+        this.per = 10;
+        this.state = {
+            page: 0,
+            nowlist: [],
+            more: (this.props.chats && this.props.chats.length > this.per)
+                ? false : true,
+            text: '',
+        };
+        this.setText = this.setText.bind(this);
+    }
+    setText = text => this.setState({ text: text });
 
-const MessageDetail = ({ send, chats, header, online, user_id }) => {
-    const [text, setText] = useState('');
+    SendAndEmpty = () => {
+        this.props.send(this.state.text);
+        this.setText('');
+    }
+    componentDidUpdate(props) {
+        if (props.chats.length === 0 && this.props.chats.length !== 0) {
+            const list = [...this.state.nowlist];
+            this.props.chats.forEach(item => list.unshift(item));
+            this.setState({ nowlist: list });
+            // this.setState({ nowlist: 
+            //   this.props.chats.reverse().concat(this.state.nowlist) });
+        }
+    }
+    componentDidMount() {
+        this.props.getMore(0);
+        const chats = document.getElementById('chats');
+        setTimeout(() => {
+            if (chats && chats.clientHeight >= 100) {
+                chats.scrollTop = chats.scrollHeight;
+            }
+        }, 1000);
+        chats && chats.addEventListener('scroll', async (e) => {
+            if (this.state.more && e.target.scrollTop === 0) {
+                chats.scrollTo({ top: 50, behavior: "smooth" });
+                this.props.getMore(this.state.page + 1);
+                await this.setState({ page: this.state.page + 1 });
+            }
+        });
+    }
 
-    return (<Wrapper>
-        <div className='gradient'>
-            <div className='blanker'>&nbsp;</div>
-            <SearchForm
-                placeholder={"대화상대 찾아보기"} disabled_filter keyword={null} />
-        </div>
+    render() {
+        const { header, online, user_id } = this.props;
+        const { text, nowlist } = this.state;
 
-        <MessageWrapper url={(header && header.url) || profile} online={online}>
-            <div className="header">
-                <div className="thumbnail"></div>
-                <div className="nick">
-                    {(header && header.nick_name) || "닉네임"}
-                </div>
-                <div className="led"></div>
+        return (<Wrapper>
+            <div className='gradient'>
+                <div className='blanker'>&nbsp;</div>
+                <SearchForm
+                    placeholder={"대화상대 찾아보기"} disabled_filter keyword={null} />
             </div>
 
-            <div className="chats">
-                {chats
-                    .sort((a, b) => a.create_at < b.create_at)
-                    .map((item, index) =>
-                        <Chat {...item}
-                            key={index}
-                            me={item.user_id === user_id}
+            <MessageWrapper url={(header && header.url) || profile} online={online}>
+                <div className="header">
+                    <div className="thumbnail"></div>
+                    <div className="nick">
+                        {(header && header.nick_name) || "닉네임"}
+                    </div>
+                    <div className="led"></div>
+                </div>
+
+                <div className="chats" id="chats">
+                    {nowlist
+                        .map((item, index) =>
+                            <Fade key={index}>
+                                <Chat {...item}
+                                    me={item.user_id === user_id} />
+                            </Fade>
+                        )}
+                </div>
+
+                <div className="send-wrapper">
+                    <div>
+                        <input
+                            onKeyDown={(e) => {
+                                e.key === "Enter" && this.SendAndEmpty()
+                            }}
+                            value={text || ""}
+                            onChange={(e) => this.setText(e.target.value)}
                         />
-                    )}
-            </div>
-
-            <div className="send-wrapper">
-                <div>
-                    <input value={text || ""} onChange={(e) => setText(e.target.value)} />
-                    <button
-                        disabled={text.trim().length === 0}
-                        onClick={() => { send(text); setText(""); }}>
-                        전송
-                    </button>
+                        <button
+                            disabled={text.trim().length === 0}
+                            onClick={() => this.SendAndEmpty()}>
+                            전송
+                        </button>
+                    </div>
                 </div>
-            </div>
-
-        </MessageWrapper>
-    </Wrapper>);
-}
+            </MessageWrapper>
+        </Wrapper>);
+    }
+};
 
 export default MessageDetail;
