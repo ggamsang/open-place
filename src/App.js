@@ -20,7 +20,8 @@ import SharerDetailPage from "pages/SharerPage/SharerDetailPage";
 import ModifyUserPage from "pages/UserPage/ModifyUserPage/ModifyUserPage";
 import SearchPage from "pages/SearchPage";
 
-import MessageListPage, { MessageDetailPage } from "pages/MessagePage";
+import MessageListPage from "pages/MessagePage";
+import MessageDetailPage from "pages/MessagePage/Detail";
 import ExpDetailPage from "pages/ExpPage/ExpDetailPage/ExpDetailPage";
 import styled from 'styled-components';
 
