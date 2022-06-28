@@ -56,7 +56,6 @@ export default function CheckAuth(Components) {
             token: state.Authentication.status.token,
             loading: state.Authentication.status.loading,
             userInfo: state.Authentication.status.userInfo,
-            userInfo: state.Authentication.status.valid,
             isActive: state.Authentication.isActive
         };
     };
