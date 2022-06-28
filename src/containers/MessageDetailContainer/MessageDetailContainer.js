@@ -15,18 +15,17 @@ class MessageDetailContainer extends React.Component {
         this.state = { online: false, more: true };
         this.send = this.send.bind(this);
     }
-    componentDidMount() {
-        const { token, group_id } = this.props;
-        this.props.GetMessageOpponentInfoRequest(token, group_id);
-    }
     componentDidUpdate(props) {
-        const { token, userInfo } = this.props;
+        const { token, userInfo, group_id } = this.props;
         if (userInfo && token != null && props.token == null) {
-            // console.log(userInfo, token);
-            // this.GetDetail(0);
+            this.GetDetail(0);
+            this.props.GetMessageOpponentInfoRequest(token, group_id);
         }
         if (userInfo) {
-            Socket.emit("alive", { gid: this.props.group_id, uid: userInfo.uid, });
+            Socket.emit("alive", {
+                gid: this.props.group_id,
+                uid: userInfo.uid,
+            });
 
             Socket.on("alive", (alive) => {
                 this.setState({
@@ -46,10 +45,12 @@ class MessageDetailContainer extends React.Component {
     componentWillUnmount() {
         this.socket = null;
     }
-    
-    GetDetail = page =>
-        this.props.GetMessageDetailRequest(
-            this.props.token, page, this.props.group_id);
+
+    GetDetail = page => {
+        const { token, group_id } = this.props;
+        if (token)
+            this.props.GetMessageDetailRequest(token, page, group_id);
+    }
 
     send = text =>
         Socket.emit("chat", {
@@ -63,8 +64,8 @@ class MessageDetailContainer extends React.Component {
         const { detail, opponent, userInfo } = this.props;
 
         return (<>
-            {/* {(detail && detail.length > 0)
-                ?  */}
+            {/* {(detail && detail.length > 0) */}
+            {/*  ?  */}
             <MessageDetail
                 getMore={this.GetDetail}
                 send={this.send}

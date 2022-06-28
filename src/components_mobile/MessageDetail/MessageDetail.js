@@ -153,7 +153,7 @@ const ChatDiv = styled.div`
     .text {
         box-sizing: border-box;
         padding: 0px 20px;
-        // width: max-content;
+        width: max-content;
         max-width: 250px;
         min-height: 30px;
         border-radius: 22px;
@@ -218,9 +218,9 @@ class MessageDetail extends React.Component {
         this.setText('');
     }
     componentDidUpdate(props) {
-        if (props.chats.length === 0 && this.props.chats.length !== 0) {
+        if (props.chats.length === 0 && this.props.chats && this.props.chats.length !== 0) {
             const list = [...this.state.nowlist];
-            this.props.chats.forEach(item => list.unshift(item));
+            this.props.chats && this.props.chats.forEach(item => list.unshift(item));
             this.setState({ nowlist: list });
             // this.setState({ nowlist: 
             //   this.props.chats.reverse().concat(this.state.nowlist) });
@@ -236,7 +236,7 @@ class MessageDetail extends React.Component {
         }, 1000);
         chats && chats.addEventListener('scroll', async (e) => {
             if (this.state.more && e.target.scrollTop === 0) {
-                chats.scrollTo({ top: 50, behavior: "smooth" });
+                chats.scrollTo({ top: 5, behavior: "smooth" });
                 this.props.getMore(this.state.page + 1);
                 await this.setState({ page: this.state.page + 1 });
             }
