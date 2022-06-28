@@ -105,9 +105,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </div>
-
-    </Wrapper>
-  )
+    </Wrapper>)
 }
 
 export default App;
