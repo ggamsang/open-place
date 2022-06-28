@@ -225,6 +225,29 @@ class MessageDetail extends React.Component {
             // this.setState({ nowlist: 
             //   this.props.chats.reverse().concat(this.state.nowlist) });
         }
+        if (props.newchat !== this.props.newchat) {
+            const { text: message, gid: message_group_id, uid: user_id, create_at } = this.props.newchat;
+            // create_at: 1656401838183
+            // gid: "4"
+            // text: "asdl;f"
+            // uid: 10
+            const date = new Date(create_at).toUTCString();
+            const list = [...this.state.nowlist];
+            list.push({ message, message_group_id, user_id, create_at: date })
+            // this.props.newchat && list.push({})
+            // create_at: "2022-06-27T16:07:46.000Z"
+            // message: "비번1234맞지?비번1234맞지?비번1234맞지?비번1234맞지?비번1234맞지?비번1234맞지?비번1234맞지?비번1234맞지?"
+            // message_group_id: 4
+            // read_at: null
+            // uid: 34
+            // user_id: 14
+            this.setState({ nowlist: list });
+            setTimeout(() => {
+                const chats = document.getElementById('chats');
+                chats.scrollTop = chats.scrollHeight;
+            }, 500);
+            console.log(this.props.newchat, list);
+        }
     }
     componentDidMount() {
         this.props.getMore(0);

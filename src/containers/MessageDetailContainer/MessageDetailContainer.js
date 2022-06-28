@@ -15,30 +15,29 @@ class MessageDetailContainer extends React.Component {
         this.state = { online: false, more: true };
         this.send = this.send.bind(this);
     }
+
     componentDidUpdate(props) {
         const { token, userInfo, group_id } = this.props;
         if (userInfo && token != null && props.token == null) {
             this.GetDetail(0);
             this.props.GetMessageOpponentInfoRequest(token, group_id);
         }
-        if (userInfo) {
+        if (userInfo != null && props.userInfo == null) {
             Socket.emit("alive", {
                 gid: this.props.group_id,
                 uid: userInfo.uid,
             });
-
-            Socket.on("alive", (alive) => {
-                this.setState({
-                    online: alive
-                });
-            });
+            Socket.on("hello", () => {
+                this.setState({ online: true });
+            })
+            Socket.on("bye", () => {
+                this.setState({ online: false });
+            })
             Socket.on("chat", chat => {
                 this.setState({
-                    chats: [...this.props.detail, chat]
+                    newchat: chat
                 });
             })
-        }
-        if (userInfo != null && props.userInfo) {
             return true;
         }
     }
@@ -48,19 +47,21 @@ class MessageDetailContainer extends React.Component {
 
     GetDetail = page => {
         const { token, group_id } = this.props;
-        if (token)
+        if (token) {
             this.props.GetMessageDetailRequest(token, page, group_id);
+        }
     }
 
     send = text =>
         Socket.emit("chat", {
             gid: this.props.group_id,
             uid: this.props.userInfo.uid,
-            text: text
+            text: text,
+            create_at: new Date().getTime(),
         });
 
     render() {
-        const { online } = this.state;
+        const { online, newchat } = this.state;
         const { detail, opponent, userInfo } = this.props;
 
         return (<>
@@ -73,6 +74,7 @@ class MessageDetailContainer extends React.Component {
                 user_id={userInfo && userInfo.uid}
                 chats={detail}
                 online={online}
+                newchat={newchat}
             />
             {/* : null} */}
         </>);
