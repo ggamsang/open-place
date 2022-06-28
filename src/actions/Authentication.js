@@ -1,7 +1,7 @@
 import * as types from "actions/ActionTypes";
 import host from "config"
 import { SetSession } from "modules/Sessions"
-import { TokenName } from "constant";
+import { authGET, TokenName } from "constant";
 
 // action creators
 const SignIn = () => ({ type: types.AUTH_SIGNIN });
@@ -11,7 +11,7 @@ const SignInFailure = (detail) => ({ type: types.AUTH_SIGNIN_FAILURE, success: f
 // const SignInIsNotMember = () => ({ type: AUTH_SIGNIN_IS_NOT_MEMBER, success: false, });
 // const SignInIsNotPassword = () => ({ type: AUTH_SIGNIN_IS_NOT_PASSWORD, success: false, });
 const CheckToken = () => ({ type: types.AUTH_CHECK_TOKEN });
-const CheckTokenSuccess = (info, token) => ({ type: types.AUTH_CHECK_TOKEN_SUCCESS, info, token });
+const CheckTokenSuccess = (info, token) => ({ type: types.AUTH_CHECK_TOKEN_SUCCESS, payload: { info, token } });
 const CheckTokenFailure = () => ({ type: types.AUTH_CHECK_TOKEN_FAILURE });
 const CheckEmail = () => ({ type: types.AUTH_CHECK_EMAIL });
 const CheckEmailSuccess = () => ({ type: types.AUTH_CHECK_EMAIL_SUCCESS, checkEmail: true });
@@ -57,7 +57,8 @@ export function CheckTokenRequest(token) {
   return (dispatch) => {
     dispatch(CheckToken());
     return fetch(`${host}/user/check`,
-      { headers: { 'x-access-token': token, 'Content-Type': 'application/json' } })
+      authGET(token))
+      // { headers: { 'x-access-token': token, 'Content-Type': 'application/json' } })
       .then(res => res.json())
       .then(res => {
         // console.log(res);

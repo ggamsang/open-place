@@ -1,16 +1,11 @@
-import React, { Component } from 'react';
 import ModifySharerContainer from 'containers/SharerContainer/ModifySharerContainer';
 import ClientTemplate from 'clientTemplate';
+import NeedToLogin from 'Verification/NeedToLogin';
 
+function ModifySharerPage() {
+  return (NeedToLogin(<ClientTemplate>
+    <ModifySharerContainer />
+  </ClientTemplate>));
+}
 
-class ModifySharerPage extends Component {
-    render() {
-      return (
-          <ClientTemplate>
-            <ModifySharerContainer/>
-          </ClientTemplate>
-      );
-    }
-  }
-  
-  export default ModifySharerPage;
+export default ModifySharerPage;

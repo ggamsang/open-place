@@ -36,8 +36,8 @@ export default function Authentication(state, action) {
     case types.AUTH_CHECK_TOKEN_SUCCESS:
       return update(state, {
         status: {
-          userInfo: { $set: action.info },
-          token: { $set: action.token },
+          userInfo: { $set: action.payload.info },
+          token: { $set: action.payload.token },
           valid: { $set: true }
         }
       });

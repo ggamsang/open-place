@@ -24,13 +24,12 @@ const Peer = styled.div`
         position: relative;
         .led {
             position: absolute;
-            right: 5px;
-            bottom: 5px;
-            width: 15px;
-            height: 15px;
+            transform: translate(-25%, -100%);
+            width: 20px;
+            height: 20px;
             border-radius: 100%;
             background: #FF0000 0% 0% no-repeat padding-box;
-            font: normal normal 500 13px/16px Pretendard;
+            font: normal normal 500 15px/20px Pretendard;
             color: #FFFFFF;
             text-align: center;
         }
@@ -103,8 +102,24 @@ const Wrapper = styled.div`
             font-size: 20px;
             line-height: 20px;
         }
-
         margin-bottom: 20px;
+    }
+    .no-data {
+        box-sizing: border-box;
+        padding: 10px 15px;
+        border: 1px dashed #AAA;
+        width: 100%;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Pretendard;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 20px;
+        color: #999;
+        margin-bottom: 25px;
     }
 `;
 
@@ -116,17 +131,15 @@ class MessageGroupList extends React.Component {
             return (<Peer onClick={() => goto("MESSAGE", message_group_id)} url={url} className="row">
                 <div className="thumbnail">
                     <img src={url} className="thumbnail" />
-                    {/* {unread !== 0 && <div className="led">{unread}</div>} */}
+                    {unread !== 0 && <div className="led">{unread}</div>}
                 </div>
                 <div className="col text-wrapper">
-                    {message}
                     <div className="nick">{nick_name}</div>
                     <div className="recent">{message}</div>
                 </div>
                 <div className="date">{DateFormat(create_at)}</div>
             </Peer>);
         }
-
         return (<Wrapper>
             <div className='gradient'>
                 <div className='blanker'>&nbsp;</div>
@@ -134,8 +147,8 @@ class MessageGroupList extends React.Component {
             </div>
             {groups && groups.length > 0
                 ? groups.map((item, index) =>
-                    <PeerElement key={index} {...item[0]} />)
-                : (<div></div>)}
+                    <PeerElement key={index} {...item} />)
+                : (<div className='no-data'>대화 내역 없습니다.</div>)}
         </Wrapper>);
     }
 }
