@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import ExpItemList from 'components_mobile/Exp/ExpItemList';
 import { GET } from 'constant';
 import host from 'config';
+import {getExpListRequest} from "actions/Exp/ExpList"
 
 const dummy = [
   {
@@ -32,24 +33,28 @@ class LearnExpListContainer extends React.Component {
     this.state = { list: dummy }
   }
   componentDidMount() {
-    const url = `${host}/item/learn`;
-    fetch(url, GET)
-      .then(res => res.json())
-      .then(data => this.setState({ list: data.detail.map(item => item) }))
-      .catch(err => console.error(err))
+    // const url = `${host}/item/learn`;
+    // fetch(url, GET)
+    //   .then(res => res.json())
+    //   .then(data => this.setState({ list: data.detail.map(item => item) }))
+    //   .catch(err => console.error(err))
   }
   render() {
     const { list } = this.state;
     return (<React.Fragment>
-      <ExpItemList list={list} {...this.props} />
+      <ExpItemList type="learn" {...this.props} />
     </React.Fragment>)
   }
 }
 const mapStateToProps = (state) => ({
   userInfo: state.Authentication.status.userInfo,
+  list : state.ExpList.status.exp_list,
+  list_added : state.ExpList.status.exp_list_added,
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  getExpListRequest:(page,category,sort,keyword)=>dispatch(getExpListRequest(page,category,sort,keyword)),
 });
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(LearnExpListContainer);

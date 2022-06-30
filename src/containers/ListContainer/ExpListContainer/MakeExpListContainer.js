@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import ExpItemList from 'components_mobile/Exp/ExpItemList';
 import { GET } from 'constant';
 import host from 'config';
+import {getExpListRequest} from "actions/Exp/ExpList"
 
 const dummy = [
   {
@@ -41,15 +42,19 @@ class MakeExpListContainer extends React.Component {
   render() {
     const { list } = this.state;
     return (<React.Fragment>
-      <ExpItemList list={list} />
+      <ExpItemList type="make" {...this.props} />
     </React.Fragment>)
   }
 }
 
 const mapStateToProps = (state) => ({
+  list : state.ExpList.status.exp_list,
+  list_added : state.ExpList.status.exp_list_added,
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  getExpListRequest:(page,category,sort,keyword)=>dispatch(getExpListRequest(page,category,sort,keyword)),
 });
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(MakeExpListContainer);
