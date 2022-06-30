@@ -6,6 +6,8 @@ import star from "source/Iconly-Bold-Star-red.svg";
 import heart from "source/Iconly-Bold-Heart-white.svg";
 import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
 import { Fade } from 'react-reveal';
+import ReviewContainer from "containers/ReviewContainer";
+import { Dimmer, Loader } from 'semantic-ui-react';
 
 const dummy = [
   {
@@ -32,12 +34,13 @@ const dummy = [
 
 const Wrapper = styled.div`
   width: 100%;
-  height:max-content;
-  min-height:100vh;
-  background: linear-gradient(205deg,#bf1d39,#8448b6);
-  .header{
-    width:100%;
-    height:${resolution(324)}px;
+  margin-bottom: 100px;
+  // height: max-content;
+  // min-height: 100vh;
+  background: linear-gradient(205deg, #bf1d39, #8448b6);
+  .header {
+    width: 100%;
+    height: ${resolution(324)}px;
   }
   .searchbox{
     width:100%;
@@ -47,6 +50,9 @@ const Wrapper = styled.div`
   }
   .img_arrow{width:${resolution(27)}px;height:${resolution(19)}px;}
 
+  .top_margin30 {
+    margin-top: 30px;
+  }
 
   .content{
       box-sizing:border-box;
@@ -92,16 +98,17 @@ const Wrapper = styled.div`
         justify-content:center;
     }
   }
-
-
-  `
+`;
 
 class ExpDetail extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      main: true, detail: false, like: false,
+      main: true,
+      detail: false,
+      like: false,
+      sub: false,
     }
     this.onClickMain = this.onClickMain.bind(this);
     this.onClickDetail = this.onClickDetail.bind(this);
@@ -127,18 +134,25 @@ class ExpDetail extends React.Component {
   onClickModify = (event) => {
     window.location.href = `/ModifyExp/${this.props.expDetail.uid}`
   }
-
-  render() {
-    const { expDetail } = this.props;
-    let taglist = expDetail && expDetail.taglist;
+  tagSprintToAry = (taglist) => {
     taglist = taglist && taglist.replace("[", "");
     taglist = taglist && taglist.replace("]", "");
-    taglist = taglist && taglist.split(",") && taglist.split(",").map((item, index) => {
-      return item + " | ";
-    })
-    return (
-      <Wrapper>
-        <div className='searchbox'><SearchForm /></div>
+    taglist = taglist && taglist.split(",").join(" | ");
+    //  && taglist.split(",").map((item, index) => {
+    //   return item + " | ";
+    // });
+    console.log(taglist);
+    return taglist;
+  }
+  render() {
+    const { expDetail } = this.props;
+    let taglist = expDetail && this.tagSprintToAry(expDetail.taglist);
+    return (expDetail
+      ? <Wrapper>
+        <div className='searchbox'>
+          <SearchForm />
+        </div>
+
         <Fade opposite when={this.state.main}>
           <section style={{ display: `${this.state.main == true ? "block" : "none"}` }}>
             <div className='content'>
@@ -188,7 +202,8 @@ class ExpDetail extends React.Component {
         <Fade opposite when={this.state.sub}>
           <section style={{ display: `${this.state.sub == true ? "block" : "none"}` }}>
             <div className='content'>
-              <div className='title'><div onClick={this.onClickMain}>〈</div>상세정보<div /></div>
+              <div className='title'>
+                <div onClick={this.onClickMain}>〈</div>상세정보<div /></div>
               <img src={expDetail && expDetail.thumbnail} className="img img2" />
 
               <div style={{ color: "white", padding: "100px 40px" }}>
@@ -208,7 +223,17 @@ class ExpDetail extends React.Component {
             </div>
           </section>
         </Fade>
-      </Wrapper>);
+
+        <Fade>
+          <ReviewContainer />
+        </Fade>
+
+      </Wrapper>
+      : <Dimmer>
+        <Loader />
+      </Dimmer>
+    );
   }
 }
+
 export default ExpDetail;
