@@ -5,6 +5,7 @@ import Search from 'components_mobile/Commons/Search';
 import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
 // import { WIDTH } from "constant";
 import { goto } from 'navigator';
+import Item from 'components_mobile/Commons/Item';
 
 const Wrapper = styled.div`
     -ms-overflow-style: none; /* Internet Explorer 10+ */
@@ -89,11 +90,22 @@ class ExpItemList extends React.Component {
     constructor(props) {
         super(props);
     }
+    componentWillMount() {
+        this.getList(0);
+    }
+    // componentDidUpdate(prevProps) {
+    //     if (this.props.sort !== prevProps.sort || this.props.cate1 !== prevProps.cate1 || this.props.cate2 !== prevProps.cate2 || this.props.cate3 !== prevProps.cate3 || this.props.keyword !== prevProps.keyword) {
+    //       this.getList(0);
+    //     }
+    // }
+    getList = (page) => {
+        return this.props.getExpListRequest(page,this.props.type, this.props.sort, this.props.keyword);
+    }
     render() {
         console.log(this.props)
-        const { list } = this.props;
+        const { list_added } = this.props;
         const tags = new Set();
-        list && list.map(item => {
+        list_added && list_added.map(item => {
             item.taglist &&
                 item.taglist
                     .replace("[", "")
@@ -139,7 +151,7 @@ class ExpItemList extends React.Component {
             </div>
 
             <div className='search-list-wrapper'>
-                <ScrollList list={list} />
+                <ScrollList list={this.props.list} list_added={this.props.list_added} getList={this.getList} ListComponent={Item} />
                 {/* <TopItemListContainer /> */}
             </div>
 
