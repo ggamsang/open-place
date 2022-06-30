@@ -11,6 +11,7 @@ import { User } from "reducers/User/User";
 import { UpdateSharer } from "reducers/Sharer/UpdateSharer"
 import { ExpDetail } from "reducers/Exp";
 import { combineReducers } from "redux";
+import { Review } from "./Review";
 
 export default combineReducers({
     Authentication,
@@ -26,4 +27,5 @@ export default combineReducers({
     Message,
     UpdateSharer,
     ExpDetail,
+    Review,
 });

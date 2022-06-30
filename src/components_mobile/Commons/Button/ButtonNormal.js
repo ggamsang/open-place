@@ -38,7 +38,7 @@ class ButtonNormal extends Component {
     const button_text = this.props.text;
     return (
       <CustomButton
-        onClick={this.onClickEvent}
+        onClick={this.props.onClick || this.onClickEvent}
         disabled={this.props.disabled}
         style={this.props.style}
         width={this.props.width}

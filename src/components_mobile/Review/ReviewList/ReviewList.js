@@ -1,8 +1,9 @@
 import ButtonNormal from "components_mobile/Commons/Button/\bButtonNormal";
 import { WIDTH } from "constant";
-import React, { useState } from "react";
+import React from "react";
 import styled from 'styled-components';
 import ReviewWriteContainer from "containers/ReviewContainer/ReviewWriteContainer";
+import Cross from "components_mobile/Commons/Cross";
 
 const reviewdummy = [
     { uid: -1, user_id: 10, nick_name: "국민대CRC", exp_name: "상품명", option: "옵션", create_at: "2021-04-05", score: 4.9, text: "리뷰내용" },
@@ -109,7 +110,8 @@ const ReviewWrapper = styled.div`
         box-sizing: border-box;
         padding: 10px;
         width: 100%;
-        height: 153px;
+        min-height: 75px;
+        max-height: 153px;
         border-radius: 10px;
         background-color: #E9E9E9;
         font: normal normal normal 15px/18px Pretendard;
@@ -126,7 +128,7 @@ const ReviewWrapper = styled.div`
         margin-bottom: 11px;
     }
 `;
-const ReivewImageElement = styled.li`
+const ReivewImageElement = styled.div`
     margin-right: 15px;
     min-width: 126px;
     min-height: 126px;
@@ -208,7 +210,17 @@ class ReviewList extends React.Component {
                                     <div className="expname">{exp_name}-{option}</div>
                                     {user_id != null &&
                                         user_id === (userInfo && userInfo.uid) &&
-                                        <div className="x"> + </div>}
+                                        <button
+                                            className="x"
+                                            style={{ marginRight: "15px", border: "none", outline: "none", backgroundColor: "transparent" }}
+                                            onClick={() => this.props.delete(uid)}>
+                                            <Cross
+                                                angle={45}
+                                                color={"#FFA0A0"}
+                                                weight={5}
+                                                width={20}
+                                                height={20} />
+                                        </button>}
                                 </div>
                                 <div className="reviewlist-row ">
                                     <div className="date">{create_at}</div>
@@ -219,11 +231,11 @@ class ReviewList extends React.Component {
                             {images &&
                                 <ul className="images reviewlist-row">
                                     {images.map(({ uid, url }) =>
-                                        <a onClick={() => alert('clicked')} key={uid}>
+                                        <li onClick={() => alert('clicked')} key={uid}>
                                             <ReivewImageElement key={uid}>
                                                 <img alt="이미지" src={url} />
                                             </ReivewImageElement>
-                                        </a>)}
+                                        </li>)}
                                 </ul>}
                             <div className="review">
                                 {text}
