@@ -78,9 +78,11 @@ function App() {
             <Route path="login" element={<SignInPage />} />
             <Route path="join" element={<SignUpPage />} />
             <Route path="findPW" element={<FindPWPage />} />
+
             <Route path="play" element={<PlayExpListPage />} />
             <Route path="make" element={<MakeExpListPage />} />
             <Route path="learn" element={<LearnExpListPage />} />
+            
             <Route path="myDetail" element={<MyDetailPage />}>
               <Route path=":id" element={<MyDetailChild />} />
             </Route>
