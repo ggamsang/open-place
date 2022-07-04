@@ -11,7 +11,7 @@ class MessageDetailContainer extends React.Component {
 
     constructor(props) {
         super(props);
-        this.socket = Socket;
+        this.socket = new Socket('message');
         this.state = { online: false, more: true };
         this.send = this.send.bind(this);
     }
@@ -23,17 +23,17 @@ class MessageDetailContainer extends React.Component {
             this.props.GetMessageOpponentInfoRequest(token, group_id);
         }
         if (userInfo != null && props.userInfo == null) {
-            Socket.emit("alive", {
+            this.socket.emit("alive", {
                 gid: this.props.group_id,
                 uid: userInfo.uid,
             });
-            Socket.on("hello", () => {
+            this.socket.on("hello", () => {
                 this.setState({ online: true });
             })
-            Socket.on("bye", () => {
+            this.socket.on("bye", () => {
                 this.setState({ online: false });
             })
-            Socket.on("chat", chat => {
+            this.socket.on("chat", chat => {
                 this.setState({
                     newchat: chat
                 });
@@ -53,7 +53,7 @@ class MessageDetailContainer extends React.Component {
     }
 
     send = text =>
-        Socket.emit("chat", {
+        this.socket.emit("chat", {
             gid: this.props.group_id,
             uid: this.props.userInfo.uid,
             text: text,

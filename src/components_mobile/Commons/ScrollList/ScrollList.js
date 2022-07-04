@@ -25,11 +25,12 @@ const ScrollWrap = styled.div`
 //     // margin:${props => props.type == "sharer" ? "none" : "auto"};
 // `;
 const NoData = styled.div`
-  width:100%;
-  height:100vh;
-  display:flex;
-  justify-content:center; align-items:center;
-`
+  width: 100%;
+//   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 class ScrollList extends React.Component {
 
     constructor(props) {

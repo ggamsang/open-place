@@ -1,7 +1,7 @@
 import * as types from "actions/ActionTypes";
 import update from "react-addons-update";
 
-const initialtate = {
+const initialstate = {
   Community: { status: "INIT" },
   status: {
     articles: [],
@@ -11,7 +11,7 @@ const initialtate = {
 }
 export default function Community(state, action) {
   if (typeof state === "undefined") {
-    state = initialtate;
+    state = initialstate;
   }
   switch (action.type) {
     case types.GET_ARTICLE_TOTAL_COUNT:

@@ -1,13 +1,13 @@
 import * as types from "actions/ActionTypes";
 import update from "react-addons-update";
 
-const initialtate = {
+const initialstate = {
     CreateExp: { status: "INIT" },
     UpdateExp: { status: "INIT" },
 }
 export function UpdateExp(state, action) {
     if (typeof state === "undefined") {
-        state = initialtate;
+        state = initialstate;
     }
 
     switch (action.type) {

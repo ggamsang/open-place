@@ -1,7 +1,7 @@
 import * as types from "actions/ActionTypes";
 import update from "react-addons-update";
 
-const initialtate = {
+const initialstate = {
   Notice: { status: "INIT" },
   status: {
     notices: [],
@@ -11,7 +11,7 @@ const initialtate = {
 }
 export default function Notice(state, action) {
   if (typeof state === "undefined") {
-    state = initialtate;
+    state = initialstate;
   }
   switch (action.type) {
     case types.GET_NOTICE_TOTAL_COUNT:

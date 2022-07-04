@@ -1,14 +1,14 @@
 import * as types from "actions/ActionTypes";
 import update from "react-addons-update";
 
-const initialtate = {
+const initialstate = {
   SharerUpdate: { status: "INIT" },
   status: {
   }
 }
 export function UpdateSharer(state, action) {
   if (typeof state === "undefined") {
-    state = initialtate;
+    state = initialstate;
   }
   switch (action.type) {
     case types.UPDATE_SHARER_PROFILE:

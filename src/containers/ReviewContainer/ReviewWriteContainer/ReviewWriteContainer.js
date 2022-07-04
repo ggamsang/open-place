@@ -21,11 +21,9 @@ class ReviewWriteContainer extends React.Component {
     }
 }
 const mapStateToProps = (state) => ({
-
     expDetail: state.ExpDetail.status.expDetail,
     token: state.Authentication.status.token,
     userInfo: state.Authentication.status.userInfo,
-
 });
 const mapDispatchToProps = (dispatch) => ({
     GetExpReviewListRequest: (id) => dispatch(GetExpReviewListRequest(id)),

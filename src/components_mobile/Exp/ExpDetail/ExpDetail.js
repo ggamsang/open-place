@@ -120,16 +120,19 @@ class ExpDetail extends React.Component {
     this.setState({ sub: false });
     setTimeout(() => {
       this.setState({ main: true })
-    }, 1000)
+    }, 1000);
   }
   onClickDetail = (event) => {
     this.setState({ main: false });
     setTimeout(() => {
       this.setState({ sub: true })
-    }, 1000)
+    }, 1000);
   }
   onClickLike = (event) => {
     this.setState({ like: !this.state.like });
+  }
+  onClickBuy = (event) => {
+    
   }
   onClickModify = (event) => {
     window.location.href = `/ModifyExp/${this.props.expDetail.uid}`
@@ -193,6 +196,19 @@ class ExpDetail extends React.Component {
                   fontSize={15}
                   bgColor={"#707070"}
                   text="상세정보"
+                />
+              </div>
+
+              <div className='buttonWrap'>
+                <ButtonNormal
+                  onClickEvent={this.onClickBuy}
+                  width={155}
+                  height={35}
+                  radius={10}
+                  fontSize={15}
+                  bgColor={"red"}
+                  text={"♥구매하기"}
+                  style={{ marginRight: "25px" }}
                 />
               </div>
             </div>
