@@ -1,7 +1,7 @@
 import * as types from "actions/ActionTypes";
 import update from "react-addons-update";
 
-const initialtate = {
+const initialstate = {
     Category: { status: "INIT" },
     Bank_code: { status: "INIT" },
     Exp_type: { status: "INIT" },
@@ -15,7 +15,7 @@ const initialtate = {
 }
 export function DefaultList(state, action) {
     if (typeof state === "undefined") {
-        state = initialtate;
+        state = initialstate;
     }
 
     switch (action.type) {

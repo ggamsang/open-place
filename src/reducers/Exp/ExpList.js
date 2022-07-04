@@ -2,7 +2,7 @@ import { type } from "@testing-library/user-event/dist/type";
 import * as types from "actions/ActionTypes";
 import update from "react-addons-update";
 
-const initialtate = {
+const initialstate = {
   ExpList:{status:"INIT"},
   status:{
     exp_list:[],
@@ -11,7 +11,7 @@ const initialtate = {
 }
 export function ExpList(state,action){
     if(typeof state === "undefined"){
-      state = initialtate;
+      state = initialstate;
     }
 
     switch(action.type){

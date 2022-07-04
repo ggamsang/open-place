@@ -1,7 +1,7 @@
 import * as types from "actions/ActionTypes";
 import update from "react-addons-update";
 
-const initialtate = {
+const initialstate = {
   AlarmList:{status:"INIT"},
   status:{
     alarmList:[],
@@ -9,7 +9,7 @@ const initialtate = {
 }
 export function AlarmList(state,action){
     if(typeof state === "undefined"){
-      state = initialtate;
+      state = initialstate;
     }
 
     switch(action.type){
