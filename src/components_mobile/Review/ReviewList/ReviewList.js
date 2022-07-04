@@ -119,6 +119,7 @@ const ReviewWrapper = styled.div`
         color: #000000;
     }
     .images {
+        list-style: none;
         box-sizing: border-box;
         padding: 0px;
         margin: 0px;
@@ -163,13 +164,6 @@ const ReivewImageElement = styled.div`
     }
 `;
 class ReviewList extends React.Component {
-    // ({ reviews = reviewdummy, userInfo })
-    // const [writeReview = false, setWriteReview] = useState();
-    // const openModal = () => {
-    //     alert('');
-    //     setWriteReview(true);
-    // }
-    // return ()
     constructor(props) {
         super(props);
         this.state = {
@@ -180,6 +174,7 @@ class ReviewList extends React.Component {
     render() {
         const { reviews = reviewdummy, userInfo } = this.props;
         const { write } = this.state;
+        console.log(reviews);
 
         return (<>
             <ButtonNormal
@@ -202,12 +197,12 @@ class ReviewList extends React.Component {
 
             <ReviewContainer>
                 {reviews &&
-                    reviews.map(({ uid, user_id, create_at, text, images, nick_name, exp_name, option, score }) =>
+                    reviews.map(({ uid, user_id, create_at, text, review_image_list: images, nick_name, exp_name, option, score }) =>
                         <ReviewWrapper key={uid}>
                             <div className="review-wrapper-top">
                                 <div className="reviewlist-row">
                                     <div className="nickname">{nick_name}</div>
-                                    <div className="expname">{exp_name}-{option}</div>
+                                    <div className="expname">{exp_name}{option?"-"+option:""}</div>
                                     {user_id != null &&
                                         user_id === (userInfo && userInfo.uid) &&
                                         <button
@@ -230,9 +225,10 @@ class ReviewList extends React.Component {
                             </div>
                             {images &&
                                 <ul className="images reviewlist-row">
-                                    {images.map(({ uid, url }) =>
-                                        <li onClick={() => alert('clicked')} key={uid}>
-                                            <ReivewImageElement key={uid}>
+                                    {images.split(",").map((url, index) =>
+                                    // onclick="window.open(this.src, '_blank');"
+                                        <li onClick={() => window.open(url,"_blank")} key={index}>
+                                            <ReivewImageElement>
                                                 <img alt="이미지" src={url} />
                                             </ReivewImageElement>
                                         </li>)}

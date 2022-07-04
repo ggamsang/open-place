@@ -5,6 +5,7 @@ import Modal from 'react-awesome-modal';
 import styled from 'styled-components';
 import Cross from "components_mobile/Commons/Cross";
 import { Rating } from 'react-simple-star-rating';
+import { FileUploadRequest } from "actions/Uploads";
 
 const Wrapper = styled.div`
     box-sizing: border-box;
@@ -50,18 +51,18 @@ const Wrapper = styled.div`
         background-color: #E9E9E9;
 
         label {
-            // height: 16px;
+            
             text-align: left;
             font: normal normal medium 13px/16px Noto Sans KR;
             letter-spacing: 0px;
             color: #707070;
         }
-
         margin-bottom: 10px;
     }
     .buttons {
         margin: auto;
-        margin-top: 28px;
+        margin-top: 10px;
+        margin-bottom: 10px;
         width: max-content;
         display: flex;
         flex-direction: row;
@@ -88,50 +89,72 @@ const Wrapper = styled.div`
         display: flex;
         flex-direction: row;
     }
+    .mini_pic_list{
+        width: 200px;
+        height: max-content;
+        display: flex;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        ::-webkit-scrollbar-track {
+            height: 4px;
+            border-radius: 4px;
+            background-color: #EEEEEE;
+        }
+        ::-webkit-scrollbar {
+            height: 4px;
+            background-color: #EEEEEE;
+        }
+        ::-webkit-scrollbar-thumb {
+            height: 4px;
+            border-radius: 2px;
+            background-color:  #707070;
+        }
+    }
 `;
-// const AddPic = styled.div`
-//     min-width:${props => props.width}px;
-//     min-height:${props => props.height}px;
-//     max-width:${props => props.width}px;
-//     max-height:${props => props.height}px;
+const AddPic = styled.div`
+    min-width:${props => props.width}px;
+    min-height:${props => props.height}px;
+    max-width:${props => props.width}px;
+    max-height:${props => props.height}px;
 
-//     margin-right:${props => props.marginRight == null ? 0 : props.marginRight}px;
+    margin-right:${props => props.marginRight == null ? 0 : props.marginRight}px;
 
-//     background-color: #efefef;
-//     background-image: url(${props => props.img});
-//     background-size:cover;
-//     border-radius:10px;
-//     display:flex;
-//     flex-direction:column;
-//     justify-content:center;
-//     align-items:center;
-//     position:relative;
-//     cursor:pointer;
-//     border:1px solid #eaeaea;
-//     .deleteButton{
-//         display:none;
-//         z-index:999;
-//     }
-//     .text{
-//         font-size: 20px;
-//         color:#afafaf;
-//     }
-//     &:hover{
-//         .deleteButton{
-//             display:block;
-//             width:18px;
-//             height:18px;
-//             border-radius:11px;
-//             color:white;
-//             background-color:#afafaf;
-//             padding:4px 3px;
-//             position:absolute;
-//             right:-5px;
-//             top:-5px;
+    background-color: #efefef;
+    background-image: url(${props => props.img});
+    background-size:cover;
+    border-radius:10px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    cursor:pointer;
+    border:1px solid #eaeaea;
+    .deleteButton{
+        display:none;
+        z-index:999;
+    }
+    .text{
+        font-size: 20px;
+        color:#afafaf;
+    }
+    &:hover{
+        .deleteButton{
+            display:block;
+            width:18px;
+            height:18px;
+            border-radius:11px;
+            color:white;
+            background-color:#afafaf;
+            padding:4px 3px;
+            position:absolute;
+            right:-5px;
+            top:-5px;
     
-//         }
-//     }
-// `;
+        }
+    }
+`;
+
 export default class ReviewWriteModal extends React.Component {
     closeModal = () => {
         this.props.close();
@@ -150,10 +173,35 @@ export default class ReviewWriteModal extends React.Component {
             visible: this.props.open, effect: "fadeInUp"
         }
     }
-    onSubmit = () => {
-        const { score, text, /*thumbnail*/ } = this.state;
+    onCancel = () => {
+        // warning: 작성한거 날아감. 오키?
+
+        this.closeModal();
+    }
+    onSubmit = async () => {
+        const { score, text, thumbnail, files } = this.state;
         const { expDetail, userInfo, } = this.props;
-        const obj = { user_id: userInfo.uid, exp_id: expDetail.uid, score: parseInt(score / 20), text: text };
+
+        const review_image_list = thumbnail &&
+            await Promise.all(
+                thumbnail.map(async (item, index) => {
+                    // console.log(item);
+                    if (item.indexOf("https://s3") == -1) {
+                        const file = files[index];
+                        const s3path = await FileUploadRequest([file]);
+                        // console.log(s3path);
+                        return s3path.path;
+                    } else {
+                        return item;
+                    }
+                }));
+        const obj = {
+            user_id: userInfo.uid,
+            exp_id: expDetail.uid,
+            score: parseInt(score / 20),
+            text: text,
+            review_image_list: review_image_list.join(","),
+        };
         this.props.submit(obj);
     }
     onChangedRating = (star) => this.setState({ score: star });
@@ -179,11 +227,13 @@ export default class ReviewWriteModal extends React.Component {
             reader.readAsDataURL(file);
         }
     };
+
     render() {
-        // const { files } = this.state;
+        const { expDetail } = this.props;
+        let imgCount = 0;
 
         return (
-            <Modal {...this.modal_option} onClickAway={()=>alert('?')}>
+            <Modal {...this.modal_option} onClickAway={() => alert('?')}>
                 <Wrapper>
                     <div className='modal-header row'>
                         <div className='title'>리뷰 등록</div>
@@ -200,11 +250,57 @@ export default class ReviewWriteModal extends React.Component {
                     </div>
                     <div className='row'>
                         {/* images */}
+                        <div className="mini_pic_list">
+                            {this.state.thumbnail &&
+                                this.state.thumbnail.length > 0 ?
+                                this.state.thumbnail.map((item, index) =>
+                                    <React.Fragment>
+                                        <input hidden onChange={(event) => this.handleOnChangeThumbnail(event, index)} id={`file${index}`} type="file" accept="image/*" />
+                                        <label onClick={() => { console.log(imgCount) }} htmlFor={`file${index}`}>
+                                            <AddPic key={index} width={100} height={100} marginRight={15} img={item}>
+                                                <div className="deleteButton"
+                                                    onClick={async (e) => {
+                                                        e.preventDefault();
+                                                        let copy = [...this.state.thumbnail];
+                                                        copy.splice(index, 1);
+                                                        await this.setState({ thumbnail: copy });
+                                                    }}
+                                                ><Cross angle={45} color={"white"} weight={2} width={10} height={10} /></div>
+                                            </AddPic>
+                                        </label>
+                                    </React.Fragment>
+                                ) : null}
 
+                            {this.state.thumbnail &&
+                                this.state.thumbnail.length >= 5 ?
+                                null
+                                :
+                                <React.Fragment>
+                                    <input hidden
+                                        onChange={(event) =>
+                                            this.handleOnChangeThumbnail(event,
+                                                this.state.thumbnail && this.state.thumbnail.length < 0
+                                                    ? 0
+                                                    : this.state.thumbnail.length)}
+                                        id={`addfile`}
+                                        type="file"
+                                        accept="image/*" />
+                                    <label htmlFor={`addfile`}>
+                                        <AddPic width={100} height={100} marginRight={15}>
+                                            {/* <div className="deleteButton">
+                                                <Cross angle={45} color={"white"} weight={2} width={10} height={10} />
+                                            </div> */}
+                                            <div className="text">+</div>
+                                            <div>사진 추가하기</div>
+                                        </AddPic>
+                                    </label>
+                                </React.Fragment>}
+
+                        </div>
                         {/* info */}
                         <div className='info'>
-                            <div className='item-name'>아이템이름</div>
-                            <div className='info-ext'>추가정보</div>
+                            <div className='item-name'>{expDetail.title || "아이템이름"}</div>
+                            <div className='info-ext'>{expDetail.option || ""}</div>
                             <div className='score'>
                                 <Rating
                                     onClick={this.onChangedRating}
@@ -214,7 +310,11 @@ export default class ReviewWriteModal extends React.Component {
                         </div>
                     </div>
                     <div className='write-review'>
-                        <textarea id="text" onChange={e => this.setState({ text: e.target.value })} value={this.state.text} placeholder='리뷰를 작성해주세요.' />
+                        <textarea
+                            id="text"
+                            onChange={e => this.setState({ text: e.target.value })}
+                            value={this.state.text}
+                            placeholder='리뷰를 작성해주세요.' />
                     </div>
                     <div className='buttons'>
                         <ButtonNormal
@@ -229,83 +329,21 @@ export default class ReviewWriteModal extends React.Component {
                                 backgroundColor: "red",
                             }} text={"작성완료"} />
 
-                        <ButtonNormal style={{
-                            width: "155px",
-                            height: "35px",
-                            background: "#707070 0% 0% no-repeat padding-box",
-                            boxShadow: "2px 2px 3px #00000019",
-                            borderRadius: "10px",
-                            marginLeft: "auto",
-                            color: "white",
-                            backgroundColor: "gray",
-                        }} text={"취소"} />
+                        <ButtonNormal
+                            onClick={() => this.onCancel()}
+                            style={{
+                                width: "155px",
+                                height: "35px",
+                                background: "#707070 0% 0% no-repeat padding-box",
+                                boxShadow: "2px 2px 3px #00000019",
+                                borderRadius: "10px",
+                                marginLeft: "auto",
+                                color: "white",
+                                backgroundColor: "gray",
+                            }} text={"취소"} />
                     </div>
                 </Wrapper>
             </Modal>
         );
     }
 }
-
-
-
-// {this.state.thumbnail &&
-    //     this.state.thumbnail.length > 0 &&
-    //     <div style={{
-    //         display: "flex",
-    //         flexDirection: "row",
-    //         width: "100px",
-    //         height: "100px",
-    //         overflow: "hidden",
-    //         position: "relative"
-    //     }}>
-    //         <div style={{
-    //             position: "absolute",
-    //             top: "0",
-    //             bottom: "-15px",
-    //             left: "0",
-    //             right: "0",
-    //             overflow: "hidden",
-    //             overflowX: "scroll"
-    //         }}>
-    //             {this.state.thumbnail.map((item, index) =>
-    //                 <React.Fragment>
-    //                     <input hidden onChange={(event) => this.handleOnChangeThumbnail(event, index)} id={`file${index}`} type="file" accept="image/*" />
-    //                     <label htmlFor={`file${index}`}>
-    //                         <AddPic key={index} width={100} height={100} marginRight={15} img={item}>
-    //                             <div className="deleteButton"
-    //                                 onClick={async (e) => {
-    //                                     e.preventDefault();
-    //                                     let copy = [...this.state.thumbnail];
-    //                                     copy.splice(index, 1);
-    //                                     await this.setState({ thumbnail: copy });
-    //                                 }}
-    //                             >
-    //                                 <Cross angle={45} color={"white"} weight={2} width={10} height={10} />
-    //                             </div>
-    //                         </AddPic>
-    //                     </label>
-    //                 </React.Fragment>)}
-    //         </div>
-    //     </div>}
-    
-    // {this.state.thumbnail &&
-    //     this.state.thumbnail.length < 2 &&
-    //     <React.Fragment>
-    //         <input hidden
-    //             onChange={(event) => this.handleOnChangeThumbnail(event, this.state.thumbnail && this.state.thumbnail.length < 0 ? 0 : this.state.thumbnail.length)}
-    //             id={`addfile`} type="file" accept="image/*" />
-    //         <label htmlFor={`addfile`}>
-    //             <AddPic width={100} height={100} marginRight={15}>
-    //                 {/* <div className="deleteButton"><Cross angle={45} color={"white"} weight={2} width={10} height={10} /></div> */}
-    //                 <div className="text">+</div>
-    //                 <div>사진 추가하기</div>
-    //             </AddPic>
-    //         </label>
-    //     </React.Fragment>}
-    
-    // {/* 
-    // <label htmlFor='add-image' className='image-selector'>
-    //     <input type="file" id="add-image" hidden />
-    //     {files && files}<img />
-    // </label> 
-    // */}
