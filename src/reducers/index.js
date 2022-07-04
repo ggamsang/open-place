@@ -11,6 +11,7 @@ import { User } from "reducers/User/User";
 import { UpdateSharer } from "reducers/Sharer/UpdateSharer"
 import { ExpDetail } from "reducers/Exp";
 import { ExpList } from "reducers/Exp";
+import { ExpBought } from "reducers/Exp";
 import { combineReducers } from "redux";
 import { Review } from "./Review";
 
@@ -30,4 +31,6 @@ export default combineReducers({
     ExpDetail,
     Review,
     ExpList,
+    ExpBought,
+    
 });
