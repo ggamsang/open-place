@@ -18,7 +18,7 @@ import { SignOutRequest } from 'actions/Authentication';
 import {
   getUserPointRequest, setUserPointRequest, getUserPointHistoryReqeust,
   getUserRegisterExpRequest, getUserSellExpRequest, getUserLikeSharerRequest,
-  getUserLikeExpRequest, getUserBoughtExpRequest,
+  getUserLikeExpRequest, // getUserBoughtExpRequest,
 } from "actions/User/MyDetail"
 import { goto } from 'navigator';
 

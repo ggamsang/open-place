@@ -31,7 +31,7 @@ import { GET } from "constant";
             method: "POST",
             body: JSON.stringify(data)
           })
-          .then(res=>res.json)
+          .then(res=>res.json())
           .then(res=>res&&dispatch(updateUserSuccess()))
           .catch(err=>dispatch(updateUserFailure(err)))
     }

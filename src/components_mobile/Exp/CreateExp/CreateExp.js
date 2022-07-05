@@ -73,8 +73,8 @@ class CreateExp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tag: null,
-      thumbnail: null, thumbnail_name: null, title: null, type: 0, info: null
+      tag: null, thumbnail: null, thumbnail_name: null, 
+      title: null, type: 0, info: null
     }
     this.onChangeThumbnail = this.onChangeThumbnail.bind(this);
     this.onChangeTitle = this.onChangeTitle.bind(this);
@@ -83,12 +83,14 @@ class CreateExp extends React.Component {
     this.onChangeInfo = this.onChangeInfo.bind(this);
     this.onChangePrice = this.onChangePrice.bind(this);
     this.onClickOK = this.onClickOK.bind(this);
-
   }
-
+  
   onChangeTitle = (event) => {
-    this.setState({ title: event.target.value })
+    this.setState({ 
+      title: event.target.value 
+    });
   }
+
   handleAddTag = (tag) => {
     this.setState({
       tag: tag.slice(),
@@ -97,14 +99,21 @@ class CreateExp extends React.Component {
   onChangePrice = (price) => {
     this.setState({
       price: price,
-    })
+    });
   }
+
   onChangeType = (event) => {
-    this.setState({ type: event.target.value });
+    this.setState({ 
+      type: event.target.value 
+    });
   }
+
   onChangeInfo = (event) => {
-    this.setState({ info: event.target.value })
+    this.setState({ 
+      info: event.target.value 
+    });
   }
+
   onChangeThumbnail = async (event) => {
     event.preventDefault();
     const reader = new FileReader();
@@ -128,15 +137,14 @@ class CreateExp extends React.Component {
       reader.readAsDataURL(file);
     }
   };
+
   onClickOK = async (event) => {
     const { thumbnail, title, tag, info, price, type } = this.state;
     const data = {
       user_id: this.props.userInfo.uid,
       title: title, taglist: tag, info: info, price: price, type: type,
       files: [],
-    }
-
-    console.log(data);
+    };
     let file = { value: this.state.thumbnail, name: this.state.thumbnail_name, key: 0 };
 
     if (thumbnail != null) { await data.files.push(file); } // thumbnail 썸네일이 있을 경우에만 
@@ -151,6 +159,7 @@ class CreateExp extends React.Component {
   }
   render() {
     console.log(this.props);
+
     return (
       <Wrapper>
         <div className='header'>
@@ -160,9 +169,9 @@ class CreateExp extends React.Component {
         <div className='content'>
           <div className='whitebox'>
             {
-              this.state.thumbnail==null?
-              <div className='img_'/>:
-              <img src={this.state.thumbnail} className="img_" alt="profile" />              
+              this.state.thumbnail == null ?
+                <div className='img_' /> :
+                <img src={this.state.thumbnail} className="img_" alt="profile" />
             }
             <div className='wrap'>
               <div style={{ marginBottom: "9px" }}><span className="label">제목</span><sup style={{ color: "red" }}>*</sup><span className="text">국민대CRC</span></div>

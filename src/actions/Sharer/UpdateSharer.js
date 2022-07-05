@@ -13,7 +13,7 @@ export const updateSharerProfileRequest = (user_id,data,token) => {
           method: "POST",
           body: JSON.stringify(data)
         })
-        .then(res=>res.json)
+        .then(res=>res.json())
         .then(res=>res&&dispatch(updateSharerProfileSuccess()))
         .catch(err=>{
           console.log(err);

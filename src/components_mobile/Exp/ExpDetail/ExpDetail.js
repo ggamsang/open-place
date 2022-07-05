@@ -132,7 +132,7 @@ class ExpDetail extends React.Component {
     this.setState({ like: !this.state.like });
   }
   onClickBuy = (event) => {
-    
+
   }
   onClickModify = (event) => {
     window.location.href = `/ModifyExp/${this.props.expDetail.uid}`
@@ -150,6 +150,8 @@ class ExpDetail extends React.Component {
   render() {
     const { expDetail } = this.props;
     let taglist = expDetail && this.tagSprintToAry(expDetail.taglist);
+    console.log("FOO", this.props);
+    
     return (expDetail
       ? <Wrapper>
         <div className='searchbox'>
@@ -219,12 +221,16 @@ class ExpDetail extends React.Component {
           <section style={{ display: `${this.state.sub == true ? "block" : "none"}` }}>
             <div className='content'>
               <div className='title'>
-                <div onClick={this.onClickMain}>〈</div>상세정보<div /></div>
+                <div onClick={this.onClickMain}>〈</div>
+                상세정보<div />
+              </div>
+
               <img src={expDetail && expDetail.thumbnail} className="img img2" />
 
-              <div style={{ color: "white", padding: "100px 40px" }}>
+              {/* <div style={{ color: "white", padding: "100px 40px" }}>
                 상세 내용은 현재 논의중이며 블로그형, 프로젝트형, 그룹형 모두 다릅니다.
-              </div>
+              </div> */}
+
               <div className='buttonWrap2'>
                 <ButtonNormal
                   onClickEvent={this.onClickModify}

@@ -4,7 +4,7 @@ import host from "config";
 export const getExpDetailRequest = (item_id) => {
     return (dispatch) => {
       dispatch(getExpDetail());
-      const url = `${host}/exp/detail/${item_id}`;
+      const url = `${host}/exp/${item_id}`;
       return fetch(url, {
         headers: { "Content-Type": "application/json" }, method: "GET"
       })
