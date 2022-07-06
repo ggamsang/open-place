@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import styled from 'styled-components';
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 import { WIDTH } from 'constant';
 import { goto } from 'navigator';
 
+import { Editor } from 'commons/Editor/Editor';
+import { InputFile } from 'components_mobile/Commons/Input';
 const Wrapper = styled.div`
   .blanker {
     height: 44px;
@@ -133,6 +135,7 @@ const WriteForm = styled.form`
   }
   .t-area-wrapper {
     position: relative;
+    margin-top:20px;
   }
   .floating-text {
     position: absolute;
@@ -141,7 +144,27 @@ const WriteForm = styled.form`
   }
 `;
 
+const config = {
+  readonly: false,
+  height: 275,
+  uploader: {
+    insertImageAsBase64URI: true
+  },
+  allowResizeX: false,
+  allowResizeY: false,
+  enableDragAndDropFileToEditor: true,
+
+  tabIndex: 0,
+  language: 'ko',
+  i18n: 'ko',
+  useSplitMode: false,
+  showXPathInStatusbar: false,
+  direction: 'ltr',
+  resize: false,
+  toolbarButtonSize: 'small',
+}
 export default class CommunityWrite extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -149,8 +172,12 @@ export default class CommunityWrite extends React.Component {
       title: "",
       content: "",
       head: "",
+      files:[],
     };
+    this.onChangeContent = this.onChangeContent.bind(this);
+    this.onFileChange = this.onFileChange.bind(this);
   }
+
 
   onChangeValueTitle = async (e) => {
     await this.setState({ title: e.target.value });
@@ -164,8 +191,9 @@ export default class CommunityWrite extends React.Component {
   onChangeValueHead = async (e) => {
     await this.setState({ head: e.target.value });
   }
-  onChangeValueContent = async (e) => {
-    await this.setState({ content: e.target.value });
+  onChangeContent = async (value) => {
+    console.log(value);
+    await this.setState({ content: value });
     if (this.state.content !== "" && this.state.title !== "") {
       this.setState({ couldwrite: true });
     } else {
@@ -194,11 +222,17 @@ export default class CommunityWrite extends React.Component {
   }
   onWrite = (e) => {
     e.preventDefault();
-    const { content, title, head } = this.state;
-    const data = { text: content, title: title, head: head };
-    this.props.Write(data).then(goto("COMMUNITY"));
+    const { content, title, head, files } = this.state;
+    const data = { text: content, title: title, head: head, files:JSON.stringify(files) };
+    console.log(data)
+    this.props.Write(data)
+      .then(goto("COMMUNITY"));
   }
-
+   onFileChange = async(files) =>{
+    this.setState({
+      files:[].concat(files),
+    })
+  }
   render() {
 
     return (<Wrapper>
@@ -207,7 +241,6 @@ export default class CommunityWrite extends React.Component {
         <SearchForm />
         <div className='title'>게시글 등록하기</div>
       </div>
-
       <WriteForm>
         <div className='form'>
           <div className='label'>게시글 작성</div>
@@ -224,39 +257,28 @@ export default class CommunityWrite extends React.Component {
             </div>
           </div>
 
-          <div className='rows top13'>
+          {/* <div className='rows top13'>
             <div className='label'>
               말머리
             </div>
-
             <div>
               <input
                 value={this.state.head}
                 onChange={this.onChangeValueHead} />
             </div>
-          </div>
-
+          </div> */}
           <div className='t-area-wrapper'>
-            <div className='floating-text' id='floating-text'>
-              <div className='label'>
-                내용<font color="red">*</font>
-              </div>
-            </div>
-
-            <textarea
-              value={this.state.content}
-              onFocus={this.hideFloatingText}
-              onBlur={this.checkToShowFloatingText}
-              onChange={this.onChangeValueContent} />
+            <Editor value={this.state.content} config={config} onChange={(value) => this.onChangeContent(value)} />
           </div>
-
+          <div className="wrapper flex">
+            <InputFile display={true} getValue={this.onFileChange}  accept="" />
+          </div>
         </div>
         <div className='button-wrapper rows top13'>
           <Button
             disabled={!this.state.couldwrite}
             onClick={this.onWrite}
             active={this.state.couldwrite}>
-
             <div className="text">등록하기</div>
           </Button>
 

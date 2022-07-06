@@ -9,12 +9,18 @@ import DropDownNormal from 'components_mobile/Commons/DropDown/DropDownNormal';
 import TextAreaNormal from 'components_mobile/Commons/TextArea/TextAreaNormal';
 import { InputPrice } from 'components_mobile/Commons/Input';
 import AddContent from 'components_mobile/Commons/AddContent/AddContent';
+import { goto } from 'navigator';
+import { InputFile } from 'components_mobile/Commons/Input';
+import { Editor } from 'commons/Editor/Editor';
+import Jodit from 'commons/Jodit';
 
 const Wrapper = styled.div`
     *{
       box-sizing:border-box;
     }
     width:100%;
+    box-sizing:border-box;
+    padding-bottom:30px;
     background: linear-gradient(205deg,#bf1d39,#8448b6);
     .header{
       width:100%;
@@ -62,18 +68,43 @@ const Wrapper = styled.div`
           display:flex;align-items:center;
         }
       }
+      .buttonWrap{
+        width:100%;
+        display:flex;
+        justify-content:space-between;
+        margin-top:20px;
+      }
 
     }
     }
 `
+const config = {
+  readonly: false,
+  height: 275,
+  uploader: {
+    insertImageAsBase64URI: true
+  },
+  allowResizeX: false,
+  allowResizeY: false,
+  enableDragAndDropFileToEditor: true,
 
+  tabIndex: 0,
+  language: 'ko',
+  i18n: 'ko',
+  useSplitMode: false,
+  showXPathInStatusbar: false,
+  direction: 'ltr',
+  resize: false,
+  toolbarButtonSize: 'small',
+}
 class ModifyExp extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       tag: null,
-      thumbnail: null, thumbnail_name: null, title: null, type: 0, info: null, price:0,
+      thumbnail: null, thumbnail_name: null, title: null, type: 0, info: null, price: 0, exp_files: [],
+      content: null,
     }
     this.onChangeThumbnail = this.onChangeThumbnail.bind(this);
     this.onChangeTitle = this.onChangeTitle.bind(this);
@@ -82,30 +113,46 @@ class ModifyExp extends React.Component {
     this.onChangeInfo = this.onChangeInfo.bind(this);
     this.onChangePrice = this.onChangePrice.bind(this);
     this.onClickOK = this.onClickOK.bind(this);
+    this.onChangeContent = this.onChangeContent.bind(this);
+    this.onFileChange = this.onFileChange.bind(this);
 
   }
-  async componentDidUpdate(prevProps){
-    if(JSON.stringify(prevProps.expDetail)!=JSON.stringify(this.props.expDetail)){
-      // let taglist = this.props.expDetail&&this.props.expDetail.taglist;
-      // taglist = taglist&&taglist.replace("[","");
-      // taglist = taglist&&taglist.replace("]","");
-      // taglist = taglist && taglist.split(",")&&taglist.split(",").map(async(item,index)=>{
-      //   return item+" | ";
-      // })   
+  async componentDidUpdate(prevProps) {
+    if (JSON.stringify(prevProps.expDetail) != JSON.stringify(this.props.expDetail)) {
+      console.log(this.props);
       await this.setState({
-        thumbnail:this.props.expDetail&&this.props.expDetail.thumbnail,
-        title:this.props.expDetail&&this.props.expDetail.title,
-        tag:this.props.expDetail&&this.props.expDetail.taglist,
-        type:this.props.expDetail&&this.props.expDetail.type,
-        info:this.props.expDetail&&this.props.expDetail.info,
-        price:this.props.expDetail&&this.props.expDetail.price,
+        thumbnail: this.props.expDetail && this.props.expDetail.thumbnail,
+        title: this.props.expDetail && this.props.expDetail.title,
+        tag: [],
+        type: this.props.expDetail && this.props.expDetail.category,
+        info: this.props.expDetail && this.props.expDetail.info,
+        price: this.props.expDetail && this.props.expDetail.price,
+        content: this.props.expDetail && this.props.expDetail.content,
+        exp_files: this.props.expDetail && JSON.parse(this.props.expDetail.exp_files),
+      }, () => {
+        let taglist = this.props.expDetail && this.props.expDetail.taglist;
+        taglist = taglist && taglist.replace("[", "");
+        taglist = taglist && taglist.replace("]", "");
+        taglist = taglist && taglist.replace("\"", "");
+        taglist = taglist && taglist.split(",") && taglist.split(",");
+        console.log(taglist);
+        this.setState({
+          tag: [].concat(taglist)
+        })
       })
+      this.props.expDetail&&await this.setState({
+        exp_files:this.props.expDetail==null?[]:JSON.parse(this.props.expDetail.exp_files)
+      },()=>{console.log(this.state)})
     }
   }
 
   onChangeTitle = (event) => {
     this.setState({ title: event.target.value })
   }
+  onChangeContent = async(value) => {
+    await this.setState({ content: value });
+  }
+
   handleAddTag = (tag) => {
     this.setState({
       tag: tag.slice(),
@@ -121,6 +168,11 @@ class ModifyExp extends React.Component {
   }
   onChangeInfo = (event) => {
     this.setState({ info: event.target.value })
+  }
+  onFileChange = async (files) => {
+    this.setState({
+      exp_files: [].concat(files),
+    })
   }
   onChangeThumbnail = async (event) => {
     event.preventDefault();
@@ -146,30 +198,33 @@ class ModifyExp extends React.Component {
     }
   };
   onClickOK = async (event) => {
-    const { thumbnail, title, tag, info, price, type } = this.state;
+    const { thumbnail, thumbnail_name, title, tag, info, price, type, exp_files, content } = this.state;
     let data = {
-      user_id:this.props.userInfo.uid,
-      item_id:this.props.item_id,
-      title: title, taglist: tag, info: info, price: price, type: type,
-      files: [],
+      user_id: this.props.userInfo.uid,
+      item_id: this.props.item_id,
+      title: title, taglist: tag, info: info, price: price, type: type, content:content,
+      files: [], exp_files: JSON.stringify(exp_files)
     }
-    console.log(data);
+    // if (this.state.thumbnail != null || this.state.thumbnail !== "") {
+    //   data.files.push(file);
+    // }
+    // if (data.files.length <= 0 || data.files[0].value === (this.props.MakerDetail && this.props.MakerDetail.image)) {
+    //   delete data.files;
+    // }
     let file = { value: this.state.thumbnail, name: this.state.thumbnail_name, key: 0 };
 
-    if (thumbnail != null) { await data.files.push(file); } // thumbnail 썸네일이 있을 경우에만 
+    console.log(data);
+    if (thumbnail_name != null) { await data.files.push(file); } // thumbnail 썸네일이 있을 경우에만 
+    if (data.files.length <= 0 || data.files[0].value === (this.props.expDetail && this.props.expDetail.image)) {
+      delete data.files;
+    }
     // if (title == null || title == "") return alert("제목을 입력하세요");
     // if (info == null || info == "") return alert("내용을 입력하세요");
 
-    this.props.updateExpRequest(data, this.props.token)
+    this.props.updateExpRequest(this.props.item_id, data, this.props.token)
     window.history.go(-1);
   }
   render() {
-    let taglist = this.state.tag||[];
-    taglist = taglist&&taglist!=""&&taglist.replace("[","");
-    taglist = taglist&&taglist!=""&&taglist.replace("]","");
-    taglist = taglist&&taglist!=""&&taglist.split(",");
-
-    console.log(taglist)
     return (
       <Wrapper>
         <div className='header'>
@@ -179,11 +234,11 @@ class ModifyExp extends React.Component {
         <div className='content'>
           <div className='whitebox'>
             {
-              this.state.thumbnail==null?
-              <div className='img_'/>:
-              <img src={this.state.thumbnail} className="img_" alt="profile" />              
+              this.state.thumbnail == null ?
+                <div className='img_' /> :
+                <img src={this.state.thumbnail} className="img_" alt="profile" />
             }            <div className='wrap'>
-              <div style={{ marginBottom: "9px" }}><span className="label">제목</span><sup style={{ color: "red" }}>*</sup><span className="text">{this.state.title}</span></div>
+              {/* <div style={{ marginBottom: "9px" }}><span className="label">제목</span><sup style={{ color: "red" }}>*</sup><span className="text">{this.state.title}</span></div> */}
               <label className="findThumbnailText" htmlFor="file">
                 <ButtonNormal
                   width={194}
@@ -206,12 +261,12 @@ class ModifyExp extends React.Component {
           </div>
           <div className='row'>
             <div className='label'>태그<sup style={{ color: "red" }}>*</sup></div>
-            <div><InputTag taglist={taglist} getValue={this.handleAddTag} width={"245"} /></div>
+            <div><InputTag taglist={this.state.tag} getValue={this.handleAddTag} width={"245"} /></div>
           </div>
           <div className='row'>
             <div className='label'>경험 유형<sup style={{ color: "red" }}>*</sup></div>
             <DropDownNormal
-              value={this.state.type}
+              value={this.state.type-1}
               onChangeValue={this.onChangeType}
               width={150} height={31} radius={10}
               options={this.props.category} />
@@ -233,9 +288,37 @@ class ModifyExp extends React.Component {
               <InputPrice price={this.state.price} onChangeValue={this.onChangePrice} name="price" />
             </div>
           </div>
-          <div className='row'>
-            <AddContent
-              onModify={this.onClickOK}
+          <div className='row' style={{ flexDirection: "column" }}>
+            <div className='label'>경험 컨텐츠</div>
+            <div style={{ backgroundColor: "white" }}>
+              <Jodit value={this.state.content} config={config} onChange={(value) => this.onChangeContent(value)} />
+            </div>
+          </div>
+          <div className=''>
+            {
+              this.state.exp_files&&
+              <InputFile files={this.state.exp_files} display={true} getValue={this.onFileChange} accept="" />
+            }
+          </div>
+          <div className='buttonWrap'>
+            <ButtonNormal
+              onClickEvent={() => goto("BACK")}
+              width={165}
+              height={35}
+              radius={10}
+              fontSize={15}
+              bgColor={"#707070"}
+              text="취소하기"
+              style={{ marginRight: "25px" }}
+            />
+            <ButtonNormal
+              onClickEvent={this.onClickOK}
+              width={165}
+              height={35}
+              radius={10}
+              fontSize={15}
+              bgColor={"red"}
+              text="등록하기"
             />
           </div>
         </div>

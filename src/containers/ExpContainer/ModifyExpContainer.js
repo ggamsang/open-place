@@ -35,8 +35,8 @@ const mapDispatchToProps = (dispatch) => ({
   getExpTypeListReqeuest: () => {
     return dispatch(getExpTypeListReqeuest())
   },
-  updateExpRequest: (data,token) => {
-    return dispatch(updateExpRequest(data,token))
+  updateExpRequest: (id, data,token) => {
+    return dispatch(updateExpRequest(id,data,token))
   },
   getExpDetailRequest:(item_id)=> {
     return dispatch(getExpDetailRequest(item_id))

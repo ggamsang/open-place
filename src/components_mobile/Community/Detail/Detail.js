@@ -4,7 +4,7 @@ import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 import { WIDTH } from 'constant';
 import CommentListContainer from 'containers/CommentListContainer';
 import DateFormat from 'modules/DateFormat';
-
+import { InputFile } from 'components_mobile/Commons/Input';
 
 const Wrapper = styled.div`
   margin-bottom: 150px; // 임시로 입력된 값입니다.
@@ -49,6 +49,11 @@ const Wrapper = styled.div`
     margin-top: 10px;
     margin-bottom: 50px;
     width: ${WIDTH}px;
+  }
+  .row{
+    margin: auto;
+    width: ${WIDTH}px;
+    margin-bottom: 10px;
   }
 
 `;
@@ -153,14 +158,16 @@ const DetailWrapper = styled.div`
 export default class CommunityDetail extends React.Component {
 
   render() {
+    console.log(this.props);
     const {
       id,
       uid = null,
       title = '게시글 제목',
       text = '게시글 내용',
       nickname = '작성자',
-      create_time = '2022-01-01'
+      create_time = '2022-01-01',
     } = this.props;
+    const files = this.props.files && JSON.parse(this.props.files);
 
     return (<Wrapper>
 
@@ -184,10 +191,14 @@ export default class CommunityDetail extends React.Component {
           </div>
         </div>
 
-        <div className='content'>{text || "내용이 없습니다."}</div>
+        <div className='content' dangerouslySetInnerHTML={{ __html: text }} />
 
       </DetailWrapper>
-
+      
+      <div className='row'>
+        <div>파일 첨부</div>
+        <InputFile files={files} />
+      </div>
       <CommentListContainer id={id} />
 
     </Wrapper >);

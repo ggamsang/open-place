@@ -15,24 +15,27 @@ export const createExpRequest = (data,token) => {
           })
           .then(res=>res.json)
           .then(res=>res&&dispatch(createExpSuccess()))
-          .catch(err=>dispatch(createExpFailure()))
+          .catch(err=>{
+            console.log(err);
+            return dispatch(createExpFailure())
+          })
     }
   };
   const createExp = () => ({ type: types.PUT_CREATE_EXP });
-  const createExpSuccess = () => ({ type: types.PUT_CREATE_EXP_SUCCESS });
+  const createExpSuccess = (data) => ({ type: types.PUT_CREATE_EXP_SUCCESS,data:data });
   const createExpFailure = () => ({ type: types.PUT_CREATE_EXP_FAILURE });
 
 
-  export const updateExpRequest = (data,token) => {
+  export const updateExpRequest = (id,data,token) => {
     return dispatch =>{
         dispatch(updateExp());
-        const url = `${host}/exp/update`;
+        const url = `${host}/exp/${id}`;
         return fetch(url, {
             headers: {
               "x-access-token": token,
               "Content-Type": "application/json"
             },
-            method: "POST",
+            method: "PUT",
             body: JSON.stringify(data)
           })
           .then(res=>res.json)

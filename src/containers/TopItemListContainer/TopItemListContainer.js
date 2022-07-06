@@ -33,7 +33,7 @@ class TopItemListContainer extends Component {
   }
   render() {
    return (<React.Fragment>
-      <ScrollList list={this.props.top_exp} />
+        {/* <ScrollList list={this.props.top_exp} list_added={this.props.top_exp} getList={this.getList} ListComponent={Item} /> */}
     </React.Fragment>)
   }
 }
