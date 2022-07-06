@@ -7,6 +7,8 @@ import heart from "source/Iconly-Bold-Heart-white.svg";
 import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
 import { InputFile } from 'components_mobile/Commons/Input';
 import { Fade } from 'react-reveal';
+import ReviewContainer from "containers/ReviewContainer";
+import { Dimmer, Loader } from 'semantic-ui-react';
 
 const dummy = [
   {
@@ -33,12 +35,13 @@ const dummy = [
 
 const Wrapper = styled.div`
   width: 100%;
-  height:max-content;
-  min-height:100vh;
-  background: linear-gradient(205deg,#bf1d39,#8448b6);
-  .header{
-    width:100%;
-    height:${resolution(324)}px;
+  margin-bottom: 100px;
+  // height: max-content;
+  // min-height: 100vh;
+  background: linear-gradient(205deg, #bf1d39, #8448b6);
+  .header {
+    width: 100%;
+    height: ${resolution(324)}px;
   }
   .searchbox{
     width:100%;
@@ -48,6 +51,9 @@ const Wrapper = styled.div`
   }
   .img_arrow{width:${resolution(27)}px;height:${resolution(19)}px;}
 
+  .top_margin30 {
+    margin-top: 30px;
+  }
 
   .content{
       box-sizing:border-box;
@@ -106,16 +112,17 @@ const Wrapper = styled.div`
         justify-content:center;
     }
   }
-
-
-  `
+`;
 
 class ExpDetail extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      main: true, detail: false, like: false,
+      main: true,
+      detail: false,
+      like: false,
+      sub: false,
     }
     this.onClickMain = this.onClickMain.bind(this);
     this.onClickDetail = this.onClickDetail.bind(this);
@@ -127,33 +134,43 @@ class ExpDetail extends React.Component {
     this.setState({ sub: false });
     setTimeout(() => {
       this.setState({ main: true })
-    }, 1000)
+    }, 1000);
   }
   onClickDetail = (event) => {
     this.setState({ main: false });
     setTimeout(() => {
       this.setState({ sub: true })
-    }, 1000)
+    }, 1000);
   }
   onClickLike = (event) => {
     this.setState({ like: !this.state.like });
   }
+  onClickBuy = (event) => {
+
+  }
   onClickModify = (event) => {
     window.location.href = `/ModifyExp/${this.props.expDetail.uid}`
+  }
+  tagSprintToAry = (taglist) => {
+    taglist = taglist && taglist.replace("[", "");
+    taglist = taglist && taglist.replace("]", "");
+    taglist = taglist && taglist.split(",").join(" | ");
+    //  && taglist.split(",").map((item, index) => {
+    //   return item + " | ";
+    // });
+    console.log(taglist);
+    return taglist;
   }
 
   render() {
     const { expDetail } = this.props;
-    let taglist = expDetail && expDetail.taglist;
-    taglist = taglist && taglist.replace("[", "");
-    taglist = taglist && taglist.replace("]", "");
-    taglist = taglist && taglist.split(",") && taglist.split(",").map((item, index) => {
-      return item + " | ";
-    })
-  const exp_files = expDetail&& expDetail.exp_files && JSON.parse(expDetail.exp_files);
-    return (
-      <Wrapper>
-        <div className='searchbox'><SearchForm /></div>
+    let taglist = expDetail && this.tagSprintToAry(expDetail.taglist);
+    
+    return (expDetail
+      ? <Wrapper>
+        <div className='searchbox'>
+          <SearchForm />
+        </div>
         <Fade opposite when={this.state.main}>
           <section style={{ display: `${this.state.main == true ? "block" : "none"}` }}>
             <div className='content'>
@@ -196,6 +213,19 @@ class ExpDetail extends React.Component {
                   text="상세정보"
                 />
               </div>
+
+              <div className='buttonWrap'>
+                <ButtonNormal
+                  onClickEvent={this.onClickBuy}
+                  width={155}
+                  height={35}
+                  radius={10}
+                  fontSize={15}
+                  bgColor={"red"}
+                  text={"♥구매하기"}
+                  style={{ marginRight: "25px" }}
+                />
+              </div>
             </div>
           </section>
         </Fade>
@@ -203,7 +233,11 @@ class ExpDetail extends React.Component {
         <Fade opposite when={this.state.sub}>
           <section style={{ display: `${this.state.sub == true ? "block" : "none"}` }}>
             <div className='content'>
-              <div className='title'><div onClick={this.onClickMain}>〈</div>상세정보<div /></div>
+              <div className='title'>
+                <div onClick={this.onClickMain}>〈</div>
+                상세정보<div />
+              </div>
+
               <img src={expDetail && expDetail.thumbnail} className="img img2" />
               <div className='exp'>
                   <div className='row'>
@@ -212,11 +246,6 @@ class ExpDetail extends React.Component {
               </div>
               {
                 exp_files!=null&&<InputFile files={exp_files} />
-
-              }
-              {/* <div style={{ color: "white", padding: "100px 40px" }}>
-                상세 내용은 현재 논의중이며 블로그형, 프로젝트형, 그룹형 모두 다릅니다.
-              </div> */}
               <div className='buttonWrap2'>
                 <ButtonNormal
                   onClickEvent={this.onClickModify}
@@ -231,7 +260,17 @@ class ExpDetail extends React.Component {
             </div>
           </section>
         </Fade>
-      </Wrapper>);
+
+        <Fade>
+          <ReviewContainer />
+        </Fade>
+
+      </Wrapper>
+      : <Dimmer>
+        <Loader />
+      </Dimmer>
+    );
   }
 }
+
 export default ExpDetail;

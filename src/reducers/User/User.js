@@ -1,7 +1,7 @@
 import * as types from "actions/ActionTypes";
 import update from "react-addons-update";
 
-const initialtate = {
+const initialstate = {
   sharer: { status: "INIT" },
   UpdateUser: { status: "INIT" },
   status: {
@@ -10,7 +10,7 @@ const initialtate = {
 }
 export function User(state, action) {
   if (typeof state === "undefined") {
-    state = initialtate;
+    state = initialstate;
   }
 
   switch (action.type) {

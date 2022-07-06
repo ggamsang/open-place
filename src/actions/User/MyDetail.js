@@ -1,12 +1,13 @@
 import * as types from "actions/ActionTypes";
 import host from "config";
-import { GET } from "constant";
+import { authGET, GET } from "constant";
 
 // function
 // getUserPointRequest - 내 포인트 
 // setUserPointRequest - 포인트 수정
 // getUserPointHistory - 포인트 내역
 
+// getUserBoughtExpRequest - 내가 구매한 경험목록 요청
 // getUserRegisterExpRequest - 내 등록 경험
 // getUserSellExpRequest - 내 판매 경험
 
@@ -139,3 +140,17 @@ const getUserLikeSharer = () => ({ type: types.GET_USER_LIKE_SHARER });
 const getUserLikeSharerSuccess = (data) => ({ type: types.GET_USER_LIKE_SHARER_SUCCESS, list: data });
 const getUserLikeSharerFailure = (err) => ({ type: types.GET_USER_LIKE_SHARER_FAILURE, err: err });
 
+
+export const getUserBoughtExpRequest = (token) => {
+  return dispatch => {
+    dispatch(getUserBoughtExp());
+    const url = `${host}/user/bought`;
+    return fetch(url, authGET(token))
+      .then(res => res.json())
+      .then(data => dispatch(getUserBoughtExpSuccess(data.list)))
+      .catch(err => dispatch(getUserBoughtExpFailure(err)))
+  }
+};
+const getUserBoughtExp = () => ({ type: types.GET_USER_BOUGHT_EXP });
+const getUserBoughtExpSuccess = (data) => ({ type: types.GET_USER_BOUGHT_EXP_SUCCESS, list: data });
+const getUserBoughtExpFailure = (err) => ({ type: types.GET_USER_BOUGHT_EXP_FAILURE, err: err });

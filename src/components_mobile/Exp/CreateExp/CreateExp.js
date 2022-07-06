@@ -112,15 +112,17 @@ class CreateExp extends React.Component {
     this.onClickOK = this.onClickOK.bind(this);
     this.onChangeContent = this.onChangeContent.bind(this);
     this.onFileChange = this.onFileChange.bind(this);
-
   }
-
+  
   onChangeTitle = (event) => {
-    this.setState({ title: event.target.value })
+    this.setState({ 
+      title: event.target.value 
+    });
   }
   onChangeContent = (value) => {
     this.setState({ content: value });
   }
+
   handleAddTag = (tag) => {
     this.setState({
       tag: tag.slice(),
@@ -129,19 +131,26 @@ class CreateExp extends React.Component {
   onChangePrice = (price) => {
     this.setState({
       price: price,
-    })
+    });
   }
+
   onChangeType = (event) => {
-    this.setState({ type: event.target.value });
+    this.setState({ 
+      type: event.target.value 
+    });
   }
+
   onChangeInfo = (event) => {
-    this.setState({ info: event.target.value })
+    this.setState({ 
+      info: event.target.value 
+    });
   }
   onFileChange = async (files) => {
     this.setState({
       exp_files: [].concat(files),
     })
   }
+
   onChangeThumbnail = async (event) => {
     event.preventDefault();
     const reader = new FileReader();
@@ -165,6 +174,7 @@ class CreateExp extends React.Component {
       reader.readAsDataURL(file);
     }
   };
+
   onClickOK = async (event) => {
     const { thumbnail, title, tag, info, price, type, content, exp_files } = this.state;
     const data = {
@@ -174,6 +184,7 @@ class CreateExp extends React.Component {
     }
 
     console.log(data);
+
     let file = { value: this.state.thumbnail, name: this.state.thumbnail_name, key: 0 };
 
     if (thumbnail != null) { await data.files.push(file); } // thumbnail 썸네일이 있을 경우에만 
@@ -188,7 +199,7 @@ class CreateExp extends React.Component {
 
   }
   render() {
-    console.log(this.state);
+
     return (
       <Wrapper>
         <div className='header'>

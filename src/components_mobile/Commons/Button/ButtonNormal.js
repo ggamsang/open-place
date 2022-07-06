@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { resolution } from 'commons/resolution';
 
-const CustomButton = styled.div`
+const CustomButton = styled.button`
   display:flex;
   justify-content:center;
   align-items:center;
@@ -18,6 +18,7 @@ const CustomButton = styled.div`
     font-weight:medium;
     font-size:${resolution(props => props.fontSize == null ? 18 : props.fontSize)}px;
   }
+  cursor: pointer;
 `
 
 class ButtonNormal extends Component {
@@ -37,7 +38,7 @@ class ButtonNormal extends Component {
     const button_text = this.props.text;
     return (
       <CustomButton
-        onClick={this.onClickEvent}
+        onClick={this.props.onClick || this.onClickEvent}
         disabled={this.props.disabled}
         style={this.props.style}
         width={this.props.width}

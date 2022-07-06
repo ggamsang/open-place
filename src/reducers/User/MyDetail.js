@@ -1,7 +1,7 @@
 import * as types from "actions/ActionTypes";
 import update from "react-addons-update";
 
-const initialtate = {
+const initialstate = {
   Point: { status: "INIT" },
   addPoint: { status: "INIT" },
   pointHistory: { status: "INIT" },
@@ -20,7 +20,7 @@ const initialtate = {
 }
 export function MyDetail(state, action) {
   if (typeof state === "undefined") {
-    state = initialtate;
+    state = initialstate;
   }
   switch (action.type) {
     case types.GET_USER_POINT:

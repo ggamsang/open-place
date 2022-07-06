@@ -213,7 +213,7 @@ class MessageDetail extends React.Component {
     }
     setText = text => this.setState({ text: text });
 
-    SendAndEmpty = () => {
+    SendAndEmpty = (e) => {
         this.props.send(this.state.text);
         this.setText('');
     }
@@ -300,14 +300,29 @@ class MessageDetail extends React.Component {
                     <div>
                         <input
                             onKeyDown={(e) => {
-                                e.key === "Enter" && this.SendAndEmpty()
+                                // e.isComposing === true && 
+                                // e.key === "Enter"
+                                // && 
+                                // if(e.key === "Enter")
+                                // }}
+                                // onKeyDownHandler(e) {
+                                if (e.key === "Enter") {
+                                    if (
+                                        e.nativeEvent.isComposing === false &&
+                                        this.state.previousKey !== "Shift"
+                                    ) {
+                                        e.preventDefault();
+                                        document.getElementById('msg-send-btn').click();
+                                    }
+                                }
                             }}
                             value={text || ""}
                             onChange={(e) => this.setText(e.target.value)}
                         />
                         <button
+                            id="msg-send-btn"
                             disabled={text.trim().length === 0}
-                            onClick={() => this.SendAndEmpty()}>
+                            onClick={(e) => this.SendAndEmpty(e)}>
                             전송
                         </button>
                     </div>

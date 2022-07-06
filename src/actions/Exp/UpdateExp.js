@@ -1,5 +1,6 @@
 import * as types from "actions/ActionTypes";
 import host from "config";
+import { POST, PUT } from "constant";
 
 export const createExpRequest = (data,token) => {
     return dispatch =>{
@@ -46,4 +47,4 @@ export const createExpRequest = (data,token) => {
   const updateExp = () => ({ type: types.UPDATE_MODIFY_EXP });
   const updateExpSuccess = () => ({ type: types.UPDATE_MODIFY_EXP_SUCCESS });
   const updateExpFailure = () => ({ type: types.UPDATE_MODIFY_EXP_FAILURE });
-  
+ 

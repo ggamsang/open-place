@@ -18,7 +18,7 @@ import { SignOutRequest } from 'actions/Authentication';
 import {
   getUserPointRequest, setUserPointRequest, getUserPointHistoryReqeust,
   getUserRegisterExpRequest, getUserSellExpRequest, getUserLikeSharerRequest,
-  getUserLikeExpRequest
+  getUserLikeExpRequest, // getUserBoughtExpRequest,
 } from "actions/User/MyDetail"
 import { goto } from 'navigator';
 
@@ -183,21 +183,22 @@ const SubMenu = styled.div`
 const SubWrap = styled.div`
   box-sizing:border-box;
   // padding-bottom:50px;
-  .subTitle{
-    width:100%;
-    height:41px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  .subTitle {
+    width: 100%;
+    height: 21px;
+    text-align: center;
     font: normal normal medium 18px/21px Pretendard;
-    color:#4A4B4D;  
+    letter-spacing: 0px;
+    color: #4A4B4D; 
   }
 `
 
 class MyDetailChild extends Component {
-  async componentDidMount(){
+  async componentDidMount() {
   }
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -239,22 +240,23 @@ class MyDetailChild extends Component {
     this.setState({ subMenu: sub })
     //testDeta
     const user_id = this.props.userInfo.uid;
-    if(sub=="point"){
+    const { token } = this.props;
+    if (sub == "point") {
       this.props.getUserPointRequest(user_id);
-    }else if(sub=="payment"){
-      this.props.getUserPointHistoryReqeust(user_id,0);
-    }else if(sub=="regExp"){
-      this.props.getUserRegisterExpRequest(user_id,0);
-    }else if(sub=="sellExp"){
-      this.props.getUserSellExpRequest(user_id,0);
-    }else if(sub=="buyExp"){
-      this.props.getUserSellExpRequest(user_id,0);
-    }else if(sub=="likeSharer"){
-      this.props.getUserLikeSharerRequest(user_id,0);
-    }else if(sub=="likeExp"){
-      this.props.getUserLikeExpRequest(user_id,0);
+    } else if (sub == "payment") {
+      this.props.getUserPointHistoryReqeust(user_id, 0);
+    } else if (sub == "regExp") {
+      this.props.getUserRegisterExpRequest(user_id, 0);
+    } else if (sub == "sellExp") {
+      this.props.getUserSellExpRequest(user_id, 0);
+    } else if (sub == "buyExp") {
+      // token && this.props.getUserBoughtExpRequest(token);
+    } else if (sub == "likeSharer") {
+      this.props.getUserLikeSharerRequest(user_id, 0);
+    } else if (sub == "likeExp") {
+      this.props.getUserLikeExpRequest(user_id, 0);
     }
-    this.props.getUserLikeExpRequest(user_id,0);
+    this.props.getUserLikeExpRequest(user_id, 0);
   }
 
   render() {
@@ -270,7 +272,7 @@ class MyDetailChild extends Component {
                   <div onClick={this.onClickPointMenu} className="menu_button" ><img alt="icon" src={star} /><div className='text'>포인트</div></div>  <div className='hrline' />
                   <div onClick={() => this.onClickSubMenu("regExp")} className="menu_button" ><img alt="icon" src={plus} /><div className='text'>등록 경험</div></div> <div className='hrline' />
                   <div onClick={() => this.onClickSubMenu("sellExp")} className="menu_button" ><img alt="icon" src={work} /><div className='text'>판매 경험</div></div> <div className='hrline' />
-                  <div onClick={() => this.onClickSubMenu("buyExp")} className="menu_button" ><img alt="icon" src={buy} /><div className='text'>구매 경험</div></div>  <div className='hrline' />
+                  <div onClick={() => this.onClickSubMenu("buyExp")} className="menu_button" ><img alt="icon" src={buy} /><div className='text'>구매한 경험</div></div>  <div className='hrline' />
                   <div onClick={this.onClickLikeMenu} className="menu_button"><img alt="icon" src={heart} /><div className='text'>관심</div></div>
                   <div onClick={this.onClickLogout} className="menu_button">
                     {/* <img alt="icon" src={heart} /> */}
@@ -311,7 +313,9 @@ class MyDetailChild extends Component {
               <div className='subTitle'>판매 경험</div><SellExpContainer /></React.Fragment>}
           {this.state.subMenu === "buyExp"
             && <React.Fragment>
-              <div className='subTitle'>구매 경험</div><BuyExpContainer /></React.Fragment>}
+              <div className='subTitle'>구매한 경험</div>
+              <BuyExpContainer />
+            </React.Fragment>}
           {this.state.subMenu === "likeSharer"
             && <React.Fragment>
               <div className='subTitle'>관심 공유자</div><LikeSharerContainer /></React.Fragment>}
@@ -334,6 +338,7 @@ const mapDispatchToProps = (dispatch) => {
     getUserSellExpRequest: (user_id, page) => (dispatch(getUserSellExpRequest(user_id, page))),
     getUserLikeSharerRequest: (user_id, page) => { dispatch(getUserLikeSharerRequest(user_id, page)) },
     getUserLikeExpRequest: (user_id, page) => { dispatch(getUserLikeExpRequest(user_id, page)) },
+    // getUserBoughtExpRequest: (token) => dispatch(getUserBoughtExpRequest(token)),
   }
 };
 const mapStateToProps = (state) => {
