@@ -7,7 +7,8 @@ import { authGET, GET } from "constant";
 // setUserPointRequest - 포인트 수정
 // getUserPointHistory - 포인트 내역
 
-// getUserBoughtExpRequest - 내가 구매한 경험목록 요청
+// getUserBoughtExpRequest - 내가 구매한 경험목록
+// getUserBoughtExpDetailRequest - 내가 구한 경험상세 
 // getUserRegisterExpRequest - 내 등록 경험
 // getUserSellExpRequest - 내 판매 경험
 
@@ -30,7 +31,6 @@ export const getUserPointRequest = (user_id) => {
 const getUserPoint = () => ({ type: types.GET_USER_POINT });
 const getUserPointSuccess = (data) => ({ type: types.GET_USER_POINT_SUCCESS, user_point: data });
 const getUserPointFailure = (err) => ({ type: types.GET_USER_POINT_FAILURE, user_point: null, err: err });
-
 
 export const setUserPointRequest = (user_id, data, token) => {
   return dispatch => {
@@ -143,7 +143,7 @@ const getUserLikeSharerFailure = (err) => ({ type: types.GET_USER_LIKE_SHARER_FA
 
 export const getUserBoughtExpRequest = (token) => {
   return dispatch => {
-    dispatch(getUserBoughtExp());
+    dispatch(getUserBoughtExp())
     const url = `${host}/user/bought`;
     return fetch(url, authGET(token))
       .then(res => res.json())
@@ -151,6 +151,32 @@ export const getUserBoughtExpRequest = (token) => {
       .catch(err => dispatch(getUserBoughtExpFailure(err)))
   }
 };
-const getUserBoughtExp = () => ({ type: types.GET_USER_BOUGHT_EXP });
-const getUserBoughtExpSuccess = (data) => ({ type: types.GET_USER_BOUGHT_EXP_SUCCESS, list: data });
-const getUserBoughtExpFailure = (err) => ({ type: types.GET_USER_BOUGHT_EXP_FAILURE, err: err });
+const getUserBoughtExp = () => ({
+  type: types.GET_USER_BOUGHT_EXP
+});
+const getUserBoughtExpSuccess = (data) => ({
+  type: types.GET_USER_BOUGHT_EXP_SUCCESS, list: data
+});
+const getUserBoughtExpFailure = (err) => ({
+  type: types.GET_USER_BOUGHT_EXP_FAILURE, err: err
+});
+
+export const getUserBoughtExpDetailRequest = (token, id) => {
+  return dispatch => {
+    dispatch(getUserBoughtExpDetail())
+    const url = `${host}/user/bought/${id}`;
+    return fetch(url, authGET(token))
+      .then(res => res.json())
+      .then(data => dispatch(getUserBoughtExpDetailSuccess(data.detail)))
+      .catch(err => dispatch(getUserBoughtExpDetailFailure(err)))
+  }
+};
+const getUserBoughtExpDetail = () => ({
+  type: types.GET_USER_BOUGHT_EXP_DETAIL
+});
+const getUserBoughtExpDetailSuccess = (detail) => ({
+  type: types.GET_USER_BOUGHT_EXP_DETAIL_SUCCESS, detail: detail
+});
+const getUserBoughtExpDetailFailure = (err) => ({
+  type: types.GET_USER_BOUGHT_EXP_DETAIL_FAILURE, err: err
+});

@@ -31,6 +31,15 @@ export function ExpDetail(state, action) {
                     expDetail: { $set: action.data }
                 }
             });
+            case types.GET_USER_BOUGHT_EXP_DETAIL_SUCCESS:
+                return update(state, {
+                    ExpDetail: {
+                        status: { $set: "SUCCESS" }
+                    },
+                    status: {
+                        expDetail: { $set: action.detail }
+                    }
+                });
         case types.GET_EXP_DETAIL_FAILURE:
             return update(state, {
                 ExpDetail: {

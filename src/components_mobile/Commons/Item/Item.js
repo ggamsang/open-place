@@ -74,8 +74,12 @@ class Item extends React.Component {
         this.onClickItem = this.onClickItem.bind(this);
     }
     onClickItem = (event) => {
-        console.log(this.props);
-        window.location.href = `/exp/${this.props.uid}`
+        if (this.props.onClick) {
+            this.props.onClick(this.props.sid);
+        }
+        else {
+            window.location.href = `/exp/${this.props.uid}`;
+        }
     }
     render() {
         const {
@@ -95,11 +99,11 @@ class Item extends React.Component {
                             <div className='item-title'>{title || "title"}</div>
                             <div className='price'>₩{price || "58000"}</div>
                         </div>
-                        <img className='imgheart' src={heart} />
+                        <img alt="icon" className='imgheart' src={heart} />
                     </div>
                     <div className='row space-between'>
                         <div className='rate-and-tags' >
-                            <StarRating score={score} />
+                            <StarRating score={score || 0} />
                             <Tags prestyle={{ "marginLeft": "16px" }}
                                 tags={tags || taglist || ['tag1', 'tag2', 'tag3']} />
                         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import InfiniteScroll from "react-infinite-scroller";
-import Sharer from 'components_mobile/Commons/Sharer';
+// import Sharer from 'components_mobile/Commons/Sharer';
 import { Loader } from "semantic-ui-react";
 import Item from 'components_mobile/Commons/Item';
 
@@ -56,7 +56,7 @@ class ScrollList extends React.Component {
 
     render() {
         const { list_added } = this.props;
-        const { ListComponent } = this.props;
+        // const { ListComponent } = this.props;
         console.log(this.props.list_added);
         return (
             this.props.list_added &&
@@ -68,7 +68,7 @@ class ScrollList extends React.Component {
                                 inline="centered" size="huge" key={0} />}>
                         {
                                 list_added&&list_added.map((item, index) => {
-                                return <Item key={index} {...item} />
+                                return <Item key={index} {...item} onClick={this.props.onClick} />
                             })
                         }
                     </InfiniteScroll>
@@ -79,7 +79,7 @@ class ScrollList extends React.Component {
 }
 export default ScrollList;
 
-{/* <Wrapper type={this.props.type}>
+/* <Wrapper type={this.props.type}>
 {list && list.length > 0 ? list.map((item, index) =>
     item.type == "item"
         ? <Item key={index} {...item} />
@@ -88,4 +88,4 @@ export default ScrollList;
             ? <Sharer key={index} {...item} />
             : null)
     : <div>데이터가 없습니다.</div>}
-</Wrapper> */}
+</Wrapper> */
