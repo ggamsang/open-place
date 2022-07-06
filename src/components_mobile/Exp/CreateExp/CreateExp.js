@@ -113,10 +113,10 @@ class CreateExp extends React.Component {
     this.onChangeContent = this.onChangeContent.bind(this);
     this.onFileChange = this.onFileChange.bind(this);
   }
-  
+
   onChangeTitle = (event) => {
-    this.setState({ 
-      title: event.target.value 
+    this.setState({
+      title: event.target.value
     });
   }
   onChangeContent = (value) => {
@@ -135,14 +135,14 @@ class CreateExp extends React.Component {
   }
 
   onChangeType = (event) => {
-    this.setState({ 
-      type: event.target.value 
+    this.setState({
+      type: event.target.value
     });
   }
 
   onChangeInfo = (event) => {
-    this.setState({ 
-      info: event.target.value 
+    this.setState({
+      info: event.target.value
     });
   }
   onFileChange = async (files) => {
@@ -215,7 +215,7 @@ class CreateExp extends React.Component {
             }
             <div className='wrap'>
               {/* <div style={{ marginBottom: "9px" }}><span className="label">제목</span><sup style={{ color: "red" }}>*</sup><span className="text"></span></div> */}
-              <label className="findThumbnailText" htmlFor="file">
+              <label className="findThumbnailText" htmlFor="afile">
                 <ButtonNormal
                   width={194}
                   height={30}
@@ -226,14 +226,14 @@ class CreateExp extends React.Component {
                   border={"2px solid red"}
                   text="썸네일 등록" />
               </label>
+              <input hidden onChange={this.onChangeThumbnail} id="afile" type="file" accept="image/png, image/bmp, image/jpeg, image/jpg" />
             </div>
-            <input hidden onChange={this.onChangeThumbnail} id="file" type="file" accept="image/png, image/bmp, image/jpeg, image/jpg" />
           </div>
           <div className='row'>
             <div className='label'>제목<sup style={{ color: "red" }}>*</sup></div>
             <InputNormal onChangeValue={this.onChangeTitle}
               value={this.state.value} placeholder={"제목을 입력하세요"} radius={10}
-            width={245} height={31} fontSize={14} color={"#E9E9E9"} />
+              width={245} height={31} fontSize={14} color={"#E9E9E9"} />
           </div>
           <div className='row'>
             <div className='label'>태그<sup style={{ color: "red" }}>*</sup></div>
@@ -242,7 +242,7 @@ class CreateExp extends React.Component {
           <div className='row'>
             <div className='label'>경험 유형<sup style={{ color: "red" }}>*</sup></div>
             <DropDownNormal
-              value={this.state.type-1}
+              value={this.state.type - 1}
               onChangeValue={this.onChangeType}
               width={150} height={31} radius={10}
               options={this.props.category} />

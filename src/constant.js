@@ -39,3 +39,7 @@ export const DELETE = (token) => ({
     },
     method: "DELETE",
 });
+
+export const COUNSELING = "자문/상담";
+export const LECTURING = "강좌";
+export const GAMING = "게임";

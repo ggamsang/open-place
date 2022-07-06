@@ -23,6 +23,7 @@ class BuyExpDetailContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
     token: state.Authentication.status.token,
+    userInfo: state.Authentication.status.userInfo,
     detail: state.ExpBought.status.detail,
 });
 const mapDispatchToProps = (dispatch) => ({
