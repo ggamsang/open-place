@@ -5,6 +5,7 @@ import { resolution } from 'commons/resolution';
 import star from "source/Iconly-Bold-Star-red.svg";
 import heart from "source/Iconly-Bold-Heart-white.svg";
 import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
+import { InputFile } from 'components_mobile/Commons/Input';
 import { Fade } from 'react-reveal';
 import ReviewContainer from "containers/ReviewContainer";
 import { Dimmer, Loader } from 'semantic-ui-react';
@@ -65,11 +66,24 @@ const Wrapper = styled.div`
             .price{font: normal normal bold 16px/19px Pretendard;color:white;}
             .like{font: normal normal bold 12px/15px Pretendard;color:white;}
         }
-    }
+      }
+      .exp{
+        .row{
+          width:100%;
+          border-radius:20px;
+          border:1px solid white;
+          box-sizing:border-box;
+          padding:20px;
+          .editorText{
+            filter: invert(100%);
+          }
+        }
+      }
     .buttonWrap{
         display:flex;align-items:center;
     }
     .buttonWrap2{
+        margin-top:30px;
         display:flex;
         align-items:center;
         justify-content:center;
@@ -134,7 +148,6 @@ class ExpDetail extends React.Component {
         <div className='searchbox'>
           <SearchForm />
         </div>
-
         <Fade opposite when={this.state.main}>
           <section style={{ display: `${this.state.main == true ? "block" : "none"}` }}>
             <div className='content'>
@@ -147,7 +160,7 @@ class ExpDetail extends React.Component {
                   <span style={{ marginLeft: "13px" }} className='writer'>{expDetail && expDetail.nick_name || "dummy"}</span>
                   <span style={{ color: "red", margin: "0px 5px" }}>·</span>
                   <span className='tags'>
-                    {taglist && taglist || "dummy"}
+                    {taglist && taglist||""}
                   </span>
                 </div>
                 <div className='detail'>
@@ -203,11 +216,13 @@ class ExpDetail extends React.Component {
               </div>
 
               <img src={expDetail && expDetail.thumbnail} className="img img2" />
-
-              {/* <div style={{ color: "white", padding: "100px 40px" }}>
-                상세 내용은 현재 논의중이며 블로그형, 프로젝트형, 그룹형 모두 다릅니다.
-              </div> */}
-
+              <div className='exp'>
+                  <div className='row'>
+                    <div className='editorText' dangerouslySetInnerHTML={{ __html: expDetail&&expDetail.content }}/>
+                  </div>
+              </div>
+              {
+                exp_files!=null&&<InputFile files={exp_files} />
               <div className='buttonWrap2'>
                 <ButtonNormal
                   onClickEvent={this.onClickModify}

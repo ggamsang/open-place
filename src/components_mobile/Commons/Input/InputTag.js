@@ -209,7 +209,7 @@ export class InputTag extends Component {
         this.returnData();
     }
     render() {
-        const TagBox = this.state.tag.map((item, index) => {
+        const TagBox = this.state.tag&&this.state.tag.length>0&&this.state.tag.map((item, index) => {
             return (
                 item === "" ?
                     null :
