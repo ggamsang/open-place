@@ -73,7 +73,7 @@ class ModifyExp extends React.Component {
     super(props);
     this.state = {
       tag: null,
-      thumbnail: null, thumbnail_name: null, title: null, type: 0, info: null, price:0,
+      thumbnail: null, thumbnail_name: null, title: null, type: 0, info: null, price: 0,
     }
     this.onChangeThumbnail = this.onChangeThumbnail.bind(this);
     this.onChangeTitle = this.onChangeTitle.bind(this);
@@ -84,8 +84,8 @@ class ModifyExp extends React.Component {
     this.onClickOK = this.onClickOK.bind(this);
 
   }
-  async componentDidUpdate(prevProps){
-    if(JSON.stringify(prevProps.expDetail)!=JSON.stringify(this.props.expDetail)){
+  async componentDidUpdate(prevProps) {
+    if (JSON.stringify(prevProps.expDetail) != JSON.stringify(this.props.expDetail)) {
       // let taglist = this.props.expDetail&&this.props.expDetail.taglist;
       // taglist = taglist&&taglist.replace("[","");
       // taglist = taglist&&taglist.replace("]","");
@@ -93,12 +93,12 @@ class ModifyExp extends React.Component {
       //   return item+" | ";
       // })   
       await this.setState({
-        thumbnail:this.props.expDetail&&this.props.expDetail.thumbnail,
-        title:this.props.expDetail&&this.props.expDetail.title,
-        tag:this.props.expDetail&&this.props.expDetail.taglist,
-        type:this.props.expDetail&&this.props.expDetail.type,
-        info:this.props.expDetail&&this.props.expDetail.info,
-        price:this.props.expDetail&&this.props.expDetail.price,
+        thumbnail: this.props.expDetail && this.props.expDetail.thumbnail,
+        title: this.props.expDetail && this.props.expDetail.title,
+        tag: this.props.expDetail && this.props.expDetail.taglist,
+        type: this.props.expDetail && this.props.expDetail.type,
+        info: this.props.expDetail && this.props.expDetail.info,
+        price: this.props.expDetail && this.props.expDetail.price,
       })
     }
   }
@@ -109,7 +109,8 @@ class ModifyExp extends React.Component {
   handleAddTag = (tag) => {
     this.setState({
       tag: tag.slice(),
-    });
+    }, console.log(this.state.tag));
+
   }
   onChangePrice = (price) => {
     this.setState({
@@ -147,13 +148,15 @@ class ModifyExp extends React.Component {
   };
   onClickOK = async (event) => {
     const { thumbnail, title, tag, info, price, type } = this.state;
+
     let data = {
-      user_id:this.props.userInfo.uid,
-      item_id:this.props.item_id,
+      user_id: this.props.userInfo.uid,
+      item_id: this.props.item_id,
       title: title, taglist: tag, info: info, price: price, type: type,
       files: [],
     }
     console.log(data);
+    return;
     let file = { value: this.state.thumbnail, name: this.state.thumbnail_name, key: 0 };
 
     if (thumbnail != null) { await data.files.push(file); } // thumbnail 썸네일이 있을 경우에만 
@@ -164,10 +167,10 @@ class ModifyExp extends React.Component {
     window.history.go(-1);
   }
   render() {
-    let taglist = this.state.tag||[];
-    taglist = taglist&&taglist!=""&&taglist.replace("[","");
-    taglist = taglist&&taglist!=""&&taglist.replace("]","");
-    taglist = taglist&&taglist!=""&&taglist.split(",");
+    let taglist = this.state.tag || [];
+    taglist = taglist && taglist != "" && taglist.replace("[", "");
+    taglist = taglist && taglist != "" && taglist.replace("]", "");
+    taglist = taglist && taglist != "" && taglist.split(",");
 
     console.log(taglist)
     return (
@@ -179,9 +182,9 @@ class ModifyExp extends React.Component {
         <div className='content'>
           <div className='whitebox'>
             {
-              this.state.thumbnail==null?
-              <div className='img_'/>:
-              <img src={this.state.thumbnail} className="img_" alt="profile" />              
+              this.state.thumbnail == null ?
+                <div className='img_' /> :
+                <img src={this.state.thumbnail} className="img_" alt="profile" />
             }            <div className='wrap'>
               <div style={{ marginBottom: "9px" }}><span className="label">제목</span><sup style={{ color: "red" }}>*</sup><span className="text">{this.state.title}</span></div>
               <label className="findThumbnailText" htmlFor="file">

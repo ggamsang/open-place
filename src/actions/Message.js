@@ -67,34 +67,26 @@ export const GetMessageOpponentInfoSuccess = (info) => ({
 export const GetMessageOpponentInfoFailure = () => ({
   type: types.GET_MESSAGE_OPPONENT_FAILURE
 });
-/*
-message_group 
-uid, create_at 
-'1', '2022-06-22 16:09:32'
-'2', '2022-06-22 16:09:32'
-'3', '2022-06-22 16:09:32'
-_
-SELECT * FROM message M 
-WHERE M.chat_group_id IN (SELECT chat_group_id FROM message_group_user WHERE user_id = id) 
-ORDER BY create_at
-GROUP BY chat_group_id
-message_group_user 
-uid, chat_group_id, user_id
-'1', '1', '1'
-'2', '1', '7'
-'3', '2', '1'
-'4', '2', '9'
-'5', '3', '7'
-'6', '3', '9'   말걸때 찾아보고 없으면 두 레코드를 만듦.
-_
-message
-uid, chat_group_id, user_id, message, create_at, read_at
-'1', '1', '1', '테스트1', '2022-06-22 16:14:04', NULL
-'2', '1', '1', '테스트2', '2022-06-22 16:14:04', NULL
-'5', '1', '7', '테스트5', '2022-06-22 16:14:04', NULL
-'3', '2', '1', '테스트3', '2022-06-22 16:14:04', NULL
-'4', '2', '9', '테스트4', '2022-06-22 16:14:04', NULL
-'6', '2', '9', '테스트6', '2022-06-22 16:14:04', NULL
-'7', '3', '7', '테스트7', '2022-06-22 16:14:04', NULL
-_
-*/
+
+// FOR COUNSELING //
+export const GetCounselingMessageGroupRequest = (token, id) => {
+  return dispatch => {
+    dispatch(GetCounselingMessageGroup());
+    const url = ``;
+    return fetch(url, authGET(token, id))
+      .then(res => res.json())
+      .then(res => dispatch(GetCounselingMessageGroupSuccess(res.detail)))
+      .catch(_ => dispatch(GetCounselingMessageGroupFailure()));
+  };
+};
+export const GetCounselingMessageGroup = () => ({
+  type: types.GET_COUNSELING_MESSAGE_GOUP
+});
+export const GetCounselingMessageGroupSuccess = (detail) => ({
+  type: types.GET_COUNSELING_MESSAGE_GOUP_SUCCESS,
+  detail: detail
+});
+export const GetCounselingMessageGroupFailure = () => ({
+  type: types.GET_COUNSELING_MESSAGE_GOUP_FAILURE,
+  detail: null
+});
