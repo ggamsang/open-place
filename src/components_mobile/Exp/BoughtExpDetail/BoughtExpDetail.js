@@ -6,6 +6,8 @@ import blackHeart from "source/Iconly-Bold-Heart.svg";
 import ReviewContainer from "containers/ReviewContainer";
 import StarRating from "commons/StarRating";
 import CounselingMessageDetailContainer from 'containers/CounselingMessageDetailContainer';
+import { COUNSELING, GAMING } from 'constant';
+import PlayGameContainer from 'containers/PlayGameContainer/PlayGameContainer';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -96,6 +98,7 @@ const DetailWrapper = styled.div`
     height: 91px;
     box-sizing: border-box;
     padding: 15px 20px;
+    
     .title {
         height: 19px;
         text-align: left;
@@ -120,8 +123,8 @@ const DetailWrapper = styled.div`
   .taglist {
     position: absolute;
     width: 50%;
-    right: 20px;
-    top: 15px;
+    right: 5px;
+    top: 10px;
 
     .inner {
         width: 100%;
@@ -158,10 +161,34 @@ const DetailWrapper = styled.div`
   .lm20 {margin-left: 20px;}
 `;
 const Counseling = styled.div`
-  width: 100%;
+  width: calc(100% - 40px);
   margin: auto;
+  margin-top: 15px;
 `;
 const Gaming = styled.div`
+  margin: auto;
+  width: 335px;
+  height: 200px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 2px 2px 5px #00000029;
+  border: 0.5px solid #E9E9E9;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+
+  margin-top: 15px;
+
+  .text { // temp
+    margin: auto;
+    width: max-content;
+    height: 22px;
+    text-align: center;
+    font: normal normal normal 18px/22px Noto Sans KR;
+    letter-spacing: 0px;
+    color: #000000;
+  }
+`;
+const Normal = styled.div`
   margin: auto;
   width: 335px;
   height: 200px;
@@ -263,12 +290,14 @@ class BoughtExpDetail extends React.Component {
         return taglist;
     }
     ShowReview = () => {
-        this.setState({ review: true,  });
+        this.setState({ review: true, });
     }
+
     render() {
         console.log("FOO", this.props);
 
-        const { detail } = this.props;
+        const { detail, userInfo } = this.props;
+        detail.type = [GAMING, COUNSELING];
         const { review } = this.state;
         let taglist = detail && this.tagSprintToAry(detail.taglist);
 
@@ -289,7 +318,7 @@ class BoughtExpDetail extends React.Component {
                     </div>
 
                     <div className='row'>
-                        <div>{detail.price}₩</div>
+                        <div>{detail.price} ₩</div>
                         <div className='row center lm20'>
                             <img
                                 style={{
@@ -311,20 +340,20 @@ class BoughtExpDetail extends React.Component {
                 </div>
             </DetailWrapper>
 
-            {detail.type !== "자문/상담"
+            {detail.type.includes(COUNSELING)
+                && (detail.user_id !== userInfo.uid) // tricky, 
                 && <Counseling>
-                    <CounselingMessageDetailContainer />
+                    <CounselingMessageDetailContainer opponent_id={detail.user_id} />
                 </Counseling>}
 
-            {detail.type !== "게임"
+            {detail.type.includes(GAMING)
                 && <Gaming>
-                    <div className='text'>게임</div>
+                    <PlayGameContainer exp_id={detail.uid} />
                 </Gaming>}
 
-            {detail.type !== "일반"
-                && <Gaming>
-                    <div className='text'>일반</div>
-                </Gaming>}
+            <Normal>
+                <div className='text'>일반</div>
+            </Normal>
 
             <ButtonBox>
                 <button onClick={this.ShowReview}>
@@ -337,10 +366,11 @@ class BoughtExpDetail extends React.Component {
 
             </ButtonBox>
 
-            {review && <ReviewContainer ExpDetail={detail}/>}
+            {review
+                && <ReviewContainer ExpDetail={detail} />}
 
         </Wrapper>);
     }
-}
+};
 
 export default BoughtExpDetail;

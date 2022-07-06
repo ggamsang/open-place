@@ -142,6 +142,7 @@ class ExpDetail extends React.Component {
   render() {
     const { expDetail } = this.props;
     let taglist = expDetail && this.tagSprintToAry(expDetail.taglist);
+    const exp_files = expDetail && expDetail.exp_files && JSON.parse(expDetail.exp_files)
     
     return (expDetail
       ? <Wrapper>
@@ -223,6 +224,7 @@ class ExpDetail extends React.Component {
               </div>
               {
                 exp_files!=null&&<InputFile files={exp_files} />
+              }
               <div className='buttonWrap2'>
                 <ButtonNormal
                   onClickEvent={this.onClickModify}
