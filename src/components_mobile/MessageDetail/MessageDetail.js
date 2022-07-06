@@ -212,7 +212,17 @@ class MessageDetail extends React.Component {
         this.setText = this.setText.bind(this);
     }
     setText = text => this.setState({ text: text });
-
+    CheckEnter = (e) => {
+        if (e.key === "Enter") {
+            if (
+                e.nativeEvent.isComposing === false &&
+                this.state.previousKey !== "Shift"
+            ) {
+                e.preventDefault();
+                document.getElementById('msg-send-btn').click();
+            }
+        }
+    }
     SendAndEmpty = (e) => {
         this.props.send(this.state.text);
         this.setText('');
@@ -222,31 +232,17 @@ class MessageDetail extends React.Component {
             const list = [...this.state.nowlist];
             this.props.chats && this.props.chats.forEach(item => list.unshift(item));
             this.setState({ nowlist: list });
-            // this.setState({ nowlist: 
-            //   this.props.chats.reverse().concat(this.state.nowlist) });
         }
         if (props.newchat !== this.props.newchat) {
             const { text: message, gid: message_group_id, uid: user_id, create_at } = this.props.newchat;
-            // create_at: 1656401838183
-            // gid: "4"
-            // text: "asdl;f"
-            // uid: 10
             const date = new Date(create_at).toUTCString();
             const list = [...this.state.nowlist];
             list.push({ message, message_group_id, user_id, create_at: date })
-            // this.props.newchat && list.push({})
-            // create_at: "2022-06-27T16:07:46.000Z"
-            // message: "비번1234맞지?비번1234맞지?비번1234맞지?비번1234맞지?비번1234맞지?비번1234맞지?비번1234맞지?비번1234맞지?"
-            // message_group_id: 4
-            // read_at: null
-            // uid: 34
-            // user_id: 14
             this.setState({ nowlist: list });
             setTimeout(() => {
                 const chats = document.getElementById('chats');
                 chats.scrollTop = chats.scrollHeight;
             }, 500);
-            console.log(this.props.newchat, list);
         }
     }
     componentDidMount() {
@@ -267,15 +263,17 @@ class MessageDetail extends React.Component {
     }
 
     render() {
-        const { header, online, user_id } = this.props;
+        const { header, online, user_id, mode } = this.props;
         const { text, nowlist } = this.state;
 
         return (<Wrapper>
-            <div className='gradient'>
-                <div className='blanker'>&nbsp;</div>
-                <SearchForm
-                    placeholder={"대화상대 찾아보기"} disabled_filter keyword={null} />
-            </div>
+            {mode === "COUNSELING"
+                ? null
+                : <div className='gradient'>
+                    <div className='blanker'>&nbsp;</div>
+                    <SearchForm
+                        placeholder={"대화상대 찾아보기"} disabled_filter keyword={null} />
+                </div>}
 
             <MessageWrapper url={(header && header.url) || profile} online={online}>
                 <div className="header">
@@ -299,23 +297,7 @@ class MessageDetail extends React.Component {
                 <div className="send-wrapper">
                     <div>
                         <input
-                            onKeyDown={(e) => {
-                                // e.isComposing === true && 
-                                // e.key === "Enter"
-                                // && 
-                                // if(e.key === "Enter")
-                                // }}
-                                // onKeyDownHandler(e) {
-                                if (e.key === "Enter") {
-                                    if (
-                                        e.nativeEvent.isComposing === false &&
-                                        this.state.previousKey !== "Shift"
-                                    ) {
-                                        e.preventDefault();
-                                        document.getElementById('msg-send-btn').click();
-                                    }
-                                }
-                            }}
+                            onKeyDown={this.CheckEnter}
                             value={text || ""}
                             onChange={(e) => this.setText(e.target.value)}
                         />

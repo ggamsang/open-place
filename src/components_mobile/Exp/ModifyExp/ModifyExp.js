@@ -156,7 +156,8 @@ class ModifyExp extends React.Component {
   handleAddTag = (tag) => {
     this.setState({
       tag: tag.slice(),
-    });
+    }, console.log(this.state.tag));
+
   }
   onChangePrice = (price) => {
     this.setState({

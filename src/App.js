@@ -35,6 +35,9 @@ import ModifyExpPage from "pages/ExpPage/ModifyExpPage/ModifyExpPage";
 import { WIDTH } from "constant";
 import bg from "resources/sample-image-01.png";
 
+import MyPaidExpDetailPage from "pages/MyPaidExpDetailPage";
+
+
 const Wrapper = styled.main`
   overflow: hidden;
   position: relative;
@@ -82,10 +85,11 @@ function App() {
             <Route path="play" element={<PlayExpListPage />} />
             <Route path="make" element={<MakeExpListPage />} />
             <Route path="learn" element={<LearnExpListPage />} />
-            
+
             <Route path="myDetail" element={<MyDetailPage />}>
               <Route path=":id" element={<MyDetailChild />} />
             </Route>
+            <Route path="paidExp/:id" element={<MyPaidExpDetailPage />} />
             <Route path="terms" element={<TermsOfServicePage />} />
             <Route path="privacy" element={<PrivacyPolicyPage />} />
             <Route path="search" element={<SearchPage />} >
@@ -104,6 +108,7 @@ function App() {
             </Route>
             <Route path="message" element={<MessageListPage />} />
             <Route path="message/:id" element={<MessageDetailPage />} />
+
             <Route path="*" element={<div>NOT FOUND</div>} />
           </Routes>
         </BrowserRouter>
