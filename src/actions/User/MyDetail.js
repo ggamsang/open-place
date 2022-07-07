@@ -72,22 +72,28 @@ const getUserPointHistorySuccess = (data) => ({ type: types.GET_USER_POINT_HISTO
 const getUserPointHistoryFailure = (err) => ({ type: types.GET_USER_POINT_HISTORY_FAILURE, err: err });
 
 
-export const getUserRegisterExpRequest = (user_id, page) => {
-  return dispatch => {
-    dispatch(getUserRegisterExp());
+export const getUserRegisterExpRequest = (user_id,page) => {
+  return (dispatch) => {
+    dispatch(getUserRegisterExp())
     const url = `${host}/user/exp/register/${user_id}/${page}`;
-    return fetch(url, GET)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        data && dispatch(getUserRegisterExpSuccess(data))
-      })
-      .catch(err => dispatch(getUserRegisterExpFailure(err)))
+    return fetch(url, {
+      headers: { "Content-Type": "application/json" },
+      method: "GET"
+    })
+    .then(res => res.json())
+    .then(data =>{
+      return dispatch(page === 0
+      ? getUserRegisterExpZero(data ? data : [])
+      : getUserRegisterExpSuccess(data ? data : []))
+  })
+    .catch(error => dispatch(getUserRegisterExpFailure(error)));
   }
 };
+
 const getUserRegisterExp = () => ({ type: types.GET_USER_REGISTER_EXP });
+const getUserRegisterExpZero = (data) => ({ type: types.GET_USER_REGISTER_EXP_ZERO, list: data, list_added: [] });
 const getUserRegisterExpSuccess = (data) => ({ type: types.GET_USER_REGISTER_EXP_SUCCESS, list: data });
-const getUserRegisterExpFailure = (err) => ({ type: types.GET_USER_REGISTER_EXP_FAILURE, err: err });
+const getUserRegisterExpFailure = (err) => ({ type: types.GET_USER_REGISTER_EXP_FAILURE, list: [], list_added: [] });
 
 export const getUserSellExpRequest = (user_id, page) => {
   return dispatch => {
@@ -113,7 +119,6 @@ export const getUserLikeExpRequest = (user_id, page) => {
     return fetch(url, GET)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         data && dispatch(getUserLikeExpSuccess(data))
       })
       .catch(err => dispatch(getUserLikeExpFailure(err)))

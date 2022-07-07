@@ -6,6 +6,7 @@ import { InputFile } from 'components_mobile/Commons/Input';
 import DropDownNormal from "components_mobile/Commons/DropDown/DropDownNormal";
 import InputNormal from "components_mobile/Commons/Input/InputNormal";
 import { InputCalendar } from "components_mobile/Commons/Input";
+import Jodit from "commons/Jodit";
 //일반:1 자문/상담:2 강의/강좌:3 모임:4 게임5
 const TYPE_NORMAL = 0;
 const TYPE_TALK = 1;
@@ -28,6 +29,14 @@ const Wrapper = styled.div`
       font: normal normal bold 15px/18px Pretendard;color:white;
       display:flex;align-items:center;
     }
+  }
+  .whiteBox{
+    width:100%;
+    padding:10px;
+    border-radius:10px;
+    background-color:white;
+    margin-bottom:15px;
+    box-shadow: 2px 2px 5px #00000029;
   }
 `
 const OnOfflinelist = [
@@ -84,7 +93,7 @@ class ExpType extends Component {
   }
   componentDidUpdate(prevProps) {
     if (prevProps.content != this.props.content) {
-      this.setState({ content: this.props.content })
+      this.setState({ content: this.props.content },()=>{console.log(this.state.content)})
       this.setState({ exp_files: this.props.exp_files ? [].concat(this.props.exp_files) : [] })
     }
     if (prevProps.exp_files != this.props.exp_files) {
@@ -99,9 +108,9 @@ class ExpType extends Component {
         this.setState({
           isOnline: typeDetailToJSON.isOnline,
           place: typeDetailToJSON.place,
-          people:typeDetailToJSON.people,
-          startDate:typeDetailToJSON.startDate,
-          endDate:typeDetailToJSON.endDate,
+          people: typeDetailToJSON.people,
+          startDate: typeDetailToJSON.startDate,
+          endDate: typeDetailToJSON.endDate,
           game_files: JSON.parse(typeDetailToJSON.game_files),
         })
       }
@@ -139,7 +148,7 @@ class ExpType extends Component {
       place: this.state.place,
       people: this.state.people,
       startDate: this.state.startDate,
-      endDate: this.state.endDate||this.state.startDate,
+      endDate: this.state.endDate || this.state.startDate,
     }
     console.log(JSON.stringify(Date))
     return this.props.return && this.props.return(JSON.stringify(Date));
@@ -178,6 +187,7 @@ class ExpType extends Component {
 
   render() {
     const { type } = this.props;
+    console.log(this.state);
     return (
       <Wrapper>
         <div className="add_content">
@@ -280,8 +290,9 @@ class ExpType extends Component {
               <div className="row">
                 <div className='label'>게임 첨부</div>
               </div>
-              <InputFile files={this.state.game_files} display={true} getValue={(value) => this.onChangeGame(value)} accept="" />
-
+              <div className="whiteBox">
+                <InputFile files={this.state.game_files} display={true} getValue={(value) => this.onChangeGame(value)} accept="" />
+              </div>
             </React.Fragment>
           }
         </div>
@@ -289,12 +300,14 @@ class ExpType extends Component {
 
         <div className='row' style={{ flexDirection: "column" }}>
           <div className='label'>경험 컨텐츠</div>
-          <div style={{ backgroundColor: "white" }}>
-            <Editor value={this.state.content} config={config} onChange={(value) => this.onChangeContent(value)} />
+          <div className="whiteBox">
+            <Jodit value={this.state.content} config={config} onChange={(value) => {
+              this.onChangeContent(value)
+            }} />
           </div>
         </div>
 
-        <div className=''>
+        <div className='whiteBox'>
           <InputFile files={this.state.exp_files} display={true} getValue={(value) => this.onChangeFile(value)} accept="" />
         </div>
 

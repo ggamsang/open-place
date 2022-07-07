@@ -22,7 +22,7 @@ export const Editor = ({ config, value, onChange }) => {
                 ref={editor}
                 config={config}
                 onChange={newContent => handleChangeContent(newContent)}
-                value={text}
+                value={value}
             />
         </Wrapper>
     )

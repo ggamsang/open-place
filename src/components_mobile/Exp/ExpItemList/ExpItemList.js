@@ -99,6 +99,7 @@ class ExpItemList extends React.Component {
     //     }
     // }
     getList = (page) => {
+        
         return this.props.getExpListRequest(page,this.props.type, this.props.sort, this.props.keyword);
     }
     render() {

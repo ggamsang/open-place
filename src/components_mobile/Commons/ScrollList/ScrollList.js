@@ -7,8 +7,9 @@ import Item from 'components_mobile/Commons/Item';
 
 // import { WIDTH } from "constant";
 const ScrollWrap = styled.div`
-  width:100%;
-  .wrapper_{
+width:100%;
+.wrapper_{
+    padding-bottom:100px;
     width:100%;
   }
 `;
@@ -38,7 +39,7 @@ class ScrollList extends React.Component {
         this.state = {
             hasMore: true, loading: false,
         }
-        this.getLoadData = this.getLoadData.bind(this);
+        // this.getLoadData = this.getLoadData.bind(this);
     }
 
     getLoadData = (page) => {

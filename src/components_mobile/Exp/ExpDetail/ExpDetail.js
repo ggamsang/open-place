@@ -200,7 +200,7 @@ class ExpDetail extends React.Component {
                   radius={10}
                   fontSize={15}
                   bgColor={"red"}
-                  text={"♥구매하기"}
+                  text={"구매하기"}
                   style={{ marginRight: "25px" }}
                 />
               </div>

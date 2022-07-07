@@ -246,7 +246,7 @@ class MyDetailChild extends Component {
     } else if (sub == "payment") {
       this.props.getUserPointHistoryReqeust(user_id, 0);
     } else if (sub == "regExp") {
-      this.props.getUserRegisterExpRequest(user_id, 0);
+      // this.props.getUserRegisterExpRequest(user_id, 0);
     } else if (sub == "sellExp") {
       this.props.getUserSellExpRequest(user_id, 0);
     } else if (sub == "buyExp") {
