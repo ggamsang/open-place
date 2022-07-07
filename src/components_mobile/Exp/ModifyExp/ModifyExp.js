@@ -13,6 +13,7 @@ import { goto } from 'navigator';
 import { InputFile } from 'components_mobile/Commons/Input';
 import { Editor } from 'commons/Editor/Editor';
 import Jodit from 'commons/Jodit';
+import ExpType from '../Common/ExpType';
 
 const Wrapper = styled.div`
     *{
@@ -102,61 +103,67 @@ class ModifyExp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tag: null,
-      thumbnail: null, thumbnail_name: null, title: null, type: 0, info: null, price: 0, exp_files: [],
+      tag: null ,exp_type:0, exp_type_detail:null,
+      thumbnail: null, thumbnail_name: null, title: null, category: 1, info: null, price: 0, exp_files: [],
       content: null,
     }
     this.onChangeThumbnail = this.onChangeThumbnail.bind(this);
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.handleAddTag = this.handleAddTag.bind(this);
-    this.onChangeType = this.onChangeType.bind(this);
+    this.onChangeCategory = this.onChangeCategory.bind(this);
     this.onChangeInfo = this.onChangeInfo.bind(this);
     this.onChangePrice = this.onChangePrice.bind(this);
     this.onClickOK = this.onClickOK.bind(this);
+
     this.onChangeContent = this.onChangeContent.bind(this);
     this.onFileChange = this.onFileChange.bind(this);
+    this.onChangeExpType = this.onChangeExpType.bind(this);
 
   }
   async componentDidUpdate(prevProps) {
     if (JSON.stringify(prevProps.expDetail) != JSON.stringify(this.props.expDetail)) {
-      console.log(this.props);
       await this.setState({
         thumbnail: this.props.expDetail && this.props.expDetail.thumbnail,
         title: this.props.expDetail && this.props.expDetail.title,
         tag: [],
-        type: this.props.expDetail && this.props.expDetail.category,
+        category: this.props.expDetail && this.props.expDetail.category,
         info: this.props.expDetail && this.props.expDetail.info,
         price: this.props.expDetail && this.props.expDetail.price,
         content: this.props.expDetail && this.props.expDetail.content,
         exp_files: this.props.expDetail && JSON.parse(this.props.expDetail.exp_files),
+        exp_type: this.props.expDetail && this.props.expDetail.type,
+        exp_type_detail: this.props.expDetail && this.props.expDetail.type_detail,
       }, () => {
         let taglist = this.props.expDetail && this.props.expDetail.taglist;
         taglist = taglist && taglist.replace("[", "");
         taglist = taglist && taglist.replace("]", "");
         taglist = taglist && taglist.replace("\"", "");
         taglist = taglist && taglist.split(",") && taglist.split(",");
-        console.log(taglist);
         this.setState({
           tag: [].concat(taglist)
         })
       })
-      this.props.expDetail&&await this.setState({
-        exp_files:this.props.expDetail==null?[]:JSON.parse(this.props.expDetail.exp_files)
-      },()=>{console.log(this.state)})
+      this.props.expDetail && await this.setState({
+        exp_files: this.props.expDetail == null ? [] : JSON.parse(this.props.expDetail.exp_files)
+      }, () => {  })
     }
   }
 
   onChangeTitle = (event) => {
     this.setState({ title: event.target.value })
   }
-  onChangeContent = async(value) => {
+  onChangeContent = async (value) => {
     await this.setState({ content: value });
   }
-
+  onFileChange = async (files) => {
+    this.setState({
+      exp_files: [].concat(files),
+    })
+  }
   handleAddTag = (tag) => {
     this.setState({
       tag: tag.slice(),
-    }, console.log(this.state.tag));
+    });
 
   }
   onChangePrice = (price) => {
@@ -164,17 +171,13 @@ class ModifyExp extends React.Component {
       price: price,
     })
   }
-  onChangeType = (event) => {
-    this.setState({ type: event.target.value });
+  onChangeCategory = (event) => {
+    this.setState({ category: event.target.value });
   }
   onChangeInfo = (event) => {
     this.setState({ info: event.target.value })
   }
-  onFileChange = async (files) => {
-    this.setState({
-      exp_files: [].concat(files),
-    })
-  }
+
   onChangeThumbnail = async (event) => {
     event.preventDefault();
     const reader = new FileReader();
@@ -198,23 +201,23 @@ class ModifyExp extends React.Component {
       reader.readAsDataURL(file);
     }
   };
+
+  onChangeExpType = (event) => {
+    this.setState({ 
+      exp_type: event.target.value 
+    });
+  }
+
   onClickOK = async (event) => {
-    const { thumbnail, thumbnail_name, title, tag, info, price, type, exp_files, content } = this.state;
+    const { thumbnail, thumbnail_name, title, tag, info, price, category, exp_files, content, exp_type, exp_type_detail } = this.state;
     let data = {
       user_id: this.props.userInfo.uid,
       item_id: this.props.item_id,
-      title: title, taglist: tag, info: info, price: price, type: type, content:content,
+      type:exp_type, type_detail:exp_type_detail,
+      title: title, taglist: tag, info: info, price: price, category: category, content: content, 
       files: [], exp_files: JSON.stringify(exp_files)
     }
-    // if (this.state.thumbnail != null || this.state.thumbnail !== "") {
-    //   data.files.push(file);
-    // }
-    // if (data.files.length <= 0 || data.files[0].value === (this.props.MakerDetail && this.props.MakerDetail.image)) {
-    //   delete data.files;
-    // }
     let file = { value: this.state.thumbnail, name: this.state.thumbnail_name, key: 0 };
-
-    console.log(data);
     if (thumbnail_name != null) { await data.files.push(file); } // thumbnail 썸네일이 있을 경우에만 
     if (data.files.length <= 0 || data.files[0].value === (this.props.expDetail && this.props.expDetail.image)) {
       delete data.files;
@@ -226,6 +229,7 @@ class ModifyExp extends React.Component {
     window.history.go(-1);
   }
   render() {
+    console.log(this.props);
     return (
       <Wrapper>
         <div className='header'>
@@ -239,7 +243,6 @@ class ModifyExp extends React.Component {
                 <div className='img_' /> :
                 <img src={this.state.thumbnail} className="img_" alt="profile" />
             }            <div className='wrap'>
-              {/* <div style={{ marginBottom: "9px" }}><span className="label">제목</span><sup style={{ color: "red" }}>*</sup><span className="text">{this.state.title}</span></div> */}
               <label className="findThumbnailText" htmlFor="file">
                 <ButtonNormal
                   width={194}
@@ -254,24 +257,28 @@ class ModifyExp extends React.Component {
             </div>
             <input hidden onChange={this.onChangeThumbnail} id="file" type="file" accept="image/png, image/bmp, image/jpeg, image/jpg" />
           </div>
+
           <div className='row'>
             <div className='label'>제목<sup style={{ color: "red" }}>*</sup></div>
             <InputNormal onChangeValue={this.onChangeTitle}
               value={this.state.title} placeholder={"제목을 입력하세요"} radius={10}
               width={245} height={31} fontSize={14} color={"#E9E9E9"} />
           </div>
+
           <div className='row'>
             <div className='label'>태그<sup style={{ color: "red" }}>*</sup></div>
             <div><InputTag taglist={this.state.tag} getValue={this.handleAddTag} width={"245"} /></div>
           </div>
+
           <div className='row'>
-            <div className='label'>경험 유형<sup style={{ color: "red" }}>*</sup></div>
+            <div className='label'>카테고리<sup style={{ color: "red" }}>*</sup></div>
             <DropDownNormal
-              value={this.state.type-1}
-              onChangeValue={this.onChangeType}
+              value={this.state.category - 1}
+              onChangeValue={this.onChangeCategory}
               width={150} height={31} radius={10}
               options={this.props.category} />
           </div>
+
           <div className='row'>
             <div className='label'>설명</div>
             <TextAreaNormal
@@ -283,24 +290,42 @@ class ModifyExp extends React.Component {
               ="설명을 입력하세요"
             />
           </div>
+
           <div className='row'>
             <div className='label'>가격</div>
             <div>
               <InputPrice price={this.state.price} onChangeValue={this.onChangePrice} name="price" />
             </div>
           </div>
-          <div className='row' style={{ flexDirection: "column" }}>
+
+          <div className='row'>
+            <div className='label'>경험 유형<sup style={{ color: "red" }}>*</sup></div>
+            <DropDownNormal
+              value={this.state.exp_type}
+              onChangeValue={this.onChangeExpType}
+              width={150} height={31} radius={10}
+              options={this.props.exp_type} />
+          </div>
+          <div className='row'>
+            <ExpType content={this.state.content} exp_files={this.state.exp_files}
+            typeDetail={this.state.exp_type_detail||null} 
+            type={this.state.exp_type} getContent={this.onChangeContent} getFiles={this.onFileChange} 
+            return={(value)=>this.setState({exp_type_detail:value})} />
+          </div>
+          {/* <div className='row' style={{ flexDirection: "column" }}>
             <div className='label'>경험 컨텐츠</div>
             <div style={{ backgroundColor: "white" }}>
               <Jodit value={this.state.content} config={config} onChange={(value) => this.onChangeContent(value)} />
             </div>
           </div>
+
           <div className=''>
             {
-              this.state.exp_files&&
+              this.state.exp_files &&
               <InputFile files={this.state.exp_files} display={true} getValue={this.onFileChange} accept="" />
             }
-          </div>
+          </div> */}
+
           <div className='buttonWrap'>
             <ButtonNormal
               onClickEvent={() => goto("BACK")}

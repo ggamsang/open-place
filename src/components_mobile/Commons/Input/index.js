@@ -5,3 +5,5 @@ export * from "./InputPhone";
 export * from "./InputTag";
 export * from "./InputPrice";
 export * from "./InputFile";
+export * from "./InputCalendar";
+

@@ -20,7 +20,7 @@ class CreateExpContainer extends Component {
 
 const mapStateToProps = (state) => ({
   category: state.DefaultList.status.category,
-  exptype: state.DefaultList.status.exptype,
+  exp_type: state.DefaultList.status.exp_type,
   token: state.Authentication.status.token,
   userInfo: state.Authentication.status.userInfo,
 });

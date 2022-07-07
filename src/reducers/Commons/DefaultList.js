@@ -27,7 +27,7 @@ export function DefaultList(state, action) {
         case types.GET_DEFAULT_CATEGORY_FAILURE:
             return update(state, {
                 Category: { status: { $set: "FAILURE" } },
-                status: { category: { $set: action.catecategorygory }, }
+                status: { category: { $set: action.category }, }
             });
         case types.GET_DEFAULT_EXP_TYPE_SUCCESS:
             return update(state, {

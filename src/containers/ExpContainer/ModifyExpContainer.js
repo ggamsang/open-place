@@ -6,10 +6,10 @@ import { updateExpRequest } from 'actions/Exp/UpdateExp'
 import {getExpDetailRequest} from "actions/Exp/ExpDetail"
 
 class ModifyExpContainer extends Component {
-    componentDidMount(){
-      this.props.getCategoryListRequest();
-      this.props.getExpTypeListReqeuest();
-      this.props.getExpDetailRequest(this.props.item_id)
+    async componentDidMount() {
+      await this.props.getCategoryListRequest()
+        .then(() => this.props.getExpTypeListReqeuest())
+        .then(()=>this.props.getExpDetailRequest(this.props.item_id));
     }
     render() {
       return (
@@ -22,7 +22,7 @@ class ModifyExpContainer extends Component {
 
   const mapStateToProps = (state) => ({
     category: state.DefaultList.status.category,
-    exptype: state.DefaultList.status.exptype,
+    exp_type: state.DefaultList.status.exp_type,
     token: state.Authentication.status.token,
     userInfo: state.Authentication.status.userInfo,
     expDetail: state.ExpDetail.status.expDetail,

@@ -39,7 +39,7 @@ class TextAreaNormal extends Component {
         <React.Fragment>
             <TextAreaField
                 onChange={this.onChangeValue}
-                value={this.props.value}
+                value={this.props.value||""}
                 placeholder={this.props.placeholder}
                 type={this.props.type==null?"text":this.props.type}
                 style={this.props.style}
