@@ -35,7 +35,6 @@ class Jodit extends Component {
       }
     }
     handleChangeContent = async(content) =>{
-        console.log(content);
         await this.props.onChange(content);
     }
     render() {

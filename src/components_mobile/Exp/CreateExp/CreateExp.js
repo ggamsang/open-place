@@ -13,6 +13,8 @@ import { Editor } from 'commons/Editor/Editor';
 import { InputFile } from 'components_mobile/Commons/Input';
 import { goto } from 'navigator';
 
+import ExpType from '../Common/ExpType';
+
 const Wrapper = styled.div`
     *{
       box-sizing:border-box;
@@ -100,18 +102,20 @@ class CreateExp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tag: null,
-      thumbnail: null, thumbnail_name: null, title: null, type: 3, info: null, exp_files: [],
+      tag: null ,exp_type:0, exp_type_detail:"",
+      thumbnail: null, thumbnail_name: null, title: null, category: 1, info: null, exp_files: [],
     }
     this.onChangeThumbnail = this.onChangeThumbnail.bind(this);
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.handleAddTag = this.handleAddTag.bind(this);
-    this.onChangeType = this.onChangeType.bind(this);
+    this.onChangeCategory = this.onChangeCategory.bind(this);
     this.onChangeInfo = this.onChangeInfo.bind(this);
     this.onChangePrice = this.onChangePrice.bind(this);
     this.onClickOK = this.onClickOK.bind(this);
+   
     this.onChangeContent = this.onChangeContent.bind(this);
     this.onFileChange = this.onFileChange.bind(this);
+    this.onChangeExpType = this.onChangeExpType.bind(this);
   }
 
   onChangeTitle = (event) => {
@@ -121,6 +125,11 @@ class CreateExp extends React.Component {
   }
   onChangeContent = (value) => {
     this.setState({ content: value });
+  }
+  onFileChange = async (files) => {
+    this.setState({
+      exp_files: [].concat(files),
+    })
   }
 
   handleAddTag = (tag) => {
@@ -134,23 +143,16 @@ class CreateExp extends React.Component {
     });
   }
 
-  onChangeType = (event) => {
-    this.setState({
-      type: event.target.value
+  onChangeCategory = (event) => {
+    this.setState({ 
+      category: event.target.value 
     });
   }
-
   onChangeInfo = (event) => {
     this.setState({
       info: event.target.value
     });
   }
-  onFileChange = async (files) => {
-    this.setState({
-      exp_files: [].concat(files),
-    })
-  }
-
   onChangeThumbnail = async (event) => {
     event.preventDefault();
     const reader = new FileReader();
@@ -175,16 +177,23 @@ class CreateExp extends React.Component {
     }
   };
 
+  onChangeExpType = (event) => {
+    this.setState({ 
+      exp_type: event.target.value 
+    });
+  }
+
   onClickOK = async (event) => {
-    const { thumbnail, title, tag, info, price, type, content, exp_files } = this.state;
+    const { thumbnail, title, tag, info, price, category, content, exp_files,exp_type,exp_type_detail } = this.state;
     const data = {
-      user_id: this.props.userInfo.uid,
-      title: title, taglist: tag, info: info, price: price, type: type, content: content,
+      user_id: this.props.userInfo.uid, 
+      type:exp_type, type_detail:exp_type_detail,
+      title: title, taglist: tag, info: info, price: price, category: category, content: content,
       files: [], exp_files: JSON.stringify(exp_files)
     }
 
     console.log(data);
-
+    
     let file = { value: this.state.thumbnail, name: this.state.thumbnail_name, key: 0 };
 
     if (thumbnail != null) { await data.files.push(file); } // thumbnail 썸네일이 있을 경우에만 
@@ -198,6 +207,7 @@ class CreateExp extends React.Component {
       })
 
   }
+  
   render() {
 
     return (
@@ -214,9 +224,10 @@ class CreateExp extends React.Component {
                 <img src={this.state.thumbnail} className="img_" alt="profile" />
             }
             <div className='wrap'>
-              {/* <div style={{ marginBottom: "9px" }}><span className="label">제목</span><sup style={{ color: "red" }}>*</sup><span className="text"></span></div> */}
-              <label className="findThumbnailText" htmlFor="afile">
-                <ButtonNormal
+              <input hidden onChange={this.onChangeThumbnail} id="file" type="file" accept="image/png, image/bmp, image/jpeg, image/jpg" />
+              <label htmlFor='file'>
+              <ButtonNormal
+                  disabled={true}
                   width={194}
                   height={30}
                   radius={10}
@@ -226,27 +237,33 @@ class CreateExp extends React.Component {
                   border={"2px solid red"}
                   text="썸네일 등록" />
               </label>
-              <input hidden onChange={this.onChangeThumbnail} id="afile" type="file" accept="image/png, image/bmp, image/jpeg, image/jpg" />
             </div>
           </div>
+   
+   
+   
           <div className='row'>
             <div className='label'>제목<sup style={{ color: "red" }}>*</sup></div>
             <InputNormal onChangeValue={this.onChangeTitle}
               value={this.state.value} placeholder={"제목을 입력하세요"} radius={10}
               width={245} height={31} fontSize={14} color={"#E9E9E9"} />
           </div>
+   
           <div className='row'>
             <div className='label'>태그<sup style={{ color: "red" }}>*</sup></div>
             <div><InputTag getValue={this.handleAddTag} width={"245"} /></div>
           </div>
+   
           <div className='row'>
-            <div className='label'>경험 유형<sup style={{ color: "red" }}>*</sup></div>
+            <div className='label'>카테고리<sup style={{ color: "red" }}>*</sup></div>
             <DropDownNormal
-              value={this.state.type - 1}
-              onChangeValue={this.onChangeType}
+              value={this.state.category-1}
+              onChangeValue={this.onChangeCategory}
+
               width={150} height={31} radius={10}
               options={this.props.category} />
           </div>
+          
           <div className='row'>
             <div className='label'>설명</div>
             <TextAreaNormal
@@ -257,21 +274,37 @@ class CreateExp extends React.Component {
               ="설명을 입력하세요"
             />
           </div>
+        
           <div className='row'>
             <div className='label'>가격</div>
             <div>
               <InputPrice onChangeValue={this.onChangePrice} name="price" />
             </div>
           </div>
-          <div className='row' style={{ flexDirection: "column" }}>
+
+          <div className='row'>
+            <div className='label'>경험 유형<sup style={{ color: "red" }}>*</sup></div>
+            <DropDownNormal
+              value={this.state.exp_type}
+              onChangeValue={this.onChangeExpType}
+              width={150} height={31} radius={10}
+              options={this.props.exp_type} />
+          </div>
+
+          <div className='row'>
+            <ExpType type={this.state.exp_type} getContent={this.onChangeContent} getFiles={this.onFileChange} return={(value)=>this.setState({exp_type_detail:value})} />
+          </div>
+        
+          {/* <div className='row' style={{ flexDirection: "column" }}>
             <div className='label'>경험 컨텐츠</div>
             <div style={{ backgroundColor: "white" }}>
               <Editor value={this.state.content} config={config} onChange={(value) => this.onChangeContent(value)} />
             </div>
           </div>
+        
           <div className=''>
             <InputFile display={true} getValue={this.onFileChange} accept="" />
-          </div>
+          </div> */}
           <div className='buttonWrap'>
             <ButtonNormal
               onClickEvent={() => goto("BACK")}

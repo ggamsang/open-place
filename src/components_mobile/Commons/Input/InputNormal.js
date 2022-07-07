@@ -60,11 +60,11 @@ class InputNormal extends Component {
             <React.Fragment>
                 <Wrap width={this.props.width} warning={warning} height={this.props.height}>
                     <InputField
+                        type={this.props.type == null ? "text" : this.props.type}
                         disabled={this.props.disable}
                         onChange={this.props.onChangeValue}
-                        value={this.props.value}
+                        value={this.props.value||""}
                         placeholder={this.props.placeholder}
-                        type={this.props.type == null ? "text" : this.props.type}
                         style={this.props.style}
                         width={this.props.width}
                         height={this.props.height}

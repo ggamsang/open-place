@@ -95,7 +95,7 @@ export class InputFile extends Component {
                             this.state.files&&
                             this.state.files.map((item,index)=>{
                                 return(
-                                    <div className="fileRow">
+                                    <div className="fileRow" key={index}>
                                         <div onClick={()=>window.location.href=item.file_url} className="file_name">{item.filename}</div>
                                         <div id={index}  style={{display:`${this.props.display==true?"flex":"none"}`}} className="close_btn" onClick={this.onClickRemove}>X</div>
                                     </div>
