@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import ScrollList from "components_mobile/Commons/ScrollList"
 import { connect } from "react-redux";
-
+import { getUserRegisterExpRequest } from "actions/User/MyDetail"
+import Item from 'components_mobile/Commons/Item';
 const dummy = [
   {
     type: "item", title: "스파게티 코드를 작성하자!", score: 4.3,
@@ -25,17 +26,36 @@ const dummy = [
   }
 ]
 class RegisterExpContainer extends Component {
+  constructor(props){
+    super(props);
+    // this.getList = this.getList.bind(this);
+  }
+  componentWillMount() {
+    console.log(this.props.userInfo)
+    this.getList(0);
+  }
+  getList = (page) => {
+
+    return new Promise((resolve)=>resolve(this.props.getUserRegisterExpRequest&&this.props.getUserRegisterExpRequest(this.props.userInfo.uid, page)));
+  }
   render() {
-   return (<React.Fragment>
-      <ScrollList list={dummy} />
+    console.log(this.props)
+    return (
+    <React.Fragment>
+      <ScrollList list={this.props.list} list_added={this.props.list_added} getList={(value)=>this.getList(value)} ListComponent={Item} />
     </React.Fragment>)
   }
 }
+{/* <ScrollList list={this.props.list} list_added={this.props.list_added} getList={this.getList} ListComponent={Item} /> */ }
 
 const mapStateToProps = (state) => ({
+  userInfo: state.Authentication.status.userInfo,
+  list: state.MyDetail.status.my_list,
+  list_added: state.MyDetail.status.my_list_added,
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  getUserRegisterExpRequest: (user_id, page) => { dispatch(getUserRegisterExpRequest(user_id, page)) },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterExpContainer);
