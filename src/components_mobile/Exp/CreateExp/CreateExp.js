@@ -117,10 +117,10 @@ class CreateExp extends React.Component {
     this.onFileChange = this.onFileChange.bind(this);
     this.onChangeExpType = this.onChangeExpType.bind(this);
   }
-  
+
   onChangeTitle = (event) => {
-    this.setState({ 
-      title: event.target.value 
+    this.setState({
+      title: event.target.value
     });
   }
   onChangeContent = (value) => {
@@ -149,8 +149,8 @@ class CreateExp extends React.Component {
     });
   }
   onChangeInfo = (event) => {
-    this.setState({ 
-      info: event.target.value 
+    this.setState({
+      info: event.target.value
     });
   }
   onChangeThumbnail = async (event) => {
@@ -246,7 +246,7 @@ class CreateExp extends React.Component {
             <div className='label'>제목<sup style={{ color: "red" }}>*</sup></div>
             <InputNormal onChangeValue={this.onChangeTitle}
               value={this.state.value} placeholder={"제목을 입력하세요"} radius={10}
-            width={245} height={31} fontSize={14} color={"#E9E9E9"} />
+              width={245} height={31} fontSize={14} color={"#E9E9E9"} />
           </div>
    
           <div className='row'>
@@ -259,6 +259,7 @@ class CreateExp extends React.Component {
             <DropDownNormal
               value={this.state.category-1}
               onChangeValue={this.onChangeCategory}
+
               width={150} height={31} radius={10}
               options={this.props.category} />
           </div>

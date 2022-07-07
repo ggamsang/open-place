@@ -2,9 +2,9 @@ import io from "socket.io-client";
 import host from "config";
 
 class Socket {
-    constructor(msg) {
+    constructor(ns) {
         this.socket = io(
-            host.replace("/api", ""),
+            host.replace("/api", ns ? `/${ns}` : ``),
             {
                 path: "/socket.io",
                 transports: ['websocket', 'polling', 'flashsocket']

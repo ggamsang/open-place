@@ -16,14 +16,14 @@ export const GetMessageGroupRequest = (page, token) => {
   };
 };
 export const GetMessageGroup = () => ({
-  type: types.GET_MESSAGE_GROUP
+  type: types.GET_MESSAGE_GROUPS
 });
 export const GetMessageGroupSuccess = (groups) => ({
-  type: types.GET_MESSAGE_GROUP_SUCCESS,
+  type: types.GET_MESSAGE_GROUPS_SUCCESS,
   groups: groups
 });
 export const GetMessageGroupFailure = () => ({
-  type: types.GET_MESSAGE_GROUP_FAILURE,
+  type: types.GET_MESSAGE_GROUPS_FAILURE,
 });
 
 // 메시지 상세
@@ -72,19 +72,19 @@ export const GetMessageOpponentInfoFailure = () => ({
 export const GetCounselingMessageGroupRequest = (token, id) => {
   return dispatch => {
     dispatch(GetCounselingMessageGroup());
-    const url = ``;
-    return fetch(url, authGET(token, id))
+    const url = `${host}/message/group/${id}`;
+    return fetch(url, authGET(token))
       .then(res => res.json())
-      .then(res => dispatch(GetCounselingMessageGroupSuccess(res.detail)))
+      .then(res => res.detail && dispatch(GetCounselingMessageGroupSuccess(res.detail)))
       .catch(_ => dispatch(GetCounselingMessageGroupFailure()));
   };
 };
 export const GetCounselingMessageGroup = () => ({
   type: types.GET_COUNSELING_MESSAGE_GOUP
 });
-export const GetCounselingMessageGroupSuccess = (detail) => ({
+export const GetCounselingMessageGroupSuccess = (id) => ({
   type: types.GET_COUNSELING_MESSAGE_GOUP_SUCCESS,
-  detail: detail
+  group_id: id
 });
 export const GetCounselingMessageGroupFailure = () => ({
   type: types.GET_COUNSELING_MESSAGE_GOUP_FAILURE,
