@@ -11,7 +11,9 @@ const Wrapper = styled.div`
     width: ${WIDTH}px;
     margin: auto;
     box-sizing: border-box;
-    
+    *{
+        box-sizing:border-box;
+    }
     .line {
         box-sizing: border-box;
         width: 100%;
@@ -150,6 +152,7 @@ const Wrapper = styled.div`
         color: #817889;
     }
     .comment-list-wrapper {
+        box-sizing: border-box;
         position: relative;
     }
     .comment-popup {
