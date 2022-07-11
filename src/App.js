@@ -108,7 +108,7 @@ function App() {
             </Route>
             <Route path="message" element={<MessageListPage />} />
             <Route path="message/:id" element={<MessageDetailPage />} />
-            <Route path="charging" element={<MyPointChargePage />} />
+            {/* <Route path="charging" element={<MyPointChargePage />} /> */}
             <Route path="*" element={<div>NOT FOUND</div>} />
           </Routes>
         </BrowserRouter>
