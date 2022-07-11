@@ -6,8 +6,7 @@ import Message from "reducers/Message";
 import { TopExp, UpdateExp } from "reducers/Exp";
 import { AlarmList } from "reducers/Alarm";
 import { DefaultList } from "reducers/Commons/DefaultList";
-import { MyDetail } from "reducers/User/MyDetail";
-import { User } from "reducers/User/User";
+import { MyDetail, User, MyPoint } from "reducers/User";
 import { UpdateSharer } from "reducers/Sharer/UpdateSharer"
 import { ExpDetail } from "reducers/Exp";
 import { ExpList } from "reducers/Exp";
@@ -32,5 +31,5 @@ export default combineReducers({
     Review,
     ExpList,
     ExpBought,
-    
+    MyPoint,
 });

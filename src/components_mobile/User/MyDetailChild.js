@@ -13,6 +13,7 @@ import SellExpContainer from 'containers/MyDetail/SellExpContainer';
 import RegisterExpContainer from 'containers/MyDetail/RegisterExpContainer';
 import LikeExpContainer from 'containers/MyDetail/LikeExpContainer';
 import LikeSharerContainer from 'containers/MyDetail/LikeSharerContainer';
+import PointLogContainer from 'containers/MyDetail/PointLogContainer';
 import { WIDTH } from 'constant';
 import { SignOutRequest } from 'actions/Authentication';
 import {
@@ -21,6 +22,8 @@ import {
   getUserLikeExpRequest, // getUserBoughtExpRequest,
 } from "actions/User/MyDetail"
 import { goto } from 'navigator';
+import { Dimmer, Loader } from 'semantic-ui-react';
+import MyPointChargeContainer from 'containers/MyDetail/MyPointChargeContainer';
 
 const Wrapper = styled.div`
   width:100%;
@@ -258,72 +261,85 @@ class MyDetailChild extends Component {
     }
     this.props.getUserLikeExpRequest(user_id, 0);
   }
+  TabSwitch = tab => this.setState({ subMenu: tab });
 
   render() {
-    // const { isLoggedIn } = this.props;
-    return (
-      <React.Fragment>
-        {this.state.subMenu === "none"
-          && <Wrapper>
-            <Fade opposite when={this.state.main_menu}>
-              <Menu style={{ display: `${this.state.main_menu === true ? "block" : "none"}` }}>
-                <div className='menu_wrap'>
-                  <div className='label'>내정보</div>
-                  <div onClick={this.onClickPointMenu} className="menu_button" ><img alt="icon" src={star} /><div className='text'>포인트</div></div>  <div className='hrline' />
-                  <div onClick={() => this.onClickSubMenu("regExp")} className="menu_button" ><img alt="icon" src={plus} /><div className='text'>등록 경험</div></div> <div className='hrline' />
-                  <div onClick={() => this.onClickSubMenu("sellExp")} className="menu_button" ><img alt="icon" src={work} /><div className='text'>판매 경험</div></div> <div className='hrline' />
-                  <div onClick={() => this.onClickSubMenu("buyExp")} className="menu_button" ><img alt="icon" src={buy} /><div className='text'>구매한 경험</div></div>  <div className='hrline' />
-                  <div onClick={this.onClickLikeMenu} className="menu_button"><img alt="icon" src={heart} /><div className='text'>관심</div></div>
-                  <div onClick={this.onClickLogout} className="menu_button">
-                    {/* <img alt="icon" src={heart} /> */}
-                    <div className='text'>로그아웃</div>
-                  </div>
-                </div>
-              </Menu>
-            </Fade>
+    const { isLoggedIn, token } = this.props;
 
-            <Fade opposite when={this.state.sub_menu1 === true || this.state.sub_menu2}>
-              <SubMenu >
-                <div className='menu_wrap' style={{ display: `${this.state.sub_menu1 === true ? "flex" : "none"}` }}>
-                  <div onClick={this.onClickHome} className='label'> {"<"} 포인트</div>
-                  <div onClick={() => this.onClickSubMenu("point")} className="menu_button" ><img alt="icon" src={plus} /><div className='text'>포인트 충전</div></div>  <div className='hrline' />
-                  <div onClick={() => this.onClickSubMenu("payment")} className="menu_button" ><img alt="icon" src={plus} /><div className='text'>결제내역</div></div>  <div className='hrline' />
-                </div>
-                <div className='menu_wrap' style={{ display: `${this.state.sub_menu2 === true ? "flex" : "none"}` }}>
-                  <div onClick={this.onClickHome} className='label'> {"<"} 관심</div>
-                  <div onClick={() => this.onClickSubMenu("likeSharer")} className="menu_button"><img alt="icon" src={plus} /><div className='text'>관심 공유자</div></div>  <div className='hrline' />
-                  <div onClick={() => this.onClickSubMenu("likeExp")} className="menu_button"><img alt="icon" src={plus} /><div className='text'>관심 경험</div></div>  <div className='hrline' />
-                </div>
-              </SubMenu>
-            </Fade>
-          </Wrapper>
-        }
-        <SubWrap>
-          {this.state.subMenu === "point"
-            && <React.Fragment>
-              <div className='subTitle'>포인트 충전</div>디자인 필요</React.Fragment>}
-          {this.state.subMenu === "payment"
-            && <React.Fragment>
-              <div className='subTitle'>충전 내역</div>디자인 필요</React.Fragment>}
-          {this.state.subMenu === "regExp"
-            && <React.Fragment>
-              <div className='subTitle'>등록 경험</div><RegisterExpContainer /></React.Fragment>}
-          {this.state.subMenu === "sellExp"
-            && <React.Fragment>
-              <div className='subTitle'>판매 경험</div><SellExpContainer /></React.Fragment>}
-          {this.state.subMenu === "buyExp"
-            && <React.Fragment>
-              <div className='subTitle'>구매한 경험</div>
-              <BuyExpContainer />
-            </React.Fragment>}
-          {this.state.subMenu === "likeSharer"
-            && <React.Fragment>
-              <div className='subTitle'>관심 공유자</div><LikeSharerContainer /></React.Fragment>}
-          {this.state.subMenu === "likeExp"
-            && <React.Fragment>
-              <div className='subTitle'>관심 경험</div><LikeExpContainer /></React.Fragment>}
-        </SubWrap>
-      </React.Fragment>
+    return (
+      isLoggedIn && token
+        ? <React.Fragment>
+          {this.state.subMenu === "none"
+            && <Wrapper>
+              <Fade opposite when={this.state.main_menu}>
+                <Menu style={{ display: `${this.state.main_menu === true ? "block" : "none"}` }}>
+                  <div className='menu_wrap'>
+                    <div className='label'>내정보</div>
+                    <div onClick={this.onClickPointMenu} className="menu_button" ><img alt="icon" src={star} /><div className='text'>포인트</div></div>  <div className='hrline' />
+                    <div onClick={() => this.onClickSubMenu("regExp")} className="menu_button" ><img alt="icon" src={plus} /><div className='text'>등록 경험</div></div> <div className='hrline' />
+                    <div onClick={() => this.onClickSubMenu("sellExp")} className="menu_button" ><img alt="icon" src={work} /><div className='text'>판매 경험</div></div> <div className='hrline' />
+                    <div onClick={() => this.onClickSubMenu("buyExp")} className="menu_button" ><img alt="icon" src={buy} /><div className='text'>구매한 경험</div></div>  <div className='hrline' />
+                    <div onClick={this.onClickLikeMenu} className="menu_button"><img alt="icon" src={heart} /><div className='text'>관심</div></div>
+                    <div onClick={this.onClickLogout} className="menu_button">
+                      {/* <img alt="icon" src={heart} /> */}
+                      <div className='text'>로그아웃</div>
+                    </div>
+                  </div>
+                </Menu>
+              </Fade>
+
+              <Fade opposite when={this.state.sub_menu1 === true || this.state.sub_menu2}>
+                <SubMenu >
+                  <div className='menu_wrap' style={{ display: `${this.state.sub_menu1 === true ? "flex" : "none"}` }}>
+                    <div onClick={this.onClickHome} className='label'> {"<"} 포인트</div>
+                    <div onClick={() => this.onClickSubMenu("point")} className="menu_button" ><img alt="icon" src={plus} /><div className='text'>포인트 충전</div></div>  <div className='hrline' />
+                    <div onClick={() => this.onClickSubMenu("payment")} className="menu_button" ><img alt="icon" src={plus} /><div className='text'>결제내역</div></div>  <div className='hrline' />
+                  </div>
+                  <div className='menu_wrap' style={{ display: `${this.state.sub_menu2 === true ? "flex" : "none"}` }}>
+                    <div onClick={this.onClickHome} className='label'> {"<"} 관심</div>
+                    <div onClick={() => this.onClickSubMenu("likeSharer")} className="menu_button"><img alt="icon" src={plus} /><div className='text'>관심 공유자</div></div>  <div className='hrline' />
+                    <div onClick={() => this.onClickSubMenu("likeExp")} className="menu_button"><img alt="icon" src={plus} /><div className='text'>관심 경험</div></div>  <div className='hrline' />
+                  </div>
+                </SubMenu>
+              </Fade>
+            </Wrapper>
+          }
+          <SubWrap>
+            {this.state.subMenu === "point"
+              && <React.Fragment>
+                <div className='subTitle'>포인트 충전</div>
+                <MyPointChargeContainer onTabSwitch={() => this.TabSwitch("payment")} />
+              </React.Fragment>}
+
+            {this.state.subMenu === "payment"
+              && <React.Fragment>
+                <PointLogContainer onTabSwitch={() => this.TabSwitch("point")} />
+              </React.Fragment>}
+
+            {this.state.subMenu === "regExp"
+              && <React.Fragment>
+                <div className='subTitle'>등록 경험</div><RegisterExpContainer /></React.Fragment>}
+            {this.state.subMenu === "sellExp"
+              && <React.Fragment>
+                <div className='subTitle'>판매 경험</div><SellExpContainer /></React.Fragment>}
+            {this.state.subMenu === "buyExp"
+              && <React.Fragment>
+                <div className='subTitle'>구매한 경험</div>
+                <BuyExpContainer />
+              </React.Fragment>}
+            {this.state.subMenu === "likeSharer"
+              && <React.Fragment>
+                <div className='subTitle'>관심 공유자</div><LikeSharerContainer /></React.Fragment>}
+            {this.state.subMenu === "likeExp"
+              && <React.Fragment>
+                <div className='subTitle'>관심 경험</div><LikeExpContainer /></React.Fragment>}
+          </SubWrap>
+        </React.Fragment>
+        : <>
+          <Dimmer>
+            <Loader />
+          </Dimmer>
+        </>
     );
   }
 }

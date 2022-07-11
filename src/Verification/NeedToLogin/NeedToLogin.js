@@ -143,9 +143,8 @@ export default function NeedToLogin(props) {
     return (
         giveTry
             ? props
-            :
-            <Wrapper>
-                <div className='gradient'> </div>
+            : <Wrapper>
+                <div className='gradient'></div>
                 <h4> 유저정보를 확인하고 있습니다. </h4>
             </Wrapper>);
 }
