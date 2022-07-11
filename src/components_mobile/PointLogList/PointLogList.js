@@ -117,14 +117,14 @@ class PointLogList extends React.Component {
         const { pointlog = logs } = this.props;
         const date = (strDate) => strDate ? strDate.split("T")[0] : "알 수 없음";
         const PER = 8; // 페이지당 출력개수
-
+        console.log(this.props);
         return (<Wrapper>
 
             <SubTitle>충전 내역</SubTitle>
 
             <ButtonWrapper>
                 <button>
-                    <div className='text'>포인트충전</div>
+                    <div onClick={this.props.onTabSwitch} className='text'>포인트충전</div>
                 </button>
                 <button className='stepback active'>
                     <div className='text'>충전 내역</div>
@@ -154,7 +154,7 @@ class PointLogList extends React.Component {
                     firstItem={null}
                     lastItem={null}
                     siblingRange={1}
-                    totalPages={Math.round(((this.props.total || PER) / PER) + 0.5)}
+                    totalPages={Math.round(((this.props.total) / PER))}
                     onPageChange={this.handlePageNumberClicked}
                 />
             </div>

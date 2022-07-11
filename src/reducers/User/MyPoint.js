@@ -6,6 +6,7 @@ const initialstate = {
     status: {
         pointlog: [],
         total: 0,
+        current_point: 0,
     }
 }
 export function MyPoint(state, action) {
@@ -32,6 +33,26 @@ export function MyPoint(state, action) {
             return update(state, {
                 MyPoint: { $set: types.FAILED },
                 status: { pointlog: { $set: [] } }
+            });
+        case types.GET_CURRENT_POINT:
+            console.log("GET_CURRENT_POINT", action);
+            return update(state, {
+                MyPoint: { $set: types.SUCCESS },
+                status: { current_point: { $set: action.payload } }
+            });
+        case types.GET_CURRENT_POINT_FAILED:
+            return update(state, {
+                MyPoint: { $set: types.FAILED },
+                status: { current_point: { $set: 0 } }
+            });
+        case types.CHARGE_MY_POINT:
+            return update(state, {
+                MyPoint: { $set: types.SUCCESS },
+            });
+        case types.CHARGE_MY_POINT_FAILED:
+            return update(state, {
+                MyPoint: { $set: types.FAILED },
+                status: { error: action.payload }
             });
         default:
             return state;

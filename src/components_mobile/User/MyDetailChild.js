@@ -23,6 +23,7 @@ import {
 } from "actions/User/MyDetail"
 import { goto } from 'navigator';
 import { Dimmer, Loader } from 'semantic-ui-react';
+import MyPointChargeContainer from 'containers/MyDetail/MyPointChargeContainer';
 
 const Wrapper = styled.div`
   width:100%;
@@ -260,6 +261,7 @@ class MyDetailChild extends Component {
     }
     this.props.getUserLikeExpRequest(user_id, 0);
   }
+  TabSwitch = tab => this.setState({ subMenu: tab });
 
   render() {
     const { isLoggedIn, token } = this.props;
@@ -305,11 +307,13 @@ class MyDetailChild extends Component {
           <SubWrap>
             {this.state.subMenu === "point"
               && <React.Fragment>
-                <div className='subTitle'>포인트 충전</div>디자인 필요</React.Fragment>}
+                <div className='subTitle'>포인트 충전</div>
+                <MyPointChargeContainer onTabSwitch={() => this.TabSwitch("payment")} />
+              </React.Fragment>}
 
             {this.state.subMenu === "payment"
               && <React.Fragment>
-                <PointLogContainer />
+                <PointLogContainer onTabSwitch={() => this.TabSwitch("point")} />
               </React.Fragment>}
 
             {this.state.subMenu === "regExp"
