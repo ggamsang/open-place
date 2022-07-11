@@ -207,7 +207,7 @@ class MyDetailChild extends Component {
       main_menu: true,
       sub_menu1: false,
       sub_menu2: false,
-      subMenu: "payment", //"none",
+      subMenu: "none",
     }
     this.onClickPointMenu = this.onClickPointMenu.bind(this);
     this.onClickLikeMenu = this.onClickLikeMenu.bind(this);
