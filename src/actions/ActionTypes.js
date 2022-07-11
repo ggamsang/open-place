@@ -1,5 +1,10 @@
 // ACTIONS
 
+// action state
+export const WAITING = "WAITING";
+export const SUCCESS = "SUCCESS";
+export const FAILED = "FAILED";
+
 // SignIn
 export const AUTH_SIGNIN = "AUTH_SIGNIN";
 export const AUTH_SIGNIN_SUCCESS = "AUTH_SIGNIN_SUCCESS";
@@ -217,3 +222,8 @@ export const GET_GAME_EXP_DETAIL = "GET_GAME_EXP_DETAIL"
 export const GET_GAME_EXP_DETAIL_SUCCESS = "GET_GAME_EXP_DETAIL_SUCCESS"
 export const GET_GAME_EXP_DETAIL_FAILURE = "GET_GAME_EXP_DETAIL_FAILURE"
 
+// Point
+export const GET_POINT_LIST = "GET_POINT_LIST";
+export const GET_POINT_LIST_FAIL = "GET_POINT_LIST_FAIL";
+export const GET_POINT_TOTAL_COUNT = "GET_POINT_TOTAL_COUNT";
+export const GET_POINT_COUNT_FAIL = "GET_POINT_COUNT_FAIL";
