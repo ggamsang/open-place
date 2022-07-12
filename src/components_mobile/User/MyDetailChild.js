@@ -208,7 +208,7 @@ class MyDetailChild extends Component {
       main_menu: true,
       sub_menu1: false,
       sub_menu2: false,
-      subMenu: "none",
+      subMenu: "buyExp", // "none",
     }
     this.onClickPointMenu = this.onClickPointMenu.bind(this);
     this.onClickLikeMenu = this.onClickLikeMenu.bind(this);
@@ -318,10 +318,14 @@ class MyDetailChild extends Component {
 
             {this.state.subMenu === "regExp"
               && <React.Fragment>
-                <div className='subTitle'>등록 경험</div><RegisterExpContainer /></React.Fragment>}
+                <div className='subTitle'>등록 경험</div>
+                <RegisterExpContainer />
+              </React.Fragment>}
             {this.state.subMenu === "sellExp"
               && <React.Fragment>
-                <div className='subTitle'>판매 경험</div><SellExpContainer /></React.Fragment>}
+                <div className='subTitle'>판매 경험</div>
+                <SellExpContainer />
+              </React.Fragment>}
             {this.state.subMenu === "buyExp"
               && <React.Fragment>
                 <div className='subTitle'>구매한 경험</div>
@@ -329,10 +333,14 @@ class MyDetailChild extends Component {
               </React.Fragment>}
             {this.state.subMenu === "likeSharer"
               && <React.Fragment>
-                <div className='subTitle'>관심 공유자</div><LikeSharerContainer /></React.Fragment>}
+                <div className='subTitle'>관심 공유자</div>
+                <LikeSharerContainer />
+              </React.Fragment>}
             {this.state.subMenu === "likeExp"
               && <React.Fragment>
-                <div className='subTitle'>관심 경험</div><LikeExpContainer /></React.Fragment>}
+                <div className='subTitle'>관심 경험</div>
+                <LikeExpContainer />
+              </React.Fragment>}
           </SubWrap>
         </React.Fragment>
         : <>

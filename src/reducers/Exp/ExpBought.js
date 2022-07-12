@@ -17,8 +17,10 @@ export function ExpBought(state, action) {
     switch (action.type) {
         case types.GET_USER_BOUGHT_EXP:
             return update(state, { Bought: { $set: action.type } });
+        case types.GET_USER_BOUGHT_EXP_ZERO:
+            return update(state, { Bought: { $set: action.type }, status: { bought: { $set: action.list }, bought_added: { $set: action.list } } });
         case types.GET_USER_BOUGHT_EXP_SUCCESS:
-            return update(state, { Bought: { $set: action.type }, status: { bought: { $set: action.list } } });
+            return update(state, { Bought: { $set: action.type }, status: { bought: { $set: action.list }, bought_added: { $push: action.list } } });
         case types.GET_USER_BOUGHT_EXP_FAILURE:
             return update(state, { Bought: { $set: action.type }, status: { bought: { $set: [] }, Error: { $set: action.error } } });
         case types.GET_USER_BOUGHT_EXP_DETAIL:

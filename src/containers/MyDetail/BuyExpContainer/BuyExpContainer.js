@@ -12,12 +12,15 @@ const dummy = [{
 
 class BuyExpContainer extends React.Component {
   componentDidMount() {
-    this.props.token && this.props.getUserBoughtExpRequest(this.props.token)
+    this.props.token && this.props.getUserBoughtExpRequest(this.props.token, 0);
   }
+  getList = (page) =>
+    this.props.token && this.props.getUserBoughtExpRequest(this.props.token, page)
   onClick = (offset) => goto("MY-ITEM-BOUGHT", offset);
 
   render() {
     return (<ScrollList
+      getList={this.getList}
       list_added={this.props.bought || dummy}
       onClick={this.onClick} />);
   }
@@ -25,11 +28,14 @@ class BuyExpContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
   token: state.Authentication.status.token,
-  bought: state.ExpBought.status.bought,
+  bought: state.ExpBought.status.bought_added,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getUserBoughtExpRequest: (token) => dispatch(getUserBoughtExpRequest(token)),
+  getUserBoughtExpRequest: (token, page) =>
+    dispatch(getUserBoughtExpRequest(token, page)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BuyExpContainer);
+export default
+  connect(mapStateToProps, mapDispatchToProps)
+    (BuyExpContainer);

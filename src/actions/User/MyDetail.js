@@ -72,7 +72,7 @@ const getUserPointHistorySuccess = (data) => ({ type: types.GET_USER_POINT_HISTO
 const getUserPointHistoryFailure = (err) => ({ type: types.GET_USER_POINT_HISTORY_FAILURE, err: err });
 
 
-export const getUserRegisterExpRequest = (user_id,page) => {
+export const getUserRegisterExpRequest = (user_id, page) => {
   return (dispatch) => {
     dispatch(getUserRegisterExp())
     const url = `${host}/user/exp/register/${user_id}/${page}`;
@@ -80,13 +80,13 @@ export const getUserRegisterExpRequest = (user_id,page) => {
       headers: { "Content-Type": "application/json" },
       method: "GET"
     })
-    .then(res => res.json())
-    .then(data =>{
-      return dispatch(page === 0
-      ? getUserRegisterExpZero(data ? data : [])
-      : getUserRegisterExpSuccess(data ? data : []))
-  })
-    .catch(error => dispatch(getUserRegisterExpFailure(error)));
+      .then(res => res.json())
+      .then(data => {
+        return dispatch(page === 0
+          ? getUserRegisterExpZero(data ? data : [])
+          : getUserRegisterExpSuccess(data ? data : []))
+      })
+      .catch(error => dispatch(getUserRegisterExpFailure(error)));
   }
 };
 
@@ -146,18 +146,24 @@ const getUserLikeSharerSuccess = (data) => ({ type: types.GET_USER_LIKE_SHARER_S
 const getUserLikeSharerFailure = (err) => ({ type: types.GET_USER_LIKE_SHARER_FAILURE, err: err });
 
 
-export const getUserBoughtExpRequest = (token) => {
+export const getUserBoughtExpRequest = (token, page) => {
   return dispatch => {
     dispatch(getUserBoughtExp())
-    const url = `${host}/user/bought`;
+    const url = `${host}/user/exp/bought/list/${page}`;
     return fetch(url, authGET(token))
       .then(res => res.json())
-      .then(data => dispatch(getUserBoughtExpSuccess(data.list)))
+      .then(data => dispatch(
+        page === 0
+          ? getUserBoughtExpSuccessClear(data.list)
+          : getUserBoughtExpSuccess(data.list)))
       .catch(err => dispatch(getUserBoughtExpFailure(err)))
   }
 };
 const getUserBoughtExp = () => ({
   type: types.GET_USER_BOUGHT_EXP
+});
+const getUserBoughtExpSuccessClear = (data) => ({
+  type: types.GET_USER_BOUGHT_EXP_ZERO, list: data
 });
 const getUserBoughtExpSuccess = (data) => ({
   type: types.GET_USER_BOUGHT_EXP_SUCCESS, list: data
@@ -169,7 +175,7 @@ const getUserBoughtExpFailure = (err) => ({
 export const getUserBoughtExpDetailRequest = (token, id) => {
   return dispatch => {
     dispatch(getUserBoughtExpDetail())
-    const url = `${host}/user/bought/${id}`;
+    const url = `${host}/user/exp/bought/${id}`;
     return fetch(url, authGET(token))
       .then(res => res.json())
       .then(data => dispatch(getUserBoughtExpDetailSuccess(data.detail)))
