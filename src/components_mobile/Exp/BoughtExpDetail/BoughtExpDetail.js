@@ -333,8 +333,10 @@ class BoughtExpDetail extends React.Component {
                     {/* tag absolute */}
                     <div className='taglist'>
                         <div className='inner'>
-                            {taglist.map(tag =>
-                                <div className="tag" key={tag}>{tag}</div>)}
+                            {taglist &&
+                                taglist.length > 0 &&
+                                taglist.map(tag =>
+                                    <div className="tag" key={tag}>{tag}</div>)}
                         </div>
                     </div>
                 </div>
