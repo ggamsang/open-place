@@ -19,7 +19,7 @@ import { SignOutRequest } from 'actions/Authentication';
 import {
   getUserPointRequest, setUserPointRequest, getUserPointHistoryReqeust,
   getUserRegisterExpRequest, getUserSellExpRequest, getUserLikeSharerRequest,
-  getUserLikeExpRequest, // getUserBoughtExpRequest,
+  getUserLikeExpRequest, getUserBoughtExpRequest,
 } from "actions/User/MyDetail"
 import { goto } from 'navigator';
 import { Dimmer, Loader } from 'semantic-ui-react';
@@ -189,12 +189,21 @@ const SubWrap = styled.div`
   margin-top: 10px;
   margin-bottom: 10px;
   .subTitle {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    box-sizing:border-box;
+    padding:3px;
     width: 100%;
-    height: 21px;
     text-align: center;
-    font: normal normal medium 18px/21px Pretendard;
+    font-size:18px;
     letter-spacing: 0px;
     color: #4A4B4D; 
+
+    .blank{
+      width:30px;
+    }
   }
 `
 
@@ -253,13 +262,12 @@ class MyDetailChild extends Component {
     } else if (sub == "sellExp") {
       this.props.getUserSellExpRequest(user_id, 0);
     } else if (sub == "buyExp") {
-      // token && this.props.getUserBoughtExpRequest(token);
+      token && this.props.getUserBoughtExpRequest(user_id,0);
     } else if (sub == "likeSharer") {
       this.props.getUserLikeSharerRequest(user_id, 0);
     } else if (sub == "likeExp") {
       this.props.getUserLikeExpRequest(user_id, 0);
     }
-    this.props.getUserLikeExpRequest(user_id, 0);
   }
   TabSwitch = tab => this.setState({ subMenu: tab });
 
@@ -316,30 +324,48 @@ class MyDetailChild extends Component {
                 <PointLogContainer onTabSwitch={() => this.TabSwitch("point")} />
               </React.Fragment>}
 
-            {this.state.subMenu === "regExp"
-              && <React.Fragment>
-                <div className='subTitle'>등록 경험</div><RegisterExpContainer /></React.Fragment>}
-            {this.state.subMenu === "sellExp"
-              && <React.Fragment>
-                <div className='subTitle'>판매 경험</div><SellExpContainer /></React.Fragment>}
-            {this.state.subMenu === "buyExp"
-              && <React.Fragment>
-                <div className='subTitle'>구매한 경험</div>
-                <BuyExpContainer />
-              </React.Fragment>}
-            {this.state.subMenu === "likeSharer"
-              && <React.Fragment>
-                <div className='subTitle'>관심 공유자</div><LikeSharerContainer /></React.Fragment>}
-            {this.state.subMenu === "likeExp"
-              && <React.Fragment>
-                <div className='subTitle'>관심 경험</div><LikeExpContainer /></React.Fragment>}
-          </SubWrap>
-        </React.Fragment>
-        : <>
-          <Dimmer>
-            <Loader />
-          </Dimmer>
-        </>
+            <Fade opposite when={this.state.sub_menu1 === true || this.state.sub_menu2}>
+              <SubMenu >
+                <div className='menu_wrap' style={{ display: `${this.state.sub_menu1 === true ? "flex" : "none"}` }}>
+                  <div onClick={this.onClickHome} className='label'> {"<"} 포인트</div>
+                  <div onClick={() => this.onClickSubMenu("point")} className="menu_button" ><img alt="icon" src={plus} /><div className='text'>포인트 충전</div></div>  <div className='hrline' />
+                  <div onClick={() => this.onClickSubMenu("payment")} className="menu_button" ><img alt="icon" src={plus} /><div className='text'>결제내역</div></div>  <div className='hrline' />
+                </div>
+                <div className='menu_wrap' style={{ display: `${this.state.sub_menu2 === true ? "flex" : "none"}` }}>
+                  <div onClick={this.onClickHome} className='label'> {"<"} 관심</div>
+                  <div onClick={() => this.onClickSubMenu("likeSharer")} className="menu_button"><img alt="icon" src={plus} /><div className='text'>관심 공유자</div></div>  <div className='hrline' />
+                  <div onClick={() => this.onClickSubMenu("likeExp")} className="menu_button"><img alt="icon" src={plus} /><div className='text'>관심 경험</div></div>  <div className='hrline' />
+                </div>
+              </SubMenu>
+            </Fade>
+          </Wrapper>
+        }
+        <SubWrap>
+          {this.state.subMenu === "point"
+            && <React.Fragment>
+              <div className='subTitle'><div onClick={() => this.setState({subMenu:"none"})} className="blank">〈</div>포인트 충전<div className='blank'/></div></React.Fragment>}
+          {this.state.subMenu === "payment"
+            && <React.Fragment>
+              <div className='subTitle'><div onClick={() => this.setState({subMenu:"none"})} className="blank">〈</div>충전 내역<div className='blank'/></div></React.Fragment>}
+          {this.state.subMenu === "regExp"
+            && <React.Fragment>
+              <div className='subTitle'><div onClick={() => this.setState({subMenu:"none"})} className="blank">〈</div>등록 경험<div className='blank'/></div><RegisterExpContainer /></React.Fragment>}
+          {this.state.subMenu === "sellExp"
+            && <React.Fragment>
+              <div className='subTitle'><div onClick={() => this.setState({subMenu:"none"})} className="blank">〈</div>판매 경험<div className='blank'/></div><SellExpContainer /></React.Fragment>}
+          {this.state.subMenu === "buyExp"
+            && <React.Fragment>
+              <div className='subTitle'><div onClick={() => this.setState({subMenu:"none"})} className="blank">〈</div>구매한 경험<div className='blank'/></div>
+              <BuyExpContainer />
+            </React.Fragment>}
+          {this.state.subMenu === "likeSharer"
+            && <React.Fragment>
+              <div className='subTitle'><div onClick={() => this.setState({subMenu:"none"})} className="blank">〈</div>관심 공유자<div className='blank'/></div><LikeSharerContainer /></React.Fragment>}
+          {this.state.subMenu === "likeExp"
+            && <React.Fragment>
+              <div className='subTitle'><div onClick={() => this.setState({subMenu:"none"})} className="blank">〈</div>관심 경험<div className='blank'/></div><LikeExpContainer /></React.Fragment>}
+        </SubWrap>
+      </React.Fragment>
     );
   }
 }
@@ -354,7 +380,7 @@ const mapDispatchToProps = (dispatch) => {
     getUserSellExpRequest: (user_id, page) => (dispatch(getUserSellExpRequest(user_id, page))),
     getUserLikeSharerRequest: (user_id, page) => { dispatch(getUserLikeSharerRequest(user_id, page)) },
     getUserLikeExpRequest: (user_id, page) => { dispatch(getUserLikeExpRequest(user_id, page)) },
-    // getUserBoughtExpRequest: (token) => dispatch(getUserBoughtExpRequest(token)),
+    getUserBoughtExpRequest: (user_id,page) => dispatch(getUserBoughtExpRequest(user_id,page)),
   }
 };
 const mapStateToProps = (state) => {

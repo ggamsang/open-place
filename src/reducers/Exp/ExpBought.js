@@ -17,16 +17,39 @@ export function ExpBought(state, action) {
     switch (action.type) {
         case types.GET_USER_BOUGHT_EXP:
             return update(state, { Bought: { $set: action.type } });
+        case types.GET_USER_BOUGHT_EXP_ZERO:
+            return update(state, {
+                Bought: { $set: action.type },
+                status: { bought: { $set: action.list }, bought_added: { $set: action.list } }
+            });
         case types.GET_USER_BOUGHT_EXP_SUCCESS:
-            return update(state, { Bought: { $set: action.type }, status: { bought: { $set: action.list } } });
+            return update(state, {
+                Bought: { $set: action.type },
+                status: { bought: { $set: action.list }, bought_added: { $push: action.list } }
+            });
         case types.GET_USER_BOUGHT_EXP_FAILURE:
-            return update(state, { Bought: { $set: action.type }, status: { bought: { $set: [] }, Error: { $set: action.error } } });
+            return update(state, {
+                Bought: { $set: action.type },
+                status: {
+                    bought: { $set: [] }, bought_added: { $set: [] },
+                    Error: { $set: action.error }
+                }
+            });
         case types.GET_USER_BOUGHT_EXP_DETAIL:
             return update(state, { Bought: { $set: action.type } });
         case types.GET_USER_BOUGHT_EXP_DETAIL_SUCCESS:
-            return update(state, { Bought: { $set: action.type }, status: { detail: { $set: action.detail } } });
+            return update(state, {
+                Bought: { $set: action.type },
+                status: { detail: { $set: action.detail } }
+            });
         case types.GET_USER_BOUGHT_EXP_DETAIL_FAILURE:
-            return update(state, { Bought: { $set: action.type }, status: { detail: { $set: null }, Error: { $set: action.error } } });
+            return update(state, {
+                Bought: { $set: action.type },
+                status: {
+                    detail: { $set: null },
+                    Error: { $set: action.error }
+                }
+            });
         default:
             return state;
     }

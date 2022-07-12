@@ -10,8 +10,14 @@ const initialstate = {
   likeSharer: { status: "INIT" },
   likeExp: { status: "INIT" },
   status: {
-    my_list: [],
-    my_list_added: [],
+    register_list: [],
+    register_list_added: [],
+    sell_list: [],
+    sell_list_added: [],
+    like_sharer_list: [],
+    like_sharer_list_added: [],
+    like_exp_list: [],
+    like_exp_list_added: [],
     user_point: 0,
     // point_history: [],
     // register_exp: [],
@@ -70,108 +76,123 @@ export function MyDetail(state, action) {
         status: { point_history: { $set: [] } },
       });
 
-
-      case types.GET_USER_REGISTER_EXP:
-        return update(state, {
-          registerExp: { status: {$set:"WAITING"} },
-        })
+    /////////// REGISTER
+    case types.GET_USER_REGISTER_EXP:
+      return update(state, {
+        registerExp: { status: { $set: "WAITING" } },
+      })
     case types.GET_USER_REGISTER_EXP_ZERO:
-        return update(state, {
-          registerExp: { status:{$set:"CLEAR"} },
-            status: {
-              my_list: { $set: action.list },
-              my_list_added: { $set: action.list}
-            }
-        })        
+      return update(state, {
+        registerExp: { status: { $set: "CLEAR" } },
+        status: {
+          register_list: { $set: action.list },
+          register_list_added: { $set: action.list }
+        }
+      })
     case types.GET_USER_REGISTER_EXP_SUCCESS:
-        return update(state, {
-          registerExp: { status:{$set:"SUCCESS"} },
-            status: {
-              my_list: { $set: action.list },
-              my_list_added: { $push: action.list }
-            }
-        })
+      return update(state, {
+        registerExp: { status: { $set: "SUCCESS" } },
+        status: {
+          register_list: { $set: action.list },
+          register_list_added: { $push: action.list }
+        }
+      })
     case types.GET_USER_REGISTER_EXP_FAILURE:
-        return update(state, {
-          registerExp: { status: {$set:"FAILURE"} },
-            status: {
-              my_list: { $set: action.list },
-              my_list_added: { $set: action.list_added}
-            }
-        })
-    // case types.GET_USER_REGISTER_EXP:
-    //   return update(state, {
-    //     registerExp: { status: { $set: "WAITING" } },
-    //   });
-    // case types.GET_USER_REGISTER_EXP_ZERO:
-    //   return update(state, {
-    //     registerExp: { status: { $set: "CLEAR" } },
-    //     status: {
-    //       my_list: { $set: action.list },
-    //       my_list_added: { $set: action.list }
-    //     }
-    //   });
-    // case types.GET_USER_REGISTER_EXP_SUCCESS:
-    //   return update(state, {
-    //     registerExp: { status: { $set: "SUCCESS" } },
-    //     status: {
-    //       my_list: { $set: action.list },
-    //       my_list_added: { $push: action.list }
-    //     }
-    //   });
-    // case types.GET_USER_REGISTER_EXP_FAILURE:
-    //   return update(state, {
-    //     registerExp: { status: { $set: "FAILURE" } },
-    //     status: {
-    //       my_list: { $set: action.list },
-    //       my_list_added: { $set: action.list }
-    //     }
-    //   });
+      return update(state, {
+        registerExp: { status: { $set: "FAILURE" } },
+        status: {
+          register_list: { $set: action.list },
+          register_list_added: { $set: action.list_added }
+        }
+      })
 
-
-
-
+    /////////// SELL
     case types.GET_USER_SELL_EXP:
       return update(state, {
-        sellExp: { status: { $set: "WAITING" } },
-      });
+        registerExp: { status: { $set: "WAITING" } },
+      })
+    case types.GET_USER_SELL_EXP_ZERO:
+      return update(state, {
+        registerExp: { status: { $set: "CLEAR" } },
+        status: {
+          sell_list: { $set: action.list },
+          sell_list_added: { $set: action.list }
+        }
+      })
     case types.GET_USER_SELL_EXP_SUCCESS:
       return update(state, {
-        sellExp: { status: { $set: "SUCCESS" } },
-        status: { sell_exp: { $set: action.list } }
-      });
+        registerExp: { status: { $set: "SUCCESS" } },
+        status: {
+          sell_list: { $set: action.list },
+          sell_list_added: { $push: action.list }
+        }
+      })
     case types.GET_USER_SELL_EXP_FAILURE:
       return update(state, {
-        sellExp: { status: { $set: "FAILURE" } },
-        status: { sell_exp: { $set: [] } }
-      });
+        registerExp: { status: { $set: "FAILURE" } },
+        status: {
+          sell_list: { $set: action.list },
+          sell_list_added: { $set: action.list_added }
+        }
+      })
+
     case types.GET_USER_LIKE_SHARER:
       return update(state, {
         likeSharer: { status: { $set: "WAITING" } },
       });
+    case types.GET_USER_LIKE_SHARER_ZERO:
+      return update(state, {
+        likeSharer: { status: { $set: "CLEAR" } },
+        status: {
+          like_sharer_list: { $set: action.list },
+          like_sharer_list_added: { $set: action.list }
+        }
+      });
     case types.GET_USER_LIKE_SHARER_SUCCESS:
       return update(state, {
         likeSharer: { status: { $set: "SUCCESS" } },
-        status: { like_sharer: { $set: action.list } }
+        status: {
+          like_sharer_list: { $set: action.list },
+          like_sharer_list_added: { $push: action.list }
+        }
       });
     case types.GET_USER_LIKE_SHARER_FAILURE:
       return update(state, {
         likeSharer: { status: { $set: "FAILURE" } },
-        status: { like_sharer: { $set: [] } }
+        status: {
+          like_sharer_list: { $set: action.list },
+          like_sharer_list_added: { $set: action.list }
+        }
       });
+
+
     case types.GET_USER_LIKE_EXP:
       return update(state, {
         likeExp: { status: { $set: "WAITING" } },
       });
+    case types.GET_USER_LIKE_EXP_ZERO:
+      return update(state, {
+        likeExp: { status: { $set: "CLEAR" } },
+        status: {
+          like_exp_list: { $set: action.list },
+          like_exp_list_added: { $set: action.list }
+        }
+      });
     case types.GET_USER_LIKE_EXP_SUCCESS:
       return update(state, {
         likeExp: { status: { $set: "SUCCESS" } },
-        status: { like_exp: { $set: action.list } }
+        status: {
+          like_exp_list: { $set: action.list },
+          like_exp_list_added: { $push: action.list }
+        }
       });
     case types.GET_USER_LIKE_EXP_FAILURE:
       return update(state, {
         likeExp: { status: { $set: "FAILURE" } },
-        status: { like_exp: { $set: [] } }
+        status: {
+          like_exp_list: { $set: action.list },
+          like_exp_list_added: { $set: action.list }
+        }
       });
     default:
       return state;

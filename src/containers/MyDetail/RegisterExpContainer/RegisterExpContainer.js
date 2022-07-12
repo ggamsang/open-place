@@ -50,8 +50,8 @@ class RegisterExpContainer extends Component {
 
 const mapStateToProps = (state) => ({
   userInfo: state.Authentication.status.userInfo,
-  list: state.MyDetail.status.my_list,
-  list_added: state.MyDetail.status.my_list_added,
+  list: state.MyDetail.status.register_list,
+  list_added: state.MyDetail.status.register_list_added,
 });
 
 const mapDispatchToProps = (dispatch) => ({

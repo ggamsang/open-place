@@ -11,21 +11,20 @@ export const getExpListRequest = (page=0,category=null,sort=null,keyword=null) =
       dispatch(getExpList())
       const url = `${host}/item/${page}/${category}/${sort}/${keyword}`;
       return fetch(url, {
-        headers: { "Content-Type": "application/json" }, method: "GET"
+        headers: { "Content-Type": "application/json" }, 
+        method: "GET"
       })
-        .then(res => res.json())
-        .then(data => {
-          console.log(data);
-          if(!data) data = []
-          if(page == 0){
-            dispatch(getExpListPageZero(data));
-          }
-          dispatch(getExpListSuccess(data))
-        })
+      .then(res => res.json())
+      .then(data =>{
+        console.log(data);
+        return dispatch(page === 0
+        ? getExpListPageZero(data ? data : [])
+        : getExpListSuccess(data ? data : []))
+      })
         .catch(error => dispatch(getExpListFailure(error)));
     }
   };
   const getExpList = () => ({ type: types.GET_EXP_LIST });
-  const getExpListPageZero = (data) => ({ type: types.GET_EXP_LIST_ZERO, list: data });
+  const getExpListPageZero = (data) => { return ({ type: types.GET_EXP_LIST_ZERO, list: data})};
   const getExpListSuccess = (data) => ({ type: types.GET_EXP_LIST_SUCCESS, list: data });
   const getExpListFailure = (err) => ({ type: types.GET_EXP_LIST_FAILURE, list: [] });
