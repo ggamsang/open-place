@@ -12,8 +12,7 @@ class BuyExpContainer extends React.Component {
   }
   getList = (page) =>
     new Promise((resolve) =>
-      resolve(this.props.getUserBoughtExpRequest &&
-        this.props.getUserBoughtExpRequest(this.props.token, page)));
+      resolve(this.props.getUserBoughtExpRequest(this.props.token, page)));
   onClick = (offset) =>
     goto("MY-ITEM-BOUGHT", offset);
 

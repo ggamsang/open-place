@@ -158,7 +158,7 @@ export const getUserBoughtExpRequest = (token, page) => {
   return dispatch => {
     dispatch(getUserBoughtExp())
     const url = `${host}/user/exp/bought/list/${page}`;
-    console.log(url);
+    // console.log(url, token, page);
     return fetch(url, authGET(token))
       .then(res => res.json())
       .then(data => dispatch(page === 0 ?

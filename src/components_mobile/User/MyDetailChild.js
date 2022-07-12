@@ -14,6 +14,7 @@ import RegisterExpContainer from 'containers/MyDetail/RegisterExpContainer';
 import LikeExpContainer from 'containers/MyDetail/LikeExpContainer';
 import LikeSharerContainer from 'containers/MyDetail/LikeSharerContainer';
 import PointLogContainer from 'containers/MyDetail/PointLogContainer';
+import MyPointChargeContainer from 'containers/MyDetail/MyPointChargeContainer';
 import { WIDTH } from 'constant';
 import { SignOutRequest } from 'actions/Authentication';
 import {
@@ -23,7 +24,6 @@ import {
 } from "actions/User/MyDetail"
 import { goto } from 'navigator';
 import { Dimmer, Loader } from 'semantic-ui-react';
-import MyPointChargeContainer from 'containers/MyDetail/MyPointChargeContainer';
 
 const Wrapper = styled.div`
   width:100%;
@@ -217,7 +217,7 @@ class MyDetailChild extends Component {
       main_menu: true,
       sub_menu1: false,
       sub_menu2: false,
-      subMenu: "none", // "buyExp", 
+      subMenu: "none",
     }
     this.onClickPointMenu = this.onClickPointMenu.bind(this);
     this.onClickLikeMenu = this.onClickLikeMenu.bind(this);
@@ -238,11 +238,11 @@ class MyDetailChild extends Component {
   onClickLikeMenu = (event) => {
     this.setState({ main_menu: false })
     setTimeout(() => {
-      this.setState({ sub_menu1: false, sub_menu2: true })
+      this.setState({ subMenu: "none", sub_menu1: false, sub_menu2: true })
     }, 1000)
   }
   onClickHome = (event) => {
-    this.setState({ sub_menu1: false, sub_menu2: false });
+    this.setState({ subMenu: "none", sub_menu1: false, sub_menu2: false });
     setTimeout(() => {
       this.setState({ main_menu: true })
     }, 1000)
@@ -262,7 +262,7 @@ class MyDetailChild extends Component {
     } else if (sub == "sellExp") {
       this.props.getUserSellExpRequest(user_id, 0);
     } else if (sub == "buyExp") {
-      token && this.props.getUserBoughtExpRequest(user_id, 0);
+      token && this.props.getUserBoughtExpRequest(token, 0);
     } else if (sub == "likeSharer") {
       this.props.getUserLikeSharerRequest(user_id, 0);
     } else if (sub == "likeExp") {
@@ -279,19 +279,21 @@ class MyDetailChild extends Component {
         ? <React.Fragment>
           {this.state.subMenu === "none"
             && <Wrapper>
-              <Fade opposite when={this.state.sub_menu1 === true || this.state.sub_menu2}>
-                <SubMenu >
-                  <div className='menu_wrap' style={{ display: `${this.state.sub_menu1 === true ? "flex" : "none"}` }}>
-                    <div onClick={this.onClickHome} className='label'> {"<"} 포인트</div>
-                    <div onClick={() => this.onClickSubMenu("point")} className="menu_button" ><img alt="icon" src={plus} /><div className='text'>포인트 충전</div></div>  <div className='hrline' />
-                    <div onClick={() => this.onClickSubMenu("payment")} className="menu_button" ><img alt="icon" src={plus} /><div className='text'>결제내역</div></div>  <div className='hrline' />
+              <Fade opposite when={this.state.main_menu}>
+                <Menu style={{ display: `${this.state.main_menu === true ? "block" : "none"}` }}>
+                  <div className='menu_wrap'>
+                    <div className='label'>내정보</div>
+                    <div onClick={this.onClickPointMenu} className="menu_button" ><img alt="icon" src={star} /><div className='text'>포인트</div></div>  <div className='hrline' />
+                    <div onClick={() => this.onClickSubMenu("regExp")} className="menu_button" ><img alt="icon" src={plus} /><div className='text'>등록 경험</div></div> <div className='hrline' />
+                    <div onClick={() => this.onClickSubMenu("sellExp")} className="menu_button" ><img alt="icon" src={work} /><div className='text'>판매 경험</div></div> <div className='hrline' />
+                    <div onClick={() => this.onClickSubMenu("buyExp")} className="menu_button" ><img alt="icon" src={buy} /><div className='text'>구매한 경험</div></div>  <div className='hrline' />
+                    <div onClick={this.onClickLikeMenu} className="menu_button"><img alt="icon" src={heart} /><div className='text'>관심</div></div>
+                    <div onClick={this.onClickLogout} className="menu_button">
+                      {/* <img alt="icon" src={heart} /> */}
+                      <div className='text'>로그아웃</div>
+                    </div>
                   </div>
-                  <div className='menu_wrap' style={{ display: `${this.state.sub_menu2 === true ? "flex" : "none"}` }}>
-                    <div onClick={this.onClickHome} className='label'> {"<"} 관심</div>
-                    <div onClick={() => this.onClickSubMenu("likeSharer")} className="menu_button"><img alt="icon" src={plus} /><div className='text'>관심 공유자</div></div>  <div className='hrline' />
-                    <div onClick={() => this.onClickSubMenu("likeExp")} className="menu_button"><img alt="icon" src={plus} /><div className='text'>관심 경험</div></div>  <div className='hrline' />
-                  </div>
-                </SubMenu>
+                </Menu>
               </Fade>
 
               <Fade opposite when={this.state.sub_menu1 === true || this.state.sub_menu2}>
@@ -310,8 +312,8 @@ class MyDetailChild extends Component {
               </Fade>
             </Wrapper>
           }
-          <SubWrap>
-            {this.state.subMenu === "point"
+          {/* <SubWrap> */}
+          {/* {this.state.subMenu === "point"
               && <React.Fragment>
                 <div className='subTitle'>포인트 충전</div>
                 <MyPointChargeContainer onTabSwitch={() => this.TabSwitch("payment")} />
@@ -320,7 +322,30 @@ class MyDetailChild extends Component {
             {this.state.subMenu === "payment"
               && <React.Fragment>
                 <PointLogContainer onTabSwitch={() => this.TabSwitch("point")} />
-              </React.Fragment>}
+              </React.Fragment>} */}
+
+          {/* <Fade opposite when={this.state.sub_menu1 === true || this.state.sub_menu2}>
+              <SubMenu >
+                <div className='menu_wrap' style={{ display: `${this.state.sub_menu1 === true ? "flex" : "none"}` }}>
+                  <div onClick={this.onClickHome} className='label'> {"<"} 포인트</div>
+                  <div onClick={() => this.onClickSubMenu("point")} className="menu_button" ><img alt="icon" src={plus} /><div className='text'>포인트 충전</div></div>  <div className='hrline' />
+                  <div onClick={() => this.onClickSubMenu("payment")} className="menu_button" ><img alt="icon" src={plus} /><div className='text'>결제내역</div></div>  <div className='hrline' />
+                </div>
+                <div className='menu_wrap' style={{ display: `${this.state.sub_menu2 === true ? "flex" : "none"}` }}>
+                  <div onClick={this.onClickHome} className='label'> {"<"} 관심</div>
+                  <div onClick={() => this.onClickSubMenu("likeSharer")} className="menu_button"><img alt="icon" src={plus} /><div className='text'>관심 공유자</div></div>  <div className='hrline' />
+                  <div onClick={() => this.onClickSubMenu("likeExp")} className="menu_button"><img alt="icon" src={plus} /><div className='text'>관심 경험</div></div>  <div className='hrline' />
+                </div>
+              </SubMenu>
+            </Fade> */}
+          {/* </SubWrap> */}
+          <SubWrap>
+            {this.state.subMenu === "point"
+              && <React.Fragment>
+                <div className='subTitle'><div onClick={() => this.setState({ subMenu: "none" })} className="blank">〈</div>포인트 충전<div className='blank' /></div><MyPointChargeContainer onTabSwitch={() => this.TabSwitch("payment")} /></React.Fragment>}
+            {this.state.subMenu === "payment"
+              && <React.Fragment>
+                <div className='subTitle'><div onClick={() => this.setState({ subMenu: "none" })} className="blank">〈</div>충전 내역<div className='blank' /></div> <PointLogContainer onTabSwitch={() => this.TabSwitch("point")} /></React.Fragment>}
             {this.state.subMenu === "regExp"
               && <React.Fragment>
                 <div className='subTitle'><div onClick={() => this.setState({ subMenu: "none" })} className="blank">〈</div>등록 경험<div className='blank' /></div><RegisterExpContainer /></React.Fragment>}
@@ -340,11 +365,7 @@ class MyDetailChild extends Component {
                 <div className='subTitle'><div onClick={() => this.setState({ subMenu: "none" })} className="blank">〈</div>관심 경험<div className='blank' /></div><LikeExpContainer /></React.Fragment>}
           </SubWrap>
         </React.Fragment>
-        : <>
-          <Dimmer>
-            <Loader />
-          </Dimmer>
-        </>
+        : null
     );
   }
 }
