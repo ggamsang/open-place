@@ -38,4 +38,6 @@ const mapDispatchToProps = (dispatch) => ({
   getUserBoughtExpRequest: (user_id,page) => dispatch(getUserBoughtExpRequest(user_id,page)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BuyExpContainer);
+export default
+  connect(mapStateToProps, mapDispatchToProps)
+    (BuyExpContainer);
