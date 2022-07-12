@@ -36,7 +36,7 @@ import { WIDTH } from "constant";
 import bg from "resources/sample-image-01.png";
 
 import MyPaidExpDetailPage from "pages/MyPaidExpDetailPage";
-
+import MyPointChargePage from "pages/MyPointChargePage";
 
 const Wrapper = styled.main`
   overflow: hidden;
@@ -108,7 +108,7 @@ function App() {
             </Route>
             <Route path="message" element={<MessageListPage />} />
             <Route path="message/:id" element={<MessageDetailPage />} />
-
+            {/* <Route path="charging" element={<MyPointChargePage />} /> */}
             <Route path="*" element={<div>NOT FOUND</div>} />
           </Routes>
         </BrowserRouter>

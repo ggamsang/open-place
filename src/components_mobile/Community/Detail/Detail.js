@@ -194,11 +194,11 @@ export default class CommunityDetail extends React.Component {
         <div className='content' dangerouslySetInnerHTML={{ __html: text }} />
 
       </DetailWrapper>
-      
-      <div className='row'>
-        <div>파일 첨부</div>
-        <InputFile files={files} />
-      </div>
+      {files &&
+        <div className='row'>
+          <div>파일 첨부</div>
+          <InputFile files={files} />
+        </div>}
       <CommentListContainer id={id} />
 
     </Wrapper >);

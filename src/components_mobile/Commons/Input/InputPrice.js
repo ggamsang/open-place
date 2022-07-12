@@ -5,32 +5,43 @@ import styled from "styled-components";
 const FormBox = styled.div`
     display: flex;
     flex-direction: column;
-    position:relative;
-    min-width:245px;
-    height:85px;
-    .won{
-        width:max-content;
-        margin-right:50px;
+    position: relative;
+    min-width: 245px;
+    height: 85px;
+    .won {
+        color: ${props => props.color ? props.color : "#000000"};
+        width: max-content;
+        margin-right: 50px;
     }
-    .formwrapper{
-        display:flex;
-        align-items:center;
+    .formwrapper {
+        display: flex;
+        align-items: center;
+        position: relative;
     }
-    .buttonbox{
-        margin-left:5px;
-        margin-right:50px;
-        min-width:max-content;
+    .clear {
+        border: none;
+        background-color: transparent;
+        outline: none;
+        position: absolute;
+        color: #FF0000;
+        font: normal normal normal 15px/18px Pretendard;
+    }
+    .buttonbox {
+        margin-left: 5px;
+        margin-right: 50px;
+        min-width: max-content;
         display: flex;
         flex-direction: row;
         margin-top: 10px;
-        flex-wrap:wrap;
+        flex-wrap: wrap;
 
-        position:absolute;
-        left:-75px;
-        top:30px;
+        position: absolute;
+        left: -75px;
+        top: 30px;
     }
 `
-const FormStyle = styled.input.attrs({ type: "number" })`
+// const FormStyle = styled.input.attrs({ type: "number" })`
+const FormStyle = styled.input`
     ::-webkit-inner-spin-button {
         -webkit-appearance: none;
     }
@@ -108,10 +119,9 @@ export class InputPrice extends Component {
         this.returnData();
     }
     async onClickButton(value) {
-
         const money = parseInt(this.state.price, 10);
         const price = parseInt(money, 10) + parseInt(value, 10);
-        console.log(this.state.price, price, money, value);
+        // console.log(this.state.price, price, money, value);
         await this.setState({ price: price });
         this.returnData();
     }
@@ -119,33 +129,38 @@ export class InputPrice extends Component {
         await this.setState({ price: event.target.value });
         this.returnData();
     }
+
     render() {
         const { width, placeholder, option } = this.props;
         const tag = option ? option.tag : null;
-        return (
-            <React.Fragment>
-                <FormBox >
-                    <div className="formwrapper">
-                        <FormStyle
-                            id="price"
-                            width={width == null ? "150" : width}
-                            placeholder={placeholder}
-                            value={this.state.price || 0}
-                            onChange={this.onChangePrice}
-                        />
-                        <div className="won">
-                            <div className="text">원</div>
-                        </div>
-                    </div>
-                    <div className="buttonbox">
-                        <Button marginRight={tag && tag.marginRight} width={tag && tag.width} onClick={() => this.onClickButton(1000)}><div className="text">+1천</div></Button>
-                        <Button marginRight={tag && tag.marginRight} width={tag && tag.width} onClick={() => this.onClickButton(10000)}><div className="text">+1만</div></Button>
-                        <Button marginRight={tag && tag.marginRight} width={tag && tag.width} onClick={() => this.onClickButton(50000)}><div className="text">+5만</div></Button>
-                        <Button marginRight={tag && tag.marginRight} width={tag && tag.width} onClick={() => this.onClickButton(100000)}><div className="text">+10만</div></Button>
-                        <Button marginRight={tag && tag.marginRight} width={tag && tag.width} onClick={() => this.onClickButton(1000000)}><div className="text">+100만</div></Button>
-                    </div>
-                </FormBox>
-            </React.Fragment>
-        );
+        return (<FormBox color={this.props.color}>
+            <div className="formwrapper">
+
+                {this.state.price != 0
+                    ? <button className="clear" onClick={() => this.setState({ price: 0 }, () => this.returnData())}>
+                        <span>x</span>
+                    </button>
+                    : null}
+
+                <FormStyle
+                    disabled={this.props.disabled}
+                    id="price"
+                    width={width == null ? "150" : width}
+                    placeholder={placeholder}
+                    value={Number(this.state.price).toLocaleString() || 0}
+                    onChange={this.onChangePrice}
+                />
+                <div className="won">
+                    <div className="text">원</div>
+                </div>
+            </div>
+            <div className="buttonbox">
+                <Button marginRight={tag && tag.marginRight} width={tag && tag.width} onClick={() => this.onClickButton(1000)}><div className="text">+1천</div></Button>
+                <Button marginRight={tag && tag.marginRight} width={tag && tag.width} onClick={() => this.onClickButton(10000)}><div className="text">+1만</div></Button>
+                <Button marginRight={tag && tag.marginRight} width={tag && tag.width} onClick={() => this.onClickButton(50000)}><div className="text">+5만</div></Button>
+                <Button marginRight={tag && tag.marginRight} width={tag && tag.width} onClick={() => this.onClickButton(100000)}><div className="text">+10만</div></Button>
+                <Button marginRight={tag && tag.marginRight} width={tag && tag.width} onClick={() => this.onClickButton(1000000)}><div className="text">+100만</div></Button>
+            </div>
+        </FormBox>);
     }
 }

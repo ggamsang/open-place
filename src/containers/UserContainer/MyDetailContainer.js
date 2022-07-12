@@ -17,7 +17,6 @@ class MyDetailContainer extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       this.props.isLoggedIn
         ? <MyDetail {...this.props} Outlet={this.props.Outlet} />
@@ -30,9 +29,6 @@ const mapStateToProps = (state) => ({
   active: state.Authentication.status.active,
   userInfo:state.Authentication.status.userInfo,
 });
-const mapDispatchToProps = (dispatch) => {
-  return ({
-  });
-}
+const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyDetailContainer);
