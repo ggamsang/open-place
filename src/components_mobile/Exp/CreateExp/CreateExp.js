@@ -68,12 +68,7 @@ const Wrapper = styled.div`
               display:flex;align-items:center;
             }
           }
-          .buttonWrap{
-            width:100%;
-            display:flex;
-            justify-content:space-between;
-            margin-top:20px;
-          }
+
     }
 
     `

@@ -6,8 +6,10 @@ import { WIDTH } from 'constant';
 import DateFormat from 'modules/DateFormat';
 
 const Wrapper = styled.div`
+    *{
+        box-sizing:border-box;
+    }
     font-family: Noto Sans KR;
-    // *{border:1px solid red;}
     width: ${WIDTH}px;
     margin: auto;
     box-sizing: border-box;

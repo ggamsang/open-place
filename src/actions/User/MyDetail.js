@@ -100,76 +100,84 @@ export const getUserSellExpRequest = (user_id, page) => {
     dispatch(getUserSellExp());
     const url = `${host}/user/exp/sell/${user_id}/${page}`;
     return fetch(url, GET)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        data && dispatch(getUserSellExpSuccess(data))
-      })
-      .catch(err => dispatch(getUserSellExpFailure(err)))
+    .then(res => res.json())
+    .then(data =>{
+      return dispatch(page === 0
+      ? getUserSellExpZero(data ? data : [])
+      : getUserSellExpSuccess(data ? data : []))
+  })
+    .catch(error => dispatch(getUserSellExpFailure(error)));
   }
 };
+
 const getUserSellExp = () => ({ type: types.GET_USER_SELL_EXP });
+const getUserSellExpZero = (data) => ({ type: types.GET_USER_SELL_EXP_ZERO, list: data, list_added: [] });
 const getUserSellExpSuccess = (data) => ({ type: types.GET_USER_SELL_EXP_SUCCESS, list: data });
-const getUserSellExpFailure = (err) => ({ type: types.GET_USER_SELL_EXP_FAILURE, err: err });
+const getUserSellExpFailure = (err) => ({ type: types.GET_USER_SELL_EXP_FAILURE, list: [], list_added: [] });
 
 export const getUserLikeExpRequest = (user_id, page) => {
   return dispatch => {
     dispatch(getUserLikeExp());
     const url = `${host}/user/like/exp/${user_id}/${page}`;
     return fetch(url, GET)
-      .then(res => res.json())
-      .then(data => {
-        data && dispatch(getUserLikeExpSuccess(data))
-      })
+    .then(res => res.json())
+    .then(data =>{
+      return dispatch(page === 0
+      ? getUserLikeExpZero(data ? data : [])
+      : getUserLikeExpSuccess(data ? data : []))
+  })
       .catch(err => dispatch(getUserLikeExpFailure(err)))
   }
 };
 const getUserLikeExp = () => ({ type: types.GET_USER_LIKE_EXP });
+const getUserLikeExpZero = (data) => ({ type: types.GET_USER_LIKE_EXP_ZERO, list:data , list_added:[] });
 const getUserLikeExpSuccess = (data) => ({ type: types.GET_USER_LIKE_EXP_SUCCESS, list: data });
-const getUserLikeExpFailure = (err) => ({ type: types.GET_USER_LIKE_EXP_FAILURE, err: err });
+const getUserLikeExpFailure = (err) => ({ type: types.GET_USER_LIKE_EXP_FAILURE, list:[], list_added:[], err: err });
 
 export const getUserLikeSharerRequest = (user_id, page) => {
   return dispatch => {
     dispatch(getUserLikeSharer());
     const url = `${host}/user/like/sharer/${user_id}/${page}`;
     return fetch(url, GET)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        data && dispatch(getUserLikeSharerSuccess(data))
-      })
+    .then(res => res.json())
+    .then(data =>{
+      console.log(data);
+      return dispatch(page === 0
+      ? getUserLikeSharerZero(data ? data : [])
+      : getUserLikeSharerSuccess(data ? data : []))
+  })
       .catch(err => dispatch(getUserLikeSharerFailure(err)))
   }
 };
 const getUserLikeSharer = () => ({ type: types.GET_USER_LIKE_SHARER });
+const getUserLikeSharerZero = (data) => ({ type: types.GET_USER_LIKE_SHARER_ZERO, list:data, list_added:[] });
 const getUserLikeSharerSuccess = (data) => ({ type: types.GET_USER_LIKE_SHARER_SUCCESS, list: data });
-const getUserLikeSharerFailure = (err) => ({ type: types.GET_USER_LIKE_SHARER_FAILURE, err: err });
+const getUserLikeSharerFailure = (err) => ({ type: types.GET_USER_LIKE_SHARER_FAILURE, list:[],list_added:[], err: err });
 
-
-export const getUserBoughtExpRequest = (token, page) => {
+export const getUserBoughtExpRequest = (user_id,page) => {
   return dispatch => {
     dispatch(getUserBoughtExp())
-    const url = `${host}/user/exp/bought/list/${page}`;
-    return fetch(url, authGET(token))
+    const url = `${host}/user/exp/bought/${user_id}/${page}`;
+    return fetch(url, GET)
       .then(res => res.json())
-      .then(data => dispatch(
-        page === 0
-          ? getUserBoughtExpSuccessClear(data.list)
-          : getUserBoughtExpSuccess(data.list)))
+      .then(data =>dispatch(page===0?
+          getUserBoughtExpZero(data.list? data.list:[])
+          :getUserBoughtExpSuccess(data.list?data.list:[]))
+      )
       .catch(err => dispatch(getUserBoughtExpFailure(err)))
   }
 };
 const getUserBoughtExp = () => ({
   type: types.GET_USER_BOUGHT_EXP
 });
-const getUserBoughtExpSuccessClear = (data) => ({
-  type: types.GET_USER_BOUGHT_EXP_ZERO, list: data
+const getUserBoughtExpZero = (data) => ({
+  type: types.GET_USER_BOUGHT_EXP_ZERO, list:data,list_added:[]
 });
 const getUserBoughtExpSuccess = (data) => ({
   type: types.GET_USER_BOUGHT_EXP_SUCCESS, list: data
 });
 const getUserBoughtExpFailure = (err) => ({
-  type: types.GET_USER_BOUGHT_EXP_FAILURE, err: err
+  type: types.GET_USER_BOUGHT_EXP_FAILURE, list:[],list_added:[], err: err
 });
 
 export const getUserBoughtExpDetailRequest = (token, id) => {

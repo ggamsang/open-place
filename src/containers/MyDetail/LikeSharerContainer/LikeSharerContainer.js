@@ -1,41 +1,30 @@
 import React, { Component } from 'react';
 import ScrollList from "components_mobile/Commons/ScrollList"
 import { connect } from "react-redux";
-
-const dummy = [
-  {
-    type: "sharer", user: "관심 공유자1", message:"256", like:"512",cal:"8 Nov",
-    face:"https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ",
-    url: "https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ"
-  },
-  {
-    type: "sharer", user: "관심 공유자2", message:"321", like:"442",cal:"8 Nov",
-    face: "https://i.picsum.photos/id/1012/3973/2639.jpg?hmac=s2eybz51lnKy2ZHkE2wsgc6S81fVD1W2NKYOSh8bzDc",
-    url: "https://i.picsum.photos/id/1012/3973/2639.jpg?hmac=s2eybz51lnKy2ZHkE2wsgc6S81fVD1W2NKYOSh8bzDc"
-  },
-  {
-    type: "sharer", user: "관심 공유자3", message:"1023", like:"45",cal:"8 Nov",
-    face: "https://i.picsum.photos/id/1065/3744/5616.jpg?hmac=V64psST3xnjnVwmIogHI8krnL3edsh_sy4HNc3dJ_xY",
-    url: "https://i.picsum.photos/id/1065/3744/5616.jpg?hmac=V64psST3xnjnVwmIogHI8krnL3edsh_sy4HNc3dJ_xY"
-  },
-  {
-    type: "sharer", user: "관심 공유자4", message:"67", like:"512",cal:"8 Nov",
-    face: "https://i.picsum.photos/id/1011/5472/3648.jpg?hmac=Koo9845x2akkVzVFX3xxAc9BCkeGYA9VRVfLE4f0Zzk",
-    url: "https://i.picsum.photos/id/1011/5472/3648.jpg?hmac=Koo9845x2akkVzVFX3xxAc9BCkeGYA9VRVfLE4f0Zzk"
-  },
-]
+import { getUserLikeSharerRequest } from "actions/User/MyDetail"
+import Sharer from 'components_mobile/Commons/Sharer';
 class LikeSharerContainer extends Component {
+  componentWillMount() {
+    this.getList(0);
+  }
+  getList = (page) => {
+    return new Promise((resolve)=>resolve(this.props.getUserLikeSharerRequest&&this.props.getUserLikeSharerRequest(this.props.userInfo.uid, page)));
+  }
   render() {
    return (<React.Fragment>
-      <ScrollList type="sharer" list={dummy} />
+            <ScrollList list={this.props.list} list_added={this.props.list_added} getList={(value)=>this.getList(value)} ListComponent={Sharer} />
     </React.Fragment>)
   }
 }
 
 const mapStateToProps = (state) => ({
+  userInfo: state.Authentication.status.userInfo,
+  list: state.MyDetail.status.like_sharer_list,
+  list_added: state.MyDetail.status.like_sharer_list_added,
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  getUserLikeSharerRequest:(user_id,page)=>dispatch(getUserLikeSharerRequest(user_id,page)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LikeSharerContainer);

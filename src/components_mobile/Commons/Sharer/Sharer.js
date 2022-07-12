@@ -4,8 +4,9 @@ import noimage from "resources/sample-image-01.png";
 import StarRating from "commons/StarRating";
 import Tags from "commons/Tags";
 import { resolution } from 'commons/resolution';
-import Heart from "source/Iconly-heart-white.svg";
+import Heart from "source/Iconly-Bold-Heart-white.svg";
 import Message from "source/Iconly-message-white.svg";
+import { DateToEng } from 'commons/calculate';
 
 const Wrapper = styled.div`
     width:${resolution(360)}px;
@@ -52,28 +53,27 @@ class Sharer extends React.Component {
     render() {
         const {
             url,
-            user,
-            like,
-            message,
-            cal,
-            face
+            nick_name,
+            update_time,
+            like_count,
+            exp_count
         } = this.props;
         console.log(this.props);
         return (
             <Wrapper bg={url || noimage} onClick={()=>window.location.href="/SharerDetail/1"}>
                 <div className='thumbnail'>
                     <div className='row'>
-                        <div className='text'>{message}</div>
+                        <div className='text'>{exp_count}</div>
                         <img src={Message} className='icon' style={{marginRight:"20px"}}/>
-                        <div className='text' >{like}</div>
-                        <img src={Message} className='icon'/>
+                        <div className='text' >{like_count}</div>
+                        <img src={Heart} className='icon'/>
                     </div>
                 </div>
                 <div className='summary'>
-                    <img src={face} className='face' style={{marginRight:"20px"}}/>
+                    <img src={url} className='face' style={{marginRight:"20px"}}/>
                     <div className='SharerInfo'>
-                        <div className='user'>{user}</div>
-                        <div className='cal'>{cal}</div>
+                        <div className='user'>{nick_name}</div>
+                        <div className='cal'>{DateToEng(update_time)}</div>
                     </div>
                 </div>
 
