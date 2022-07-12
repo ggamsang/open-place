@@ -84,10 +84,14 @@ export function CheckEmailRequest(email) {
       .catch(err => dispatch(CheckEmailFailure(err)));
   };
 }
-export function CheckNickNameRequest(NickName) {
+export function CheckNickNameRequest(token,nick_name) {
   return (dispatch) => {
     dispatch(CheckNickName());
-    return fetch(`${host}/user/checkNickName`, { headers: { 'Content-Type': 'application/json' }, method: "POST", body: JSON.stringify(NickName) })
+    const url = `${host}/user/checkNickName`;
+    return fetch(url, { headers: {               
+      "x-access-token": token,
+    'Content-Type': 'application/json' }, 
+    method: "POST", body: JSON.stringify({nick_name:nick_name})})
       .then(res => res.json())
       .then(res => {
         if (res.success) {

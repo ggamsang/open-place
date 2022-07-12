@@ -15,7 +15,7 @@ width:100%;
 `;
 // const Wrapper = styled.div`
 //     box-sizing:border-box;
-//     margin-bottom:50px;
+//     margin-bottom:50px;f
 //     -ms-overflow-style: none; /* Internet Explorer 10+ */
 //     scrollbar-width: none; /* Firefox */
 //     &::-webkit-scrollbar {
@@ -57,7 +57,7 @@ class ScrollList extends React.Component {
 
     render() {
         const { list_added } = this.props;
-        // const { ListComponent } = this.props;
+        const { ListComponent } = this.props;
         console.log(this.props.list_added);
         return (
             this.props.list_added &&
@@ -69,7 +69,7 @@ class ScrollList extends React.Component {
                                 inline="centered" size="huge" key={0} />}>
                         {
                                 list_added&&list_added.map((item, index) => {
-                                return <Item key={index} {...item} onClick={this.props.onClick} />
+                                return <ListComponent key={index} {...item} onClick={this.props.onClick} />
                             })
                         }
                     </InfiniteScroll>

@@ -90,16 +90,10 @@ class ExpItemList extends React.Component {
     constructor(props) {
         super(props);
     }
-    componentWillMount() {
+    componentDidMount() {
         this.getList(0);
     }
-    // componentDidUpdate(prevProps) {
-    //     if (this.props.sort !== prevProps.sort || this.props.cate1 !== prevProps.cate1 || this.props.cate2 !== prevProps.cate2 || this.props.cate3 !== prevProps.cate3 || this.props.keyword !== prevProps.keyword) {
-    //       this.getList(0);
-    //     }
-    // }
     getList = (page) => {
-        
         return this.props.getExpListRequest(page,this.props.type, this.props.sort, this.props.keyword);
     }
     render() {
@@ -114,7 +108,6 @@ class ExpItemList extends React.Component {
                     .split(",")
                     .map(word => tags.has(word) == false && tags.add(word))
         });
-        console.log(tags);
         return (<Wrapper>
 
             <div className='gradient'>
