@@ -243,6 +243,7 @@ class MyDetailChild extends Component {
   }
   onClickHome = (event) => {
     this.setState({ subMenu:"none",  sub_menu1: false, sub_menu2: false });
+
     setTimeout(() => {
       this.setState({ main_menu: true })
     }, 1000)
@@ -262,7 +263,7 @@ class MyDetailChild extends Component {
     } else if (sub == "sellExp") {
       this.props.getUserSellExpRequest(user_id, 0);
     } else if (sub == "buyExp") {
-      token && this.props.getUserBoughtExpRequest(user_id,0);
+      token && this.props.getUserBoughtExpRequest(token, 0);
     } else if (sub == "likeSharer") {
       this.props.getUserLikeSharerRequest(user_id, 0);
     } else if (sub == "likeExp") {
@@ -314,6 +315,7 @@ class MyDetailChild extends Component {
           }
           {/* <SubWrap> */}
             {/* {this.state.subMenu === "point"
+
               && <React.Fragment>
                 <div className='subTitle'>포인트 충전</div>
                 <MyPointChargeContainer onTabSwitch={() => this.TabSwitch("payment")} />
@@ -325,6 +327,7 @@ class MyDetailChild extends Component {
               </React.Fragment>} */}
 
             {/* <Fade opposite when={this.state.sub_menu1 === true || this.state.sub_menu2}>
+
               <SubMenu >
                 <div className='menu_wrap' style={{ display: `${this.state.sub_menu1 === true ? "flex" : "none"}` }}>
                   <div onClick={this.onClickHome} className='label'> {"<"} 포인트</div>
@@ -366,6 +369,7 @@ class MyDetailChild extends Component {
         </SubWrap>
       </React.Fragment>
       :null
+
     );
   }
 }
@@ -380,7 +384,7 @@ const mapDispatchToProps = (dispatch) => {
     getUserSellExpRequest: (user_id, page) => (dispatch(getUserSellExpRequest(user_id, page))),
     getUserLikeSharerRequest: (user_id, page) => { dispatch(getUserLikeSharerRequest(user_id, page)) },
     getUserLikeExpRequest: (user_id, page) => { dispatch(getUserLikeExpRequest(user_id, page)) },
-    getUserBoughtExpRequest: (user_id,page) => dispatch(getUserBoughtExpRequest(user_id,page)),
+    getUserBoughtExpRequest: (user_id, page) => dispatch(getUserBoughtExpRequest(user_id, page)),
   }
 };
 const mapStateToProps = (state) => {
