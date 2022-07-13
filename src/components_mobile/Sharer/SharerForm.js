@@ -61,6 +61,18 @@ class SharerForm extends React.Component {
     this.onChangeBankNumber=this.onChangeBankNumber.bind(this);
     this.onChangeThumbnail = this.onChangeThumbnail.bind(this);
   }
+  componentDidUpdate(prevProps){
+    if(prevProps.sharer!=this.props.sharer){
+      console.log(this.props.sharer);
+      this.setState({
+        info:this.props.sharer.about_me,
+        city:this.props.sharer.location_id,
+        email:this.props.sharer.email,
+        bank_code:this.props.sharer.bank_code,
+        bank_number:this.props.sharer.account_number,
+      })
+    }
+  }
 
   onChangeInfo = (event) => {
     this.setState({info:event.target.value});

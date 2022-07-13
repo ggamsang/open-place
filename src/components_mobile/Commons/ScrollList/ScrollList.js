@@ -2,15 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import InfiniteScroll from "react-infinite-scroller";
 // import Sharer from 'components_mobile/Commons/Sharer';
-import { Loader } from "semantic-ui-react";
+import { List, Loader } from "semantic-ui-react";
 import Item from 'components_mobile/Commons/Item';
 
 // import { WIDTH } from "constant";
 const ScrollWrap = styled.div`
 width:100%;
 .wrapper_{
-    padding-bottom:100px;
-    width:100%;
+    padding-bottom: 10px;
+    width: 100%;
   }
 `;
 // const Wrapper = styled.div`
@@ -37,7 +37,8 @@ class ScrollList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            hasMore: true, loading: false,
+            hasMore: true,
+            loading: false,
         }
         // this.getLoadData = this.getLoadData.bind(this);
     }
@@ -57,8 +58,8 @@ class ScrollList extends React.Component {
 
     render() {
         const { list_added } = this.props;
-        const { ListComponent } = this.props;
-        console.log(this.props.list_added);
+        const { ListComponent = Item } = this.props;
+
         return (
             this.props.list_added &&
                 this.props.list_added.length > 0 ?
@@ -66,12 +67,10 @@ class ScrollList extends React.Component {
                     <InfiniteScroll className="wrapper_" hasMore={this.state.hasMore}
                         threshold={100} pageStart={0} loadMore={this.getLoadData}
                         loader={<Loader className="loading" active={false}
-                                inline="centered" size="huge" key={0} />}>
-                        {
-                                list_added&&list_added.map((item, index) => {
-                                return <ListComponent key={index} {...item} onClick={this.props.onClick} />
-                            })
-                        }
+                            inline="centered" size="huge" key={0} />}>
+                        {list_added && list_added.map((item, index) => {
+                            return <ListComponent key={index} {...item} onClick={this.props.onClick} />
+                        })}
                     </InfiniteScroll>
                 </ScrollWrap>
                 : <NoData>검색 결과 없음</NoData>
@@ -79,14 +78,3 @@ class ScrollList extends React.Component {
     }
 }
 export default ScrollList;
-
-/* <Wrapper type={this.props.type}>
-{list && list.length > 0 ? list.map((item, index) =>
-    item.type == "item"
-        ? <Item key={index} {...item} />
-        :
-        item.type == "sharer"
-            ? <Sharer key={index} {...item} />
-            : null)
-    : <div>데이터가 없습니다.</div>}
-</Wrapper> */

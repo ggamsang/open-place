@@ -12,11 +12,10 @@ const ChargeTypeCredit = 2;
 const ChargeTypeSimple = 3;
 
 const Wrapper = styled.div`
+box-sizing:border-box;
+padding:20px;
   width: 100%;
-  height: 100vh;
-
-//   background: linear-gradient(205deg, #bf1d39, #8448b6);
-  
+  height: 100vh;  
   .header{
     width: 100%;
     margin-bottom: 30px;
@@ -77,15 +76,20 @@ const Wrapper = styled.div`
   .row {
     display: flex;
     flex-direction: row;
+    box-sizing:border-box;
+    padding-left:13px;
+    margin-top:10px;
   }
   .label {
-    width: max-content;
+    width: 100px;
     height: 18px;
     text-align: left;
     font: normal normal bold 15px/18px Pretendard;
     letter-spacing: 0px;
-    // color: #FFFFFF;
     color: #000;
+    box-sizing:border-box;
+    margin-right:10px;
+
   }
     .method-buttons {
         width: 205px;
@@ -121,7 +125,7 @@ const Wrapper = styled.div`
 `;
 const ButtonWrapper = styled.div`
     margin: auto;
-    width: ${WIDTH - 30}px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -161,7 +165,7 @@ const CurrentPoint = styled.div`
     margin: auto;
     box-sizing: border-box;
     padding: 10px 12px;
-    width: ${WIDTH - 30}px;
+    width: 100%;
     height: 50px;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 2px 2px 5px #00000029;

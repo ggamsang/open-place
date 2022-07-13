@@ -2,19 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { resolution } from 'commons/resolution';
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
-import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
 import { InputTag } from 'components_mobile/Commons/Input';
 import InputNormal from 'components_mobile/Commons/Input/InputNormal';
 import DropDownNormal from 'components_mobile/Commons/DropDown/DropDownNormal';
 import TextAreaNormal from 'components_mobile/Commons/TextArea/TextAreaNormal';
 import { InputPrice } from 'components_mobile/Commons/Input';
-import AddContent from 'components_mobile/Commons/AddContent/AddContent';
 import { goto } from 'navigator';
-import { InputFile } from 'components_mobile/Commons/Input';
-import { Editor } from 'commons/Editor/Editor';
-import Jodit from 'commons/Jodit';
 import ExpType from '../Common/ExpType';
-
+import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
 const Wrapper = styled.div`
     *{
       box-sizing:border-box;

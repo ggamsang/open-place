@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { WIDTH } from 'constant';
 
 const Wrapper = styled.div`
+
     font-family: Noto Sans KR;
     *{ box-sizing: border-box; }
     ul { padding: 0; margin: 0;}
@@ -50,6 +51,8 @@ const Wrapper = styled.div`
         }
         border-bottom: 1px solid #E9E9E9;
     }
+    border:1px solid black;
+*{border:1px solid blue;}
 `;
 const SubTitle = styled.div`
     width: 100%;
