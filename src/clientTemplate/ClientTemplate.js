@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import Footer from "components_mobile/Footer"
 import BottomMenu from "components_mobile/Menu/Bottom";
-import { debounce } from 'lodash';
+// import { debounce } from 'lodash';
 
 const Wrapper = styled.div`
   z-index: 1;
@@ -55,43 +55,43 @@ class ClientTemplate extends Component {
       stick: false,
       prev_y: 0,
     };
-    this.scroll = debounce(e => {
-      // get main height
-      const main = document.getElementById('main');
-      const rectMain = main.getBoundingClientRect();
-      if (!rectMain) {
-        return;
-      }
-      // get bottom menu position
-      const nav = document.getElementById('nav');
-      const rectNav = nav.getBoundingClientRect();
-      if (!rectNav) {
-        return;
-      }
-      // detect direction and store prev position
-      const { prev_y } = this.state;
-      let dir = "";
-      if (rectMain.y - prev_y > 0) {
-        dir = "UP";
-      } else {
-        dir = "DOWN";
-      }
-      this.setState({ prev_y: rectMain.y });
-      console.log(new Date().getTime(), 0);
+    // this.scroll = debounce(e => {
+    //   // get main height
+    //   const main = document.getElementById('main');
+    //   const rectMain = main.getBoundingClientRect();
+    //   if (!rectMain) {
+    //     return;
+    //   }
+    //   // get bottom menu position
+    //   const nav = document.getElementById('nav');
+    //   const rectNav = nav.getBoundingClientRect();
+    //   if (!rectNav) {
+    //     return;
+    //   }
+    //   // detect direction and store prev position
+    //   const { prev_y } = this.state;
+    //   let dir = "";
+    //   if (rectMain.y - prev_y > 0) {
+    //     dir = "UP";
+    //   } else {
+    //     dir = "DOWN";
+    //   }
+    //   this.setState({ prev_y: rectMain.y });
+    //   console.log(new Date().getTime(), 0);
 
-      const { stick, } = this.state;
-      if (stick == false) {
-        if (rectMain.height - (rectNav.y - rectMain.y) < 50) {
-          console.log(new Date().getTime(), 1);
-          this.setState({ stick: true });
-        }
-      } else {
-        if (rectMain.height - (rectNav.y - rectMain.y) < 50) {
-          console.log(new Date().getTime(), 3);
-          setTimeout(this.setState({ stick: false }), 500);
-        }
-      }
-    }, 1000);
+    //   const { stick, } = this.state;
+    //   if (stick == false) {
+    //     if (rectMain.height - (rectNav.y - rectMain.y) < 50) {
+    //       console.log(new Date().getTime(), 1);
+    //       this.setState({ stick: true });
+    //     }
+    //   } else {
+    //     if (rectMain.height - (rectNav.y - rectMain.y) < 50) {
+    //       console.log(new Date().getTime(), 3);
+    //       setTimeout(this.setState({ stick: false }), 500);
+    //     }
+    //   }
+    // }, 1000);
   }
   componentDidMount() {
     // window.addEventListener('scroll', e => this.handleScroll(e), true);

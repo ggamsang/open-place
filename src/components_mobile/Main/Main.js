@@ -42,9 +42,9 @@ function Main() {
         <SearchForm isMain={true} />
         <Slide />
         <TopItemList />
- 
+        {/* 
         <TopItemList />
-{/*        <TopItemList />
+       <TopItemList />
         <TopItemList />
         <TopItemList />
         <TopItemList />
