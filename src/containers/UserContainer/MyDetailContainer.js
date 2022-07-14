@@ -2,20 +2,21 @@ import React, { Component } from 'react';
 import MyDetail from 'components_mobile/User/MyDetail';
 import { connect } from 'react-redux';
 import { goto } from 'navigator';
+import { getSharerRequest } from 'actions/Sharer/Sharer';
 
 class MyDetailContainer extends Component {
-  componentDidMount() {
-    // this.props.getUserDetailRequest(1);
-    // this.props.getUserPointRequest(1);
-    
+  componentDidMount() {    
     if (this.props.isLoggedIn) {
-      ;
     } else {
       alert('로그인해주세요.')
       goto("LOGIN")
     }
   }
-
+  componentDidUpdate(prevProps){
+    if(JSON.stringify(prevProps.userInfo)!=JSON.stringify(this.props.userInfo)){
+      this.props.getSharerRequest(this.props.userInfo.uid);
+    }
+  }
   render() {
     return (
       this.props.isLoggedIn
@@ -28,7 +29,10 @@ const mapStateToProps = (state) => ({
   isLoggedIn: state.Authentication.status.isLoggedIn,
   active: state.Authentication.status.active,
   userInfo:state.Authentication.status.userInfo,
+  sharer: state.User.status.sharer,
 });
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  getSharerRequest: (user_id) => { dispatch(getSharerRequest(user_id)) }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyDetailContainer);

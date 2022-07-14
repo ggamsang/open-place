@@ -163,7 +163,7 @@ const config = {
   resize: false,
   toolbarButtonSize: 'small',
 }
-export default class CommunityWrite extends React.Component {
+export default class CommunityModify extends React.Component {
 
   constructor(props) {
     super(props);
@@ -178,6 +178,17 @@ export default class CommunityWrite extends React.Component {
     this.onFileChange = this.onFileChange.bind(this);
   }
 
+  componentDidUpdate(prevProps){
+    console.log(this.props);
+    if(JSON.stringify(prevProps.detail)!=JSON.stringify(this.props.detail)){
+      console.log("-----",this.props)
+      this.setState({
+        title:this.props.detail.title,
+        content:this.props.detail.text,
+        files:JSON.parse(this.props.detail.files),
+      },()=>console.log(this.state))
+    }
+  }
 
   onChangeValueTitle = async (e) => {
     await this.setState({ title: e.target.value });
@@ -220,12 +231,12 @@ export default class CommunityWrite extends React.Component {
     e.preventDefault();
     goto("COMMUNITY");
   }
-  onWrite = (e) => {
+  onModify = (e) => {
     e.preventDefault();
     const { content, title, head, files } = this.state;
     const data = { text: content, title: title, head: head, files:JSON.stringify(files) };
     console.log(data)
-    this.props.Write(data)
+    this.props.Modify(data)
       .then(goto("COMMUNITY"));
   }
    onFileChange = async(files) =>{
@@ -256,30 +267,19 @@ export default class CommunityWrite extends React.Component {
                 onChange={this.onChangeValueTitle} />
             </div>
           </div>
-
-          {/* <div className='rows top13'>
-            <div className='label'>
-              말머리
-            </div>
-            <div>
-              <input
-                value={this.state.head}
-                onChange={this.onChangeValueHead} />
-            </div>
-          </div> */}
           <div className='t-area-wrapper'>
             <Editor value={this.state.content} config={config} onChange={(value) => this.onChangeContent(value)} />
           </div>
-          <div className="wrapper flex"  style={{marginTop:"10px"}}>
-            <InputFile display={true} getValue={this.onFileChange}  accept="" />
+          <div className="wrapper flex" style={{marginTop:"10px"}}>
+            <InputFile files={this.state.files} display={true} getValue={(value) => this.onFileChange(value)} accept="" />
           </div>
         </div>
         <div className='button-wrapper rows top13'>
           <Button
             disabled={!this.state.couldwrite}
-            onClick={this.onWrite}
+            onClick={this.onModify}
             active={this.state.couldwrite}>
-            <div className="text">등록하기</div>
+            <div className="text">수정하기</div>
           </Button>
 
           <Button onClick={this.onCancelWrite}>
