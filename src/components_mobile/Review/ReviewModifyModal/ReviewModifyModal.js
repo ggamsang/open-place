@@ -155,7 +155,7 @@ const AddPic = styled.div`
     }
 `;
 
-export default class ReviewWriteModal extends React.Component {
+export default class ReviewModifyModal extends React.Component {
     closeModal = () => {
         this.props.close();
     }
@@ -163,9 +163,22 @@ export default class ReviewWriteModal extends React.Component {
         super(props);
         this.state = {
             files: [],
-            thumbnail: [],
-            score: 0,
-            text: "",
+            thumbnail: this.props.detail.review_image_list && this.props.detail.review_image_list.split(","),
+            ...this.props.detail
+            //             create_at: "2022-07-14T14:51:07.000Z"
+            // exp_name: undefined
+            // nick_name: "깜상"
+            // option: null
+            // review_image_list: "https://s3.ap-northeast-2.amazonaws.com/osd.uploads.com/dev/uploads/c0d3a03a4f41d3b662d176e8f06b9ac9"
+            // score: 2
+            // text: "a"
+            // uid: 29
+            // user_id: 10
+
+            // files: [],
+            // thumbnail: [],
+            // score: 0,
+            // text: "",
         }
         this.modal_option = {
             width: `${WIDTH - 30}px`,
@@ -182,31 +195,46 @@ export default class ReviewWriteModal extends React.Component {
         const { score, text, thumbnail, files } = this.state;
         const { expDetail, userInfo, } = this.props;
 
-        const review_image_list = thumbnail &&
-            await Promise.all(
-                thumbnail.map(async (item, index) => {
-                    // console.log(item);
-                    if (item.indexOf("https://s3") == -1) {
-                        const file = files[index];
-                        const s3path = await FileUploadRequest([file]);
-                        // console.log(s3path);
-                        return s3path.path;
-                    } else {
-                        return item;
-                    }
-                }));
-        const obj = {
-            user_id: userInfo.uid,
-            exp_id: expDetail.uid,
-            score: parseInt(score / 20),
-            text: text,
-            review_image_list: review_image_list.join(","),
-        };
-        this.props.submit(obj);
+        Promise.all(
+
+            files.map(async (item) => {
+                const file = item;
+                const s3path = await FileUploadRequest([file]);
+                return s3path.path;
+            }))
+
+            .then(file_to_url => thumbnail
+                .filter(thum => thum.includes("data:image") == false)
+                .concat(file_to_url).join(","))
+
+            .then(review_image_list => {
+                console.log(review_image_list);
+                const obj = {
+                    user_id: userInfo.uid,
+                    exp_id: expDetail.uid,
+                    score: score < 6 ? score : parseInt(score / 20),
+                    text: text,
+                    review_image_list: review_image_list,
+                };
+                this.props.submit(this.props.detail.uid, obj);
+            })
+        // .then(alert('completed'));
     }
     onChangedRating = (star) => this.setState({ score: star });
 
     handleOnChangeThumbnail(event, index) {
+        // event.preventDefault();
+        // const reader = new FileReader();
+        // const file = event.target.files[0];
+        // reader.onloadend = () => {
+        //     const thumbnail_url = reader.result;
+        //     let file_list = this.state.files;
+        //     let thumbnail_list = this.state.thumbnail.length == 0 ? "" : this.state.thumbnail;
+        //     alert(thumbnail_list);
+        //     thumbnail_list.splice(index, 1, thumbnail_url);
+        //     file_list.splice(index, 1, file);
+        //     this.setState({ thumbnail: thumbnail_list, files: file_list });
+        // }
         event.preventDefault();
         const reader = new FileReader();
         const file = event.target.files[0];
@@ -215,8 +243,7 @@ export default class ReviewWriteModal extends React.Component {
             if (this.state.thumbnail && this.state.thumbnail.length <= 0) {
                 this.setState({ thumbnail: this.state.thumbnail.concat(thumbnail_url), files: this.state.files.concat(file) });
             } else {
-                console.log(index);
-                let thumbnail_list = this.state.thumbnail;
+                let thumbnail_list = typeof this.state.thumbnail === "object" ? this.state.thumbnail : this.state.thumbnail.split(",");
                 let file_list = this.state.files;
                 thumbnail_list.splice(index, 1, thumbnail_url);
                 file_list.splice(index, 1, file);
@@ -231,7 +258,7 @@ export default class ReviewWriteModal extends React.Component {
     render() {
         const { expDetail } = this.props;
         let imgCount = 0;
-
+        console.log("gosleep", this.props);
         return (
             <Modal {...this.modal_option} onClickAway={() => alert('?')}>
                 <Wrapper>
@@ -303,6 +330,7 @@ export default class ReviewWriteModal extends React.Component {
                             <div className='info-ext'>{expDetail.option || ""}</div>
                             <div className='score'>
                                 <Rating
+                                    initialValue={this.state.score}
                                     onClick={this.onChangedRating}
                                     size="20"
                                     stye={{ width: "112px", height: "20px" }} />
