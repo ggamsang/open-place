@@ -101,7 +101,7 @@ class MyDetail extends Component {
           <div className='user_name'>{this.props.userInfo && this.props.userInfo.nick_name || "국민대학교 CRC"}</div>
           <div className='button_wrap'>
             <div className='button borderRight'
-              onClick={() => goto("CREATE-SHARER")}>
+              onClick={() => goto(this.props.sharer == null ?"CREATE-SHARER":"MODIFY-SHARER")}>
               공유자<br />
               등록수정
             </div>

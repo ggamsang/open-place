@@ -2,7 +2,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes, } from "react-router-dom";
 import MainPage from "pages/MainPage";
-import CommunityPage, { CommunityWritePage, CommunityDetailPage }
+import CommunityPage, { CommunityWritePage, CommunityDetailPage, CommunityModifyPage }
   from "pages/CommunityPage";
 import { NoticeDetailPage } from "pages/NoticePage";
 import SignInPage from "pages/RegistrationPage/SignInPage";
@@ -75,6 +75,8 @@ function App() {
             <Route path="community" element={<CommunityPage />} />
             <Route path="community/:id" element={<CommunityDetailPage />} />
             <Route path="community/write" element={<CommunityWritePage />} />
+            <Route path="community/modify/:id" element={<CommunityModifyPage />} />
+
             {/* <Route path="notice" element={<NoticePage />} /> */}
             <Route path="notice/:id" element={<NoticeDetailPage />} />
             <Route path="intro" element={<IntroPage />} />

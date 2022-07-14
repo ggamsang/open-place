@@ -5,6 +5,7 @@ import { WIDTH } from 'constant';
 import CommentListContainer from 'containers/CommentListContainer';
 import DateFormat from 'modules/DateFormat';
 import { InputFile } from 'components_mobile/Commons/Input';
+import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
 
 const Wrapper = styled.div`
   margin-bottom: 150px; // 임시로 입력된 값입니다.
@@ -54,6 +55,13 @@ const Wrapper = styled.div`
     margin: auto;
     width: ${WIDTH}px;
     margin-bottom: 10px;
+  }
+  .buttonWrap{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    margin-top:20px;
+    margin-bottom:20px;
   }
 
 `;
@@ -199,8 +207,23 @@ export default class CommunityDetail extends React.Component {
           <div>파일 첨부</div>
           <InputFile files={files} />
         </div>}
-      <CommentListContainer id={id} />
+      {
+        this.props.userInfo &&
+        this.props.userInfo.uid == this.props.user_id &&
+        <div className='buttonWrap'>
+          <ButtonNormal
+            onClickEvent={()=>window.location.href=`/community/modify/${this.props.uid}`}
+            width={165}
+            height={35}
+            radius={10}
+            fontSize={15}
+            bgColor={"red"}
+            text="수정하기"
+          />
+        </div>
+      }
 
+      <CommentListContainer id={id} />
     </Wrapper >);
   }
 }
