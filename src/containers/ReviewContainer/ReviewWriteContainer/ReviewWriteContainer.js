@@ -1,7 +1,8 @@
-import ReviewWrite from "components_mobile/Review/ReviewWrite";
+import ReviewWrite from "components_mobile/Review/ReviewWriteModal";
 import React from "react";
 import { connect } from "react-redux";
 import { CreateExpReviewRequest, GetExpReviewListRequest } from "actions/Review";
+import ReviewWriteModal from "components_mobile/Review/ReviewWriteModal";
 
 class ReviewWriteContainer extends React.Component {
 
@@ -16,7 +17,7 @@ class ReviewWriteContainer extends React.Component {
 
     render() {
         return (<>
-            <ReviewWrite submit={this.submit} {...this.props} />
+            <ReviewWriteModal submit={this.submit} {...this.props} />
         </>);
     }
 }

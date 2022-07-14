@@ -20,12 +20,12 @@ export function GetExpReviewListRequest(id) {
         const url = `${host}/review/${id}`;
         return fetch(url, GET)
             .then(res => res.json())
-            .then(data => dispatch(GetExpReviewSuccess(data)))
-            .catch(err => dispatch(GetExpReviewFailure(err)))
+            .then(data => dispatch(GetExpReviewListSuccess(data)))
+            .catch(err => dispatch(GetExpReviewListFailure(err)))
     }
 };
-const GetExpReviewSuccess = (data) => ({ type: types.GET_REVIEW_SUCCESS, reviews: data.detail });
-const GetExpReviewFailure = (err) => ({ type: types.GET_REVIEW_FAILURE, error: err, reviews: [] });
+const GetExpReviewListSuccess = (data) => ({ type: types.GET_REVIEW_LIST_SUCCESS, reviews: data.detail });
+const GetExpReviewListFailure = (err) => ({ type: types.GET_REVIEW_LIST_FAILURE, error: err, reviews: [] });
 // U
 export function UpdateExpReviewRequest(token, id, data) {
     return (dispatch) => {
@@ -50,3 +50,15 @@ export function DeleteExpReviewRequest(id, token) {
 };
 const DeleteExpReviewSuccess = () => ({ type: types.DELETE_REVIEW_SUCCESS, });
 const DeleteExpReviewFailure = (err) => ({ type: types.DELETE_REVIEW_FAILURE, error: err, });
+
+export function GetExpReviewRequest(id) {
+    return (dispatch) => {
+        const url = `${host}/review/detail/${id}`;
+        return fetch(url, GET)
+            .then(res => res.json())
+            .then(data => dispatch(GetExpReviewSuccess(data)))
+            .catch(err => dispatch(GetExpReviewFailure(err)))
+    }
+};
+const GetExpReviewSuccess = (data) => ({ type: types.GET_REVIEW_SUCCESS, detail: data.detail });
+const GetExpReviewFailure = (err) => ({ type: types.GET_REVIEW_FAILURE, error: err, detail: null });
