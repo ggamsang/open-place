@@ -122,6 +122,7 @@ export const getUserLikeExpRequest = (user_id, page) => {
     return fetch(url, GET)
     .then(res => res.json())
     .then(data =>{
+      console.log(data);
       return dispatch(page === 0
       ? getUserLikeExpZero(data ? data : [])
       : getUserLikeExpSuccess(data ? data : []))

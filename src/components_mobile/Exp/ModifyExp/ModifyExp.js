@@ -74,25 +74,6 @@ const Wrapper = styled.div`
     }
     }
 `
-const config = {
-  readonly: false,
-  height: 275,
-  uploader: {
-    insertImageAsBase64URI: true
-  },
-  allowResizeX: false,
-  allowResizeY: false,
-  enableDragAndDropFileToEditor: true,
-
-  tabIndex: 0,
-  language: 'ko',
-  i18n: 'ko',
-  useSplitMode: false,
-  showXPathInStatusbar: false,
-  direction: 'ltr',
-  resize: false,
-  toolbarButtonSize: 'small',
-}
 class ModifyExp extends React.Component {
 
   constructor(props) {
@@ -116,7 +97,7 @@ class ModifyExp extends React.Component {
 
   }
   async componentDidUpdate(prevProps) {
-    if (JSON.stringify(prevProps.expDetail) != JSON.stringify(this.props.expDetail)) {
+    if (JSON.stringify(prevProps.expDetail) !== JSON.stringify(this.props.expDetail)) {
       await this.setState({
         thumbnail: this.props.expDetail && this.props.expDetail.thumbnail,
         title: this.props.expDetail && this.props.expDetail.title,
@@ -204,7 +185,7 @@ class ModifyExp extends React.Component {
   }
 
   onClickOK = async (event) => {
-    const { thumbnail, thumbnail_name, title, tag, info, price, category, exp_files, content, exp_type, exp_type_detail } = this.state;
+    const { thumbnail_name, title, tag, info, price, category, exp_files, content, exp_type, exp_type_detail } = this.state;
     let data = {
       user_id: this.props.userInfo.uid,
       item_id: this.props.item_id,
@@ -339,7 +320,7 @@ class ModifyExp extends React.Component {
               radius={10}
               fontSize={15}
               bgColor={"red"}
-              text="등록하기"
+              text="수정하기"
             />
           </div>
         </div>

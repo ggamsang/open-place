@@ -6,6 +6,8 @@ import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
 // import { WIDTH } from "constant";
 import { goto } from 'navigator';
 import Item from 'components_mobile/Commons/Item';
+import SortButton from 'components_mobile/Commons/SortButton/SortButton';
+import { GetSORTYPE } from 'components_mobile/Commons/Define';
 
 const Wrapper = styled.div`
     -ms-overflow-style: none; /* Internet Explorer 10+ */
@@ -89,15 +91,18 @@ const Wrapper = styled.div`
 class ExpItemList extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            sortType:this.props.sort,
+        }
     }
     componentDidMount() {
         this.getList(0);
     }
     getList = (page) => {
-        return this.props.getExpListRequest(page,this.props.type, this.props.sort, this.props.keyword);
+        return this.props.getExpListRequest(page,this.props.type, 
+                                            GetSORTYPE(this.props.sort), this.props.keyword);
     }
     render() {
-        console.log(this.props)
         const { list_added } = this.props;
         const tags = new Set();
         list_added && list_added.map(item => {
@@ -106,7 +111,7 @@ class ExpItemList extends React.Component {
                     .replace("[", "")
                     .replace("]", "")
                     .split(",")
-                    .map(word => tags.has(word) == false && tags.add(word))
+                    .map(word => tags.has(word) === false && tags.add(word))
         });
         return (<Wrapper>
 
@@ -129,18 +134,20 @@ class ExpItemList extends React.Component {
                     height={35}
                     radius={10}
                     fontSize={15}
-                    // bgColor={this.props.userInfo ? "#F00" : "#707070"}
                     bgColor={"#707070"}
                     text="경험 등록하기"
                     style={{ marginRight: "25px" }}
                 />
-                <ButtonNormal
-                    width={165}
-                    height={35}
-                    radius={10}
-                    fontSize={15}
-                    bgColor={"#707070"}
-                    text="인기순"
+                <SortButton
+                    value={this.state.sortType}
+                    getValue = {(value)=>{
+                        this.setState({sortType:value},()=>{
+                            const TYPE = this.props.type === "play" ? "PLAY"
+                                        : this.props.type === "learn"? "LEARN"
+                                        : this.props.type === "make" ? "MAKE":this.props.type;
+                            goto(TYPE,`${this.state.sortType}/${this.props.keyword}`)
+                        })
+                    }}
                 />
             </div>
 

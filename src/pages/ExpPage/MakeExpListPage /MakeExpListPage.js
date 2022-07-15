@@ -7,7 +7,7 @@ function MakeExpListPage() {
   let params = useParams();
 
   return (<ClientTemplate i_dont_need_footer={true}>
-    <MakeExpListContainer keyword={params.keyword} />
+    <MakeExpListContainer sort={params.sort} keyword={params.keyword} />
 
   </ClientTemplate>)
 }

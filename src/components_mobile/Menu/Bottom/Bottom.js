@@ -248,11 +248,11 @@ class Bottom extends React.Component {
             {this.state.mainmenu
                 && <div className='row background topmargin3'>
                     <ul className='row'>
-                        <li onClick={() => goto("PLAY")} className='left-margin35'><IconPLAY /></li>
-                        <li onClick={() => goto("LEARN")}><IconLEARN /></li>
+                        <li onClick={() => goto("PLAY","1/null")} className='left-margin35'><IconPLAY /></li>
+                        <li onClick={() => goto("LEARN","1/null")}><IconLEARN /></li>
                     </ul>
                     <ul className='row'>
-                        <li onClick={() => goto("MAKE")}><IconMAKE /></li>
+                        <li onClick={() => goto("MAKE","1/null")}><IconMAKE /></li>
                         <li onClick={() => goto("COMMUNITY")} className='right-margin35'><IconCOMMUNITY /></li>
                     </ul>
                 </div>}

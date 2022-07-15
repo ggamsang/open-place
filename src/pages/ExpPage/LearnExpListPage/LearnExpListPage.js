@@ -7,7 +7,7 @@ function LearnExpListPage() {
   let params = useParams();
 
   return (<ClientTemplate i_dont_need_footer={true}>
-    <LearnExpListContainer keyword={params.keyword} />
+    <LearnExpListContainer sort={params.sort} keyword={params.keyword} />
 
   </ClientTemplate>)
 }

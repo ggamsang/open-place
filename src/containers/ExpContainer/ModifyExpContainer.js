@@ -9,7 +9,7 @@ class ModifyExpContainer extends Component {
     async componentDidMount() {
       await this.props.getCategoryListRequest()
         .then(() => this.props.getExpTypeListReqeuest())
-        .then(()=>this.props.getExpDetailRequest(this.props.item_id));
+        .then(()=>this.props.getExpDetailRequest(this.props.item_id,null));
     }
     render() {
       return (
@@ -38,8 +38,8 @@ const mapDispatchToProps = (dispatch) => ({
   updateExpRequest: (id, data,token) => {
     return dispatch(updateExpRequest(id,data,token))
   },
-  getExpDetailRequest:(item_id)=> {
-    return dispatch(getExpDetailRequest(item_id))
+  getExpDetailRequest:(item_id,user_id)=> {
+    return dispatch(getExpDetailRequest(item_id,user_id))
   },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(ModifyExpContainer);

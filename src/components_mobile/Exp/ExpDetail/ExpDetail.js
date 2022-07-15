@@ -106,6 +106,14 @@ class ExpDetail extends React.Component {
     this.onClickLike = this.onClickLike.bind(this);
     this.onClickModify = this.onClickModify.bind(this);
   }
+  componentDidUpdate(prevProps){
+    if(this.props.expDetail){
+      if(JSON.stringify(prevProps.expDetail)!==JSON.stringify(this.props.expDetail)){
+        this.setState({like:this.props.expDetail.isLike})
+      }
+  
+    }
+  }
 
   onClickMain = (event) => {
     this.setState({ sub: false });
@@ -119,8 +127,16 @@ class ExpDetail extends React.Component {
       this.setState({ sub: true })
     }, 1000);
   }
-  onClickLike = (event) => {
-    this.setState({ like: !this.state.like });
+  onClickLike = async(event) => {
+    await this.setState({ like: !this.state.like },(()=>{
+      const data = {
+        type:"exp",
+        like_id:this.props.item_id,
+        user_id:this.props.userInfo.uid,
+        isLike:this.state.like
+      }
+      this.props.likeExpRequest(this.props.token,data);
+    }));
   }
   onClickBuy = (event) => {
 
@@ -135,11 +151,11 @@ class ExpDetail extends React.Component {
     //  && taglist.split(",").map((item, index) => {
     //   return item + " | ";
     // });
-    console.log(taglist);
     return taglist;
   }
 
   render() {
+    console.log(this.props);
     const { expDetail } = this.props;
     let taglist = expDetail && this.tagSprintToAry(expDetail.taglist);
     const exp_files = expDetail && expDetail.exp_files && JSON.parse(expDetail.exp_files)
@@ -171,7 +187,9 @@ class ExpDetail extends React.Component {
                 </div>
               </div>
               <div className='buttonWrap'>
-                <ButtonNormal
+                {
+                  this.props.isLoggedIn ? 
+                  <ButtonNormal
                   onClickEvent={this.onClickLike}
                   width={155}
                   height={35}
@@ -181,6 +199,10 @@ class ExpDetail extends React.Component {
                   text={this.state.like == true ? "♥ 좋아요" : "♡ 좋아요"}
                   style={{ marginRight: "25px" }}
                 />
+                :<div style={{width:"155px",marginRight: "25px"}}/>
+                }
+                
+
                 <ButtonNormal
                   onClickEvent={this.onClickDetail}
                   width={155}

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import ExpDetail from 'components_mobile/Exp/ExpDetail';
-import { getExpDetailRequest } from "actions/Exp/ExpDetail"
+import { getExpDetailRequest, likeExpRequest } from "actions/Exp/ExpDetail"
 import { connect } from "react-redux";
 
 class ExpDetailContainer extends Component {
-  componentDidMount() {
-    this.props.getExpDetailRequest(this.props.item_id)
+  async componentDidUpdate(prevProps) {
+    if (JSON.stringify(prevProps.userInfo) !== JSON.stringify(this.props.userInfo)) {
+      await this.props.getExpDetailRequest(this.props.item_id, this.props.userInfo == null ? null : this.props.userInfo.uid)
+    }
   }
   render() {
     return (<React.Fragment>
@@ -15,6 +17,7 @@ class ExpDetailContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  token: state.Authentication.status.token,
   isLoggedIn: state.Authentication.status.isLoggedIn,
   active: state.Authentication.status.active,
   userInfo: state.Authentication.status.userInfo,
@@ -22,7 +25,8 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch) => {
   return ({
-    getExpDetailRequest: (item_id) => dispatch(getExpDetailRequest(item_id)),
+    getExpDetailRequest: (item_id, user_id) => dispatch(getExpDetailRequest(item_id, user_id)),
+    likeExpRequest: (token, data) => dispatch(likeExpRequest(token, data)),
   });
 }
 

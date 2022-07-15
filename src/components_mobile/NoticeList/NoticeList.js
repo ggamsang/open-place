@@ -18,18 +18,16 @@ const Wrapper = styled.div`
         border-bottom: 1px solid #C1C1C1;
 
         // *{ border: 1px solid red; }
-
+        .fontSmall{font-size:12px;}
         .header {
             text-align: left;
             font-weight: bold;
-            font-size: 15px;
             line-height: 18px;
             letter-spacing: 0px;
             color: #C1C1C1;
         }
         .title {
             width: 120px;
-            height: 19px;
             text-align: left;
             font-weight: medium;
             font-size: 15px;
@@ -41,9 +39,12 @@ const Wrapper = styled.div`
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
         }
         .author {
-            width: max-content;
+            min-width: 100px;
             height: 19px;
             font-weight: normal;
             font-size: 13px;
@@ -54,13 +55,20 @@ const Wrapper = styled.div`
             flex-direction: row;
             justify-content: center;
             align-items: center;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
         }
         .date {
+            min-width:40px;
             font-weight: normal;
             font-size: 13px;
             line-height: 16px;
             letter-spacing: 0px;
             color: #000;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
         }
     }
 
@@ -112,9 +120,23 @@ class NoticeList extends React.Component {
         const { notices = dummy } = this.props;
 
         return (<Wrapper>
+            <div className="line" style={{ backgroundColor: "#efefef" }}>
+                <div className='header '>
+                    &nbsp;
+                </div>
+                <div className='title'>
+                    제목
+                </div>
+                <div className='author'>
+                    글쓴이
+                </div>
+                <div className='date'>
+                    날짜
+                </div>
+            </div>
             {notices.map((item, idx) =>
                 <div key={idx} className="line" onClick={e => this.gotoDetail(item.uid)}>
-                    <div className='header'>
+                    <div className='header fontSmall'>
                         {item.head}
                     </div>
                     <div className='title'>

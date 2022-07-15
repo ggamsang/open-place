@@ -2,6 +2,7 @@ import React from 'react';
 import styledComponents from 'styled-components';
 import zoombg from "resources/zoom.png";
 import filterbg from "resources/filter.png";
+import { CATEGORY } from 'components_mobile/Commons/Define';
 
 const WIDTH = 335;
 const Wrapper = styledComponents.div`
@@ -75,18 +76,20 @@ class Search extends React.Component {
             node.value = this.props.keyword ? this.props.keyword : "";
         }
     }
-    goSearch = (keyword) => {
-        window.location.href = `/search/${keyword}`;
+    goSearch = (category,sort,keyword) => {
+        console.log(`/search/${category}/${keyword}`)
+        window.location.href = `/search/${category}/${sort}/${keyword}`;
     }
     handleKeyDown = e => {
         if (e.key === "Enter" && e.target.value) {
-            this.goSearch(e.target.value);
+            this.goSearch(CATEGORY.PLAY,1,e.target.value);
         }
     }
     handleZoomClicked = () => {
         const input = document.getElementById("search");
+        console.log(input.value)
         if (input.value !== "") {
-            this.goSearch(input.value);
+            this.goSearch(CATEGORY.PLAY,1,input.value);
         }
     }
     render() {
@@ -94,7 +97,7 @@ class Search extends React.Component {
             <InputWrapper width={this.props.width}>
                 <span className="zoom" onClick={() => this.handleZoomClicked()} />
                 <input id="search" placeholder={this.props.placeholder || '경험 찾아보기'} onKeyDown={e => this.handleKeyDown(e)} />
-                {this.props.disabled_filter != true && <span className='filter' />}
+                {this.props.disabled_filter !== true && <span className='filter' />}
             </InputWrapper>
         </Wrapper>);
     }
