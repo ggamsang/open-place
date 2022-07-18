@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { FileUploadRequest } from "actions/Uploader/Uploader";
-import InputNormal from 'components_mobile/Commons/Input/InputNormal';
 import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
 
 const Wrapper = styled.div`
@@ -17,6 +16,7 @@ const Wrapper = styled.div`
         padding:10px;
         margin-top:10px;
         .piece{
+            margin-bottom:3px;
             border-radius:5px;
             border:1px solid #eaeaea;
             padding:3px;
@@ -134,7 +134,7 @@ export class InputFile extends Component {
                                     return (
                                         <div className="piece" key={index}>
                                             <div onClick={() => window.location.href = item.file_url} className="file_name">{item.filename}</div>
-                                            <div style={{ display: `${this.props.display == true ? "flex" : "none"}` }} onClick={this.onClickRemove}>x</div>
+                                            <div style={{ display: `${this.props.display === true ? "flex" : "none"}` }} onClick={this.onClickRemove}>x</div>
                                         </div>
                                     )
                                 })

@@ -18,7 +18,7 @@ import CreateSharerPage from "pages/SharerPage/CreateSharerPage";
 import ModifySharerPage from "pages/SharerPage/ModifySharerPage";
 import SharerDetailPage from "pages/SharerPage/SharerDetailPage";
 import ModifyUserPage from "pages/UserPage/ModifyUserPage/ModifyUserPage";
-import SearchPage from "pages/SearchPage";
+import SearchPage from "pages/SearchPage/SearchPage";
 
 import MessageListPage from "pages/MessagePage";
 import MessageDetailPage from "pages/MessagePage/Detail";
@@ -83,9 +83,9 @@ function App() {
             <Route path="join" element={<SignUpPage />} />
             <Route path="findPW" element={<FindPWPage />} />
 
-            <Route path="play" element={<PlayExpListPage />} />
-            <Route path="make" element={<MakeExpListPage />} />
-            <Route path="learn" element={<LearnExpListPage />} />
+            <Route path="play/:sort/:keyword" element={<PlayExpListPage />} />
+            <Route path="make/:sort/:keyword" element={<MakeExpListPage />} />
+            <Route path="learn/:sort/:keyword" element={<LearnExpListPage />} />
 
             <Route path="myDetail" element={<MyDetailPage />}>
               <Route path=":id" element={<MyDetailChild />} />
@@ -93,9 +93,7 @@ function App() {
             <Route path="paidExp/:id" element={<MyPaidExpDetailPage />} />
             <Route path="terms" element={<TermsOfServicePage />} />
             <Route path="privacy" element={<PrivacyPolicyPage />} />
-            <Route path="search" element={<SearchPage />} >
-              <Route path=":keyword" element={<SearchPage />} />
-            </Route>
+            <Route path="search/:category/:sort/:keyword" element={<SearchPage />} />
             <Route path="createSharer" element={<CreateSharerPage />} />
             <Route path="modifySharer" element={<ModifySharerPage />} />
             <Route path="SharerDetail" element={<SharerDetailPage />}>

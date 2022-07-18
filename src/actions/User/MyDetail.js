@@ -120,12 +120,13 @@ export const getUserLikeExpRequest = (user_id, page) => {
     dispatch(getUserLikeExp());
     const url = `${host}/user/like/exp/${user_id}/${page}`;
     return fetch(url, GET)
-      .then(res => res.json())
-      .then(data => {
-        return dispatch(page === 0
-          ? getUserLikeExpZero(data ? data : [])
-          : getUserLikeExpSuccess(data ? data : []))
-      })
+    .then(res => res.json())
+    .then(data =>{
+      console.log(data);
+      return dispatch(page === 0
+      ? getUserLikeExpZero(data ? data : [])
+      : getUserLikeExpSuccess(data ? data : []))
+  })
       .catch(err => dispatch(getUserLikeExpFailure(err)))
   }
 };

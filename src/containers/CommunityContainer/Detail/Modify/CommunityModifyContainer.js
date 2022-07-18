@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { ModifyArticleRequest } from "actions/Community";
-import CommunityWrite from 'components_mobile/Community/Write';
 import CommunityModify from 'components_mobile/Community/Modify/Modify';
 import { GetArticleDetailRequest } from 'actions/Community';
 
@@ -15,8 +14,8 @@ class CommunityWriteContainer extends React.Component {
     return await this.props.ModifyArticleRequest(this.props.id,form ,this.props.token )
       .then(result => {
         return result
-          ? alert("게시글이 작성되었습니다.")
-          : alert('게시글 작성에 실패하였습니다.')
+          ? alert("게시글이 수정되었습니다.")
+          : alert('게시글 수정 에 실패하였습니다.')
       }
       );
     

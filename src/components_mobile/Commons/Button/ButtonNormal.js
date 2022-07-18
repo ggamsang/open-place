@@ -48,6 +48,7 @@ class ButtonNormal extends Component {
         fontSize={this.props.fontSize}
         radius={this.props.radius}
         border={this.props.border}
+        className={this.props.className}
       >
         <div className='text'>{button_text}</div>
       </CustomButton>

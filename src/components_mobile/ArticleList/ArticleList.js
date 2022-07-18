@@ -7,7 +7,6 @@ import DateFormat from 'modules/DateFormat';
 
 const Wrapper = styled.div`
     font-family: Noto Sans KR;
-
     .line {
         height: 21px;
         display: flex;
@@ -43,8 +42,7 @@ const Wrapper = styled.div`
             white-space: nowrap;
         }
         .author {
-            width: max-content;
-            height: 19px;
+            width: 100px;
             font-weight: normal;
             font-size: 13px;
             line-height: 16px;
@@ -52,15 +50,22 @@ const Wrapper = styled.div`
             color: #000;
             display: flex;
             flex-direction: row;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
         }
         .date {
+            width:40px;
             font-weight: normal;
             font-size: 13px;
             line-height: 16px;
             letter-spacing: 0px;
             color: #000;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
         }
     }
 
@@ -113,11 +118,25 @@ class ArticleList extends React.Component {
         console.log(this.props);
 
         return (<Wrapper>
+            <div  className="line" style={{backgroundColor:"#efefef"}}>
+                    {/* <div className='header'>
+                        
+                    </div> */}
+                    <div className='title'>
+                        제목
+                    </div>
+                    <div className='author'>
+                        글쓴이
+                    </div>
+                    <div className='date'>
+                        날짜
+                    </div>
+                </div>
             {articles.map((item, idx) =>
                 <div key={idx} className="line" onClick={e => this.gotoDetail(item.uid || idx)}>
-                    <div className='header'>
+                    {/* <div className='header'>
                         {item.head}
-                    </div>
+                    </div> */}
                     <div className='title'>
                         &nbsp; {item.title}
                     </div>

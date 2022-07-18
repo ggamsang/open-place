@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 import { WIDTH } from 'constant';

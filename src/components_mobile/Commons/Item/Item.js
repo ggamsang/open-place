@@ -59,6 +59,8 @@ const Wrapper = styled.div`
         font-weight: bold;
     }
     .like{
+        width:22px;
+        text-align:center;
         font: normal normal bold 12px/15px Pretendard;
         color: white;
         font-weight: bold;
@@ -89,7 +91,8 @@ class Item extends React.Component {
             tags,
             taglist,
             price,
-            like
+            like_count,
+            like_id
         } = this.props;
         return (
             <Wrapper bg={url || noimage} onClick={this.onClickItem}>
@@ -107,7 +110,7 @@ class Item extends React.Component {
                             <Tags prestyle={{ "marginLeft": "16px" }}
                                 tags={tags || taglist || ['tag1', 'tag2', 'tag3']} />
                         </div>
-                        <div className='like'>{943 || like}</div>
+                        <div className='like'>{like_id==null?0:like_count}</div>
                     </div>
                 </div>
                 <div className='gradient-cover'>&nbsp;</div>
