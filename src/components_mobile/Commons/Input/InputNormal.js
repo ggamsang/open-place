@@ -62,9 +62,9 @@ class InputNormal extends Component {
                     <InputField
                         type={this.props.type == null ? "text" : this.props.type}
                         disabled={this.props.disable}
-                        onBlur = {this.props.onBlurEvent}
+                        onBlur={this.props.onBlurEvent}
                         onChange={this.props.onChangeValue}
-                        value={this.props.value||""}
+                        value={this.props.value || ""}
                         placeholder={this.props.placeholder}
                         style={this.props.style}
                         width={this.props.width}

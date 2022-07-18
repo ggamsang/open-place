@@ -83,6 +83,9 @@ export class InputFile extends Component {
         }
     }
     onFileChange = async files => {
+        if (files.length === 0) {
+            return;
+        }
         await this.setState({ loading: "파일을 등록하고 있는 중입니다." });
         const file = files;
         const s3path = await FileUploadRequest(file);
@@ -96,7 +99,8 @@ export class InputFile extends Component {
         }, async () => await this.returnData())
     }
     returnData = async e => {
-        this.props.getValue && await this.props.getValue(this.state.files);
+        this.props.getValue
+            && await this.props.getValue(this.state.files);
     }
     init = async () => {
         await this.returnData();
@@ -111,16 +115,16 @@ export class InputFile extends Component {
         return (
             <React.Fragment>
                 <Wrapper>
-                    <div className="addfile" style={{display:`${this.props.display==true?"block":"none"}`}}>
+                    <div className="addfile" style={{ display: `${this.props.display == true ? "block" : "none"}` }}>
                         <input hidden id="addfile" type="file" name="source" ref={ref => (this.input = ref)} onChange={e => this.onFileChange(e.target.files)} accept={`.${this.props.accept}`} />
                         <label htmlFor="addfile" >
-                        <ButtonNormal
-                            height={30}
-                            radius={10}
-                            fontSize={15}
-                            color={"red"}
-                            bgColor={"#F7F7F7"}
-                            text="파일 등록" />
+                            <ButtonNormal
+                                height={30}
+                                radius={10}
+                                fontSize={15}
+                                color={"red"}
+                                bgColor={"#F7F7F7"}
+                                text="파일 등록" />
                         </label>
                     </div>
                     {this.state.files.length > 0 &&
@@ -128,7 +132,7 @@ export class InputFile extends Component {
                             {
                                 this.state.files.map((item, index) => {
                                     return (
-                                        <div className="piece">
+                                        <div className="piece" key={index}>
                                             <div onClick={() => window.location.href = item.file_url} className="file_name">{item.filename}</div>
                                             <div style={{ display: `${this.props.display == true ? "flex" : "none"}` }} onClick={this.onClickRemove}>x</div>
                                         </div>
