@@ -22,8 +22,8 @@ class LikeExpContainer extends Component {
 
 const mapStateToProps = (state) => ({
   userInfo: state.Authentication.status.userInfo,
-  list: state.MyDetail.status.like_sharer_list,
-  list_added: state.MyDetail.status.like_sharer_list_added,
+  list: state.MyDetail.status.like_exp_list,
+  list_added: state.MyDetail.status.like_exp_list_added,
 });
 
 const mapDispatchToProps = (dispatch) => ({

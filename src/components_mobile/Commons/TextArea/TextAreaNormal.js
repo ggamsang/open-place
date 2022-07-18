@@ -11,6 +11,7 @@ const TextAreaField = styled.textarea`
     max-width:${resolution(props=>props.width)}px;
     max-height:${resolution(props=>props.height)}px;
     background-color:${props=>props.color==null?'white':props.color};
+    font-family:Noto Sans KR;
     display:flex;
     align-items:center;
     font-size:${resolution(props=>props.fontSize==null?"17":props.fontSize)}px;

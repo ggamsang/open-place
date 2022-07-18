@@ -2,6 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 import ScrollList from 'components_mobile/Commons/ScrollList';
+import SortButton from 'components_mobile/Commons/SortButton/SortButton';
+import CategoryButton from 'components_mobile/Commons/CategoryButton/CategoryButton';
+import { goto } from 'navigator';
+import { GetCATEGORY, GetSORTYPE } from 'components_mobile/Commons/Define';
+import Item from 'components_mobile/Commons/Item';
 // import { WIDTH } from "constant";
 
 const Wrapper = styled.div`
@@ -10,6 +15,7 @@ const Wrapper = styled.div`
     &::-webkit-scrollbar {
        display: none;
     }
+    box-sizing: border-box;
     margin: auto;
     .blanker {
         height: 44px;
@@ -39,9 +45,11 @@ const Wrapper = styled.div`
         }
     }
     .rows {
+        box-sizing:border-box;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        padding:0px 20px;
     }
 
     .margin-top-9 { margin-top: 9px; }
@@ -49,41 +57,24 @@ const Wrapper = styled.div`
 
     .search-list-wrapper { }
 `;
-const Button = styled.button`
-  margin: auto;
-  width: 155px;
-  height: 35px;
-  background: ${prop => prop.active ? "#FF0000" : "#707070"};
-  box-shadow: 2px 2px 3px #00000019;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  display: flex;
-  .text {
-    margin: auto;
-    width: max-content;
-    height: 18px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 15px;
-    line-height: 18px;
-    font-family: Pretendard;
-    letter-spacing: 0px;
-    color: #FFFFFF;
-  }
-  .rows {
-      display: flex;
-      flex-direction: rows;
-  }
-`;
-
-const dummy = [
-    { type: "item", url: "https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ", title: "맛있는 디저트 만들기", score: 4.9, tags: ["카페마스터", "디저트",] },
-];
 
 class SearchList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            keyword: this.props.keyword,
+            sortType: this.props.sort,
+            categoryType: this.props.category
+        }
+    }
+    componentDidMount() {
+        this.getList(0);
+    }
+    getList = (page) => {
+        return this.props.getExpListRequest(page,GetCATEGORY(this.state.categoryType), 
+                                            GetSORTYPE(this.state.sortType), this.state.keyword);
+    }
     render() {
-        const { list } = this.props;
         return (<Wrapper>
 
             <div className='gradient'>
@@ -92,17 +83,28 @@ class SearchList extends React.Component {
             </div>
 
             <div className='rows margin-top-9'>
-                <Button active>
-                    <div className='text'>카테고리</div>
-                </Button>
-                <Button>
-                    <div className='text'>최신순</div>
-                </Button>
+                <CategoryButton
+                    style={{ paddingRight: "10px" }}
+                    value={this.state.categoryType}
+                    getValue={(value) => {
+                        this.setState({ categoryType: value }, () => {
+                            goto("SEARCH", `${this.state.categoryType}/${this.state.sortType}/${this.props.keyword}`)
+                        })
+                    }}
+                />
+                <SortButton
+                    style={{ paddingLeft: "10px" }}
+                    value={this.state.sortType}
+                    getValue={(value) => {
+                        this.setState({ sortType: value }, () => {
+                            goto("SEARCH", `${this.state.categoryType}/${this.state.sortType}/${this.props.keyword}`)
+                        })
+                    }}
+                />
             </div>
 
             <div className='search-list-wrapper margin-top-11'>
-                <ScrollList list={list} />
-                {/* <TopItemListContainer /> */}
+                <ScrollList list={this.props.list} list_added={this.props.list_added} getList={this.getList} ListComponent={Item} />
             </div>
 
             <div className='blanker'>&nbsp;</div>

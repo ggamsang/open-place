@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import { WIDTH } from 'constant';
 
 const Wrapper = styled.div`
-
+    margin-top:10px;
     font-family: Noto Sans KR;
+    box-sizing:border-box;
     *{ box-sizing: border-box; }
     ul { padding: 0; margin: 0;}
     .page-wrap {
@@ -51,18 +52,6 @@ const Wrapper = styled.div`
         }
         border-bottom: 1px solid #E9E9E9;
     }
-    border:1px solid black;
-*{border:1px solid blue;}
-`;
-const SubTitle = styled.div`
-    width: 100%;
-    // height: 21px;
-    text-align: center;
-    font: normal normal medium 18px/21px Pretendard;
-    letter-spacing: 0px;
-    color: #4A4B4D; 
-    padding: 10px 0px;
-    box-sizing: border-box;
 `;
 const ButtonWrapper = styled.div`
     display: flex;
@@ -122,9 +111,6 @@ class PointLogList extends React.Component {
         const PER = 8; // 페이지당 출력개수
         console.log(this.props);
         return (<Wrapper>
-
-            <SubTitle>충전 내역</SubTitle>
-
             <ButtonWrapper>
                 <button>
                     <div onClick={this.props.onTabSwitch} className='text'>포인트충전</div>
