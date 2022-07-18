@@ -42,7 +42,14 @@ function Main() {
         <SearchForm isMain={true} />
         <Slide />
         <TopItemList />
-        <div className='blanker'>&nbsp;</div>
+        {/* 
+        <TopItemList />
+       <TopItemList />
+        <TopItemList />
+        <TopItemList />
+        <TopItemList />
+
+        <div className='blanker'>&nbsp;</div> */}
       </ContentWrapper>
 
     </Fade>

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import styled/*, { keyframes }*/ from "styled-components";
+import styled from "styled-components";
 import Footer from "components_mobile/Footer"
 import BottomMenu from "components_mobile/Menu/Bottom";
-// import NotificationContainer from "containers/NotificationContainer"
-// import { WIDTH } from 'constant';
+// import { debounce } from 'lodash';
 
 const Wrapper = styled.div`
   z-index: 1;
@@ -14,18 +13,21 @@ const Wrapper = styled.div`
     z-index: 999;
     position: fixed;
     bottom: 23px;
-    &.up {
-      margin-top: 230px;
+    &.stick {
+      // margin-top: 230px;
       position: relative;
     }
   }
-  .main { }
+  .main { 
+    min-height: 100vh;
+    margin-bottom: 25px;
+  }
   .disabled {
     pointer-events: none;
   }
   .bottom {
     .blanker {
-      height: 120px;
+      height: 50px;
     }
   }
   .dimmer {
@@ -46,45 +48,106 @@ const Wrapper = styled.div`
   }
 `;
 
-// const GAP = window.innerHeight;
-const GAP = 600;
-
 class ClientTemplate extends Component {
   constructor(props) {
     super(props);
-    this.state = { up: false, login: false }
+    this.state = {
+      stick: false,
+      prev_y: 0,
+    };
+    // this.scroll = debounce(e => {
+    //   // get main height
+    //   const main = document.getElementById('main');
+    //   const rectMain = main.getBoundingClientRect();
+    //   if (!rectMain) {
+    //     return;
+    //   }
+    //   // get bottom menu position
+    //   const nav = document.getElementById('nav');
+    //   const rectNav = nav.getBoundingClientRect();
+    //   if (!rectNav) {
+    //     return;
+    //   }
+    //   // detect direction and store prev position
+    //   const { prev_y } = this.state;
+    //   let dir = "";
+    //   if (rectMain.y - prev_y > 0) {
+    //     dir = "UP";
+    //   } else {
+    //     dir = "DOWN";
+    //   }
+    //   this.setState({ prev_y: rectMain.y });
+    //   console.log(new Date().getTime(), 0);
+
+    //   const { stick, } = this.state;
+    //   if (stick == false) {
+    //     if (rectMain.height - (rectNav.y - rectMain.y) < 50) {
+    //       console.log(new Date().getTime(), 1);
+    //       this.setState({ stick: true });
+    //     }
+    //   } else {
+    //     if (rectMain.height - (rectNav.y - rectMain.y) < 50) {
+    //       console.log(new Date().getTime(), 3);
+    //       setTimeout(this.setState({ stick: false }), 500);
+    //     }
+    //   }
+    // }, 1000);
   }
   componentDidMount() {
-    if (this.props.isLoggedIn) {
-      this.setState({ login: true });
-    }
-    window.addEventListener('scroll', e => this.handleScroll(e));
+    // window.addEventListener('scroll', e => this.handleScroll(e), true);
+    window.addEventListener('scroll', this.scroll, true);
   }
 
-  handleScroll = _ => {
-    const nav = document.getElementById('main');
-    if (nav && nav.getClientRects() && nav.getClientRects()[0]) {
-      const rect = nav.getBoundingClientRect();
-      if (!rect) {
-        return;
+  handleScroll = async (_) => {
+    // get main height
+    const main = document.getElementById('main');
+    const rectMain = main.getBoundingClientRect();
+    if (!rectMain) {
+      return;
+    }
+    // get bottom menu position
+    const nav = document.getElementById('nav');
+    const rectNav = nav.getBoundingClientRect();
+    if (!rectNav) {
+      return;
+    }
+    // detect direction and store prev position
+    const { prev_y } = this.state;
+    let dir = "";
+    if (rectMain.y - prev_y > 0) {
+      dir = "UP";
+    } else {
+      dir = "DOWN";
+    }
+    this.setState({ prev_y: rectMain.y });
+    console.log(new Date().getTime(), 0);
+
+    const { stick, } = this.state;
+    if (stick == false) {
+      if (rectMain.height - (rectNav.y - rectMain.y) < 50) {
+        console.log(new Date().getTime(), 1);
+        this.setState({ stick: true });
       }
-      // console.log(rect.height + rect.y);
-      if (rect.height + rect.y < GAP) {
-        this.setState({ up: true });
-      } else {
-        this.setState({ up: false });
+    } else {
+      if (rectMain.height - (rectNav.y - rectMain.y) < 50) {
+        console.log(new Date().getTime(), 3);
+        setTimeout(this.setState({ stick: false }), 500);
       }
     }
   }
 
   render() {
+
     return (<Wrapper id="client-template">
+
       <div id="main" className='main'>
         {this.props.children}
       </div>
 
-      <div id="nav" className={this.state.up ? 'nav up' : 'nav'}>
-        <BottomMenu up={this.state.up} login={this.state.login} />
+      <div id="nav" className={`nav ${this.state.stick ? "stick" : ""}`}>
+        <BottomMenu
+          up={this.state.stick}
+          login={this.props.isLoggedIn} />
       </div>
 
       <div className='bottom'>
@@ -95,6 +158,9 @@ class ClientTemplate extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
-const mapDispatchToProps = dispatch => ({});
+const mapStateToProps = state => ({
+  isLoggedIn: state.Authentication.status.isLoggedIn,
+});
+const mapDispatchToProps = dispatch => ({
+});
 export default connect(mapStateToProps, mapDispatchToProps)(ClientTemplate);

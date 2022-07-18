@@ -218,32 +218,7 @@ class Bottom extends React.Component {
                             <span>회원가입</span>
                         </div>
                     </div>
-                </div>
-                // <div className='row'>
-                //     {/* no LOGIN */}
-                //     <div className='login' onClick={() => goto("LOGIN")}>
-                //         <span> + 로그인하기</span>
-                //     </div>
-                //     <Fade>
-                //         {this.props.up
-                //             ? <img
-                //                 alt="icon"
-                //                 onClick={() => this.gotoTop()}
-                //                 className="logo arrow-resize notloggedin"
-                //                 src={arrow} />
-                //             : <img
-                //                 alt="icon"
-                //                 onClick={() => goto("MAIN")}
-                //                 className="logo notloggedin"
-                //                 src={logo} />}
-                //     </Fade>
-
-                //     <div className='signup' onClick={() => goto("SIGNUP")}>
-                //         <div className='profile' />
-                //         <span>회원가입</span>
-                //     </div>
-                // </div>
-            }
+                </div>}
 
             {this.state.mainmenu
                 && <div className='row background topmargin3'>

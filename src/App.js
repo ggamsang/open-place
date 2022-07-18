@@ -77,7 +77,6 @@ function App() {
             <Route path="community/write" element={<CommunityWritePage />} />
             <Route path="community/modify/:id" element={<CommunityModifyPage />} />
 
-            {/* <Route path="notice" element={<NoticePage />} /> */}
             <Route path="notice/:id" element={<NoticeDetailPage />} />
             <Route path="intro" element={<IntroPage />} />
             <Route path="login" element={<SignInPage />} />

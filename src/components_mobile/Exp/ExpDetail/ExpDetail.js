@@ -9,6 +9,7 @@ import { InputFile } from 'components_mobile/Commons/Input';
 import { Fade } from 'react-reveal';
 import ReviewContainer from "containers/ReviewContainer";
 import { Dimmer, Loader } from 'semantic-ui-react';
+import { goto } from 'navigator';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -139,7 +140,22 @@ class ExpDetail extends React.Component {
     }));
   }
   onClickBuy = (event) => {
-
+    this.setState({ loading: true });
+    this.props.buy(this.props.token, this.props.expDetail.uid)
+      .then(data => data.json())
+      .then(data => {
+        console.log(data);
+        if (data.success) {
+          alert('결제가 완료되었습니다. 구매한 상품페이지로 이동합니다.');
+          goto("MY-ITEM-BOUGHT", data.payment_id);
+        } else {
+          alert('결제를 하지 못하였습니다.' + data.detail);
+        }
+      })
+      .catch(e => {
+        alert('결제실패' + e);
+      });
+    this.setState({ loading: false });
   }
   onClickModify = (event) => {
     window.location.href = `/ModifyExp/${this.props.expDetail.uid}`
@@ -148,9 +164,6 @@ class ExpDetail extends React.Component {
     taglist = taglist && taglist.replace("[", "");
     taglist = taglist && taglist.replace("]", "");
     taglist = taglist && taglist.split(",").join(" | ");
-    //  && taglist.split(",").map((item, index) => {
-    //   return item + " | ";
-    // });
     return taglist;
   }
 
@@ -159,7 +172,7 @@ class ExpDetail extends React.Component {
     const { expDetail } = this.props;
     let taglist = expDetail && this.tagSprintToAry(expDetail.taglist);
     const exp_files = expDetail && expDetail.exp_files && JSON.parse(expDetail.exp_files)
-    
+
     return (expDetail
       ? <Wrapper>
         <div className='searchbox'>
@@ -168,20 +181,27 @@ class ExpDetail extends React.Component {
         <Fade opposite when={this.state.main}>
           <section style={{ display: `${this.state.main == true ? "block" : "none"}` }}>
             <div className='content'>
-              <div className='title'><div />경험정보<div /></div>
+              <div className='title'>
+                <div />경험정보<div />
+              </div>
               <img src={expDetail && expDetail.thumbnail} className="img" />
               <div className='summary'>
                 <div className='label'>{expDetail && expDetail.title || "dummy"}</div>
                 <div className='detail'>
-                  <img src={star} style={{ width: "14px", height: "14px", marginRight: "5px" }} /><span className='score'>4.9</span>
-                  <span style={{ marginLeft: "13px" }} className='writer'>{expDetail && expDetail.nick_name || "dummy"}</span>
+                  <img src={star} style={{ width: "14px", height: "14px", marginRight: "5px" }} />
+                  <span className='score'>4.9</span>
+                  <span style={{ marginLeft: "13px" }} className='writer'>
+                    {expDetail && expDetail.nick_name || "dummy"}
+                  </span>
                   <span style={{ color: "red", margin: "0px 5px" }}>·</span>
                   <span className='tags'>
-                    {taglist && taglist||""}
+                    {taglist && taglist || ""}
                   </span>
                 </div>
                 <div className='detail'>
-                  <span style={{ marginRight: "14px" }} className='price'>₩{expDetail && expDetail.price || "dummy"}</span>
+                  <span style={{ marginRight: "14px" }} className='price'>
+                    ₩ {expDetail && expDetail.price || "dummy"}
+                  </span>
                   <img style={{ width: "14px", height: "14px", marginRight: "5px" }} src={heart} />
                   <span className='like'>99</span>
                 </div>
@@ -240,12 +260,12 @@ class ExpDetail extends React.Component {
 
               <img src={expDetail && expDetail.thumbnail} className="img img2" />
               <div className='exp'>
-                  <div className='row'>
-                    <div className='editorText' dangerouslySetInnerHTML={{ __html: expDetail&&expDetail.content }}/>
-                  </div>
+                <div className='row'>
+                  <div className='editorText' dangerouslySetInnerHTML={{ __html: expDetail && expDetail.content }} />
+                </div>
               </div>
               {
-                exp_files!=null&&<InputFile files={exp_files} />
+                exp_files != null && <InputFile files={exp_files} />
               }
               <div className='buttonWrap2'>
                 <ButtonNormal
