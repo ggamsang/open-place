@@ -1,5 +1,20 @@
 import host from "config"
 
+export const GameFileUploadRequest = file => {
+    return new Promise(async (resolve, reject) => {
+        const formData = new FormData();
+        console.log(file);
+        await formData.append('source', file[0]);
+        fetch(`${host}/upload/game`, {
+            header: { 'Content-Type': 'multipart/form-data' },
+            method: "POST",
+            body: formData,
+        })
+            .then(res => res.json())
+            .then(data => resolve(data || null))
+            .catch(err => reject(err));
+    });
+};
 export const FileUploadRequest = file => {
     return new Promise(async (resolve, reject) => {
         const formData = new FormData();
@@ -13,4 +28,4 @@ export const FileUploadRequest = file => {
             .then(data => resolve(data || null))
             .catch(err => reject(err));
     });
-}
+};

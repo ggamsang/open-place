@@ -2,7 +2,7 @@ import React, { Component, useState, useRef, useEffect } from "react";
 import styled from 'styled-components';
 import { resolution } from 'commons/resolution';
 import { Editor } from 'commons/Editor/Editor';
-import { InputFile } from 'components_mobile/Commons/Input';
+import { InputFile, InputGameFile } from 'components_mobile/Commons/Input';
 import DropDownNormal from "components_mobile/Commons/DropDown/DropDownNormal";
 import InputNormal from "components_mobile/Commons/Input/InputNormal";
 import { InputCalendar } from "components_mobile/Commons/Input";
@@ -14,28 +14,38 @@ const TYPE_LECTURE = 2;
 const TYPE_CLASS = 3;
 const TYPE_GAME = 4;
 const Wrapper = styled.div`
-  width:100%;
+  width: 100%;
   .add_content{
     // border:1px solid white;
     // border-radius:20px;
     // padding-bottom:20px;
   }
   .row{
-    display:flex;
-    margin-top:20px;
+    display: flex;
+    margin-top: 20px;
     .label{
-      padding-left:10px;
-      width:${resolution(80)}px;height:${resolution(30)}px;
-      font: normal normal bold 15px/18px Pretendard;color:white;
-      display:flex;align-items:center;
+      padding-left: 10px;
+      width: ${resolution(80)}px;
+      height: ${resolution(30)}px;
+      font: normal normal bold 15px/18px Pretendard;
+      color: white;
+      display: flex;
+      align-items: center;
+      &.wide {
+        transform: translate(0, -20px);
+        padding: 0; 
+        margin-left: 10px;
+        width: max-content !important;
+        height: 45px;
+      }
     }
   }
   .whiteBox{
-    width:100%;
-    padding:10px;
-    border-radius:10px;
-    background-color:white;
-    margin-bottom:15px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    margin-bottom: 15px;
     box-shadow: 2px 2px 5px #00000029;
   }
 `
@@ -93,7 +103,7 @@ class ExpType extends Component {
   }
   componentDidUpdate(prevProps) {
     if (prevProps.content != this.props.content) {
-      this.setState({ content: this.props.content },()=>{console.log(this.state.content)})
+      this.setState({ content: this.props.content }, () => { console.log(this.state.content) })
       this.setState({ exp_files: this.props.exp_files ? [].concat(this.props.exp_files) : [] })
     }
     if (prevProps.exp_files != this.props.exp_files) {
@@ -142,7 +152,7 @@ class ExpType extends Component {
   }
 
   returnState = () => {
-    const Date = {
+    const Data = {
       game_files: JSON.stringify(this.state.game_files),
       isOnline: this.state.isOnline,
       place: this.state.place,
@@ -150,8 +160,8 @@ class ExpType extends Component {
       startDate: this.state.startDate,
       endDate: this.state.endDate || this.state.startDate,
     }
-    console.log(JSON.stringify(Date))
-    return this.props.return && this.props.return(JSON.stringify(Date));
+    console.log("game:", Data, this.state.game_files);
+    return this.props.return && this.props.return(JSON.stringify(Data));
   }
   onChangeContent = (value) => {
     this.setState({ content: value }, () => {
@@ -187,7 +197,7 @@ class ExpType extends Component {
 
   render() {
     const { type } = this.props;
-    console.log(this.state);
+
     return (
       <Wrapper>
         <div className="add_content">
@@ -291,7 +301,18 @@ class ExpType extends Component {
                 <div className='label'>게임 첨부</div>
               </div>
               <div className="whiteBox">
-                <InputFile files={this.state.game_files} display={true} getValue={(value) => this.onChangeGame(value)} accept="" />
+                <InputGameFile
+                  files={this.state.game_files}
+                  display={true}
+                  getValue={(value) => this.onChangeGame(value)}
+                  accept="html,zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed" />
+              </div>
+              <div className="row">
+                <div className='label wide'>
+                  1) index.html만 업로드<br />
+                  2) zip파일로 업로드,<br />
+                  파일 내 index.html이 반드시 있어야 함.<br />
+                </div>
               </div>
             </React.Fragment>
           }
