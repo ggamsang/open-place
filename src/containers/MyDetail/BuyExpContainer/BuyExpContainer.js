@@ -20,6 +20,7 @@ class BuyExpContainer extends React.Component {
     return (
       <React.Fragment>
         <ScrollList
+          onClick={this.onClick}
           list={this.props.list}
           list_added={this.props.list_added}
           getList={(value) => this.getList(value)}

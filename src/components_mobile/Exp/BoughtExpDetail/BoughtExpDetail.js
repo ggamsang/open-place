@@ -6,7 +6,7 @@ import blackHeart from "source/Iconly-Bold-Heart.svg";
 import ReviewContainer from "containers/ReviewContainer";
 import StarRating from "commons/StarRating";
 import CounselingMessageDetailContainer from 'containers/CounselingMessageDetailContainer';
-import { COUNSELING, GAMING } from 'constant';
+import { ExpTypes } from 'constant';
 import PlayGameContainer from 'containers/PlayGameContainer/PlayGameContainer';
 
 const Wrapper = styled.div`
@@ -297,7 +297,7 @@ class BoughtExpDetail extends React.Component {
         console.log("FOO", this.props);
 
         const { detail, userInfo } = this.props;
-        detail.type = [GAMING, COUNSELING];
+        // detail.type = [GAMING, COUNSELING];
         const { review } = this.state;
         let taglist = detail && this.tagSprintToAry(detail.taglist);
 
@@ -342,20 +342,21 @@ class BoughtExpDetail extends React.Component {
                 </div>
             </DetailWrapper>
 
-            {detail.type.includes(COUNSELING)
+            {detail.type === ExpTypes.COUNSELING
                 && (detail.user_id !== userInfo.uid) // tricky, 
                 && <Counseling>
                     <CounselingMessageDetailContainer opponent_id={detail.user_id} />
                 </Counseling>}
 
-            {detail.type.includes(GAMING)
+            {detail.type === ExpTypes.GAMING
                 && <Gaming>
                     <PlayGameContainer exp_id={detail.uid} />
                 </Gaming>}
 
-            <Normal>
-                <div className='text'>일반</div>
-            </Normal>
+            {detail.type === ExpTypes.NORMAL
+                && <Normal>
+                    <div className='text'>일반</div>
+                </Normal>}
 
             <ButtonBox>
                 <button onClick={this.ShowReview}>

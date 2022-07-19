@@ -4,6 +4,7 @@ import SearchForm from "components_mobile/Commons/Search/SearchForm";
 import profile from 'resources/Profile.svg';
 import DateFormat from "modules/DateFormat";
 import { Fade } from "react-reveal";
+import { FileUploadRequest } from "actions/Uploads";
 
 const Wrapper = styled.div`
     -ms-overflow-style: none; /* Internet Explorer 10+ */
@@ -216,6 +217,7 @@ const ChatDiv = styled.div`
 `;
 const Chat = function ({ me, message, create_at }) {
     return (<ChatDiv me={me}>
+        {message.file}
         <div className="text">{message}</div>
         <div className="date">{DateFormat(create_at)}</div>
     </ChatDiv>);
@@ -231,10 +233,12 @@ class CounselingMessageDetail extends React.Component {
             more: (this.props.chats && this.props.chats.length > this.per)
                 ? false : true,
             text: "",
+            file: null,
         };
         this.setText = this.setText.bind(this);
     }
     setText = text => this.setState({ text: text });
+    setFile = file => this.setState({ file: file });
     CheckEnter = (e) => {
         if (e.key === "Enter") {
             if (
@@ -246,9 +250,10 @@ class CounselingMessageDetail extends React.Component {
             }
         }
     }
-    SendAndEmpty = (e) => {
-        this.props.send(this.state.text);
+    SendAndEmpty = () => {
+        this.props.send({ text: this.state.text, file: this.state.file });
         this.setText('');
+        this.setFile(null);
     }
     componentDidUpdate(props) {
         if (props.chats.length === 0 && this.props.chats && this.props.chats.length !== 0) {
@@ -284,6 +289,28 @@ class CounselingMessageDetail extends React.Component {
             });
         }
     }
+    openFileExplorer = () => {
+        const dom = document.getElementById('message-file');
+        dom.click();
+    }
+    onFileSelected = async (e) => {
+        const bConfirm = window.confirm("선택하신 파일을 전송하시겠습니까?");
+        if (!bConfirm) {
+            return;
+        }
+        /* 
+            const fileurl = await FileUploadRequest(files);
+            if(fileurl && fileurl.success){
+                this.setFile({file:fileurl}); 
+            } else {
+                alert('파일전송에 실패하였습니다.');
+            }
+        */
+        const fileurl = "https://s3.ap-northeast-2.amazonaws.com/osd.uploads.com/dev/uploads/e6126d7ff264cab0f25484f1d9f1588d";
+        this.setFile({ file: fileurl }, () => {
+            this.SendAndEmpty(null);
+        });
+    }
 
     render() {
         const { header, online, user_id, title } = this.props;
@@ -308,8 +335,22 @@ class CounselingMessageDetail extends React.Component {
                 </div>
 
                 <div className="tools">
-                    <button></button>
-                    <button></button>
+                    <button onClick={this.openFileExplorer}>
+                        <form hidden>
+                            <input
+                                onChange={this.onFileSelected}
+                                type='file'
+                                id='message-file' />
+                        </form>
+                    </button>
+
+
+                    <button onClick={() => {
+                        alert("video conferencing");
+                    }}>
+
+                    </button>
+                    화상회의
                 </div>
 
                 <div className="send-wrapper">
@@ -321,7 +362,7 @@ class CounselingMessageDetail extends React.Component {
                     <button
                         id="msg-send-btn"
                         disabled={text.trim().length === 0}
-                        onClick={(e) => this.SendAndEmpty(e)}>
+                        onClick={this.SendAndEmpty}>
                         <div className="text">보내기</div>
                     </button>
                 </div>
