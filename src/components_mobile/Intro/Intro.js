@@ -10,7 +10,7 @@ import { WIDTH } from 'constant';
 import { goto } from 'navigator';
 
 const Wrapper = styled.div`
-  width: ${WIDTH}px; // width: 100%;
+  width: 100%;
   height: 100vh;
   position:relative;
   .wrap{
@@ -38,7 +38,8 @@ const Wrapper = styled.div`
 `
 const Loading = styled.div`
   .content{
-    width: ${WIDTH}px; // width: 100%;
+    width: 100%;
+    // width: ${WIDTH}px; // 
     height: 100vh;
     position: absolute;
     background: linear-gradient(205deg, #DA1313, #014FFF);

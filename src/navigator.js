@@ -5,6 +5,7 @@ export const goto = (type, offset = null) => {
         case "INTRO": window.location.href = "/intro"; break;
         case "LOGIN": window.location.href = "/login"; break;
         case "SIGNUP": window.location.href = "/join"; break;
+        case "FINDPW": window.location.href = "/findPW"; break;
         case "MYDETAIL": window.location.href = "/myDetail/sub"; break;
         case "MY-ITEM-BOUGHT": window.location.href = "/paidExp/" + offset; break;
         case "CREATE-ITEM": window.location.href = "/createExp"; break;

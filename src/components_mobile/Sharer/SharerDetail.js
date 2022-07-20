@@ -41,6 +41,8 @@ const Wrapper = styled.div`
       height:${resolution(100)}px;
       border-radius:50%;
       background-color:#efefef;
+      background-image: url(${prop => prop.url});
+      background-size:cover;
     }
     .textWrap{
       box-sizing:border-box;
@@ -75,7 +77,8 @@ const Detail = styled.div`
     padding:13px;
     .title{
       width:100%;
-      font: normal normal medium 18px/21px Pretendard;
+      font-size:18px;
+      font-family:Pretendard;
       text-align:center;
       color:#4A4B4D;
     }
@@ -102,7 +105,8 @@ const Sell = styled.div`
     // padding:0px 20px;
     .title{
         width:100%;
-        font: normal normal medium 18px/21px Pretendard;
+        font-size:18px;
+        font-family:Pretendard;
         text-align:center;
         color:#4A4B4D;
     }
@@ -116,25 +120,41 @@ class SharerDetail extends React.Component {
       }
       this.onClickLike = this.onClickLike.bind(this);
   }
+  componentWillMount() {
+    this.getList(this.props.user_id);
+  }
+  getList = (page) => {
+    return new Promise((resolve)=>resolve(this.props.getUserSellExpRequest&&this.props.getUserSellExpRequest(this.props.userInfo.uid, page)));
+  }
   onClickLike = () =>{
-    this.setState({like:!this.state.like});
+    const Data = {
+      user_id:this.props.userInfo.uid,
+      like_id:this.props.sharer.uid,
+      type:"sharer",
+    }
+    this.props.likeSharerRequest(this.props.token,Data)
+    .then(()=>this.setState({like:!this.state.like}))
+    // this.setState({like:!this.state.like});
   }
   render() {
+    const updateTime = new Date(this.props.sharer&&this.props.sharer.update_time);
+
+
     return (
       <React.Fragment>
-        <Wrapper>
+        <Wrapper url={this.props.sharer && this.props.sharer.url || null}>
         <div className="header">
           <div className='searchbox'><SearchForm/></div>
           <div className='profile'>
             <div className="thumbnailWrap">
-                 <div className='text_'>2022.2.1</div>
+                 <div className='text_'>{updateTime.getFullYear()+"."+updateTime.getMonth()+"."+updateTime.getDay()}</div>
                  <div className='thumbnail'/>
                  <div className='text_' style={{textAlign:"right"}}>#분야</div>
             </div>
             <div className='textWrap'>
-                <div className='userName'>닉네임</div>
+                <div className='userName'>{this.props.sharer && this.props.sharer.nick_name || "국민대학교 CRC"}</div>
                 <div className='likeWrap'>
-                    <div className='count'>942</div>
+                    <div className='count'>{this.props.sharer&&this.props.sharer.like_count}</div>
                     <img onClick={this.onClickLike}  className='icon' src={`${this.state.like==true?Heart_red:Heart}`}/>
                 </div>
             </div>
@@ -145,15 +165,14 @@ class SharerDetail extends React.Component {
                     <div className='title'>상세정보</div>
                     <div className='row' style={{marginTop:"11px"}}>
                         <div className='label'>설명</div>
-                        <div className='textBox' style={{width:"100%"}}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                            when an unknown printer took a 
+                        <div className='textBox' style={{width:"100%"}}>
+                          {this.props.sharer&&this.props.sharer.about_me}
                         </div>
                     </div>
                     <div className='row' style={{marginTop:"11px"}}>
                         <div className='label'>위치</div>
                         <div className='textBox' style={{width:"114px",marginRight:"14px"}}>대한민국</div>
-                        <div className='textBox' style={{width:"114px"}}>시/도</div>
+                        <div className='textBox' style={{width:"114px"}}>{this.props.location&&this.props.location.length>0&&this.props.location[this.props.sharer.location_id||0].name}</div>
                     </div>
             </div>
             
@@ -169,7 +188,7 @@ class SharerDetail extends React.Component {
         </Detail>
         <Sell>
             <div className='title' style={{marginBottom:"11px"}}>판매경험</div>
-            <SharerItemListContainer/>
+            <SharerItemListContainer user_id={this.props.user_id}/>
         </Sell>
         </Wrapper>
     </React.Fragment>

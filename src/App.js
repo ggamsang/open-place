@@ -41,8 +41,6 @@ import MyPointChargePage from "pages/MyPointChargePage";
 const Wrapper = styled.main`
   overflow: hidden;
   position: relative;
-  // background-image: url(${bg});
-  // background-size: cover;
   
   .bg {
     opacity: 0.1;
