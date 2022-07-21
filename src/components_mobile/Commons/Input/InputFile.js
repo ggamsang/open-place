@@ -116,7 +116,14 @@ export class InputFile extends Component {
             <React.Fragment>
                 <Wrapper>
                     <div className="addfile" style={{ display: `${this.props.display == true ? "block" : "none"}` }}>
-                        <input hidden id="addfile" type="file" name="source" ref={ref => (this.input = ref)} onChange={e => this.onFileChange(e.target.files)} accept={`.${this.props.accept}`} />
+                        <input
+                            hidden
+                            id="addfile"
+                            type="file"
+                            name="source"
+                            ref={ref => (this.input = ref)}
+                            onChange={e => this.onFileChange(e.target.files)}
+                            accept={`.${this.props.accept}`} />
                         <label htmlFor="addfile" >
                             <ButtonNormal
                                 height={30}

@@ -7,7 +7,7 @@ import BoughtExpDetail from 'components_mobile/Exp/BoughtExpDetail';
 class BuyExpDetailContainer extends React.Component {
     componentDidUpdate(props) {
         if (props.token == null && (this.props.token !== props.token)) {
-            this.props.getUserBoughtExpDetailRequest(this.props.token, this.props.payment_id);
+            this.props.token && this.props.getUserBoughtExpDetailRequest(this.props.token, this.props.payment_id);
         }
     }
     render() {

@@ -138,7 +138,7 @@ class MessageGroupList extends React.Component {
             return (<Peer onClick={() => goto("MESSAGE", message_group_id)} url={url} className="row">
                 <div className="thumbnail">
                     <img src={url} className="thumbnail" />
-                    {unread !== 0 && <div className="led">{unread}</div>}
+                    {/* {unread !== 0 && <div className="led">{unread}</div>} */}
                 </div>
                 <div className="col text-wrapper">
                     <div className="nick">{nick_name}</div>

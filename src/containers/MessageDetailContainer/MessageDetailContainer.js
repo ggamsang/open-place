@@ -12,7 +12,7 @@ class MessageDetailContainer extends React.Component {
     constructor(props) {
         super(props);
         this.socket = new Socket('message');
-        this.state = { online: false, more: true };
+        this.state = { online: false, more: true, newchat: null };
         this.send = this.send.bind(this);
     }
 

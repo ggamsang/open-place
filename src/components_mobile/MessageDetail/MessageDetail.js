@@ -191,12 +191,11 @@ const ChatDiv = styled.div`
         : `margin-right: auto; margin-left: 15px;`}
     }
 `;
-const Chat = function ({ me, message, create_at }) {
-    return (<ChatDiv me={me}>
+const Chat = ({ me, message, create_at }) =>
+    <ChatDiv me={me}>
         <div className="text">{message}</div>
         <div className="date">{DateFormat(create_at)}</div>
-    </ChatDiv>);
-}
+    </ChatDiv>
 
 class MessageDetail extends React.Component {
     constructor(props) {
@@ -281,7 +280,7 @@ class MessageDetail extends React.Component {
                     <div className="nick">
                         {(header && header.nick_name) || "닉네임"}
                     </div>
-                    <div className="led"></div>
+                    {/* <div className="led"></div> */}
                 </div>
 
                 <div className="chats" id="chats">

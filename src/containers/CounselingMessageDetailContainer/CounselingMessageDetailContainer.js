@@ -13,47 +13,44 @@ class CounselingMessageDetailContainer extends React.Component {
     constructor(props) {
         super(props);
         this.socket = null; // 검증 후 개체 생성 // new Socket('counseling');
-        this.state = { online: false, more: true };
+        this.state = {
+            online: false,
+            more: true
+        };
     }
 
-    // componentDidUpdate(props) {
-    //     const { token, userInfo, } = this.props;
-
-    //     if ((userInfo && token != null) && props.token == null) {
-    //         alert('request!');
-    //         this.props.GetCounselingMessageGroupRequest()
-    //             .then(id => alert(id))
-    //     }
-    //     // const { token, userInfo, group_id } = this.props;
-    //     // if (userInfo && token != null && props.token == null) {
-    //     //     this.GetDetail(0);
-    //     //     this.props.GetMessageOpponentInfoRequest(token, group_id);
-    //     // }
-    //     // if (userInfo != null && props.userInfo == null) {
-    //     //     this.socket.emit("alive", {
-    //     //         gid: this.props.group_id,
-    //     //         uid: userInfo.uid,
-    //     //     });
-    //     //     this.socket.on("hello", () => {
-    //     //         this.setState({ online: true });
-    //     //     })
-    //     //     this.socket.on("bye", () => {
-    //     //         this.setState({ online: false });
-    //     //     })
-    //     //     this.socket.on("chat", chat => {
-    //     //         this.setState({
-    //     //             newchat: chat
-    //     //         });
-    //     //     })
-    //     //     return true;
-    //     // }
-    // }
+    connectAndSetupSocketServer = (detail) => {
+        this.socket = new Socket("counseling");
+        if (this.socket) {
+            this.socket.emit("alive", {
+                gid: detail.group_id,
+                uid: this.props.userInfo.uid,
+            });
+            this.socket.on("hello", () => {
+                this.setState({ online: true });
+            });
+            this.socket.on("bye", () => {
+                this.setState({ online: false });
+            });
+            this.socket.on("chat", chat => {
+                this.setState({
+                    newchat: chat
+                });
+            });
+        }
+    }
     componentDidMount() {
-        const { token, opponent_id } = this.props;
-        this.props.GetCounselingMessageGroupRequest(token, opponent_id)
-        // .then(id => this.setState({ group_id: id.group_id }))
-        // .then(id => this.props.GetMessageDetailRequest(token, 0, id))
-        // .catch(e => alert("자문/상담 내용을 가져오지 못하였습니다.\n" + e));
+        // this.props.GetCounselingMessageGroupRequest(this.props.token, this.props.opponent_id);
+    }
+    componentDidUpdate(props) {
+        // if (this.props.detail != props.detail && props.detail == null) {
+        // this.connectAndSetupSocketServer(props.detail);
+        // }
+        // const { token, opponent_id, userInfo } = this.props;
+        // console.log("!!!!!", JSON.stringify(userInfo).length, this.props);
+        // if (token != null && JSON.stringify(userInfo).length != 0 && this.socket == null) {
+        //     
+        // }
     }
 
     componentWillUnmount() {
@@ -67,13 +64,14 @@ class CounselingMessageDetailContainer extends React.Component {
         }
     }
 
-    Send = (text) =>
-        this.socket.emit("chat", {
+    Send = async ({ text, file }) =>
+        this.socket && this.socket.emit("chat", {
             gid: this.props.group_id,
             uid: this.props.userInfo.uid,
             text: text,
+            file: file,
             create_at: new Date().getTime(),
-        });
+        })
 
     render() {
         const { online, newchat } = this.state;
