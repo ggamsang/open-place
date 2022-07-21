@@ -13,6 +13,7 @@ import { ExpList } from "reducers/Exp";
 import { ExpBought } from "reducers/Exp";
 import { combineReducers } from "redux";
 import { Review } from "./Review";
+import { Contact } from "./Contact";
 
 export default combineReducers({
     Authentication,
@@ -29,6 +30,7 @@ export default combineReducers({
     UpdateSharer,
     ExpDetail,
     Review,
+    Contact,
     ExpList,
     ExpBought,
     MyPoint,

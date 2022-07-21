@@ -8,6 +8,7 @@ import StarRating from "commons/StarRating";
 import CounselingMessageDetailContainer from 'containers/CounselingMessageDetailContainer';
 import { ExpTypes } from 'constant';
 import PlayGameContainer from 'containers/PlayGameContainer/PlayGameContainer';
+import ContactContainer from 'containers/ContactContainer';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -255,6 +256,7 @@ class BoughtExpDetail extends React.Component {
             like: false,
             sub: false,
             review: false,
+            contact: false,
         }
         this.onClickMain = this.onClickMain.bind(this);
         this.onClickDetail = this.onClickDetail.bind(this);
@@ -286,19 +288,19 @@ class BoughtExpDetail extends React.Component {
         taglist = taglist && taglist.replace("[", "");
         taglist = taglist && taglist.replace("]", "");
         taglist = taglist && taglist.split(",")
-        console.log(taglist);
         return taglist;
     }
     ShowReview = () => {
-        this.setState({ review: true, });
+        this.setState({ review: true, contact: false });
     }
-
+    ShowContact = () => {
+        this.setState({ contact: true, review: false });
+    }
     render() {
         console.log("FOO", this.props);
 
         const { detail, userInfo } = this.props;
-        // detail.type = [GAMING, COUNSELING];
-        const { review } = this.state;
+        const { review, contact } = this.state;
         let taglist = detail && this.tagSprintToAry(detail.taglist);
 
         return (<Wrapper>
@@ -363,7 +365,7 @@ class BoughtExpDetail extends React.Component {
                     <div className='text'>리뷰 목록</div>
                 </button>
 
-                <button>
+                <button onClick={this.ShowContact}>
                     <div className='text'>문의 목록</div>
                 </button>
 
@@ -371,6 +373,10 @@ class BoughtExpDetail extends React.Component {
 
             {review
                 && <ReviewContainer ExpDetail={detail} />}
+
+            {contact
+                && <ContactContainer ExpDetail={detail} />}
+
 
         </Wrapper>);
     }
