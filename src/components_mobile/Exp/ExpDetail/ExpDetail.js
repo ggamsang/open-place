@@ -102,7 +102,7 @@ class ExpDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      write:false,
+      write: false,
       main: true,
       detail: false,
       like: false,
@@ -147,20 +147,7 @@ class ExpDetail extends React.Component {
   }
   onClickBuy = (event) => {
     this.setState({ loading: true });
-    this.props.buy(this.props.token, this.props.expDetail.uid)
-      .then(data => data.json())
-      .then(data => {
-        console.log(data);
-        if (data.success) {
-          alert('결제가 완료되었습니다. 구매한 상품페이지로 이동합니다.');
-          goto("MY-ITEM-BOUGHT", data.payment_id);
-        } else {
-          alert('결제를 하지 못하였습니다.' + data.detail);
-        }
-      })
-      .catch(e => {
-        alert('결제실패' + e);
-      });
+    goto("BUY", this.props.expDetail.uid);
     this.setState({ loading: false });
   }
   onClickModify = (event) => {
@@ -241,7 +228,7 @@ class ExpDetail extends React.Component {
                 />
               </div>
 
-              <div className='buttonWrap' style={{marginTop:"10px"}}>
+              <div className='buttonWrap' style={{ marginTop: "10px" }}>
                 <ButtonNormal
                   onClickEvent={this.onClickBuy}
                   width={155}
@@ -253,7 +240,7 @@ class ExpDetail extends React.Component {
                   style={{ marginRight: "25px" }}
                 />
                 <ButtonNormal
-                  onClickEvent={()=>this.setState({write:true})}
+                  onClickEvent={() => this.setState({ write: true })}
                   width={155}
                   height={35}
                   radius={10}
@@ -300,7 +287,7 @@ class ExpDetail extends React.Component {
           </section>
         </Fade>
         <div className='reviewWrap'>
-        <ReviewContainer write={this.state.write} onCloseWriteModal={()=>this.setState({write:false})}/>
+          <ReviewContainer write={this.state.write} onCloseWriteModal={() => this.setState({ write: false })} />
         </div>
         {/* <Fade>
           <ReviewContainer />
