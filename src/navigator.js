@@ -24,6 +24,7 @@ export const goto = (type, offset = null) => {
         case "READ": window.location.href = "/community/" + offset; break;
         case "NOTICE": window.location.href = "/notice/" + offset; break;
         case "MESSAGE": window.location.href = `/message${offset && ('/' + offset)}`; break;
+        case "BUY": window.location.href = `/buy/${offset}`; break;
 
         case "BACK": window.history.go(-1); break;
 

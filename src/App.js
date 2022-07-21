@@ -39,9 +39,10 @@ import MyPaidExpDetailPage from "pages/MyPaidExpDetailPage";
 import MyPointChargePage from "pages/MyPointChargePage";
 import BuyPage from "pages/BuyPage";
 const Wrapper = styled.main`
-  overflow: hidden;
+  // overflow: hidden;
   position: relative;
-  
+  height: auto;
+
   .bg {
     opacity: 0.1;
     position: absolute;
@@ -53,7 +54,7 @@ const Wrapper = styled.main`
   .appcontent {
     position: relative;
     width: ${WIDTH}px;
-    height: 100%;
+    // height: 100%;
     margin: auto;
     background-color: white;
     @media only screen and (min-width: 320px) and (max-width:500px){
