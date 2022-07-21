@@ -3,16 +3,15 @@ import styled from 'styled-components';
 import iconClose from "resources/close.svg";
 import iconNoti from "resources/notification.png";
 import iconRead from "resources/read-icon.webp";
-
 const Wrapper = styled.div`
     width: 280px;
     height: 462px;
     max-width: 280px;
+    position: fixed;
     z-index: 999;
     background-color: #0D0D0D;
     border-radius: 32px;
 
-    position: fixed;
     margin: auto;
     left: 0;
     right: 0;
@@ -43,6 +42,7 @@ const Wrapper = styled.div`
             opacity: 0.7;
         }
         .element {
+            box-sizing:border-box;
             position: relative;
             // border: 1px solid green;
             margin: auto;

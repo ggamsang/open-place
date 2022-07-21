@@ -28,10 +28,10 @@ const dummy = [
 ]
 const NotificationBox = styled.div`
     box-sizing:border-box;
+    margin-left:5px;
     width:${resolution(34)}px;
     display:flex;
     justify-content:center;
-    margin-right:10px;
     .img_notification{width:${resolution(27)}px;height:${resolution(27)}px;}
 `
 class NotificationContainer extends React.Component {

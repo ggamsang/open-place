@@ -27,6 +27,31 @@ const Wrapper = styled.div`
         text-shadow: 5px 5px 6px #00000029;        
     }
 `
+const Wrapper_image = styled.div`
+    width:${resolution(207)}px;
+    height:${resolution(207)}px;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    img{
+        width:${resolution(207)}px;
+        height:${resolution(207)}px;
+        object-fit:contain;
+    }
+    .text{
+        overflow-wrap: break-word;
+        text-align: center;
+        width: 100%;
+        height: ${resolution(80)}px;
+        position: absolute;
+        bottom: 0px;
+        font-family: Montserrat;
+        font-weight: bold;
+        font-size: ${resolution(32)}px;
+        color: white;
+        text-shadow: 5px 5px 6px #00000029;        
+    }
+`
 const Wrapper_small = styled.div`
     width:${resolution(137)}px;
     height:${resolution(137)}px;
@@ -51,37 +76,41 @@ const Wrapper_small = styled.div`
 `
 
 class Logo extends Component {
-  constructor(props){
-      super(props);
-      this.onClickEvent = this.onClickEvent.bind(this);
-  }
+    constructor(props) {
+        super(props);
+        this.onClickEvent = this.onClickEvent.bind(this);
+    }
 
-  onClickEvent = () =>{
-    this.props.onClickEvent();
-  }
+    onClickEvent = () => {
+        this.props.onClickEvent();
+    }
 
-  render() {
-    return (
-    <React.Fragment>
-        {
-            this.props.type == 'big'?
-            <Wrapper onClick={this.onClickEvent}>
-                <img style={this.props.style} src={OWD_logo_small}/>
-                <div className='text'>{this.props.text}</div>
-            </Wrapper>
-            :
-            this.props.type=='small'?
-            <Wrapper_small onClick={this.onClickEvent}>
-                <img style={this.props.style} src={OWD_logo_small}/>
-                <div className='text'>{this.props.text}</div>
-            </Wrapper_small>
-            :
-            null
-        }
+    render() {
+        return (
+            <React.Fragment>
+                {
+                    this.props.type == 'big_image' ?
+                        <Wrapper_image onClick={this.onClickEvent}>
+                            <img style={this.props.style} src={OWD_logo_small} />
+                        </Wrapper_image>
+                        : this.props.type == 'big' ?
+                            <Wrapper onClick={this.onClickEvent}>
+                                <img style={this.props.style} src={OWD_logo_small} />
+                                <div className='text'>{this.props.text}</div>
+                            </Wrapper>
+                            :
+                            this.props.type == 'small' ?
+                                <Wrapper_small onClick={this.onClickEvent}>
+                                    <img style={this.props.style} src={OWD_logo_small} />
+                                    <div className='text'>{this.props.text}</div>
+                                </Wrapper_small>
+                                :
+                                null
+                }
 
-    </React.Fragment>
-    )
-  }
+            </React.Fragment>
+        )
+    }
 }
 
 export default Logo;
