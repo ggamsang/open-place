@@ -16,6 +16,13 @@ export const authGET = (token) => ({
     },
     method: "GET",
 })
+export const noauthPOST = (form) => ({
+    headers: {
+        "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify(form)
+})
 export const POST = (token, form) => ({
     headers: {
         "Content-Type": "application/json",

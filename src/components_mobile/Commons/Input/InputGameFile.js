@@ -4,6 +4,7 @@ import { GameFileUploadRequest } from "actions/Uploader/Uploader";
 import InputNormal from 'components_mobile/Commons/Input/InputNormal';
 import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
 import { Dimmer, Loader } from "semantic-ui-react";
+import JSZip from "jszip";
 
 const Wrapper = styled.div`
     width:100%;
@@ -55,8 +56,33 @@ export class InputGameFile extends Component {
         if (files.length === 0) {
             return;
         }
-        await this.setState({ loading: "파일을 등록하고 있는 중입니다." });
-        const file = files;
+        const file = files[0];
+        console.log(files);
+        // check type
+        // if (file.type === "application/zip") {
+        //     console.log("JSZIP")
+        //     JSZip.loadAsync(file)
+        //         .then(zip => { console.log(zip) })
+        //         .catch(e => console.error(e));
+        //     // var new_zip = new JSZip();
+        //     // // more files !
+        //     // new_zip.loadAsync(content)
+        //     // .then(function(zip) {
+        //     //     // you now have every files contained in the loaded zip
+        //     //     zip.file("hello.txt").async("string"); // a promise of "Hello World\n"
+        //     // });
+        // }
+        // if (file.type === "text/html") {
+        //     if (file.name !== "index.html") {
+        //         alert("index.html 파일을 선택하여 주세요.");
+        //         return;
+        //     }
+        // }
+        // type: "application/zip" type: "text/html" name: "index.html"
+        // check index.html in here.
+        // console.log(files);
+        return;
+        // await this.setState({ loading: "파일을 등록하고 있는 중입니다." });
         const s3path = await GameFileUploadRequest(file);
         console.log({ s3path });
         return;
@@ -96,7 +122,9 @@ export class InputGameFile extends Component {
                         name="source"
                         ref={ref => (this.input = ref)}
                         onChange={e => this.onFileChange(e.target.files)}
-                        accept={`.${this.props.accept}`} />
+                        accept={`.${this.props.accept}`}
+                        directory="" webkitdirectory=""
+                    />
                     <label htmlFor="addfile" >
                         <ButtonNormal
                             height={30}

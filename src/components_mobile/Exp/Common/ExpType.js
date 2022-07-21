@@ -305,7 +305,9 @@ class ExpType extends Component {
                   files={this.state.game_files}
                   display={true}
                   getValue={(value) => this.onChangeGame(value)}
-                  accept="html,zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed" />
+                  accept="html"
+                // accept="html,zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed" 
+                />
               </div>
               <div className="row">
                 <div className='label wide'>
