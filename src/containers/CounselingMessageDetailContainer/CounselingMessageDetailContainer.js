@@ -13,7 +13,10 @@ class CounselingMessageDetailContainer extends React.Component {
     constructor(props) {
         super(props);
         this.socket = null; // 검증 후 개체 생성 // new Socket('counseling');
-        this.state = { online: false, more: true };
+        this.state = {
+            online: false,
+            more: true
+        };
     }
 
     connectAndSetupSocketServer = (detail) => {
@@ -37,13 +40,12 @@ class CounselingMessageDetailContainer extends React.Component {
         }
     }
     componentDidMount() {
-        this.props.GetCounselingMessageGroupRequest(this.props.token, this.props.opponent_id);
+        // this.props.GetCounselingMessageGroupRequest(this.props.token, this.props.opponent_id);
     }
     componentDidUpdate(props) {
-        if (this.props.detail != props.detail && props.detail == null) {
-            alert('');
-            this.connectAndSetupSocketServer(props.detail);
-        }
+        // if (this.props.detail != props.detail && props.detail == null) {
+        // this.connectAndSetupSocketServer(props.detail);
+        // }
         // const { token, opponent_id, userInfo } = this.props;
         // console.log("!!!!!", JSON.stringify(userInfo).length, this.props);
         // if (token != null && JSON.stringify(userInfo).length != 0 && this.socket == null) {
@@ -69,7 +71,7 @@ class CounselingMessageDetailContainer extends React.Component {
             text: text,
             file: file,
             create_at: new Date().getTime(),
-        });
+        })
 
     render() {
         const { online, newchat } = this.state;
