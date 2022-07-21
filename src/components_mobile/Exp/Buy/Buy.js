@@ -9,12 +9,16 @@ import CounselingMessageDetailContainer from 'containers/CounselingMessageDetail
 import { ExpTypes } from 'constant';
 import PlayGameContainer from 'containers/PlayGameContainer/PlayGameContainer';
 import ContactContainer from 'containers/ContactContainer';
+import { goto } from 'navigator';
+const ChargeTypeCash = 1;
+const ChargeTypeCredit = 2;
+const ChargeTypeSimple = 3;
 
 const Wrapper = styled.div`
   width: 100%;
   box-sizing: border-box;
   margin-bottom: 100px;
-  padding-bottom: 125px;
+  padding:0px 20px;
   background: linear-gradient(205deg, #bf1d39, #8448b6);
   .header {
     width: 100%;
@@ -76,15 +80,15 @@ const Wrapper = styled.div`
         justify-content:center;
     }
   }
+
+
 `;
 const DetailWrapper = styled.div`
   margin: auto;
   margin-top: 15px;
-  width: calc(100% - 40px);
   height: 366px;
   background-color: #FFF;
   border-radius: 21px;
-// *{border: 1px solid red;}
   
   .thumbnail {
     width: 100%;
@@ -160,97 +164,111 @@ const DetailWrapper = styled.div`
   }
   .lm10 {margin-left: 10px;}
   .lm20 {margin-left: 20px;}
+      .payType{
+        border:1px solid white;
+        width:100%;
+        background-color:white;
+        box-shadow: 2px 2px 5px #00000029;
+    }
 `;
-const Counseling = styled.div`
-  width: calc(100% - 40px);
-  margin: auto;
-  margin-top: 15px;
-`;
-const Gaming = styled.div`
-  margin: auto;
-  width: 335px;
-  height: 200px;
-  background: #FFFFFF 0% 0% no-repeat padding-box;
-  box-shadow: 2px 2px 5px #00000029;
-  border: 0.5px solid #E9E9E9;
-  border-radius: 24px;
-  display: flex;
-  align-items: center;
-
-  margin-top: 15px;
-
-  .text { // temp
+const CurrentPoint = styled.div`
     margin: auto;
-    width: max-content;
-    height: 22px;
-    text-align: center;
-    font: normal normal normal 18px/22px Noto Sans KR;
-    letter-spacing: 0px;
-    color: #000000;
-  }
-`;
-const Normal = styled.div`
-  margin: auto;
-  width: 335px;
-  height: 200px;
-  background: #FFFFFF 0% 0% no-repeat padding-box;
-  box-shadow: 2px 2px 5px #00000029;
-  border: 0.5px solid #E9E9E9;
-  border-radius: 24px;
-  display: flex;
-  align-items: center;
-
-  margin-top: 15px;
-
-  .text { // temp
-    margin: auto;
-    width: max-content;
-    height: 22px;
-    text-align: center;
-    font: normal normal normal 18px/22px Noto Sans KR;
-    letter-spacing: 0px;
-    color: #000000;
-  }
-`;
-const ButtonBox = styled.div`
-    margin: auto;
-    margin-top: 15px;
-    width: calc(100% - 40px);
-    // height: 130px;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    width: 100%;
+    height: 50px;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 2px 2px 5px #00000029;
     border: 0.5px solid #E9E9E9;
     border-radius: 10px;
-    box-sizing: border-box;
-    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
 
-    button {
+    .label {
+        width: max-content;
+        height: 18px;
+        text-align: left;
+        font: normal normal 500 15px/18px Pretendard;
+        letter-spacing: 0px;
+        color: #707070;
+        margin-right: 13px;
+    }
+    input {
         border: none;
-        outline: none;
-        width: 100%;
-        height: 30px;
-        background: #F7F7F7 0% 0% no-repeat padding-box;
-        &.red {
-            background: #FF0000 0% 0% no-repeat padding-box;
-        }
+        width: 150px;
+        height: 31px;
+        background: #E9E9E9 0% 0% no-repeat padding-box;
         border-radius: 10px;
-        .text {
-            height: 19px;
-            text-align: center;
-            font: normal normal bold 15px/18px Noto Sans KR;
-            letter-spacing: 0px;
-            color: #FF3838;
-        }
-        margin-bottom: 9px;
-        :last-child {
-            margin-bottom: 0px;
+        
+        text-align: center;
+        font: normal normal normal 15px/18px Pretendard;
+        letter-spacing: 0px;
+        color: #000000;
+        margin-right: 8px;
+    }
+    .unit {
+        width: max-content;
+        height: 18px;
+        text-align: center;
+        font: normal normal normal 15px/18px Pretendard;
+        letter-spacing: 0px;
+        color: #000000;
+    }
+
+`;
+const PayType = styled.div`
+    margin-top:20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    border:1px solid white;
+    width:100%;
+    background-color:white;
+    border-radius:10px;
+    box-sizing:border-box;
+    padding:10px;
+    box-shadow: 2px 2px 5px #00000029;
+    .label{
+        font-size:15px;
+        font-family:Pretendard;
+    }
+    .method-buttons {
+        width: 205px;
+        button {
+            &.active {
+                background: #FE1400 0% 0% no-repeat padding-box;
+                .text {
+                    text-align: center;
+                    font: normal normal bold 15px/18px Pretendard;
+                    letter-spacing: 0px;
+                    color: #FFFFFF;
+                }
+            }
+            margin-top: 10px;
+            border: none;
+            outline: none;
+            width: 205px;
+            height: 35px;
+            background: #E9E9E9 0% 0% no-repeat padding-box;
+            border-radius: 20px;
+            .text {
+                height: 18px;
+                text-align: center;
+                font: normal normal normal 15px/18px Pretendard;
+                letter-spacing: 0px;
+                color: #000000;
+            }
         }
     }
-`;
-class BoughtExpDetail extends React.Component {
+`
+
+class Buy extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            type: 0,
             main: true,
             detail: false,
             like: false,
@@ -262,6 +280,7 @@ class BoughtExpDetail extends React.Component {
         this.onClickDetail = this.onClickDetail.bind(this);
         this.onClickLike = this.onClickLike.bind(this);
         this.onClickModify = this.onClickModify.bind(this);
+        this.onClickBuy = this.onClickBuy.bind(this);
     }
     onClickMain = (event) => {
         this.setState({ sub: false });
@@ -269,6 +288,7 @@ class BoughtExpDetail extends React.Component {
             this.setState({ main: true })
         }, 1000);
     }
+    SelectChargeType = type => this.setState({ type: type }, () => { this.setState({ active: this.state.point > 0 && this.state.type != 0 }) });
     onClickDetail = (event) => {
         this.setState({ main: false });
         setTimeout(() => {
@@ -279,7 +299,22 @@ class BoughtExpDetail extends React.Component {
         this.setState({ like: !this.state.like });
     }
     onClickBuy = (event) => {
-
+        this.setState({ loading: true });
+        this.props.buy(this.props.token, this.props.expDetail.uid)
+          .then(data => data.json())
+          .then(data => {
+            console.log(data);
+            if (data.success) {
+              alert('결제가 완료되었습니다. 구매한 상품페이지로 이동합니다.');
+              goto("MY-ITEM-BOUGHT", data.payment_id);
+            } else {
+              alert('결제를 하지 못하였습니다.' + data.detail);
+            }
+          })
+          .catch(e => {
+            alert('결제실패' + e);
+          });
+        this.setState({ loading: false });
     }
     onClickModify = (event) => {
         window.location.href = `/ModifyExp/${this.props.detail.uid}`
@@ -297,14 +332,11 @@ class BoughtExpDetail extends React.Component {
         this.setState({ contact: true, review: false });
     }
     render() {
-        console.log("FOO", this.props);
-
-        const { detail, userInfo } = this.props;
+        const detail = this.props.expDetail;
         const { review, contact } = this.state;
         let taglist = detail && this.tagSprintToAry(detail.taglist);
 
         return (<Wrapper>
-
             <div className='searchbox'>
                 <SearchForm />
             </div>
@@ -313,12 +345,10 @@ class BoughtExpDetail extends React.Component {
                 <div className='thumbnail' />
                 <div className='info'>
                     <div className='title'>{detail.title || "경험제목"}</div>
-
                     <div className='score row'>
                         <StarRating score={detail.score || 0} />
                         <div className='nick lm10'>{detail.nick_name}</div>
                     </div>
-
                     <div className='row'>
                         <div>{detail.price} ₩</div>
                         <div className='row center lm20'>
@@ -332,7 +362,6 @@ class BoughtExpDetail extends React.Component {
                             {detail.like || 0}
                         </div>
                     </div>
-                    {/* tag absolute */}
                     <div className='taglist'>
                         <div className='inner'>
                             {taglist &&
@@ -344,42 +373,115 @@ class BoughtExpDetail extends React.Component {
                 </div>
             </DetailWrapper>
 
-            {detail.type === ExpTypes.COUNSELING
-                && (detail.user_id !== userInfo.uid) // tricky, 
-                && <Counseling>
-                    <CounselingMessageDetailContainer opponent_id={detail.user_id} />
-                </Counseling>}
+            <CurrentPoint style={{ marginTop: "20px" }}>
+                <div className='label'>보유 포인트</div>
+                <input
+                    disabled
+                    value={Number(this.props.current_point).toLocaleString()} />
+                <span className='unit'>point</span>
+            </CurrentPoint>
 
-            {detail.type === ExpTypes.GAMING
-                && <Gaming>
-                    <PlayGameContainer exp_id={detail.uid} />
-                </Gaming>}
+            <PayType>
+                <div className='label'>결제 수단</div>
+                <div className='method-buttons'>
+                    <button
+                        onClick={() => this.SelectChargeType(ChargeTypeCash)}
+                        className={this.state.type === ChargeTypeCash ? 'active' : ''}>
+                        <div className='text'>현금 충전</div>
+                    </button>
+                    <button
+                        onClick={() => this.SelectChargeType(ChargeTypeCredit)}
+                        className={this.state.type === ChargeTypeCredit ? 'active' : ''}>
+                        <div className='text'>신용카드</div>
+                    </button>
+                    <button
+                        onClick={() => this.SelectChargeType(ChargeTypeSimple)}
+                        className={this.state.type === ChargeTypeSimple ? 'active' : ''}>
+                        <div className='text'>간편결제</div>
+                    </button>
 
-            {detail.type === ExpTypes.NORMAL
-                && <Normal>
-                    <div className='text'>일반</div>
-                </Normal>}
-
-            <ButtonBox>
-                <button onClick={this.ShowReview}>
-                    <div className='text'>리뷰 목록</div>
-                </button>
-
-                <button onClick={this.ShowContact}>
-                    <div className='text'>문의 목록</div>
-                </button>
-
-            </ButtonBox>
-
-            {review
-                && <ReviewContainer ExpDetail={detail} />}
-
-            {contact
-                && <ContactContainer ExpDetail={detail} />}
-
-
-        </Wrapper>);
+                    <button
+                        style={{ marginTop: "22px" }}
+                        onClick={this.onClickBuy}
+                        className={'active'}>
+                        <div className='text'>결제하기</div>
+                    </button>
+                </div>
+            </PayType>
+        </Wrapper>
+        );
     }
 };
 
-export default BoughtExpDetail;
+export default Buy;
+
+// <div className='searchbox'>
+// <SearchForm />
+// </div>
+
+// <DetailWrapper url={detail.thumbnail}>
+// <div className='thumbnail' />
+// <div className='info'>
+//     <div className='title'>{detail.title || "경험제목"}</div>
+
+//     <div className='score row'>
+//         <StarRating score={detail.score || 0} />
+//         <div className='nick lm10'>{detail.nick_name}</div>
+//     </div>
+
+//     <div className='row'>
+//         <div>{detail.price} ₩</div>
+//         <div className='row center lm20'>
+//             <img
+//                 style={{
+//                     width: "14px",
+//                     height: "14px",
+//                     marginRight: "5px"
+//                 }}
+//                 src={blackHeart} />
+//             {detail.like || 0}
+//         </div>
+//     </div>
+//     <div className='taglist'>
+//         <div className='inner'>
+//             {taglist &&
+//                 taglist.length > 0 &&
+//                 taglist.map(tag =>
+//                     <div className="tag" key={tag}>{tag}</div>)}
+//         </div>
+//     </div>
+// </div>
+// </DetailWrapper>
+
+// {detail.type === ExpTypes.COUNSELING
+// && (detail.user_id !== userInfo.uid) // tricky, 
+// && <Counseling>
+//     <CounselingMessageDetailContainer opponent_id={detail.user_id} />
+// </Counseling>}
+
+// {detail.type === ExpTypes.GAMING
+// && <Gaming>
+//     <PlayGameContainer exp_id={detail.uid} />
+// </Gaming>}
+
+// {detail.type === ExpTypes.NORMAL
+// && <Normal>
+//     <div className='text'>일반</div>
+// </Normal>}
+
+// <ButtonBox>
+// <button onClick={this.ShowReview}>
+//     <div className='text'>리뷰 목록</div>
+// </button>
+
+// <button onClick={this.ShowContact}>
+//     <div className='text'>문의 목록</div>
+// </button>
+
+// </ButtonBox>
+
+// {review
+// && <ReviewContainer ExpDetail={detail} />}
+
+// {contact
+// && <ContactContainer ExpDetail={detail} />}

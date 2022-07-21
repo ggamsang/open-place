@@ -37,7 +37,7 @@ import bg from "resources/sample-image-01.png";
 
 import MyPaidExpDetailPage from "pages/MyPaidExpDetailPage";
 import MyPointChargePage from "pages/MyPointChargePage";
-
+import BuyPage from "pages/BuyPage";
 const Wrapper = styled.main`
   overflow: hidden;
   position: relative;
@@ -89,6 +89,7 @@ function App() {
               <Route path=":id" element={<MyDetailChild />} />
             </Route>
             <Route path="paidExp/:id" element={<MyPaidExpDetailPage />} />
+            <Route path="buy/:id" element={<BuyPage/>} />
             <Route path="terms" element={<TermsOfServicePage />} />
             <Route path="privacy" element={<PrivacyPolicyPage />} />
             <Route path="search/:category/:sort/:keyword" element={<SearchPage />} />
