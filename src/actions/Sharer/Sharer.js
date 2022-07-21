@@ -3,7 +3,6 @@ import host from "config";
 import { GET,DELETE,POST } from "constant";
 
 export const getSharerRequest = (user_id) => {
-    console.log("getSharerRequest");
     return (dispatch) => {
         dispatch(getSharer())
         const url = `${host}/sharer/detail/${user_id}`;

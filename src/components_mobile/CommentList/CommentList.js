@@ -10,14 +10,16 @@ const Wrapper = styled.div`
         box-sizing:border-box;
     }
     font-family: Noto Sans KR;
-    width: ${WIDTH}px;
+    // width: ${WIDTH}px;
     margin: auto;
     box-sizing: border-box;
+    padding:0px 20px;
     *{
         box-sizing:border-box;
     }
     .line {
         box-sizing: border-box;
+        *{box-sizing: border-box;}
         width: 100%;
         height: 186px;
         display: flex;
@@ -133,11 +135,14 @@ const Wrapper = styled.div`
         }
     }
     .row {
+        box-sizing:border-box;
+        width:100%;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        // justify-content: space-between;
     }
     .hundred {
+        // border:1px solid black;
         width: 100%;
     }
     .content {

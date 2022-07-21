@@ -30,7 +30,7 @@ const SearchBox = styled.div`
 
 `
 
-class SearchForms extends Component {
+class MemberSearchForm extends Component {
   constructor(props) {
     super(props);
     this.onClickEvent = this.onClickEvent.bind(this);
@@ -64,9 +64,6 @@ class SearchForms extends Component {
             keyword={this.props.keyword}
             placeholder={this.props.placeholder}
             disabled_filter={this.props.disabled_filter} />
-
-          {this.props.isMain != null
-            && <NotificationContainer active={active} />}
           </div>
         </SearchBox>
       </React.Fragment>
@@ -81,4 +78,4 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = () => ({
 
 });
-export default connect(mapStateToProps, mapDispatchToProps)(SearchForms);
+export default connect(mapStateToProps, mapDispatchToProps)(MemberSearchForm);

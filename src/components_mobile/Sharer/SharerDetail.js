@@ -113,85 +113,94 @@ const Sell = styled.div`
 `
 
 class SharerDetail extends React.Component {
-  constructor(props){
-      super(props);
-      this.state = {
-          like:false,
-      }
-      this.onClickLike = this.onClickLike.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = {
+      like: false,
+    }
+    this.onClickLike = this.onClickLike.bind(this);
   }
   componentWillMount() {
     this.getList(this.props.user_id);
   }
-  getList = (page) => {
-    return new Promise((resolve)=>resolve(this.props.getUserSellExpRequest&&this.props.getUserSellExpRequest(this.props.userInfo.uid, page)));
-  }
-  onClickLike = () =>{
-    const Data = {
-      user_id:this.props.userInfo.uid,
-      like_id:this.props.sharer.uid,
-      type:"sharer",
+  componentDidUpdate(prevProps) {
+    if (JSON.stringify(this.props.isLike) != JSON.stringify(prevProps.isLike)) {
+      console.log("like?", this.props.isLike)
+      this.setState({ like: this.props.isLike == true ? true : false })
     }
-    this.props.likeSharerRequest(this.props.token,Data)
-    .then(()=>this.setState({like:!this.state.like}))
-    // this.setState({like:!this.state.like});
+  }
+  getList = (page) => {
+    return new Promise((resolve) => resolve(this.props.getUserSellExpRequest && this.props.getUserSellExpRequest(this.props.userInfo.uid, page)));
+  }
+  onClickLike = async () => {
+    const Data = {
+      user_id: this.props.userInfo.uid,
+      like_id: this.props.sharer.user_id,
+      type: "sharer",
+      isLike: !this.state.like,
+    }
+    this.props.likeSharerRequest(this.props.token, Data)
+      .then(() => this.setState({ like: !this.state.like }), () => {
+        this.props.getIsMyLikeRequest(this.props.userInfo.uid, this.props.sharer.uid, "sharer")
+      })
+      .then(() => this.props.getSharerRequest(this.props.user_id))
   }
   render() {
-    const updateTime = new Date(this.props.sharer&&this.props.sharer.update_time);
+    const updateTime = new Date(this.props.sharer && this.props.sharer.update_time);
 
 
     return (
       <React.Fragment>
         <Wrapper url={this.props.sharer && this.props.sharer.url || null}>
-        <div className="header">
-          <div className='searchbox'><SearchForm/></div>
-          <div className='profile'>
-            <div className="thumbnailWrap">
-                 <div className='text_'>{updateTime.getFullYear()+"."+updateTime.getMonth()+"."+updateTime.getDay()}</div>
-                 <div className='thumbnail'/>
-                 <div className='text_' style={{textAlign:"right"}}>#분야</div>
-            </div>
-            <div className='textWrap'>
+          <div className="header">
+            <div className='searchbox'><SearchForm /></div>
+            <div className='profile'>
+              <div className="thumbnailWrap">
+                <div className='text_'>{updateTime.getFullYear() + "." + updateTime.getMonth() + "." + updateTime.getDay()}</div>
+                <div className='thumbnail' />
+                <div className='text_' style={{ textAlign: "right" }}>#분야</div>
+              </div>
+              <div className='textWrap'>
                 <div className='userName'>{this.props.sharer && this.props.sharer.nick_name || "국민대학교 CRC"}</div>
                 <div className='likeWrap'>
-                    <div className='count'>{this.props.sharer&&this.props.sharer.like_count}</div>
-                    <img onClick={this.onClickLike}  className='icon' src={`${this.state.like==true?Heart_red:Heart}`}/>
+                  <div className='count'>{this.props.sharer && this.props.sharer.like_count}</div>
+                  <img onClick={this.onClickLike} className='icon' src={`${this.state.like == true ? Heart_red : Heart}`} />
                 </div>
+              </div>
             </div>
           </div>
-        </div>
-        <Detail>
+          <Detail>
             <div className='shadowBorderBox'>
-                    <div className='title'>상세정보</div>
-                    <div className='row' style={{marginTop:"11px"}}>
-                        <div className='label'>설명</div>
-                        <div className='textBox' style={{width:"100%"}}>
-                          {this.props.sharer&&this.props.sharer.about_me}
-                        </div>
-                    </div>
-                    <div className='row' style={{marginTop:"11px"}}>
-                        <div className='label'>위치</div>
-                        <div className='textBox' style={{width:"114px",marginRight:"14px"}}>대한민국</div>
-                        <div className='textBox' style={{width:"114px"}}>{this.props.location&&this.props.location.length>0&&this.props.location[this.props.sharer.location_id||0].name}</div>
-                    </div>
+              <div className='title'>상세정보</div>
+              <div className='row' style={{ marginTop: "11px" }}>
+                <div className='label'>설명</div>
+                <div className='textBox' style={{ width: "100%" }}>
+                  {this.props.sharer && this.props.sharer.about_me}
+                </div>
+              </div>
+              <div className='row' style={{ marginTop: "11px" }}>
+                <div className='label'>위치</div>
+                <div className='textBox' style={{ width: "114px", marginRight: "14px" }}>대한민국</div>
+                <div className='textBox' style={{ width: "114px" }}>{this.props.location && this.props.location.length > 0 && this.props.location[this.props.sharer.location_id || 0].name}</div>
+              </div>
             </div>
-            
+
             <ButtonNormal
-                onClickEvent={()=>window.location.href="/modifySharer"}
-                width={335}
-                height={35}
-                radius={10}
-                bgColor={"#707070"}
-                text="수정"
-                style={{marginTop:"16px"}}
+              onClickEvent={() => window.location.href = "/modifySharer"}
+              width={335}
+              height={35}
+              radius={10}
+              bgColor={"#707070"}
+              text="수정"
+              style={{ marginTop: "16px" }}
             />
-        </Detail>
-        <Sell>
-            <div className='title' style={{marginBottom:"11px"}}>판매경험</div>
-            <SharerItemListContainer user_id={this.props.user_id}/>
-        </Sell>
+          </Detail>
+          <Sell>
+            <div className='title' style={{ marginBottom: "11px" }}>판매경험</div>
+            <SharerItemListContainer user_id={this.props.user_id} />
+          </Sell>
         </Wrapper>
-    </React.Fragment>
+      </React.Fragment>
     )
   }
 }

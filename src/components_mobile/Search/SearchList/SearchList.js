@@ -55,7 +55,7 @@ const Wrapper = styled.div`
     .margin-top-9 { margin-top: 9px; }
     .margin-top-11 { margin-top: 11px; }
 
-    .search-list-wrapper { }
+    .search-list-wrapper { width:100%;box-sizing:border-box; padding:0px 20px; }
 `;
 
 class SearchList extends React.Component {
@@ -71,6 +71,7 @@ class SearchList extends React.Component {
         this.getList(0);
     }
     getList = (page) => {
+        console.log(page,this.state.categoryType)
         return this.props.getExpListRequest(page,GetCATEGORY(this.state.categoryType), 
                                             GetSORTYPE(this.state.sortType), this.state.keyword);
     }

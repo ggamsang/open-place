@@ -24,7 +24,7 @@ class ReviewContainer extends React.Component {
                     this.props.GetExpReviewListRequest(ExpDetail.uid))
     }
     render() {
-        return (<ReviewList {...this.props} delete={this.deleteReview} />);
+        return (<ReviewList write={this.props.write} onCloseWriteModal={()=>this.props.onCloseWriteModal} {...this.props} delete={this.deleteReview} />);
     }
 }
 

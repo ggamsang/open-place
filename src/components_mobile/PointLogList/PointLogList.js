@@ -111,14 +111,14 @@ class PointLogList extends React.Component {
         const PER = 8; // 페이지당 출력개수
         console.log(this.props);
         return (<Wrapper>
-            <ButtonWrapper>
+            {/* <ButtonWrapper>
                 <button>
                     <div onClick={this.props.onTabSwitch} className='text'>포인트충전</div>
                 </button>
                 <button className='stepback active'>
                     <div className='text'>충전 내역</div>
                 </button>
-            </ButtonWrapper>
+            </ButtonWrapper> */}
 
             <div className='line'>
                 <div className="point-log-list-header">날짜</div>

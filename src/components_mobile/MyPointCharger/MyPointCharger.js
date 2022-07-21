@@ -250,14 +250,14 @@ class MyPointCharger extends React.Component {
                 </div>
             </div> */}
 
-                <ButtonWrapper>
+                {/* <ButtonWrapper>
                     <button className='active bw50'>
                         <div className='text'>포인트충전</div>
                     </button>
                     <button onClick={this.props.onTabSwitch} className='stepback bw50'>
                         <div className='text'>충전 내역</div>
                     </button>
-                </ButtonWrapper>
+                </ButtonWrapper> */}
 
                 <CurrentPoint>
                     <div className='label'>보유 포인트</div>

@@ -17,6 +17,11 @@ const Wrapper = styled.div`
   // height: max-content;
   // min-height: 100vh;
   background: linear-gradient(205deg, #bf1d39, #8448b6);
+  .reviewWrap{
+    width:100%;
+    box-sizing:border-box;
+    padding:0px 20px;
+  }
   .header {
     width: 100%;
     height: ${resolution(324)}px;
@@ -97,6 +102,7 @@ class ExpDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      write:false,
       main: true,
       detail: false,
       like: false,
@@ -107,12 +113,12 @@ class ExpDetail extends React.Component {
     this.onClickLike = this.onClickLike.bind(this);
     this.onClickModify = this.onClickModify.bind(this);
   }
-  componentDidUpdate(prevProps){
-    if(this.props.expDetail){
-      if(JSON.stringify(prevProps.expDetail)!==JSON.stringify(this.props.expDetail)){
-        this.setState({like:this.props.expDetail.isLike})
+  componentDidUpdate(prevProps) {
+    if (this.props.expDetail) {
+      if (JSON.stringify(prevProps.expDetail) !== JSON.stringify(this.props.expDetail)) {
+        this.setState({ like: this.props.expDetail.isLike })
       }
-  
+
     }
   }
 
@@ -128,15 +134,15 @@ class ExpDetail extends React.Component {
       this.setState({ sub: true })
     }, 1000);
   }
-  onClickLike = async(event) => {
-    await this.setState({ like: !this.state.like },(()=>{
+  onClickLike = async (event) => {
+    await this.setState({ like: !this.state.like }, (() => {
       const data = {
-        type:"exp",
-        like_id:this.props.item_id,
-        user_id:this.props.userInfo.uid,
-        isLike:this.state.like
+        type: "exp",
+        like_id: this.props.item_id,
+        user_id: this.props.userInfo.uid,
+        isLike: this.state.like
       }
-      this.props.likeExpRequest(this.props.token,data);
+      this.props.likeExpRequest(this.props.token, data);
     }));
   }
   onClickBuy = (event) => {
@@ -208,20 +214,20 @@ class ExpDetail extends React.Component {
               </div>
               <div className='buttonWrap'>
                 {
-                  this.props.isLoggedIn ? 
-                  <ButtonNormal
-                  onClickEvent={this.onClickLike}
-                  width={155}
-                  height={35}
-                  radius={10}
-                  fontSize={15}
-                  bgColor={this.state.like == true ? "red" : "#dd5035"}
-                  text={this.state.like == true ? "♥ 좋아요" : "♡ 좋아요"}
-                  style={{ marginRight: "25px" }}
-                />
-                :<div style={{width:"155px",marginRight: "25px"}}/>
+                  this.props.isLoggedIn ?
+                    <ButtonNormal
+                      onClickEvent={this.onClickLike}
+                      width={155}
+                      height={35}
+                      radius={10}
+                      fontSize={15}
+                      bgColor={this.state.like == true ? "red" : "#dd5035"}
+                      text={this.state.like == true ? "♥ 좋아요" : "♡ 좋아요"}
+                      style={{ marginRight: "25px" }}
+                    />
+                    : <div style={{ width: "155px", marginRight: "25px" }} />
                 }
-                
+
 
                 <ButtonNormal
                   onClickEvent={this.onClickDetail}
@@ -229,21 +235,32 @@ class ExpDetail extends React.Component {
                   height={35}
                   radius={10}
                   fontSize={15}
-                  bgColor={"#707070"}
+                  bgColor={"white"}
+                  color={"black"}
                   text="상세정보"
                 />
               </div>
 
-              <div className='buttonWrap'>
+              <div className='buttonWrap' style={{marginTop:"10px"}}>
                 <ButtonNormal
                   onClickEvent={this.onClickBuy}
                   width={155}
                   height={35}
                   radius={10}
                   fontSize={15}
-                  bgColor={"red"}
+                  bgColor={"#707070"}
                   text={"구매하기"}
                   style={{ marginRight: "25px" }}
+                />
+                <ButtonNormal
+                  onClickEvent={()=>this.setState({write:true})}
+                  width={155}
+                  height={35}
+                  radius={10}
+                  fontSize={15}
+                  bgColor={"#707070"}
+                  text={"리뷰 등록하기"}
+                  style={{}}
                 />
               </div>
             </div>
@@ -277,14 +294,17 @@ class ExpDetail extends React.Component {
                   bgColor={"#707070"}
                   text="수정하기"
                 />
+
               </div>
             </div>
           </section>
         </Fade>
-
-        <Fade>
+        <div className='reviewWrap'>
+        <ReviewContainer write={this.state.write} onCloseWriteModal={()=>this.setState({write:false})}/>
+        </div>
+        {/* <Fade>
           <ReviewContainer />
-        </Fade>
+        </Fade> */}
 
       </Wrapper>
       : <Dimmer>

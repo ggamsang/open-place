@@ -120,7 +120,7 @@ class NoticeList extends React.Component {
         const { notices = dummy } = this.props;
 
         return (<Wrapper>
-            <div className="line" style={{ backgroundColor: "#efefef" }}>
+            {/* <div className="line" style={{ backgroundColor: "#efefef" }}>
                 <div className='header '>
                     &nbsp;
                 </div>
@@ -133,7 +133,7 @@ class NoticeList extends React.Component {
                 <div className='date'>
                     날짜
                 </div>
-            </div>
+            </div> */}
             {notices.map((item, idx) =>
                 <div key={idx} className="line" onClick={e => this.gotoDetail(item.uid)}>
                     <div className='header fontSmall'>

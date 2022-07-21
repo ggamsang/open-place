@@ -26,8 +26,9 @@ const reviewdummy = [
     },
 ]
 const ReviewContainer = styled.div`
-    margin: auto;
-    width: ${WIDTH - 30}px;
+    box-sizing:border-box;
+    margin-top:20px;
+    width:100%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -174,12 +175,12 @@ class ReviewList extends React.Component {
     }
 
     render() {
-        const { reviews = reviewdummy, userInfo } = this.props;
-        const { write, modify } = this.state;
+        const { reviews = reviewdummy, userInfo, write } = this.props;
+        const { modify } = this.state;
         console.log(reviews);
 
         return (<>
-            <ButtonNormal
+            {/* <ButtonNormal
                 onClickEvent={() => this.setState({ write: true })}
                 width={155}
                 height={35}
@@ -193,12 +194,12 @@ class ReviewList extends React.Component {
                     marginTop: "20px",
                     marginLeft: "20px"
                 }}
-            />
+            /> */}
 
             {write
                 && <ReviewWriteContainer
                     open={write}
-                    close={() => this.setState({ write: false })} />}
+                    close={() => this.props.onCloseWriteModal() }/>}
             {modify != null
                 && <ReviewModifyContainer
                     open={modify != null}
