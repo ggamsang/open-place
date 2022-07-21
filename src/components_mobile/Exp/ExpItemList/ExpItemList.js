@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import ScrollList from 'components_mobile/Commons/ScrollList';
-import Search from 'components_mobile/Commons/Search';
+// import Search from 'components_mobile/Commons/Search';
+import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
 // import { WIDTH } from "constant";
 import { goto } from 'navigator';
@@ -85,6 +86,8 @@ const Wrapper = styled.div`
 
     .search-list-wrapper {
         width:100%;
+        box-sizing:border-box;
+        padding:0px 20px;
      }
 `;
 
@@ -117,7 +120,7 @@ class ExpItemList extends React.Component {
 
             <div className='gradient'>
                 <div className='blanker'>&nbsp;</div>
-                <Search />
+                <SearchForm />
                 <div className='title'>태그리스트</div>
                 <div className='tagBox'>
                     <div className='tagList'>

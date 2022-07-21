@@ -32,7 +32,7 @@ const Wrapper = styled.div`
       display: flex;
       align-items: center;
       &.wide {
-        transform: translate(0, -20px);
+        // transform: translate(0, -20px);
         padding: 0; 
         margin-left: 10px;
         width: max-content !important;

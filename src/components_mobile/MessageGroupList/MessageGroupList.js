@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
 import { goto } from "navigator";
-import SearchForm from 'components_mobile/Commons/Search/SearchForm';
+// import SearchForm from 'components_mobile/Commons/Search/SearchForm';
+import MemberSearchForm from 'components_mobile/Commons/Search/MemberSearchForm';
 import DateFormat from 'modules/DateFormat';
 import profile from 'resources/Profile.svg';
 
@@ -62,6 +63,7 @@ const Peer = styled.div`
         color: #000000;
     }
     .recent {
+        margin-top:5px;
         height: 18px;
         text-align: left;
         font: normal normal normal 15px/18px Pretendard;
@@ -74,6 +76,11 @@ const Wrapper = styled.div`
     scrollbar-width: none; /* Firefox */
     &::-webkit-scrollbar {
        display: none;
+    }
+    .list{
+        width:100%;
+        box-sizing:border-box;
+        padding:0px 20px;
     }
     margin: auto;
     .blanker {
@@ -143,12 +150,14 @@ class MessageGroupList extends React.Component {
         return (<Wrapper>
             <div className='gradient'>
                 <div className='blanker'>&nbsp;</div>
-                <SearchForm placeholder={"대화상대 찾아보기"} disabled_filter keyword={null} />
+                <MemberSearchForm placeholder={"대화상대 찾아보기"} disabled_filter keyword={null} />
             </div>
+            <div className="list">
             {groups && groups.length > 0
                 ? groups.map((item, index) =>
                     <PeerElement key={index} {...item} />)
                 : (<div className='no-data'>대화 내역 없습니다.</div>)}
+            </div>
         </Wrapper>);
     }
 }

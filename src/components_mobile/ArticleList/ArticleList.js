@@ -118,10 +118,7 @@ class ArticleList extends React.Component {
         console.log(this.props);
 
         return (<Wrapper>
-            <div  className="line" style={{backgroundColor:"#efefef"}}>
-                    {/* <div className='header'>
-                        
-                    </div> */}
+            {/* <div  className="line" style={{backgroundColor:"#efefef"}}>
                     <div className='title'>
                         제목
                     </div>
@@ -131,7 +128,7 @@ class ArticleList extends React.Component {
                     <div className='date'>
                         날짜
                     </div>
-                </div>
+                </div> */}
             {articles.map((item, idx) =>
                 <div key={idx} className="line" onClick={e => this.gotoDetail(item.uid || idx)}>
                     {/* <div className='header'>

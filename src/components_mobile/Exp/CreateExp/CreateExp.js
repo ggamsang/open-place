@@ -23,6 +23,10 @@ const Wrapper = styled.div`
     box-sizing:border-box;
     padding-bottom:30px;
     background: linear-gradient(205deg,#bf1d39,#8448b6);
+    .buttonWrap{
+      width:100%;
+      display:flex;
+    }
     .header{
       width:100%;
     }

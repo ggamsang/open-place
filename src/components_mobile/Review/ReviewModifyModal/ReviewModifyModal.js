@@ -9,6 +9,7 @@ import { FileUploadRequest } from "actions/Uploads";
 
 const Wrapper = styled.div`
     box-sizing: border-box;
+    *{box-sizing: border-box;}
     padding: 10px;
     .modal-header {
         margin-bottom: 7px;
@@ -60,12 +61,10 @@ const Wrapper = styled.div`
         margin-bottom: 10px;
     }
     .buttons {
-        margin: auto;
+        width: 100%;
         margin-top: 10px;
         margin-bottom: 10px;
-        width: max-content;
         display: flex;
-        flex-direction: row;
         justify-content: space-between;
         align-items: center;
     }
@@ -93,7 +92,7 @@ const Wrapper = styled.div`
         width: 200px;
         height: max-content;
         display: flex;
-        overflow-x: scroll;
+        overflow-x: overlay;
         overflow-y: hidden;
         ::-webkit-scrollbar-track {
             height: 4px;
@@ -348,7 +347,7 @@ export default class ReviewModifyModal extends React.Component {
                         <ButtonNormal
                             onClick={() => this.onSubmit()}
                             style={{
-                                width: "155px",
+                                width: "140px",
                                 height: "35px",
                                 background: "#FF0000 0% 0 % no-repeat padding-box",
                                 boxShadow: "2px 2px 3px #00000019",
@@ -360,7 +359,7 @@ export default class ReviewModifyModal extends React.Component {
                         <ButtonNormal
                             onClick={() => this.onCancel()}
                             style={{
-                                width: "155px",
+                                width: "140px",
                                 height: "35px",
                                 background: "#707070 0% 0% no-repeat padding-box",
                                 boxShadow: "2px 2px 3px #00000019",

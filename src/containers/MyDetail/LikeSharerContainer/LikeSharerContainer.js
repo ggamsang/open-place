@@ -3,6 +3,14 @@ import ScrollList from "components_mobile/Commons/ScrollList"
 import { connect } from "react-redux";
 import { getUserLikeSharerRequest } from "actions/User/MyDetail"
 import Sharer from 'components_mobile/Commons/Sharer';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  width:100%;
+  box-sizing:border-box;
+  // padding:0px 20px;
+`
+
 class LikeSharerContainer extends Component {
   componentWillMount() {
     this.getList(0);
@@ -11,9 +19,9 @@ class LikeSharerContainer extends Component {
     return new Promise((resolve)=>resolve(this.props.getUserLikeSharerRequest&&this.props.getUserLikeSharerRequest(this.props.userInfo.uid, page)));
   }
   render() {
-   return (<React.Fragment>
+   return (<Wrapper>
             <ScrollList list={this.props.list} list_added={this.props.list_added} getList={(value)=>this.getList(value)} ListComponent={Sharer} />
-    </React.Fragment>)
+    </Wrapper>)
   }
 }
 

@@ -11,8 +11,8 @@ export const CATEGORY = {
     MAKE:3
 }
 export const GetCATEGORY = (value)=>{
-    return value === CATEGORY.PLAY ? "play"
-    :value === CATEGORY.LEARN? "learn"
+    return value == CATEGORY.PLAY ? "play"
+    :value == CATEGORY.LEARN? "learn"
     :"make"
 }
 export const GetTextToCATEGORY = (value)=>{

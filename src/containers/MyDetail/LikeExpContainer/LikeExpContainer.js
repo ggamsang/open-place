@@ -3,7 +3,13 @@ import ScrollList from "components_mobile/Commons/ScrollList"
 import { connect } from "react-redux";
 import { getUserLikeExpRequest } from "actions/User/MyDetail"
 import Item from 'components_mobile/Commons/Item';
+import styled from 'styled-components';
 
+const Wrapper = styled.div`
+  width:100%;
+  box-sizing:border-box;
+  padding:0px 20px;
+`
 class LikeExpContainer extends Component {
   componentWillMount() {
     this.getList(0);
@@ -13,9 +19,9 @@ class LikeExpContainer extends Component {
   }
   render() {
     console.log(this.props);
-   return (<React.Fragment>
+   return (<Wrapper>
       <ScrollList list={this.props.list} list_added={this.props.list_added} getList={(value)=>this.getList(value)} ListComponent={Item} />
-    </React.Fragment>)
+    </Wrapper>)
   }
 }
 
