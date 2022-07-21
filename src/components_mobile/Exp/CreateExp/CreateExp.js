@@ -208,8 +208,6 @@ class CreateExp extends React.Component {
     if (title == null || title === "") return alert("제목을 입력하세요");
     if (info == null || info === "") return alert("내용을 입력하세요");
 
-    return;
-
     this.props.createExpRequest(data, this.props.token)
       .then((data) => {
         // console.log(data);
