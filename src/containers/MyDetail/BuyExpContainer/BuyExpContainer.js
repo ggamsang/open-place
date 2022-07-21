@@ -25,21 +25,6 @@ class BuyExpContainer extends React.Component {
           list_added={this.props.list_added}
           getList={(value) => this.getList(value)}
           ListComponent={Item} />
-        <div>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-        </div>
       </React.Fragment>
     )
   }
