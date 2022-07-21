@@ -7,7 +7,7 @@ import { WIDTH } from "constant"
 const Wrapper = styled.div`
     margin: auto;
     margin-top: 10px;
-    width: ${WIDTH}px;
+    width: ${WIDTH-10}px;
     height: 187px;
     border-radius: 6px;
     overflow-y: hidden;

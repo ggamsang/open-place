@@ -54,7 +54,7 @@ class CheckBoxNormal extends Component {아니
   render() {
     return (
       <Wrapper style={this.props.style} onClick={this.onClickEvent}>
-      <CheckBox width={this.props.width} height={this.props.height} marginRight={this.props.marginRight} value={this.props.value} 
+      <CheckBox id={this.props.id} width={this.props.width} height={this.props.height} marginRight={this.props.marginRight} value={this.props.value} 
       >
         <div className='nemo'/>
         <div className="check">

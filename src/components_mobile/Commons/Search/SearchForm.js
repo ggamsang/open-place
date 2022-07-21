@@ -21,6 +21,13 @@ const SearchBox = styled.div`
   .alarm_box{box-sizing:border-box;width:${resolution(34)}px;display:flex;justify-content:center;margin-left:10px;}
   .img_arrow{width:${resolution(27)}px;height:${resolution(19)}px;}
 
+  .searchWrap{
+    box-sizing:border-box;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
 `
 
 class SearchForms extends Component {
@@ -51,16 +58,16 @@ class SearchForms extends Component {
             && <div onClick={this.onClickBack} className='arrow_box'>
               <img className='img_arrow' src={back_arrow} />
             </div>}
-
+          <div className='searchWrap'>
           <Search
-            width={302}
+            width={291}
             keyword={this.props.keyword}
             placehoder={this.props.placehoder}
             disabled_filter={this.props.disabled_filter} />
 
           {this.props.isMain != null
             && <NotificationContainer active={active} />}
-
+          </div>
         </SearchBox>
       </React.Fragment>
     )

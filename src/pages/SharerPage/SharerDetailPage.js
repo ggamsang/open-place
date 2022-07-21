@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import SharerDetailContainer from 'containers/SharerContainer/SharerDetailContainer';
 import ClientTemplate from 'clientTemplate';
+import { useParams } from "react-router-dom";
 
+function SharerDetailPage() {
+  let params = useParams();
+  return (
+    <ClientTemplate>
+      <SharerDetailContainer user_id={params.id}/>
+    </ClientTemplate>
+  );
 
-class SharerDetailPage extends Component {
-    render() {
-      return (
-          <ClientTemplate>
-            <SharerDetailContainer/>
-          </ClientTemplate>
-      );
-    }
-  }
-  
-  export default SharerDetailPage;
+}
+
+export default SharerDetailPage;

@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { WIDTH } from 'constant';
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
+import { resolution } from 'commons/resolution';
+import back_arrow from 'source/Iconly-Bold-left-arrow.svg';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -10,22 +12,32 @@ const Wrapper = styled.div`
   }
   .gradient {
     width: 100%;
-    height: 131px;
+    height: 133px;
     background: linear-gradient(69deg, #501B1B, #655FFA, #D30E0E);
     background-size: 200% 200%;
     background-position: top right;
-    
+  .header{
+    height:30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-sizing:border-box;
+    padding:0px 20px;
+    margin-top:18px;
+    .arrow_box{width:${resolution(27)}px;display:flex;justify-content:center;margin-right:10px;}
+    .img_arrow{width:${resolution(27)}px;height:${resolution(19)}px;}
     .title {
-      margin: auto;
-      margin-top: 10px;
       color: white;
-      width: max-content;
-      text-align: center;
       font-family: Pretendard;
       font-weight: 400;
       font-size: 24px;
-      line-height: 29px;
+  }
     }
+  }
+  .search_wrap{
+    width:100%;
+    box-sizing:border-box;
+    padding-top:42px;
   }
   .terms {
     margin: auto;
@@ -51,17 +63,35 @@ const Wrapper = styled.div`
   }
 `;
 
+
 class PrivacyPolicy extends React.Component {
+  constructor(props){
+    super(props);
+    this.onClickBack = this.onClickBack.bind(this);
+  }
+  onClickBack = () => {
+    window.history.go(-1);
+  }
   render() {
     // console.log(resolution(123))
 
     return (
       <Wrapper>
         <div className='gradient'>
+          <div className='search_wrap'>
+            <SearchForm isMain={true} />
+          </div>
+          <div className='header'>
+            <img onClick={this.onClickBack} src={back_arrow} className="img_arrow" />
+            <div className='title'>개인정보 보호정책</div>
+            <div className='img_arrow' />
+          </div>
+        </div>
+        {/* <div className='gradient'>
           <div className='blanker'>&nbsp;</div>
           <SearchForm />
           <div className='title'>개인정보 보호정책</div>
-        </div>
+        </div> */}
 
         <div className='terms'>
           <div className='text'>

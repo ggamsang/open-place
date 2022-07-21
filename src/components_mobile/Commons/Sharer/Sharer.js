@@ -56,11 +56,12 @@ class Sharer extends React.Component {
             nick_name,
             update_time,
             like_count,
-            exp_count
+            exp_count,
+            uid,
         } = this.props;
         console.log(this.props);
         return (
-            <Wrapper bg={url || noimage} onClick={()=>window.location.href="/SharerDetail/1"}>
+            <Wrapper bg={url || noimage} onClick={()=>window.location.href=`/SharerDetail/${uid}`}>
                 <div className='thumbnail'>
                     <div className='row'>
                         <div className='text'>{exp_count}</div>

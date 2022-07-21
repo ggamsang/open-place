@@ -6,10 +6,9 @@ import GradientButton from 'components_mobile/Commons/Button/GradientButton';
 import ImageButton from 'components_mobile/Commons/Button/ImageButton';
 import InputNormal from 'components_mobile/Commons/Input/InputNormal';
 import Fade from 'react-reveal/Fade';
-import { SetSession } from 'modules/Sessions';
-import { TokenName } from 'constant';
 import { goto } from 'navigator';
-
+import CheckBoxNormal from 'components_mobile/Commons/CheckBox/CheckBoxNormal';
+import cookie from 'react-cookies';
 const Wrapper = styled.div`
   width:100%;
   height:100vh;
@@ -17,6 +16,7 @@ const Wrapper = styled.div`
   .box{
     width:100%;
     display:flex;
+    box-sizing:border-box;
   }
   
   .alignCenter{align-items:center;}
@@ -25,6 +25,11 @@ const Wrapper = styled.div`
   .justifyEnd{justify-content:flex-end;}
 
   .column{flex-direction:column;}
+
+  .checkBoxRow{
+    display:flex;
+    box-sizing:border-box;
+  }
 
   .inputBox{
     height:${resolution(122)}px;
@@ -66,16 +71,49 @@ class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user_id: null,
-      password: null,
+      user_id: cookie.load('saveid') || "",
+      password: cookie.load('savepassword') || "",
+      saveID: cookie.load('saveid') != null ? true : false, saveLogin: cookie.load('savepassword') != null ? true : false,
       login: Login.ready,
     }
     this.onClickLogin = this.onClickLogin.bind(this);
     this.onChangeId = this.onChangeId.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.onCheckSaveID = this.onCheckSaveID.bind(this);
+    this.onCheckSaveLogin = this.onCheckSaveLogin.bind(this);
   }
+  onCheckSaveID() {
+    const result = !this.state.saveID;
+    if (result === false) {
+      cookie.remove(('saveid'), { path: '/' });
+    }
 
-  onClickLogin = () => {
+    this.setState({ saveID: result });
+  }
+  onCheckSaveLogin() {
+    const result = !this.state.saveLogin;
+    if (result) {
+      cookie.remove(('saveid'), { path: '/' });
+      cookie.remove(('savepassword'), { path: '/' });
+    }
+    this.setState({ saveLogin: result });
+  }
+  onClickLogin = (e) => {
+
+    if (this.state.saveID === true) {
+      cookie.save("saveid", this.state.user_id, {
+        path: '/',
+      });
+    }
+    //로그인저장
+    if (this.state.saveLogin === true) {
+      cookie.save("saveid", this.state.user_id, {
+        path: '/',
+      });
+      cookie.save("savepassword", this.state.password, {
+        path: '/',
+      });
+    }
     this.setState({ login: Login.ready });
     const { user_id, password } = this.state;
     this.props.SignInRequest &&
@@ -109,15 +147,22 @@ class SignIn extends Component {
 
     return (
       <Wrapper>
-        <div className='box alignCenter justifyCenter'>
+        <div className='box alignCenter justifyCenter' style={{ paddingTop: "39px" }}>
           <Logo
+            type="big_image"
             onClickEvent={() => window.location.href = "/"}
-            type="big"
-            text={"OPEN PLACE"} />
+          />
         </div>
+        <Warning warning={this.state.login == Login.failed}>
+          {this.state.login == Login.failed
+            && <Fade>
+              <div>{"아이디 혹은 비밀번호가 틀립니다."}</div>
+            </Fade>}
+        </Warning>
         <div className='box column alignCenter'>
           <div className='inputBox'>
             <InputNormal
+              style={{ boxSizing: "border-top", marginBottom: "12px" }}
               onChangeValue={this.onChangeId}
               onClear={() => {
                 this.setState({ user_id: "", login: Login.ready })
@@ -131,14 +176,6 @@ class SignIn extends Component {
               color={"#EAF2FE"}
               radius={3}
               warning={this.state.login == Login.failed} />
-
-            <Warning warning={this.state.login == Login.failed}>
-              {this.state.login == Login.failed
-                && <Fade>
-                  <div>{"아이디 혹은 비밀번호가 틀립니다."}</div>
-                </Fade>}
-            </Warning>
-
             <InputNormal
               type="password"
               onChangeValue={this.onChangePassword}
@@ -155,6 +192,81 @@ class SignIn extends Component {
               radius={3}
               warning={this.state.login == Login.failed} />
           </div>
+
+          <div className="checkBoxRow" style={{marginBottom:`${this.state.login == Login.failed?"20px":"53px"}`}}>
+            <CheckBoxNormal id="saveid" style={{ marginRight: "15px" }} text="로그인 유지" value={this.state.saveID} onClickEvent={this.onCheckSaveID} />
+            <CheckBoxNormal id="savelogin" style={{ marginLeft: "15px" }} text="아이디 저장" value={this.state.saveLogin} onClickEvent={this.onCheckSaveLogin} />
+          </div>
+          {
+            this.state.login == Login.failed ?
+              <React.Fragment>
+                <Fade>
+                <GradientButton
+                  onClickEvent={() => goto("FINDPW")}
+                  style={{ marginBottom: "12px" }}
+                  text="아이디/비밀번호 찾기"
+                  width={240}
+                  height={42}
+                  front={'#365AF1'}
+                  end={'#FF4343'}
+                  deg={240}
+                  radius={28} />
+                <GradientButton
+                  onClickEvent={() => this.onClickLogin()}
+                  style={{ marginBottom: "12px" }}
+                  text="로그인"
+                  width={240}
+                  height={42}
+                  front={'#FF4343'}
+                  end={'#365AF1'}
+                  deg={270}
+                  radius={28} />
+                <GradientButton
+                  onClickEvent={() => goto("SIGNUP")}
+                  style={{ marginBottom: "12px" }}
+                  text="회원가입"
+                  width={240}
+                  height={42}
+                  front={'#365AF1'}
+                  end={'#FF4343'}
+                  deg={270}
+                  radius={28} />
+                </Fade>
+              </React.Fragment>
+              :
+              <React.Fragment>
+                <GradientButton
+                  onClickEvent={() => this.onClickLogin()}
+                  style={{ marginBottom: "20px" }}
+                  text="로그인"
+                  width={292}
+                  height={52}
+                  front={'#FF4343'}
+                  end={'#365AF1'}
+                  deg={270}
+                  radius={28} />
+                <GradientButton
+                  onClickEvent={() => goto("SIGNUP")}
+                  style={{ marginBottom: "20px" }}
+                  text="회원가입"
+                  width={292}
+                  height={52}
+                  front={'#365AF1'}
+                  end={'#FF4343'}
+                  deg={270}
+                  radius={28} />
+              </React.Fragment>
+          }
+          {/* <GradientButton
+            onClickEvent={() => goto("SIGNUP")}
+            style={{ marginBottom: "20px" }}
+            text="아이디/비밀번호 찾기"
+            width={292}
+            height={52}
+            front={'#365AF1'}
+            end={'#FF4343'}
+            deg={270}
+            radius={28} />
           <GradientButton
             onClickEvent={() => this.onClickLogin()}
             style={{ marginBottom: "20px" }}
@@ -174,7 +286,7 @@ class SignIn extends Component {
             front={'#365AF1'}
             end={'#FF4343'}
             deg={270}
-            radius={28} />
+            radius={28} /> */}
           <div className='login_button_wrap'>
             <ImageButton
               style={{ marginRight: "6px", marginLeft: "6px" }}

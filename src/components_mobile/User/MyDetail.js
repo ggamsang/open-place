@@ -17,10 +17,12 @@ const Wrapper = styled.div`
     background: linear-gradient(205deg,#bf1d39,#8448b6);
   }
   .searchbox{
+    padding-top:49px;
+    box-sizing:border-box;
     width:100%;
-    padding-top:50px;
     display:flex;
     align-items:center;
+    justify-content:center;
   }
   .img_arrow{width:${resolution(27)}px;height:${resolution(19)}px;}
 
