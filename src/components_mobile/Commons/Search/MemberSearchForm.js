@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { resolution } from 'commons/resolution';
 
-import Search from 'components_mobile/Search';
+import { MemberSearch as Search } from 'components_mobile/Search';
 import back_arrow from 'source/Iconly-Bold-left-arrow.svg';
-import alarm from 'source/Iconly-alarm-white.svg'
-import { useNavigate } from 'react-router';
+// import alarm from 'source/Iconly-alarm-white.svg'
+// import { useNavigate } from 'react-router';
 import { connect } from 'react-redux';
-import NotificationContainer from 'containers/NotificationContainer';
+// import NotificationContainer from 'containers/NotificationContainer';
 
 const SearchBox = styled.div`
   *{
@@ -50,7 +50,7 @@ class MemberSearchForm extends Component {
   }
 
   render() {
-    const { isLoggedIn: active } = this.props;
+    const { isLoggedIn: active, token } = this.props;
     return (
       <React.Fragment>
         <SearchBox>
@@ -59,11 +59,12 @@ class MemberSearchForm extends Component {
               <img className='img_arrow' src={back_arrow} />
             </div>}
           <div className='searchWrap'>
-          <Search
-            width={291}
-            keyword={this.props.keyword}
-            placeholder={this.props.placeholder}
-            disabled_filter={this.props.disabled_filter} />
+            <Search
+              token={token}
+              width={291}
+              keyword={this.props.keyword}
+              placeholder={this.props.placeholder}
+              disabled_filter={this.props.disabled_filter} />
           </div>
         </SearchBox>
       </React.Fragment>
@@ -73,6 +74,7 @@ class MemberSearchForm extends Component {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.Authentication.status.isLoggedIn,
+    token: state.Authentication.status.token,
   }
 };
 const mapDispatchToProps = () => ({

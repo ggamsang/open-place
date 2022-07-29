@@ -147,20 +147,7 @@ class ExpDetail extends React.Component {
   }
   onClickBuy = (event) => {
     this.setState({ loading: true });
-    this.props.buy(this.props.token, this.props.expDetail.uid)
-      .then(data => data.json())
-      .then(data => {
-        console.log(data);
-        if (data.success) {
-          alert('결제가 완료되었습니다. 구매한 상품페이지로 이동합니다.');
-          goto("MY-ITEM-BOUGHT", data.payment_id);
-        } else {
-          alert('결제를 하지 못하였습니다.' + data.detail);
-        }
-      })
-      .catch(e => {
-        alert('결제실패' + e);
-      });
+    goto("BUY", this.props.expDetail.uid);
     this.setState({ loading: false });
   }
   onClickModify = (event) => {
@@ -267,7 +254,6 @@ class ExpDetail extends React.Component {
                   :
                   null
               }
-
             </div>
           </section>
         </Fade>
