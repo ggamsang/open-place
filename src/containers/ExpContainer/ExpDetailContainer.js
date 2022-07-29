@@ -5,10 +5,13 @@ import { getExpDetailRequest, likeExpRequest, BuyExpRequest } from "actions/Exp/
 import { connect } from "react-redux";
 
 class ExpDetailContainer extends Component {
+  async componentDidMount(){
+    await this.props.getExpDetailRequest(this.props.item_id, null)
+  }
   async componentDidUpdate(prevProps) {
-    if (JSON.stringify(prevProps.userInfo) !== JSON.stringify(this.props.userInfo)) {
-      await this.props.getExpDetailRequest(this.props.item_id, this.props.userInfo == null ? null : this.props.userInfo.uid)
-    }
+    // if (JSON.stringify(prevProps.userInfo) !== JSON.stringify(this.props.userInfo)) {
+    //   await this.props.getExpDetailRequest(this.props.item_id, this.props.userInfo == null ? null : this.props.userInfo.uid)
+    // }
   }
   render() {
     return (<ExpDetail {...this.props} outlet={this.props.outlet} buy={BuyExpRequest} />);
