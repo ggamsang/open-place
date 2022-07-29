@@ -25,6 +25,7 @@ class MakeExpListContainer extends React.Component {
 const mapStateToProps = (state) => ({
   list : state.ExpList.status.exp_list,
   list_added : state.ExpList.status.exp_list_added,
+  token: state.Authentication.status.token,
 });
 
 const mapDispatchToProps = (dispatch) => ({

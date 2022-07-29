@@ -95,15 +95,15 @@ class ExpItemList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            sortType:this.props.sort,
+            sortType: this.props.sort,
         }
     }
     componentDidMount() {
         this.getList(0);
     }
     getList = (page) => {
-        return this.props.getExpListRequest(page,this.props.type, 
-                                            GetSORTYPE(this.props.sort), this.props.keyword);
+        return this.props.getExpListRequest(page, this.props.type,
+            GetSORTYPE(this.props.sort), this.props.keyword);
     }
     render() {
         const { list_added } = this.props;
@@ -131,24 +131,30 @@ class ExpItemList extends React.Component {
             </div>
 
             <div className='rows' style={{ marginTop: "15px", marginBottom: "15px" }}>
-                <ButtonNormal
-                    onClickEvent={() => goto("CREATE-ITEM")}
-                    width={165}
-                    height={35}
-                    radius={10}
-                    fontSize={15}
-                    bgColor={"#707070"}
-                    text="경험 등록하기"
-                    style={{ marginRight: "25px" }}
-                />
+                {
+                    this.props.token ?
+                        <ButtonNormal
+                            onClickEvent={() => goto("CREATE-ITEM")}
+                            width={165}
+                            height={35}
+                            radius={10}
+                            fontSize={15}
+                            bgColor={"#707070"}
+                            text="경험등록하기"
+                            style={{ marginRight: "25px" }}
+                        />
+                    :
+                    <div style={{width:"165px",height:"35px",marginRight:"25px"}}/>
+                }
+
                 <SortButton
                     value={this.state.sortType}
-                    getValue = {(value)=>{
-                        this.setState({sortType:value},()=>{
+                    getValue={(value) => {
+                        this.setState({ sortType: value }, () => {
                             const TYPE = this.props.type === "play" ? "PLAY"
-                                        : this.props.type === "learn"? "LEARN"
-                                        : this.props.type === "make" ? "MAKE":this.props.type;
-                            goto(TYPE,`${this.state.sortType}/${this.props.keyword}`)
+                                : this.props.type === "learn" ? "LEARN"
+                                    : this.props.type === "make" ? "MAKE" : this.props.type;
+                            goto(TYPE, `${this.state.sortType}/${this.props.keyword}`)
                         })
                     }}
                 />
