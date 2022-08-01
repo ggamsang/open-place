@@ -25,6 +25,7 @@ const mapStateToProps = (state) => ({
   userInfo: state.Authentication.status.userInfo,
   list : state.ExpList.status.exp_list,
   list_added : state.ExpList.status.exp_list_added,
+  token: state.Authentication.status.token,
 });
 
 const mapDispatchToProps = (dispatch) => ({

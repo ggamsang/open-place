@@ -164,7 +164,12 @@ class SharerDetail extends React.Component {
                 <div className='userName'>{this.props.sharer && this.props.sharer.nick_name || "국민대학교 CRC"}</div>
                 <div className='likeWrap'>
                   <div className='count'>{this.props.sharer && this.props.sharer.like_count}</div>
-                  <img onClick={this.onClickLike} className='icon' src={`${this.state.like == true ? Heart_red : Heart}`} />
+                  {
+                    this.props.token==null?
+                    <img className='icon' src={Heart} />
+                    :
+                    <img onClick={this.onClickLike} className='icon' src={`${this.state.like == true ? Heart_red : Heart}`} />
+                  }
                 </div>
               </div>
             </div>
@@ -184,16 +189,19 @@ class SharerDetail extends React.Component {
                 <div className='textBox' style={{ width: "114px" }}>{this.props.location && this.props.location.length > 0 && this.props.location[this.props.sharer.location_id || 0].name}</div>
               </div>
             </div>
+            {
+              this.props.token &&
+              <ButtonNormal
+                onClickEvent={() => window.location.href = "/modifySharer"}
+                width={335}
+                height={35}
+                radius={10}
+                bgColor={"#707070"}
+                text="수정"
+                style={{ marginTop: "16px" }}
+              />
+            }
 
-            <ButtonNormal
-              onClickEvent={() => window.location.href = "/modifySharer"}
-              width={335}
-              height={35}
-              radius={10}
-              bgColor={"#707070"}
-              text="수정"
-              style={{ marginTop: "16px" }}
-            />
           </Detail>
           <Sell>
             <div className='title' style={{ marginBottom: "11px" }}>판매경험</div>

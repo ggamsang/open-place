@@ -89,7 +89,7 @@ const Wrapper = styled.div`
         display:flex;align-items:center;
     }
     .buttonWrap2{
-        margin-top:30px;
+        margin-top:20px;
         display:flex;
         align-items:center;
         justify-content:center;
@@ -227,29 +227,33 @@ class ExpDetail extends React.Component {
                   text="상세정보"
                 />
               </div>
-
-              <div className='buttonWrap' style={{ marginTop: "10px" }}>
-                <ButtonNormal
-                  onClickEvent={this.onClickBuy}
-                  width={155}
-                  height={35}
-                  radius={10}
-                  fontSize={15}
-                  bgColor={"#707070"}
-                  text={"구매하기"}
-                  style={{ marginRight: "25px" }}
-                />
-                <ButtonNormal
-                  onClickEvent={() => this.setState({ write: true })}
-                  width={155}
-                  height={35}
-                  radius={10}
-                  fontSize={15}
-                  bgColor={"#707070"}
-                  text={"리뷰 등록하기"}
-                  style={{}}
-                />
-              </div>
+              {
+                this.props.isLoggedIn ?
+                  <div className='buttonWrap' style={{ marginTop: "10px" }}>
+                    <ButtonNormal
+                      onClickEvent={this.onClickBuy}
+                      width={155}
+                      height={35}
+                      radius={10}
+                      fontSize={15}
+                      bgColor={"#707070"}
+                      text={"구매하기"}
+                      style={{ marginRight: "25px" }}
+                    />
+                    <ButtonNormal
+                      onClickEvent={() => this.setState({ write: true })}
+                      width={155}
+                      height={35}
+                      radius={10}
+                      fontSize={15}
+                      bgColor={"#707070"}
+                      text={"리뷰 등록하기"}
+                      style={{}}
+                    />
+                  </div>
+                  :
+                  null
+              }
             </div>
           </section>
         </Fade>
@@ -263,7 +267,7 @@ class ExpDetail extends React.Component {
               </div>
 
               <img src={expDetail && expDetail.thumbnail} className="img img2" />
-              <div className='exp'>
+              <div className='exp' style={{ marginTop: "10px" }}>
                 <div className='row'>
                   <div className='editorText' dangerouslySetInnerHTML={{ __html: expDetail && expDetail.content }} />
                 </div>
@@ -271,16 +275,21 @@ class ExpDetail extends React.Component {
               {
                 exp_files != null && <InputFile files={exp_files} />
               }
+
               <div className='buttonWrap2'>
-                <ButtonNormal
-                  onClickEvent={this.onClickModify}
-                  width={155}
-                  height={35}
-                  radius={10}
-                  fontSize={15}
-                  bgColor={"#707070"}
-                  text="수정하기"
-                />
+                {
+                  this.props.token &&
+                  <ButtonNormal
+                    onClickEvent={this.onClickModify}
+                    width={155}
+                    height={35}
+                    radius={10}
+                    fontSize={15}
+                    bgColor={"#707070"}
+                    text="수정하기"
+                  />
+                }
+
 
               </div>
             </div>

@@ -271,7 +271,7 @@ class CommentList extends React.Component {
 
         return (<Wrapper>
 
-            {isReply === null && (<CommentForm />)}
+            {isReply === null && this.props.token&& (<CommentForm />)}
 
             {comment.length > 0 ? comment.map((item, idx) =>
                 <div key={idx} className="line comment-list-wrapper">
