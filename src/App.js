@@ -33,10 +33,10 @@ import CreateExpPage from "pages/ExpPage/CreateExpPage/CreateExpPage";
 import ModifyExpPage from "pages/ExpPage/ModifyExpPage/ModifyExpPage";
 
 import { WIDTH } from "constant";
-import bg from "resources/sample-image-01.png";
+// import bg from "resources/sample-image-01.png";
 
 import MyPaidExpDetailPage from "pages/MyPaidExpDetailPage";
-import MyPointChargePage from "pages/MyPointChargePage";
+// import MyPointChargePage from "pages/MyPointChargePage";
 import BuyPage from "pages/BuyPage";
 const Wrapper = styled.main`
   // overflow: hidden;

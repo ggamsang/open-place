@@ -352,7 +352,7 @@ class BoughtExpDetail extends React.Component {
 
             {detail.type === ExpTypes.GAMING
                 && <Gaming>
-                    <PlayGameContainer exp_id={detail.uid} />
+                    <PlayGameContainer detail={detail} exp_id={detail.uid} />
                 </Gaming>}
 
             {detail.type === ExpTypes.NORMAL

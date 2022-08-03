@@ -1,18 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { resolution } from 'commons/resolution';
-
 import TextAreaNormal from 'components_mobile/Commons/TextArea/TextAreaNormal';
 import DropDownNormal from 'components_mobile/Commons/DropDown/DropDownNormal';
 import InputNormal from 'components_mobile/Commons/Input/InputNormal';
-import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
 
 const Wrap = styled.div`
-  box-sizing:border-box;
+  box-sizing: border-box;
   .flex{
-    padding:10px;
-    display:flex;
-    align-items:center;
+    padding: 10px;
+    display: flex;
+    align-items: center;
   }
   .shadowBorderBox{
     .img_{border:none;background-color:#E9E9E9;width:${resolution(100)}px;height:${resolution(100)}px;border-radius:${resolution(10)}px;object-fit:cover;}
@@ -42,60 +40,60 @@ const Wrap = styled.div`
 
 
 class SharerForm extends React.Component {
-  async componentDidMount(){
-    this.props.location&&
-    await this.props.location.map((item,index)=>{
+  // async componentDidMount(){
+  //   this.props.location&&
+  //   await this.props.location.map((item,index)=>{
 
-    })
-  }
+  //   })
+  // }
   constructor(props) {
     super(props);
     this.state = {
-      info:"",country:-1,city:-1,email:"",bank_code:null,bank_number:""
+      info: "", country: -1, city: -1, email: "", bank_code: null, bank_number: ""
     }
     this.onChangeInfo = this.onChangeInfo.bind(this);
     this.onChangeCountry = this.onChangeCountry.bind(this);
-    this.onChangeCity=this.onChangeCity.bind(this);
-    this.onChangeEmail=this.onChangeEmail.bind(this);
-    this.onChangeBankCode=this.onChangeBankCode.bind(this);
-    this.onChangeBankNumber=this.onChangeBankNumber.bind(this);
+    this.onChangeCity = this.onChangeCity.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangeBankCode = this.onChangeBankCode.bind(this);
+    this.onChangeBankNumber = this.onChangeBankNumber.bind(this);
     this.onChangeThumbnail = this.onChangeThumbnail.bind(this);
   }
-  componentDidUpdate(prevProps){
-    if(prevProps.sharer!=this.props.sharer){
+  componentDidUpdate(prevProps) {
+    if (prevProps.sharer !== this.props.sharer) {
       console.log(this.props.sharer);
       this.setState({
-        info:this.props.sharer.about_me,
-        city:this.props.sharer.location_id,
-        email:this.props.sharer.email,
-        bank_code:this.props.sharer.bank_code,
-        bank_number:this.props.sharer.account_number,
+        info: this.props.sharer.about_me,
+        city: this.props.sharer.location_id,
+        email: this.props.sharer.email,
+        bank_code: this.props.sharer.bank_code,
+        bank_number: this.props.sharer.account_number,
       })
     }
   }
 
   onChangeInfo = (event) => {
-    this.setState({info:event.target.value});
+    this.setState({ info: event.target.value });
     this.props.onChangeInfo(event.target.value);
   }
   onChangeCountry = (event) => {
-    this.setState({country:event.target.value});
+    this.setState({ country: event.target.value });
     this.props.onChangeCountry(event.target.value);
   }
   onChangeCity = (event) => {
-    this.setState({city:event.target.value});
+    this.setState({ city: event.target.value });
     this.props.onChangeCity(event.target.value);
   }
   onChangeEmail = (event) => {
-    this.setState({email:event.target.value});
+    this.setState({ email: event.target.value });
     this.props.onChangeEmail(event.target.value);
   }
   onChangeBankCode = (event) => {
-    this.setState({bank_code:event.target.value});
+    this.setState({ bank_code: event.target.value });
     this.props.onChangeBankCode(event.target.value);
   }
   onChangeBankNumber = (event) => {
-    this.setState({bank_number:event.target.value});
+    this.setState({ bank_number: event.target.value });
     this.props.onChangeBankNumber(event.target.value);
   }
   onChangeThumbnail = async (event) => {
@@ -116,7 +114,7 @@ class SharerForm extends React.Component {
     }
     reader.onloadend = () => {
       this.setState({ thumbnail: reader.result, thumbnail_name: file.name })
-      this.props.onChangeThumbnail(reader.result,file.name);
+      this.props.onChangeThumbnail(reader.result, file.name);
     }
     if (event.target.files[0]) {
       reader.readAsDataURL(file);
@@ -126,7 +124,7 @@ class SharerForm extends React.Component {
     return (
       <React.Fragment>
         <Wrap>
-        {/* <div className='shadowBorderBox flex'>
+          {/* <div className='shadowBorderBox flex'>
             <img src={this.state.thumbnail} className="img_" />
             <div className='wrap'>
               <div style={{ marginBottom: "9px" }}><span className="text">{this.props.userInfo&&this.props.userInfo.nick_name||""} 프로필 썸네일</span></div>
@@ -167,7 +165,7 @@ class SharerForm extends React.Component {
                 radius={10}
                 disabled={true}
                 options={
-                  [{name:"대한민국"}]
+                  [{ name: "대한민국" }]
                 }
 
               />

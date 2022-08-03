@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { GetExpReviewRequest, UpdateExpReviewRequest, GetExpReviewListRequest } from "actions/Review";
+import { UpdateExpReviewRequest, GetExpReviewListRequest } from "actions/Review";
 import ReviewModifyModal from "components_mobile/Review/ReviewModifyModal";
 
 class ReviewModifyContainer extends React.Component {

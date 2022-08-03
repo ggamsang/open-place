@@ -32,7 +32,7 @@ const setTokenCookie = (tname, tvalue) => {
     const expires = `expires=${date.toUTCString()}`;
     document.cookie = `${tname}=${tvalue};${expires};path=/`;
 }
-const setCookie = (cookie_name, value, days) => { ; }
+// const setCookie = (cookie_name, value, days) => { ; }
 export const SetSession = (key, data) => {
     return new Promise((resolve, reject) => {
         if (storageAvailable(LocalStorageName)) {
@@ -40,7 +40,7 @@ export const SetSession = (key, data) => {
         } else {
             setTokenCookie(key, data);//setCookie(key, data);
         }
-        if (data == null || data === "null") {
+        if (data === null || data === "null") {
             window.localStorage.removeItem(key);
         }
         resolve(data);
@@ -69,7 +69,7 @@ export const GetSession = (key) => {
         } else {
             token = getCookie(key);
         }
-        if (token === "null" || token == null) {
+        if (token === "null" || token === null) {
             reject(null);
         } else {
             resolve(token);

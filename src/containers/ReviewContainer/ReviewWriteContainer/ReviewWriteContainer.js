@@ -1,4 +1,3 @@
-import ReviewWrite from "components_mobile/Review/ReviewWriteModal";
 import React from "react";
 import { connect } from "react-redux";
 import { CreateExpReviewRequest, GetExpReviewListRequest } from "actions/Review";

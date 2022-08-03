@@ -5,10 +5,11 @@ import NeedToLogin from 'Verification/NeedToLogin';
 
 function MyPaidExpDetailPage() {
   const params = useParams();
-  return (NeedToLogin(
-    <ClientTemplate>
+  return (<ClientTemplate>
+    {NeedToLogin(
       <BuyExpDetailContainer payment_id={params.id} />
-    </ClientTemplate>));
+    )}
+  </ClientTemplate>);
 }
 
 export default MyPaidExpDetailPage;

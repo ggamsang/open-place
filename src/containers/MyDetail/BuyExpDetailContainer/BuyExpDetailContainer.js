@@ -5,13 +5,18 @@ import { Dimmer, Loader } from 'semantic-ui-react';
 import BoughtExpDetail from 'components_mobile/Exp/BoughtExpDetail';
 
 class BuyExpDetailContainer extends React.Component {
+    componentDidMount() {
+        if (this.props.token) {
+            this.props.token && this.props.getUserBoughtExpDetailRequest(this.props.token, this.props.payment_id);
+        }
+    }
     componentDidUpdate(props) {
-        if (props.token == null && (this.props.token !== props.token)) {
+        if (props.token === null && (this.props.token !== props.token)) {
             this.props.token && this.props.getUserBoughtExpDetailRequest(this.props.token, this.props.payment_id);
         }
     }
     render() {
-        console.log('buy exp detail', this.props);
+
         return (<>
             {this.props.detail
                 ? <BoughtExpDetail {...this.props} />

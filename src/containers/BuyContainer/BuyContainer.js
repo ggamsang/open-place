@@ -7,17 +7,17 @@ import Buy from 'components_mobile/Exp/Buy';
 
 class BuyContainer extends React.Component {
     componentDidUpdate(prevProps) {
-        if (JSON.stringify(prevProps.userInfo)!=JSON.stringify(this.props.userInfo)) {
-            this.props.userInfo && this.props.getExpDetailRequest(this.props.item_id,this.props.userInfo.uid);
+        if (JSON.stringify(prevProps.userInfo) !== JSON.stringify(this.props.userInfo)) {
+            this.props.userInfo && this.props.getExpDetailRequest(this.props.item_id, this.props.userInfo.uid);
         }
         if (prevProps.token !== this.props.token && this.props.token != null) {
             this.props.GetCurrentMyPointRequest(this.props.token);
-          }
+        }
     }
     render() {
         return (<>
             {this.props.expDetail
-                ? <Buy {...this.props} buy={BuyExpRequest}/>
+                ? <Buy {...this.props} buy={BuyExpRequest} />
                 : <Dimmer>
                     <Loader />
                 </Dimmer>}

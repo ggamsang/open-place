@@ -4,9 +4,7 @@ import { resolution } from 'commons/resolution';
 import profile from 'resources/Profile.svg';
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 import SharerForm from './SharerForm';
-
 import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
-import { WIDTH } from 'constant';
 
 const Wrapper = styled.div`
   width:100%;
@@ -71,11 +69,17 @@ class CreateSharer extends React.Component {
     this.onCancel = this.onCancel.bind(this);
   }
   onSubmit = async () => {
-    const { info, country, city, email, bank_code, bank_number, thumbnail, thumbnail_name } = this.state;
+    const { userInfo, token } = this.props;
+    const { info, country, city, email, bank_code, bank_number, } = this.state;
     let data = {
-      info: info, country: country, city: city, email: email, bank_code: bank_code, bank_number: bank_number,
+      info: info,
+      country: country,
+      city: city,
+      email: email,
+      bank_code: bank_code,
+      bank_number: bank_number,
     }
-    this.props.updateSharerProfileRequest(this.props.userInfo.uid, data, this.props.token)
+    this.props.updateSharerProfileRequest(userInfo?.uid, data, token)
     window.history.go(-1);
 
   }
@@ -83,7 +87,7 @@ class CreateSharer extends React.Component {
     window.history.go(-1);
   }
   componentDidUpdate(props) {
-    if (props.userInfo == null && this.props.userInfo)
+    if (props.userInfo === null && this.props.userInfo)
       return;
   }
   render() {

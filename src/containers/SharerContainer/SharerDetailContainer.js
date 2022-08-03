@@ -6,22 +6,22 @@ import SharerDetail from 'components_mobile/Sharer/SharerDetail';
 import { likeSharerRequest } from 'actions/Sharer/Sharer';
 import { getIsMyLikeRequest } from 'actions/User/User';
 class SharerDetailContainer extends React.Component {
-  async componentDidMount(){
+  async componentDidMount() {
     console.log(this.props);
     await this.props.getSharerRequest(this.props.user_id)
     this.props.getLocationListRequest();
   }
-  async componentDidUpdate(prevProps){
-    if(JSON.stringify(prevProps.userInfo) != JSON.stringify(this.props.userInfo)){
-      console.log(this.props.userInfo.uid,this.props.user_id,"sharer");
-      this.props.getIsMyLikeRequest(this.props.userInfo.uid,this.props.user_id,"sharer")
+  async componentDidUpdate(prevProps) {
+    if (JSON.stringify(prevProps.userInfo) !== JSON.stringify(this.props.userInfo)) {
+      console.log(this.props.userInfo.uid, this.props.user_id, "sharer");
+      this.props.getIsMyLikeRequest(this.props.userInfo.uid, this.props.user_id, "sharer")
     }
   }
   render() {
-    console.log("=====",this.props)
+    console.log("=====", this.props)
     return (
       <React.Fragment>
-        <SharerDetail {...this.props}/>
+        <SharerDetail {...this.props} />
       </React.Fragment>
     )
   }
@@ -31,7 +31,7 @@ const mapStateToProps = (state) => ({
   active: state.Authentication.status.active,
   userInfo: state.Authentication.status.userInfo,
   sharer: state.User.status.sharer,
-  location : state.DefaultList.status.location,
+  location: state.DefaultList.status.location,
   token: state.Authentication.status.token,
   isLike: state.User.status.isLike,
 });
@@ -39,8 +39,8 @@ const mapDispatchToProps = (dispatch) => {
   return ({
     getSharerRequest: (user_id) => { dispatch(getSharerRequest(user_id)) },
     getLocationListRequest: () => { dispatch(getLocationListRequest()) },
-    likeSharerRequest:(token,data)=>dispatch(likeSharerRequest(token,data)),
-    getIsMyLikeRequest:(user_id,like_id,type)=>dispatch(getIsMyLikeRequest(user_id,like_id,type))
+    likeSharerRequest: (token, data) => dispatch(likeSharerRequest(token, data)),
+    getIsMyLikeRequest: (user_id, like_id, type) => dispatch(getIsMyLikeRequest(user_id, like_id, type))
   });
 }
 

@@ -170,7 +170,7 @@ class FindPW extends Component {
       <React.Fragment>
         <Wrapper>
           <Fade when={this.state.page1}>
-            <div className='content' style={{ display: `${this.state.page1 == false ? "none" : "block"}` }}>
+            <div className='content' style={{ display: `${this.state.page1 === false ? "none" : "block"}` }}>
               <div className='box alignCenter justifyCenter'>
                 <Logo type="big" text={"OPEN PLACE"} />
               </div>
@@ -206,7 +206,7 @@ class FindPW extends Component {
           </Fade>
 
           <Fade when={this.state.page2_1}>
-            <div className='content' style={{ display: `${this.state.page2_1 == false ? "none" : "block"}` }}>
+            <div className='content' style={{ display: `${this.state.page2_1 === false ? "none" : "block"}` }}>
               <div className='box alignCenter justifyCenter'>
                 <Logo onClickEvent={() => window.location.href = "/login"} type="small" text={"OPEN PLACE"} />
               </div>
@@ -247,7 +247,7 @@ class FindPW extends Component {
           </Fade>
 
           <Fade when={this.state.page2_2}>
-            <div className='content' style={{ display: `${this.state.page2_2 == false ? "none" : "block"}` }}>
+            <div className='content' style={{ display: `${this.state.page2_2 === false ? "none" : "block"}` }}>
 
               <div className='box alignCenter justifyCenter'>
                 <Logo onClickEvent={() => window.location.href = "/login"} type="small" text={"OPEN PLACE"} />
@@ -286,7 +286,7 @@ class FindPW extends Component {
           </Fade>
 
           <Fade when={this.state.page3}>
-            <div className='content' style={{ display: `${this.state.page3 == false ? "none" : "block"}` }}>
+            <div className='content' style={{ display: `${this.state.page3 === false ? "none" : "block"}` }}>
               <div className='box alignCenter justifyCenter'>
                 <Logo onClickEvent={() => window.location.href = "/login"} type="big" />
               </div>

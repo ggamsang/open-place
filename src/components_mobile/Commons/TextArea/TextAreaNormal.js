@@ -19,7 +19,7 @@ const TextAreaField = styled.textarea`
     border-radius:${props=>props.radius==null?"0":props.radius}px;
     padding:10px;
     outline:none;
-    border:${props=>props.warning == true ? "1px solid red" : "none"};
+    border:${props=>props.warning === true ? "1px solid red" : "none"};
     ::placeholder{
         color:#707070;
     }

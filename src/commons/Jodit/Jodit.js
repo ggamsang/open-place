@@ -20,32 +20,32 @@ import JoditEditor from "jodit-react";
 
 class Jodit extends Component {
 
-    constructor(props) {
-      super(props);
-      this.state = {
-        value:"",
-      }
-      this.handleChangeContent = this.handleChangeContent.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: "",
     }
-    componentDidUpdate(prevProps){
-      if(prevProps.value != this.props.value){
-        this.setState({
-          value:this.props.value,
-        })
-      }
-    }
-    handleChangeContent = async(content) =>{
-        await this.props.onChange(content);
-    }
-    render() {
-      const {config} = this.props;
-      return (
-        <JoditEditor
-            config={config}
-            onChange={async newContent=>await this.handleChangeContent(newContent)}
-            value={this.state.value}
-        />
-      )
+    this.handleChangeContent = this.handleChangeContent.bind(this);
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.value !== this.props.value) {
+      this.setState({
+        value: this.props.value,
+      })
     }
   }
-  export default Jodit;
+  handleChangeContent = async (content) => {
+    await this.props.onChange(content);
+  }
+  render() {
+    const { config } = this.props;
+    return (
+      <JoditEditor
+        config={config}
+        onChange={async newContent => await this.handleChangeContent(newContent)}
+        value={this.state.value}
+      />
+    )
+  }
+}
+export default Jodit;

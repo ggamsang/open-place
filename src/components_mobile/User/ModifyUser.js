@@ -109,7 +109,7 @@ class ModifyUser extends Component {
     this.onChangePassword_checked = this.onChangePassword_checked.bind(this);
   }
   componentDidUpdate(prevProps) {
-    if (prevProps.userInfo != this.props.userInfo) {
+    if (prevProps.userInfo !== this.props.userInfo) {
       this.setState({
         nick_name: this.props.userInfo.nick_name,
         thumbnail: this.props.userInfo.l_img,
@@ -150,16 +150,16 @@ class ModifyUser extends Component {
     }
   };
   onSubmit = async () => {
-    if (this.state.nick_name != this.props.userInfo.nick_name) {
+    if (this.state.nick_name !== this.props.userInfo.nick_name) {
       await this.props.CheckNickNameRequest(this.props.token, this.state.nick_name)
-      if (this.state.nick_name == null || this.state.nick_name == "") {
+      if (this.state.nick_name === null || this.state.nick_name === "") {
         alert("닉네임을 입력해주세요");
         return;
-      } else if (this.props.checkNickName == true && this.state.nick_name != this.props.userInfo.nick_name) {
+      } else if (this.props.checkNickName === true && this.state.nick_name !== this.props.userInfo.nick_name) {
         alert("중복된 닉네임입니다");
         return;
       }
-    } else if (this.state.password != this.state.password_checked) {
+    } else if (this.state.password !== this.state.password_checked) {
       alert("비밀번호가 일치하지 않습니다");
       return;
     }
@@ -170,11 +170,11 @@ class ModifyUser extends Component {
       files: [],
     }
     let file = { value: this.state.thumbnail, name: this.state.thumbnail_name, key: 0 };
-    if (this.state.thumbnail != this.props.userInfo.l_img) { await data.files.push(file); } // thumbnail 썸네일이 있을 경우에만 
+    if (this.state.thumbnail !== this.props.userInfo.l_img) { await data.files.push(file); } // thumbnail 썸네일이 있을 경우에만 
     await this.props.updateUserRequest(this.props.userInfo.uid, data, this.props.token)
-    .then(()=>{
-      window.location.href = "/myDetail/sub"
-    })
+      .then(() => {
+        window.location.href = "/myDetail/sub"
+      })
   }
   render() {
     const { userInfo } = this.props;
@@ -196,10 +196,10 @@ class ModifyUser extends Component {
                 </div>
               </div>
               <Content>
-                <div className='shadowBorderBox' style={{marginBottom:"20px"}}>
+                <div className='shadowBorderBox' style={{ marginBottom: "20px" }}>
                   <div className='thumbnailBox'>
                     {
-                      this.state.thumbnail == null ?
+                      this.state.thumbnail === null ?
                         <div className='img_' /> :
                         <img src={this.state.thumbnail} className="img_" alt="profile" />
                     }

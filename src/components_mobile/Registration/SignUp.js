@@ -194,7 +194,7 @@ class SignUp extends Component {
 
           {/*본인인증 */}
           <Fade when={this.state.page1}>
-            <div className="box column alignCenter" style={{ display: `${this.state.page1 == false ? "none" : "flex"}` }}>
+            <div className="box column alignCenter" style={{ display: `${this.state.page1 === false ? "none" : "flex"}` }}>
               <div className='inputBox'>
                 <div style={{ marginTop: "20px" }} className='label'>이름</div>
                 <InputLine onChangeValue={this.onChangeFirstName}
@@ -230,7 +230,7 @@ class SignUp extends Component {
 
           {/* id, pw, pw2 */}
           <Fade when={this.state.page2}>
-            <div className="box column alignCenter" style={{ display: `${this.state.page2 == false ? "none" : "flex"}` }}>
+            <div className="box column alignCenter" style={{ display: `${this.state.page2 === false ? "none" : "flex"}` }}>
               <div className='inputBox' style={{ marginTop: "32px" }}>
                 <InputNormal style={{ marginBottom: "16px" }} onChangeValue={this.onChangeId}
                   value={this.state.user_id}

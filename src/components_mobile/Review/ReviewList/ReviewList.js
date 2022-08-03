@@ -1,5 +1,3 @@
-import ButtonNormal from "components_mobile/Commons/Button/\bButtonNormal";
-import { WIDTH } from "constant";
 import React from "react";
 import styled from 'styled-components';
 import ReviewWriteContainer from "containers/ReviewContainer/ReviewWriteContainer";

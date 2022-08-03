@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from "react-redux";
 import ExpItemList from 'components_mobile/Exp/ExpItemList';
 import {getExpListRequest} from "actions/Exp/ExpList"
@@ -39,7 +39,7 @@ class PlayExpListContainer extends React.Component {
   }
   render() {
     console.log(this.props);
-    const { list } = this.state;
+    
     return (<React.Fragment>
       <ExpItemList type="play" {...this.props} />
     </React.Fragment>)

@@ -1,4 +1,3 @@
-import { type } from "@testing-library/user-event/dist/type";
 import * as types from "actions/ActionTypes";
 import update from "react-addons-update";
 

@@ -4,16 +4,18 @@ import { connect } from "react-redux";
 import { getUserRegisterExpRequest } from "actions/User/MyDetail"
 import Item from 'components_mobile/Commons/Item';
 import styled from 'styled-components';
+
 const Wrapper = styled.div`
-  width:100%;
-  box-sizing:border-box;
-  padding:0px 20px;
-`
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0px 20px;
+`;
+
 class SellItemListContainer extends Component {
-  constructor(props){
-    super(props);
-    // this.getList = this.getList.bind(this);
-  }
+  // constructor(props){
+  //   super(props);
+  //   // this.getList = this.getList.bind(this);
+  // }
   componentWillMount() {
     console.log(this.props.userInfo)
     this.getList(0);

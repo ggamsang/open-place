@@ -9,14 +9,14 @@ const CustomButton = styled.div`
   box-sizing:border-box;
   width:${resolution(props => props.width)}px;
   height:${resolution(props => props.height)}px;
-  background-color:${props => props.bgColor == null ? "red" : props.bgColor};
-  border:${props => props.border == null ? "none" : props.border};
-  border-radius:${props => props.radius == null ? 0 : props.radius}px;
+  background-color:${props => props.bgColor === null ? "red" : props.bgColor};
+  border:${props => props.border === null ? "none" : props.border};
+  border-radius:${props => props.radius === null ? 0 : props.radius}px;
   .text{
-    color:${props => props.color == null ? 'white' : props.color};
+    color:${props => props.color === null ? 'white' : props.color};
     font-family:Pretendard;
     font-weight:medium;
-    font-size:${resolution(props => props.fontSize == null ? 18 : props.fontSize)}px;
+    font-size:${resolution(props => props.fontSize === null ? 18 : props.fontSize)}px;
   }
   cursor: pointer;
 `

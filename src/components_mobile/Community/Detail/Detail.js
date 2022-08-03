@@ -209,7 +209,7 @@ export default class CommunityDetail extends React.Component {
         </div>}
       {
         this.props.userInfo &&
-        this.props.userInfo.uid == this.props.user_id &&
+        this.props.userInfo.uid === this.props.user_id &&
         <div className='buttonWrap'>
           <ButtonNormal
             onClickEvent={()=>window.location.href=`/community/modify/${this.props.uid}`}

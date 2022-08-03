@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { resolution } from 'commons/resolution';
-import { keyframes } from 'styled-components';
 import CheckIcon from 'source/check_green.svg';
+// import { keyframes } from 'styled-components';
 
 const Wrap = styled.div`
-    width:${resolution(props=>props.width==null?300:props.width)}px;
-    height:${resolution(props=>props.height==null?300:props.height)}px;
-    max-width:${resolution(props=>props.width==null?300:props.width)}px;
-    max-height:${resolution(props=>props.height==null?300:props.height)}px;
+    width:${resolution(props => props.width === null ? 300 : props.width)}px;
+    height:${resolution(props => props.height === null ? 300 : props.height)}px;
+    max-width:${resolution(props => props.width === null ? 300 : props.width)}px;
+    max-height:${resolution(props => props.height === null ? 300 : props.height)}px;
 
     border-radius:3px;
     border:1px solid white;
@@ -16,7 +16,7 @@ const Wrap = styled.div`
     align-items:center;
     justify-content:space-between;
     .checked{
-        opacity:${props=>props.checked==true?"1":"0"};
+        opacity:${props => props.checked === true ? "1" : "0"};
         width:16px;
         height:16px;
         max-width:16px;
@@ -42,12 +42,11 @@ const InputField = styled.input`
         color:black;
     }
 `
-const InputRegionNumber = styled.input`
-    border:none;
-    outline:none;
-    background-color:transparent;
-
-`
+// const InputRegionNumber = styled.input`
+//     border:none;
+//     outline:none;
+//     background-color:transparent;
+// `
 const selectList = [
     "gmail.com",
     "naver.com",
@@ -55,39 +54,41 @@ const selectList = [
     "hanmail.com"
 ]
 class InputEmail extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            email_adr:"",email_id:""}
+        this.state = {
+            email_adr: "",
+            email_id: ""
+        }
         this.onSelectEmail = this.onSelectEmail.bind(this);
     }
 
-    onSelectEmail = (event)=>{
-        this.setState({email_adr:event.target.value})
+    onSelectEmail = (event) => {
+        this.setState({ email_adr: event.target.value })
     }
 
     render() {
-    const warning = this.props.warning;
-    return (
-        <React.Fragment>
-            <Wrap width={this.props.width} height={this.props.height} checked={this.props.checked}>
-            <InputField
-                placeholder='이메일을 입력하세요'
-                onChange={this.props.onChangeValue}
-                value={this.props.value}
-            />
-            <select className='combo' onChange={this.onSelectEmail} value={this.state.email_adr}>
-                {
-                    selectList.map((item,index)=>{
-                        return <option value={index}>{item}</option>
-                    })
-                }
-            </select>
-            <div className='checked'/>
-            </Wrap>
-        </React.Fragment>
-    )
-  }
+        // const warning = this.props.warning;
+        return (
+            <React.Fragment>
+                <Wrap width={this.props.width} height={this.props.height} checked={this.props.checked}>
+                    <InputField
+                        placeholder='이메일을 입력하세요'
+                        onChange={this.props.onChangeValue}
+                        value={this.props.value}
+                    />
+                    <select className='combo' onChange={this.onSelectEmail} value={this.state.email_adr}>
+                        {
+                            selectList.map((item, index) => {
+                                return <option value={index}>{item}</option>
+                            })
+                        }
+                    </select>
+                    <div className='checked' />
+                </Wrap>
+            </React.Fragment>
+        )
+    }
 }
 
 export default InputEmail;

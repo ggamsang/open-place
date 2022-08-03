@@ -6,7 +6,7 @@ import host from 'config';
 import { goto } from 'navigator';
 
 const Wrapper = styled.div`
-    width: ${props => props.width == null ? WIDTH : props.width}px;
+    width: ${props => props.width === null ? WIDTH : props.width}px;
     position: relative;
 `;
 const InputWrapper = styled.div`
@@ -15,7 +15,7 @@ const InputWrapper = styled.div`
     flex-direction: row;
     // justify-content: space-between;
     align-items: center;
-    width: ${props => props.width == null ? WIDTH : props.width}px;
+    width: ${props => props.width === null ? WIDTH : props.width}px;
     width: 100%;
     height: 35px;
     border-radius: 6px;
@@ -159,7 +159,7 @@ export class MemberSearch extends React.Component {
                     {list.map(({ uid, id, nick_name, s_img }) => {
                         return (<li key={uid} onClick={() => this.getMessageGroupId(uid)}>
                             <div>
-                                <img src={s_img} />
+                                <img alt="mini-profile" src={s_img} />
                             </div>
                             <div>
                                 {id}

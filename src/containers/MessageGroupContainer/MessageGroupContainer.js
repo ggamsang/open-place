@@ -7,7 +7,7 @@ class MessageGroupContainer extends React.Component {
 
     GetList = page => this.props.GetMessageGroupRequest(page, this.props.token)
     componentDidUpdate(props) {
-        if (this.props.token && props.token == null) {
+        if (this.props.token && props.token === null) {
             this.GetList(0);
         }
     }

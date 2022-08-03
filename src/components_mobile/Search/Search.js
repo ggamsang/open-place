@@ -6,7 +6,7 @@ import { CATEGORY } from 'components_mobile/Commons/Define';
 
 const WIDTH = 335;
 const Wrapper = styledComponents.div`
-    width: ${props => props.width == null ? WIDTH : props.width}px;
+    width: ${props => props.width === null ? WIDTH : props.width}px;
     // margin: auto;
 `;
 const InputWrapper = styledComponents.div`
@@ -15,7 +15,7 @@ const InputWrapper = styledComponents.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: ${props => props.width == null ? WIDTH : props.width}px;
+    width: ${props => props.width === null ? WIDTH : props.width}px;
     width: 100%;
     height: 35px;
     border-radius: 6px;

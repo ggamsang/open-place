@@ -5,10 +5,10 @@ import { keyframes } from 'styled-components';
 import CheckIcon from 'source/check_green.svg';
 
 const Wrap = styled.div`
-    width:${resolution(props => props.width == null ? 300 : props.width)}px;
-    height:${resolution(props => props.height == null ? 300 : props.height)}px;
-    max-width:${resolution(props => props.width == null ? 300 : props.width)}px;
-    max-height:${resolution(props => props.height == null ? 300 : props.height)}px;
+    width:${resolution(props => props.width === null ? 300 : props.width)}px;
+    height:${resolution(props => props.height === null ? 300 : props.height)}px;
+    max-width:${resolution(props => props.width === null ? 300 : props.width)}px;
+    max-height:${resolution(props => props.height === null ? 300 : props.height)}px;
 
     border-radius:3px;
     border:1px solid white;
@@ -16,7 +16,7 @@ const Wrap = styled.div`
     align-items:center;
     justify-content:space-between;
     .checked{
-        opacity:${props => props.checked == true ? "1" : "0"};
+        opacity:${props => props.checked === true ? "1" : "0"};
         width:16px;
         height:16px;
         max-width:16px;

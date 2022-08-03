@@ -81,7 +81,7 @@ class TermsOfService extends React.Component {
             <SearchForm isMain={true} />
           </div>
           <div className='header'>
-            <img onClick={this.onClickBack} src={back_arrow} className="img_arrow" />
+            <img alt="arrow-button" onClick={this.onClickBack} src={back_arrow} className="img_arrow" />
             <div className='title'>이용약관</div>
             <div className='img_arrow' />
           </div>

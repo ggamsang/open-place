@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import SharerDetailContainer from 'containers/SharerContainer/SharerDetailContainer';
 import ClientTemplate from 'clientTemplate';
 import { useParams } from "react-router-dom";

@@ -101,8 +101,15 @@ class CreateExp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tag: null, exp_type: 0, exp_type_detail: "",
-      thumbnail: null, thumbnail_name: null, title: null, category: 1, info: null, exp_files: [],
+      tag: null,
+      exp_type: 0,
+      exp_type_detail: "",
+      thumbnail: null,
+      thumbnail_name: null,
+      title: null,
+      category: 1,
+      info: null,
+      exp_files: [],
     }
     this.onChangeThumbnail = this.onChangeThumbnail.bind(this);
     this.onChangeTitle = this.onChangeTitle.bind(this);
@@ -209,17 +216,18 @@ class CreateExp extends React.Component {
     if (thumbnail != null) {
       await data.files.push(file);
     } // thumbnail 썸네일이 있을 경우에만 
-    if (title == null || title === "") return alert("제목을 입력하세요");
-    if (info == null || info === "") return alert("내용을 입력하세요");
+    if (title === null || title === "") return alert("제목을 입력하세요");
+    if (info === null || info === "") return alert("내용을 입력하세요");
 
     this.props.createExpRequest(data, this.props.token)
       .then((data) => {
         // console.log(data);
-        window.history.go(-1);
+        // window.history.go(-1);
       })
   }
 
   render() {
+    console.log(this.state);
 
     return (
       <Wrapper>
@@ -231,7 +239,7 @@ class CreateExp extends React.Component {
         </div>
         <div className='content'>
           <div className='whitebox'>
-            {this.state.thumbnail == null ?
+            {this.state.thumbnail === null ?
               <div className='img_' /> :
               <img src={this.state.thumbnail} className="img_" alt="profile" />}
 

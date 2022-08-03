@@ -5,12 +5,12 @@ import { getExpDetailRequest, likeExpRequest, BuyExpRequest } from "actions/Exp/
 import { connect } from "react-redux";
 
 class ExpDetailContainer extends Component {
-  async componentDidMount(){
+  async componentDidMount() {
     await this.props.getExpDetailRequest(this.props.item_id, null)
   }
   async componentDidUpdate(prevProps) {
     // if (JSON.stringify(prevProps.userInfo) !== JSON.stringify(this.props.userInfo)) {
-    //   await this.props.getExpDetailRequest(this.props.item_id, this.props.userInfo == null ? null : this.props.userInfo.uid)
+    //   await this.props.getExpDetailRequest(this.props.item_id, this.props.userInfo === null ? null : this.props.userInfo.uid)
     // }
   }
   render() {
@@ -24,13 +24,13 @@ const mapStateToProps = (state) => ({
   active: state.Authentication.status.active,
   userInfo: state.Authentication.status.userInfo,
   expDetail: state.ExpDetail.status.expDetail,
-  token: state.Authentication.status.token,
 });
-const mapDispatchToProps = (dispatch) => {
-  return ({
-    getExpDetailRequest: (item_id, user_id) => dispatch(getExpDetailRequest(item_id, user_id)),
-    likeExpRequest: (token, data) => dispatch(likeExpRequest(token, data)),
-  });
-}
+const mapDispatchToProps = (dispatch) => ({
+  getExpDetailRequest: (item_id, user_id) =>
+    dispatch(getExpDetailRequest(item_id, user_id)),
+  likeExpRequest: (token, data) =>
+    dispatch(likeExpRequest(token, data)),
+});
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpDetailContainer);

@@ -272,7 +272,7 @@ class CounselingMessageDetail extends React.Component {
                 chats.scrollTop = chats.scrollHeight;
             }, 500);
         }
-        if (this.props.group_id != props.group_id && props.group_id == null) {
+        if (this.props.group_id != props.group_id && props.group_id === null) {
             this.props.getMore(0);
             const chats = document.getElementById('chats');
             setTimeout(() => {

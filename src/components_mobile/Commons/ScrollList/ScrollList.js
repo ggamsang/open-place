@@ -23,7 +23,7 @@ width:100%;
 //     }
 //     margin: auto;
 //     width: ${WIDTH}px;
-//     // margin:${props => props.type == "sharer" ? "none" : "auto"};
+//     // margin:${props => props.type === "sharer" ? "none" : "auto"};
 // `;
 const NoData = styled.div`
   width: 100%;
@@ -47,7 +47,7 @@ class ScrollList extends React.Component {
         this.props.getList &&
             this.props.getList(page)
                 .then(() => {
-                    this.setState({ hasMore: this.props.list == null || this.props.list.length < 10 ? false : true, loading: true, })
+                    this.setState({ hasMore: this.props.list === null || this.props.list.length < 10 ? false : true, loading: true, })
                 })
                 .catch((err) => {
                     console.log(err);

@@ -1,11 +1,10 @@
 import host from "config"
 
-export const GameFileUploadRequest = file => {
+export const GameFileUploadRequest = (file, folder) => {
     return new Promise(async (resolve, reject) => {
         const formData = new FormData();
-        console.log(file);
-        await formData.append('source', file[0]);
-        fetch(`${host}/upload/game`, {
+        await formData.append('source', file);
+        fetch(`${host}/upload/game/${folder}`, {
             header: { 'Content-Type': 'multipart/form-data' },
             method: "POST",
             body: formData,

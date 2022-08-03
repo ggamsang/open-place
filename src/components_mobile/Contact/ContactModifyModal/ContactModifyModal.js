@@ -116,7 +116,7 @@ const AddPic = styled.div`
     max-width:${props => props.width}px;
     max-height:${props => props.height}px;
 
-    margin-right:${props => props.marginRight == null ? 0 : props.marginRight}px;
+    margin-right:${props => props.marginRight === null ? 0 : props.marginRight}px;
 
     background-color: #efefef;
     background-image: url(${props => props.img});
@@ -203,7 +203,7 @@ export default class ContactModifyModal extends React.Component {
             }))
 
             .then(file_to_url => thumbnail
-                .filter(thum => thum.includes("data:image") == false)
+                .filter(thum => thum.includes("data:image") === false)
                 .concat(file_to_url).join(","))
 
             .then(contact_image_list => {
@@ -228,7 +228,7 @@ export default class ContactModifyModal extends React.Component {
         // reader.onloadend = () => {
         //     const thumbnail_url = reader.result;
         //     let file_list = this.state.files;
-        //     let thumbnail_list = this.state.thumbnail.length == 0 ? "" : this.state.thumbnail;
+        //     let thumbnail_list = this.state.thumbnail.length === 0 ? "" : this.state.thumbnail;
         //     alert(thumbnail_list);
         //     thumbnail_list.splice(index, 1, thumbnail_url);
         //     file_list.splice(index, 1, file);
