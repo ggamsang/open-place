@@ -43,12 +43,12 @@ class CounselingMessageDetailContainer extends React.Component {
         // this.props.GetCounselingMessageGroupRequest(this.props.token, this.props.opponent_id);
     }
     componentDidUpdate(props) {
-        // if (this.props.detail != props.detail && props.detail == null) {
+        // if (this.props.detail != props.detail && props.detail === null) {
         // this.connectAndSetupSocketServer(props.detail);
         // }
         // const { token, opponent_id, userInfo } = this.props;
         // console.log("!!!!!", JSON.stringify(userInfo).length, this.props);
-        // if (token != null && JSON.stringify(userInfo).length != 0 && this.socket == null) {
+        // if (token != null && JSON.stringify(userInfo).length != 0 && this.socket === null) {
         //     
         // }
     }

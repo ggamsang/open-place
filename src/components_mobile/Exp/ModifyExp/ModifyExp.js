@@ -120,7 +120,7 @@ class ModifyExp extends React.Component {
         })
       })
       this.props.expDetail && await this.setState({
-        exp_files: this.props.expDetail == null ? [] : JSON.parse(this.props.expDetail.exp_files)
+        exp_files: this.props.expDetail === null ? [] : JSON.parse(this.props.expDetail.exp_files)
       }, () => {  })
     }
   }
@@ -198,8 +198,8 @@ class ModifyExp extends React.Component {
     if (data.files.length <= 0 || data.files[0].value === (this.props.expDetail && this.props.expDetail.image)) {
       delete data.files;
     }
-    // if (title == null || title == "") return alert("제목을 입력하세요");
-    // if (info == null || info == "") return alert("내용을 입력하세요");
+    // if (title === null || title === "") return alert("제목을 입력하세요");
+    // if (info === null || info === "") return alert("내용을 입력하세요");
 
     this.props.updateExpRequest(this.props.item_id, data, this.props.token)
     window.history.go(-1);
@@ -215,7 +215,7 @@ class ModifyExp extends React.Component {
         <div className='content'>
           <div className='whitebox'>
             {
-              this.state.thumbnail == null ?
+              this.state.thumbnail === null ?
                 <div className='img_' /> :
                 <img src={this.state.thumbnail} className="img_" alt="profile" />
             }            <div className='wrap'>

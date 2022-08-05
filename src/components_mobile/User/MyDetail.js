@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { resolution } from 'commons/resolution';
 import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 import { goto } from 'navigator';
-import { WIDTH } from 'constant';
+// import { WIDTH } from 'constant';
 import NotificationContainer from 'containers/NotificationContainer';
 // import notification from 'source/Iconly-Bold-Notification.svg';
 // import { Fade } from 'react-reveal';
@@ -94,17 +94,17 @@ class MyDetail extends Component {
   }
 
   render() {
-    return (<Wrapper url={this.props.userInfo && this.props.userInfo.l_img || null}>
+    return (<Wrapper url={(this.props.userInfo?.l_img) || null}>
       <div className="header">
         <div className='searchbox'>
           <SearchForm />
         </div>
         <div className='profile'>
           <div className='thumbnail' />
-          <div className='user_name'>{this.props.userInfo && this.props.userInfo.nick_name || "국민대학교 CRC"}</div>
+          <div className='user_name'>{(this.props.userInfo?.nick_name) || "국민대학교 CRC"}</div>
           <div className='button_wrap'>
             <div className='button borderRight'
-              onClick={() => goto(this.props.sharer == null ? "CREATE-SHARER" : "MODIFY-SHARER")}>
+              onClick={() => goto(this.props.sharer === null ? "CREATE-SHARER" : "MODIFY-SHARER")}>
               공유자<br />
               등록수정
             </div>

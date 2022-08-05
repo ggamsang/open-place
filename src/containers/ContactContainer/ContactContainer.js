@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import ContactList from "components_mobile/Contact/ContactList";
-import { GetExpContactListRequest, DeleteExpContactRequest, UpdateExpContactRequest } from "actions/Contact";
+import { GetExpContactListRequest, DeleteExpContactRequest,  } from "actions/Contact";
 
 class ContactContainer extends React.Component {
     componentDidMount() {

@@ -26,7 +26,7 @@ class SortButton extends Component {
     }
     onClickButton = (event) => {
         this.setState({
-            sortType: this.state.sortType == SORTTYPE.LIKE ? SORTTYPE.UPDATE : SORTTYPE.LIKE
+            sortType: this.state.sortType === SORTTYPE.LIKE ? SORTTYPE.UPDATE : SORTTYPE.LIKE
         }, () => this.returnData(this.state.sortType))
     }
 
@@ -40,7 +40,7 @@ class SortButton extends Component {
                         radius={10}
                         fontSize={15}
                         bgColor={"red"}
-                        text={`${SORTTYPE.LIKE == this.state.sortType ? "인기순" : "최신순"}`}
+                        text={`${SORTTYPE.LIKE === this.state.sortType ? "인기순" : "최신순"}`}
                         onClickEvent={this.onClickButton}
                         className="button_"
                         

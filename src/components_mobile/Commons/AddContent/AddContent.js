@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 // import { resolution } from 'commons/resolution';
-import Button from 'commons/Button';
+// import Button from 'commons/Button';
 // import SunEditor from 'suneditor-react';
 // import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
 
@@ -40,38 +40,38 @@ const Wrap = styled.div`
     .black { font: normal normal medium 15px/18px Noto Sans KR; color:#707070; }
     .white { font: normal normal medium 15px/18px Noto Sans KR; color:white; }
 `;
-                 
+
 const config = {
-    readonly:false,
-    height:275,
+    readonly: false,
+    height: 275,
     uploader: {
-      insertImageAsBase64URI: true
+        insertImageAsBase64URI: true
     },
-    allowResizeX:false,
-    allowResizeY:false,
+    allowResizeX: false,
+    allowResizeY: false,
     enableDragAndDropFileToEditor: true,
-    
+
     tabIndex: 0,
     language: 'ko',
     i18n: 'ko',
     useSplitMode: false,
     showXPathInStatusbar: false,
     direction: 'ltr',
-    resize:false,
-    toolbarButtonSize:'small',
-  }
+    resize: false,
+    toolbarButtonSize: 'small',
+}
 class AddContent extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            content:"",
+        this.state = {
+            content: "",
         }
-        this.onChangeContent=this.onChangeContent.bind(this);
+        this.onChangeContent = this.onChangeContent.bind(this);
     }
 
-    onChangeContent = async(value) =>{
-        await this.setState({content:value});
-      }
+    onChangeContent = async (value) => {
+        await this.setState({ content: value });
+    }
 
     render() {
         // const warning = this.props.warning;
@@ -83,9 +83,12 @@ class AddContent extends Component {
 
         return (
             <div style={style}>
-                <div style={{marginBottom:"10px"}}>경험 컨텐츠 입력</div>
+                <div style={{ marginBottom: "10px" }}>경험 컨텐츠 입력</div>
                 <Wrap>
-                    <Editor value={this.state.content} config={config} onChange={(value)=>this.onChangeContent(value)}/>
+                    <Editor
+                        value={this.state.content}
+                        config={config}
+                        onChange={(value) => this.onChangeContent(value)} />
                 </Wrap>
             </div>
         )
@@ -95,7 +98,7 @@ class AddContent extends Component {
 export default AddContent;
 
 
-{/* <div style={style}>
+/* <div style={style}>
 경험 컨텐츠 입력
 <Wrap>
     <div onClick={this.props.onAddFile} className='button_grey red'>파일 등록</div>
@@ -108,4 +111,4 @@ export default AddContent;
 <Button active onClick={this.props.onModify}>
     <div className='text'>등록하기</div>
 </Button>
-</div> */}
+</div> */

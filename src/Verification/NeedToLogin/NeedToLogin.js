@@ -103,12 +103,12 @@ const Wrapper = styled.div`
     }
 `;
 export default function NeedToLogin(props) {
+    const dispatch = useDispatch();
     const [giveTry, setGiveTry] = useState(false);
     // const state = useSelector(state => state.Authentication.status)
-    const dispatch = useDispatch();
 
     useEffect(() => {
-        if (giveTry == false) {
+        if (giveTry === false) {
             dispatch({ type: AUTH_CHECK_TOKEN, });
             GetSession(TokenName)
                 .then(token => {
@@ -138,7 +138,7 @@ export default function NeedToLogin(props) {
                 })
             setGiveTry(true);
         }
-    });
+    }, [dispatch, giveTry]);
 
     return (
         giveTry

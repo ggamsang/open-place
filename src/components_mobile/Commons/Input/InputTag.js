@@ -245,7 +245,7 @@ export class InputTag extends Component {
                     value={this.state.value}
                 />
                 <ShowWarning />
-                <TagList width={this.props.width == null ? "100" : this.props.width}>
+                <TagList width={this.props.width === null ? "100" : this.props.width}>
                     {TagBox}
                 </TagList>
 

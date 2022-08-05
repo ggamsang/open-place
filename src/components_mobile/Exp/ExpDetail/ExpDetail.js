@@ -172,19 +172,19 @@ class ExpDetail extends React.Component {
           <SearchForm />
         </div>
         <Fade opposite when={this.state.main}>
-          <section style={{ display: `${this.state.main == true ? "block" : "none"}` }}>
+          <section style={{ display: `${(this.state.main === true) ? "block" : "none"}` }}>
             <div className='content'>
               <div className='title'>
                 <div />경험정보<div />
               </div>
-              <img src={expDetail && expDetail.thumbnail} className="img" />
+              <img alt="thumbnail" src={(expDetail && expDetail.thumbnail)} className="img" />
               <div className='summary'>
-                <div className='label'>{expDetail && expDetail.title || "dummy"}</div>
+                <div className='label'>{(expDetail && expDetail.title) || "dummy"}</div>
                 <div className='detail'>
-                  <img src={star} style={{ width: "14px", height: "14px", marginRight: "5px" }} />
+                  <img alt="" src={star} style={{ width: "14px", height: "14px", marginRight: "5px" }} />
                   <span className='score'>4.9</span>
                   <span style={{ marginLeft: "13px" }} className='writer'>
-                    {expDetail && expDetail.nick_name || "dummy"}
+                    {(expDetail && expDetail.nick_name) || "dummy"}
                   </span>
                   <span style={{ color: "red", margin: "0px 5px" }}>·</span>
                   <span className='tags'>
@@ -208,8 +208,8 @@ class ExpDetail extends React.Component {
                       height={35}
                       radius={10}
                       fontSize={15}
-                      bgColor={this.state.like == true ? "red" : "#dd5035"}
-                      text={this.state.like == true ? "♥ 좋아요" : "♡ 좋아요"}
+                      bgColor={this.state.like === true ? "red" : "#dd5035"}
+                      text={this.state.like === true ? "♥ 좋아요" : "♡ 좋아요"}
                       style={{ marginRight: "25px" }}
                     />
                     : <div style={{ width: "155px", marginRight: "25px" }} />
@@ -259,7 +259,7 @@ class ExpDetail extends React.Component {
         </Fade>
 
         <Fade opposite when={this.state.sub}>
-          <section style={{ display: `${this.state.sub == true ? "block" : "none"}` }}>
+          <section style={{ display: `${this.state.sub === true ? "block" : "none"}` }}>
             <div className='content'>
               <div className='title'>
                 <div onClick={this.onClickMain}>〈</div>

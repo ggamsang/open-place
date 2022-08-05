@@ -5,10 +5,10 @@ import { keyframes } from 'styled-components';
 import CheckIcon from 'source/check_green.svg';
 
 const Wrap = styled.div`
-    width:${resolution(props=>props.width==null?300:props.width)}px;
-    height:${resolution(props=>props.height==null?300:props.height)}px;
-    max-width:${resolution(props=>props.width==null?300:props.width)}px;
-    max-height:${resolution(props=>props.height==null?300:props.height)}px;
+    width:${resolution(props => props.width === null ? 300 : props.width)}px;
+    height:${resolution(props => props.height === null ? 300 : props.height)}px;
+    max-width:${resolution(props => props.width === null ? 300 : props.width)}px;
+    max-height:${resolution(props => props.height === null ? 300 : props.height)}px;
 
     border-radius:3px;
     border:1px solid white;
@@ -16,7 +16,7 @@ const Wrap = styled.div`
     align-items:center;
     justify-content:space-between;
     .checked{
-        opacity:${props=>props.checked==true?"1":"0"};
+        opacity:${props => props.checked === true ? "1" : "0"};
         width:16px;
         height:16px;
         max-width:16px;
@@ -25,12 +25,15 @@ const Wrap = styled.div`
         background-repeat:no-repeat;
         margin-right:15px;
     }
+    .preNum010 {
+        margin-left: 10px;
+    }
 `
 const InputField = styled.input`
     background-color:transparent;
     outline:none;
     border:none;
-    padding-left:30px;
+    padding-left: 10px;
 `
 const InputRegionNumber = styled.input`
     width:${resolution(50)}px;
@@ -43,29 +46,29 @@ const InputRegionNumber = styled.input`
 
 `
 class InputPhone extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
-
-
-
     render() {
-    const warning = this.props.warning;
-    return (
-        <React.Fragment>
-            <Wrap width={this.props.width} height={this.props.height} checked={this.props.checked}>
-            <InputRegionNumber value={"+82"}/>
-            <InputField
-                maxlength="8"
-                type="number"
-                onChange={this.props.onChangeValue}
-                value={this.props.value}
-            />
-            <div className='checked'/>
-            </Wrap>
-        </React.Fragment>
-    )
-  }
+        const warning = this.props.warning;
+        return (
+            <React.Fragment>
+                <Wrap width={this.props.width} height={this.props.height} checked={this.props.checked}>
+                    <InputRegionNumber value={"+82"} />
+                    <div className='preNum010'>
+                        010-
+                    </div>
+                    <InputField
+                        maxlength="8"
+                        type="number"
+                        onChange={this.props.onChangeValue}
+                        value={this.props.value}
+                    />
+                    <div className='checked' />
+                </Wrap>
+            </React.Fragment>
+        )
+    }
 }
 
 export default InputPhone;

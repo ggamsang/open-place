@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, } from "react";
 import JoditEditor from "jodit-react";
 import styled from "styled-components";
 const Wrapper = styled.div`
@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 `;
 export const Editor = ({ config, value, onChange }) => {
     const editor = useRef(null);
-    const [text, onChangeText] = useState("");
+    const [text, onChangeText] = useState(value);
     const handleChangeContent = async (content) => {
         onChangeText(content);
         await onChange(content);
@@ -22,7 +22,7 @@ export const Editor = ({ config, value, onChange }) => {
                 ref={editor}
                 config={config}
                 onChange={newContent => handleChangeContent(newContent)}
-                value={value}
+                value={text}
             />
         </Wrapper>
     )

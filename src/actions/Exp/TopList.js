@@ -7,9 +7,7 @@ import { GET } from "constant";
 export const getTopExpListRequest = () => {
   return (dispatch) => {
     const url = `${host}/item/TopList`;
-    return fetch(url, {
-      headers: { "Content-Type": "application/json" }, method: "GET"
-    })
+    return fetch(url, GET)
       .then(res => res.json())
       .then(data => {
         console.log(data);

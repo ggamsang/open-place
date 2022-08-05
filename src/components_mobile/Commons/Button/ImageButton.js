@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { resolution } from 'commons/resolution';
+// import { resolution } from 'commons/resolution';
 
 const CustomButton = styled.div`
     width:${props=>props.width}px;

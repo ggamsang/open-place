@@ -117,7 +117,7 @@ const AddPic = styled.div`
     max-width:${props => props.width}px;
     max-height:${props => props.height}px;
 
-    margin-right:${props => props.marginRight == null ? 0 : props.marginRight}px;
+    margin-right:${props => props.marginRight === null ? 0 : props.marginRight}px;
 
     background-color: #efefef;
     background-image: url(${props => props.img});
@@ -186,7 +186,7 @@ export default class ReviewWriteModal extends React.Component {
             await Promise.all(
                 thumbnail.map(async (item, index) => {
                     // console.log(item);
-                    if (item.indexOf("https://s3") == -1) {
+                    if (item.indexOf("https://s3") === -1) {
                         const file = files[index];
                         const s3path = await FileUploadRequest([file]);
                         // console.log(s3path);

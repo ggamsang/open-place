@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import ReviewList from "components_mobile/Review/ReviewList";
-import { GetExpReviewListRequest, DeleteExpReviewRequest, UpdateExpReviewRequest } from "actions/Review";
+import { GetExpReviewListRequest, DeleteExpReviewRequest, } from "actions/Review";
 
 class ReviewContainer extends React.Component {
     componentDidMount() {
@@ -24,7 +24,7 @@ class ReviewContainer extends React.Component {
                     this.props.GetExpReviewListRequest(ExpDetail.uid))
     }
     render() {
-        return (<ReviewList write={this.props.write} onCloseWriteModal={()=>this.props.onCloseWriteModal} {...this.props} delete={this.deleteReview} />);
+        return (<ReviewList write={this.props.write} onCloseWriteModal={() => this.props.onCloseWriteModal} {...this.props} delete={this.deleteReview} />);
     }
 }
 

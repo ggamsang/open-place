@@ -44,7 +44,7 @@ class MemberSearchForm extends Component {
     window.history.go(-1);
   }
   componentDidUpdate(props) {
-    if (this.props.active && (props.active != this.props.active)) {
+    if (this.props.active && (props.active!== this.props.active)) {
       return true;
     }
   }
@@ -54,7 +54,7 @@ class MemberSearchForm extends Component {
     return (
       <React.Fragment>
         <SearchBox>
-          {this.props.isMain == null
+          {this.props.isMain === null
             && <div onClick={this.onClickBack} className='arrow_box'>
               <img className='img_arrow' src={back_arrow} />
             </div>}

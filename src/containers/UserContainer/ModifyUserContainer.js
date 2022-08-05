@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ModifyUser from 'components_mobile/User/ModifyUser';
 import { updateUserRequest } from "actions/User/User"
-import {CheckNickNameRequest} from "actions/Authentication"
+import { CheckNickNameRequest } from "actions/Authentication"
 
 class ModifyUserContainer extends React.Component {
     componentDidMount() {
@@ -18,7 +18,6 @@ class ModifyUserContainer extends React.Component {
 const mapStateToProps = (state) => ({
     token: state.Authentication.status.token,
     userInfo: state.Authentication.status.userInfo,
-    token: state.Authentication.status.token,
     isLoggedIn: state.Authentication.status.isLoggedIn,
     user_detail: state.User.status.user_detail,
     checkNickName: state.Authentication.checkStatus.checkNickName,
@@ -27,7 +26,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
     return ({
         updateUserRequest: (user_id, data, token) => dispatch(updateUserRequest(user_id, data, token)),
-        CheckNickNameRequest: (token,nickname)=>dispatch(CheckNickNameRequest(token,nickname)),
+        CheckNickNameRequest: (token, nickname) => dispatch(CheckNickNameRequest(token, nickname)),
     });
 }
 

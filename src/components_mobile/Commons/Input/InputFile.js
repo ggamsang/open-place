@@ -66,7 +66,7 @@ export class InputFile extends Component {
         // this.state = { file: { file_url: "", filename: "" }, value: "선택된 파일 없음" };
         this.state = {
             loading: "",
-            files: this.props.files == null ? [] : this.props.files,
+            files: this.props.files === null ? [] : this.props.files,
         }
         this.onFileChange = this.onFileChange.bind(this);
         this.returnData = this.returnData.bind(this);
@@ -76,7 +76,7 @@ export class InputFile extends Component {
         this.init();
     }
     componentDidUpdate(prevProps) {
-        if (JSON.stringify(prevProps.files) != JSON.stringify(this.props.files)) {
+        if (JSON.stringify(prevProps.files) !== JSON.stringify(this.props.files)) {
             this.setState({
                 files: [].concat(this.props.files)
             })
@@ -115,7 +115,7 @@ export class InputFile extends Component {
         return (
             <React.Fragment>
                 <Wrapper>
-                    <div className="addfile" style={{ display: `${this.props.display == true ? "block" : "none"}` }}>
+                    <div className="addfile" style={{ display: `${this.props.display === true ? "block" : "none"}` }}>
                         <input
                             hidden
                             id="addfile"
@@ -154,8 +154,7 @@ export class InputFile extends Component {
     }
 }
 
-
-{/* <Wrapper style={this.props.style}>
+/* <Wrapper style={this.props.style}>
                     <div className="row_">
                         {this.state.loading}
                     </div>
@@ -194,4 +193,4 @@ export class InputFile extends Component {
                                     text="파일 등록" />
                             </label>
                     </div>
-                </Wrapper> */}
+                </Wrapper> */

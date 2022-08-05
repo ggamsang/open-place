@@ -102,14 +102,14 @@ class ExpType extends Component {
     this.returnState = this.returnState.bind(this);
   }
   componentDidUpdate(prevProps) {
-    if (prevProps.content != this.props.content) {
+    if (prevProps.content !== this.props.content) {
       this.setState({ content: this.props.content }, () => { console.log(this.state.content) })
       this.setState({ exp_files: this.props.exp_files ? [].concat(this.props.exp_files) : [] })
     }
-    if (prevProps.exp_files != this.props.exp_files) {
+    if (prevProps.exp_files !== this.props.exp_files) {
       this.setState({ exp_files: this.props.exp_files ? [].concat(this.props.exp_files) : [] })
     }
-    if (prevProps.typeDetail != this.props.typeDetail) {
+    if (prevProps.typeDetail !== this.props.typeDetail) {
       console.log(this.props.typeDetail)
       const { typeDetail } = this.props;
       if (typeDetail != null) {
@@ -126,9 +126,9 @@ class ExpType extends Component {
       }
     }
     // if (this.props && this.props.typeDetail != null) {
-    //   if (prevProps.typeDetail&&JSON.stringify(prevProps.typeDetail) != JSON.stringify(this.props.typeDetail)) {
+    //   if (prevProps.typeDetail&&JSON.stringify(prevProps.typeDetail) !== JSON.stringify(this.props.typeDetail)) {
     //     this.setState({
-    //       game_files: this.props.typeDetail == null ? [] : JSON.parse(this.props.typeDetail.game_files),
+    //       game_files: this.props.typeDetail === null ? [] : JSON.parse(this.props.typeDetail.game_files),
     //       isOnline: this.props.typeDetail && this.props.typeDetail.isOnline,
     //       place: this.props.typeDetail && this.props.typeDetail.place,
     //       people: this.props.typeDetail && this.props.typeDetail.people,
@@ -136,14 +136,14 @@ class ExpType extends Component {
     //       endDate: this.props.typeDetail && this.props.typeDetail.endDate,
     //     })
     //   }
-    //   if (prevProps.content&&JSON.stringify(prevProps.content) != JSON.stringify(this.props.content)) {
+    //   if (prevProps.content&&JSON.stringify(prevProps.content) !== JSON.stringify(this.props.content)) {
     //     this.setState({
     //       content: this.props.content && this.props.content,
     //     })
     //   }
-    //   if (prevProps.exp_files&&JSON.stringify(prevProps.exp_files) != JSON.stringify(this.props.exp_files)) {
+    //   if (prevProps.exp_files&&JSON.stringify(prevProps.exp_files) !== JSON.stringify(this.props.exp_files)) {
     //     this.setState({
-    //       exp_files: this.props.exp_files == null ? [] : JSON.parse(this.props.exp_files),
+    //       exp_files: this.props.exp_files === null ? [] : JSON.parse(this.props.exp_files),
     //     })
     //   }
 
@@ -160,7 +160,6 @@ class ExpType extends Component {
       startDate: this.state.startDate,
       endDate: this.state.endDate || this.state.startDate,
     }
-    console.log("game:", Data, this.state.game_files);
     return this.props.return && this.props.return(JSON.stringify(Data));
   }
   onChangeContent = (value) => {
@@ -180,7 +179,8 @@ class ExpType extends Component {
     this.setState({ place: event.target.value }, () => this.returnState());
   }
   onChangeGame = (files) => {
-    this.setState({ gameFile: files }, () => this.returnState())
+    console.log("game: changed ", typeof files, files);
+    this.setState({ game_files: files }, () => this.returnState())
   }
   onChanegPeople = (event) => {
     this.setState({ people: event.target.value }, () => this.returnState())
@@ -196,13 +196,13 @@ class ExpType extends Component {
   }
 
   render() {
-    const { type } = this.props;
+    const type = parseInt(this.props.type);
 
     return (
       <Wrapper>
         <div className="add_content">
           {
-            type == TYPE_TALK &&
+            type === TYPE_TALK &&
             <React.Fragment>
               <div className="row">
                 <div className='label'>온라인</div>
@@ -221,7 +221,7 @@ class ExpType extends Component {
             </React.Fragment>
           }
           {
-            type == TYPE_LECTURE &&
+            type === TYPE_LECTURE &&
             <React.Fragment>
               <div className="row">
                 <div className='label'>온라인</div>
@@ -258,7 +258,7 @@ class ExpType extends Component {
             </React.Fragment>
           }
           {
-            type == TYPE_CLASS &&
+            type === TYPE_CLASS &&
             <React.Fragment>
               <div className="row">
                 <div className='label'>온라인</div>
@@ -294,8 +294,7 @@ class ExpType extends Component {
               </div>
             </React.Fragment>
           }
-          {
-            type == TYPE_GAME &&
+          {type === TYPE_GAME &&
             <React.Fragment>
               <div className="row">
                 <div className='label'>게임 첨부</div>
@@ -305,17 +304,17 @@ class ExpType extends Component {
                   files={this.state.game_files}
                   display={true}
                   getValue={(value) => this.onChangeGame(value)}
-                  accept="html,zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed" />
+                  accept="html"
+                />
               </div>
               <div className="row">
                 <div className='label wide'>
                   1) index.html만 업로드<br />
-                  2) zip파일로 업로드,<br />
-                  파일 내 index.html이 반드시 있어야 함.<br />
+                  2) 폴더로 업로드, 파일 내 index.html이 반드시 있어야 함.<br />
                 </div>
               </div>
-            </React.Fragment>
-          }
+            </React.Fragment>}
+
         </div>
 
 

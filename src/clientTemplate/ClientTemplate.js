@@ -80,7 +80,7 @@ class ClientTemplate extends Component {
     //   console.log(new Date().getTime(), 0);
 
     //   const { stick, } = this.state;
-    //   if (stick == false) {
+    //   if (stick === false) {
     //     if (rectMain.height - (rectNav.y - rectMain.y) < 50) {
     //       console.log(new Date().getTime(), 1);
     //       this.setState({ stick: true });
@@ -112,18 +112,18 @@ class ClientTemplate extends Component {
       return;
     }
     // detect direction and store prev position
-    const { prev_y } = this.state;
-    let dir = "";
-    if (rectMain.y - prev_y > 0) {
-      dir = "UP";
-    } else {
-      dir = "DOWN";
-    }
+    // const { prev_y } = this.state;
+    // let dir = "";
+    // if (rectMain.y - prev_y > 0) {
+    //   dir = "UP";
+    // } else {
+    //   dir = "DOWN";
+    // }
     this.setState({ prev_y: rectMain.y });
     console.log(new Date().getTime(), 0);
 
     const { stick, } = this.state;
-    if (stick == false) {
+    if (stick === false) {
       if (rectMain.height - (rectNav.y - rectMain.y) < 50) {
         console.log(new Date().getTime(), 1);
         this.setState({ stick: true });

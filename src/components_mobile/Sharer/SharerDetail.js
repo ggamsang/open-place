@@ -124,9 +124,9 @@ class SharerDetail extends React.Component {
     this.getList(this.props.user_id);
   }
   componentDidUpdate(prevProps) {
-    if (JSON.stringify(this.props.isLike) != JSON.stringify(prevProps.isLike)) {
+    if (JSON.stringify(this.props.isLike) !== JSON.stringify(prevProps.isLike)) {
       console.log("like?", this.props.isLike)
-      this.setState({ like: this.props.isLike == true ? true : false })
+      this.setState({ like: this.props.isLike === true ? true : false })
     }
   }
   getList = (page) => {
@@ -151,7 +151,7 @@ class SharerDetail extends React.Component {
 
     return (
       <React.Fragment>
-        <Wrapper url={this.props.sharer && this.props.sharer.url || null}>
+        <Wrapper url={this.props.sharer?.url || null}>
           <div className="header">
             <div className='searchbox'><SearchForm /></div>
             <div className='profile'>
@@ -161,14 +161,14 @@ class SharerDetail extends React.Component {
                 <div className='text_' style={{ textAlign: "right" }}>#분야</div>
               </div>
               <div className='textWrap'>
-                <div className='userName'>{this.props.sharer && this.props.sharer.nick_name || "국민대학교 CRC"}</div>
+                <div className='userName'>{this.props.sharer?.nick_name || "국민대학교 CRC"}</div>
                 <div className='likeWrap'>
-                  <div className='count'>{this.props.sharer && this.props.sharer.like_count}</div>
+                  <div className='count'>{this.props.sharer?.like_count}</div>
                   {
-                    this.props.token==null?
-                    <img className='icon' src={Heart} />
-                    :
-                    <img onClick={this.onClickLike} className='icon' src={`${this.state.like == true ? Heart_red : Heart}`} />
+                    this.props.token === null ?
+                      <img alt="icon" className='icon' src={Heart} />
+                      :
+                      <img alt="icon" onClick={this.onClickLike} className='icon' src={`${this.state.like === true ? Heart_red : Heart}`} />
                   }
                 </div>
               </div>

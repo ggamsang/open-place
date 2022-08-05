@@ -44,7 +44,7 @@ class SearchForms extends Component {
     window.history.go(-1);
   }
   componentDidUpdate(props) {
-    if (this.props.active && (props.active != this.props.active)) {
+    if (this.props.active && (props.active !== this.props.active)) {
       return true;
     }
   }
@@ -54,19 +54,20 @@ class SearchForms extends Component {
     return (
       <React.Fragment>
         <SearchBox>
-          {this.props.isMain == null
-            && <div onClick={this.onClickBack} className='arrow_box'>
+          {window.location.pathname !== `/` &&
+            <div onClick={this.onClickBack} className='arrow_box'>
               <img className='img_arrow' src={back_arrow} />
             </div>}
-          <div className='searchWrap'>
-          <Search
-            width={291}
-            keyword={this.props.keyword}
-            placeholder={this.props.placeholder}
-            disabled_filter={this.props.disabled_filter} />
 
-          {this.props.isMain != null
-            && <NotificationContainer active={active} />}
+          <div className='searchWrap'>
+            <Search
+              width={291}
+              keyword={this.props.keyword}
+              placeholder={this.props.placeholder}
+              disabled_filter={this.props.disabled_filter} />
+
+            {this.props.isMain != null
+              && <NotificationContainer active={active} />}
           </div>
         </SearchBox>
       </React.Fragment>

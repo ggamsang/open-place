@@ -145,7 +145,7 @@ export class InputPrice extends Component {
                 <FormStyle
                     disabled={this.props.disabled}
                     id="price"
-                    width={width == null ? "150" : width}
+                    width={width === null ? "150" : width}
                     placeholder={placeholder}
                     value={Number(this.state.price).toLocaleString() || 0}
                     onChange={this.onChangePrice}

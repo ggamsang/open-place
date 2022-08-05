@@ -89,17 +89,17 @@ class Logo extends Component {
         return (
             <React.Fragment>
                 {
-                    this.props.type == 'big_image' ?
+                    this.props.type === 'big_image' ?
                         <Wrapper_image onClick={this.onClickEvent}>
                             <img style={this.props.style} src={OWD_logo_small} />
                         </Wrapper_image>
-                        : this.props.type == 'big' ?
+                        : this.props.type === 'big' ?
                             <Wrapper onClick={this.onClickEvent}>
                                 <img style={this.props.style} src={OWD_logo_small} />
                                 <div className='text'>{this.props.text}</div>
                             </Wrapper>
                             :
-                            this.props.type == 'small' ?
+                            this.props.type === 'small' ?
                                 <Wrapper_small onClick={this.onClickEvent}>
                                     <img style={this.props.style} src={OWD_logo_small} />
                                     <div className='text'>{this.props.text}</div>

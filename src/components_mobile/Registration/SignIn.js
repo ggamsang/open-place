@@ -43,7 +43,7 @@ const Wrapper = styled.div`
   }
 `
 const Warning = styled.div`
-  display:${props => props.warning == true ? "block" : "none"};
+  display:${props => props.warning === true ? "block" : "none"};
   width:100%;
   font-family:Roboto;
   font-weight:Regular;
@@ -53,7 +53,7 @@ const Warning = styled.div`
   justify-content:center;
   align-items:center;
   height:16px;
-  animation:${props => props.warning == true ? "transHeightin 1s ease-in-out" : "none"};
+  animation:${props => props.warning === true ? "transHeightin 1s ease-in-out" : "none"};
   animation-fill-mode: forwards;
   @keyframes transHeightin{
     0%{height:16px;}
@@ -64,7 +64,7 @@ const Warning = styled.div`
     100%{height:16pxpx;}
   }
 `
-const example = { id: 'user01', pw: 'q1w2e3' }
+// const example = { id: 'user01', pw: 'q1w2e3' }
 const Login = { ready: "READY", failed: "FAILED", success: "SUCCESS" }
 
 class SignIn extends Component {
@@ -153,8 +153,8 @@ class SignIn extends Component {
             onClickEvent={() => window.location.href = "/"}
           />
         </div>
-        <Warning warning={this.state.login == Login.failed}>
-          {this.state.login == Login.failed
+        <Warning warning={this.state.login === Login.failed}>
+          {this.state.login === Login.failed
             && <Fade>
               <div>{"아이디 혹은 비밀번호가 틀립니다."}</div>
             </Fade>}
@@ -175,7 +175,7 @@ class SignIn extends Component {
               fontSize={17}
               color={"#EAF2FE"}
               radius={3}
-              warning={this.state.login == Login.failed} />
+              warning={this.state.login === Login.failed} />
             <InputNormal
               type="password"
               onChangeValue={this.onChangePassword}
@@ -190,47 +190,47 @@ class SignIn extends Component {
               fontSize={17}
               color={"#EAF2FE"}
               radius={3}
-              warning={this.state.login == Login.failed} />
+              warning={this.state.login === Login.failed} />
           </div>
 
-          <div className="checkBoxRow" style={{marginBottom:`${this.state.login == Login.failed?"20px":"53px"}`}}>
+          <div className="checkBoxRow" style={{ marginBottom: `${this.state.login === Login.failed ? "20px" : "53px"}` }}>
             <CheckBoxNormal id="saveid" style={{ marginRight: "15px" }} text="로그인 유지" value={this.state.saveID} onClickEvent={this.onCheckSaveID} />
             <CheckBoxNormal id="savelogin" style={{ marginLeft: "15px" }} text="아이디 저장" value={this.state.saveLogin} onClickEvent={this.onCheckSaveLogin} />
           </div>
           {
-            this.state.login == Login.failed ?
+            this.state.login === Login.failed ?
               <React.Fragment>
                 <Fade>
-                <GradientButton
-                  onClickEvent={() => goto("FINDPW")}
-                  style={{ marginBottom: "12px" }}
-                  text="아이디/비밀번호 찾기"
-                  width={240}
-                  height={42}
-                  front={'#365AF1'}
-                  end={'#FF4343'}
-                  deg={240}
-                  radius={28} />
-                <GradientButton
-                  onClickEvent={() => this.onClickLogin()}
-                  style={{ marginBottom: "12px" }}
-                  text="로그인"
-                  width={240}
-                  height={42}
-                  front={'#FF4343'}
-                  end={'#365AF1'}
-                  deg={270}
-                  radius={28} />
-                <GradientButton
-                  onClickEvent={() => goto("SIGNUP")}
-                  style={{ marginBottom: "12px" }}
-                  text="회원가입"
-                  width={240}
-                  height={42}
-                  front={'#365AF1'}
-                  end={'#FF4343'}
-                  deg={270}
-                  radius={28} />
+                  <GradientButton
+                    onClickEvent={() => goto("FINDPW")}
+                    style={{ marginBottom: "12px" }}
+                    text="아이디/비밀번호 찾기"
+                    width={240}
+                    height={42}
+                    front={'#365AF1'}
+                    end={'#FF4343'}
+                    deg={240}
+                    radius={28} />
+                  <GradientButton
+                    onClickEvent={() => this.onClickLogin()}
+                    style={{ marginBottom: "12px" }}
+                    text="로그인"
+                    width={240}
+                    height={42}
+                    front={'#FF4343'}
+                    end={'#365AF1'}
+                    deg={270}
+                    radius={28} />
+                  <GradientButton
+                    onClickEvent={() => goto("SIGNUP")}
+                    style={{ marginBottom: "12px" }}
+                    text="회원가입"
+                    width={240}
+                    height={42}
+                    front={'#365AF1'}
+                    end={'#FF4343'}
+                    deg={270}
+                    radius={28} />
                 </Fade>
               </React.Fragment>
               :

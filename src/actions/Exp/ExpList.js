@@ -10,10 +10,7 @@ export const getExpListRequest = (page=0,category=null,sort=null,keyword=null) =
     return (dispatch) => {
       dispatch(getExpList())
       const url = `${host}/item/${page}/${category}/${sort}/${keyword}`;
-      return fetch(url, {
-        headers: { "Content-Type": "application/json" }, 
-        method: "GET"
-      })
+      return fetch(url, GET)
       .then(res => res.json())
       .then(data =>{
         console.log(data);

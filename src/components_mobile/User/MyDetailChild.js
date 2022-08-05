@@ -23,7 +23,7 @@ import {
   getUserLikeExpRequest, getUserBoughtExpRequest,
 } from "actions/User/MyDetail"
 import { goto } from 'navigator';
-import { Dimmer, Loader } from 'semantic-ui-react';
+// import { Dimmer, Loader } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
   width:100%;
@@ -268,19 +268,19 @@ class MyDetailChild extends Component {
     //testDeta
     const user_id = this.props.userInfo.uid;
     const { token } = this.props;
-    if (sub == "point") {
+    if (sub === "point") {
       this.props.getUserPointRequest(user_id);
-    } else if (sub == "payment") {
+    } else if (sub === "payment") {
       this.props.getUserPointHistoryReqeust(user_id, 0);
-    } else if (sub == "regExp") {
+    } else if (sub === "regExp") {
       // this.props.getUserRegisterExpRequest(user_id, 0);
-    } else if (sub == "sellExp") {
+    } else if (sub === "sellExp") {
       this.props.getUserSellExpRequest(user_id, 0);
-    } else if (sub == "buyExp") {
+    } else if (sub === "buyExp") {
       token && this.props.getUserBoughtExpRequest(token, 0);
-    } else if (sub == "likeSharer") {
+    } else if (sub === "likeSharer") {
       this.props.getUserLikeSharerRequest(user_id, 0);
-    } else if (sub == "likeExp") {
+    } else if (sub === "likeExp") {
       this.props.getUserLikeExpRequest(user_id, 0);
     }
   }

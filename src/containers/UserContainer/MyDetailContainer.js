@@ -5,15 +5,15 @@ import { goto } from 'navigator';
 import { getSharerRequest } from 'actions/Sharer/Sharer';
 
 class MyDetailContainer extends Component {
-  componentDidMount() {    
+  componentDidMount() {
     if (this.props.isLoggedIn) {
     } else {
       alert('로그인해주세요.')
       goto("LOGIN")
     }
   }
-  componentDidUpdate(prevProps){
-    if(JSON.stringify(prevProps.userInfo)!=JSON.stringify(this.props.userInfo)){
+  componentDidUpdate(prevProps) {
+    if (JSON.stringify(prevProps.userInfo) !== JSON.stringify(this.props.userInfo)) {
       this.props.getSharerRequest(this.props.userInfo.uid);
     }
   }
@@ -28,7 +28,7 @@ class MyDetailContainer extends Component {
 const mapStateToProps = (state) => ({
   isLoggedIn: state.Authentication.status.isLoggedIn,
   active: state.Authentication.status.active,
-  userInfo:state.Authentication.status.userInfo,
+  userInfo: state.Authentication.status.userInfo,
   sharer: state.User.status.sharer,
 });
 const mapDispatchToProps = (dispatch) => ({

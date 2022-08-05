@@ -271,7 +271,7 @@ class CommentList extends React.Component {
 
         return (<Wrapper>
 
-            {isReply === null && this.props.token&& (<CommentForm />)}
+            {isReply === null && this.props.token && (<CommentForm />)}
 
             {comment.length > 0 ? comment.map((item, idx) =>
                 <div key={idx} className="line comment-list-wrapper">
@@ -286,7 +286,7 @@ class CommentList extends React.Component {
                     <div className='row hundred'>
                         <div className='row'>
                             <div className='profile'>
-                                <img src={item.s_img || profile} />
+                                <img alt="profile" src={item.s_img || profile} />
                             </div>
                             <div>
                                 <div className='author'>{item.nick_name}</div>
@@ -295,9 +295,11 @@ class CommentList extends React.Component {
                         </div>
 
                         <div className='arrowDown'>
-                            <img onClick={() => this.popup(whichOnePoppedUp == null ? idx : null)}
-                                className={whichOnePoppedUp == null ? "" : "up"}
-                                src={arrowBelow} />
+                            <img onClick={() => this.popup(whichOnePoppedUp === null ? idx : null)}
+                                className={whichOnePoppedUp === null ? "" : "up"}
+                                src={arrowBelow} 
+                                alt="arrow-button"
+                                />
                         </div>
 
                     </div>

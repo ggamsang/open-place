@@ -18,11 +18,11 @@ class MessageDetailContainer extends React.Component {
 
     componentDidUpdate(props) {
         const { token, userInfo, group_id } = this.props;
-        if (userInfo && token != null && props.token == null) {
+        if (userInfo && token != null && props.token === null) {
             this.GetDetail(0);
             this.props.GetMessageOpponentInfoRequest(token, group_id);
         }
-        if (userInfo != null && props.userInfo == null) {
+        if (userInfo != null && props.userInfo === null) {
             this.socket.emit("alive", {
                 gid: this.props.group_id,
                 uid: userInfo.uid,
