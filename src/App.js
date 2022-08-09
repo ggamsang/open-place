@@ -1,9 +1,14 @@
+import React from "react";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import MainPage from "./pages/MainPage";
 
 function App() {
   return (
-    <div>
-      open place desktop version 
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" component={MainPage} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
