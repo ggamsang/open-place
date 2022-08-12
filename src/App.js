@@ -36,13 +36,15 @@ function App() {
         <Route path="/" element={<MainPage />} />
 
         {/* EXPERIENCE */}
-        <Route path="/play/:sort/:keyword" element={<PlayListPage />} />
-        <Route path="/make/:sort?/:keyword?" element={<MakeListPage />} />
+        <Route path="/play" element={<PlayListPage />} >
+          <Route path=":sort" element={<PlayListPage />} />
+          <Route path=":sort/:keyword" element={<PlayListPage />} />
+        </Route>
+        <Route path="/make" element={<MakeListPage />} />
         <Route path="/learn/:sort?/:keyword?" element={<LearnListPage />} />
         <Route path="/exp/:id" element={<ExpDetailPage />} />
-        {/* EXPERIENCE > CREATE/MODIFY, auth needed. */}
-        <Route path="/exp/create" element={<ExpCreatePage />} />
-        <Route path="/exp/:id/modify" element={<ExpModifyPage />} />
+        <Route path="/exp/create" element={<ExpCreatePage />} />{/* auth needed */}
+        <Route path="/exp/:id/modify" element={<ExpModifyPage />} />{/* auth needed */}
 
         {/* PERSONAL */}
         <Route path="/mydetail" element={<MyPage />} />
