@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="92.5" height="30.5" viewBox="0 0 92.5 30.5">
+  <g id="Container" transform="translate(0.5 0.5)">
+    <g id="_Color" data-name="↳ 🎨 Color" fill="none" stroke="rgba(255,0,0,0.12)" stroke-width="1">
+      <rect width="92" height="30" rx="4" stroke="none"/>
+      <rect x="0.5" y="0.5" width="91" height="29" rx="3.5" fill="none"/>
+    </g>
+    <g id="_States" data-name="↳ 💡States">
+      <rect id="States_Light_Surface_containers_Primary_Content" data-name="States/Light 🌕/Surface containers/Primary Content" fill="rgba(98,0,238,0)" stroke="rgba(255,0,0,0.12)" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

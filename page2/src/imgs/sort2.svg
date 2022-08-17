@@ -1,0 +1,12 @@
+<svg id="구성_요소_42_1" data-name="구성 요소 42 – 1" xmlns="http://www.w3.org/2000/svg" width="71" height="30" viewBox="0 0 71 30">
+  <g id="Container" transform="translate(-16 -10)">
+    <g id="_Color" data-name="↳ 🎨 Color" transform="translate(16 10)" fill="none" stroke="red" stroke-width="1">
+      <rect width="71" height="30" rx="4" stroke="none"/>
+      <rect x="0.5" y="0.5" width="70" height="29" rx="3.5" fill="none"/>
+    </g>
+    <g id="_States" data-name="↳ 💡States" transform="translate(16 10)">
+      <rect id="States_Light_Surface_containers_Primary_Content" data-name="States/Light 🌕/Surface containers/Primary Content" width="71" height="30" rx="4" fill="rgba(238,0,0,0.12)"/>
+    </g>
+  </g>
+  <text id="_Label" data-name="↳ ✏️ Label" transform="translate(16 21)" fill="#e00" font-size="14" font-family="Pretendard-Medium, Pretendard" font-weight="500" letter-spacing="0.089em"><tspan x="0" y="0">최신순</tspan></text>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="164.625" height="51.25" viewBox="0 0 164.625 51.25">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f8f8f8"/>
+      <stop offset="1" stop-color="red"/>
+    </linearGradient>
+    <filter id="사각형_35" x="0" y="0" width="164.625" height="51.25" filterUnits="userSpaceOnUse">
+      <feOffset dx="1" dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="구성_요소_4_1" data-name="구성 요소 4 – 1" transform="translate(159.125 45.75) rotate(180)">
+    <g transform="matrix(-1, 0, 0, -1, 159.13, 45.75)" filter="url(#사각형_35)">
+      <path id="사각형_35-2" data-name="사각형 35" d="M30,0H155.625a0,0,0,0,1,0,0V12.25a30,30,0,0,1-30,30H0a0,0,0,0,1,0,0V30A30,30,0,0,1,30,0Z" transform="translate(159.13 45.75) rotate(180)" fill="url(#linear-gradient)"/>
+    </g>
+  </g>
+</svg>
