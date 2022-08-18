@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Detail from "components_mobile/Community/Detail";
+import Detail from "components/Community/Detail";
 import { GetArticleDetailRequest } from 'actions/Community';
 
 class CommunityDetailContainer extends React.Component {

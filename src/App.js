@@ -9,7 +9,7 @@ import SignInPage from "pages/RegistrationPage/SignInPage";
 import SignUpPage from "pages/RegistrationPage/SignUpPage";
 import FindPWPage from "pages/RegistrationPage/FindPWPage";
 import MyDetailPage from "pages/UserPage/MyDetailPage/MyDetailPage";
-import MyDetailChild from "components_mobile/User/MyDetailChild";
+import MyDetailChild from "components/User/MyDetailChild";
 
 import IntroPage from "pages/IntroPage";
 import TermsOfServicePage from "pages/TermsOfServicePage";
@@ -53,7 +53,7 @@ const Wrapper = styled.main`
   }
   .appcontent {
     position: relative;
-    width: ${WIDTH}px;
+    width: 100%; //${WIDTH}px;
     // height: 100%;
     margin: auto;
     background-color: white;

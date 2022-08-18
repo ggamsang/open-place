@@ -4,7 +4,7 @@ import {
     GetMessageDetailRequest,
     GetMessageOpponentInfoRequest
 } from "actions/Message";
-import MessageDetail from 'components_mobile/MessageDetail';
+import MessageDetail from 'components/MessageDetail';
 import Socket from 'modules/socket';
 
 class MessageDetailContainer extends React.Component {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CreateExp from 'components_mobile/Exp/CreateExp';
+import CreateExp from 'components/Exp/CreateExp';
 import { connect } from "react-redux";
 import { getCategoryListRequest, getExpTypeListReqeuest } from 'actions/Commons/DefaultList';
 import { createExpRequest } from 'actions/Exp/UpdateExp'

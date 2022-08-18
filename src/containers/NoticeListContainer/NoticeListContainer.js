@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import NoticeList from "components_mobile/NoticeList";
+import NoticeList from "components/NoticeList";
 import {
     GetNoticeListRequest,
     GetTotalNoticeCountRequest

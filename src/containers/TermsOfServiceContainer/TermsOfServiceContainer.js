@@ -1,5 +1,5 @@
 import React from 'react';
-import TermsOfService from "components_mobile/TermsOfService";
+import TermsOfService from "components/TermsOfService";
 
 class TermsOfServiceContainer extends React.Component {
   render() {

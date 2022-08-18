@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { CreateExpContactRequest, GetExpContactListRequest } from "actions/Contact";
-import ContactWriteModal from "components_mobile/Contact/ContactWriteModal";
+import ContactWriteModal from "components/Contact/ContactWriteModal";
 
 class ContactWriteContainer extends React.Component {
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { GetMessageGroupRequest } from "actions/Message";
-import MesssGroupList from "components_mobile/MessageGroupList";
+import MesssGroupList from "components/MessageGroupList";
 
 class MessageGroupContainer extends React.Component {
 

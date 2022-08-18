@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FindPW from 'components_mobile/Registration/FindPW';
+import FindPW from 'components/Registration/FindPW';
 class FindPWContainer extends Component {
     render() {
       return (

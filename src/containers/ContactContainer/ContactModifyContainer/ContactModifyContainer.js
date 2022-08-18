@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import {  UpdateExpContactRequest, GetExpContactListRequest } from "actions/Contact";
-import ContactModifyModal from "components_mobile/Contact/ContactModifyModal";
+import ContactModifyModal from "components/Contact/ContactModifyModal";
 
 class ContactModifyContainer extends React.Component {
     componentDidMount() {

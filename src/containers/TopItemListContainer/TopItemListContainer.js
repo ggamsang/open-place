@@ -1,5 +1,5 @@
 import React from 'react';
-import ScrollList from "components_mobile/Commons/ScrollList"
+import ScrollList from "components/Commons/ScrollList"
 import { connect } from "react-redux";
 import { getTopExpListRequest } from "../../actions/Exp/TopList.js";
 

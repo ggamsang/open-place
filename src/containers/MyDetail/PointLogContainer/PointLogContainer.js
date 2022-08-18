@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PointLogList from "components_mobile/PointLogList";
+import PointLogList from "components/PointLogList";
 import {
   GetPointListRequest,
   GetTotalPointCountRequest

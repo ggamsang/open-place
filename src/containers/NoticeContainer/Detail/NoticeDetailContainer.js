@@ -1,5 +1,5 @@
 import React from 'react';
-import NoticeDetail from 'components_mobile/Notice/Detail';
+import NoticeDetail from 'components/Notice/Detail';
 import { GetNoticeDetailRequest, } from 'actions/Notice';
 import { connect } from 'react-redux';
 import { goto } from 'navigator';

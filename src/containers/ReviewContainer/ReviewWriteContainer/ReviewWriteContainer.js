@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { CreateExpReviewRequest, GetExpReviewListRequest } from "actions/Review";
-import ReviewWriteModal from "components_mobile/Review/ReviewWriteModal";
+import ReviewWriteModal from "components/Review/ReviewWriteModal";
 
 class ReviewWriteContainer extends React.Component {
 

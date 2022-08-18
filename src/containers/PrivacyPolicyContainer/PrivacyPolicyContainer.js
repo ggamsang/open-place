@@ -1,5 +1,5 @@
 import React from 'react';
-import PrivacyPolicy from 'components_mobile/PrivacyPolicy';
+import PrivacyPolicy from 'components/PrivacyPolicy';
 
 class CommunityContainer extends React.Component {
   render() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import Notice from 'components_mobile/Community';
+import Notice from 'components/Community';
 
 class NoticeContainer extends React.Component {
   render() {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ExpDetail from 'components_mobile/Exp/ExpDetail';
+import ExpDetail from 'components/Exp/ExpDetail';
 import { getExpDetailRequest, likeExpRequest, BuyExpRequest } from "actions/Exp/ExpDetail"
 
 import { connect } from "react-redux";

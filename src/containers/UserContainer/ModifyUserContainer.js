@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ModifyUser from 'components_mobile/User/ModifyUser';
+import ModifyUser from 'components/User/ModifyUser';
 import { updateUserRequest } from "actions/User/User"
 import { CheckNickNameRequest } from "actions/Authentication"
 

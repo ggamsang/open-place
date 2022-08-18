@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Main from 'components_mobile/Main/Main'
+import Main from 'components/Main/Main'
 
 class MainContainer extends Component {
   render() {

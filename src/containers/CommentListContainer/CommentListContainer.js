@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CommentList from "components_mobile/CommentList";
+import CommentList from "components/CommentList";
 import { GetArticleCommentRequest, CreateArticleCommentRequest } from 'actions/Comment';
 
 class CommentListContainer extends React.Component {

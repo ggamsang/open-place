@@ -1,4 +1,4 @@
-import Intro from 'components_mobile/Intro';
+import Intro from 'components/Intro';
 
 function IntroContainer() {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import ExpItemList from 'components_mobile/Exp/ExpItemList';
+import ExpItemList from 'components/Exp/ExpItemList';
 import {getExpListRequest} from "actions/Exp/ExpList"
 
 const dummy = [
