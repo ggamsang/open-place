@@ -7,69 +7,73 @@ import { resolution } from 'commons/resolution';
 import heart from 'source/Iconly-heart-red.svg'
 
 const Wrapper = styled.div`
-    box-sizing: border-box;
-    *{ 
-        box-sizing: border-box;
+    width: 280px;
+    height: 472px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 6px 7px 9px #00000029;
+    border-radius: 32px;
+    opacity: 1;
+    margin: auto;
+
+    .thumbnail {
+        width: max-content;
+        margin: auto;
+        img {
+            width: 248px;
+            height: 248px;
+            background-color: transparent;
+            background-image: url(${props => props.url});
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            box-shadow: 0px 20px 60px #00000026;
+            border-radius: 20px;
+            opacity: 1;
+        }
     }
-    position: relative;
-    height: ${resolution(165)}px;
-    background-image: url(${prop => prop.bg});
-    background-position: center center;
-    background-size: cover;
-    padding: 16px 21px;
-    display: flex;
-    align-items: flex-end;
-    *{ z-index: 1;}
-    .summary_wrap { width: 100%; } 
-    .gradient-cover {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: ${resolution(103)}px;
-        background: transparent linear-gradient(180deg, #00000000 0%, #000000 100%) 0% 0% no-repeat padding-box;
-        opacity: 0.78;
-        z-index: 0;
+    .title {
+        margin-top: 23px;
+        height: 25px;
+        text-align: center;
+        font: normal normal 600 18px/14px Pretendard;
+        letter-spacing: 0px;
+        color: #000000;
+        opacity: 1;
     }
-    .row {
-        width: 100%;
-        display: flex;
-    }
-    .space-between {
-        justify-content: space-between;
-    }
-    .item-title {
-        width: ${resolution(132)}px;
-        font: normal normal bold 16px/19px Pretendard;
-        color: white;
-        font-weight: bold;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-    .imgheart {
-        width: 23px;
-        height: 23px;
+    .category {
+        margin-top: 7px;
+        height: 16px;
+        text-align: center;
+        font: normal normal normal 12px/14px Pretendard;
+        letter-spacing: 0px;
+        color: #000000;
+        opacity: 0.6;
     }
     .price {
-        margin-left: 20px;
-        width: ${resolution(80)}px;
-        font: normal normal bold 16px/19px Pretendard;
-        color: white;
-        font-weight: bold;
+        margin-top: 8px;
+        height: 19px;
+        text-align: center;
+        font: normal normal normal 16px/14px Pretendard;
+        letter-spacing: 0px;
+        color: #4136F1;
+        opacity: 1;
     }
-    .like{
-        width:22px;
-        text-align:center;
-        font: normal normal bold 12px/15px Pretendard;
-        color: white;
-        font-weight: bold;
-    }
-    .rate-and-tags {
+    .score {
         display: flex;
+        flex-direction: row;
+
     }
 `;
 
+const ScoreDetail = ({ score }) => {
+    return (<div style={{ display: "flex", flexDirection: "column" }}>
+        <div>5</div>
+        <div>4</div>
+        <div>3</div>
+        <div>2</div>
+        <div>1</div>
+    </div>)
+}
 class Item extends React.Component {
     constructor(props) {
         super(props);
@@ -92,11 +96,24 @@ class Item extends React.Component {
             taglist,
             price,
             like_count,
-            like_id
+            like_id,
+            category
         } = this.props;
+        console.log(this.props);
         return (
-            <Wrapper bg={url || noimage} onClick={this.onClickItem}>
-                <div className='summary_wrap'>
+            <Wrapper url={url || noimage} onClick={this.onClickItem}>
+                <div className='fav-star'>absStar</div>
+                <div className='thumbnail'>
+                    <img src={null} />
+                </div>
+                <div className='title'>{title}</div>
+                <div className='category'>{category === 1 ? "놀기" : category === 2 ? "배우기" : category === 3 ? "만들기" : "카테고리"}</div>
+                <div className='price'>{price}원</div>
+                <div className='score'>
+                    {score}
+                    <ScoreDetail score={score} />
+                </div>
+                {/* <div className='summary_wrap'>
                     <div className='row space-between'>
                         <div className='row'>
                             <div className='item-title'>{title || "title"}</div>
@@ -113,7 +130,7 @@ class Item extends React.Component {
                         <div className='like'>{like_id==null?0:like_count}</div>
                     </div>
                 </div>
-                <div className='gradient-cover'>&nbsp;</div>
+                <div className='gradient-cover'>&nbsp;</div> */}
             </Wrapper>
         )
     }

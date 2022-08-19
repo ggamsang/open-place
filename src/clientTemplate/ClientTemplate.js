@@ -23,6 +23,7 @@ const Wrapper = styled.div`
     pointer-events: none;
   }
   .bottom {
+
     .blanker {
       height: 50px;
     }
@@ -38,11 +39,11 @@ const Wrapper = styled.div`
     z-index: 1;
     opacity: 50%;
   }
-  @media only screen and (min-width: 320px) and (max-width:500px){
-   .nav{
-     width:${window.innerWidth}px;
-   }
-  }
+  // @media only screen and (min-width: 320px) and (max-width:500px){
+  //  .nav{
+  //    width:${window.innerWidth}px;
+  //  }
+  // }
 `;
 
 class ClientTemplate extends Component {
@@ -100,16 +101,16 @@ class ClientTemplate extends Component {
 
     return (<Wrapper id="client-template">
       <div className='top'>
-        <TopMenu login={this.props.isLoggedIn} />
+        <TopMenu login={this.props.isLoggedIn} userInfo={this.props.userInfo} />
       </div>
 
       <div id="main" className='main'>
         {this.props.children}
-      </div>
-
-      <div className='bottom'>
         <Footer />
       </div>
+
+      {/* <div className='bottom'> */}
+      {/* </div> */}
 
     </Wrapper>);
   }
@@ -117,6 +118,7 @@ class ClientTemplate extends Component {
 
 const mapStateToProps = state => ({
   isLoggedIn: state.Authentication.status.isLoggedIn,
+  userInfo: state.Authentication.status.userInfo,
 });
 const mapDispatchToProps = dispatch => ({
 });

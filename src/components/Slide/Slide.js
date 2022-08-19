@@ -8,7 +8,7 @@ const Wrapper = styled.div`
     margin: auto;
     margin-top: 10px;
     width: ${WIDTH-10}px;
-    height: 187px;
+    height: 349px;
     border-radius: 6px;
     overflow-y: hidden;
     scrollbar-width: none; /* Firefox */
@@ -54,17 +54,16 @@ const PaginationDots = styled.ul`
 const Slide = styled.div`
     min-width: ${WIDTH}px;
     width: 100%;
-    height: 187px;
+    height: 349px;
     background-image: url(${prop => prop.url});
     color: #FFF;
     position: relative;
 	scroll-snap-align: start;
 	text-align: center;
     background-size: cover;
-	position: relative;
+    background-position: center center;
+    position: relative;
     .para1 {
-        // width: 156px;
-        // height: 44px;
         position: absolute;
         left: 12px;
         top: 113px;       

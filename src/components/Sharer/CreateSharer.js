@@ -7,7 +7,7 @@ import ButtonNormal from 'components/Commons/Button/ButtonNormal';
 
 const Wrapper = styled.div`
   width:100%;
-  height:130vh;
+  // height:130vh;
   .header{
     width:100%;
     height:${resolution(290)}px;

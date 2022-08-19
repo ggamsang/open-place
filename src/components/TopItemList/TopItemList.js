@@ -12,16 +12,20 @@ const Wrapper = styled.div`
 `;
 const Title = styled.div`
     margin: auto;
+
+    padding: 18px 0px 9px 0px;
+
     width: max-content;
-    // font: normal normal medium 18px/21px Pretendard;
-    color: #4A4B4D;
-    text-align: left;
-    box-sizing:border-box;
-    padding:10px;
-    font-sizing:18px;
+    // width: 152px;
+    height: 52px;
+    text-align: center;
+    font: normal normal 900 44px/52px Pretendard;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
 `;
 
-const strTopItemList = "인기아이템";
+const strTopItemList = "탑리스트";
 
 class TopItemList extends React.Component {
     render() {

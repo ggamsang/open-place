@@ -9,6 +9,9 @@ import Item from 'components/Commons/Item';
 const ScrollWrap = styled.div`
 width:100%;
 .wrapper_{
+    display: flex;
+    flex-wrap: wrap;
+    flex-gap: 84px;
     padding-bottom: 10px;
     width: 100%;
   }

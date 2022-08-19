@@ -61,8 +61,7 @@ class SharerForm extends React.Component {
   }
   componentDidUpdate(prevProps) {
     if (prevProps.sharer !== this.props.sharer) {
-      console.log(this.props.sharer);
-      this.setState({
+      this.props.sharer && this.setState({
         info: this.props.sharer.about_me,
         city: this.props.sharer.location_id,
         email: this.props.sharer.email,
@@ -121,27 +120,10 @@ class SharerForm extends React.Component {
     }
   };
   render() {
+    console.log("SHARE:", this.props);
     return (
       <React.Fragment>
         <Wrap>
-          {/* <div className='shadowBorderBox flex'>
-            <img src={this.state.thumbnail} className="img_" />
-            <div className='wrap'>
-              <div style={{ marginBottom: "9px" }}><span className="text">{this.props.userInfo&&this.props.userInfo.nick_name||""} 프로필 썸네일</span></div>
-              <label className="findThumbnailText" htmlFor="file">
-                <ButtonNormal
-                  width={194}
-                  height={30}
-                  radius={10}
-                  fontSize={15}
-                  color={"red"}
-                  bgColor={"white"}
-                  border={"2px solid red"}
-                  text="썸네일 등록" />
-              </label>
-            </div>
-            <input hidden onChange={this.onChangeThumbnail} id="file" type="file" accept="image/png, image/bmp, image/jpeg, image/jpg" />
-          </div> */}
           <div className='shadowBorderBox'>
             <div className='title'>상세정보</div>
             <div className='row' style={{ marginTop: "11px" }}>

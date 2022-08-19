@@ -9,7 +9,7 @@ import { goto } from 'navigator';
 
 const Wrapper = styled.div`
   width:100%;
-  height:130vh;
+  // height:130vh;
   .header{
     width:100%;
     height:${resolution(290)}px;
@@ -71,16 +71,17 @@ class ModifySharer extends React.Component {
     this.onDelete = this.onDelete.bind(this);
   }
 
-  componentDidUpdate(prevProps){
-    if(prevProps.sharer!==this.props.sharer){
-      console.log(this.props.sharer);
-      this.setState({
-        info:this.props.sharer.about_me,
-        city:this.props.sharer.location_id,
-        email:this.props.sharer.email,
-        bank_code:this.props.sharer.bank_code,
-        bank_number:this.props.sharer.account_number,
-      })
+  componentDidUpdate(prevProps) {
+    if ((prevProps.sharer !== this.props.sharer)) {
+      if (this.props.sharer) {
+        this.setState({
+          info: this.props.sharer && this.props.sharer.about_me,
+          city: this.props.sharer && this.props.sharer.location_id,
+          email: this.props.sharer.email,
+          bank_code: this.props.sharer.bank_code,
+          bank_number: this.props.sharer.account_number,
+        })
+      }
     }
   }
   onSubmit = async () => {
@@ -94,8 +95,8 @@ class ModifySharer extends React.Component {
     goto("MYDETAIL");
 
   }
-  onDelete = async () =>{
-    await this.props.deleteSharerRequest(this.props.token,this.props.userInfo.uid)
+  onDelete = async () => {
+    await this.props.deleteSharerRequest(this.props.token, this.props.userInfo.uid)
     goto("MYDETAIL");
   }
   onCancel = () => {
