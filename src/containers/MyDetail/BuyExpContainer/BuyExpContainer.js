@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { goto } from 'navigator';
-import ScrollList from "components_mobile/Commons/ScrollList"
+import ScrollList from "components/Commons/ScrollList"
 import { getUserBoughtExpRequest } from 'actions/User/MyDetail';
-import Item from 'components_mobile/Commons/Item';
+import Item from 'components/Commons/Item';
 
 class BuyExpContainer extends React.Component {
   componentDidMount() {

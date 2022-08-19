@@ -6,7 +6,7 @@ import {
     GetCounselingMessageGroupRequest,
 } from "actions/Message";
 import Socket from 'modules/socket';
-import CounselingMessageDetail from 'components_mobile/CounselingMessageDetail';
+import CounselingMessageDetail from 'components/CounselingMessageDetail';
 
 class CounselingMessageDetailContainer extends React.Component {
 

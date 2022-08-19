@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MyDetail from 'components_mobile/User/MyDetail';
+import MyDetail from 'components/User/MyDetail';
 import { connect } from 'react-redux';
 import { goto } from 'navigator';
 import { getSharerRequest } from 'actions/Sharer/Sharer';

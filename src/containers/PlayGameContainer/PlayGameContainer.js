@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import PlayGame from 'components_mobile/PlayGame';
+import PlayGame from 'components/PlayGame';
 
 class PlayGameContainer extends React.Component {
   render() {

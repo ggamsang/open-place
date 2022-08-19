@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getUserBoughtExpDetailRequest } from 'actions/User/MyDetail';
 import { Dimmer, Loader } from 'semantic-ui-react';
-import BoughtExpDetail from 'components_mobile/Exp/BoughtExpDetail';
+import BoughtExpDetail from 'components/Exp/BoughtExpDetail';
 
 class BuyExpDetailContainer extends React.Component {
     componentDidMount() {

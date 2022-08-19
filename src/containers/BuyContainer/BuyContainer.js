@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getExpDetailRequest, BuyExpRequest } from "actions/Exp/ExpDetail"
 import { GetCurrentMyPointRequest, } from "actions/MyPoint";
 import { Dimmer, Loader } from 'semantic-ui-react';
-import Buy from 'components_mobile/Exp/Buy';
+import Buy from 'components/Exp/Buy';
 
 class BuyContainer extends React.Component {
     componentDidUpdate(prevProps) {

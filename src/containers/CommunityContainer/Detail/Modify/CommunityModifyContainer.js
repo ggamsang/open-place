@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { ModifyArticleRequest } from "actions/Community";
-import CommunityModify from 'components_mobile/Community/Modify/Modify';
+import CommunityModify from 'components/Community/Modify/Modify';
 import { GetArticleDetailRequest } from 'actions/Community';
 
 class CommunityWriteContainer extends React.Component {

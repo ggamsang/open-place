@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { GetCurrentMyPointRequest, ChargeMyPointRequest, } from "actions/MyPoint";
-import MyPointCharger from "components_mobile/MyPointCharger";
+import MyPointCharger from "components/MyPointCharger";
 import { Dimmer, Loader } from 'semantic-ui-react';
 
 class MyPointChargeContainer extends React.Component {

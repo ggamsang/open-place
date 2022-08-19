@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import notification from 'source/Iconly-alarm-white.svg'
 import { resolution } from 'commons/resolution';
-import NotificationModal from 'components_mobile/NotificationModal';
+import NotificationModal from 'components/NotificationModal';
 import { connect } from "react-redux";
 import host from 'config';
 import { goto } from 'navigator';

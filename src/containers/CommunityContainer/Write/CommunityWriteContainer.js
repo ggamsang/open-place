@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { WriteArticleRequest, } from "actions/Community";
-import CommunityWrite from 'components_mobile/Community/Write';
+import CommunityWrite from 'components/Community/Write';
 
 class CommunityWriteContainer extends React.Component {
   Write = async(form) =>

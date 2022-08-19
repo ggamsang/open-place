@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getSharerRequest } from 'actions/Sharer/Sharer';
 import { getLocationListRequest } from "actions/Commons/DefaultList"
-import SharerDetail from 'components_mobile/Sharer/SharerDetail';
+import SharerDetail from 'components/Sharer/SharerDetail';
 import { likeSharerRequest } from 'actions/Sharer/Sharer';
 import { getIsMyLikeRequest } from 'actions/User/User';
 class SharerDetailContainer extends React.Component {

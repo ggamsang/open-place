@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import ReviewList from "components_mobile/Review/ReviewList";
+import ReviewList from "components/Review/ReviewList";
 import { GetExpReviewListRequest, DeleteExpReviewRequest, } from "actions/Review";
 
 class ReviewContainer extends React.Component {

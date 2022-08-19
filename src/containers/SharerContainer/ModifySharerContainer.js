@@ -1,5 +1,5 @@
 import React from 'react';
-import ModifySharer from 'components_mobile/Sharer/ModifySharer';
+import ModifySharer from 'components/Sharer/ModifySharer';
 import { connect } from 'react-redux';
 import { getBankCodeListReqeust, getLocationListRequest } from "actions/Commons/DefaultList"
 import { updateSharerProfileRequest } from "actions/Sharer/UpdateSharer";

@@ -9,7 +9,7 @@ import SignInPage from "pages/RegistrationPage/SignInPage";
 import SignUpPage from "pages/RegistrationPage/SignUpPage";
 import FindPWPage from "pages/RegistrationPage/FindPWPage";
 import MyDetailPage from "pages/UserPage/MyDetailPage/MyDetailPage";
-import MyDetailChild from "components_mobile/User/MyDetailChild";
+import MyDetailChild from "components/User/MyDetailChild";
 
 import IntroPage from "pages/IntroPage";
 import TermsOfServicePage from "pages/TermsOfServicePage";
@@ -38,6 +38,7 @@ import { WIDTH } from "constant";
 import MyPaidExpDetailPage from "pages/MyPaidExpDetailPage";
 // import MyPointChargePage from "pages/MyPointChargePage";
 import BuyPage from "pages/BuyPage";
+
 const Wrapper = styled.main`
   // overflow: hidden;
   position: relative;
@@ -53,7 +54,7 @@ const Wrapper = styled.main`
   }
   .appcontent {
     position: relative;
-    width: ${WIDTH}px;
+    width: 100%; //${WIDTH}px;
     // height: 100%;
     margin: auto;
     background-color: white;
@@ -90,7 +91,7 @@ function App() {
               <Route path=":id" element={<MyDetailChild />} />
             </Route>
             <Route path="paidExp/:id" element={<MyPaidExpDetailPage />} />
-            <Route path="buy/:id" element={<BuyPage/>} />
+            <Route path="buy/:id" element={<BuyPage />} />
             <Route path="terms" element={<TermsOfServicePage />} />
             <Route path="privacy" element={<PrivacyPolicyPage />} />
             <Route path="search/:category/:sort/:keyword" element={<SearchPage />} />

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import ScrollList from "components_mobile/Commons/ScrollList"
+import ScrollList from "components/Commons/ScrollList"
 import { connect } from "react-redux";
 import { getUserLikeExpRequest } from "actions/User/MyDetail"
-import Item from 'components_mobile/Commons/Item';
+import Item from 'components/Commons/Item';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`

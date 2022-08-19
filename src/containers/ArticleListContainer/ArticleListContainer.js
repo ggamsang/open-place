@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ArticleList from "components_mobile/ArticleList";
+import ArticleList from "components/ArticleList";
 import {
     GetArticleListRequest,
     GetTotalArticleCountRequest

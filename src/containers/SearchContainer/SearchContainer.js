@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchList from "components_mobile/Search/SearchList";
+import SearchList from "components/Search/SearchList";
 import {getExpListRequest} from "actions/Exp/ExpList"
 import { connect } from "react-redux";
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { WriteArticleRequest, } from "actions/Community";
-import NoticeWrite from 'components_mobile/Notice/Write';
+import NoticeWrite from 'components/Notice/Write';
 
 class NoticeWriteContainer extends React.Component {
   Write = (form) => {
