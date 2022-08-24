@@ -48,7 +48,7 @@ const App = () => {
         
         {/* 검색 페이지 */}
         <Route path="/search/:keyword" element={<SearchPage />} />
-        
+
       </Routes>
     </BrowserRouter>
   );
