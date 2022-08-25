@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="212" height="597" viewBox="0 0 212 597">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1" y1="0.5" x2="0" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#8743ff"/>
+      <stop offset="1" stop-color="#4136f1"/>
+    </linearGradient>
+    <filter id="cta" x="0" y="0" width="212" height="597" filterUnits="userSpaceOnUse">
+      <feOffset dy="15" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="15" result="blur"/>
+      <feFlood flood-color="#1466cc" flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="cta-2" data-name="cta" transform="translate(45 30)">
+    <g transform="matrix(1, 0, 0, 1, -45, -30)" filter="url(#cta)">
+      <rect id="cta-3" data-name="cta" width="507" height="122" rx="28" transform="translate(45 537) rotate(-90)" fill="url(#linear-gradient)"/>
+    </g>
+  </g>
+</svg>

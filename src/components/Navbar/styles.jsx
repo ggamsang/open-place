@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import sidebar from '../../imgs/sidebar.svg';
+import sidebar from '../../imgs/sidebar2.png';
 import sidebaricon1 from '../../imgs/sidebar-heart.svg';
 import sidebaricon2 from '../../imgs/sidebar-activity.svg';
 import sidebaricon3 from '../../imgs/sidebar-user.svg';
@@ -9,11 +9,11 @@ import sidebarcontrol from '../../imgs/sidebar-control.png';
 
 
 export const SideBar = styled.div`
-  width: 99px;
-  height: 606px;
+  width: 122px;
+  height: 507px;
   display: inline-block;
   position: absolute;
-  left: 27px;
+  left: 0px;
   top: 0px;
 `;
 
