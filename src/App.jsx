@@ -10,6 +10,7 @@ import ExpAddPage from './pages/Exp/Add';
 import ExpEditPage from './pages/Exp/Edit';
 import ExpDetailPage from './pages/Exp/Detail';
 import SearchPage from './pages/Search';
+import ListPage from './pages/ListPage';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -22,10 +23,14 @@ const App = () => {
         <Route path="/loading" element={<LoadingPage />} />
 
         {/* 메인페이지 - 로그인전 – 1 */}
+        <Route path="/" element={<MainPage />} />
+
         {/* 메인페이지 - 로그인후 – 1 */}
         {/* 메인페이지 - 리스트페이지 태그 목록 접힌 상태 – 1 */}
+        <Route path="/listpage" element={<ListPage />} />
+
         {/* 메인페이지 - 리스트페이지 태그 목록 펼침 상태 – 1 */}
-        <Route path="/" element={<MainPage />} />
+        
 
         {/* 커뮤니티 페이지(자유게시판) */}
         <Route path="/community" element={<CommunityPage />} />

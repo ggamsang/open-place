@@ -5,8 +5,8 @@ import top1 from '../../imgs/top1.svg';
 import top2 from '../../imgs/top2.svg';
 import top3 from '../../imgs/top3.svg';
 import top4 from '../../imgs/top4.svg';
-import register from '../../imgs/register.svg';
-import login from '../../imgs/login.svg';
+import register from '../../imgs/register2.svg';
+import login from '../../imgs/login2.svg';
 
 
 export const Container = styled.div`
@@ -87,12 +87,31 @@ export const RegisterText = styled.div`
   margin-right: 0px;
 `;
 
-export const Login = styled.img.attrs({
+export const Login = styled.div`
+  width: 155.63px;
+  height: 42.24px;
+  cursor: pointer;
+  position: relative;
+`;
+
+export const LoginImg = styled.img.attrs({
   src: login,
 })`
   width: 155.63px;
   height: 42.24px;
-  cursor: pointer;
+`;
+
+export const LoginText = styled.div`
+  font: normal normal 900 18px/21px Pretendard;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+  position: absolute;
+  top: 11px;
+  left: 72px;
+  // text-align: center;
+  // margin-top: 10px;
+  // cursor: pointer;
+  // margin-right: 0px;
 `;
 
 export const RegistBox = styled.div`

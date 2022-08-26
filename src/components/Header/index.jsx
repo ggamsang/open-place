@@ -14,7 +14,10 @@ const Header = () => {
           <styled.RegisterImg />
           <styled.RegisterText>회원가입</styled.RegisterText>
         </styled.Register>
-        <styled.Login />
+        <styled.Login>
+          <styled.LoginImg />
+          <styled.LoginText>로그인</styled.LoginText>
+        </styled.Login>
       </styled.RegistBox>
     </styled.Container>
   );
