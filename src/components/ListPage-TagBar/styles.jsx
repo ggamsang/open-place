@@ -136,6 +136,7 @@ export const MoreButton = styled.div`
     text-align: center;
     align-items: center;
     cursor: pointer;
+    visibility: ${props => props.isShowCondition ? "hidden" : "visible"};
 
     > span {
         text-align: center;
@@ -177,8 +178,8 @@ export const LessButton = styled.div`
 
     position: absolute;
     margin-left: 424px;
-    visibility: hidden;
-    // visibility: ${(props) => (!props.isShowCondition ? "hidden" : "visible")}
+    // visibility: hidden;
+    visibility: ${props => props.isShowCondition ? "visible" : "hidden"};
     
 
     > span {

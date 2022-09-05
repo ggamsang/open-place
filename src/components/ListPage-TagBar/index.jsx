@@ -27,9 +27,9 @@ const Tagbar = () => {
         <styled.CancelButton>
           <span>모두취소</span>
         </styled.CancelButton>
-        <styled.LessButton>
+        {/* <styled.LessButton>
           <span>접기</span>
-        </styled.LessButton>
+        </styled.LessButton> */}
       </styled.Tags>
     );    
   };
@@ -64,12 +64,12 @@ const Tagbar = () => {
               <styled.MoreButtonText>더보기</styled.MoreButtonText>
           </styled.MoreButton> */}
 
-          <styled.MoreButton onClick={() => {setIsShowCondition(!isShowCondition);}}>
+          <styled.MoreButton onClick={() => {setIsShowCondition(!isShowCondition);}} isShowCondition={isShowCondition} >
             <styled.MoreButtonPlusIcon />
             <span>더보기</span>
           </styled.MoreButton>
 
-          <styled.LessButton>
+          <styled.LessButton onClick={() => {setIsShowCondition(!isShowCondition);}} isShowCondition={isShowCondition}>
             <span>접기</span>
           </styled.LessButton>
           
