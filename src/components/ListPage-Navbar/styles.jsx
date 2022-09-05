@@ -7,6 +7,7 @@ import styled from 'styled-components';
 // import sidebaricon5 from '../../imgs/sidebar-info.svg';
 import sidebarcontrol from '../../imgs/sidebar-control.png';
 import sidebarmenu from '../../imgs/sidebarmenu.png';
+// import { SideBarControl } from '../Navbar/styles';
 
 
 export const SideBar = styled.div`
@@ -16,6 +17,7 @@ export const SideBar = styled.div`
   position: absolute;
   left: 27px;
   top: 0px;
+  z-index: 1;
 `;
 
 
@@ -145,26 +147,51 @@ export const SideBar = styled.div`
 //   left: 15.39px;
 // `;
 
-export const SideBarControl = styled.img.attrs({
-    src: sidebarcontrol,
-})`
-    width: 56.97px;
-    height: 56.97px;
-    z-index: 3;
-    top: 84.52px;
-    left: 66.52px;
-    position: absolute;
-    transform: scaleY(-1);
+// export const SideBarControl = styled.img.attrs({
+//     src: sidebarcontrol,
+// })`
+//     width: 56.97px;
+//     height: 56.97px;
+//     z-index: 3;
+//     top: 84.52px;
+//     left: 66.52px;
+//     position: absolute;
+//     transform: scaleY(-1);
+// `;
+
+export const SideBarControl = styled.div`
+  background: transparent linear-gradient(239deg, #054EFA 0%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 15px 30px #1466CC29;
+  border-radius: 28px;
+  opacity: 1;
+  width: 56.97px;
+  height: 56.97px;
+  position: absolute;
+  top: 84px;
+  left: 80px;
+  transform: matrix(0.02, 1, -1, 0.02, 0, 0);
 `;
      
-export const SideBarMenu = styled.img.attrs({
-  src: sidebarmenu,
-})`
+// export const SideBarMenu = styled.img.attrs({
+//   src: sidebarmenu,
+// })`
+//   width: 99px;
+//   height: 26px;
+//   position: absolute;
+//   top: 100px;
+//   left: 16px;
+// `;
+
+export const SideBarMenu = styled.button`
+  background: transparent linear-gradient(270deg, #2854F8 0%, #4068FA 19%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
+  border-radius: 28px;
+  opacity: 1;
   width: 99px;
   height: 26px;
-  position: absolute;
-  top: 100px;
-  left: 16px;
+  margin-top: 99px;
+  border: 0;
+  outline: 0;
+  transform: matrix(-1, 0, 0, -1, 0, 0);  
 `;
 
 export const SidebarMenuText = styled.div`
@@ -172,7 +199,10 @@ export const SidebarMenuText = styled.div`
   letter-spacing: 0px;
   color: #FFFFFF;
   opacity: 1;
-  position: absolute;
-  top: 104px;
-  left: 32px;
+  text-align: left;
+  padding-left: 17px;
+  transform: matrix(-1, 0, 0, -1, 0, 0); 
+  // position: absolute;
+  // top: 104px;
+  // left: 32px;
 `;

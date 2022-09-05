@@ -5,8 +5,9 @@ const Navbar = () => {
   return (
     <styled.SideBar>
       {/* <styled.SideBarImg /> */}
-      <styled.SideBarMenu />
-      <styled.SidebarMenuText>메뉴</styled.SidebarMenuText>
+      <styled.SideBarMenu>
+        <styled.SidebarMenuText>메뉴</styled.SidebarMenuText>
+      </styled.SideBarMenu>
       <styled.SideBarControl />
       {/* <styled.SideBarIcon1 />
       <styled.SideBarText1>만들기</styled.SideBarText1>

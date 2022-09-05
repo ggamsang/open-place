@@ -5,24 +5,31 @@ const Header = () => {
   return (
     <styled.Container>
       <styled.Logo />
-      <styled.Top1 />
-      <styled.Top2 />
-      <styled.Top3 />
-      <styled.Top4 />
+      <styled.Play>
+        <styled.PlayText>놀기</styled.PlayText>
+      </styled.Play>
+      <styled.Learn>
+        <styled.LearnText>배우기</styled.LearnText>
+      </styled.Learn>
+      <styled.Make>
+        <styled.MakeText>만들기</styled.MakeText>
+      </styled.Make>
+      <styled.SearchExp>
+        <styled.SearchExpIcon />
+        <styled.SearchExpText>경험 찾아보기</styled.SearchExpText>
+      </styled.SearchExp>
+      <styled.NotificationIcon />
+      <styled.EmailIcon />
       <styled.RegistBox>
-        <styled.Register />
-
+        <styled.Register>
+          <styled.RegisterIcon />
+          <styled.RegisterText>등록</styled.RegisterText>
+        </styled.Register>
         <styled.Nickname>
-          <styled.NicknameProfileImg />
-          <styled.NicknameBox />
+          <styled.NicknameIcon />
           <styled.NicknameText>닉네임</styled.NicknameText>
         </styled.Nickname>
       </styled.RegistBox>
-      {/* <styled.SideBar>
-        <styled.SideBarImg />
-        <styled.SideBarIcon1 />
-        <styled.SideBarText>만들기</styled.SideBarText>
-      </styled.SideBar> */}
     </styled.Container>
   );
 };

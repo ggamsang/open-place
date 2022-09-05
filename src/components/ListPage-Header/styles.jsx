@@ -1,13 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import logoRed from '../../imgs/logo.png';
-import top1 from '../../imgs/top1.svg';
-import top2 from '../../imgs/top2.svg';
-import top3 from '../../imgs/top3.svg';
-import top4 from '../../imgs/top4.svg';
-import nickname from '../../imgs/nickname.png';
-import register from '../../imgs/Registerblue.png';
 import nicknameprofileimg from '../../imgs/NicknameProfileImg.png';
+import notifications from '../../imgs/notifications.png';
+import email from '../../imgs/email.png';
+
 
 
 export const Container = styled.div`
@@ -27,95 +24,189 @@ export const Logo = styled.img.attrs({
   margin-left: 27px;
 `;
 
-export const Top1 = styled.img.attrs({
-  src: top1,
-})`
-  width: 351px;
+export const Play = styled.button`
+  width: 159px;
   height: 43px;
+  background: transparent linear-gradient(270deg, #FF8900 0%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
+  border-radius: 0px 22px 22px 0px;
+  opacity: 1;
   cursor: pointer;
+  border: 0;
+  outline: 0;
 `;
 
-export const Top2 = styled.img.attrs({
-  src: top2,
-})`
+export const PlayText = styled.div`
+  font: normal normal 900 16px/19px Pretendard;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+  opacity: 1;
+  // margin-top: 1px;
+  margin-left: 94px;
+`;
+
+export const Learn = styled.button`
+  background: transparent linear-gradient(270deg, #8800FF 0%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
+  border-radius: 0px 22px 22px 0px;
+  opacity: 1;
   width: 159px;
   height: 43px;
   cursor: pointer;
+  border: 0;
+  outline: 0;
 `;
 
-export const Top3 = styled.img.attrs({
-  src: top3,
-})`
+export const LearnText = styled.div`
+  font: normal normal 900 16px/19px Pretendard;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+  opacity: 1;
+  // margin-top: 1px;
+  margin-left: 87px;
+`;
+
+export const Make = styled.button`
+  background: transparent linear-gradient(270deg, #0062FF 0%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
+  border-radius: 0px 22px 22px 0px;
+  opacity: 1;
   width: 159px;
   height: 43px;
   cursor: pointer;
+  border: 0;
+  outline: 0;
 `;
 
-export const Top4 = styled.img.attrs({
-  src: top4,
-})`
-  width: 159px;
+export const MakeText = styled.div`
+  font: normal normal 900 16px/19px Pretendard;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+  opacity: 1;
+  // margin-top: 1px;
+  margin-left: 87px;
+`;
+
+export const SearchExp = styled.button`
+  background: #848484 0% 0% no-repeat padding-box;
+  border-radius: 22px;
+  opacity: 1;
+  width: 740px;
   height: 43px;
   cursor: pointer;
-`;
-
-export const Nickname = styled.div`
-  width: 155.63px;
-  height: 42.24px;
+  border: 0;
+  outline: 0;
+  margin-left: 9px;
   position: relative;
-  vertical-align: middle;
-  display: inline-block;
-  // text-align: center;
-  // margin-right: 125px;
 `;
 
-export const NicknameBox = styled.img.attrs({
-  src: nickname,
-})`
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
+export const SearchExpText = styled.div`
+  font: normal normal 900 16px/19px Pretendard;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+  opacity: 1;
+  // margin-top: 1px;
+  text-align: right;
+  margin-right: 22.36px;
+`;
+
+export const SearchExpIcon = styled.div`
+  width: 22.56px;
+  height: 22.56px;
   position: absolute;
+  top: 9.7px;
+  left: 11.36px;
+  background-color: white;
 `;
 
-export const NicknameProfileImg = styled.img.attrs({
+export const NotificationIcon = styled.img.attrs({
+  src: notifications,
+})`
+  width; 44.09px;
+  height: 44.09px;
+  margin-left: 66.69px;
+`;
+
+export const EmailIcon = styled.img.attrs({
+  src: email,
+})`
+  width: 44px;
+  height: 45px;
+  margin-left: 33.22px;
+`;
+
+export const Register = styled.button`
+  width: 156px;
+  height: 42px;
+  border-radius: 22px;
+  background: #ff181b 0% 0% no-repeat padding-box;
+  opacity: 1;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  margin-right: 4px;
+  position: relative;
+`;
+
+export const RegisterIcon = styled.div`
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 8.95px;
+  left: 25.73px;
+  background-color: white;
+`;
+
+export const RegisterText = styled.div`
+  font: normal normal 900 18px/21px Pretendard;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  margin-left: 32.66px;
+`;
+
+
+export const Nickname = styled.button`
+  width: 156px;
+  height: 42px;
+  border-radius: 22px;
+  background: #848484 0% 0% no-repeat padding-box;
+  opacity: 1;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  // margin-right: 27px;
+  position: relative;
+`;
+
+export const NicknameIcon = styled.img.attrs({
   src: nicknameprofileimg,
 })`
   width: 43px;
   height: 43px;
-  z-index: 1;
   position: absolute;
-  margin-left: 10px;
+  top: 0px;
+  left: 0px;
+  // background-color: white;
 `;
 
 export const NicknameText = styled.div`
   font: normal normal 900 18px/21px Pretendard;
   letter-spacing: 0px;
   color: #FFFFFF;
+  opacity: 1;
   position: relative;
-  // text-align: center;
-  // vertical-align: middle;
-  margin-top: 10px;
-  margin-left: 75px;
+  text-align: center;
   cursor: pointer;
   margin-right: 0px;
+  margin-left: 31.38px;
 `;
 
-export const Register = styled.img.attrs({
-  src: register,
-})`
-  width: 155.63px;
-  height: 42.24px;
-  cursor: pointer;
-`;
+
 
 export const RegistBox = styled.div`
   display: flex;
   font-size: 16px;
-  // justify-content: center;
-  // align-items: center;
   margin-left: auto;
-  // position: absolute;
   margin-right: 27px;
 `;
 
