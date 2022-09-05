@@ -11,6 +11,7 @@ import ExpEditPage from './pages/Exp/Edit';
 import ExpDetailPage from './pages/Exp/Detail';
 import SearchPage from './pages/Search';
 import ListPage from './pages/ListPage';
+import MainLogin from './pages/MainLogin';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -26,6 +27,8 @@ const App = () => {
         <Route path="/" element={<MainPage />} />
 
         {/* 메인페이지 - 로그인후 – 1 */}
+        <Route path="/mainlogin" element={<MainLogin />} />
+
         {/* 메인페이지 - 리스트페이지 태그 목록 접힌 상태 – 1 */}
         <Route path="/listpage" element={<ListPage />} />
 

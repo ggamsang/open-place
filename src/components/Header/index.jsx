@@ -5,17 +5,25 @@ const Header = () => {
   return (
     <styled.Container>
       <styled.Logo />
-      <styled.Top1 />
-      <styled.Top2 />
-      <styled.Top3 />
-      <styled.Top4 />
+      <styled.Play>
+        <styled.PlayText>놀기</styled.PlayText>
+      </styled.Play>
+      <styled.Learn>
+        <styled.LearnText>배우기</styled.LearnText>
+      </styled.Learn>
+      <styled.Make>
+        <styled.MakeText>만들기</styled.MakeText>
+      </styled.Make>
+      <styled.SearchExp>
+        <styled.SearchExpIcon />
+        <styled.SearchExpText>경험 찾아보기</styled.SearchExpText>
+      </styled.SearchExp>
       <styled.RegistBox>
         <styled.Register>
-          <styled.RegisterImg />
           <styled.RegisterText>회원가입</styled.RegisterText>
         </styled.Register>
         <styled.Login>
-          <styled.LoginImg />
+          <styled.LoginIcon />
           <styled.LoginText>로그인</styled.LoginText>
         </styled.Login>
       </styled.RegistBox>

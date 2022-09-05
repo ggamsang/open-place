@@ -3,38 +3,6 @@ import star from '../../imgs/star.svg';
 import profileimg from '../../imgs/profileimg.jpg';
 
 
-export const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const TopListText = styled.div`
-  margin-top: 18px;
-  margin-bottom: 9.05px;
-  width: 100%;
-
-  text-align: center;
-  font: normal normal 900 44px/52px Pretendard;
-  letter-spacing: 0px;
-  color: #000000;
-  opacity: 1;
-`;
-
-
-
-export const TopListContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 84px;
-  padding: 0 74px 0 74px;
-  justify-content: space-around;
-  margin-bottom: 77px;
-  text-align: center;
-  align-items: center;
-`;
-
 export const Profile = styled.div`
   display: inline-block;
   position: relative;
@@ -188,6 +156,3 @@ export const RateBar = styled.div`
   border-radius: 50px;
   background-color: rgb(101,101,101);
 `;
-
-
-

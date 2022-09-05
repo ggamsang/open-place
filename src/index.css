@@ -41,6 +41,20 @@ code {
 }
 
 @font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: medium;
+  src: url("fonts/Pretendard-Medium.otf");
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: normal;
+  src: url("fonts/Pretendard-Regular.otf");
+}
+
+@font-face {
   font-family: 'PingFang SC';
   font-style: normal;
   font-weight: 600;
