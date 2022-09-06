@@ -18,14 +18,17 @@ const Header = () => {
         <styled.SearchExpIcon />
         <styled.SearchExpText>경험 찾아보기</styled.SearchExpText>
       </styled.SearchExp>
+      <styled.NotificationIcon />
+      <styled.EmailIcon />
       <styled.RegistBox>
         <styled.Register>
-          <styled.RegisterText>회원가입</styled.RegisterText>
+          <styled.RegisterIcon />
+          <styled.RegisterText>등록</styled.RegisterText>
         </styled.Register>
-        <styled.Login>
-          <styled.LoginIcon />
-          <styled.LoginText>로그인</styled.LoginText>
-        </styled.Login>
+        <styled.Nickname>
+          <styled.NicknameIcon />
+          <styled.NicknameText>닉네임</styled.NicknameText>
+        </styled.Nickname>
       </styled.RegistBox>
     </styled.Container>
   );
