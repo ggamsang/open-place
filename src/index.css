@@ -34,14 +34,14 @@ code {
 }
 
 @font-face {
-  font-family: 'Pretendard';
+  font-family: 'Pretendard-bold';
   font-style: normal;
   font-weight: bold;
   src: url("fonts/Pretendard-Bold.otf");
 }
 
 @font-face {
-  font-family: 'Pretendard';
+  font-family: 'Pretendard-medium';
   font-style: normal;
   font-weight: medium;
   src: url("fonts/Pretendard-Medium.otf");
