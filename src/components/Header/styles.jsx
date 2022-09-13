@@ -1,7 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
 import logoRed from '../../imgs/logo.png';
-
 
 export const Container = styled.div`
   width: 100%;
@@ -175,6 +173,3 @@ export const RegistBox = styled.div`
   margin-left: auto;
   margin-right: 27px;
 `;
-
-
-

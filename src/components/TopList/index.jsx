@@ -7,7 +7,6 @@ import ProfileCard from '../ProfileCard';
 
 const MatchList = () => {
   
-
   return (
     <styled.Container>
       <styled.TopListText>
