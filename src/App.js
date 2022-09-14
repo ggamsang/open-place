@@ -23,6 +23,8 @@ import SearchPage from "pages/SearchPage/SearchPage";
 import MessageListPage from "pages/MessagePage";
 import MessageDetailPage from "pages/MessagePage/Detail";
 import ExpDetailPage from "pages/ExpPage/ExpDetailPage/ExpDetailPage";
+import LiveExpDetailPage from "pages/ExpPage/LiveExpDetailPage/LiveExpDetailPage";
+
 import styled from 'styled-components';
 
 import MakeExpListPage from "pages/ExpPage/MakeExpListPage ";
@@ -102,6 +104,7 @@ function App() {
             </Route>
             <Route path="modifyUser" element={<ModifyUserPage />} />
             <Route path="exp/:id" element={<ExpDetailPage />} />
+            <Route path="liveExp/:id" element={<LiveExpDetailPage />} />
             <Route path="createExp" element={<CreateExpPage />} />
             <Route path="modifyExp" >
               <Route path=":id" element={<ModifyExpPage />} />

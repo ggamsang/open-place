@@ -105,6 +105,7 @@ class ClientTemplate extends Component {
       </div>
 
       <div id="main" className='main'>
+
         {this.props.children}
         <Footer />
       </div>

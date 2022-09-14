@@ -168,7 +168,7 @@ const Counseling = styled.div`
 const Gaming = styled.div`
   margin: auto;
   width: calc(100% - 40px);
-  height: 100vh;
+  min-height: 50vh;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   box-shadow: 2px 2px 5px #00000029;
   border: 0.5px solid #E9E9E9;
@@ -346,7 +346,7 @@ class BoughtExpDetail extends React.Component {
 
             {detail.type === ExpTypes.GAMING
                 && <Gaming>
-                    <PlayGameContainer detail={detail} exp_id={detail.uid} />
+                    <PlayGameContainer detail={detail} exp_id={detail.uid} payment_id={this.props.payment_id} />
                 </Gaming>}
 
             {detail.type === ExpTypes.NORMAL
