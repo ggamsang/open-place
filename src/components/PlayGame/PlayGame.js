@@ -58,7 +58,7 @@ class PlayGame extends React.Component {
         if (data.success) {
           alert("라이브 게임이 정상적으로 닫혔습니다.");
           this.socket.emit("close-room", liveId);
-          this.setState({ live: false, liveId: false });
+          this.setState({ live: false, liveId: false, started: false });
         } else {
           alert("failed to close game");
         }
@@ -101,7 +101,7 @@ class PlayGame extends React.Component {
     return live && liveId ? (
       started ? (
         <>
-          <iframe src={url} width="100%" height="100%"/>
+          <iframe src={url} width="100%" height="500px" />
           <div
             style={{
               width: "max-content",

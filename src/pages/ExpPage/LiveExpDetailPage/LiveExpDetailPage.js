@@ -88,7 +88,7 @@ class LiveExpDetail extends React.Component {
         )}
         {status === "START" && (
           <>
-            <iframe src={url} width="100%" height="100%" />
+            <iframe src={url} width="100%" height="500px" />
           </>
         )}
       </>
