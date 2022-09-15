@@ -267,7 +267,8 @@ class CreateExp extends React.Component {
 
     this.props.createExpRequest(data, this.props.token).then((data) => {
       // console.log(data);
-      // window.history.go(-1);
+      alert("등록함");
+      window.history.go(-1);
     });
   };
 
