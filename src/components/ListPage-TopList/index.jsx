@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as styled from './styles';
-
+import ListPageProfileCard from '../ListPage-ProfileCard';
 
 
 const MatchList = () => {
@@ -14,7 +14,7 @@ const MatchList = () => {
       
       
       <styled.TopListContainer>
-        <styled.TopLists>
+        {/* <styled.TopLists>
             <styled.Profile>
               <styled.ProfileImg />
               <styled.ProfileImgStar />
@@ -47,8 +47,8 @@ const MatchList = () => {
                 
               </styled.NumRate>
             </styled.ExpDiv>
-        </styled.TopLists>
-
+        </styled.TopLists> */}
+        <ListPageProfileCard />
 
 
         <styled.TopLists>

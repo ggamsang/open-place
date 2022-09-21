@@ -12,6 +12,7 @@ import ExpDetailPage from './pages/Exp/Detail';
 import SearchPage from './pages/Search';
 import ListPage from './pages/ListPage';
 import MainLogin from './pages/MainLogin';
+import MyPage from './pages/MyPage';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -56,6 +57,9 @@ const App = () => {
         
         {/* 검색 페이지 */}
         <Route path="/search/:keyword" element={<SearchPage />} />
+
+        {/* 마이 페이지 */}
+        <Route path="/mypage" element={<MyPage />} />
 
       </Routes>
     </BrowserRouter>
