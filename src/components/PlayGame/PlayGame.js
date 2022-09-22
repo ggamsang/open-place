@@ -13,6 +13,7 @@ class PlayGame extends React.Component {
       peer: [],
       selected: false,
       started: false,
+      gamepoint: 100,
     };
     this.socket = io("https://place.opensrcdesign.com/webgame2", {
       path: "/socket.io",
@@ -86,32 +87,58 @@ class PlayGame extends React.Component {
     this.CheckAlreadyOpened();
   }
   SelectUser = () => {
-    this.socket.emit("start-with-you", {
-      who: this.state.selected,
-      url: this.props.detail.type_detail,
-    });
-    const url = JSON.parse(
-      JSON.parse(this.props.detail.type_detail)["game_files"]
-    )[0].path;
-    this.setState({ started: true, url: url });
+    if (this.state.selected) {
+      this.socket.emit("start-with-you", {
+        who: this.state.selected,
+        url: this.props.detail.type_detail,
+        gamepoint: this.state.gamepoint,
+      });
+      const url = JSON.parse(
+        JSON.parse(this.props.detail.type_detail)["game_files"]
+      )[0].path;
+      this.setState({ started: true, url: url });
+    }
   };
   render() {
     const { live, liveId, peer, started, url } = this.state;
     console.log(this.state, this.props);
+    console.log(url);
+    // const URL = `${url}?room=${encodeURIComponent(
+    //   this.props.detail?.nick_name + " " + this.props.detail?.title
+    // )}&isOpener=true&name=${this.props.userInfo?.nick_name}&url=${
+    //   this.props.userInfo?.l_img
+    // }`;
+    // console.log(URL);
+    const URL = `${url}?room='${this.props.userInfo?.nick_name}의 ${this.props.detail?.title}'&isOpener=true&name=${this.props.userInfo?.nick_name}&url=${this.props.userInfo?.l_img}&GAMEPOINT=${this.state.gamepoint}`;
+
     return live && liveId ? (
       started ? (
         <>
-          <iframe src={url} width="100%" height="500px" />
           <div
             style={{
-              width: "max-content",
-              marginLeft: "auto",
-              marginRight: "15px",
+              height: "auto",
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
             }}
           >
-            <Button onClick={() => live && liveId && this.GameCloseRequest()}>
-              <div className="text">게임종료</div>
-            </Button>
+            {/* {url}
+            <br />
+            {URL} */}
+            <div style={{ height: "100vh" }}>
+              <iframe id="game-frame" src={URL} width="100%" height="100%" />
+            </div>
+            <div
+              style={{
+                width: "max-content",
+                marginLeft: "auto",
+                marginRight: "15px",
+              }}
+            >
+              <Button onClick={() => live && liveId && this.GameCloseRequest()}>
+                <div className="text">게임종료</div>
+              </Button>
+            </div>
           </div>
         </>
       ) : (
@@ -161,7 +188,18 @@ class PlayGame extends React.Component {
                 ))}
               </div>
             </div>
-
+            <div>
+              <div className="text">점수설정</div>
+              <div className="text">
+                <input
+                  type="number"
+                  value={this.state.gamepoint}
+                  onChange={(e) => {
+                    this.setState({ gamepoint: e.target.value });
+                  }}
+                />
+              </div>
+            </div>
             <div>
               <Button onClick={() => this.SelectUser()}>
                 <div className="text">게임시작</div>
@@ -184,7 +222,7 @@ class PlayGame extends React.Component {
       )
     ) : (
       <>
-        <Button onClick={() => this.GameOpenRequest()}>
+        <Button disabled={false} onClick={() => this.GameOpenRequest()}>
           <div className="text">게임개설</div>
         </Button>
       </>

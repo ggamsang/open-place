@@ -15,7 +15,7 @@ class PlayGameContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
   token: state.Authentication.status.token,
-  // detail: state.ExpDetail.
+  userInfo: state.Authentication.status.userInfo,
 });
 const mapDispatchToProps = (dispatch) => ({
   // GameOpenRequest: (token, id) => dispatch(GameOpenRequest(token, id)),

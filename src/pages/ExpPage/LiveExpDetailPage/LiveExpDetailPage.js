@@ -36,6 +36,7 @@ class LiveExpDetail extends React.Component {
       status: "INIT", // init,
       detail: null,
       url: null,
+      gamepoint: null,
     };
     this.socket = io("https://place.opensrcdesign.com/webgame2", {
       path: "/socket.io",
@@ -45,8 +46,9 @@ class LiveExpDetail extends React.Component {
       .on("start-with-you", (obj) => {
         try {
           this.setState({
-            url: JSON.parse(JSON.parse(obj)["game_files"])[0].path,
+            url: JSON.parse(JSON.parse(obj.url)["game_files"])[0].path,
             status: "START",
+            gamepoint: obj.gamepoint,
           });
         } catch (e) {
           console.log(e);
@@ -67,6 +69,8 @@ class LiveExpDetail extends React.Component {
   render() {
     const { status, detail, url } = this.state;
     console.log(this.props, this.state);
+
+    const URL = `${url}?room='${detail?.title}'&name=${this.props.userInfo?.nick_name}&url=${this.props.userInfo?.l_img}&GAMEPOINT=${this.state.gamepoint}`;
     return (
       <>
         {status === "INIT" && <></>}
@@ -87,9 +91,12 @@ class LiveExpDetail extends React.Component {
           </>
         )}
         {status === "START" && (
-          <>
-            <iframe src={url} width="100%" height="500px" />
-          </>
+          <div style={{ height: "100vh" }}>
+            {/* {url}
+            <br />
+            {URL} */}
+            <iframe src={URL} width="100%" height="100%" />
+          </div>
         )}
       </>
     );
