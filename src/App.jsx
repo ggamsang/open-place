@@ -13,6 +13,7 @@ import SearchPage from './pages/Search';
 import ListPage from './pages/ListPage';
 import MainLogin from './pages/MainLogin';
 import MyPage from './pages/MyPage';
+import Message from './pages/Message';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -60,6 +61,9 @@ const App = () => {
 
         {/* 마이 페이지 */}
         <Route path="/mypage" element={<MyPage />} />
+
+        {/* 메시지 페이지 */}
+        <Route path="/message" element={<Message />} />
 
       </Routes>
     </BrowserRouter>
