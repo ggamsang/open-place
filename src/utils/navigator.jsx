@@ -9,11 +9,11 @@ export const goto = (type, offset = null) => {
     case "INTRO":
       window.location.href = "/intro";
       break;
-    case "LOGIN":
-      window.location.href = "/login";
+    case "SIGNIN":
+      window.location.href = "/signin";
       break;
     case "SIGNUP":
-      window.location.href = "/join";
+      window.location.href = "/signup";
       break;
     case "FINDPW":
       window.location.href = "/findPW";

@@ -78,7 +78,7 @@ export const MakeText = styled.div`
   margin-left: 87px;
 `;
 
-export const SearchExp = styled.button`
+export const SearchExp = styled.input`
   background: #848484 0% 0% no-repeat padding-box;
   border-radius: 22px;
   opacity: 1;

@@ -11,11 +11,10 @@ import ExpDetailPage from "./pages/Exp/Detail";
 import SearchPage from "./pages/Search";
 import ListPage from "./pages/ListPage";
 import MainLogin from "./pages/MainLogin";
+
 import MyPage from "./pages/MyPage";
 import Message from "./pages/Message";
 import LoadingPage from "./pages/Loading";
-import CommunityWritePage from "./pages/Community/Write";
-import CommunityDetailPage from "./pages/Community/Detail";
 import NoticePage from "./pages/Notice/List";
 import ExpAddPage from "./pages/Exp/Add";
 import ExpEditPage from "./pages/Exp/Edit";
@@ -23,6 +22,11 @@ import ExpDetailPage from "./pages/Exp/Detail";
 import SearchPage from "./pages/Search";
 import ListPage from "./pages/ListPage";
 import MainLogin from "./pages/MainLogin";
+
+import SignInPage from "./pages/Sign/SignIn";
+import SignUpPage from "./pages/Sign/SignUp";
+import NotFoundPage from "./pages/NotFound";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 /*
   로긴-마이페이지,
@@ -39,10 +43,12 @@ function App() {
     <Wrapper>
       <BrowserRouter>
         <Routes>
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/signin" element={<SignInPage />} />
+
           <Route path="/loading" element={<LoadingPage />} />
 
           <Route path="/" element={<MainPage />} />
-
           <Route path="/mainlogin" element={<MainLogin />} />
 
           <Route path="/play">
@@ -60,10 +66,14 @@ function App() {
 
           {/* 커뮤니티 페이지(자유게시판) */}
           <Route path="/community" element={<CommunityPage />} />
+
           {/* 커뮤니티 페이지(공지사항) – 상세 */}
           <Route path="/community/:id" element={<CommunityDetailPage />} />
+
           {/* 커뮤니티 페이지(자유게시판) – 게시글 등록페이지 */}
           <Route path="/community/write" element={<CommunityWritePage />} />
+          {/* 커뮤니티 페이지(공지사항) – 상세 */}
+          <Route path="/community/:id" element={<CommunityDetailPage />} />
 
           {/* 커뮤니티 페이지(공지사항) */}
           <Route path="/notice" element={<NoticePage />} />
@@ -76,14 +86,14 @@ function App() {
 
           {/* 경험상세페이지 – 1 */}
           <Route path="/exp/:id" element={<ExpDetailPage />} />
-
           {/* 경험등록/수정 페이지 */}
           <Route path="/exp/add" element={<ExpAddPage />} />
           <Route path="/exp/edit" element={<ExpEditPage />} />
 
           {/* 검색 페이지 */}
           <Route path="/search/:keyword" element={<SearchPage />} />
-          
+          {/* not found */}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </Wrapper>
