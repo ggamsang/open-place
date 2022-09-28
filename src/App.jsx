@@ -48,14 +48,10 @@ function App() {
 
           {/* 커뮤니티 페이지(자유게시판) */}
           <Route path="/community" element={<CommunityPage />} />
-
           {/* 커뮤니티 페이지(공지사항) – 상세 */}
           <Route path="/community/:id" element={<CommunityDetailPage />} />
-
           {/* 커뮤니티 페이지(자유게시판) – 게시글 등록페이지 */}
           <Route path="/community/write" element={<CommunityWritePage />} />
-          {/* 커뮤니티 페이지(공지사항) – 상세 */}
-          <Route path="/community/:id" element={<CommunityDetailPage />} />
 
           {/* 커뮤니티 페이지(공지사항) */}
           <Route path="/notice" element={<NoticePage />} />
@@ -69,9 +65,8 @@ function App() {
           {/* 메시지 페이지 */}
           <Route path="/message" element={<Message />} />
 
-          {/* 경험상세페이지 – 1 */}
+          {/* 경험상세페이지 – 1, 경험등록/수정 페이지 */}
           <Route path="/exp/:id" element={<ExpDetailPage />} />
-          {/* 경험등록/수정 페이지 */}
           <Route path="/exp/add" element={<ExpAddPage />} />
           <Route path="/exp/edit" element={<ExpEditPage />} />
 
@@ -79,6 +74,7 @@ function App() {
           <Route path="/search/:keyword" element={<SearchPage />} />
           {/* not found */}
           <Route path="*" element={<NotFoundPage />} />
+
         </Routes>
       </BrowserRouter>
     </Wrapper>
