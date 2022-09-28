@@ -14,14 +14,6 @@ import MainLogin from "./pages/MainLogin";
 
 import MyPage from "./pages/MyPage";
 import Message from "./pages/Message";
-import LoadingPage from "./pages/Loading";
-import NoticePage from "./pages/Notice/List";
-import ExpAddPage from "./pages/Exp/Add";
-import ExpEditPage from "./pages/Exp/Edit";
-import ExpDetailPage from "./pages/Exp/Detail";
-import SearchPage from "./pages/Search";
-import ListPage from "./pages/ListPage";
-import MainLogin from "./pages/MainLogin";
 
 import SignInPage from "./pages/Sign/SignIn";
 import SignUpPage from "./pages/Sign/SignUp";
