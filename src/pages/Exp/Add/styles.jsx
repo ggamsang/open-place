@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import '../../../../src/App.css';
+import "../../../App";
+
+// import "/Users/ggmsng/Work/place/desktop/src/App.jsx";
 
 export const Main = styled.div`
   display: flex;
