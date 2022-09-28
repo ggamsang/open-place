@@ -71,10 +71,13 @@ function App() {
           <Route path="/exp/edit" element={<ExpEditPage />} />
 
           {/* 검색 페이지 */}
-          <Route path="/search/:keyword" element={<SearchPage />} />
+          <Route path="/search">
+            <Route index element={<SearchPage />} />
+            <Route path=":keyword" element={<SearchPage />} />
+          </Route>
+
           {/* not found */}
           <Route path="*" element={<NotFoundPage />} />
-
         </Routes>
       </BrowserRouter>
     </Wrapper>

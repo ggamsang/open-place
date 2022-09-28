@@ -7,14 +7,12 @@ import ClientTemplate from "../../components/ClientTemplate";
 function MainPage() {
   return (
     <ClientTemplate>
-
       <Main>
         <Banner />
         <MainContainer>
           <TopList />
         </MainContainer>
       </Main>
-      
     </ClientTemplate>
   );
 }

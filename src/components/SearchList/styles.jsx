@@ -1,18 +1,37 @@
 import styled from 'styled-components';
 import star from '../../imgs/star.svg';
 import profileimg from '../../imgs/profileimg.jpg';
-import listimg from '../../imgs/Listimg.png';
+
+export const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const TopListText = styled.div`
+  margin-top: 18px;
+  margin-bottom: 9.05px;
+  width: 100%;
+
+  text-align: center;
+  font: normal normal 900 44px/52px Pretendard;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+`;
 
 
-export const TopLists = styled.div`
-  background: #ffffff;
-  box-shadow: 0px 4px 24px -1px rgba(0, 0, 0, 0.25);
-  border-radius: 30px;
-  padding: 14px 16px;
-  width: 248px;
-  height: 444px;
-  // position: absolute;
-  display: inline-block;
+
+export const TopListContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 84px;
+  padding: 0 74px 0 74px;
+  justify-content: space-around;
+  margin-bottom: 77px;
+  text-align: center;
+  align-items: center;
 `;
 
 export const Profile = styled.div`
@@ -24,23 +43,14 @@ export const Profile = styled.div`
   
 `;
 
-export const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`;
-
 export const ProfileImg = styled.img.attrs({
-  src: listimg,
+  src: profileimg,
 })`
   width: 100%;
   height: 100%;
   object-fit: fill;
   margin-bottom: 23px;
   justify-content : center;
-  // position: absolute;
-  // position: relative;
 `;
 
 export const ProfileImgStar = styled.img.attrs({
@@ -49,12 +59,19 @@ export const ProfileImgStar = styled.img.attrs({
   width: 13.87px;
   height: 13px;
   position: absolute;
-  // position: relative;
   right: 16.09px;
   top: 13.6px;
 `;
 
-
+export const TopLists = styled.div`
+  background: #ffffff;
+  box-shadow: 0px 4px 24px -1px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  padding: 14px 16px;
+  width: 248px;
+  height: 444px;
+  display: inline-block;
+`;
 
 export const Name = styled.div`
   font: normal normal 600 18px/14px Pretendard;
@@ -80,6 +97,7 @@ export const Category = styled.div`
 
 export const Price = styled.div`
   font: normal normal 400 16px/14px Pretendard;
+  // font-size: 40px;
   letter-spacing: 0px;
   color: #4136F1;
   opacity: 1;
@@ -93,7 +111,6 @@ export const ExpDiv = styled.div`
 `;
 
 export const RateDiv = styled.div`
-  // display: block;
   align-items: center;
 `;
 
@@ -170,3 +187,6 @@ export const RateBar = styled.div`
   border-radius: 50px;
   background-color: rgb(101,101,101);
 `;
+
+
+

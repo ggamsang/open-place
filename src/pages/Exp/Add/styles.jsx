@@ -15,7 +15,7 @@ export const Main = styled.div`
 
 export const AddExpText = styled.div`
     text-align: center;
-    font: normal normal bold 27px/32px Pretendard;
+    font: normal normal 700 27px/32px Pretendard;
     letter-spacing: 0px;
     color: #000000;
     opacity: 1;
@@ -42,7 +42,7 @@ export const AddThumbnail = styled.div`
 
     > span {
         text-align: center;
-        // font: normal normal medium 24px/29px Pretendard;
+        // font: normal normal 500 24px/29px Pretendard;
         font-family: 'Pretendard-medium';
         font-size: 24px;
         letter-spacing: 0px;
@@ -64,7 +64,7 @@ export const ThumbnailImg = styled.div`
     margin-top: 30px;
 
     > span {
-        // font: normal normal medium 24px/29px Pretendard;
+        // font: normal normal 500 24px/29px Pretendard;
         font-size: 23px;
         font-family: 'Pretendard-medium';
         letter-spacing: 0px;
@@ -102,14 +102,14 @@ export const TitleDiv = styled.div`
 
     div:nth-child(1) {
         width: 197px;
-        font: normal normal bold 20px/24px Pretendard;
+        font: normal normal 700 20px/24px Pretendard;
         letter-spacing: 0px;
         color: #707070;
         margin-left: 70px;
     }
 
     div:nth-child(2) {
-        font: normal normal normal 20px/24px Pretendard;
+        font: normal normal 400 20px/24px Pretendard;
         letter-spacing: 0px;
         color: #000000;
         opacity: 1;
@@ -120,7 +120,7 @@ export const TitleDiv = styled.div`
 //     width: 197px;
 //     // height: 24px;
 //     text-align: left;
-//     font: normal normal bold 20px/24px Pretendard;
+//     font: normal normal 700 20px/24px Pretendard;
 //     letter-spacing: 0px;
 //     opacity: 1;
 //     color: #707070;
@@ -131,7 +131,7 @@ export const TitleDiv = styled.div`
 // export const BodyDiv = styled.div`
 //     width: 1062px;
 //     text-align: left;
-//     font: normal normal normal 20px/24px Noto Sans KR;
+//     font: normal normal 400 20px/24px Noto Sans KR;
 //     letter-spacing: 0px;
 //     color: #000000;
 //     opacity: 1;
@@ -146,7 +146,7 @@ export const CategoryDiv = styled.div`
 
     div:nth-child(1) {
         width: 197px;
-        font: normal normal bold 20px/24px Pretendard;
+        font: normal normal 700 20px/24px Pretendard;
         letter-spacing: 0px;
         color: #707070;
         margin-left: 70px;
@@ -163,7 +163,7 @@ export const CategoryButton1 = styled.div`
     align-items: center;
 
     > span {
-        font: normal normal normal 20px/24px Pretendard;
+        font: normal normal 400 20px/24px Pretendard;
         letter-spacing: 0px;
         color: #000000;
         opacity: 1;
@@ -182,7 +182,7 @@ export const CategoryButton2 = styled.div`
     margin-left: 13px;
 
     > span {
-        font: normal normal normal 20px/24px Pretendard;
+        font: normal normal 400 20px/24px Pretendard;
         letter-spacing: 0px;
         color: #000000;
         opacity: 1;
@@ -198,7 +198,7 @@ export const TagDiv = styled.div`
 
     div:nth-child(1) {
         width: 197px;
-        font: normal normal bold 20px/24px Pretendard;
+        font: normal normal 700 20px/24px Pretendard;
         letter-spacing: 0px;
         color: #707070;
         margin-left: 70px;
@@ -240,7 +240,7 @@ export const TagExamplesDiv = styled.div`
         align-items: center;
         justify-content: center;
 
-        font: normal normal normal 20px/24px Pretendard;
+        font: normal normal 400 20px/24px Pretendard;
         letter-spacing: 0px;
         color: #707070;
         opacity: 1;
@@ -265,7 +265,7 @@ export const DescriptionDiv = styled.div`
 
     div:nth-child(1) {
         width: 197px;
-        font: normal normal bold 20px/24px Pretendard;
+        font: normal normal 700 20px/24px Pretendard;
         letter-spacing: 0px;
         color: #707070;
         margin-left: 70px;
@@ -294,7 +294,7 @@ export const ExpTypeDiv = styled.div`
 
     div:nth-child(1) {
         width: 197px;
-        font: normal normal bold 20px/24px Pretendard;
+        font: normal normal 700 20px/24px Pretendard;
         letter-spacing: 0px;
         color: #707070;
         margin-left: 70px;
@@ -328,7 +328,7 @@ export const PriceDiv = styled.div`
 
     span {
         margin-left: 14px;
-        font: normal normal normal 20px/24px Noto Sans KR;
+        font: normal normal 400 20px/24px Noto Sans KR;
         letter-spacing: 0px;
         color: #000000;
         opacity: 1;
@@ -337,7 +337,7 @@ export const PriceDiv = styled.div`
 
 export const PriceDivText = styled.div`
     width: 197px;
-    font: normal normal bold 20px/24px Pretendard;
+    font: normal normal 700 20px/24px Pretendard;
     letter-spacing: 0px;
     color: #707070;
     margin-left: 70px;  
@@ -352,7 +352,7 @@ export const PriceBox = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    font: normal normal normal 20px/24px Noto Sans KR;
+    font: normal normal 400 20px/24px Noto Sans KR;
     letter-spacing: 0px;
     color: #000000;
     opacity: 1;
@@ -373,7 +373,7 @@ export const AddPriceButton = styled.div`
     height: 49px;
     border: 1px solid #707070;
     opacity: 1;
-    font: normal normal medium 20px/24px Pretendard;
+    font: normal normal 500 20px/24px Pretendard;
     font-family: 'Pretendard-medium';
     font-size: 20px;
     letter-spacing: 0px;
@@ -456,7 +456,7 @@ export const AddButton = styled.div`
 
     > span {
         text-align: center;
-        font: normal normal bold 20px/24px Pretendard;
+        font: normal normal 700 20px/24px Pretendard;
         font-size: 20px;
         font-family: 'Pretendard-bold';
         letter-spacing: 0px;
@@ -479,7 +479,7 @@ export const CancelButton = styled.div`
 
     > span {
         text-align: center;
-        font: normal normal bold 20px/24px Pretendard;
+        font: normal normal 700 20px/24px Pretendard;
         font-size: 20px;
         font-family: 'Pretendard-bold';
         letter-spacing: 0px;

@@ -22,7 +22,7 @@ export const Rate = styled.div`
 
 
 export const Review = styled.div`
-  font: normal normal normal 12px/14px Pretendard;
+  font: normal normal 400 12px/14px Pretendard;
   letter-spacing: 0px;
   color: #000000;
   opacity: 0.6;
@@ -44,7 +44,7 @@ export const NumRate = styled.div`
   align-items: left;
   display: block;
   margin-left: 10px;
-  font: normal normal normal 11px/14px Pretendard;
+  font: normal normal 400 11px/14px Pretendard;
   letter-spacing: 0px;
   color: #000000;
   opacity: 0.9;
@@ -56,7 +56,7 @@ export const NumRate2 = styled.div`
   height: 16px;
   margin-top: 0px;
   margin-bottom: 2px;
-  font: normal normal normal 11px/14px Pretendard;
+  font: normal normal 400 11px/14px Pretendard;
   letter-spacing: 0px;
   color: #000000;
   opacity: 0.9;

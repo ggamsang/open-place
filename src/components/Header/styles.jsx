@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import logoRed from '../../imgs/logo.png';
+import styled from "styled-components";
+import logoRed from "../../imgs/logo.png";
 
 export const Container = styled.div`
   width: 100%;
@@ -21,25 +21,26 @@ export const Logo = styled.img.attrs({
 export const Play = styled.button`
   width: 159px;
   height: 43px;
-  background: transparent linear-gradient(270deg, #FF8900 0%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
+  background: transparent linear-gradient(270deg, #ff8900 0%, #ffffff 100%) 0%
+    0% no-repeat padding-box;
   border-radius: 0px 22px 22px 0px;
   opacity: 1;
   cursor: pointer;
   border: 0;
   outline: 0;
 `;
-
 export const PlayText = styled.div`
   font: normal normal 900 16px/19px Pretendard;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   opacity: 1;
   // margin-top: 1px;
   margin-left: 94px;
 `;
 
 export const Learn = styled.button`
-  background: transparent linear-gradient(270deg, #8800FF 0%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
+  background: transparent linear-gradient(270deg, #8800ff 0%, #ffffff 100%) 0%
+    0% no-repeat padding-box;
   border-radius: 0px 22px 22px 0px;
   opacity: 1;
   width: 159px;
@@ -48,18 +49,18 @@ export const Learn = styled.button`
   border: 0;
   outline: 0;
 `;
-
 export const LearnText = styled.div`
   font: normal normal 900 16px/19px Pretendard;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   opacity: 1;
   // margin-top: 1px;
   margin-left: 87px;
 `;
 
 export const Make = styled.button`
-  background: transparent linear-gradient(270deg, #0062FF 0%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
+  background: transparent linear-gradient(270deg, #0062ff 0%, #ffffff 100%) 0%
+    0% no-repeat padding-box;
   border-radius: 0px 22px 22px 0px;
   opacity: 1;
   width: 159px;
@@ -68,11 +69,10 @@ export const Make = styled.button`
   border: 0;
   outline: 0;
 `;
-
 export const MakeText = styled.div`
   font: normal normal 900 16px/19px Pretendard;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   opacity: 1;
   // margin-top: 1px;
   margin-left: 87px;
@@ -87,27 +87,33 @@ export const SearchExp = styled.input`
   cursor: pointer;
   border: 0;
   outline: 0;
-  margin-left: 9px;
+  // margin-left: 9px;
   position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  padding-left: 35px;
+  font: normal normal 500 16px/19px Pretendard;
 `;
-
 export const SearchExpText = styled.div`
   font: normal normal 900 16px/19px Pretendard;
   letter-spacing: 0px;
-  color: #FFFFFF;
-  opacity: 1;
-  // margin-top: 1px;
+  color: #ffffff;
   text-align: right;
-  margin-right: 22.36px;
-`;
-
-export const SearchExpIcon = styled.div`
-  width: 22.56px;
-  height: 22.56px;
   position: absolute;
-  top: 9.7px;
-  left: 11.36px;
+  right: 23px;
+  top: 11px;
+  z-index: 2;
+  cursor: default;
+  opacity: ${(prop) => prop.opacity || 1};
+`;
+export const SearchExpIcon = styled.div`
+  position: absolute;
+  left: 11px;
+  top: 10px;
+  width: 23px;
+  height: 23px;
   background-color: white;
+  z-index: 2;
 `;
 
 export const Register = styled.button`
@@ -121,12 +127,10 @@ export const Register = styled.button`
   outline: 0;
   margin-right: 4px;
 `;
-
-
 export const RegisterText = styled.div`
   font: normal normal 900 18px/21px Pretendard;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   position: relative;
   text-align: center;
   cursor: pointer;
@@ -145,11 +149,10 @@ export const Login = styled.button`
   margin-right: 27px;
   position: relative;
 `;
-
 export const LoginText = styled.div`
   font: normal normal 900 18px/21px Pretendard;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   opacity: 1;
   position: relative;
   text-align: center;
@@ -157,7 +160,6 @@ export const LoginText = styled.div`
   margin-right: 0px;
   margin-left: 21.1px;
 `;
-
 export const LoginIcon = styled.div`
   width: 18px;
   height: 22px;

@@ -87,7 +87,7 @@ export const SideBarIcon5 = styled.img.attrs({
 
 
 export const SideBarText1 = styled.div`
-  font: normal normal bold 19px/18px Pretendard;
+  font: normal normal 700 19px/18px Pretendard;
   letter-spacing: 0px;
   color: #FFFFFF;
   opacity: 1;
@@ -98,7 +98,7 @@ export const SideBarText1 = styled.div`
 `;
 
 export const SideBarText2 = styled.div`
-  font: normal normal bold 19px/18px Pretendard;
+  font: normal normal 700 19px/18px Pretendard;
   letter-spacing: 0px;
   color: #FFFFFF;
   opacity: 1;
@@ -109,7 +109,7 @@ export const SideBarText2 = styled.div`
 `;
 
 export const SideBarText3 = styled.div`
-  font: normal normal bold 19px/18px Pretendard;
+  font: normal normal 700 19px/18px Pretendard;
   letter-spacing: 0px;
   color: #FFFFFF;
   opacity: 1;
@@ -120,7 +120,7 @@ export const SideBarText3 = styled.div`
 `;
 
 export const SideBarText4 = styled.div`
-  font: normal normal bold 19px/18px Pretendard;
+  font: normal normal 700 19px/18px Pretendard;
   letter-spacing: 0px;
   color: #FFFFFF;
   opacity: 1;
@@ -131,7 +131,7 @@ export const SideBarText4 = styled.div`
 `;
 
 export const SideBarText5 = styled.div`
-  font: normal normal bold 19px/18px Pretendard;
+  font: normal normal 700 19px/18px Pretendard;
   letter-spacing: 0px;
   color: #FFFFFF;
   opacity: 1;

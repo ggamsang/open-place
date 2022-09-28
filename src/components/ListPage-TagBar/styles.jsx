@@ -46,7 +46,7 @@ export const TagButton = styled.div`
 `;
 
 export const TagButtonText = styled.div`
-    font: normal normal normal 14px Pretendard;
+    font: normal normal 400 14px Pretendard;
     letter-spacing: 0.25px;
     color: #000000DE;
     opacity: 1;
@@ -114,7 +114,7 @@ export const TagButtonDelete = styled.div`
 // `;
 
 // export const MoreButtonText = styled.div`
-//     font: normal normal medium 14px/16px Pretendard;
+//     font: normal normal 500 14px/16px Pretendard;
 //     letter-spacing: 1.25px;
 //     color: #FF0000;
 //     text-transform: uppercase;
@@ -141,7 +141,7 @@ export const MoreButton = styled.div`
     > span {
         text-align: center;
         align-items: center;
-        font: normal normal medium 14px/16px Pretendard;
+        font: normal normal 500 14px/16px Pretendard;
         letter-spacing: 1.25px;
         color: #FF0000;
         text-transform: uppercase;
@@ -185,7 +185,7 @@ export const LessButton = styled.div`
     > span {
         text-align: center;
         align-items: center;
-        font: normal normal medium 14px/16px Pretendard;
+        font: normal normal 500 14px/16px Pretendard;
         font-size: 14px;
         letter-spacing: 2.23px;
         color: #000000;
@@ -212,7 +212,7 @@ export const CancelButton = styled.div`
     > span {
         text-align: center;
         align-items: center;
-        font: normal normal medium 14px/16px Pretendard;
+        font: normal normal 500 14px/16px Pretendard;
         font-size: 14px;
         letter-spacing: 2.23px;
         color: #EE0000;

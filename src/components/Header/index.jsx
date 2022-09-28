@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   Logo,
@@ -20,7 +20,9 @@ import {
 } from "./styles";
 import { goto } from "../../utils/navigator";
 
-const Header = () => {
+const Header = (props) => {
+  const [keyword, setKeyword] = useState("");
+
   return (
     <Container>
       <Logo onClick={() => goto("MAIN")} />
@@ -37,13 +39,22 @@ const Header = () => {
         <MakeText>만들기</MakeText>
       </Make>
 
-      <div style={{ display: "flex" }}>
-        {/* <SearchExpIcon /> */}
-        <SearchExp />
-        {/* <SearchExpText>경험 찾아보기</SearchExpText> */}
+      <div
+        style={{
+          border: "1px solid red",
+          display: "flex",
+          position: "relative",
+          marginLeft: "9px",
+        }}
+      >
+        <SearchExpIcon />
+        <SearchExp
+          value={keyword}
+          onKeyUp={(e) => (e.key === "Enter" ? goto("SEARCH", keyword) : null)}
+          onChange={(e) => setKeyword(e.target.value)}
+        />
+        <SearchExpText opacity={keyword ? 0.5 : 1}>경험 찾아보기</SearchExpText>
       </div>
-      {/* <input type="text" /> */}
-      {/* </SearchxExp> */}
 
       <RegistBox>
         <Register onClick={() => goto("SIGNUP")}>
