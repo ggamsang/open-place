@@ -1,7 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
 import logoRed from '../../imgs/logo.png';
-
 
 export const Container = styled.div`
   width: 100%;
@@ -80,7 +78,7 @@ export const MakeText = styled.div`
   margin-left: 87px;
 `;
 
-export const SearchExp = styled.button`
+export const SearchExp = styled.input`
   background: #848484 0% 0% no-repeat padding-box;
   border-radius: 22px;
   opacity: 1;
@@ -175,6 +173,3 @@ export const RegistBox = styled.div`
   margin-left: auto;
   margin-right: 27px;
 `;
-
-
-
