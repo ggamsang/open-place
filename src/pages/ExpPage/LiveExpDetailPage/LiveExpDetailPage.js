@@ -6,6 +6,7 @@ import host from "config";
 import Button from "commons/Button";
 import io from "socket.io-client";
 import { connect } from "react-redux";
+import { goto } from "navigator";
 
 class LiveExpDetail extends React.Component {
   GetLiveExpDetail = () => {
@@ -15,8 +16,14 @@ class LiveExpDetail extends React.Component {
       .then((data) => {
         if (data.success) {
           if (data.detail) {
-            this.setState({ detail: data.detail });
-            this.setState({ status: "STANDBY" });
+            if (data.detail.status === "LIVE") {
+              console.log(data.detail);
+              this.setState({ detail: data.detail });
+              this.setState({ status: "STANDBY" });
+            } else {
+              alert("게임이 이미 시작되었습니다.");
+              goto("PLAY", "1/null");
+            }
           } else {
             alert("잘못된 접근입니다.");
             window.history.back();
@@ -30,6 +37,9 @@ class LiveExpDetail extends React.Component {
   componentDidMount() {
     this.GetLiveExpDetail();
   }
+  componentWillUnmount() {
+    this.socket = null;
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -38,32 +48,54 @@ class LiveExpDetail extends React.Component {
       url: null,
       gamepoint: null,
     };
-    this.socket = io("https://place.opensrcdesign.com/webgame2", {
+    this.socket = null;
+  }
+  RequestJoin = () => {
+    //
+    this.socket = io("https://place.opensrcdesign.com/waiting", {
       path: "/socket.io",
       transports: ["websocket", "polling", "flashsocket"],
     })
-      .on("no-room", () => alert("서버연결에 실패하였습니다. 방이 없습니다."))
-      .on("start-with-you", (obj) => {
-        try {
-          this.setState({
-            url: JSON.parse(JSON.parse(obj.url)["game_files"])[0].path,
-            status: "START",
-            gamepoint: obj.gamepoint,
-          });
-        } catch (e) {
-          console.log(e);
-          alert("게임경로를 가져오지 못하였습니다");
+      .on("user-list", (obj) => {
+        console.log(obj);
+      })
+      .on("started", (obj) => {
+        const { user, game } = obj;
+        console.log(obj);
+        if (user === this.props.userInfo.id) {
+          alert("게임에 참가되었습니다.");
+          try {
+            this.setState({
+              url: JSON.parse(JSON.parse(game.url)["game_files"])[0].path,
+              status: "START",
+              gamepoint: game.gamepoint,
+            });
+          } catch (e) {
+            console.log(e);
+            alert("게임경로를 가져오지 못하였습니다");
+          }
+        } else {
+          alert(
+            `게임 개설자가 ${user}와 게임을 시작하였습니다.\n리스트 페이지로 이동합니다.`
+          );
+          goto("PLAY", "1/null");
         }
+        this.socket = null;
       })
       .on("close-room", () => {
-        alert("라이브가 종료되었습니다.");
+        alert("게임이 종료되었습니다.\n페이지로 이동합니다.");
+        goto("PLAY", "1/null");
       });
-  }
-  RequestJoin = () => {
-    this.socket.emit("join-room", {
-      room: this.props.live_id,
-      userInfo: this.props.userInfo,
-    });
+    alert(this.props.userInfo.uid);
+    this.socket &&
+      this.socket.emit("join", {
+        roomNum: this.props.live_id,
+        user: this.props.userInfo,
+      });
+
+    this.socket &&
+      this.socket.emit("get-users", { roomNum: this.props.live_id });
+
     this.setState({ status: "JOIN" });
   };
   render() {
@@ -72,14 +104,20 @@ class LiveExpDetail extends React.Component {
 
     const URL = `${url}?room='${detail?.title}'&name=${this.props.userInfo?.nick_name}&url=${this.props.userInfo?.l_img}&GAMEPOINT=${this.state.gamepoint}`;
     return (
-      <>
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         {status === "INIT" && <></>}
         {status === "STANDBY" && (
-          <>
-            <Button onClick={this.RequestJoin}>
-              <div className="text">참가신청</div>
-            </Button>
-          </>
+          <Button w={512} h={256} onClick={this.RequestJoin}>
+            <div className="text">참가신청</div>
+          </Button>
         )}
         {status === "JOIN" && (
           <>
@@ -91,14 +129,23 @@ class LiveExpDetail extends React.Component {
           </>
         )}
         {status === "START" && (
-          <div style={{ height: "100vh" }}>
-            {/* {url}
-            <br />
-            {URL} */}
-            <iframe src={URL} width="100%" height="100%" />
-          </div>
+          // <div style={{ width: "max-content" }}>
+          // {/* {url}
+          // <br />
+          // {URL} */}
+          <iframe
+            id="iFrame1"
+            src={URL}
+            width="100%"
+            height="100%"
+            onLoad={() => {
+              document.getElementById("iFrame1").style.width = "100%";
+              // document.getElementById("iFrame1").style.height = "100%";
+            }}
+          />
+          // </div>
         )}
-      </>
+      </div>
     );
   }
 }

@@ -11,6 +11,7 @@ import SortButton from "components/Commons/SortButton/SortButton";
 import { GetSORTYPE } from "components/Commons/Define";
 import host from "config";
 import { GET } from "constant";
+import { io } from "socket.io-client";
 
 const Wrapper = styled.div`
   -ms-overflow-style: none; /* Internet Explorer 10+ */
@@ -92,12 +93,21 @@ const Wrapper = styled.div`
     padding: 0px 20px;
   }
 `;
+// "I'm-in-list-page"  -> roomName = "list-page"
+// "incoming" -> broadcast to list-page members
+
 class LiveExpItemList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       list: [],
     };
+    this.socket = io("https://place.opensrcdesign.com/list-page", {
+      path: "/socket.io",
+      transports: ["websocket", "polling", "flashsocket"],
+    }).on("incoming", () => {
+      this.GetLiveList();
+    });
   }
   GetLiveList = () => {
     const url = `${host}/user/exp/live`;
@@ -111,11 +121,16 @@ class LiveExpItemList extends React.Component {
       .catch((error) => alert(error));
   };
   componentDidMount() {
+    this.socket && this.socket.emit("I'mHere");
     this.GetLiveList();
+  }
+  componentWillUnmount() {
+    this.socket = null;
   }
   render() {
     const { list } = this.state;
     console.log(this.state.list);
+
     return (
       list.length > 0 && (
         <div style={{ display: "flex", flexWrap: "wrap" }}>
@@ -137,11 +152,15 @@ class LiveExpItemList extends React.Component {
                   borderRadius: "10px",
                 }}
               >
-                LIVE
+                {item.status}
               </div>
               <Item
                 onClick={() => {
-                  window.location.href = `/liveExp/${item.live_id}`;
+                  item.status === "LIVE"
+                    ? (window.location.href = `/liveExp/${item.live_id}`)
+                    : item.status === "PLAY"
+                    ? alert("이미 게임이 시작되었습니다.")
+                    : alert("접근할수없습니다");
                 }}
                 url={item.m_img}
                 title={item.title}
