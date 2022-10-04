@@ -1,13 +1,71 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as styled from './styles';
 import Header from '../../components/ListPage-Header';
 import Navbar from '../../components/ListPage-Navbar';
 import Footer from '../../components/Footer';
 import ListPageProfileCard from '../../components/ListPage-ProfileCard';
+import ReactModal from 'react-modal';
+
+
+
+
 
 const MyPage = () => {
-    return(
+    const [isModal, setIsModal] = useState(false);
+
+    const showModal = () => {
+        setIsModal(true);
+    };
+
+    {/* 모달창 코드*/}
+    const Modal = () => {
+        return(
+            <styled.Modal>
+                <styled.ModalContainer>
+                    <styled.ModalTitle>내 정보 수정</styled.ModalTitle>
+                    <styled.ModalHorizonLine />
+                    <styled.Wrapper>
+                        <styled.AddThumbnail>
+                            <styled.ThumbnailImg />
+                            <div>썸네일 등록</div>
+                        </styled.AddThumbnail>
+                        <styled.VerticalWrapper>
+                            <styled.NicknameDiv>
+                                <div>닉네임</div>
+                                <styled.InputBox>
+                                    <span>닉네임을 입력하세요.</span>
+                                </styled.InputBox>
+                            </styled.NicknameDiv>
+                            <styled.PasswordDiv>
+                                <div>비밀번호</div>
+                                <styled.InputBox>
+                                    <span>비밀번호를 입력하세요.</span>
+                                </styled.InputBox>
+                            </styled.PasswordDiv>
+                            <styled.PasswordCheckDiv>
+                                <div>비밀번호 확인</div>
+                                <styled.InputBox>
+                                    <span>비밀번호를 한 번 더 입력하세요.</span>
+                                </styled.InputBox>
+                            </styled.PasswordCheckDiv>
+                            <styled.ModalButtons>
+                                <button onClick={() => setIsModal(false)}>취소하기</button>
+                                <button>수정하기</button>
+                            </styled.ModalButtons>
+                        </styled.VerticalWrapper>
+                    </styled.Wrapper>
+                </styled.ModalContainer>
+            </styled.Modal>
+        );
+    };
+
+
+    return (
         <styled.Container>
+            {/* 모달창 코드*/}
+            {isModal && <Modal />}
+
+
             <Header />
             <Navbar />
             <styled.Wrapper>
@@ -17,7 +75,7 @@ const MyPage = () => {
                 </styled.ProfileBox>
                 <styled.ProfileInfo>
                     <styled.Buttons>
-                        <styled.EditProfileBtn>
+                        <styled.EditProfileBtn onClick={showModal} >
                             <span>프로필 편집</span>
                         </styled.EditProfileBtn>
                         <styled.RegisterBtn>
