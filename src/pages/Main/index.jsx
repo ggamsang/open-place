@@ -1,23 +1,22 @@
-import React from 'react';
-import * as styled from './styles';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import Banner from '../../components/Banner';
-import TopList from '../../components/TopList';
-import Navbar from '../../components/Navbar';
+import React from "react";
+import { Main, MainContainer } from "./styles";
+import Banner from "../../components/Banner";
+import TopList from "../../components/TopList";
+import ClientTemplate from "../../components/ClientTemplate";
 
-const MainPage = () => {
+function MainPage() {
   return (
-    <styled.Main>
-      <Header />
-      <Navbar />
-      <Banner />
-      <styled.MainContainer>
-        <TopList />
-      </styled.MainContainer>
-      <Footer />
-    </styled.Main>
+    <ClientTemplate>
+
+      <Main>
+        <Banner />
+        <MainContainer>
+          <TopList />
+        </MainContainer>
+      </Main>
+      
+    </ClientTemplate>
   );
-};
+}
 
 export default MainPage;

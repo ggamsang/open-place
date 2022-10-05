@@ -1,33 +1,61 @@
-import React from 'react';
-import * as styled from './styles';
+import React from "react";
+import {
+  Container,
+  Logo,
+  Play,
+  PlayText,
+  Learn,
+  LearnText,
+  Make,
+  MakeText,
+  SearchExp,
+  SearchExpIcon,
+  SearchExpText,
+  RegistBox,
+  Register,
+  RegisterText,
+  Login,
+  LoginIcon,
+  LoginText,
+} from "./styles";
+import { goto } from "../../utils/navigator";
 
 const Header = () => {
   return (
-    <styled.Container>
-      <styled.Logo />
-      <styled.Play>
-        <styled.PlayText>놀기</styled.PlayText>
-      </styled.Play>
-      <styled.Learn>
-        <styled.LearnText>배우기</styled.LearnText>
-      </styled.Learn>
-      <styled.Make>
-        <styled.MakeText>만들기</styled.MakeText>
-      </styled.Make>
-      <styled.SearchExp>
-        <styled.SearchExpIcon />
-        <styled.SearchExpText>경험 찾아보기</styled.SearchExpText>
-      </styled.SearchExp>
-      <styled.RegistBox>
-        <styled.Register>
-          <styled.RegisterText>회원가입</styled.RegisterText>
-        </styled.Register>
-        <styled.Login>
-          <styled.LoginIcon />
-          <styled.LoginText>로그인</styled.LoginText>
-        </styled.Login>
-      </styled.RegistBox>
-    </styled.Container>
+    <Container>
+      <Logo onClick={() => goto("MAIN")} />
+
+      <Play onClick={() => goto("PLAY")}>
+        <PlayText>놀기</PlayText>
+      </Play>
+
+      <Learn onClick={() => goto("LEARN")}>
+        <LearnText>배우기</LearnText>
+      </Learn>
+
+      <Make onClick={() => goto("MAKE")}>
+        <MakeText>만들기</MakeText>
+      </Make>
+
+      <div style={{ display: "flex" }}>
+        {/* <SearchExpIcon /> */}
+        <SearchExp />
+        {/* <SearchExpText>경험 찾아보기</SearchExpText> */}
+      </div>
+      {/* <input type="text" /> */}
+      {/* </SearchxExp> */}
+
+      <RegistBox>
+        <Register onClick={() => goto("SIGNUP")}>
+          <RegisterText>회원가입</RegisterText>
+        </Register>
+
+        <Login onClick={() => goto("SIGNIN")}>
+          <LoginIcon />
+          <LoginText>로그인</LoginText>
+        </Login>
+      </RegistBox>
+    </Container>
   );
 };
 

@@ -2,7 +2,7 @@
   "name": "spots-client",
   "version": "0.1.0",
   "scripts": {
-    "start": "vite",
+    "start": "vite --https",
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview"
