@@ -11,23 +11,13 @@ import ExpDetailPage from "./pages/Exp/Detail";
 import SearchPage from "./pages/Search";
 import ListPage from "./pages/ListPage";
 import MainLogin from "./pages/MainLogin";
-
 import MyPage from "./pages/MyPage";
 import Message from "./pages/Message";
-
+import About from "./pages/About";
 import SignInPage from "./pages/Sign/SignIn";
 import SignUpPage from "./pages/Sign/SignUp";
 import NotFoundPage from "./pages/NotFound";
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-/*
-  로긴-마이페이지,
-  등록,
-  목록조회,
-  조회,
-  구매,
-  개설,
-*/
 import { Wrapper } from "./styles";
 
 function App() {
@@ -72,6 +62,9 @@ function App() {
 
           {/* 마이 페이지 */}
           <Route path="/mypage" element={<MyPage />} />
+
+          {/* 사이트 소개 페이지 */}
+          <Route path="/about" element={<About />} />
 
           {/* 메시지 페이지 */}
           <Route path="/message" element={<Message />} />

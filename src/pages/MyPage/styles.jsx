@@ -15,6 +15,12 @@ export const Wrapper = styled.div`
     align-items: center;
 `;
 
+export const VerticalWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    position: relative;
+`;
+
 export const ProfileBox = styled.div`
     width: 329px;
     height: 372px;
@@ -202,6 +208,7 @@ export const EditProfileBtn = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     // margin-top: 33px;
     // margin-left: 32px;
 
@@ -301,11 +308,7 @@ export const CategoryBox = styled.div`
     }
 `;
 
-export const VerticalWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    position: relative;
-`;
+
 
 export const SortAs = styled.div`
     display: flex;
@@ -341,4 +344,192 @@ export const ExpList = styled.div`
 
 export const ProfileCardDiv = styled.div`
     margin-right: 103px;
+`;
+
+export const Modal = styled.div`
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(112, 112, 112, 0.5);
+`;
+
+export const ModalContainer = styled.div`
+    width: 1046px;
+    height: 471px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 3px 3px 5px #00000029;
+    border: 0.25px solid #B7B7B7;
+    border-radius: 20px;
+    opacity: 1;
+    // z-index: 999;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`;
+
+export const ModalTitle = styled.div`
+    // font: normal normal medium 18px/21px Pretendard;
+    font-size: 18px;
+    font-family: "Pretendard-medium";
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+`;
+
+export const ModalHorizonLine = styled.div`
+    width: 903px;
+    height: 2px;
+    background: #EFEFEF;
+    // border: 2px solid #EFEFEF;
+    opacity: 1;
+    margin-top: 12px;
+    margin-bottom: 14px;
+`;
+
+export const AddThumbnail = styled.div`
+    width: 329px;
+    height: 349px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 3px 3px 5px #0000001A;
+    border: 0.25px solid #B7B7B7;
+    border-radius: 20px;
+    opacity: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 31px;
+
+    div:nth-child(2){
+        font-size: 15px;
+        font-family: "Pretendard-medium";
+        letter-spacing: 0px;
+        color: #000000;
+        opacity: 1;
+        margin-top: 11px;
+    }
+`;
+
+export const ThumbnailImg = styled.div`
+    width: 284px;
+    height: 284px;
+    background: #EEEEEE 0% 0% no-repeat padding-box;
+    opacity: 1;
+    border-radius: 50%;
+`;
+
+export const NicknameDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    div:nth-child(1){
+        font-size: 15px;
+        font-family: "Pretendard-medium";
+        letter-spacing: 0px;
+        color: #000000;
+        opacity: 1;
+        margin-right: 102px;
+    }
+
+`;
+
+export const InputBox = styled.div`
+    width: 431px;
+    height: 31px;
+    background: #E9E9E9 0% 0% no-repeat padding-box;
+    border-radius: 22px;
+    opacity: 1;
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+
+    > span{
+        font-size: 15px;
+        font-family: "Pretendard-normal";
+        letter-spacing: 0px;
+        color: #707070;
+        opacity: 1;
+        margin-left: 20px;
+    }
+    
+`;
+
+export const PasswordDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 29px;
+
+    div:nth-child(1){
+        font-size: 15px;
+        font-family: "Pretendard-medium";
+        letter-spacing: 0px;
+        color: #000000;
+        opacity: 1;
+        margin-right: 89px;
+    }
+`;
+
+export const PasswordCheckDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 29px;
+    margin-bottom: 148px;
+
+    div:nth-child(1){
+        font-size: 15px;
+        font-family: "Pretendard-medium";
+        letter-spacing: 0px;
+        color: #000000;
+        opacity: 1;
+        margin-right: 60px;
+    }
+`;
+
+export const ModalButtons = styled.div`
+    width: 572px;
+    height: 40px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    > button{
+        font-size: 18px;
+        font-family: "Pretendard-bold";
+        letter-spacing: 0px;
+        color: #FFFFFF;
+        opacity: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 0;
+        outline: 0;
+        cursor: pointer;
+
+
+        &:nth-child(1){
+            width: 150px;
+            height: 40px;
+            background: #848484 0% 0% no-repeat padding-box;
+            opacity: 1;   
+            margin-right: 25px;
+        }
+
+        &:nth-child(2){
+            width: 150px;
+            height: 40px;
+            background: #FF0000 0% 0% no-repeat padding-box;
+            opacity: 1;
+        }
+    }
 `;
