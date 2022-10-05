@@ -15,6 +15,10 @@ class LiveExpDetail extends React.Component {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
+          if (data.detail.opener === this.props.userInfo.uid) {
+            alert("개설자의 페이지로 이동합니다.");
+            goto("SOMEWHERE", `paidExp/${data.detail.payment_id}`);
+          }
           if (data.detail) {
             if (data.detail.status === "LIVE") {
               console.log(data.detail);
@@ -36,6 +40,9 @@ class LiveExpDetail extends React.Component {
   };
   componentDidMount() {
     this.GetLiveExpDetail();
+    // window.addEventListener("message", (e) => {
+    //   console.log(e);
+    // });
   }
   componentWillUnmount() {
     this.socket = null;
@@ -86,7 +93,7 @@ class LiveExpDetail extends React.Component {
         alert("게임이 종료되었습니다.\n페이지로 이동합니다.");
         goto("PLAY", "1/null");
       });
-    alert(this.props.userInfo.uid);
+
     this.socket &&
       this.socket.emit("join", {
         roomNum: this.props.live_id,
@@ -129,10 +136,6 @@ class LiveExpDetail extends React.Component {
           </>
         )}
         {status === "START" && (
-          // <div style={{ width: "max-content" }}>
-          // {/* {url}
-          // <br />
-          // {URL} */}
           <iframe
             id="iFrame1"
             src={URL}
@@ -140,10 +143,8 @@ class LiveExpDetail extends React.Component {
             height="100%"
             onLoad={() => {
               document.getElementById("iFrame1").style.width = "100%";
-              // document.getElementById("iFrame1").style.height = "100%";
             }}
           />
-          // </div>
         )}
       </div>
     );

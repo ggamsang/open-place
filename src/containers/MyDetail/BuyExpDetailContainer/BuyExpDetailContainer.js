@@ -5,22 +5,26 @@ import { Dimmer, Loader } from "semantic-ui-react";
 import BoughtExpDetail from "components/Exp/BoughtExpDetail";
 
 class BuyExpDetailContainer extends React.Component {
-  componentDidMount() {
-    if (this.props.token) {
-      this.props.token &&
-        this.props.getUserBoughtExpDetailRequest(
-          this.props.token,
-          this.props.payment_id
-        );
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.token == null) alert("boom!");
+  //   // if (this.props.token) {
+  //   this.props.token &&
+  //     this.props.getUserBoughtExpDetailRequest(
+  //       this.props.token,
+  //       this.props.payment_id
+  //     );
+  //   // }
+  // }
   componentDidUpdate(props) {
-    if (props.token === null && this.props.token !== props.token) {
+    // console.log({ props });
+    if (props.token == null && this.props.token !== props.token) {
+      // console.log("?", this.props.token, this.props.payment_id);
       this.props.token &&
         this.props.getUserBoughtExpDetailRequest(
           this.props.token,
           this.props.payment_id
         );
+      // .then((data) => console.log(data));
     }
   }
   render() {
@@ -30,6 +34,7 @@ class BuyExpDetailContainer extends React.Component {
           <BoughtExpDetail {...this.props} />
         ) : (
           <Dimmer>
+            loading...
             <Loader />
           </Dimmer>
         )}

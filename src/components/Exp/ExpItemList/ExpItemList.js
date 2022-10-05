@@ -1,17 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import ScrollList from "components/Commons/ScrollList";
-// import Search from 'components_mobile/Commons/Search';
-import SearchForm from "components/Commons/Search/SearchForm";
+// import SearchForm from "components/Commons/Search/SearchForm";
 import ButtonNormal from "components/Commons/Button/ButtonNormal";
-// import { WIDTH } from "constant";
 import { goto } from "navigator";
 import Item from "components/Commons/Item";
 import SortButton from "components/Commons/SortButton/SortButton";
 import { GetSORTYPE } from "components/Commons/Define";
-import host from "config";
-import { GET } from "constant";
-import { io } from "socket.io-client";
+import { LiveExpItemList } from "./LiveExpItemList";
+import { Categories } from "./Categories";
 
 const Wrapper = styled.div`
   -ms-overflow-style: none; /* Internet Explorer 10+ */
@@ -93,95 +90,6 @@ const Wrapper = styled.div`
     padding: 0px 20px;
   }
 `;
-// "I'm-in-list-page"  -> roomName = "list-page"
-// "incoming" -> broadcast to list-page members
-
-class LiveExpItemList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      list: [],
-    };
-    this.socket = io("https://place.opensrcdesign.com/list-page", {
-      path: "/socket.io",
-      transports: ["websocket", "polling", "flashsocket"],
-    }).on("incoming", () => {
-      this.GetLiveList();
-    });
-  }
-  GetLiveList = () => {
-    const url = `${host}/user/exp/live`;
-    fetch(url, GET)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          this.setState({ list: data.detail });
-        }
-      })
-      .catch((error) => alert(error));
-  };
-  componentDidMount() {
-    this.socket && this.socket.emit("I'mHere");
-    this.GetLiveList();
-  }
-  componentWillUnmount() {
-    this.socket = null;
-  }
-  render() {
-    const { list } = this.state;
-    console.log(this.state.list);
-
-    return (
-      list.length > 0 && (
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
-          {list.map((item, index) => (
-            <div
-              key={index}
-              style={{ width: "max-content", position: "relative" }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "3%",
-                  background: "red",
-                  color: "white",
-                  width: "max-content",
-                  fontSize: "1rem",
-                  padding: "10px",
-                  borderRadius: "10px",
-                }}
-              >
-                {item.status}
-              </div>
-              <Item
-                onClick={() => {
-                  item.status === "LIVE"
-                    ? (window.location.href = `/liveExp/${item.live_id}`)
-                    : item.status === "PLAY"
-                    ? alert("이미 게임이 시작되었습니다.")
-                    : alert("접근할수없습니다");
-                }}
-                url={item.m_img}
-                title={item.title}
-                //   const {
-                //     score,
-                //     tags,
-                //     taglist,
-                //     price,
-                //     like_count,
-                //     like_id,
-                //     category
-                // } = this.props;
-              />
-            </div>
-            //   <LiveItem key={index} />
-          ))}
-        </div>
-      )
-    );
-  }
-}
 
 class ExpItemList extends React.Component {
   constructor(props) {
@@ -193,6 +101,9 @@ class ExpItemList extends React.Component {
   componentDidMount() {
     this.getList(0);
   }
+  getCategories = (type) => {
+    alert(type);
+  };
   getList = (page) => {
     return this.props.getExpListRequest(
       page,
@@ -215,6 +126,8 @@ class ExpItemList extends React.Component {
       });
     return (
       <Wrapper>
+        <Categories type={this.props.type} />
+
         <div className="gradient">
           <div className="blanker">&nbsp;</div>
           <div className="title">태그리스트</div>
@@ -269,7 +182,8 @@ class ExpItemList extends React.Component {
         </div>
 
         <div className="search-list-wrapper">
-          <LiveExpItemList />
+          {/* live game item list */}
+          {this.props.type === "play" && <LiveExpItemList />}
           <ScrollList
             list={this.props.list}
             list_added={this.props.list_added}

@@ -169,7 +169,7 @@ class PlayGame extends React.Component {
     console.log(this.state, this.props);
     console.log({ url }, { peer });
     const URL = `${url}?room='${this.props.userInfo?.nick_name}의 ${this.props.detail?.title}'&isOpener=true&name=${this.props.userInfo?.nick_name}&url=${this.props.userInfo?.l_img}&GAMEPOINT=${this.state.gamepoint}`;
-
+    console.log(URL);
     return live && liveId ? (
       started ? (
         <>

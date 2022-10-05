@@ -285,7 +285,7 @@ export const GameOpenRequest = (token, id) => {
   return (dispatch) => {
     dispatch(GameOpen());
     const url = `${host}/user/exp/open/${id}`;
-    alert(url)
+    alert(url);
     return fetch(url, POST(token))
       .then((res) => res.json())
       .then((data) => dispatch(GameOpenRequestSuccess(data.detail)))

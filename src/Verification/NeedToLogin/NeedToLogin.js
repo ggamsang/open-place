@@ -112,7 +112,7 @@ export default function NeedToLogin(props) {
             dispatch({ type: AUTH_CHECK_TOKEN, });
             GetSession(TokenName)
                 .then(token => {
-                    console.log(token);
+                    // console.log(token);
                     fetch(`${host}/user/check`, authGET(token))
                         .then(res => res.json())
                         .then(res => {
