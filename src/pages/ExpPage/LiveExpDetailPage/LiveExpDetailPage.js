@@ -20,13 +20,14 @@ class LiveExpDetail extends React.Component {
             goto("SOMEWHERE", `paidExp/${data.detail.payment_id}`);
           }
           if (data.detail) {
+            console.log(data);
             if (data.detail.status === "LIVE") {
               console.log(data.detail);
               this.setState({ detail: data.detail });
               this.setState({ status: "STANDBY" });
             } else {
               alert("게임이 이미 시작되었습니다.");
-              goto("PLAY", "1/null");
+              // this.gotopslaylist();
             }
           } else {
             alert("잘못된 접근입니다.");
@@ -38,13 +39,14 @@ class LiveExpDetail extends React.Component {
       })
       .catch((er) => alert(er));
   };
+  gotoplaylist = () => goto("PLAY", "1/null");
   componentDidMount() {
     this.GetLiveExpDetail();
     window.addEventListener("message", (e) => {
       if (e.data === "GAMEOVER") {
         this.socket && this.socket.emit("close-room", this.props.live_id);
         alert("게임이 종료되었습니다.");
-        goto("PLAY", "1/null");
+        this.gotoplaylist();
       }
     });
   }
@@ -59,7 +61,6 @@ class LiveExpDetail extends React.Component {
       url: null,
       gamepoint: null,
     };
-    //
     this.socket = io("https://place.opensrcdesign.com/waiting", {
       path: "/socket.io",
       transports: ["websocket", "polling", "flashsocket"],
@@ -71,7 +72,7 @@ class LiveExpDetail extends React.Component {
         const { user, game } = obj;
         console.log(obj);
         if (user === this.props.userInfo.id) {
-          alert("게임에 참가되었습니다.");
+          alert("게임에 참가합니다.");
           try {
             this.setState({
               url: JSON.parse(JSON.parse(game.url)["game_files"])[0].path,
@@ -80,19 +81,21 @@ class LiveExpDetail extends React.Component {
             });
           } catch (e) {
             console.log(e);
-            alert("게임경로를 가져오지 못하였습니다");
+            alert("게임을 시작할 수 없습니다.");
+            this.socket = null;
+            this.gotoplaylist();
           }
         } else {
           alert(
             `게임 개설자가 ${user}와 게임을 시작하였습니다.\n리스트 페이지로 이동합니다.`
           );
-          goto("PLAY", "1/null");
+          this.gotoplaylist();
         }
         this.socket = null;
       })
       .on("close-room", () => {
         alert("게임이 종료되었습니다.\n놀기 페이지로 이동합니다.");
-        goto("PLAY", "1/null");
+        this.gotoplaylist();
       });
     this.socket && this.socket.emit("standby", { room: this.props.live_id });
   }
@@ -105,12 +108,10 @@ class LiveExpDetail extends React.Component {
 
     this.socket &&
       this.socket.emit("get-users", { roomNum: this.props.live_id });
-
     this.setState({ status: "JOIN" });
   };
   render() {
     const { status, detail, url } = this.state;
-    console.log(this.props, this.state);
 
     const URL = `${url}?room='${detail?.title}'&name=${this.props.userInfo?.nick_name}&url=${this.props.userInfo?.l_img}&GAMEPOINT=${this.state.gamepoint}`;
     return (

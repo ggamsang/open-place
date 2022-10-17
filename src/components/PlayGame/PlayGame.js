@@ -1,6 +1,6 @@
 import Button from "commons/Button";
 import host from "config";
-import { authGET, DELETE, POST } from "constant";
+import { authGET, DELETE, PUT } from "constant";
 import React from "react";
 import io from "socket.io-client";
 
@@ -97,7 +97,7 @@ class PlayGame extends React.Component {
   GamePlayingRequest = () => {
     const { token } = this.props;
     const url = `${host}/user/exp/play/${this.state.liveId}`;
-    return fetch(url, POST(token, null));
+    return fetch(url, authGET(token));
   };
   CheckAlreadyOpened = () => {
     const { payment_id, token } = this.props;

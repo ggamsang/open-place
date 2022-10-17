@@ -27,7 +27,7 @@ export const noauthPOST = (form) => ({
 });
 export const POST = (token, form) => ({
   headers: {
-    "Access-Control-Allow-Origin": "*",
+    // "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
     "X-Access-Token": token,
   },
