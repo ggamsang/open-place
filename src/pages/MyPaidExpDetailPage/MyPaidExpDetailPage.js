@@ -7,7 +7,11 @@ function MyPaidExpDetailPage() {
   const params = useParams();
   return (
     <ClientTemplate>
-      {NeedToLogin(<BuyExpDetailContainer payment_id={params.id} />)}
+      {
+        // NeedToLogin(
+        <BuyExpDetailContainer payment_id={params.id} />
+        // )
+      }
     </ClientTemplate>
   );
 }

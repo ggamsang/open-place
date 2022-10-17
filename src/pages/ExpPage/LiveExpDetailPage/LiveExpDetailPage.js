@@ -15,7 +15,7 @@ class LiveExpDetail extends React.Component {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          if (data.detail.opener === this.props.userInfo.uid) {
+          if (data.detail?.opener === this.props.userInfo.uid) {
             alert("개설자의 페이지로 이동합니다.");
             goto("SOMEWHERE", `paidExp/${data.detail.payment_id}`);
           }
@@ -40,9 +40,13 @@ class LiveExpDetail extends React.Component {
   };
   componentDidMount() {
     this.GetLiveExpDetail();
-    // window.addEventListener("message", (e) => {
-    //   console.log(e);
-    // });
+    window.addEventListener("message", (e) => {
+      if (e.data === "GAMEOVER") {
+        this.socket && this.socket.emit("close-room", this.props.live_id);
+        alert("게임이 종료되었습니다.");
+        goto("PLAY", "1/null");
+      }
+    });
   }
   componentWillUnmount() {
     this.socket = null;
@@ -55,9 +59,6 @@ class LiveExpDetail extends React.Component {
       url: null,
       gamepoint: null,
     };
-    this.socket = null;
-  }
-  RequestJoin = () => {
     //
     this.socket = io("https://place.opensrcdesign.com/waiting", {
       path: "/socket.io",
@@ -90,10 +91,12 @@ class LiveExpDetail extends React.Component {
         this.socket = null;
       })
       .on("close-room", () => {
-        alert("게임이 종료되었습니다.\n페이지로 이동합니다.");
+        alert("게임이 종료되었습니다.\n놀기 페이지로 이동합니다.");
         goto("PLAY", "1/null");
       });
-
+    this.socket && this.socket.emit("standby", { room: this.props.live_id });
+  }
+  RequestJoin = () => {
     this.socket &&
       this.socket.emit("join", {
         roomNum: this.props.live_id,
@@ -153,9 +156,10 @@ class LiveExpDetail extends React.Component {
 
 function PageWrapper(props) {
   let params = useParams();
+  // console.log("PROPS", props);
   return (
     <ClientTemplate>
-      <LiveExpDetail {...props} live_id={params.id} />
+      {props.userInfo && <LiveExpDetail {...props} live_id={params.id} />}
     </ClientTemplate>
   );
 }

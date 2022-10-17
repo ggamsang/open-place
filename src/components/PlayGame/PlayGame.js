@@ -18,33 +18,37 @@ class PlayGame extends React.Component {
     this.socket = null;
     this.listpagesocket = null;
   }
-  createSocketRoom = (room) => room && this.socket.emit("join", room);
+  createSocketRoom = (room) =>
+    room &&
+    this.socket.emit("join", { roomNum: room, user: this.props.userInfo });
 
   ConnectSocket = () => {
     if (!this.socket) {
       this.listpagesocket = io("https://place.opensrcdesign.com/list-page", {
         path: "/socket.io",
-        transports: ["websocket", "polling", "flashsocket"],
+        transports: ["websocket", "polling"], // "flashsocket"],
       }).on("incoming", () => {});
 
       this.socket = io("https://place.opensrcdesign.com/waiting", {
         path: "/socket.io",
-        transports: ["websocket", "polling", "flashsocket"],
-      }).on("user-list", (obj) => {
-        const users = obj.map((element) => element.user);
-        console.log({ users });
-        const peer = users.filter(
-          (user) => user.uid !== this.props.userInfo.uid
-        );
-        console.log(peer);
-        this.setState({ peer: peer });
-      });
+        transports: ["websocket", "polling"], // "flashsocket"],
+      })
+        .on("user-list", (obj) => {
+          const users = obj.map((element) => element.user);
+          const peer = users.filter(
+            (user) => user.uid !== this.props.userInfo.uid
+          );
+          this.setState({ peer: peer });
+        })
+        .on("started", () => {
+          this.socket = null;
+        });
     }
   };
   GameOpenRequest = () => {
-    // socket connection
+    //-= socket connection =-//
     this.ConnectSocket();
-    // restapi request
+    //-= restapi request =-//
     const { token, payment_id: id } = this.props;
     const url = `${host}/user/exp/open/${id}`;
     return fetch(url, authGET(token))
@@ -56,8 +60,7 @@ class PlayGame extends React.Component {
           this.createSocketRoom(data.detail);
           this.listpagesocket.emit("incoming");
         } else {
-          console.log(data);
-          alert("foo");
+          console.error("failed to open live room: ", data);
         }
       })
       .catch((err) => {
@@ -95,21 +98,6 @@ class PlayGame extends React.Component {
     const { token } = this.props;
     const url = `${host}/user/exp/play/${this.state.liveId}`;
     return fetch(url, POST(token, null));
-    // .then((res) => res.json())
-    // .then((data) => {
-    //   if (data.success) {
-    //     this.setState({ live: data.success });
-    //     this.setState({ liveId: data.detail });
-    //     this.createSocketRoom(data.detail);
-    //     console.log(data);
-    //   } else {
-    //     console.log(data);
-    //     alert("foo");
-    //   }
-    // })
-    // .catch((err) => {
-    //   alert(err);
-    // });
   };
   CheckAlreadyOpened = () => {
     const { payment_id, token } = this.props;
@@ -141,7 +129,7 @@ class PlayGame extends React.Component {
     window.addEventListener("message", (e) => {
       console.log(e.data);
       if (e.data === "GAMEOVER") {
-        alert("game over");
+        alert("게임이 종료되었습니다.");
         this.GameCloseRequest();
       }
     });
@@ -160,7 +148,7 @@ class PlayGame extends React.Component {
         JSON.parse(this.props.detail.type_detail)["game_files"]
       )[0].path;
       this.setState({ started: true, url: url });
-      // this.GamePlayingRequest();
+      this.GamePlayingRequest();
       // this.socket = null;
     }
   };
