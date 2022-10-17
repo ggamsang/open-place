@@ -252,7 +252,15 @@ class CreateExp extends React.Component {
     };
 
     console.log(data);
-
+    if (exp_type == "4") {
+      if (
+        exp_type_detail ==
+        '{"game_files":"[]","isOnline":1,"place":"","people":0,"startDate":null,"endDate":null}'
+      ) {
+        alert("게임 파일을 등록해주세요.");
+        return;
+      }
+    }
     let file = {
       value: this.state.thumbnail,
       name: this.state.thumbnail_name,
@@ -266,9 +274,11 @@ class CreateExp extends React.Component {
     if (info === null || info === "") return alert("내용을 입력하세요");
 
     this.props.createExpRequest(data, this.props.token).then((data) => {
-      // console.log(data);
-      alert("등록함");
-      window.history.go(-1);
+      alert("경험이 등록되었습니다.\n 리스트페이지로 이동합니다.");
+      goto(
+        category == "0" ? "PLAY" : category == "1" ? "MAKE" : "LEARN",
+        "1/null"
+      );
     });
   };
 
