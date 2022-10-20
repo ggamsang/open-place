@@ -198,7 +198,10 @@ class PlayGame extends React.Component {
           }}
         >
           <div style={{ margin: "auto", width: "max-content" }}>
-            <h3>게임이 개설되었습니다. 원하시는 상대를 선택하여주세요.</h3>
+            <h3>
+              게임이 개설되었습니다.
+              <br /> 원하시는 상대를 선택하여주세요.
+            </h3>
           </div>
           <div
             style={{ margin: "auto", width: "max-content", display: "flex" }}

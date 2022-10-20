@@ -48,17 +48,31 @@ export class LiveExpItemList extends React.Component {
               style={{ width: "max-content", position: "relative" }}
             >
               <div
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "3%",
-                  background: "red",
-                  color: "white",
-                  width: "max-content",
-                  fontSize: "1rem",
-                  padding: "10px",
-                  borderRadius: "10px",
-                }}
+                style={
+                  window.innerWidth > 500
+                    ? {
+                        position: "absolute",
+                        top: "50%",
+                        left: "3%",
+                        background: "red",
+                        color: "white",
+                        width: "max-content",
+                        fontSize: "1rem",
+                        padding: "10px",
+                        borderRadius: "10px",
+                      }
+                    : {
+                        color: "white",
+                        padding: "5px",
+                        borderRadius: "5px",
+                        zIndex: "999",
+                        top: "2%",
+                        left: "2%",
+                        position: "absolute",
+                        background: "red",
+                        width: "max-content",
+                      }
+                }
               >
                 {item.status}
               </div>
