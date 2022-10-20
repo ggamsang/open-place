@@ -47,6 +47,29 @@ const Wrapper = styled.div`
 `;
 
 class ClientTemplate extends Component {
+  render() {
+    return (
+      <Wrapper id="client-template">
+        <div className="top">
+          <TopMenu
+            login={this.props.isLoggedIn}
+            userInfo={this.props.userInfo}
+          />
+        </div>
+
+        <div id="main" className="main">
+          {this.props.children}
+          <Footer />
+        </div>
+
+        {/* <div className='bottom'> */}
+        {/* </div> */}
+      </Wrapper>
+    );
+  }
+}
+const WrapperMobile = styled.div``;
+class ClientTemplateMobile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -55,8 +78,8 @@ class ClientTemplate extends Component {
     };
   }
   componentDidMount() {
-    // window.addEventListener('scroll', e => this.handleScroll(e), true);
-    window.addEventListener("scroll", this.scroll, true);
+    // window.addEventListener("scroll", (e) => this.handleScroll(e), true);
+    // window.addEventListener("scroll", this.scroll, true);
   }
   handleScroll = async (_) => {
     // get main height
@@ -72,13 +95,13 @@ class ClientTemplate extends Component {
       return;
     }
     // detect direction and store prev position
-    // const { prev_y } = this.state;
-    // let dir = "";
-    // if (rectMain.y - prev_y > 0) {
-    //   dir = "UP";
-    // } else {
-    //   dir = "DOWN";
-    // }
+    const { prev_y } = this.state;
+    let dir = "";
+    if (rectMain.y - prev_y > 0) {
+      dir = "UP";
+    } else {
+      dir = "DOWN";
+    }
     this.setState({ prev_y: rectMain.y });
     console.log(new Date().getTime(), 0);
 
@@ -97,25 +120,8 @@ class ClientTemplate extends Component {
   };
 
   render() {
-    return window.innerWidth > 500 ? (
-      <Wrapper id="client-template">
-        <div className="top">
-          <TopMenu
-            login={this.props.isLoggedIn}
-            userInfo={this.props.userInfo}
-          />
-        </div>
-
-        <div id="main" className="main">
-          {this.props.children}
-          <Footer />
-        </div>
-
-        {/* <div className='bottom'> */}
-        {/* </div> */}
-      </Wrapper>
-    ) : (
-      <Wrapper id="client-template">
+    return (
+      <WrapperMobile id="client-template">
         <div id="main" className="main">
           {this.props.children}
         </div>
@@ -127,14 +133,16 @@ class ClientTemplate extends Component {
         <div className="bottom">
           <Footer />
         </div>
-      </Wrapper>
+      </WrapperMobile>
     );
   }
 }
-
 const mapStateToProps = (state) => ({
   isLoggedIn: state.Authentication.status.isLoggedIn,
   userInfo: state.Authentication.status.userInfo,
 });
 const mapDispatchToProps = (dispatch) => ({});
-export default connect(mapStateToProps, mapDispatchToProps)(ClientTemplate);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(window.innerWidth > 500 ? ClientTemplate : ClientTemplateMobile);
