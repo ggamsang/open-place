@@ -5,9 +5,10 @@ import Navbar from "../Navbar";
 import SendDm from "../ListPage-DM";
 import { useParams } from "react-router-dom";
 
-function ClientTemplate({ children }) {
+function PageLayout({ children }) {
   const params = useParams();
   const { keyword } = params;
+  // auth
   return (
     <>
       <Header keyword={keyword} />
@@ -18,4 +19,4 @@ function ClientTemplate({ children }) {
     </>
   );
 }
-export default ClientTemplate;
+export default PageLayout;

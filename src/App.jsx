@@ -1,7 +1,6 @@
 import React from "react";
 import MainPage from "./pages/Main";
 import CommunityPage from "./pages/Community/List";
-import LoadingPage from "./pages/Loading";
 import CommunityWritePage from "./pages/Community/Write";
 import CommunityDetailPage from "./pages/Community/Detail";
 import NoticePage from "./pages/Notice/List";
@@ -19,6 +18,8 @@ import SignUpPage from "./pages/Sign/SignUp";
 import NotFoundPage from "./pages/NotFound";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Wrapper } from "./styles";
+
+import LoadingPage from "./pages/Loading";
 
 function App() {
   return (

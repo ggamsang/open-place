@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import ClientTemplate from "../../components/ClientTemplate";
+import PageLayout from "../../components/PageLayout";
 import Search from "../../components/Search";
 
 const SearchPage = () => {
@@ -12,14 +12,14 @@ const SearchPage = () => {
   const category = searchParams.get("category");
 
   return (
-    <ClientTemplate>
+    <PageLayout>
       <Search
         keyword={keyword}
         category={category}
         sort={sort}
         setSearchParams={setSearchParams}
       />
-    </ClientTemplate>
+    </PageLayout>
   );
 };
 
