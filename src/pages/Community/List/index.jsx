@@ -1,8 +1,9 @@
 import React from 'react';
 import * as styled from './styles';
-import Header from '../../../components/Header';
-import Navbar from '../../../components/ListPage-Navbar';
-import Footer from '../../../components/Footer';
+import Header from '../../../components/desktop/ListPage-Header';
+// import Header from '../../../components/Header';
+// import Navbar from '../../../components/ListPage-Navbar';
+// import Footer from '../../../components/Footer';
 
 const OtherPost = () => {
   return(

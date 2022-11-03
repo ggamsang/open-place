@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-// import sidebar from '../../imgs/sidebar.svg';
-// import sidebaricon1 from '../../imgs/sidebar-heart.svg';
-// import sidebaricon2 from '../../imgs/sidebar-activity.svg';
-// import sidebaricon3 from '../../imgs/sidebar-user.svg';
-// import sidebaricon4 from '../../imgs/sidebar-star.svg';
-// import sidebaricon5 from '../../imgs/sidebar-info.svg';
-import sidebarcontrol from '../../imgs/sidebar-control.png';
-import sidebarmenu from '../../imgs/sidebarmenu.png';
+// import sidebar from '../../../imgs/sidebar.svg';
+// import sidebaricon1 from '../../../imgs/sidebar-heart.svg';
+// import sidebaricon2 from '../../../imgs/sidebar-activity.svg';
+// import sidebaricon3 from '../../../imgs/sidebar-user.svg';
+// import sidebaricon4 from '../../../imgs/sidebar-star.svg';
+// import sidebaricon5 from '../../../imgs/sidebar-info.svg';
+import sidebarcontrol from '../../../imgs/sidebar-control.png';
+import sidebarmenu from '../../../imgs/sidebarmenu.png';
 // import { SideBarControl } from '../Navbar/styles';
 
 

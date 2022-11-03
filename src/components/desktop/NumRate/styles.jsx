@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import star from '../../imgs/star.svg';
+import star from '../../../imgs/star.svg';
 
 
 export const ExpDiv = styled.div`

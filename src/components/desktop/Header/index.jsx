@@ -18,7 +18,7 @@ import {
   LoginIcon,
   LoginText,
 } from "./styles";
-import { goto } from "../../utils/navigator";
+import { goto } from "../../../utils/navigator";
 
 const Header = (props) => {
   const [keyword, setKeyword] = useState("");

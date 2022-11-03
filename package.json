@@ -10,6 +10,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",
     "jquery": "^3.6.1",
+    "path": "^0.12.7",
     "prettier": "^2.7.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

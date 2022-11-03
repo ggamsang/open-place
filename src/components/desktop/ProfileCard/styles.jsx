@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import star from '../../imgs/star.svg';
-import profileimg from '../../imgs/profileimg.jpg';
+import star from '../../../imgs/star.svg';
+import profileimg from '../../../imgs/profileimg.jpg';
 
 
 export const Profile = styled.div`

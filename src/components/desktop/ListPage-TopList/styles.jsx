@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import star from '../../imgs/star.svg';
-import profileimg from '../../imgs/profileimg.jpg';
-import listimg from '../../imgs/Listimg.png';
+import star from '../../../imgs/star.svg';
+import profileimg from '../../../imgs/profileimg.jpg';
+import listimg from '../../../imgs/Listimg.png';
 
 
 export const Container = styled.div`

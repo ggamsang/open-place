@@ -1,10 +1,10 @@
 import React from 'react';
 import * as styled from './styles';
-import Header from '../../../components/ListPage-Header';
-import Navbar from '../../../components/ListPage-Navbar'; 
-import NumRate from '../../../components/NumRate';
-import ProfileCard from '../../../components/ProfileCard';
-import Footer from '../../../components/Footer';
+import Header from '../../../components/desktop/ListPage-Header';
+import Navbar from '../../../components/desktop/ListPage-Navbar'; 
+import NumRate from '../../../components/desktop/NumRate';
+import ProfileCard from '../../../components/desktop/ProfileCard';
+import Footer from '../../../components/desktop/Footer';
 
 
 

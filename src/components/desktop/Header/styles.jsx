@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import logoRed from "../../imgs/logo.png";
+import logoRed from "../../../imgs/logo.png";
 
 export const Container = styled.div`
   width: 100%;

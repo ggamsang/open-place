@@ -1,11 +1,8 @@
-import React from 'react';
 import styled from 'styled-components';
-import logoRed from '../../imgs/logo.png';
-import nicknameprofileimg from '../../imgs/NicknameProfileImg.png';
-import notifications from '../../imgs/notifications.png';
-import email from '../../imgs/email.png';
-
-
+import logoRed from  '../../../imgs/logo.png';
+import nicknameprofileimg from '../../../imgs/NicknameProfileImg.png';
+import notifications from '../../../imgs/notifications.png';
+import email from '../../../imgs/email.png';
 
 export const Container = styled.div`
   width: 100%;

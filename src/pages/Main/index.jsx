@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Main, MainContainer } from "./styles";
-import Banner from "../../components/Banner";
-import TopList from "../../components/TopList";
-import PageLayout from "../../components/PageLayout";
+import Banner from "../../components/desktop/Banner";
+import TopList from "../../components/desktop/TopList";
+import PageLayout from "../../components/desktop/PageLayout";
 import host from "../../config";
 
 const getTopExpListRequest = () => {

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import DmBtn from '../../imgs/DmButton.png';
+import DmBtn from '../../../imgs/DmButton.png';
 
 
 export const Container = styled.div`

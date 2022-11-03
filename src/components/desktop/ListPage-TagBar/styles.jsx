@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
-import tagbutton from '../../imgs/tagbutton.svg';
-import tagbuttonmore from '../../imgs/tagbutton-more.svg';
-import plusicon from '../../imgs/tagbutton-more-add.svg';
-import sort1 from '../../imgs/sort1.svg';
-import sort2 from '../../imgs/sort2.svg';
+import tagbutton from '../../../imgs/tagbutton.svg';
+import tagbuttonmore from '../../../imgs/tagbutton-more.svg';
+import plusicon from '../../../imgs/tagbutton-more-add.svg';
+import sort1 from '../../../imgs/sort1.svg';
+import sort2 from '../../../imgs/sort2.svg';
 
 
 export const Container = styled.div`

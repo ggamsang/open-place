@@ -1,16 +1,16 @@
-import React from 'react';
-import * as styled from './styles';
-import Header from '../../../components/ListPage-Header';
-import Navbar from '../../../components/ListPage-Navbar';
-import DM from '../../../components/ListPage-DM'
-import Footer from '../../../components/Footer';
+import React from "react";
+import * as styled from "./styles";
+import Header from "../../../components/desktop/ListPage-Header";
+import Navbar from "../../../components/desktop/ListPage-Navbar";
+import Footer from "../../../components/desktop/Footer";
+// import SendDm from "../../../components/desktop/ListPage-DM";
 
 const ExpAddPage = () => {
   return (
     <styled.Main>
       <Header />
       <Navbar />
-      {/* <DM /> */}
+      {/* <SendDm /> [!] reason why ? already called by ancestor component */}
       <styled.AddExpText>경험 등록</styled.AddExpText>
       <styled.Wrapper>
         <styled.AddThumbnail>
@@ -60,7 +60,7 @@ const ExpAddPage = () => {
           </styled.ExpTypeDiv>
           <styled.PriceDiv>
             <styled.PriceDivText>가격</styled.PriceDivText>
-            <styled.PriceBox>10000</styled.PriceBox> 
+            <styled.PriceBox>10000</styled.PriceBox>
             <span>원</span>
             <styled.AddPrice>
               <styled.AddPriceButton>+ 1천</styled.AddPriceButton>
@@ -83,7 +83,6 @@ const ExpAddPage = () => {
         <styled.ExpDetailBox>
           <span>경험유형 상세</span>
         </styled.ExpDetailBox>
-        
       </styled.Wrapper>
       <styled.AddFile></styled.AddFile>
       <styled.Wrapper>
@@ -96,7 +95,7 @@ const ExpAddPage = () => {
       </styled.Wrapper>
       <Footer />
     </styled.Main>
-  )
+  );
 };
 
 export default ExpAddPage;
