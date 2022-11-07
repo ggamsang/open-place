@@ -17,11 +17,18 @@ import {
   Login,
   LoginIcon,
   LoginText,
+  NotificationIcon,
+  EmailIcon,
+  RegisterIcon,
+  Nickname,
+  NicknameIcon,
+  NicknameText,
 } from "./styles";
 import { goto } from "../../../utils/navigator";
 
 const Header = (props) => {
   const [keyword, setKeyword] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
 
   return (
     <Container>
@@ -55,17 +62,33 @@ const Header = (props) => {
         />
         <SearchExpText opacity={keyword ? 0.5 : 1}>경험 찾아보기</SearchExpText>
       </div>
+      {loggedIn ? (
+        <>
+          <NotificationIcon />
+          <EmailIcon />
+          <RegistBox>
+            <Register>
+              <RegisterIcon />
+              <RegisterText>등록</RegisterText>
+            </Register>
+            <Nickname>
+              <NicknameIcon />
+              <NicknameText>닉네임</NicknameText>
+            </Nickname>
+          </RegistBox>
+        </>
+      ) : (
+        <RegistBox>
+          <Register onClick={() => goto("SIGNUP")}>
+            <RegisterText>회원가입</RegisterText>
+          </Register>
 
-      <RegistBox>
-        <Register onClick={() => goto("SIGNUP")}>
-          <RegisterText>회원가입</RegisterText>
-        </Register>
-
-        <Login onClick={() => goto("SIGNIN")}>
-          <LoginIcon />
-          <LoginText>로그인</LoginText>
-        </Login>
-      </RegistBox>
+          <Login onClick={() => goto("SIGNIN")}>
+            <LoginIcon />
+            <LoginText>로그인</LoginText>
+          </Login>
+        </RegistBox>
+      )}
     </Container>
   );
 };

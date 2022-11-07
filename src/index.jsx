@@ -1,20 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
-// import AppMobile from "./AppMobile";
-// const WIDTH = 500;
+import store from "./store";
+import { Provider } from "react-redux";
 
 ReactDOM.render(
-  <React.StrictMode>
+  // useEffect 두번수행되어 코멘트함.
+  // <React.StrictMode>
+  <Provider store={store}>
     <App />
-
-    {/* 
-    <div className="device-info">
-      {window.innerWidth > WIDTH ? "🖥️데스크탑" : "📱모바일"}
-    </div>
-    {window.innerWidth > WIDTH ? <App /> : <AppMobile />}
-  */}
-  </React.StrictMode>,
+  </Provider>,
+  // </React.StrictMode>
   document.getElementById("root")
 );

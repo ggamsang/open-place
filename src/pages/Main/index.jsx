@@ -1,35 +1,24 @@
-import React, { useEffect } from "react";
-import { Main, MainContainer } from "./styles";
+import React from "react";
+import { Main, MainContainer, Shortcut } from "./styles";
 import Banner from "../../components/desktop/Banner";
 import TopList from "../../components/desktop/TopList";
+import ShortcutList from "../../components/desktop/ExpList";
 import PageLayout from "../../components/desktop/PageLayout";
-import host from "../../config";
-
-const getTopExpListRequest = () => {
-  // return (dispatch) => {
-  const url = `${host}/item/TopList`;
-  return fetch(url, {
-    headers: { "Content-Type": "application/json" },
-    method: "GET",
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-      // dispatch(getTopExpListSuccess(data ? data : []));
-    })
-    .catch((e) => console.error(e));
-  // .catch((error) => dispatch(getTopExpListFailure()));
-  // }
-};
+import { useState } from "react";
 
 function MainPage() {
-  useEffect(() => {
-    getTopExpListRequest();
-  }, []);
+  const [loggedIn, setLoggedIn] = useState(true);
   return (
     <PageLayout>
       <Main>
         <Banner />
+        {loggedIn && (
+          <>
+            <Shortcut>바로가기</Shortcut>
+            <ShortcutList />
+          </>
+        )}
+
         <MainContainer>
           <TopList />
         </MainContainer>

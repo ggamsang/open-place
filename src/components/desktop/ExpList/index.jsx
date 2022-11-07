@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react";
 import * as styled from "./styles";
-import NumRate from "../NumRate";
 import ProfileCard from "../ProfileCard";
 import host from "src/config.js";
 
-const TopList = () => {
-  const [list, setList] = useState();
-  const getTopExpListRequest = () => {
-    const url = `${host}/item/TopList`;
+const ExpList = ({
+  type = "play",
+  page = 0,
+  keyword = null,
+  category = type,
+  sort = null,
+  tags = [],
+}) => {
+  const [list, setList] = useState([]);
+  const getExpListRequest = () => {
+    const url = `${host}/item/${page}/${category}/${sort}/${keyword}`;
     return fetch(url, {
       headers: { "Content-Type": "application/json" },
       method: "GET",
@@ -20,20 +26,21 @@ const TopList = () => {
       .catch((e) => console.error(e));
   };
   useEffect(() => {
-    getTopExpListRequest();
-  }, []);
+    getExpListRequest();
+  }, [sort]);
+  // useEffect(() => {
+  //   getExpListRequest();
+  //   console.log(this);
+  // }, [sort, tags, keyword, page]);
 
   return (
     <styled.Container>
-      <styled.TopListText>탑리스트</styled.TopListText>
-
       <styled.TopListContainer>
         {list?.length > 0 &&
           list.map((item) => <ProfileCard key={item.uid} {...item} />)}
-          
       </styled.TopListContainer>
     </styled.Container>
   );
 };
 
-export default TopList;
+export default ExpList;
