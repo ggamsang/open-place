@@ -1,11 +1,11 @@
 import React from 'react';
 import * as styled from './styles';
-import Header from '../../components/desktop/ListPage-Header';
-import Footer from '../../components/desktop/Footer';
-import Banner from '../../components/desktop/Banner';
-import ShortcutList from '../../components/desktop/ListPage-TopList';
-import TopList from '../../components/desktop/TopList';
-import Navbar from '../../components/desktop/ListPage-Navbar';
+import Header from '../../components/ListPage-Header';
+import Footer from '../../components/Footer';
+import Banner from '../../components/Banner';
+import ShortcutList from '../../components/ListPage-TopList';
+import TopList from '../../components/TopList';
+import Navbar from '../../components/ListPage-Navbar';
 
 
 const MainPage = () => {

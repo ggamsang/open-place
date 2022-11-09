@@ -1,8 +1,8 @@
 import React from "react";
 import * as styled from "./styles";
-import PageLayout from "../../components/desktop/PageLayout";
-import ExpList from "../../components/desktop/ExpList";
-import ListPageFilter from "src/components/desktop/ListPageFilter";
+import PageLayout from "../../components/PageLayout";
+import ExpList from "../../components/ExpList";
+import ListPageFilter from "src/components/ListPageFilter";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 

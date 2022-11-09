@@ -1,11 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import Logo from "../Logo/Logo";
+import Logo from "../Logo";
 import { Wrapper } from "./styles";
-import InputLine from "../Input/InputLine";
-import InputPhone from "../Input/InputPhone";
+import { InputLine, InputPhone, InputNormal } from "../Input";
 import GradientButton from "../Button/GradientButton";
-import InputNormal from "../Input/InputNormal";
 import CheckBoxNormal from "../CheckBoxNormal";
 
 const SignUp = () => {

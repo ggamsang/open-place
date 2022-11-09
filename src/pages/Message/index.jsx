@@ -1,8 +1,8 @@
 import React from "react";
 import * as styled from "./styles";
-import Header from "../../components/desktop/ListPage-Header";
-import Navbar from "../../components/desktop/ListPage-Navbar";
-import Footer from "../../components/desktop/Footer";
+import Header from "../../components/ListPage-Header";
+import Navbar from "../../components/ListPage-Navbar";
+import Footer from "../../components/Footer";
 
 const UserChat = () => {
   return (

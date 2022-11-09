@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import PageLayout from "../../components/desktop/PageLayout";
-import Search from "../../components/desktop/Search";
+import PageLayout from "../../components/PageLayout";
+import Search from "../../components/Search";
 
 const SearchPage = () => {
   const params = useParams();

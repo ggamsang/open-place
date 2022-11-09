@@ -1,9 +1,9 @@
 import React from "react";
 import { Main, MainContainer, Shortcut } from "./styles";
-import Banner from "../../components/desktop/Banner";
-import TopList from "../../components/desktop/TopList";
-import ShortcutList from "../../components/desktop/ExpList";
-import PageLayout from "../../components/desktop/PageLayout";
+import Banner from "../../components/Banner";
+import TopList from "../../components/TopList";
+import ShortcutList from "../../components/ExpList";
+import PageLayout from "../../components/PageLayout";
 import { useState } from "react";
 
 function MainPage() {
@@ -18,7 +18,6 @@ function MainPage() {
             <ShortcutList />
           </>
         )}
-
         <MainContainer>
           <TopList />
         </MainContainer>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Logo from "../../../components/Commons/Logo/Logo";
+import Logo from "../../../components/Commons/Logo";
 import { Wrapper, Warning } from "./styles";
-import InputNormal from "../../../components/Commons/Input/InputNormal";
+import { InputNormal } from "../../../components/Commons/Input";
 import { goto } from "../../../utils/navigator";
 import cookie from "react-cookies";
 import CheckBoxNormal from "../../../components/Commons/CheckBoxNormal";

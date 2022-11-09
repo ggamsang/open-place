@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import expimg from '../../../imgs/Listimg.png';
-import staricon from '../../../imgs/star.svg';
-import firstpage from '../../../imgs/firstpage.svg';
-import prevpage from '../../../imgs/prevpage.svg';
-import nextpage from '../../../imgs/nextpage.svg';
-import lastpage from '../../../imgs/lastpage.svg';
+import expimg from '../../imgs/Listimg.png';
+import staricon from '../../imgs/star.svg';
+import firstpage from '../../imgs/firstpage.svg';
+import prevpage from '../../imgs/prevpage.svg';
+import nextpage from '../../imgs/nextpage.svg';
+import lastpage from '../../imgs/lastpage.svg';
 
 
 export const Main = styled.div`

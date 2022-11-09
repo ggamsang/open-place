@@ -1,0 +1,35 @@
+import * as types from "src/mobile/actions/ActionTypes";
+import update from "react-addons-update";
+
+const initialstate = {
+  SharerUpdate: { status: "INIT" },
+  status: {
+  }
+}
+export function UpdateSharer(state, action) {
+  if (typeof state === "undefined") {
+    state = initialstate;
+  }
+  switch (action.type) {
+    case types.UPDATE_SHARER_PROFILE:
+      return update(state, {
+        SharerUpdate: {
+          status: { $set: "WAITING" }
+        }
+      });
+    case types.UPDATE_SHARER_PROFILE_SUCCESS:
+      return update(state, {
+        SharerUpdate: {
+          status: { $set: "SUCCESS" }
+        }
+      });
+    case types.UPDATE_SHARER_PROFILE_FAILURE:
+      return update(state, {
+        SharerUpdate: {
+          status: { $set: "FAILURE" }
+        }
+      });
+    default:
+      return state;
+  }
+}

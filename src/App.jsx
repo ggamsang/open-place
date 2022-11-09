@@ -21,7 +21,14 @@ import LoadingPage from "./pages/Loading";
 
 function App() {
   return (
-    <div style={{ margin: "auto", maxWdith: "1920px", width: "max-content" }}>
+    <div
+      style={{
+        border: "1px solid gray",
+        margin: "auto",
+        maxWdith: "1920px",
+        width: "max-content",
+      }}
+    >
       <BrowserRouter>
         <Routes>
           <Route path="/signup" element={<SignUpPage />} />
@@ -37,6 +44,7 @@ function App() {
               <Route path=":id" element={<ListPage type={path} />} />
             </Route>
           ))}
+          {/* /option/:optionId/(small|medium|large) */}
 
           {/* 경험상세페이지 – 1, 경험등록/수정 페이지 */}
           <Route path="/exp/:id" element={<ExpDetailPage />} />
