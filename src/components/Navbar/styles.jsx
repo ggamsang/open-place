@@ -12,7 +12,7 @@ export const SideBar = styled.div`
   //   border: 1px solid red;
   // }
   width: 122px;
-  padding-bottom: 20px;
+  padding-bottom: ${(props) => (props.folded ? 0 : 20)}px;
   // min-height: 507px;
   background: transparent linear-gradient(270deg, #8743ff 0%, #4136f1 100%) 0%
     0% no-repeat padding-box;
@@ -29,7 +29,11 @@ export const SideBar = styled.div`
   width: 122px;
   height: 26px;
   gradient(270deg, #2854F8 0%, #4068FA 19%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
-  border-radius: 28px;`
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  `
       : ``}
 `;
 export const SideBarInner = styled.div`
@@ -111,7 +115,15 @@ export const SideBarControl = styled.button`
   outline: none;
   ${(props) => (props.folded ? "transform: rotate(180deg);" : "")}
 `;
-
+export const SideBarTextFolded = styled.div`
+  font: normal normal 700 19px/18px Pretendard;
+  letter-spacing: 0px;
+  color: #ffffff;
+  opacity: 1;
+  z-index: 2;
+  width: max-content;
+  margin: auto;
+`;
 export const SideBarText = styled.div`
   font: normal normal 700 19px/18px Pretendard;
   letter-spacing: 0px;

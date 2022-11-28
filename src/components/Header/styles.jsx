@@ -3,6 +3,7 @@ import logoRed from "../../imgs/logo.png";
 import nicknameprofileimg from "../../imgs/NicknameProfileImg.png";
 import notifications from "../../imgs/notifications.png";
 import email from "../../imgs/email.png";
+import zoom from "../../imgs/zoom.png";
 
 export const Container = styled.div`
   width: 100%;
@@ -112,6 +113,8 @@ export const SearchExpIcon = styled.div`
   height: 23px;
   background-color: white;
   z-index: 2;
+  // background-image: url(${zoom});
+  // background-size: cover;
 `;
 export const Register = styled.button`
   width: 156px;

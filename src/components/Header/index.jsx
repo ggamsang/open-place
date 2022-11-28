@@ -49,12 +49,13 @@ const Header = (props) => {
 
       <div
         style={{
-          border: "1px solid red",
+          // border: "1px solid red",
           display: "flex",
           position: "relative",
           marginLeft: "9px",
         }}
       >
+        {/* <i class="search icon"></i> */}
         <SearchExpIcon />
         <SearchExp
           value={keyword}
@@ -66,9 +67,7 @@ const Header = (props) => {
               ? goto("SEARCH", keyword)
               : null
           }
-          onChange={(e) =>
-            setKeyword(e.target.value.replace(".", ""))
-          }
+          onChange={(e) => setKeyword(e.target.value.replace(".", ""))}
         />
         <SearchExpText opacity={keyword ? 0.5 : 1}>경험 찾아보기</SearchExpText>
       </div>

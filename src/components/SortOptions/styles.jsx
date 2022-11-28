@@ -159,7 +159,7 @@ export const ConditionBox = styled.div`
 
 export const SortButton = styled.button`
   height: 30px;
-  font: normal normal medium 19px/22px Pretendard;
+  font: normal normal 300 25px/30px Pretendard;
   line-height: 22px;
   margin: auto;
   letter-spacing: 0px;

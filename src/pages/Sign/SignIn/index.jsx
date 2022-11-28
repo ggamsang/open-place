@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import Logo from "../../../components/Commons/Logo";
-import { Wrapper, Warning } from "./styles";
+import * as styled from "./styles";
 import { InputNormal } from "../../../components/Commons/Input";
 import { goto } from "../../../utils/navigator";
 import cookie from "react-cookies";
 import CheckBoxNormal from "../../../components/Commons/CheckBoxNormal";
 import GradientButton from "../../../components/Commons/Button/GradientButton";
 import ImageButton from "../../../components/Commons/Button/ImageButton";
-
 const Login = { ready: "READY", failed: "FAILED", success: "SUCCESS" };
 
 function SignInPage() {
@@ -28,7 +27,7 @@ function SignInPage() {
   const handleEnterKey = (e) => {
     if (e.key === "Enter") {
       if (user_id && password != "") {
-        this.onClickLogin();
+        SignIn();
       }
     }
   };
@@ -52,6 +51,7 @@ function SignInPage() {
     }
     setLoginState(Login.ready);
 
+    // SignInRequest({ id: user_id, password: password });
     // this.props.SignInRequest &&
     //   this.props
     //     .SignInRequest({ id: user_id, password: password })
@@ -64,7 +64,6 @@ function SignInPage() {
     //         this.setState({ login: Login.failed });
     //       }
     //     });
-
     return;
   };
   const handleChangePassword = (e) => setPassword(e.target.value);
@@ -83,7 +82,7 @@ function SignInPage() {
     setSaveId(!saveID);
   };
   return (
-    <Wrapper>
+    <styled.Wrapper>
       <div
         className="box alignCenter justifyCenter"
         style={{ paddingTop: "39px" }}
@@ -94,13 +93,13 @@ function SignInPage() {
         />
       </div>
 
-      <Warning warning={login === Login.failed}>
+      <styled.Warning warning={login === Login.failed}>
         {login === Login.failed && (
           <Fade>
             <div>{"아이디 혹은 비밀번호가 틀립니다."}</div>
           </Fade>
         )}
-      </Warning>
+      </styled.Warning>
 
       <div className="box column alignCenter">
         <div className="inputBox">
@@ -266,7 +265,7 @@ function SignInPage() {
           />
         </div>
       </div>
-    </Wrapper>
+    </styled.Wrapper>
   );
 }
 

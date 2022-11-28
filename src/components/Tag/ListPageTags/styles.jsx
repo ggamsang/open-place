@@ -4,9 +4,9 @@ import tagbuttonmore from "src/imgs/tagbutton-more.svg";
 import plusicon from "src/imgs/tagbutton-more-add.svg";
 
 export const Container = styled.div`
-  * {
-    border: 1px solid red;
-  }
+  // * {
+  //   border: 1px solid red;
+  // }
   z-index: 999;
   display: flex;
   flex-direction: row;

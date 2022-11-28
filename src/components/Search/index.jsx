@@ -12,34 +12,18 @@ import {
   SortButton,
 } from "./styles";
 
-const Search = (props) => {
+const Search = ({ category: _category, sort: _sort, setSearchParams }) => {
   const params = useParams();
   const { keyword } = params;
-  const [category, setCategory] = useState(
-    props.category === "play"
-      ? "play"
-      : props.category === "learn"
-      ? "learn"
-      : props.category === "make"
-      ? "make"
-      : ""
-  );
-  const [sort, setSort] = useState(
-    props.sort === "update"
-      ? "update"
-      : props.sort === "like"
-      ? "like"
-      : "update"
-  );
+  const [category, setCategory] = useState(_category || "");
+  const [sort, setSort] = useState(_sort || "update");
   const onClickCategory = (category) => {
-    props.setSearchParams &&
-      props.setSearchParams({ category: category, sort: sort });
+    setSearchParams && setSearchParams({ category: category, sort: sort });
     setCategory(category);
   };
   const onClickSort = (data) => {
     const { sort } = data;
-    props.setSearchParams &&
-      props.setSearchParams({ category: category, sort: sort });
+    setSearchParams && setSearchParams({ category: category, sort: sort });
     setSort(sort);
   };
 
@@ -74,9 +58,8 @@ const Search = (props) => {
       >
         <SortOptions onChange={onClickSort} />
       </div>
-
       {/*  */}
-      <SearchList category={category} sort={sort} />
+      <SearchList keyword={keyword} category={category} sort={sort} />
       {/*  */}
     </Wrapper>
   );

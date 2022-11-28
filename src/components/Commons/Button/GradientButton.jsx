@@ -26,6 +26,7 @@ const CustomButton = styled.div`
       props.fontSize == null ? 18 : props.fontSize
     )}px;
   }
+  cursor: pointer;
 `;
 
 class GradientButton extends Component {
@@ -43,7 +44,7 @@ class GradientButton extends Component {
     const button_text = this.props.text;
     return (
       <CustomButton
-        onClick={this.onClickEvent}
+        onClick={this.props.onClick || this.onClickEvent}
         style={this.props.style}
         width={this.props.width}
         height={this.props.height}

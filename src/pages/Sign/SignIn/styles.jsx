@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background: linear-gradient(205deg, #3a58f5, #3a58f5);
   .box {

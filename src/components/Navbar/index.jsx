@@ -26,12 +26,12 @@ const Navbar = () => {
       <styled.SideBarInner folded={fold}>
         <styled.SideBarControl folded={fold} onClick={onClickedFoldButton} />
         {fold ? (
-          <>
-            <styled.SideBarText>메뉴</styled.SideBarText>
-          </>
+          <styled.SideBarTextFolded>메뉴</styled.SideBarTextFolded>
         ) : (
           <>
-            {fixed && <Logo type={"tiny"} onClickEvent={() => goto("MAIN", "")}/>}
+            {fixed && (
+              <Logo type={"tiny"} onClickEvent={() => goto("MAIN", "")} />
+            )}
             <styled.MenuButton onClick={() => goto("MAKE", "")}>
               <styled.SideBarIcon1 />
               <styled.SideBarText>만들기</styled.SideBarText>

@@ -13,8 +13,10 @@ const ExpList = ({
 }) => {
   const [list, setList] = useState([]);
   const getExpListRequest = () => {
-    const url = `${host}/item/${page}/${category}/${sort}/${keyword}`;
-    return fetch(url, {
+    const url = `${host}/item/${page}/${category}/${
+      sort || "update"
+    }/${keyword}`;
+    fetch(url, {
       headers: { "Content-Type": "application/json" },
       method: "GET",
     })
@@ -27,11 +29,10 @@ const ExpList = ({
   };
   useEffect(() => {
     getExpListRequest();
-  }, [sort]);
-  // useEffect(() => {
-  //   getExpListRequest();
-  //   console.log(this);
-  // }, [sort, tags, keyword, page]);
+  }, []);
+  useEffect(() => {
+    getExpListRequest();
+  }, [sort,  keyword, page]);
 
   return (
     <styled.Container>
