@@ -1,10 +1,12 @@
-import React from 'react';
+import React from "react";
+import { Wrapper, Logo } from "./styles";
 
 const LoadingPage = () => {
   return (
-    <div>
-        로딩 페이지
-    </div>);
+    <Wrapper>
+      <Logo />
+    </Wrapper>
+  );
 };
 
 export default LoadingPage;

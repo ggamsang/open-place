@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import expimg from '../../../imgs/Listimg.png';
-import staricon from '../../../imgs/star.svg';
-import firstpage from '../../../imgs/firstpage.svg';
-import prevpage from '../../../imgs/prevpage.svg';
-import nextpage from '../../../imgs/nextpage.svg';
-import lastpage from '../../../imgs/lastpage.svg';
+import expimg from '../../imgs/Listimg.png';
+import staricon from '../../imgs/star.svg';
+import firstpage from '../../imgs/firstpage.svg';
+import prevpage from '../../imgs/prevpage.svg';
+import nextpage from '../../imgs/nextpage.svg';
+import lastpage from '../../imgs/lastpage.svg';
 
 
 export const Main = styled.div`
@@ -84,7 +84,7 @@ export const TagButton = styled.div`
 `;
 
 export const TagButtonText = styled.div`
-    font: normal normal normal 14px Pretendard;
+    font: normal normal 400 14px Pretendard;
     letter-spacing: 0.25px;
     color: #000000DE;
     opacity: 1;
@@ -104,7 +104,7 @@ export const TagButtonDelete = styled.div`
 
 // export const ExpPrice = styled.div`
 //     text-align: left;
-//     font: normal normal medium 40px Pretendard;
+//     font: normal normal 500 40px Pretendard;
 //     letter-spacing: 0px;
 //     color: #4136F1;
 //     opacity: 1;
@@ -114,7 +114,7 @@ export const TagButtonDelete = styled.div`
 // `;
 
 export const Price = styled.div`
-  // font: normal normal normal 16px/14px Pretendard;
+  // font: normal normal 400 16px/14px Pretendard;
   font-size: 40px;
   letter-spacing: 0px;
   color: #4136F1;
@@ -150,7 +150,7 @@ export const LikeButton = styled.div`
     > span {
         text-align: center;
         align-items: center;
-        // font: normal normal medium 26px/30px Pretendard;
+        // font: normal normal 500 26px/30px Pretendard;
         font-size: 26px;
         letter-spacing: 2.31px;
         color: #000000;
@@ -175,7 +175,7 @@ export const PurchaseButton = styled.div`
 
     > span {
         text-align: center;
-        // font: normal normal medium 25px/29px Pretendard;
+        // font: normal normal 500 25px/29px Pretendard;
         font-size: 25px;
         letter-spacing: 2.23px;
         color: #EE0000;
@@ -259,7 +259,7 @@ export const Post = styled.div`
     margin-top: 17px;
 
     > span {
-        font: normal normal medium 19px/22px Pretendard;
+        font: normal normal 500 19px/22px Pretendard;
         letter-spacing: 0px;
         color: #000000;
         opacity: 1;
@@ -310,7 +310,7 @@ export const AnswerTitle = styled.div`
     margin-top: 16px;
 
     > span {
-        font: normal normal medium 19px/22px Pretendard;
+        font: normal normal 500 19px/22px Pretendard;
         letter-spacing: 0px;
         color: #000000;
         opacity: 1;
@@ -348,7 +348,7 @@ export const AnswerBody = styled.div`
 
         &:nth-child(1){
             margin-left: 27px;
-            font: normal normal medium 19px/22px Pretendard;
+            font: normal normal 500 19px/22px Pretendard;
             font-size: 19px;
             letter-spacing: 0px;
             color: #000000;
@@ -357,7 +357,7 @@ export const AnswerBody = styled.div`
     
         &:nth-child(2){
             margin-left: 27px;
-            font: normal normal medium 15px/25px Pretendard;
+            font: normal normal 500 15px/25px Pretendard;
             font-size: 15px;
             letter-spacing: 0px;
             color: #000000;
@@ -375,7 +375,7 @@ export const PageNumbers = styled.div`
     align-items: center;
 
     > span {
-        font: normal normal medium 15px/35px Pretendard;
+        font: normal normal 500 15px/35px Pretendard;
         letter-spacing: 0px;
         opacity: 1;
 

@@ -1,14 +1,33 @@
+// import common
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import { Provider } from "react-redux";
+
+// import desktop
 import App from "./App";
+import store from "./store";
+
+// import mobile
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
 import AppMobile from "./AppMobile";
-const WIDTH = 500;
+import reducers from "./mobile/reducers";
+// import './index.css';
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const storeM = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 
 ReactDOM.render(
-  <React.StrictMode>
-    <div className="device-info">{window.innerWidth > WIDTH ? "🖥️데스크탑" : "📱모바일"}</div>
-    {window.innerWidth > WIDTH ? <App /> : <AppMobile />}
-  </React.StrictMode>,
+  window.innerWidth > 500 ? (
+    // useEffect 두번수행되어 코멘트함.
+    // <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  ) : (
+    <Provider store={storeM}>
+      <AppMobile />
+    </Provider>
+  ),
+  // </React.StrictMode>
   document.getElementById("root")
 );

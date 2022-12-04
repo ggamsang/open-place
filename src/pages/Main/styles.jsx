@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Main = styled.div`
   display: flex;
@@ -11,8 +11,18 @@ export const Main = styled.div`
 `;
 
 export const MainContainer = styled.div`
-  width: 1300px;
-  // width: 100%;
+  // width: 1300px;
+  width: 100%;
   justify-content: center;
   align-items: center;
+  border: 1px solid red;
+`;
+
+export const Shortcut = styled.div`
+  text-align: center;
+  font: normal normal 900 44px/52px Pretendard;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+  margin-top: 20px;
 `;

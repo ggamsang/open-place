@@ -28,7 +28,7 @@ export const CategoryBox = styled.div`
     > div {
         width: 150px;
         height: 30px;
-        font: normal normal bold 15px/18px Pretendard;
+        font: normal normal 700 15px/18px Pretendard;
         letter-spacing: 0px;
         color: #FFFFFF;
         opacity: 1;
@@ -59,7 +59,7 @@ export const BoardTitleDiv = styled.div`
 `;
 
 export const FreeBoard = styled.div`
-    font: normal normal bold 25px/30px Pretendard;
+    font: normal normal 700 25px/30px Pretendard;
     letter-spacing: 0px;
     color: #000000;
     opacity: 1;
@@ -98,7 +98,7 @@ export const TitleUserDate = styled.div`
     align-items: center;
 
     > span {
-        font: normal normal bold 17px/20px Pretendard;
+        font: normal normal 700 17px/20px Pretendard;
         letter-spacing: 0px;
         color: #000000;
         opacity: 1;
@@ -132,7 +132,7 @@ export const Wrapper1 = styled.div`
     margin-top: 13px;
 
     div:nth-child(1){
-        font: normal normal bold 19px/22px Pretendard;
+        font: normal normal 700 19px/22px Pretendard;
         letter-spacing: 0px;
         color: #000000;
         opacity: 1;
@@ -149,7 +149,7 @@ export const Wrapper1 = styled.div`
         align-items: center;
         justify-content: center;
 
-        font: normal normal bold 17px/20px Pretendard;
+        font: normal normal 700 17px/20px Pretendard;
         letter-spacing: 0px;
         color: #FFFFFF;
         opacity: 1;
@@ -167,7 +167,7 @@ export const Wrapper1 = styled.div`
     }
 
     div:nth-child(4){
-        // font: normal normal medium 17px/20px Pretendard;
+        // font: normal normal 500 17px/20px Pretendard;
         font-size: 17px;
         font-family: "Pretendard-medium";
         letter-spacing: 0px;
@@ -177,7 +177,7 @@ export const Wrapper1 = styled.div`
     }
 
     div:nth-child(5){
-        font: normal normal normal 16px/19px Pretendard;
+        font: normal normal 400 16px/19px Pretendard;
         letter-spacing: 0px;
         color: #000000;
         opacity: 1;
@@ -209,7 +209,7 @@ export const ArticleBox1 = styled.div`
 
     > div {
         &:nth-child(1){
-            font: normal normal medium 15px/18px Pretendard;
+            font: normal normal 500 15px/18px Pretendard;
             letter-spacing: 0px;
             color: #707070;
             opacity: 1;
@@ -235,7 +235,7 @@ export const ArticleBox1 = styled.div`
             border-radius: 10px;
             opacity: 1;
 
-            font: normal normal normal 15px/18px Noto Sans KR;
+            font: normal normal 400 15px/18px Noto Sans KR;
             letter-spacing: 0px;
             color: #000000;
             opacity: 1;
@@ -250,7 +250,7 @@ export const ArticleBox2 = styled.div`
 
     > div {
         &:nth-child(1){
-            font: normal normal medium 15px/18px Pretendard;
+            font: normal normal 500 15px/18px Pretendard;
             letter-spacing: 0px;
             color: #707070;
             opacity: 1;
@@ -265,7 +265,7 @@ export const ArticleBox2 = styled.div`
         }
 
         &:nth-child(3){
-            font: normal normal medium 15px/18px Pretendard;
+            font: normal normal 500 15px/18px Pretendard;
             letter-spacing: 0px;
             color: #707070;
             opacity: 1;
@@ -281,7 +281,7 @@ export const ArticleBox3 = styled.div`
 
     > div {
         &:nth-child(1){
-            font: normal normal medium 15px/18px Pretendard;
+            font: normal normal 500 15px/18px Pretendard;
             letter-spacing: 0px;
             color: #707070;
             opacity: 1;
@@ -296,7 +296,7 @@ export const ArticleBox3 = styled.div`
         }
 
         &:nth-child(3){
-            font: normal normal medium 15px/18px Pretendard;
+            font: normal normal 500 15px/18px Pretendard;
             letter-spacing: 0px;
             color: #707070;
             opacity: 1;
@@ -313,7 +313,7 @@ export const ArticleBox4 = styled.div`
 
     > div {
         &:nth-child(1){
-            font: normal normal medium 15px/18px Pretendard;
+            font: normal normal 500 15px/18px Pretendard;
             letter-spacing: 0px;
             color: #707070;
             opacity: 1;
@@ -353,7 +353,7 @@ export const AddCommentButton = styled.div`
     justify-content: center;
     align-items: center;
 
-    font: normal normal bold 15px/18px Pretendard;
+    font: normal normal 700 15px/18px Pretendard;
     letter-spacing: 0px;
     color: #FFFFFF;
     opacity: 1;
@@ -461,7 +461,7 @@ export const PercentBar = styled.div`
     }
 
     > span {
-        font: normal normal normal 11px/14px Pretendard;
+        font: normal normal 400 11px/14px Pretendard;
         letter-spacing: 0px;
         color: #000000;
         opacity: 0.6;
@@ -491,7 +491,7 @@ export const Wrapper3 = styled.div`
         border: 1px solid #FF0000;
         border-radius: 12px;
         opacity: 1;
-        // font: normal normal medium 17px/20px Pretendard;
+        // font: normal normal 500 17px/20px Pretendard;
         font-size: 17px;
         font-family: "Pretendard-medium";
         letter-spacing: 0px;
@@ -512,7 +512,7 @@ export const Wrapper3 = styled.div`
     }
 
     div:nth-child(3){
-        // font: normal normal medium 17px/20px Pretendard;
+        // font: normal normal 500 17px/20px Pretendard;
         font-size: 17px;
         font-family: "Pretendard-medium";
         letter-spacing: 0px;
@@ -522,7 +522,7 @@ export const Wrapper3 = styled.div`
     }
 
     div:nth-child(4){
-        font: normal normal normal 16px/19px Pretendard;
+        font: normal normal 400 16px/19px Pretendard;
         letter-spacing: 0px;
         color: #000000;
         opacity: 1;
@@ -553,7 +553,7 @@ export const AddCommentButton2 = styled.div`
     justify-content: center;
     align-items: center;
 
-    font: normal normal bold 15px/18px Pretendard;
+    font: normal normal 700 15px/18px Pretendard;
     letter-spacing: 0px;
     color: #FFFFFF;
     opacity: 1;
@@ -576,7 +576,7 @@ export const OtherPost = styled.div`
     align-items: center;
 
     div:nth-child(1){
-        font: normal normal bold 19px/22px Pretendard;
+        font: normal normal 700 19px/22px Pretendard;
         letter-spacing: 0px;
         color: #000000;
         opacity: 1;
@@ -593,7 +593,7 @@ export const OtherPost = styled.div`
     }
 
     div:nth-child(3){
-        // font: normal normal medium 17px/20px Pretendard;
+        // font: normal normal 500 17px/20px Pretendard;
         font-size: 17px;
         font-family: "Pretendard-medium";
         letter-spacing: 0px;
@@ -603,7 +603,7 @@ export const OtherPost = styled.div`
     }
 
     div:nth-child(4){
-        font: normal normal normal 16px/19px Pretendard;
+        font: normal normal 400 16px/19px Pretendard;
         letter-spacing: 0px;
         color: #000000;
         opacity: 1;
@@ -614,7 +614,7 @@ export const OtherPost = styled.div`
 export const UploadPostButton = styled.div`
     width: 195px;
     height: 39px;
-    font: normal normal bold 19px/23px Pretendard;
+    font: normal normal 700 19px/23px Pretendard;
     letter-spacing: 0px;
     color: #FFFFFF;
     opacity: 1;

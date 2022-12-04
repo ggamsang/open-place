@@ -42,13 +42,13 @@ export const BannerText = styled.div`
 
 export const BannerText2 = styled.div`
   margin-bottom: 36px;
-  font: normal normal bold 51px/51px Pretendard;
+  font: normal normal 700 51px/51px Pretendard;
   letter-spacing: 0px;
   color: #FFFFFF;
 `;
 
 export const BannerText3 = styled.div`
-  font: normal normal bold 56px/51px Montserrat;
+  font: normal normal 700 56px/51px Montserrat;
   letter-spacing: 0px;
   color: #FFFFFF;
 `;

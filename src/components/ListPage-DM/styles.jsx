@@ -3,11 +3,13 @@ import DmBtn from '../../imgs/DmButton.png';
 
 
 export const Container = styled.div`
+    position: fixed;
+    bottom: 15px;
     width: 100%;
     height: 42.25px;
     display: flex;
-    margin-top: 30.77px;
-    margin-bottom: 200px;
+    // margin-top: 30.77px;
+    // margin-bottom: 200px;
 `;
 
 export const DmButton = styled.div`

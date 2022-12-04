@@ -1,19 +1,27 @@
 import React from "react";
 import * as styled from "./styles";
-import ClientTemplate from "../../components/ClientTemplate";
-import TopList from "../../components/ListPage-TopList";
-import Tagbar from "../../components/ListPage-TagBar";
+import PageLayout from "../../components/PageLayout";
+import ExpList from "../../components/ExpList";
+import ListPageFilter from "src/components/ListPageFilter";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 
-const ListPage = () => {
+const ListPage = ({ type }) => {
+  const params = useParams();
+  const [filter, setFilter] = useState({ sort: "", tags: [] });
+  const handleChange = (data) => setFilter({ ...filter, ...data });
+
   return (
-    <ClientTemplate>
-      <styled.Main>
-        <Tagbar />
-        <styled.MainContainer>
-          <TopList />
-        </styled.MainContainer>
-      </styled.Main>
-    </ClientTemplate>
+    <PageLayout>
+      <styled.ListWrapper>
+        {/* filter */}
+        <ListPageFilter onChange={handleChange} />
+        {/* list */}
+        <styled.ListContainer>
+          <ExpList type={type} {...filter} />
+        </styled.ListContainer>
+      </styled.ListWrapper>
+    </PageLayout>
   );
 };
 

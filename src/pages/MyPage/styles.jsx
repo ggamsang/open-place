@@ -103,7 +103,7 @@ export const Review = styled.div`
     align-items: center;
 
     > div {
-        font: normal normal medium 31px/36px Pretendard;
+        font: normal normal 500 31px/36px Pretendard;
         font-family: "Pretendard-medium";
         font-size: 31px;
         letter-spacing: 2.17px;

@@ -79,7 +79,7 @@ export const FindButton = styled.div`
     margin-left: 12px;
 
     > span {
-        font: normal normal bold 15px/18px Pretendard;
+        font: normal normal 700 15px/18px Pretendard;
         letter-spacing: 0px;
         color: #FFFFFF;
         opacity: 1;
@@ -123,14 +123,14 @@ export const UserNameAndDate = styled.div`
     display: flex;
 
     span:nth-child(1){
-        font: normal normal normal 21px/25px Pretendard;
+        font: normal normal 400 21px/25px Pretendard;
         letter-spacing: 0px;
         color: #000000;
         opacity: 1;
     }
 
     span:nth-child(2){
-        font: normal normal normal 20px/24px Pretendard;
+        font: normal normal 400 20px/24px Pretendard;
         letter-spacing: 0px;
         color: #000000;
         opacity: 1;
@@ -140,7 +140,7 @@ export const UserNameAndDate = styled.div`
 
 export const UserNotification = styled.div`
     width: 223px;
-    font: normal normal medium 15px/25px Pretendard;
+    font: normal normal 500 15px/25px Pretendard;
     letter-spacing: 0px;
     color: #000000;
     opacity: 1;
@@ -190,7 +190,7 @@ export const MyChat = styled.div`
 `;
 
 export const ChatDate = styled.div`
-    font: normal normal normal 13px/16px Pretendard;
+    font: normal normal 400 13px/16px Pretendard;
     letter-spacing: 0px;
     color: #000000;
     opacity: 1;
@@ -243,7 +243,7 @@ export const SendButton = styled.div`
     margin-left: 20px;
 
     > span {
-        font: normal normal medium 15px/18px Pretendard;
+        font: normal normal 500 15px/18px Pretendard;
         letter-spacing: 0px;
         color: #FF0000;
         opacity: 1;

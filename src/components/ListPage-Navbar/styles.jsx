@@ -93,7 +93,7 @@ export const SideBar = styled.div`
 
 
 // export const SideBarText1 = styled.div`
-//   font: normal normal bold 19px/18px Pretendard;
+//   font: normal normal 700 19px/18px Pretendard;
 //   letter-spacing: 0px;
 //   color: #FFFFFF;
 //   opacity: 1;
@@ -104,7 +104,7 @@ export const SideBar = styled.div`
 // `;
 
 // export const SideBarText2 = styled.div`
-//   font: normal normal bold 19px/18px Pretendard;
+//   font: normal normal 700 19px/18px Pretendard;
 //   letter-spacing: 0px;
 //   color: #FFFFFF;
 //   opacity: 1;
@@ -115,7 +115,7 @@ export const SideBar = styled.div`
 // `;
 
 // export const SideBarText3 = styled.div`
-//   font: normal normal bold 19px/18px Pretendard;
+//   font: normal normal 700 19px/18px Pretendard;
 //   letter-spacing: 0px;
 //   color: #FFFFFF;
 //   opacity: 1;
@@ -126,7 +126,7 @@ export const SideBar = styled.div`
 // `;
 
 // export const SideBarText4 = styled.div`
-//   font: normal normal bold 19px/18px Pretendard;
+//   font: normal normal 700 19px/18px Pretendard;
 //   letter-spacing: 0px;
 //   color: #FFFFFF;
 //   opacity: 1;
@@ -137,7 +137,7 @@ export const SideBar = styled.div`
 // `;
 
 // export const SideBarText5 = styled.div`
-//   font: normal normal bold 19px/18px Pretendard;
+//   font: normal normal 700 19px/18px Pretendard;
 //   letter-spacing: 0px;
 //   color: #FFFFFF;
 //   opacity: 1;
