@@ -229,14 +229,14 @@ class SignIn extends Component {
             <CheckBoxNormal
               id="saveid"
               style={{ marginRight: "15px" }}
-              text="로그인 유지"
+              text="아이디 저장"
               value={this.state.saveID}
               onClickEvent={this.onCheckSaveID}
             />
             <CheckBoxNormal
               id="savelogin"
               style={{ marginLeft: "15px" }}
-              text="아이디 저장"
+              text="비밀번호 저장"
               value={this.state.saveLogin}
               onClickEvent={this.onCheckSaveLogin}
             />

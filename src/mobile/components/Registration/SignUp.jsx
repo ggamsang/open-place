@@ -203,7 +203,7 @@ class SignUp extends Component {
         <Wrapper>
           <div className="box alignCenter justifyCenter">
             <Logo
-              onClickEvent={() => (window.location.href = "/login")}
+              onClickEvent={() => (window.location.href = "/signin")}
               type="small"
               text={"OPEN PLACE"}
             />
@@ -271,7 +271,7 @@ class SignUp extends Component {
                 />
                 <div className="text_">이미 계정이 있으신가요?</div>
                 <GradientButton
-                  onClickEvent={() => (window.location.href = "/login")}
+                  onClickEvent={() => (window.location.href = "/signin")}
                   style={{ marginBottom: "20px" }}
                   text="로그인"
                   width={292}
@@ -375,7 +375,7 @@ class SignUp extends Component {
                 />
                 <div className="text_">이미 계정이 있으신가요?</div>
                 <GradientButton
-                  onClickEvent={() => (window.location.href = "/login")}
+                  onClickEvent={() => (window.location.href = "/signin")}
                   style={{ marginBottom: "20px" }}
                   text="로그인"
                   width={292}

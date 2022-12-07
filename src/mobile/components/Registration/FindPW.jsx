@@ -245,7 +245,7 @@ class FindPW extends Component {
             >
               <div className="box alignCenter justifyCenter">
                 <Logo
-                  onClickEvent={() => (window.location.href = "/login")}
+                  onClickEvent={() => (window.location.href = "/signin")}
                   type="small"
                   text={"OPEN PLACE"}
                 />
@@ -302,7 +302,7 @@ class FindPW extends Component {
             >
               <div className="box alignCenter justifyCenter">
                 <Logo
-                  onClickEvent={() => (window.location.href = "/login")}
+                  onClickEvent={() => (window.location.href = "/signin")}
                   type="small"
                   text={"OPEN PLACE"}
                 />
@@ -369,7 +369,7 @@ class FindPW extends Component {
             >
               <div className="box alignCenter justifyCenter">
                 <Logo
-                  onClickEvent={() => (window.location.href = "/login")}
+                  onClickEvent={() => (window.location.href = "/signin")}
                   type="big"
                 />
               </div>
@@ -379,7 +379,7 @@ class FindPW extends Component {
                 style={{ height: "40vh" }}
               >
                 <GradientButton
-                  onClickEvent={() => (window.location.href = "/login")}
+                  onClickEvent={() => (window.location.href = "/signin")}
                   style={{ marginBottom: "20px" }}
                   text="로그인"
                   width={292}
@@ -390,7 +390,7 @@ class FindPW extends Component {
                   radius={28}
                 />
                 <GradientButton
-                  onClickEvent={() => (window.location.href = "/join")}
+                  onClickEvent={() => (window.location.href = "/signup")}
                   style={{ marginBottom: "20px" }}
                   text="회원가입"
                   width={292}

@@ -186,6 +186,7 @@ const OtherThings = () => (
 );
 
 const ExpDetailWrapper = () => {
+  
   return (
     <styled.Main>
       <ExpInfo />

@@ -169,6 +169,7 @@ export const LoginIcon = styled.div`
 `;
 export const RegistBox = styled.div`
   display: flex;
+  position: relative;
   font-size: 16px;
   margin-left: auto;
   margin-right: 27px;
@@ -208,7 +209,7 @@ export const Nickname = styled.button`
   position: relative;
 `;
 export const NicknameIcon = styled.img.attrs({
-  src: nicknameprofileimg,
+  // src: nicknameprofileimg,
 })`
   width: 43px;
   height: 43px;
@@ -216,6 +217,8 @@ export const NicknameIcon = styled.img.attrs({
   top: 0px;
   left: 0px;
   // background-color: white;
+  border-radius: 100%;
+  background-image: url(${(props) => props.src || nicknameprofileimg});
 `;
 export const NicknameText = styled.div`
   font: normal normal 900 18px/21px Pretendard;

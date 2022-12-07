@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 import iconClose from "src/imgs/close.svg";
 import iconNoti from "src/imgs/notification.png";
 import iconRead from "src/imgs/read-icon.webp";
@@ -34,7 +34,7 @@ const Wrapper = styled.div`
     }
     .list {
         width: 280px;
-        height: ${(53 * 5 + 20 * 4)}px;
+        height: ${53 * 5 + 20 * 4}px;
         overflow: auto;
         padding: 0;
         margin: 0;
@@ -105,63 +105,67 @@ const Wrapper = styled.div`
     }
 `;
 const CloseButton = styled.button`
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    width: 30px;
-    height: 30px;
-    border: none;
-    outline: none;
-    background-color: #F00;
-    border-radius: 100%;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  outline: none;
+  background-color: #f00;
+  border-radius: 100%;
 
-    .cross {
-        margin: auto;
-        width: 10.56px;
-        height: 10.56px;
-    }
-
+  .cross {
+    margin: auto;
+    width: 10.56px;
+    height: 10.56px;
+  }
 `;
 
 class NotificationModal extends React.Component {
-    handleClose = () => {
-        this.props.close();
-    }
-    handleClicked = (id) => {
-        this.props.clicked(id);
-    }
-    render() {
-        const { list } = this.props;
+  handleClose = () => {
+    this.props.close();
+  };
+  handleClicked = (id) => {
+    this.props.clicked(id);
+  };
+  render() {
+    const { list } = this.props;
 
-        return (
-            <Wrapper>
-                <div className='top'>
-                    <div className='noti'></div>
-                    <CloseButton onClick={this.handleClose}>
-                        <img className="cross" src={iconClose} />
-                    </CloseButton>
+    return (
+      <Wrapper>
+        <div className="top">
+          <div className="noti"></div>
+          <CloseButton onClick={this.handleClose}>
+            <img className="cross" src={iconClose} />
+          </CloseButton>
+        </div>
+
+        <ul className="list">
+          {list &&
+            list.length > 0 &&
+            list.map((item) => (
+              <li
+                key={item.uid}
+                className={`${item.read === 1 && "read"} element row`}
+              >
+                <div onClick={(e) => e.stopPropagation()} className="title">
+                  {item.title}
                 </div>
-
-                <ul className='list'>
-                    {list&&list.length > 0 && list.map(item =>
-                        <li key={item.uid}
-                            className={`${item.read === 1 && "read"} element row`}>
-                            <div
-                                onClick={e => e.stopPropagation()}
-                                className='title'>
-                                {item.title}
-                            </div>
-                            {item.read === 0
-                                && <button
-                                    onClick={() => this.handleClicked(item.uid)}
-                                    className='icon-button'>
-                                    <img src={iconRead} />
-                                </button>}
-                        </li>)}
-                </ul>
-            </Wrapper>
-        );
-    }
+                {item.read === 0 && (
+                  <button
+                    onClick={() => this.handleClicked(item.uid)}
+                    className="icon-button"
+                  >
+                    <img src={iconRead} />
+                  </button>
+                )}
+              </li>
+            ))}
+        </ul>
+      </Wrapper>
+    );
+  }
 }
 
 export default NotificationModal;

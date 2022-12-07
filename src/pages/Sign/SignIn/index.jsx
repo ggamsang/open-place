@@ -7,7 +7,14 @@ import cookie from "react-cookies";
 import CheckBoxNormal from "../../../components/Commons/CheckBoxNormal";
 import GradientButton from "../../../components/Commons/Button/GradientButton";
 import ImageButton from "../../../components/Commons/Button/ImageButton";
+import { SetSession } from "../../../mobile/modules";
+import { TokenName } from "../../../constants";
+import host from "../../../config";
 const Login = { ready: "READY", failed: "FAILED", success: "SUCCESS" };
+
+/*
+  TODO: 이미로그인되어있는지, 있다면 alert과 메인페이지로 이동
+*/
 
 function SignInPage() {
   const [login, setLoginState] = useState(Login.ready);
@@ -50,18 +57,40 @@ function SignInPage() {
       });
     }
     setLoginState(Login.ready);
+    const SignInRequest = (data) => {
+      const url = `${host}/user/signIn`;
+      const opt = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      };
+      return fetch(url, opt)
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.success) {
+            const { token } = res.detail;
+            SetSession(TokenName, token);
+            setLoginState({ login: Login.success });
+            goto("MAIN");
+          } else {
+            // failed
+            setLoginState({ login: Login.failed });
+          }
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    };
 
-    // SignInRequest({ id: user_id, password: password });
+    SignInRequest({ id: user_id, password: password });
     // this.props.SignInRequest &&
     //   this.props
     //     .SignInRequest({ id: user_id, password: password })
     //     .then((data) => {
     //       if (data.success) {
     //         // SetSession(TokenName);
-    //         this.setState({ login: Login.success });
-    //         goto("MAIN");
+
     //       } else {
-    //         this.setState({ login: Login.failed });
     //       }
     //     });
     return;
@@ -81,6 +110,7 @@ function SignInPage() {
     !saveID && cookie.remove("saveid", { path: "/" });
     setSaveId(!saveID);
   };
+
   return (
     <styled.Wrapper>
       <div
@@ -142,14 +172,14 @@ function SignInPage() {
           <CheckBoxNormal
             id="saveid"
             style={{ marginRight: "15px" }}
-            text="로그인 유지"
+            text="아이디 저장"
             value={saveID}
             onClickEvent={onCheckSaveID}
           />
           <CheckBoxNormal
             id="savelogin"
             style={{ marginLeft: "15px" }}
-            text="아이디 저장"
+            text="비밀번호 저장"
             value={saveLogin}
             onClickEvent={onCheckSaveLogin}
           />
@@ -218,36 +248,7 @@ function SignInPage() {
             />
           </React.Fragment>
         )}
-        {/* <GradientButton
-            onClickEvent={() => goto("SIGNUP")}
-            style={{ marginBottom: "20px" }}
-            text="아이디/비밀번호 찾기"
-            width={292}
-            height={52}
-            front={'#365AF1'}
-            end={'#FF4343'}
-            deg={270}
-            radius={28} />
-          <GradientButton
-            onClickEvent={() => this.onClickLogin()}
-            style={{ marginBottom: "20px" }}
-            text="로그인"
-            width={292}
-            height={52}
-            front={'#FF4343'}
-            end={'#365AF1'}
-            deg={270}
-            radius={28} />
-          <GradientButton
-            onClickEvent={() => goto("SIGNUP")}
-            style={{ marginBottom: "20px" }}
-            text="회원가입"
-            width={292}
-            height={52}
-            front={'#365AF1'}
-            end={'#FF4343'}
-            deg={270}
-            radius={28} /> */}
+
         <div className="login_button_wrap">
           <ImageButton
             style={{ marginRight: "6px", marginLeft: "6px" }}

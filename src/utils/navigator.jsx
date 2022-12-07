@@ -20,11 +20,17 @@ export const goto = (type, offset = null) => {
     case "FINDPW":
       window.location.href = "/findPW";
       break;
+    case "MY-PAGE":
+      window.location.href = "/mypage";
+      break;
     case "MYDETAIL":
       window.location.href = "/myDetail/sub";
       break;
     case "MY-ITEM-BOUGHT":
       window.location.href = "/paidExp/" + offset;
+      break;
+    case "CREATE-ITEM-DESKTOP":
+      window.location.href = "/exp/add";
       break;
     case "CREATE-ITEM":
       window.location.href = "/createExp";

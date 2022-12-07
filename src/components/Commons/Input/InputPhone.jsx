@@ -54,6 +54,10 @@ export class InputPhone extends Component {
   constructor(props) {
     super(props);
   }
+  handleOnChange = (e) => {
+    this.props.onChange && this.props.onChange(e);
+    this.props.onChangeValue && this.props.onChangeValue(e);
+  };
   render() {
     const warning = this.props.warning;
     return (
@@ -63,12 +67,12 @@ export class InputPhone extends Component {
           height={this.props.height}
           checked={this.props.checked}
         >
-          <InputRegionNumber value={"+82"} />
+          {/* <InputRegionNumber value={"+82"} /> */}
           <div className="preNum010">010-</div>
           <InputField
             maxlength="8"
             type="number"
-            onChange={this.props.onChangeValue}
+            onChange={this.handleOnChange}
             value={this.props.value}
           />
           <div className="checked" />

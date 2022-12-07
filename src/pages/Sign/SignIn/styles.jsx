@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  width: 100vw;
+  width: ${window.innerWidth}px;
   height: 100vh;
+  margin: 0 !important;
+  padding: 0;
   background: linear-gradient(205deg, #3a58f5, #3a58f5);
   .box {
     width: 100%;

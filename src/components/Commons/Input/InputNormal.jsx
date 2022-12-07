@@ -76,7 +76,7 @@ export class InputNormal extends Component {
             type={this.props.type === null ? "text" : this.props.type}
             disabled={this.props.disable}
             onBlur={this.props.onBlurEvent}
-            onChange={this.props.onChangeValue}
+            onChange={this.props.onChange || this.props.onChangeValue}
             value={this.props.value || ""}
             placeholder={this.props.placeholder}
             style={this.props.style}
