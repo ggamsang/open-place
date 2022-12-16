@@ -1,18 +1,25 @@
 import React from "react";
+import { useState } from "react";
 import PageLayout from "../../../components/PageLayout";
 import * as styled from "./styles";
+import { goto } from "../../../utils/navigator";
+import { useEffect } from "react";
+import { GetSession } from "../../../mobile/modules";
+import { TokenName, GET } from "../../../constants";
+import host from "../../../config";
+import DateFormat from "../../../mobile/modules/DateFormat";
+import { Pagination } from "semantic-ui-react";
 
-const OtherPost = () => {
+const OtherPost = ({ key, title, nickname, create_time, url }) => {
   return (
-    <styled.OtherPost>
-      <div>제목예시</div>
+    <styled.OtherPost key={key} url={url}>
+      <div>{title}</div>
       <div></div>
-      <div>국민대 CRC</div>
-      <div>1달 전</div>
+      <div>{nickname}</div>
+      <div>{DateFormat(create_time)}</div>
     </styled.OtherPost>
   );
 };
-
 const File = () => {
   return (
     <styled.FileBox>
@@ -30,96 +37,113 @@ const File = () => {
     </styled.FileBox>
   );
 };
-
+const GetArticleListRequest = (page, per = null) => {
+  const url = `${host}/community/list/${page}${per ? "/" + per : ""}`;
+  return fetch(url, GET)
+    .then((res) => res.json())
+    .then((data) => (data?.success ? data.detail : []))
+    .catch((err) => []);
+};
+const GetTotalArticleCountRequest = () => {
+  const url = `${host}/community/list`;
+  return fetch(url, GET)
+    .then((res) => res.json())
+    .then((data) => (data?.success ? data.detail?.total : 0))
+    .catch((err) => 0);
+};
 const CommunityPage = () => {
+  const [sort, setSort] = useState("update");
+  const [signed, setSigned] = useState(false);
+  const [list, setList] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    // verification
+    GetSession(TokenName)
+      .then((token) => {
+        if (token) setSigned(true);
+        else setSigned(false);
+      })
+      .catch((e) => {
+        setSigned(false);
+      });
+    // get article list
+    GetArticleListRequest(0, 10).then((list) => setList(list));
+    GetTotalArticleCountRequest().then((total) => setTotal(total));
+  }, []);
+
+  // create_time: "2022-10-14T14:18:06.000Z";
+  // head: "";
+  // nickname: "저녁겐노리";
+  // title: "kkkkkkk";
+  // uid: 56;
+  // update_time: "2022-10-14T14:18:06.000Z";
+  // url: "https://s3.ap-northeast-2.amazonaws.com/osd.uploads.com/dev/thumbnails/1655956119608-x50.jpg";
+  // user_id: 12;
+
   return (
     <PageLayout>
       <styled.Container>
         <styled.CategoryBox>
-          <div>자유게시판</div>
-          <div>공지사항</div>
+          <button className="active">자유게시판</button>
+          <button onClick={() => goto("NOTICE")}>공지사항</button>
         </styled.CategoryBox>
+
         <styled.BoardTitleDiv>
           <styled.FreeBoard>자유게시판</styled.FreeBoard>
           <styled.SortAs>
-            <span>최신순</span>
-            <span>등록순</span>
+            <button
+              onClick={() => setSort("update")}
+              className={sort === "update" ? "active" : ""}
+            >
+              최신순
+            </button>
+            <button
+              onClick={() => setSort("like")}
+              className={sort === "like" ? "active" : ""}
+            >
+              인기순
+            </button>
           </styled.SortAs>
         </styled.BoardTitleDiv>
+
         <styled.TitleUserDate>
           <span>제목</span>
           <span>글쓴이</span>
           <span>작성일</span>
         </styled.TitleUserDate>
-        <styled.HotBoard>
-          <styled.Wrapper1>
-            <div>제목예시</div>
-            <div>인기글</div>
-            <div></div>
-            <div>국민대 CRC</div>
-            <div>1달 전</div>
-          </styled.Wrapper1>
-          <styled.Wrapper2>
-            <styled.Article>
-              <styled.ArticleBox1>
-                <div>머릿말</div>
-                <div />
-                <div>질문</div>
-              </styled.ArticleBox1>
-              <styled.ArticleBox2>
-                <div>작성자</div>
-                <div />
-                <div>작성자 닉네임</div>
-              </styled.ArticleBox2>
-              <styled.ArticleBox3>
-                <div>내용</div>
-                <div />
-                <div>내용 예시</div>
-              </styled.ArticleBox3>
-              <styled.AddCommentButton>댓글달기</styled.AddCommentButton>
-            </styled.Article>
-            <styled.AddedFiles>
-              <styled.FolderIcon />
-              <div style={{ marginBottom: "13px" }}>첨부파일</div>
-              <File />
-              <File />
-              <File />
-            </styled.AddedFiles>
-          </styled.Wrapper2>
-        </styled.HotBoard>
 
-        <styled.AnswerBoard>
-          <styled.Wrapper3>
-            <div>답변</div>
-            <div></div>
-            <div>국민대 CRC</div>
-            <div>1달 전</div>
-          </styled.Wrapper3>
-          <styled.AnswerBox>
-            <styled.ArticleBox1>
-              <div>머릿말</div>
-              <div />
-              <div>답변</div>
-            </styled.ArticleBox1>
-            <styled.ArticleBox2>
-              <div>작성자</div>
-              <div />
-              <div>작성자 닉네임</div>
-            </styled.ArticleBox2>
-            <styled.ArticleBox4>
-              <div>내용</div>
-              <div />
-              <div>내용을 입력하세요</div>
-            </styled.ArticleBox4>
-            <styled.AddCommentButton2>댓글 등록</styled.AddCommentButton2>
-          </styled.AnswerBox>
-        </styled.AnswerBoard>
-        <OtherPost />
-        <OtherPost />
-        <OtherPost />
-        <styled.UploadPostButton>
-          <div>게시글 작성</div>
-        </styled.UploadPostButton>
+        {/* list */}
+        {list?.map((item, index) => (
+          <li key={index} onClick={() => goto("READ", item.uid)}>
+            <OtherPost {...item} />
+          </li>
+        ))}
+        {/* pagination */}
+        <styled.PaginationWrapper>
+          <Pagination
+            boundaryRange={0}
+            defaultActivePage={1}
+            ellipsisItem={null}
+            firstItem={null}
+            lastItem={null}
+            siblingRange={1}
+            totalPages={Math.round(total / 10 + 0.5)}
+            onPageChange={(e, page) => {
+              GetArticleListRequest(page.activePage - 1, 10).then(setList);
+            }}
+          />
+        </styled.PaginationWrapper>
+
+        <styled.ButtonWrapper>
+          <styled.UploadPostButton
+            disabled={!signed}
+            active={signed}
+            onClick={() => goto("WRITE")}
+          >
+            <span>게시글 작성</span>
+          </styled.UploadPostButton>
+        </styled.ButtonWrapper>
       </styled.Container>
     </PageLayout>
   );

@@ -55,7 +55,7 @@ function App() {
           <Route path="/mypage" element={<MyPage />} />
           {/* 메시지 페이지 */}
           <Route path="/message" element={<Message />} />
-          {/* 없는 페이지들 */}
+          {/* === 없는 페이지들 === */}
           {/* 공유자 등록/수정 */}
           {/* 공유자 상세 */}
           {/* 유저정보수정 */}

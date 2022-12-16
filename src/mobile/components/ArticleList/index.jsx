@@ -124,17 +124,13 @@ class ArticleList extends React.Component {
 
     return (
       <Wrapper>
-        {/* <div  className="line" style={{backgroundColor:"#efefef"}}>
-                    <div className='title'>
-                        제목
-                    </div>
-                    <div className='author'>
-                        글쓴이
-                    </div>
-                    <div className='date'>
-                        날짜
-                    </div>
-                </div> */}
+      {/* 
+        <div  className="line" style={{ backgroundColor: "#EFEFEF"}}>
+          <div className='title'>제목</div>
+          <div className='author'>글쓴이</div>
+          <div className='date'>날짜</div>
+        </div>
+      */}
         {articles.map((item, idx) => (
           <div
             key={idx}

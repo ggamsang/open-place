@@ -4,12 +4,17 @@ import { useRef } from "react";
 import { goto } from "../../utils/navigator";
 import Logo from "../Commons/Logo";
 import * as styled from "./styles";
+import cookie from "react-cookies";
 
 const Navbar = () => {
-  const [fold, setFold] = useState(false);
+  const [fold, setFold] = useState(cookie.load("fold") === "false");
   const [fixed, setFixed] = useState(false);
-  const onClickedFoldButton = () => setFold(!fold);
+  const onClickedFoldButton = () => {
+    setFold(!fold);
+    cookie.save("fold", fold, { path: "/" });
+  };
   const sidebar = useRef();
+
   useEffect(() => {
     window.addEventListener("scroll", (e) => {
       if (!fixed) {
@@ -21,6 +26,7 @@ const Navbar = () => {
       }
     });
   }, []);
+
   return (
     <styled.SideBar ref={sidebar} folded={fold} fixed={fixed}>
       <styled.SideBarInner folded={fold}>

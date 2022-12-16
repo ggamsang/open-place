@@ -1,11 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import * as styled from "./styles";
 import Banner from "../../components/Banner";
 import TopList from "../../components/TopList";
 import PageLayout from "../../components/PageLayout";
 import ShortcutList from "../../components/ExpList";
-import { useState } from "react";
-import { useEffect } from "react";
 
 function Main(props) {
   // const [loggedIn, setLoggedIn] = useState(props?.loggedIn);

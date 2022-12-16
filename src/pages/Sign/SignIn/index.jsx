@@ -7,16 +7,14 @@ import cookie from "react-cookies";
 import CheckBoxNormal from "../../../components/Commons/CheckBoxNormal";
 import GradientButton from "../../../components/Commons/Button/GradientButton";
 import ImageButton from "../../../components/Commons/Button/ImageButton";
-import { SetSession } from "../../../mobile/modules";
+import { GetSession, SetSession } from "../../../mobile/modules";
 import { TokenName } from "../../../constants";
 import host from "../../../config";
+import { useEffect } from "react";
 const Login = { ready: "READY", failed: "FAILED", success: "SUCCESS" };
 
-/*
-  TODO: 이미로그인되어있는지, 있다면 alert과 메인페이지로 이동
-*/
-
 function SignInPage() {
+  const [checking, setChecking] = useState(true);
   const [login, setLoginState] = useState(Login.ready);
   const [user_id, setUserId] = useState(cookie.load("saveid") || "");
   const [password, setPassword] = useState(cookie.load("savepassword") || "");
@@ -110,8 +108,22 @@ function SignInPage() {
     !saveID && cookie.remove("saveid", { path: "/" });
     setSaveId(!saveID);
   };
+  useEffect(() => {
+    GetSession(TokenName)
+      .then((token) => {
+        if (token) {
+          alert("이미 로그인 상태입니다.");
+          window.location.href = "/";
+        }
+      })
+      .catch((_) => {
+        setChecking(false);
+      });
+  }, []);
 
-  return (
+  return checking ? (
+    <div>{"확인중..."}</div>
+  ) : (
     <styled.Wrapper>
       <div
         className="box alignCenter justifyCenter"

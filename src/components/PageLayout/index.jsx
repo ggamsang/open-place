@@ -17,27 +17,32 @@ function PageLayout({ children }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   useEffect(() => {
-    GetSession(TokenName).then((token) => {
-      if (token) {
-        function CheckTokenRequest(token) {
-          return fetch(`${host}/user/check`, authGET(token))
-            .then((res) => res.json())
-            .then((res) => {
-              console.log(res);
-              if (res.success) {
-                setLoggedIn(true);
-                setUserInfo(res.info);
-                return;
-              }
-              setLoggedIn(false);
-              setUserInfo(null);
-            });
+    GetSession(TokenName)
+      .then((token) => {
+        if (token) {
+          function CheckTokenRequest(token) {
+            return fetch(`${host}/user/check`, authGET(token))
+              .then((res) => res.json())
+              .then((res) => {
+                console.log("LOG-", res);
+                if (res.success) {
+                  setLoggedIn(true);
+                  setUserInfo(res.info);
+                  return;
+                }
+                setLoggedIn(false);
+                setUserInfo(null);
+              });
+          }
+          CheckTokenRequest(token);
         }
-        CheckTokenRequest(token);
-      }
-    });
-  }, [loggedIn]);
-
+      })
+      .catch((e) => {
+        setLoggedIn(false);
+        setUserInfo(null);
+        // console.error("GetSession(): ", e);
+      });
+  }, []);
   return (
     <styled.Wrapper>
       <Header keyword={keyword} loggedIn={loggedIn} userInfo={userInfo} />
@@ -48,4 +53,5 @@ function PageLayout({ children }) {
     </styled.Wrapper>
   );
 }
+
 export default PageLayout;
