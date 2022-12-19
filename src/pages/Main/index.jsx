@@ -1,27 +1,36 @@
 import React from "react";
-import { Main, MainContainer, Shortcut } from "./styles";
+import * as styled from "./styles";
 import Banner from "../../components/Banner";
 import TopList from "../../components/TopList";
-import ShortcutList from "../../components/ExpList";
 import PageLayout from "../../components/PageLayout";
+import ShortcutList from "../../components/ExpList";
 import { useState } from "react";
+import { useEffect } from "react";
 
+function Main(props) {
+  // const [loggedIn, setLoggedIn] = useState(props?.loggedIn);
+  // useEffect(() => {
+  //   setLoggedIn(props?.loggedIn);
+  // }, [props]);
+  return (
+    <styled.Main>
+      <Banner />
+      {/* {loggedIn && (
+        <>
+          <styled.Shortcut>바로가기</styled.Shortcut>
+          <ShortcutList />
+        </>
+      )} */}
+      <styled.MainContainer>
+        <TopList />
+      </styled.MainContainer>
+    </styled.Main>
+  );
+}
 function MainPage() {
-  const [loggedIn, setLoggedIn] = useState(true);
   return (
     <PageLayout>
-      <Main>
-        <Banner />
-        {loggedIn && (
-          <>
-            <Shortcut>바로가기</Shortcut>
-            <ShortcutList />
-          </>
-        )}
-        <MainContainer>
-          <TopList />
-        </MainContainer>
-      </Main>
+      <Main />
     </PageLayout>
   );
 }

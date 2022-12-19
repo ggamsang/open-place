@@ -1,51 +1,32 @@
-import React, { useState } from "react";
-import {
-  Container,
-  Play,
-  PlayText,
-  Learn,
-  LearnText,
-  Make,
-  MakeText,
-  SearchExp,
-  SearchExpIcon,
-  SearchExpText,
-  RegistBox,
-  Register,
-  RegisterText,
-  Login,
-  LoginIcon,
-  LoginText,
-  NotificationIcon,
-  EmailIcon,
-  RegisterIcon,
-  Nickname,
-  NicknameIcon,
-  NicknameText,
-} from "./styles";
+import React, { useEffect, useState } from "react";
 import { goto } from "../../utils/navigator";
 import Logo from "../Commons/Logo";
+import * as styled from "./styles";
 
 const Header = (props) => {
   const [keyword, setKeyword] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(props?.loggedIn);
+
+  useEffect(() => {
+    setLoggedIn(props?.loggedIn);
+  }, [props]);
 
   return (
-    <Container>
+    <styled.Container>
       <div style={{ marginLeft: "20px" }}>
         <Logo type="mini" onClickEvent={() => goto("MAIN")} />
       </div>
-      <Play onClick={() => goto("PLAY")}>
-        <PlayText>놀기</PlayText>
-      </Play>
+      <styled.Play onClick={() => goto("PLAY")}>
+        <styled.PlayText>놀기</styled.PlayText>
+      </styled.Play>
 
-      <Learn onClick={() => goto("LEARN")}>
-        <LearnText>배우기</LearnText>
-      </Learn>
+      <styled.Learn onClick={() => goto("LEARN")}>
+        <styled.LearnText>배우기</styled.LearnText>
+      </styled.Learn>
 
-      <Make onClick={() => goto("MAKE")}>
-        <MakeText>만들기</MakeText>
-      </Make>
+      <styled.Make onClick={() => goto("MAKE")}>
+        <styled.MakeText>만들기</styled.MakeText>
+      </styled.Make>
 
       <div
         style={{
@@ -56,8 +37,8 @@ const Header = (props) => {
         }}
       >
         {/* <i class="search icon"></i> */}
-        <SearchExpIcon />
-        <SearchExp
+        {/* <styled.SearchExpIcon /> */}
+        <styled.SearchExp
           value={keyword}
           onKeyUp={(e) =>
             e.key === "Enter" &&
@@ -69,36 +50,40 @@ const Header = (props) => {
           }
           onChange={(e) => setKeyword(e.target.value.replace(".", ""))}
         />
-        <SearchExpText opacity={keyword ? 0.5 : 1}>경험 찾아보기</SearchExpText>
+        <styled.SearchExpText opacity={keyword ? 1 : 0.5}>
+          경험 찾아보기
+        </styled.SearchExpText>
       </div>
       {loggedIn ? (
         <>
-          <NotificationIcon />
-          <EmailIcon />
-          <RegistBox>
-            <Register>
-              <RegisterIcon />
-              <RegisterText>등록</RegisterText>
-            </Register>
-            <Nickname>
-              <NicknameIcon />
-              <NicknameText>닉네임</NicknameText>
-            </Nickname>
-          </RegistBox>
+          <styled.NotificationIcon />
+          <styled.EmailIcon />
+          <styled.RegistBox>
+            <styled.Register onClick={() => goto("CREATE-ITEM-DESKTOP")}>
+              {/* <styled.RegisterIcon /> */}
+              <styled.RegisterText>경험등록</styled.RegisterText>
+            </styled.Register>
+            <styled.Nickname onClick={() => goto("MY-PAGE")}>
+              <styled.NicknameIcon src={props?.userInfo?.l_img}/>
+              <styled.NicknameText>
+                {props?.userInfo?.nick_name || "닉네임"}
+              </styled.NicknameText>
+            </styled.Nickname>
+          </styled.RegistBox>
         </>
       ) : (
-        <RegistBox>
-          <Register onClick={() => goto("SIGNUP")}>
-            <RegisterText>회원가입</RegisterText>
-          </Register>
+        <styled.RegistBox>
+          <styled.Register onClick={() => goto("SIGNUP")}>
+            <styled.RegisterText>회원가입</styled.RegisterText>
+          </styled.Register>
 
-          <Login onClick={() => goto("SIGNIN")}>
-            <LoginIcon />
-            <LoginText>로그인</LoginText>
-          </Login>
-        </RegistBox>
+          <styled.Login onClick={() => goto("SIGNIN")}>
+            <styled.LoginIcon />
+            <styled.LoginText>로그인</styled.LoginText>
+          </styled.Login>
+        </styled.RegistBox>
       )}
-    </Container>
+    </styled.Container>
   );
 };
 

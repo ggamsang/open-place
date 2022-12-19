@@ -48,7 +48,7 @@ export class InputLine extends Component {
       <React.Fragment>
         <Wrap warning={warning} height={this.props.height}>
           <InputField
-            onChange={this.props.onChangeValue}
+            onChange={this.props.onChange || this.props.onChangeValue}
             value={this.props.value}
             placeholder={this.props.placeholder}
             type={this.props.type === null ? "text" : this.props.type}

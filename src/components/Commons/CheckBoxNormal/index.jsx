@@ -23,11 +23,8 @@ const CheckBox = styled.div`
 
   .nemo {
     position: absolute;
-    width: ${(props) => (props.width === null ? 16 : props.width)}px;
-    max-width: ${(props) => (props.width === null ? 16 : props.width)}px;
-    height: ${(props) => (props.height === null ? 16 : props.height)}px;
-    max-height: ${(props) => (props.height === null ? 16 : props.height)}px;
-
+    width: 13px;
+    height: 13px;
     background-color: #e5f0fe;
     border: 1px solid #b5d0f3;
     border-radius: 3px;

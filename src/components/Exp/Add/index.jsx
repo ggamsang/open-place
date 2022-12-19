@@ -86,7 +86,7 @@ const ExpAdd = () => {
           <span>취소하기</span>
         </styled.CancelButton>
       </styled.Wrapper>
-      <Footer />
+      {/* <styled.Footer /> */}
     </styled.Main>
   );
 };

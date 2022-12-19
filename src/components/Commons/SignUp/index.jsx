@@ -5,9 +5,13 @@ import { Wrapper } from "./styles";
 import { InputLine, InputPhone, InputNormal } from "../Input";
 import GradientButton from "../Button/GradientButton";
 import CheckBoxNormal from "../CheckBoxNormal";
+import host from "../../../config";
+import { SetSession } from "../../../mobile/modules";
+import { TokenName } from "../../../constants";
+import { goto } from "../../../utils/navigator";
 
 const SignUp = () => {
-  const [tab, setTab] = useState(1);
+  const [tab, setTab] = useState(2);
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
   const [phoneChecked, setPhoneChecked] = useState(false);
@@ -20,7 +24,10 @@ const SignUp = () => {
   const [agree1, setAgree1] = useState(false);
   const [agree2, setAgree2] = useState(false);
 
-  const handleFirstName = (e) => setFirstName(e.target.value);
+  const handleFirstName = (e) => {
+    console.log(e.target.value);
+    setFirstName(e.target.value);
+  };
   const handleLastName = (e) => setLastName(e.target.value);
   const handlePhoneNumber = (e) => {
     const { value } = e.target;
@@ -69,25 +76,37 @@ const SignUp = () => {
       password: password,
       nick_name: nick_name,
     };
+    function SignUpRequest(data) {
+      const url = `${host}/user/signUp`;
+      const request = {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        body: JSON.stringify(data),
+      };
+      return fetch(url, request)
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+          if (res.success) {
+            SetSession(TokenName, res.detail.token);
+          }
+          return res;
+        })
+        .catch((err) => {
+          return { detail: err, success: false };
+        });
+    }
 
     // ---- sign up request ---- //
-    // this.props.SignUpRequest &&
-    //   this.props.SignUpRequest(data).then((res) => {
-    //     if (res.success) {
-    //       alert("회원가입을 축하드립니다.");
-    //       goto("MAIN");
-    //     } else {
-    //       console.error(res.detail);
-    //       alert("회원가입실패");
-    //     }
-    //     // console.log(res);
-    //     // if (res.type === "AUTH_SIGNUP_SUCCESS") {
-    //     //   window.location.href = "/";
-    //     // }
-    //     // else {
-    //     //   alert(res.detail + '와 같은 이유로 회원가입을 하지 못하였습니다.');
-    //     // }
-    //   });
+    SignUpRequest(data).then((res) => {
+      if (res.success) {
+        alert("회원가입을 축하드립니다.");
+        goto("MAIN");
+      } else {
+        console.error(res.detail);
+        alert("회원가입실패");
+      }
+    });
     // ----               ---- //
   };
 
@@ -217,25 +236,27 @@ const SignUp = () => {
             />
           </div>
           <div className="checkBoxWrap">
-            <CheckBoxNormal
-              style={{ marginLeft: "15vw", marginBottom: "13px" }}
-              text="전체동의"
-              value={agreeAll}
-              onClickEvent={onClickedAllAgree}
-            />
-            <CheckBoxNormal
-              style={{ marginLeft: "15vw", marginBottom: "13px" }}
-              text="이용약관"
-              value={agree1}
-              onClickEvent={onClickedAgree1}
-            />
-            <CheckBoxNormal
-              style={{ marginLeft: "15vw", marginBottom: "13px" }}
-              text="개인정보 수집 및 이용"
-              // text="개인정보 수집 및 이용 (선택)"
-              value={agree2}
-              onClickEvent={onClickedAgree2}
-            />
+            <div style={{ margin: "auto", width: "328px" }}>
+              <CheckBoxNormal
+                style={{ marginLeft: "0px", marginBottom: "13px" }}
+                text="전체동의"
+                value={agreeAll}
+                onClickEvent={onClickedAllAgree}
+              />
+              <CheckBoxNormal
+                style={{ marginLeft: "0px", marginBottom: "13px" }}
+                text="이용약관"
+                value={agree1}
+                onClickEvent={onClickedAgree1}
+              />
+              <CheckBoxNormal
+                style={{ marginLeft: "0px", marginBottom: "13px" }}
+                text="개인정보 수집 및 이용"
+                // text="개인정보 수집 및 이용 (선택)"
+                value={agree2}
+                onClickEvent={onClickedAgree2}
+              />
+            </div>
           </div>
           <div className="buttonWrap">
             <GradientButton

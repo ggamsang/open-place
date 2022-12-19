@@ -15,7 +15,7 @@ import {
 const Search = ({ category: _category, sort: _sort, setSearchParams }) => {
   const params = useParams();
   const { keyword } = params;
-  const [category, setCategory] = useState(_category || "");
+  const [category, setCategory] = useState(_category || "play");
   const [sort, setSort] = useState(_sort || "update");
   const onClickCategory = (category) => {
     setSearchParams && setSearchParams({ category: category, sort: sort });

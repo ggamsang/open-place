@@ -47,8 +47,6 @@ function AppMobile() {
           <Route path="notice/:id" element={<NoticeDetailPage />} />
           <Route path="intro" element={<IntroPage />} />
           <Route path="signin" element={<SignInPage />} />
-          <Route path="login" element={<SignInPage />} />
-          <Route path="join" element={<SignUpPage />} />
           <Route path="signup" element={<SignUpPage />} />
           <Route path="findPW" element={<FindPWPage />} />
           <Route path="play/:sort/:keyword" element={<PlayExpListPage />} />
@@ -79,8 +77,10 @@ function AppMobile() {
           <Route path="modifyExp">
             <Route path=":id" element={<ModifyExpPage />} />
           </Route>
+
           <Route path="message" element={<MessageListPage />} />
           <Route path="message/:id" element={<MessageDetailPage />} />
+
           <Route path="*" element={<div>NOT FOUND</div>} />
         </Routes>
       </BrowserRouter>

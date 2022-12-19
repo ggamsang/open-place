@@ -18,6 +18,7 @@ const likeExpFailure = (err) => ({ type: types.UPDATE_LIKE_EXP_FAILURE });
 
 export const getExpDetailRequest = (item_id, user_id) => {
   return (dispatch) => {
+    
     dispatch(getExpDetail());
     const url = `${host}/exp/${item_id}/${user_id}`;
     return fetch(url, {
