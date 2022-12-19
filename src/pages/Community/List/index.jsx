@@ -85,7 +85,9 @@ const CommunityPage = () => {
     <PageLayout>
       <styled.Container>
         <styled.CategoryBox>
-          <button className="active">자유게시판</button>
+          <button onClick={() => goto("COMMUNITY")} className="active">
+            자유게시판
+          </button>
           <button onClick={() => goto("NOTICE")}>공지사항</button>
         </styled.CategoryBox>
 

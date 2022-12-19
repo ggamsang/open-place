@@ -73,7 +73,7 @@ export const BoardTitleDiv = styled.div`
   //   height: 50px;
   display: flex;
   justify-content: center;
-  margin-top: 12px;
+  margin-top: 25px;
   //   align-itmes: center;
   //   justify-content: flex-end;
   //   margin-right: 230px;
@@ -149,10 +149,11 @@ export const TitleUserDate = styled.div`
 `;
 
 export const HotBoard = styled.div`
-  width: 1698px;
-  height: 463px;
+  width: 100%;
+  padding: 15px;
+  box-sizing: border-box;
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: 0.30000001192092896px solid #b7b7b7;
+  border: 0.3px solid #b7b7b7;
   opacity: 1;
   margin-top: 13px;
 `;
@@ -163,14 +164,6 @@ export const Wrapper1 = styled.div`
   margin-top: 13px;
 
   div:nth-child(1) {
-    font: normal normal 700 19px/22px Pretendard;
-    letter-spacing: 0px;
-    color: #000000;
-    opacity: 1;
-    margin-left: 54px;
-  }
-
-  div:nth-child(2) {
     width: 127px;
     height: 31px;
     background: #ff0000 0% 0% no-repeat padding-box;
@@ -188,13 +181,23 @@ export const Wrapper1 = styled.div`
     margin-left: 26px;
   }
 
+  div:nth-child(2) {
+    font: normal normal 700 19px/22px Pretendard;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+    margin-left: 54px;
+    width: max-content;
+    max-width: 750px;
+  }
+
   div:nth-child(3) {
     width: 30px;
     height: 30px;
     background: #e9e9e9 0% 0% no-repeat padding-box;
     opacity: 1;
     border-radius: 50%;
-    margin-left: 1096px;
+    margin-left: auto;
   }
 
   div:nth-child(4) {
@@ -213,6 +216,7 @@ export const Wrapper1 = styled.div`
     color: #000000;
     opacity: 1;
     margin-left: 94px;
+    margin-right: 25px;
   }
 `;
 
@@ -374,22 +378,81 @@ export const ArticleBox4 = styled.div`
   }
 `;
 
-export const AddCommentButton = styled.div`
+export const CommentInputWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  box-sizing: border-box;
+`;
+export const AddCommentButton = styled.button`
+  border: none;
+  outline: none;
+  cursor: default;
+
   width: 150px;
   height: 30px;
-  background: #848484 0% 0% no-repeat padding-box;
   opacity: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-
+  
   font: normal normal 700 15px/18px Pretendard;
   letter-spacing: 0px;
-  color: #ffffff;
+  color: #FFF;
   opacity: 1;
+  :disabled {
+    background: #888 0% 0% no-repeat padding-box;
+  }
+  background: #F00 0% 0% no-repeat padding-box;
+`;
+export const CommentInput = styled.textarea`
+  width: 100%;
+  margin-right: 15px;
+  border: 1px solid #4F4F4F;
+  overflow: auto;
+  outline: none;
 
-  margin-top: 112px;
-  margin-left: 1139px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  :focus {
+    border: 1px solid #F00;
+  }
+  resize: none;
+  box-sizing: border-box;
+  padding: 10px;
+  // border-radius: 10px;
+`;
+export const CommentsWrapper = styled.div``;
+export const CommentDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  > div {
+    &:nth-child(1) {
+      font: normal normal 600 13px/14px Pretendard;
+      letter-spacing: 0px;
+      color: #000000;
+      opacity: 1;
+    }
+    &:nth-child(2) {
+    }
+    &:nth-child(3) {
+      img { 
+        width: 25px;
+        height: 25px;
+        background-color: #efefef;
+        border-radius: 100%;
+        background-image: url(${(prop) => prop.url});
+      }
+    }
+    &:nth-child(4) {
+    }
+    &:nth-child(5) {
+    }
+  }
 `;
 
 export const AddedFiles = styled.div`
@@ -462,6 +525,15 @@ export const FileName = styled.div`
       color: #000000;
       opacity: 1;
     }
+  }
+  a {
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 1rm;
+    text-decoration: none;
+    width: max-content;
+    padding: 3px 5px;
+    background-color: #f33;
   }
 `;
 
@@ -670,21 +742,20 @@ export const UploadPostButton = styled.button`
 `;
 
 export const PaginationWrapper = styled.div`
-    cursor: default;
-    margin-top: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+  cursor: default;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
-    .active {
-      background-color: red;
-      color: white;
-    }
-    .item {
-      padding: 5px 12px;
-      margin-right: 10px;
-      border-radius: 5px;
-    }
-
+  .active {
+    background-color: red;
+    color: white;
+  }
+  .item {
+    padding: 5px 12px;
+    margin-right: 10px;
+    border-radius: 5px;
+  }
 `;
