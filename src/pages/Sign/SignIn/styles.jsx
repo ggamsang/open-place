@@ -1,17 +1,21 @@
 import styled from "styled-components";
+// margin: auto;
+// max-width: 1920px;
+// width: max-content;
 
 export const Wrapper = styled.div`
-  width: ${window.innerWidth}px;
+  max-width: 100vw !important;
+  width: 100vw;
   height: 100vh;
-  margin: 0 !important;
+  margin: auto !important;
   padding: 0;
-  background: linear-gradient(205deg, #3a58f5, #3a58f5);
+  background: linear-gradient(205deg, #3A58F5, #3A58F5);
+
   .box {
     width: 100%;
     display: flex;
     box-sizing: border-box;
   }
-
   .alignCenter {
     align-items: center;
   }
@@ -24,16 +28,13 @@ export const Wrapper = styled.div`
   .justifyEnd {
     justify-content: flex-end;
   }
-
   .column {
     flex-direction: column;
   }
-
   .checkBoxRow {
     display: flex;
     box-sizing: border-box;
   }
-
   .inputBox {
     height: 122px;
     margin-bottom: 10px;

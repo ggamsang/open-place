@@ -16,7 +16,6 @@ import SignInPage from "./pages/Sign/SignIn";
 import SignUpPage from "./pages/Sign/SignUp";
 import NotFoundPage from "./pages/NotFound";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import LoadingPage from "./pages/Loading";
 import * as styled from "./styles";
 
@@ -55,11 +54,17 @@ function App() {
           <Route path="/mypage" element={<MyPage />} />
           {/* 메시지 페이지 */}
           <Route path="/message" element={<Message />} />
-          {/* 없는 페이지들 */}
+
+          {/* === 없는 페이지들 === */}
+
           {/* 공유자 등록/수정 */}
+
           {/* 공유자 상세 */}
+
           {/* 유저정보수정 */}
+
           {/* 라이브경험 */}
+
           {/* 경험상세 페이지 – 1, 경험등록/수정 페이지 */}
           <Route path="/exp/:id" element={<ExpDetailPage />} />
           <Route path="/exp/add" element={<ExpAddPage />} />
