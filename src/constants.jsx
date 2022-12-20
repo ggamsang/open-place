@@ -86,3 +86,5 @@ export const ExpTypes = {
   GAMING: 4, // 게임
   MEETUP: 5, // 모임
 };
+
+export const AcceptForThumbnail = "image/png, image/bmp, image/jpeg, image/jpg";

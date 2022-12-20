@@ -9,8 +9,6 @@
 // import { goto } from "../../utils/navigator";
 // import React, { useEffect, useState } from "react";
 // import { useDispatch } from "react-redux";
-import styled from "styled-components";
-
 // export default function NeedToLogin(props) {
 //   const dispatch = useDispatch();
 //   const [giveTry, setGiveTry] = useState(false);
@@ -58,6 +56,12 @@ import styled from "styled-components";
 //     </Wrapper>
 //   );
 // }
+import styled from "styled-components";
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { TokenName } from "../../constants";
+import { goto } from "../../utils/navigator";
+import { GetSession } from "../modules";
 const Wrapper = styled.div`
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none; /* Firefox */
@@ -95,14 +99,9 @@ const Wrapper = styled.div`
     margin-bottom: 20px;
   }
 `;
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { TokenName } from "../../constants";
-import { goto } from "../../utils/navigator";
-import { GetSession } from "../modules";
-
 export default function NeedToLogin(child) {
   const [valid, setValid] = useState(null);
+
   useEffect(() => {
     GetSession(TokenName)
       .then((token) => {
@@ -120,6 +119,7 @@ export default function NeedToLogin(child) {
         goto("SIGNIN");
       });
   }, []);
+
   return valid === null ? (
     <Wrapper>
       <div className="gradient"></div>

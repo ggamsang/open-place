@@ -30,7 +30,13 @@ const Navbar = () => {
   return (
     <styled.SideBar ref={sidebar} folded={fold} fixed={fixed}>
       <styled.SideBarInner folded={fold}>
-        <styled.SideBarControl folded={fold} onClick={onClickedFoldButton} />
+        <styled.ControlBall folded={fold} onClick={onClickedFoldButton}>
+          <styled.SideBarArrow >
+            <span className={fold ? "active" : ""} />
+            <span className={fold ? "active" : ""} />
+          </styled.SideBarArrow>
+        </styled.ControlBall>
+
         {fold ? (
           <styled.SideBarTextFolded>메뉴</styled.SideBarTextFolded>
         ) : (

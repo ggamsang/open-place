@@ -273,7 +273,7 @@ class ModifyExp extends React.Component {
           <div className="searchbox">
             <SearchForm />
           </div>
-          <div className="title">경험등록하기</div>
+          <div className="title">경험 수정하기</div>
         </div>
         <div className="content">
           <div className="whitebox">
