@@ -14,8 +14,10 @@ function PageLayout({ children }) {
   const { keyword } = params;
 
   // auth
+  const [checking, setChecking] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
+
   useEffect(() => {
     GetSession(TokenName)
       .then((token) => {
@@ -24,14 +26,13 @@ function PageLayout({ children }) {
             return fetch(`${host}/user/check`, authGET(token))
               .then((res) => res.json())
               .then((res) => {
-                console.log("LOG-", res);
                 if (res.success) {
                   setLoggedIn(true);
                   setUserInfo(res.info);
-                  return;
+                } else {
+                  setLoggedIn(false);
+                  setUserInfo(null);
                 }
-                setLoggedIn(false);
-                setUserInfo(null);
               });
           }
           CheckTokenRequest(token);
@@ -40,15 +41,25 @@ function PageLayout({ children }) {
       .catch((e) => {
         setLoggedIn(false);
         setUserInfo(null);
-        // console.error("GetSession(): ", e);
-      });
+      })
+      .finally(() => setChecking(false));
   }, []);
+
   return (
     <styled.Wrapper>
       <Header keyword={keyword} loggedIn={loggedIn} userInfo={userInfo} />
+
       <Navbar />
-      {children && React.cloneElement(children, { loggedIn: loggedIn })}
+
+      {children &&
+        checking === false &&
+        React.cloneElement(children, {
+          loggedIn: loggedIn,
+          userInfo: userInfo,
+        })}
+
       {/* <SendDm /> */}
+
       <Footer />
     </styled.Wrapper>
   );

@@ -33,8 +33,7 @@ export const SideBar = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  `
-      : ``}
+  ` : ``}
 `;
 export const SideBarInner = styled.div`
   position: relative;
@@ -44,6 +43,7 @@ export const SideBarInner = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  // transition: all .7s ease;
 `;
 export const SideBarFoldButton = styled.button`
   width: 79px;
@@ -101,6 +101,52 @@ export const SideBarIcon5 = styled.img.attrs({
   width: 39.84px;
   height: 39.84px;
   z-index: 2;
+`;
+export const ControlBall = styled.div`
+  width: 57px;
+  height: 57px;
+  z-index: 3;
+  position: absolute;
+  right: -40px;
+  top: -20px;
+  // outline: none;
+  // border: none;
+  background: transparent linear-gradient(239deg, #054EFA 0%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+`;
+export const SideBarArrow = styled.div`
+  width: 1.25rem;
+  height: 1.25rem;
+  display: inline-block;
+  position: relative;
+  margin: 0 1rem;
+  span {
+    top: .5rem;
+    position: absolute;
+    width: .75rem;
+    height: .1rem;
+    background-color: #efefef;
+    display: inline-block;
+    transition: all .7s ease;
+  }
+  span:nth-child(1) {
+    left: 0;
+    transform: rotate(-45deg);
+    &.active{
+      transform: rotate(45deg);
+    }
+  }
+  span:nth-child(2) {
+    right: 0;
+    transform: rotate(45deg);
+    &.active{
+      transform: rotate(-45deg);
+    }
+  }
 `;
 
 export const SideBarControl = styled.button`

@@ -18,6 +18,10 @@ import NotFoundPage from "./pages/NotFound";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingPage from "./pages/Loading";
 import * as styled from "./styles";
+import RegisterExpertPage from "./pages/User/Expert/Register";
+import ExpertDetailPage from "./pages/User/Expert/Detail";
+import LiveExpDetailPage from "./pages/Exp/Live";
+import BuyExpPage from "./pages/Exp/Buy";
 
 function App() {
   return (
@@ -50,26 +54,23 @@ function App() {
           <Route path="/intro" element={<About />} />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/signup" element={<SignUpPage />} />
-          {/* 마이페이지 */}
+          {/* 마이페이지 / 유저정보수정 */}
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/mypage" element={<ExpertDetailPage />} />
+          {/* 공유자 등록/수정/상세 */}
+          <Route path="/sharer/register" element={<RegisterExpertPage />} />
+          <Route path="/sharer/modify" element={<RegisterExpertPage />} />
+          <Route path="/sharer/detail" element={<ExpertDetailPage />} />
+
           {/* 메시지 페이지 */}
           <Route path="/message" element={<Message />} />
 
-          {/* === 없는 페이지들 === */}
-
-          {/* 공유자 등록/수정 */}
-
-          {/* 공유자 상세 */}
-
-          {/* 유저정보수정 */}
-
-          {/* 라이브경험 */}
-
-          {/* 경험상세 페이지 – 1, 경험등록/수정 페이지 */}
+          {/* 경험상세 페이지 – 1, 경험등록/수정 페이지 , 라이브경험 */}
           <Route path="/exp/:id" element={<ExpDetailPage />} />
           <Route path="/exp/add" element={<ExpAddPage />} />
-          <Route path="/exp/edit" element={<ExpEditPage />} />
-          {/* */}
+          <Route path="/exp/:id/edit" element={<ExpEditPage />} />
+          <Route path="/live/:id" element={<LiveExpDetailPage />} />
+          <Route path="/buy/:id" element={<BuyExpPage />} />
           {/* loading-page */}
           <Route path="/loading" element={<LoadingPage />} />
           {/* not found */}

@@ -37,15 +37,19 @@ export const ExpInfoDiv = styled.div`
   height: 302px;
   margin-top: 40px;
   // align-items: center;
+  position: relative;
 `;
 
 export const ExpImg = styled.img.attrs({
-  src: expimg,
+  // src: expimg,
 })`
   width: 271px;
   height: 271px;
   margin-left: 16px;
   margin-top: 14px;
+  background-image: url(${(props) => props.url || expimg});
+  background-size: cover;
+  background-position: center;
 `;
 
 export const ExpInnerDiv = styled.div`
@@ -80,6 +84,8 @@ export const TagButton = styled.div`
   border-radius: 16px;
   opacity: 1;
   display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const TagButtonText = styled.div`
@@ -87,8 +93,6 @@ export const TagButtonText = styled.div`
   letter-spacing: 0.25px;
   color: #000000de;
   opacity: 1;
-  margin-top: 7px;
-  margin-left: 12px;
 `;
 
 export const TagButtonDelete = styled.div`
@@ -128,20 +132,23 @@ export const StarIcon = styled.img.attrs({
   width: 42px;
   height: 39px;
   position: absolute;
-  // top: 23px;
-  // right: 24px;
-  margin-top: 23px;
-  margin-left: 1657px;
+  top: 23px;
+  right: 24px;
+  opacity: ${(props) => (props.liked ? "1" : "0.5")};
 `;
 
-export const LikeButton = styled.div`
+export const LikeButton = styled.button`
+  border: none;
+  outline: none;
+  background: none;
+
   width: 131px;
   height: 55px;
   border: 1px solid #000000;
   border-radius: 4px;
   opacity: 1;
-  margin-top: 224px;
-  margin-left: 555px;
+  // margin-top: 224px;
+  // margin-left: 555px;
   display: flex;
   text-align: center;
   align-items: center;
@@ -159,7 +166,11 @@ export const LikeButton = styled.div`
   }
 `;
 
-export const PurchaseButton = styled.div`
+export const PurchaseButton = styled.button`
+  border: none;
+  outline: none;
+  background: none;
+
   width: 130px;
   height: 55px;
   background: #ee00001f 0% 0% no-repeat padding-box;
@@ -169,8 +180,8 @@ export const PurchaseButton = styled.div`
   display: flex;
   text-align: center;
   align-items: center;
-  margin-top: 224px;
-  margin-left: 20px;
+  // margin-top: 224px;
+  // margin-left: 20px;
 
   > span {
     text-align: center;
