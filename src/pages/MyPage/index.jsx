@@ -4,8 +4,10 @@ import Header from "../../components/ListPage-Header";
 import Navbar from "../../components/ListPage-Navbar";
 import Footer from "../../components/Footer";
 import ListPageProfileCard from "../../components/ListPage-ProfileCard";
+import PageLayout from "../../components/PageLayout";
+import NeedToLogin from "../../mobile/verify";
 
-const MyPage = () => {
+const MyPageComponent = () => {
   const [isModal, setIsModal] = useState(false);
 
   const showModal = () => {
@@ -61,8 +63,8 @@ const MyPage = () => {
       {/* 모달창 코드*/}
       {isModal && <Modal />}
 
-      <Header />
-      <Navbar />
+      {/* <Header />
+      <Navbar /> */}
       <styled.Wrapper>
         <styled.ProfileBox>
           <styled.ProfileImg />
@@ -168,6 +170,13 @@ const MyPage = () => {
       </styled.Wrapper>
       <Footer />
     </styled.Container>
+  );
+};
+const MyPage = () => {
+  return NeedToLogin(
+    <PageLayout>
+      <MyPageComponent />
+    </PageLayout>
   );
 };
 

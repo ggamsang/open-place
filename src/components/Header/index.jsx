@@ -57,14 +57,14 @@ const Header = (props) => {
       {loggedIn ? (
         <>
           <styled.NotificationIcon />
-          <styled.EmailIcon />
+          <styled.EmailIcon onClick={() => goto("MESSAGE")} />
           <styled.RegistBox>
             <styled.Register onClick={() => goto("CREATE-ITEM-DESKTOP")}>
               {/* <styled.RegisterIcon /> */}
               <styled.RegisterText>경험등록</styled.RegisterText>
             </styled.Register>
             <styled.Nickname onClick={() => goto("MY-PAGE")}>
-              <styled.NicknameIcon src={props?.userInfo?.l_img}/>
+              <styled.NicknameIcon src={props?.userInfo?.l_img} />
               <styled.NicknameText>
                 {props?.userInfo?.nick_name || "닉네임"}
               </styled.NicknameText>
