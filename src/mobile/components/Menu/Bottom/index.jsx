@@ -39,14 +39,22 @@ const Wrapper = styled.div`
   }
 
   .login {
-    pading: 0;
+    padding: 0;
     margin: 0;
-    width: 113px;
+    margin-bottom: 5px;
+    /* width: 113px;
     height: 26px;
     background-image: url(${shapeLogin});
     background-position: center center;
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; */
+
+    width: 106px;
+    height: 26px;
+    background: #8E8A85 0% 0% no-repeat padding-box;
+    box-shadow: 1px 1px 3px #00000029;
+    border-radius: 30px 0px;
+    opacity: 1;
 
     display: flex;
     justify-content: center;
@@ -107,7 +115,7 @@ const Wrapper = styled.div`
     height: 75px;
     transform: translate(-50%, -20%);
     &.notloggedin {
-      top: -2O%;
+      top: -20%;
     }
   }
   ul {
