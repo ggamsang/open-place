@@ -29,6 +29,7 @@ const SearchBox = styled.div`
   .img_arrow {
     width: ${27}px;
     height: ${19}px;
+    rotate: -90deg;
   }
 
   .searchWrap {
