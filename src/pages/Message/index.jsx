@@ -3,6 +3,8 @@ import * as styled from "./styles";
 import Header from "../../components/ListPage-Header";
 import Navbar from "../../components/ListPage-Navbar";
 import Footer from "../../components/Footer";
+import NeedToLogin from "../../mobile/verify";
+import PageLayout from "../../components/PageLayout";
 
 const UserChat = () => {
   return (
@@ -20,12 +22,11 @@ const UserChat = () => {
     </styled.UserChat>
   );
 };
-
-const MessagePage = () => {
+const Message = () => {
   return (
     <styled.Container>
-      <Header />
-      <Navbar />
+      {/* <Header />
+      <Navbar /> */}
       <styled.MessageText>메세지</styled.MessageText>
       <styled.MessageBox>
         <span>닉네임/경험</span>
@@ -77,8 +78,14 @@ const MessagePage = () => {
           </styled.SendMessageDiv>
         </styled.ChatWindow>
       </styled.Wrapper>
-      <Footer />
     </styled.Container>
+  );
+};
+const MessagePage = () => {
+  return NeedToLogin(
+    <PageLayout>
+      <Message />
+    </PageLayout>
   );
 };
 

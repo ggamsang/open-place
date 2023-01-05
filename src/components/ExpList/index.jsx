@@ -2,39 +2,46 @@ import React, { useEffect, useState } from "react";
 import * as styled from "./styles";
 import ProfileCard from "../ProfileCard";
 import host from "src/config";
-import { authGET, TokenName } from "../../constants";
-import { GetSession } from "../../mobile/modules";
 
-const RecentExpList = () => {
+const ExpList = ({
+  type = "play",
+  page = 0,
+  keyword = null,
+  category = type,
+  sort = null,
+  tags = [],
+}) => {
   const [list, setList] = useState([]);
   const getExpListRequest = () => {
-    const url = `${host}/user/visited`;
-    GetSession(TokenName).then((token) => {
-      fetch(url, {
-        headers: { "Content-Type": "application/json" },
-        method: authGET(token),
+    const url = `${host}/item/${page}/${category}/${
+      sort || "update"
+    }/${keyword}`;
+    fetch(url, {
+      headers: { "Content-Type": "application/json" },
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setList(data);
       })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          setList(data);
-        });
-      // .catch((e) => console.error(e));
-    });
+      .catch((e) => console.error(e));
   };
   useEffect(() => {
     getExpListRequest();
   }, []);
+  useEffect(() => {
+    getExpListRequest();
+  }, [sort, keyword, page]);
 
   return (
     <styled.Container>
       <styled.TopListContainer>
-        {list.length === 0 && <p>최근방문한 경험아이템이 없습니다.</p>}
-        {/* {list?.length > 0 &&
-          list.map((item) => <ProfileCard key={item.uid} {...item} />)} */}
+        {list?.length > 0 &&
+          list.map((item) => <ProfileCard key={item.uid} {...item} />)}
       </styled.TopListContainer>
     </styled.Container>
   );
 };
 
-export default RecentExpList;
+export default ExpList;
