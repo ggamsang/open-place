@@ -2,7 +2,7 @@ import React from "react";
 import * as styled from "./styles";
 import PageLayout from "../../components/PageLayout";
 import ExpList from "../../components/ExpList";
-import ListPageFilter from "src/components/ListPageFilter";
+import ListPageFilter from "../../components/ListPageFilter";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
