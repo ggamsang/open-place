@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import host from "../../config";
 import { goto } from "../../utils/navigator";
 import Logo from "../Commons/Logo";
 import * as styled from "./styles";
@@ -6,10 +7,28 @@ import * as styled from "./styles";
 const Header = (props) => {
   const [keyword, setKeyword] = useState("");
   const [loggedIn, setLoggedIn] = useState(props?.loggedIn);
+  const [listening, setListening] = useState(false);
+  const [facts, setFacts] = useState([]);
+
+  useEffect(() => {
+    if (!listening) {
+      const events = new EventSource(`${host}/events`, {
+        hearbeatTimeout: 59000,
+      });
+      events.onmessage = (event) => {
+        console.log(event);
+        // const parsedData = JSON.parse(event.data);
+        // setFacts((facts) => facts.concat(parsedData));
+      };
+      setListening(true);
+    }
+  }, [listening, facts]);
 
   useEffect(() => {
     setLoggedIn(props?.loggedIn);
   }, [props]);
+  
+  console.log({ facts });
 
   return (
     <styled.Container>
