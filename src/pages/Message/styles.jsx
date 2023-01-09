@@ -243,14 +243,20 @@ export const SendMessageDiv = styled.div`
 export const ChatInputBox = styled.div`
   width: 1136px;
   height: 60px;
-  background: #e9e9e9 0% 0% no-repeat padding-box;
+  background: #E9E9E9 0% 0% no-repeat padding-box;
   border-radius: 10px;
   opacity: 1;
+  outline: 1px solid gray;
+  box-sizing: border-box;
+  padding: 3px;
+  overflow: hidden auto;
 `;
 
-export const SendButton = styled.div`
+export const SendButton = styled.button`
   width: 100px;
   height: 50px;
+  outline: none;
+  background: transparent;
   border: 1px solid #ff0000;
   opacity: 1;
   display: flex;

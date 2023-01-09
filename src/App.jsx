@@ -63,7 +63,9 @@ function App() {
           <Route path="/sharer/detail" element={<ExpertDetailPage />} />
 
           {/* 메시지 페이지 */}
-          <Route path="/message" element={<Message />} />
+          <Route path="/message" element={<Message />}>
+            <Route path=":id" element={<Message />} />
+          </Route>
 
           {/* 경험상세 페이지 – 1, 경험등록/수정 페이지 , 라이브경험 */}
           <Route path="/exp/:id" element={<ExpDetailPage />} />
