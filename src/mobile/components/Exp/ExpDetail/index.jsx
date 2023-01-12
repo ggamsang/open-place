@@ -240,7 +240,11 @@ class ExpDetail extends React.Component {
                 </div>
                 <div className="detail">
                   <span style={{ marginRight: "14px" }} className="price">
-                    ₩ {(expDetail && expDetail.price) || "dummy"}
+                    {expDetail
+                      ? expDetail.price === 0
+                        ? "무료"
+                        : "₩ " + expDetail.price
+                      : ""}
                   </span>
                   <img
                     style={{
