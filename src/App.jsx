@@ -36,7 +36,7 @@ function App() {
             <Route index element={<SearchPage />} />
             <Route path=":keyword" element={<SearchPage />} />
           </Route>
-
+ 
           {/* 경험리스트 페이지 */}
           {["play", "make", "learn"].map((path, index) => (
             <Route path={path} key={index}>

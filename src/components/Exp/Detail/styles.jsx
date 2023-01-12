@@ -217,25 +217,6 @@ export const DetailsText = styled.div`
   vertical-align: middle;
 `;
 
-export const ReviewText = styled.div`
-  text-align: center;
-  font: normal normal 900 44px/52px Pretendard;
-  letter-spacing: 0px;
-  color: #000000;
-  opacity: 1;
-  margin-top: 28px;
-`;
-
-export const ReviewDiv = styled.div`
-  width: 1695px;
-  height: 430px;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 6px 7px 9px #00000029;
-  border: 1px solid #979797;
-  border-radius: 32px;
-  opacity: 1;
-  margin-top: 22px;
-`;
 
 export const BoardText = styled.div`
   text-align: center;

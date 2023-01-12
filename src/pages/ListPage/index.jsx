@@ -15,7 +15,7 @@ const ListPage = ({ type }) => {
     <PageLayout>
       <styled.ListWrapper>
         {/* filter */}
-        <ListPageFilter onChange={handleChange} />
+        <ListPageFilter type={type} onChange={handleChange} />
         {/* list */}
         <styled.ListContainer>
           <ExpList type={type} {...filter} />
