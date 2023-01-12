@@ -9,7 +9,7 @@ import { useState } from "react";
 import { GetSession } from "../../mobile/modules";
 import DateFormat from "../../mobile/modules/DateFormat";
 import { useRef } from "react";
-import Socket from "../../mobile/modules/Socket";
+// import Socket from "../../mobile/modules/Socket";
 import { useParams } from "react-router-dom";
 
 const UserChat = ({ nick_name, create_at, message, url }) => {
@@ -71,17 +71,18 @@ const MessageDetail = ({ sent, selected, user_id }) => {
   const [detail, setDetail] = useState([]);
   const [opponent, setOpponent] = useState(null);
   const [more, noMore] = useState(true);
-  const socket = new Socket("message")
-    .emit("alive", {
-      gid: selected,
-      uid: user_id,
-    })
-    .once("chat", (chat) => {
-      console.log("chat:", chat, detail);
-    });
+  const socket = null;
+  //  new Socket("message")
+  //   .emit("alive", {
+  //     gid: selected,
+  //     uid: user_id,
+  //   })
+  //   .once("chat", (chat) => {
+  //     console.log("chat:", chat, detail);
+  //   });
   useEffect(() => {
     return () => {
-      socket.close();
+      socket && socket.close();
       console.log("unmount");
     };
   }, []);
@@ -160,12 +161,13 @@ const MessageDetail = ({ sent, selected, user_id }) => {
   const send = () => {
     const text = document.getElementById("box");
     if (text.innerHTML) {
-      socket.emit("chat", {
-        gid: selected,
-        uid: user_id,
-        text: text.innerHTML,
-        create_at: new Date().getTime(),
-      });
+      socket &&
+        socket.emit("chat", {
+          gid: selected,
+          uid: user_id,
+          text: text.innerHTML,
+          create_at: new Date().getTime(),
+        });
       // console.log(text.innerHTML);
       text.innerHTML = "";
       sent();

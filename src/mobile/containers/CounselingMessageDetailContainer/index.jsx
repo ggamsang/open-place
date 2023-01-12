@@ -5,7 +5,7 @@ import {
   GetMessageOpponentInfoRequest,
   GetCounselingMessageGroupRequest,
 } from "../../actions/Message";
-import Socket from "../../modules/Socket";
+// import Socket from "../../modules/Socket";
 import CounselingMessageDetail from "../../components/CounselingMessageDetail";
 
 class CounselingMessageDetailContainer extends React.Component {
@@ -19,7 +19,7 @@ class CounselingMessageDetailContainer extends React.Component {
   }
 
   connectAndSetupSocketServer = (detail) => {
-    this.socket = new Socket("counseling");
+    // this.socket = new Socket("counseling");
     if (this.socket) {
       this.socket.emit("alive", {
         gid: detail.group_id,
