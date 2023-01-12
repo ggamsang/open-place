@@ -270,17 +270,15 @@ const ExpDetailWrapper = ({ loggedIn, item_id, userInfo }) => {
   console.log({ detail });
   return (
     <styled.Main>
-      {detail && <ExpReview {...detail} />}
-      {/* 
       <ExpInfo
         {...detail}
         onCLickedBuyButton={handleClickedBuyButton}
         onClickedLikeButton={handleClickedLikeButton}
       />
       {detail?.detail && <ExpDetail {...detail} />}
+      {detail && <ExpReview {...detail} />}
       <ExpBoard {...detail} />
-      <OtherThings {...detail} /> 
-      */}
+      <OtherThings {...detail} />
     </styled.Main>
   );
 };
