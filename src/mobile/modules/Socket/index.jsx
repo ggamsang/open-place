@@ -8,6 +8,10 @@ export default class Socket {
       transports: ["websocket", "polling", "flashsocket"],
     });
   }
+  componentDidMount() {
+    console.log(host);
+  }
+
   emit = (e, cf) => this.socket.emit(e, cf);
   on = (e, cf) => this.socket.on(e, cf);
 }
