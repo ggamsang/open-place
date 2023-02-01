@@ -20,7 +20,6 @@ import LoadingPage from "./pages/Loading";
 import * as styled from "./styles";
 import RegisterExpertPage from "./pages/User/Expert/Register";
 import ExpertDetailPage from "./pages/User/Expert/Detail";
-import LiveExpDetailPage from "./pages/Exp/Live";
 import BuyExpPage from "./pages/Exp/Buy";
 
 function App() {
@@ -71,7 +70,6 @@ function App() {
           <Route path="/exp/:id" element={<ExpDetailPage />} />
           <Route path="/exp/add" element={<ExpAddPage />} />
           <Route path="/exp/:id/edit" element={<ExpEditPage />} />
-          <Route path="/live/:id" element={<LiveExpDetailPage />} />
           <Route path="/buy/:id" element={<BuyExpPage />} />
           {/* loading-page */}
           <Route path="/loading" element={<LoadingPage />} />

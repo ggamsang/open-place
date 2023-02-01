@@ -14,7 +14,7 @@ function LiveExpDetail({ live_id, userInfo }) {
   const [gamepoint, setGamePoint] = useState(null);
   const [url, setUrl] = useState("");
   const gotoplaylist = () => goto("PLAY", "1/null");
-  const socket = io("https://place.opensrcdesign.com/waiting", {
+  const socket =null;/* io("https://place.opensrcdesign.com/waiting", {
     path: "/socket.io",
     transports: ["websocket", "polling", "flashsocket"],
   })
@@ -44,7 +44,7 @@ function LiveExpDetail({ live_id, userInfo }) {
     .on("close-room", () => {
       alert("게임이 종료되었습니다.\n 놀기 페이지로 이동합니다.");
       gotoplaylist();
-    });
+    }); */
   socket && socket.emit("standby", { room: live_id });
   const RequestJoin = () => {
     socket &&
