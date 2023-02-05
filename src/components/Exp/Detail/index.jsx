@@ -8,6 +8,7 @@ import host from "../../../config";
 import { GET, POST, DELETE, TokenName } from "../../../constants";
 import { GetSession } from "../../../mobile/modules";
 import { goto } from "../../../utils/navigator";
+import { ReviewList as ExpReview } from "../../Review/ReviewList";
 
 const ExpInfo = ({
   onCLickedBuyButton,
@@ -44,7 +45,9 @@ const ExpInfo = ({
             ))}
           </styled.NameAndTagsDiv>
 
-          <styled.Price>{price}원</styled.Price>
+          <styled.Price>
+            {price !== undefined ? (price === 0 ? "무료" : price + "원") : ""}
+          </styled.Price>
 
           <NumRate />
         </styled.ExpInnerDiv>
@@ -66,12 +69,6 @@ const ExpDetail = () => (
   <>
     <styled.ReviewText>상세정보</styled.ReviewText>
     <styled.DetailsDiv></styled.DetailsDiv>
-  </>
-);
-const ExpReview = () => (
-  <>
-    <styled.ReviewText>리뷰</styled.ReviewText>
-    <styled.ReviewDiv />
   </>
 );
 const ExpBoard = () => (
@@ -270,6 +267,7 @@ const ExpDetailWrapper = ({ loggedIn, item_id, userInfo }) => {
   // update_time: "2022-06-23T11:04:29.000Z";
   // user_id: 11;
 
+  console.log({ detail });
   return (
     <styled.Main>
       <ExpInfo
@@ -277,8 +275,8 @@ const ExpDetailWrapper = ({ loggedIn, item_id, userInfo }) => {
         onCLickedBuyButton={handleClickedBuyButton}
         onClickedLikeButton={handleClickedLikeButton}
       />
-      <ExpDetail {...detail} />
-      <ExpReview {...detail} />
+      {detail?.detail && <ExpDetail {...detail} />}
+      {detail && <ExpReview {...detail} />}
       <ExpBoard {...detail} />
       <OtherThings {...detail} />
     </styled.Main>

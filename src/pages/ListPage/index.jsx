@@ -2,7 +2,7 @@ import React from "react";
 import * as styled from "./styles";
 import PageLayout from "../../components/PageLayout";
 import ExpList from "../../components/ExpList";
-import ListPageFilter from "src/components/ListPageFilter";
+import ListPageFilter from "../../components/ListPageFilter";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -15,7 +15,7 @@ const ListPage = ({ type }) => {
     <PageLayout>
       <styled.ListWrapper>
         {/* filter */}
-        <ListPageFilter onChange={handleChange} />
+        <ListPageFilter type={type} onChange={handleChange} />
         {/* list */}
         <styled.ListContainer>
           <ExpList type={type} {...filter} />

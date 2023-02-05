@@ -20,7 +20,6 @@ import LoadingPage from "./pages/Loading";
 import * as styled from "./styles";
 import RegisterExpertPage from "./pages/User/Expert/Register";
 import ExpertDetailPage from "./pages/User/Expert/Detail";
-import LiveExpDetailPage from "./pages/Exp/Live";
 import BuyExpPage from "./pages/Exp/Buy";
 
 function App() {
@@ -36,7 +35,7 @@ function App() {
             <Route index element={<SearchPage />} />
             <Route path=":keyword" element={<SearchPage />} />
           </Route>
-
+ 
           {/* 경험리스트 페이지 */}
           {["play", "make", "learn"].map((path, index) => (
             <Route path={path} key={index}>
@@ -63,13 +62,14 @@ function App() {
           <Route path="/sharer/detail" element={<ExpertDetailPage />} />
 
           {/* 메시지 페이지 */}
-          <Route path="/message" element={<Message />} />
+          <Route path="/message" element={<Message />}>
+            <Route path=":id" element={<Message />} />
+          </Route>
 
           {/* 경험상세 페이지 – 1, 경험등록/수정 페이지 , 라이브경험 */}
           <Route path="/exp/:id" element={<ExpDetailPage />} />
           <Route path="/exp/add" element={<ExpAddPage />} />
           <Route path="/exp/:id/edit" element={<ExpEditPage />} />
-          <Route path="/live/:id" element={<LiveExpDetailPage />} />
           <Route path="/buy/:id" element={<BuyExpPage />} />
           {/* loading-page */}
           <Route path="/loading" element={<LoadingPage />} />

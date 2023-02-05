@@ -5,12 +5,12 @@ import {
   GetMessageOpponentInfoRequest,
 } from "../../actions/Message";
 import MessageDetail from "../../components/MessageDetail";
-import Socket from "../../modules/Socket";
+// import Socket from "../../modules/Socket";
 
 class MessageDetailContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.socket = new Socket("message");
+    this.socket = null; //new Socket("message");
     this.state = { online: false, more: true, newchat: null };
     this.send = this.send.bind(this);
   }
@@ -22,21 +22,25 @@ class MessageDetailContainer extends React.Component {
       this.props.GetMessageOpponentInfoRequest(token, group_id);
     }
     if (userInfo != null && props.userInfo === null) {
-      this.socket.emit("alive", {
-        gid: this.props.group_id,
-        uid: userInfo.uid,
-      });
-      this.socket.on("hello", () => {
-        this.setState({ online: true });
-      });
-      this.socket.on("bye", () => {
-        this.setState({ online: false });
-      });
-      this.socket.on("chat", (chat) => {
-        this.setState({
-          newchat: chat,
+      this.socket &&
+        this.socket.emit("alive", {
+          gid: this.props.group_id,
+          uid: userInfo.uid,
         });
-      });
+      this.socket &&
+        this.socket.on("hello", () => {
+          this.setState({ online: true });
+        });
+      this.socket &&
+        this.socket.on("bye", () => {
+          this.setState({ online: false });
+        });
+      this.socket &&
+        this.socket.on("chat", (chat) => {
+          this.setState({
+            newchat: chat,
+          });
+        });
       return true;
     }
   }
@@ -52,6 +56,7 @@ class MessageDetailContainer extends React.Component {
   };
 
   send = (text) =>
+    this.socket &&
     this.socket.emit("chat", {
       gid: this.props.group_id,
       uid: this.props.userInfo.uid,
