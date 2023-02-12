@@ -34,7 +34,7 @@ import MyPaidExpDetailPage from "desktop/pages/MyPaidExpDetailPage";
 import BuyPage from "desktop/pages/BuyPage";
 
 const Wrapper = styled.main`
-  border: 1px solid gray;
+  // border: 1px solid gray;
   margin: auto;
   max-width: 1920px;
   width: max-content;
@@ -55,6 +55,8 @@ function App() {
           <Route path="myPage" element={<MyDetailPage />}>
             <Route path=":id" element={<MyDetailChild />} />
           </Route>
+          <Route path="signin" element={<SignInPage />} />
+          <Route path="signup" element={<SignUpPage />} />
 
           <Route path="community" element={<CommunityPage />} />
           <Route path="community/:id" element={<CommunityDetailPage />} />
@@ -66,8 +68,6 @@ function App() {
 
           <Route path="notice/:id" element={<NoticeDetailPage />} />
           <Route path="intro" element={<IntroPage />} />
-          <Route path="login" element={<SignInPage />} />
-          <Route path="join" element={<SignUpPage />} />
           <Route path="findPW" element={<FindPWPage />} />
 
           <Route path="paidExp/:id" element={<MyPaidExpDetailPage />} />

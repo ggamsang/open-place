@@ -239,9 +239,7 @@ export class InputTag extends Component {
           value={this.state.value}
         />
         <ShowWarning />
-        <TagList >
-          {TagBox}
-        </TagList>
+        <TagList>{TagBox}</TagList>
       </React.Fragment>
     );
   }

@@ -12,7 +12,7 @@ import Fade from "react-reveal/Fade";
 import { goto } from "navigator";
 
 const Wrapper = styled.div`
-  width: 100%;
+  width: 1920px;
   height: 100vh;
   background: linear-gradient(205deg, #3a58f5, #3a58f5);
   .box {
@@ -44,11 +44,10 @@ const Wrapper = styled.div`
     align-items: center;
   }
   .checkBoxWrap {
-    width: 100%;
-    height: ${resolution(100)}px;
+    width: max-content;
     display: flex;
-    margin: 0px 10vw;
     flex-direction: column;
+    align-items: center;
   }
   .buttonWrap {
     width: 100%;
@@ -190,10 +189,18 @@ class SignUp extends Component {
     this.setState({ agree2: !this.state.agreeAll });
   };
   onClickAgree1 = () => {
-    this.setState({ agree1: !this.state.agree1 });
+    this.setState({ agree1: !this.state.agree1 }, () => {
+      if (this.state.agree1 !== this.state.agree2 && this.state.agree2) {
+        this.setState({ agreeAll: false });
+      }
+    });
   };
   onClickAgree2 = () => {
-    this.setState({ agree2: !this.state.agree2 });
+    this.setState({ agree2: !this.state.agree2 }, () => {
+      if (this.state.agree1 !== this.state.agree2 && this.state.agree1) {
+        this.setState({ agreeAll: false });
+      }
+    });
   };
 
   render() {
@@ -202,7 +209,7 @@ class SignUp extends Component {
         <Wrapper>
           <div className="box alignCenter justifyCenter">
             <Logo
-              onClickEvent={() => (window.location.href = "/login")}
+              onClickEvent={() => (window.location.href = "/signin")}
               type="small"
               text={"OPEN PLACE"}
             />
@@ -270,7 +277,7 @@ class SignUp extends Component {
                 />
                 <div className="text_">이미 계정이 있으신가요?</div>
                 <GradientButton
-                  onClickEvent={() => (window.location.href = "/login")}
+                  onClickEvent={() => (window.location.href = "/signin")}
                   style={{ marginBottom: "20px" }}
                   text="로그인"
                   width={292}
@@ -343,19 +350,25 @@ class SignUp extends Component {
               </div>
               <div className="checkBoxWrap">
                 <CheckBoxNormal
-                  style={{ marginLeft: "15vw", marginBottom: "13px" }}
+                  width={12}
+                  height={12}
+                  style={{ marginBottom: "13px" }}
                   text="전체동의"
                   value={this.state.agreeAll}
                   onClickEvent={this.onClickAllAgree}
                 />
                 <CheckBoxNormal
-                  style={{ marginLeft: "15vw", marginBottom: "13px" }}
+                  width={12}
+                  height={12}
+                  style={{ marginBottom: "13px" }}
                   text="이용약관"
                   value={this.state.agree1}
                   onClickEvent={this.onClickAgree1}
                 />
                 <CheckBoxNormal
-                  style={{ marginLeft: "15vw", marginBottom: "13px" }}
+                  width={12}
+                  height={12}
+                  style={{ marginBottom: "13px" }}
                   text="개인정보 수집 및 이용 (선택)"
                   value={this.state.agree2}
                   onClickEvent={this.onClickAgree2}
@@ -374,7 +387,7 @@ class SignUp extends Component {
                 />
                 <div className="text_">이미 계정이 있으신가요?</div>
                 <GradientButton
-                  onClickEvent={() => (window.location.href = "/login")}
+                  onClickEvent={() => (window.location.href = "/signin")}
                   style={{ marginBottom: "20px" }}
                   text="로그인"
                   width={292}

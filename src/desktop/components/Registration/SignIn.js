@@ -11,9 +11,10 @@ import CheckBoxNormal from "desktop/components/Commons/CheckBox/CheckBoxNormal";
 import cookie from "react-cookies";
 
 const Wrapper = styled.div`
-  width: 100%;
+  width: 1920px;
   height: 100vh;
   background: linear-gradient(205deg, #3a58f5, #3a58f5);
+  
   .box {
     width: 100%;
     display: flex;
