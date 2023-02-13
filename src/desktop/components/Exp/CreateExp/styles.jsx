@@ -65,6 +65,10 @@ export const ThumbnailImg = styled.div`
     opacity: 1;
     text-align: center;
   }
+  img {
+    width: 388px;
+    height: 388px;
+  }
 `;
 
 export const InfoBox = styled.div`

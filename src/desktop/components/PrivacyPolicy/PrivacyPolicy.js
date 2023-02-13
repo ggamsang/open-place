@@ -1,62 +1,30 @@
 import React from "react";
 import styled from "styled-components";
-import { WIDTH } from "constant";
-import SearchForm from "desktop/components/Commons/Search/SearchForm";
-import { resolution } from "desktop/commons/resolution";
-import back_arrow from "resources/Iconly-Bold-left-arrow.svg";
 
 const Wrapper = styled.div`
   width: 100%;
   .blanker {
     height: 44px;
   }
-  .gradient {
-    width: 100%;
-    height: 133px;
-    background: linear-gradient(69deg, #501b1b, #655ffa, #d30e0e);
-    background-size: 200% 200%;
-    background-position: top right;
-    .header {
-      height: 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-sizing: border-box;
-      padding: 0px 20px;
-      margin-top: 18px;
-      .arrow_box {
-        width: ${resolution(27)}px;
-        display: flex;
-        justify-content: center;
-        margin-right: 10px;
-      }
-      .img_arrow {
-        width: ${resolution(27)}px;
-        height: ${resolution(19)}px;
-      }
-      .title {
-        color: white;
-        font-family: Pretendard;
-        font-weight: 400;
-        font-size: 24px;
-      }
-    }
-  }
-  .search_wrap {
-    width: 100%;
-    box-sizing: border-box;
-    padding-top: 42px;
+  .title {
+    margin: auto;
+    width: max-content;
+    font: normal normal 700 25px/30px Pretendard;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
   }
   .terms {
     margin: auto;
     margin-top: 15px;
-    width: ${WIDTH}px;
-    background-color: black;
+    padding: 15px;
+    width: 94%;
+    background-color: white;
     border-radius: 35px 35px 0 0;
     .text {
       padding: 29px;
       font-family: Pretendard;
-      color: white;
+      color: gray;
       .big {
         font-weight: 500;
         font-size: 17px;
@@ -84,42 +52,23 @@ class PrivacyPolicy extends React.Component {
 
     return (
       <Wrapper>
-        <div className="gradient">
-          <div className="search_wrap">
-            <SearchForm isMain={true} />
-          </div>
-          <div className="header">
-            <img
-              alt="arrow"
-              onClick={this.onClickBack}
-              src={back_arrow}
-              className="img_arrow"
-            />
-            <div className="title">개인정보 보호정책</div>
-            <div className="img_arrow" />
-          </div>
-        </div>
-        {/* <div className='gradient'>
-          <div className='blanker'>&nbsp;</div>
-          <SearchForm />
-          <div className='title'>개인정보 보호정책</div>
-        </div> */}
-
+        <div className="title">개인정보 보호정책</div>
         <div className="terms">
           <div className="text">
-            ○○○ 개인정보보호정책
+            <span style={{ color: "red" }}>오픈소스디자인</span>{" "}
+            개인정보보호정책
             <br />
-            ○○○주식회사(○○○corp.com 이하 "회사"라 함)는 이용자들의
-            개인정보보호를 매우 중요시하며, 이용자가 회사의 서비스(이하 "○○○
-            서비스" 또는 "○○○"라 함)를 이용함과 동시에 온라인상에서 회사에
-            제공한 개인정보가 보호 받을 수 있도록 최선을 다하고 있습니다. 이에
-            회사는 통신비밀보호법, 전기통신사업법,
-            정보통신망이용촉진등에관한법률 등 정보통신서비스제공자가 준수하여야
-            할 관련 법규상의 개인정보보호 규정 및 정보통신부가 제정한
-            개인정보보호지침을 준수하고 있습니다. 회사는 개인정보 보호정책을
-            통하여 이용자들이 제공하는 개인정보가 어떠한 용도와 방식으로
-            이용되고 있으며 개인정보보호를 위해 어떠한 조치가 취해지고 있는지
-            알려드립니다.
+            <span style={{ color: "red" }}>오픈소스디자인</span>{" "}
+            주식회사(○○○corp.com 이하 "회사"라 함)는 이용자들의 개인정보보호를
+            매우 중요시하며, 이용자가 회사의 서비스(이하 "○○○ 서비스" 또는
+            "○○○"라 함)를 이용함과 동시에 온라인상에서 회사에 제공한 개인정보가
+            보호 받을 수 있도록 최선을 다하고 있습니다. 이에 회사는
+            통신비밀보호법, 전기통신사업법, 정보통신망이용촉진등에관한법률 등
+            정보통신서비스제공자가 준수하여야 할 관련 법규상의 개인정보보호 규정
+            및 정보통신부가 제정한 개인정보보호지침을 준수하고 있습니다. 회사는
+            개인정보 보호정책을 통하여 이용자들이 제공하는 개인정보가 어떠한
+            용도와 방식으로 이용되고 있으며 개인정보보호를 위해 어떠한 조치가
+            취해지고 있는지 알려드립니다.
             <br />
             회사는 개인정보 보호정책을 홈페이지 첫 화면에 공개함으로써
             이용자들이 언제나 용이하게 보실 수 있도록 조치하고 있습니다.

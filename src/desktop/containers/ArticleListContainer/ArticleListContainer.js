@@ -1,36 +1,41 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 import ArticleList from "desktop/components/ArticleList";
 import {
-    GetArticleListRequest,
-    GetTotalArticleCountRequest
+  GetArticleListRequest,
+  GetTotalArticleCountRequest,
 } from "actions/Community";
 
 class ArticleListContainer extends React.Component {
-    GetList = (page) => {
-        this.props.GetArticleListRequest(page);
-    }
-    GetTotalCount = () => {
-        this.props.GetTotalArticleCountRequest();
-    }
+  GetList = (page) => {
+    this.props.GetArticleListRequest(page);
+  };
+  GetTotalCount = () => {
+    this.props.GetTotalArticleCountRequest();
+  };
 
-    render() {
-        return (<React.Fragment>
-            <ArticleList
-                {...this.props}
-                GetTotalCount={this.GetTotalCount}
-                GetList={this.GetList} />
-
-        </React.Fragment>)
-    }
+  render() {
+    return (
+      <React.Fragment>
+        <ArticleList
+          {...this.props}
+          GetTotalCount={this.GetTotalCount}
+          GetList={this.GetList}
+        />
+      </React.Fragment>
+    );
+  }
 }
 
 const mapStateToProps = (state) => ({
-    articles: state.Community.status.articles,
-    total: state.Community.status.total,
+  articles: state.Community.status.articles,
+  total: state.Community.status.total,
 });
 const mapDispatchToProps = (dispatch) => ({
-    GetArticleListRequest: (page) => dispatch(GetArticleListRequest(page)),
-    GetTotalArticleCountRequest: () => dispatch(GetTotalArticleCountRequest()),
+  GetArticleListRequest: (page) => dispatch(GetArticleListRequest(page)),
+  GetTotalArticleCountRequest: () => dispatch(GetTotalArticleCountRequest()),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleListContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ArticleListContainer);
