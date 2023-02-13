@@ -464,7 +464,7 @@ class Buy extends React.Component {
     console.log(taglist);
     return (
       <Wrapper>
-        <ExpInfoText>경험정보</ExpInfoText>
+        <ExpInfoText>구매페이지</ExpInfoText>
         <ExpInfoDiv>
           <ExpImg url={detail?.thumbnail} />
 

@@ -12,5 +12,5 @@ export default connect(
     isLoggedIn: state.Authentication.status.isLoggedIn,
     userInfo: state.Authentication.status.userInfo,
   }),
-  () => {}
+  null
 )(MainContainer);

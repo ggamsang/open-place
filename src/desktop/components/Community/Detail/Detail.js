@@ -1,11 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
-import SearchForm from 'desktop/components/Commons/Search/SearchForm';
-import { WIDTH } from 'constant';
-import CommentListContainer from 'desktop/containers/CommentListContainer';
-import DateFormat from 'modules/DateFormat';
-import { InputFile } from 'desktop/components/Commons/Input';
-import ButtonNormal from 'desktop/components/Commons/Button/ButtonNormal';
+import React from "react";
+import styled from "styled-components";
+import SearchForm from "desktop/components/Commons/Search/SearchForm";
+import { WIDTH } from "constant";
+import CommentListContainer from "desktop/containers/CommentListContainer";
+import DateFormat from "modules/DateFormat";
+import { InputFile } from "desktop/components/Commons/Input";
+import ButtonNormal from "desktop/components/Commons/Button/ButtonNormal";
 
 const Wrapper = styled.div`
   margin-bottom: 150px; // 임시로 입력된 값입니다.
@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   .gradient {
     width: 100%;
     height: 131px;
-    background: linear-gradient(69deg, #501B1B, #655FFA, #D30E0E);
+    background: linear-gradient(69deg, #501b1b, #655ffa, #d30e0e);
     background-size: 200% 200%;
     background-position: top right;
 
@@ -24,7 +24,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+
     .title {
       margin: auto;
       margin-top: 18px;
@@ -51,25 +51,24 @@ const Wrapper = styled.div`
     margin-bottom: 50px;
     width: ${WIDTH}px;
   }
-  .row{
+  .row {
     margin: auto;
     width: ${WIDTH}px;
     margin-bottom: 10px;
   }
-  .buttonWrap{
-    width:100%;
-    display:flex;
-    justify-content:center;
-    margin-top:20px;
-    margin-bottom:20px;
+  .buttonWrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
-
 `;
 const Button = styled.button`
   margin: auto;
   width: 155px;
   height: 35px;
-  background: ${prop => prop.active ? "#FF0000" : "#707070"};
+  background: ${(prop) => (prop.active ? "#FF0000" : "#707070")};
   box-shadow: 2px 2px 3px #00000019;
   border-radius: 10px;
   border: none;
@@ -85,7 +84,7 @@ const Button = styled.button`
     line-height: 18px;
     font-family: Pretendard;
     letter-spacing: 0px;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 `;
 const DetailWrapper = styled.div`
@@ -99,7 +98,7 @@ const DetailWrapper = styled.div`
   padding: 10px 8px;
   background-color: white;
   border-radius: 10px;
-  border: 0.5px solid #E9E9E9;
+  border: 0.5px solid #e9e9e9;
 
   .width70fix {
     width: 70px;
@@ -164,66 +163,63 @@ const DetailWrapper = styled.div`
 `;
 
 export default class CommunityDetail extends React.Component {
-
   render() {
     console.log(this.props);
     const {
       id,
       uid = null,
-      title = '게시글 제목',
-      text = '게시글 내용',
-      nickname = '작성자',
-      create_time = '2022-01-01',
+      title = "게시글 제목",
+      text = "게시글 내용",
+      nickname = "작성자",
+      create_time = "2022-01-01",
     } = this.props;
     const files = this.props.files && JSON.parse(this.props.files);
 
-    return (<Wrapper>
+    return (
+      <Wrapper>
+        <div className="title">게시글 상세</div>
 
-      <div className='gradient'>
-        <div className='blanker'>&nbsp;</div>
-        <SearchForm />
-        <div className='title'>게시글 상세</div>
-      </div>
+        <DetailWrapper>
+          <div className="label bottom28">{title}</div>
 
-      <DetailWrapper>
-        <div className='label bottom28'>{title}</div>
-
-        <div className='center row'>
-          <div className='row'>
-            <div className='label split width70fix'>작성자</div>
-            <div className='author'>{nickname}</div>
+          <div className="center row">
+            <div className="row">
+              <div className="label split width70fix">작성자</div>
+              <div className="author">{nickname}</div>
+            </div>
+            <div className="row">
+              <div className="label split width70fix">작성일자</div>
+              <div className="date">{DateFormat(create_time)}</div>
+            </div>
           </div>
-          <div className='row'>
-            <div className='label split width70fix'>작성일자</div>
-            <div className='date'>{DateFormat(create_time)}</div>
+
+          <div className="content" dangerouslySetInnerHTML={{ __html: text }} />
+        </DetailWrapper>
+        {files && files.length > 0 && files[0] != null ? (
+          <div className="row">
+            <div>파일 첨부</div>
+            <InputFile files={files} />
           </div>
-        </div>
+        ) : null}
+        {this.props.userInfo &&
+          this.props.userInfo.uid === this.props.user_id && (
+            <div className="buttonWrap">
+              <ButtonNormal
+                onClickEvent={() =>
+                  (window.location.href = `/community/modify/${this.props.uid}`)
+                }
+                width={165}
+                height={35}
+                radius={10}
+                fontSize={15}
+                bgColor={"red"}
+                text="수정하기"
+              />
+            </div>
+          )}
 
-        <div className='content' dangerouslySetInnerHTML={{ __html: text }} />
-
-      </DetailWrapper>
-      {files &&
-        <div className='row'>
-          <div>파일 첨부</div>
-          <InputFile files={files} />
-        </div>}
-      {
-        this.props.userInfo &&
-        this.props.userInfo.uid === this.props.user_id &&
-        <div className='buttonWrap'>
-          <ButtonNormal
-            onClickEvent={()=>window.location.href=`/community/modify/${this.props.uid}`}
-            width={165}
-            height={35}
-            radius={10}
-            fontSize={15}
-            bgColor={"red"}
-            text="수정하기"
-          />
-        </div>
-      }
-
-      <CommentListContainer id={id} />
-    </Wrapper >);
+        <CommentListContainer id={id} />
+      </Wrapper>
+    );
   }
 }

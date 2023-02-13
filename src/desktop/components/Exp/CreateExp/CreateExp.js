@@ -296,3 +296,157 @@ class CreateExp extends React.Component {
   }
 }
 export default CreateExp;
+
+// <Wrapper>
+//   <div className="header">
+
+//     <div className="title">경험등록하기</div>
+//   </div>
+//   <div className="content">
+//     <div className="whitebox">
+//       {this.state.thumbnail === null ? (
+//         <div className="img_" />
+//       ) : (
+//         <img src={this.state.thumbnail} className="img_" alt="profile" />
+//       )}
+
+//       <div className="wrap">
+//         <input
+//           hidden
+//           onChange={this.onChangeThumbnail}
+//           id="file"
+//           type="file"
+//           accept="image/png, image/bmp, image/jpeg, image/jpg"
+//         />
+//         <label htmlFor="file">
+//           <ButtonNormal
+//             disabled={true}
+//             width={194}
+//             height={30}
+//             radius={10}
+//             fontSize={15}
+//             color={"red"}
+//             bgColor={"white"}
+//             border={"2px solid red"}
+//             text="썸네일 등록"
+//           />
+//         </label>
+//       </div>
+//     </div>
+
+//     <div className="row">
+//       <div className="label">
+//         제목<sup style={{ color: "red" }}>*</sup>
+//       </div>
+//       <InputNormal
+//         onChangeValue={this.onChangeTitle}
+//         value={this.state.title}
+//         placeholder={"제목을 입력하세요"}
+//         radius={10}
+//         width={245}
+//         height={31}
+//         fontSize={14}
+//         color={"#E9E9E9"}
+//       />
+//     </div>
+
+//     <div className="row">
+//       <div className="label">
+//         태그<sup style={{ color: "red" }}>*</sup>
+//       </div>
+//       <div>
+//         <InputTag getValue={this.handleAddTag} width={"245"} />
+//       </div>
+//     </div>
+
+//     <div className="row">
+//       <div className="label">
+//         카테고리<sup style={{ color: "red" }}>*</sup>
+//       </div>
+//       <DropDownNormal
+//         value={this.state.category - 1}
+//         onChangeValue={this.onChangeCategory}
+//         width={150}
+//         height={31}
+//         radius={10}
+//         options={this.props.category}
+//       />
+//     </div>
+
+//     <div className="row">
+//       <div className="label">설명</div>
+//       <TextAreaNormal
+//         onChangeValue={this.onChangeInfo}
+//         width={245}
+//         height={100}
+//         color={"#E9E9E9"}
+//         fontSize={15}
+//         radius={10}
+//         placeholder="설명을 입력하세요"
+//         value={this.state.info}
+//       />
+//     </div>
+
+//     <div className="row">
+//       <div className="label">가격</div>
+//       <div>
+//         <InputPrice onChangeValue={this.onChangePrice} name="price" />
+//       </div>
+//     </div>
+
+//     <div className="row">
+//       <div className="label">
+//         경험 유형<sup style={{ color: "red" }}>*</sup>
+//       </div>
+//       <DropDownNormal
+//         value={this.state.exp_type}
+//         onChangeValue={this.onChangeExpType}
+//         width={150}
+//         height={31}
+//         radius={10}
+//         options={this.props.exp_type}
+//       />
+//     </div>
+
+//     <div className="row">
+//       <ExpType
+//         type={this.state.exp_type}
+//         getContent={this.onChangeContent}
+//         getFiles={this.onFileChange}
+//         return={(value) => this.setState({ exp_type_detail: value })}
+//       />
+//     </div>
+
+//     {/* <div className='row' style={{ flexDirection: "column" }}>
+//       <div className='label'>경험 컨텐츠</div>
+//       <div style={{ backgroundColor: "white" }}>
+//         <Editor value={this.state.content} config={config} onChange={(value) => this.onChangeContent(value)} />
+//       </div>
+//     </div>
+
+//     <div className=''>
+//       <InputFile display={true} getValue={this.onFileChange} accept="" />
+//     </div> */}
+//     <div className="buttonWrap">
+//       <ButtonNormal
+//         onClickEvent={() => goto("BACK")}
+//         width={165}
+//         height={35}
+//         radius={10}
+//         fontSize={15}
+//         bgColor={"#707070"}
+//         text="취소하기"
+//         style={{ marginRight: "25px" }}
+//       />
+//       <ButtonNormal
+//         onClickEvent={this.onClickOK}
+//         width={165}
+//         height={35}
+//         radius={10}
+//         fontSize={15}
+//         bgColor={"red"}
+//         text="등록하기"
+//       />
+//     </div>
+//   </div>
+// </Wrapper>

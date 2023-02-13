@@ -16,7 +16,7 @@ pm2.sh
 
 # production
 /build
-
+depoly-dev.sh
 # misc
 .DS_Store
 .env.local

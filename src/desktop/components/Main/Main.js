@@ -2,6 +2,8 @@ import React from "react";
 import TopItemList from "desktop/components/TopItemList";
 import styled from "styled-components";
 import Fade from "react-reveal/Fade";
+import Banner from "../Banner";
+import ShortCutListContainer from "desktop/containers/ShortCutListContainer";
 
 const MainWrapper = styled.div`
   display: flex;
@@ -30,14 +32,21 @@ const Shortcut = styled.div`
   margin-top: 20px;
 `;
 
-function Main() {
+function Main({ userInfo }) {
   return (
     <MainWrapper>
-      {/* <Fade> */}
+      <Fade>
+        <Banner />
+      </Fade>
+      {userInfo && (
+        <>
+          <Shortcut>바로가기</Shortcut>
+          <ShortCutListContainer />
+        </>
+      )}
       <MainContainer>
         <TopItemList />
       </MainContainer>
-      {/* </Fade> */}
     </MainWrapper>
   );
 }

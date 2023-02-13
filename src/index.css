@@ -108,3 +108,15 @@ button {
   font-weight: bold;
   src: url("resources/fonts/Montserrat-Bold.ttf");
 }
+
+/* stick footer to bottom */
+body {
+  margin: 0;
+  background-color: #fafafa;
+}
+main {
+  min-height: calc(100vh - 4rem);
+}
+footer {
+  height: 4rem;
+}

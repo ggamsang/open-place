@@ -7,14 +7,15 @@ import Item from "../Item";
 const ScrollWrap = styled(List)`
   width: 100%;
   margin-top: 35px;
-  
+
   .wrapper_ {
     padding-bottom: 10px;
-    // width: 100vw;
+    width: 100%;
     display: grid;
     // grid-wrap: wrap;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 30px;
+
     padding: 0 20px;
     justify-content: space-around;
     margin-bottom: 77px;
@@ -23,7 +24,6 @@ const ScrollWrap = styled(List)`
   }
   justify-content: center;
   align-items: center;
-
 `;
 const NoData = styled.div`
   width: 100%;

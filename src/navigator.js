@@ -50,22 +50,26 @@ export const goto = (type, offset = null) => {
     case "MAIN":
       window.location.href = "/";
       break;
-
+    case "MOBILE-PLAY":
+      window.location.href = `/play/${offset}`;
+      break;
+    case "MOBILE-MAKE":
+      window.location.href = `/make/${offset}`;
+      break;
+    case "MOBILE-LEARN":
+      window.location.href = `/learn/${offset}`;
+      break;
     case "PLAY":
-      // window.location.href = `/play/${offset}`;
       window.location.href = `/play`;
       break;
     case "MAKE":
-      // window.location.href = `/make/${offset}`;
       window.location.href = `/make`;
       break;
     case "LEARN":
-      window.location.href = `/learn/${offset}`;
       window.location.href = `/learn`;
-
       break;
     case "SEARCH":
-      window.location.href = `/search/${offset}`;
+      window.location.href = `/search?${offset}`;
       break;
     case "COMMUNITY":
       window.location.href = "/community";

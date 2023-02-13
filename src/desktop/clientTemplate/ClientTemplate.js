@@ -3,11 +3,15 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import Header from "desktop/components/Menu/Header";
 import Navbar from "desktop/components/Navbar";
-import Footer from "desktop/components/Footer";
 
 const Wrapper = styled.div`
-  width: 100%;
+  width: ${1920}px;
+  // height: ${window.innerHeight}px;
+  margin: auto;
   position: relative;
+  border: 1px solid #eee;
+  background-color: white;
+
 `;
 class ClientTemplate extends Component {
   render() {
@@ -25,8 +29,6 @@ class ClientTemplate extends Component {
             loggedIn: isLoggedIn,
             userInfo: userInfo,
           })}
-
-        <Footer />
       </Wrapper>
     );
   }

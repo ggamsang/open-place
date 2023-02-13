@@ -42,7 +42,12 @@ const Navbar = () => {
         ) : (
           <>
             {fixed && (
-              <Logo type={"tiny"} onClickEvent={() => goto("MAIN", "")} />
+              <Logo
+                type={"tiny"}
+                onClickEvent={() =>
+                  window.scrollTo({ top: 0, behavior: "smooth" })
+                }
+              />
             )}
             <styled.MenuButton onClick={() => goto("MAKE", "")}>
               <styled.SideBarIcon1 />
@@ -54,7 +59,7 @@ const Navbar = () => {
             </styled.MenuButton>
             <styled.MenuButton onClick={() => goto("PLAY", "")}>
               <styled.SideBarIcon3 />
-              <styled.SideBarText>모여서놀기</styled.SideBarText>
+              <styled.SideBarText>놀기</styled.SideBarText>
             </styled.MenuButton>
             <styled.MenuButton onClick={() => goto("COMMUNITY")}>
               <styled.SideBarIcon4 />

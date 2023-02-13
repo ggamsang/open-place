@@ -189,7 +189,7 @@ class SignUp extends Component {
       <React.Fragment>
         <Wrapper>
           <div className='box alignCenter justifyCenter'>
-            <Logo onClickEvent={() => window.location.href = "/login"} type="small" text={"OPEN PLACE"} />
+            <Logo onClickEvent={() => window.location.href =  "/signin"} type="small" text={"OPEN PLACE"} />
           </div>
 
           {/*본인인증 */}
@@ -223,7 +223,7 @@ class SignUp extends Component {
                   }, 1000)
                 }} text="본인인증하기" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28} />
                 <div className="text_">이미 계정이 있으신가요?</div>
-                <GradientButton onClickEvent={() => window.location.href = "/login"} style={{ marginBottom: "20px" }} text="로그인" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28} />
+                <GradientButton onClickEvent={() => window.location.href =  "/signin"} style={{ marginBottom: "20px" }} text="로그인" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28} />
               </div>
             </div>
           </Fade>
@@ -269,7 +269,7 @@ class SignUp extends Component {
               <div className='buttonWrap'>
                 <GradientButton onClickEvent={() => this.SignUp()} text="가입하기" width={292} height={52} front={'#365AF1'} end={'#FF4343'} deg={270} radius={28} />
                 <div className="text_">이미 계정이 있으신가요?</div>
-                <GradientButton onClickEvent={() => window.location.href = "/login"} style={{ marginBottom: "20px" }} text="로그인" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28} />
+                <GradientButton onClickEvent={() => window.location.href =  "/signin"} style={{ marginBottom: "20px" }} text="로그인" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28} />
               </div>
             </div>
           </Fade>

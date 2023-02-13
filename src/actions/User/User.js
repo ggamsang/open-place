@@ -3,38 +3,44 @@ import host from "config";
 import { GET } from "constant";
 
 export const updateUserRequest = (user_id, data, token) => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(updateUser());
     const url = `${host}/user/update/${user_id}`;
     return fetch(url, {
       headers: {
         "x-access-token": token,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       method: "POST",
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
-      .then(res => res.json())
-      .then(res => res && dispatch(updateUserSuccess()))
-      .catch(err => dispatch(updateUserFailure(err)))
-  }
+      .then((res) => res.json())
+      .then((res) => res && dispatch(updateUserSuccess()))
+      .catch((err) => dispatch(updateUserFailure(err)));
+  };
 };
 const updateUser = () => ({ type: types.UPDATE_USER_PROFILE });
 const updateUserSuccess = () => ({ type: types.UPDATE_USER_PROFILE_SUCCESS });
-const updateUserFailure = (err) => ({ type: types.UPDATE_USER_PROFILE_FAILURE });
+const updateUserFailure = (err) => ({
+  type: types.UPDATE_USER_PROFILE_FAILURE,
+});
 
-export const getIsMyLikeRequest = (user_id,like_id,type) => {
+export const getIsMyLikeRequest = (user_id, like_id, type) => {
   return (dispatch) => {
-      const url = `${host}/user/like/${user_id}/${like_id}/${type}`;
-      console.log(url);
-      return fetch(url, GET)
-          .then(res => res.json())
-          .then(data => {
-              dispatch(getIsMyLikeSuccess(data))
-          }
-          )
-          .catch(error => dispatch(getIsMyLikeFailure()));
-  }
+    const url = `${host}/user/like/${user_id}/${like_id}/${type}`;
+    console.log(url);
+    return fetch(url, GET)
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch(getIsMyLikeSuccess(data));
+      })
+      .catch((error) => dispatch(getIsMyLikeFailure()));
+  };
 };
-const getIsMyLikeSuccess = (data) => ({ type: types.GET_USER_LIKE_THIS_SUCCESS, data: data });
-const getIsMyLikeFailure = (err) => ({ type: types.GET_USER_LIKE_THIS_FAILURE });
+const getIsMyLikeSuccess = (data) => ({
+  type: types.GET_USER_LIKE_THIS_SUCCESS,
+  data: data,
+});
+const getIsMyLikeFailure = (err) => ({
+  type: types.GET_USER_LIKE_THIS_FAILURE,
+});

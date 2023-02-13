@@ -11,10 +11,15 @@ import CheckBoxNormal from "desktop/components/Commons/CheckBox/CheckBoxNormal";
 import cookie from "react-cookies";
 
 const Wrapper = styled.div`
-  width: 1920px;
+  width: ${window.innerWidth}px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
   height: 100vh;
   background: linear-gradient(205deg, #3a58f5, #3a58f5);
-  
+
   .box {
     width: 100%;
     display: flex;
@@ -231,6 +236,8 @@ class SignIn extends Component {
           >
             <CheckBoxNormal
               id="saveid"
+              width={15}
+              height={15}
               style={{ marginRight: "15px" }}
               text="로그인 유지"
               value={this.state.saveID}
@@ -238,6 +245,8 @@ class SignIn extends Component {
             />
             <CheckBoxNormal
               id="savelogin"
+              width={15}
+              height={15}
               style={{ marginLeft: "15px" }}
               text="아이디 저장"
               value={this.state.saveLogin}

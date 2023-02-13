@@ -1,5 +1,5 @@
-import React from 'react';
-import Notice from 'desktop/components/Community';
+import React from "react";
+import Notice from "desktop/components/NoticeList";
 
 class NoticeContainer extends React.Component {
   render() {
@@ -7,7 +7,7 @@ class NoticeContainer extends React.Component {
       <React.Fragment>
         <Notice />
       </React.Fragment>
-    )
+    );
   }
 }
 

@@ -5,9 +5,10 @@ import logoRed from "resources/logo.png";
 import nicknameprofileimg from "resources/NicknameProfileImg.png";
 import notifications from "resources/notifications.png";
 import email from "resources/email.png";
+import NotificationContainer from "desktop/containers/NotificationContainer";
 // import zoom from "resources/zoom.png";
 // import { Icon } from "semantic-ui-react";
-
+import LoginProfileIcon from "resources/profile_icon_183860.svg"
 const Container = styled.div`
   width: 100%;
   max-width: 1920px;
@@ -152,12 +153,15 @@ const LoginText = styled.div`
   margin-left: 21.1px;
 `;
 const LoginIcon = styled.div`
-  width: 18px;
-  height: 22px;
+  width: 20px;
+  height: 25px;
   position: absolute;
   top: 9.75px;
   left: 32.2px;
-  background-color: white;
+  // background-color: white;
+  background-image: url(${LoginProfileIcon});
+  background-size: cover;
+  background-position: center center;
 `;
 const RegistBox = styled.div`
   display: flex;
@@ -259,7 +263,7 @@ class Header extends React.Component {
               (keyword.trimStart().trimEnd() === ""
                 ? alert("검색키워드를 입력하세요")
                 : true)
-                ? goto("SEARCH", keyword)
+                ? goto("SEARCH", "keyword=" + keyword)
                 : null
             }
             onChange={(e) => this.setKeyword(e.target.value.replace(".", ""))}
@@ -271,7 +275,8 @@ class Header extends React.Component {
 
         {loggedIn ? (
           <>
-            <NotificationIcon />
+            {/* <NotificationIcon /> */}
+            {userInfo && <NotificationContainer />}
             <EmailIcon onClick={() => goto("MESSAGE")} />
             <RegistBox>
               <Register onClick={() => goto("CREATE-ITEM-DESKTOP")}>

@@ -208,7 +208,7 @@ class FindPW extends Component {
           <Fade when={this.state.page2_1}>
             <div className='content' style={{ display: `${this.state.page2_1 === false ? "none" : "block"}` }}>
               <div className='box alignCenter justifyCenter'>
-                <Logo onClickEvent={() => window.location.href = "/login"} type="small" text={"OPEN PLACE"} />
+                <Logo onClickEvent={() => window.location.href =  "/signin"} type="small" text={"OPEN PLACE"} />
               </div>
 
               <div className="box column alignCenter">
@@ -250,7 +250,7 @@ class FindPW extends Component {
             <div className='content' style={{ display: `${this.state.page2_2 === false ? "none" : "block"}` }}>
 
               <div className='box alignCenter justifyCenter'>
-                <Logo onClickEvent={() => window.location.href = "/login"} type="small" text={"OPEN PLACE"} />
+                <Logo onClickEvent={() => window.location.href =  "/signin"} type="small" text={"OPEN PLACE"} />
               </div>
 
               <div className="box column alignCenter justifyCenter" style={{ height: "35vh" }}>
@@ -288,13 +288,13 @@ class FindPW extends Component {
           <Fade when={this.state.page3}>
             <div className='content' style={{ display: `${this.state.page3 === false ? "none" : "block"}` }}>
               <div className='box alignCenter justifyCenter'>
-                <Logo onClickEvent={() => window.location.href = "/login"} type="big" />
+                <Logo onClickEvent={() => window.location.href =  "/signin"} type="big" />
               </div>
               <div className='result_text'>
                 {this.state.message}
               </div>
               <div className='buttonWrap justifyCenter' style={{ height: "40vh" }} >
-                <GradientButton onClickEvent={() => window.location.href = "/login"} style={{ marginBottom: "20px" }} text="로그인" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28} />
+                <GradientButton onClickEvent={() => window.location.href =  "/signin"} style={{ marginBottom: "20px" }} text="로그인" width={292} height={52} front={'#FF4343'} end={'#365AF1'} deg={270} radius={28} />
                 <GradientButton onClickEvent={() => window.location.href = "/join"} style={{ marginBottom: "20px" }} text="회원가입" width={292} height={52} front={'#365AF1'} end={'#FF4343'} deg={270} radius={28} />
                 <div className='login_button_wrap'>
                   <ImageButton style={{ marginRight: "6px", marginLeft: "6px" }} width={50} height={50} color={"#1877F2"} radius={25} />

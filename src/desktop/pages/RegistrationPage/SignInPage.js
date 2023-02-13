@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import SignInContainer from 'desktop/containers/RegistrationContainer/SignInContainer';
+import React, { Component } from "react";
+import SignInContainer from "desktop/containers/RegistrationContainer/SignInContainer";
 
 class SignInPage extends Component {
   render() {

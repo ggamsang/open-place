@@ -6,7 +6,7 @@ function ExpListPage() {
   let params = useParams();
 
   return (
-    <ClientTemplate i_dont_need_footer={true}>
+    <ClientTemplate>
       <PlayExpListContainer sort={params.sort} keyword={params.keyword} />
     </ClientTemplate>
   );

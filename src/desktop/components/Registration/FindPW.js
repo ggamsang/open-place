@@ -11,10 +11,10 @@ import ImageButton from "desktop/components/Commons/Button/ImageButton";
 
 import Fade from "react-reveal/Fade";
 import host from "config";
-import { noauthPOST,  } from "constant";
+import { noauthPOST } from "constant";
 
 const Wrapper = styled.div`
-  width: 100%;
+  width: ${window.innerWidth}px;
   height: 100vh;
   background: linear-gradient(205deg, #3a58f5, #3a58f5);
   .box {
@@ -250,7 +250,7 @@ class FindPW extends Component {
             >
               <div className="box alignCenter justifyCenter">
                 <Logo
-                  onClickEvent={() => (window.location.href = "/login")}
+                  onClickEvent={() => (window.location.href =  "/signin")}
                   type="small"
                   text={"OPEN PLACE"}
                 />
@@ -307,7 +307,7 @@ class FindPW extends Component {
             >
               <div className="box alignCenter justifyCenter">
                 <Logo
-                  onClickEvent={() => (window.location.href = "/login")}
+                  onClickEvent={() => (window.location.href =  "/signin")}
                   type="small"
                   text={"OPEN PLACE"}
                 />
@@ -374,7 +374,7 @@ class FindPW extends Component {
             >
               <div className="box alignCenter justifyCenter">
                 <Logo
-                  onClickEvent={() => (window.location.href = "/login")}
+                  onClickEvent={() => (window.location.href =  "/signin")}
                   type="big"
                 />
               </div>
@@ -384,7 +384,7 @@ class FindPW extends Component {
                 style={{ height: "40vh" }}
               >
                 <GradientButton
-                  onClickEvent={() => (window.location.href = "/login")}
+                  onClickEvent={() => (window.location.href =  "/signin")}
                   style={{ marginBottom: "20px" }}
                   text="로그인"
                   width={292}

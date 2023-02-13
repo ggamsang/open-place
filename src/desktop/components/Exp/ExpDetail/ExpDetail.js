@@ -27,12 +27,34 @@ class ExpDetail extends React.Component {
     this.onClickLike = this.onClickLike.bind(this);
     this.onClickModify = this.onClickModify.bind(this);
   }
+  visited = () => {
+    const url = `${host}/user/visited/${this.props.expDetail.uid}`;
+    console.log(url, this.props.token);
+    fetch(
+      url, //POST(this.props.token, { test: "test" }))
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": this.props.token,
+        },
+        // JSON.stringify 안하면 400오류
+        body: JSON.stringify({ test: "" }),
+      }
+    )
+      .then((r) => r.json())
+      .then((detail) => console.log(detail));
+  };
+  componentDidMount() {
+    // this.visited();
+  }
   componentDidUpdate(prevProps) {
     if (this.props.expDetail) {
       if (
         JSON.stringify(prevProps.expDetail) !==
         JSON.stringify(this.props.expDetail)
       ) {
+        this.props.token && this.visited();
         this.setState({ like: this.props.expDetail.isLike });
       }
     }

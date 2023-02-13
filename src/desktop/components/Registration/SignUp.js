@@ -12,7 +12,7 @@ import Fade from "react-reveal/Fade";
 import { goto } from "navigator";
 
 const Wrapper = styled.div`
-  width: 1920px;
+  width: ${window.innerWidth}px;
   height: 100vh;
   background: linear-gradient(205deg, #3a58f5, #3a58f5);
   .box {

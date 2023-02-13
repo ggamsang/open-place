@@ -6,7 +6,7 @@ import PrivacyPolicyContainer from 'desktop/containers/PrivacyPolicyContainer';
 class PrivacyPolicyPage extends React.Component {
   render() {
     return (
-      <ClientTemplate i_dont_need_footer={true}>
+      <ClientTemplate  >
         <PrivacyPolicyContainer />
       </ClientTemplate>
     )

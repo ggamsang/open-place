@@ -18,7 +18,7 @@ class ExpItemList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sortType: this.props.sort,
+      sortType: this.props.sort || "update",
       filter: { sort: "", tags: [] },
     };
   }
@@ -26,16 +26,25 @@ class ExpItemList extends React.Component {
     this.getList(0);
   }
   handleChange = (data) => {
-    console.log(data);
-    
-    //this.setState({ ...this.state.filter, ...data });
+    // return this.props.getExpListRequest(
+    //   0,
+    //   this.props.type,
+    //   data.sort,
+    //   this.props.keyword
+    // );
+    // return;
+    // this.setState({ sortType: data.sort }, () => {
+    //   console.log(this.state);
+    // });
+    // this.getList(0);
+    this.setState({ ...this.state.filter, ...data });
   };
 
   getList = (page) => {
     return this.props.getExpListRequest(
       page,
       this.props.type,
-      GetSORTYPE(this.props.sort),
+      this.state.sortType, //GetSORTYPE(this.state.sortType),
       this.props.keyword
     );
   };
@@ -50,14 +59,16 @@ class ExpItemList extends React.Component {
           item.taglist
             .replace("[", "")
             .replace("]", "")
+            .replace(new RegExp('"', "gi"), "")
             .split(",")
             .map((word) => tags.has(word) === false && tags.add(word));
       });
     console.log([...tags]);
+
     return (
       <ListWrapper>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          {[...tags].map((tag, index) => (
+          {[...tags].sort().map((tag, index) => (
             <div
               key={index}
               style={{
@@ -77,7 +88,7 @@ class ExpItemList extends React.Component {
         <ListPageFilter
           tags={[...tags]}
           type={type}
-          onChange={this.handleChange}
+          onChange={(d) => this.handleChange(d)}
         />
         {/* list */}
         <ListContainer>

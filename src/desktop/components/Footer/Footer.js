@@ -1,42 +1,45 @@
-import React from 'react';
-import styled from 'styled-components';
-import { goto } from 'navigator';
+import React from "react";
+import styled from "styled-components";
+import { goto } from "navigator";
 
 const Wrapper = styled.div`
-    height: 80px;
-    background-color: #FFF;
-    display: flex;
-    justify-content: space-between;
-    margin: 0;
-    padding: 0;
-    padding-right: 14px;
-    padding-left: 13px;
-    padding-bottom: 14px;
-    
-    .sub-wrapper {
-        margin-top: 5px;
-    }
-    .text-main {
-      font-family: Montserrat;
-      font-weight: 500;
-      font-style: italic;
-      font-size: 16px;
-      text-align: left;
-      line-height: 19px;
-      height: 19px;
-      width: max-content;
-      color: #2F2651;
-    }
-    .text-sub {
-        font-family: Pretendard;
-        font-weight: 300;
-        font-size: 14px;
-        text-align: left;
-        line-height: 17px;
-        height: 17px;
-        width: max-content;
-        color: #A19DAF;
-    }
+  width: ${1920}px;
+  margin: auto;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  // margin: 0;
+  box-sizing: border-box;
+  padding: 10px;
+  // padding-right: 14px;
+  // padding-left: 13px;
+  // padding-bottom: 14px;
+  margin-top: 10px;
+
+  .sub-wrapper {
+    margin-top: 5px;
+  }
+  .text-main {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 16px;
+    text-align: left;
+    line-height: 19px;
+    height: 19px;
+    width: max-content;
+    color: #2f2651;
+  }
+  .text-sub {
+    font-family: Pretendard;
+    font-weight: 300;
+    font-size: 14px;
+    text-align: left;
+    line-height: 17px;
+    height: 17px;
+    width: max-content;
+    color: #a19daf;
+  }
 `;
 const strOpenPlace = "OPEN Place";
 const strUsePolicy = "이용약관";
@@ -47,33 +50,51 @@ const strAndroid = "Android";
 const strAbout = "About";
 const strCommunity = "Community";
 const strCompany = "Company";
+const strSupport = "Support";
+const strNotice = "공지사항";
 
 class Footer extends React.Component {
-
-    render() {
-        return (<Wrapper>
-            <div>
-                <div className='text-main'>{strOpenPlace}</div>
-                <div className='sub-wrapper'>
-                    <div className="text-sub" onClick={() => goto("TERMS")}>{strUsePolicy}</div>
-                    <div className="text-sub" onClick={() => goto("PRIVACY")}>{strSecurity}</div>
-                </div>
+  render() {
+    return (
+      <Wrapper>
+        <div>
+          <div className="text-main">{strOpenPlace}</div>
+          <div className="sub-wrapper">
+            <div className="text-sub" onClick={() => goto("TERMS")}>
+              {strUsePolicy}
             </div>
-            <div>
-                <div className='text-main'>{strPlatform}</div>
-                <div className='sub-wrapper'>
-                    <div className="text-sub">{strWeb}</div>
-                    <div className="text-sub">{strAndroid}</div>
-                </div>
+            <div className="text-sub" onClick={() => goto("PRIVACY")}>
+              {strSecurity}
             </div>
-            <div>
-                <div className='text-main'>{strAbout}</div>
-                <div className='sub-wrapper'>
-                    <div className="text-sub">{strCommunity}</div>
-                    <div className="text-sub" onClick={() => goto("INTRO")}>{strCompany}</div>
-                </div>
+          </div>
+        </div>
+        <div>
+          <div className="text-main">{strPlatform}</div>
+          <div className="sub-wrapper">
+            <div className="text-sub">{strWeb}</div>
+            <div className="text-sub">{strAndroid}</div>
+          </div>
+        </div>
+        <div>
+          <div className="text-main">{strAbout}</div>
+          <div className="sub-wrapper">
+            <div className="text-sub">{strCommunity}</div>
+            <div className="text-sub" onClick={() => goto("INTRO")}>
+              {strCompany}
             </div>
-        </Wrapper>)
-    }
+          </div>
+        </div>
+        <div>
+          <div className="text-main">{strSupport}</div>
+          <div className="sub-wrapper">
+            {/* <div className="text-sub">{strNotice}</div> */}
+            <div className="text-sub" onClick={() => goto("NOTICE")}>
+              {strNotice}
+            </div>
+          </div>
+        </div>
+      </Wrapper>
+    );
+  }
 }
 export default Footer;

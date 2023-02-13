@@ -1,9 +1,12 @@
 // REACT //
 import React from "react";
-import { BrowserRouter, Route, Routes, } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainPage from "mobile/pages/MainPage";
-import CommunityPage, { CommunityWritePage, CommunityDetailPage, CommunityModifyPage }
-  from "mobile/pages/CommunityPage";
+import CommunityPage, {
+  CommunityWritePage,
+  CommunityDetailPage,
+  CommunityModifyPage,
+} from "mobile/pages/CommunityPage";
 import { NoticeDetailPage } from "mobile/pages/NoticePage";
 import SignInPage from "mobile/pages/RegistrationPage/SignInPage";
 import SignUpPage from "mobile/pages/RegistrationPage/SignUpPage";
@@ -23,7 +26,7 @@ import SearchPage from "mobile/pages/SearchPage/SearchPage";
 import MessageListPage from "mobile/pages/MessagePage";
 import MessageDetailPage from "mobile/pages/MessagePage/Detail";
 import ExpDetailPage from "mobile/pages/ExpPage/ExpDetailPage/ExpDetailPage";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 import MakeExpListPage from "mobile/pages/ExpPage/MakeExpListPage ";
 import PlayExpListPage from "mobile/pages/ExpPage/PlayExpListPage";
@@ -57,8 +60,8 @@ const Wrapper = styled.main`
     // height: 100%;
     margin: auto;
     background-color: white;
-    @media only screen and (min-width: 320px) and (max-width:500px){
-      width:100%;
+    @media only screen and (min-width: 320px) and (max-width: 500px) {
+      width: 100%;
     }
   }
 `;
@@ -74,12 +77,15 @@ function App() {
             <Route path="community" element={<CommunityPage />} />
             <Route path="community/:id" element={<CommunityDetailPage />} />
             <Route path="community/write" element={<CommunityWritePage />} />
-            <Route path="community/modify/:id" element={<CommunityModifyPage />} />
+            <Route
+              path="community/modify/:id"
+              element={<CommunityModifyPage />}
+            />
 
             <Route path="notice/:id" element={<NoticeDetailPage />} />
             <Route path="intro" element={<IntroPage />} />
-            <Route path="login" element={<SignInPage />} />
-            <Route path="join" element={<SignUpPage />} />
+            <Route path="signin" element={<SignInPage />} />
+            <Route path="signup" element={<SignUpPage />} />
             <Route path="findPW" element={<FindPWPage />} />
 
             <Route path="play/:sort/:keyword" element={<PlayExpListPage />} />
@@ -90,10 +96,13 @@ function App() {
               <Route path=":id" element={<MyDetailChild />} />
             </Route>
             <Route path="paidExp/:id" element={<MyPaidExpDetailPage />} />
-            <Route path="buy/:id" element={<BuyPage/>} />
+            <Route path="buy/:id" element={<BuyPage />} />
             <Route path="terms" element={<TermsOfServicePage />} />
             <Route path="privacy" element={<PrivacyPolicyPage />} />
-            <Route path="search/:category/:sort/:keyword" element={<SearchPage />} />
+            <Route
+              path="search/:category/:sort/:keyword"
+              element={<SearchPage />}
+            />
             <Route path="createSharer" element={<CreateSharerPage />} />
             <Route path="modifySharer" element={<ModifySharerPage />} />
             <Route path="SharerDetail" element={<SharerDetailPage />}>
@@ -102,7 +111,7 @@ function App() {
             <Route path="modifyUser" element={<ModifyUserPage />} />
             <Route path="exp/:id" element={<ExpDetailPage />} />
             <Route path="createExp" element={<CreateExpPage />} />
-            <Route path="modifyExp" >
+            <Route path="modifyExp">
               <Route path=":id" element={<ModifyExpPage />} />
             </Route>
             <Route path="message" element={<MessageListPage />} />
@@ -112,7 +121,8 @@ function App() {
           </Routes>
         </BrowserRouter>
       </div>
-    </Wrapper>)
+    </Wrapper>
+  );
 }
 
 export default App;

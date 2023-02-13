@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import SearchForm from 'desktop/components/Commons/Search/SearchForm';
-import { WIDTH } from 'constant';
-import DateFormat from 'modules/DateFormat';
+import React from "react";
+import styled from "styled-components";
+import SearchForm from "desktop/components/Commons/Search/SearchForm";
+import { WIDTH } from "constant";
+import DateFormat from "modules/DateFormat";
 
 const Wrapper = styled.div`
   margin-bottom: 150px; // 임시로 입력된 값입니다.
@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   .gradient {
     width: 100%;
     height: 131px;
-    background: linear-gradient(69deg, #501B1B, #655FFA, #D30E0E);
+    background: linear-gradient(69deg, #501b1b, #655ffa, #d30e0e);
     background-size: 200% 200%;
     background-position: top right;
 
@@ -21,7 +21,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+
     .title {
       margin: auto;
       margin-top: 18px;
@@ -48,13 +48,12 @@ const Wrapper = styled.div`
     margin-bottom: 50px;
     width: ${WIDTH}px;
   }
-
 `;
 const Button = styled.button`
   margin: auto;
   width: 155px;
   height: 35px;
-  background: ${prop => prop.active ? "#FF0000" : "#707070"};
+  background: ${(prop) => (prop.active ? "#FF0000" : "#707070")};
   box-shadow: 2px 2px 3px #00000019;
   border-radius: 10px;
   border: none;
@@ -70,7 +69,7 @@ const Button = styled.button`
     line-height: 18px;
     font-family: Pretendard;
     letter-spacing: 0px;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 `;
 const DetailWrapper = styled.div`
@@ -84,7 +83,7 @@ const DetailWrapper = styled.div`
   padding: 10px 8px;
   background-color: white;
   border-radius: 10px;
-  border: 0.5px solid #E9E9E9;
+  border: 0.5px solid #e9e9e9;
 
   .width70fix {
     width: 70px;
@@ -152,39 +151,34 @@ export default class NoticeDetail extends React.Component {
   render() {
     const {
       // uid = null,
-      title = '공지사항 제목',
-      text = '공지사항 내용',
+      title = "공지사항 제목",
+      text = "공지사항 내용",
       // author = '작성자',
-      create_time = '2022-05-01'
+      create_time = "2022-05-01",
     } = this.props;
     console.log(this.props);
 
-    return (<Wrapper>
+    return (
+      <Wrapper>
+        <div className="title">공지사항 상세</div>
 
-      <div className='gradient'>
-        <div className='blanker'>&nbsp;</div>
-        <SearchForm />
-        <div className='title'>공지사항 상세</div>
-      </div>
+        <DetailWrapper>
+          <div className="label bottom28">{title}</div>
 
-      <DetailWrapper>
-        <div className='label bottom28'>{title}</div>
-
-        <div className='center row'>
-          <div className='row'>
-            <div className='label split width70fix'>작성자</div>
-            <div className='author'>관리자</div>
+          <div className="center row">
+            <div className="row">
+              <div className="label split width70fix">작성자</div>
+              <div className="author">관리자</div>
+            </div>
+            <div className="row">
+              <div className="label split width70fix">작성일자</div>
+              <div className="date">{DateFormat(create_time)}</div>
+            </div>
           </div>
-          <div className='row'>
-            <div className='label split width70fix'>작성일자</div>
-            <div className='date'>{DateFormat(create_time)}</div>
-          </div>
-        </div>
 
-        <div className='content'>{text}</div>
-
-      </DetailWrapper>
-
-    </Wrapper >);
+          <div className="content">{text}</div>
+        </DetailWrapper>
+      </Wrapper>
+    );
   }
 }
