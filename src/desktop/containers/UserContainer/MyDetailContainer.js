@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { goto } from "navigator";
 import { getSharerRequest } from "actions/Sharer/Sharer";
 import MyDetail from "desktop/components/User/MyDetail";
-
+import { SignOutRequest } from 'actions/Authentication';
 class MyDetailContainer extends Component {
   componentDidMount() {
     if (this.props.isLoggedIn) {
@@ -36,6 +36,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getSharerRequest: (user_id) => {
     dispatch(getSharerRequest(user_id));
+  },
+  SignOutRequest: () => {
+    dispatch(SignOutRequest());
   },
 });
 

@@ -84,6 +84,10 @@ class ExpDetail extends React.Component {
     //   this.props.likeExpRequest(this.props.token, data);
     // });
     const { item_id, expDetail, token } = this.props;
+    if (token == null) {
+      alert("로그인 후 가능합니다.");
+      return;
+    }
     if (expDetail.isLike === 0) {
       const url = `${host}/exp/${item_id}/like`;
       return fetch(url, POST(token))
@@ -198,11 +202,6 @@ class ExpDetail extends React.Component {
         {/*  */}
         <styled.ReviewText>리뷰</styled.ReviewText>
         <div className="reviewWrap">
-          <styled.WriteReviewButton
-            onClick={() => this.setState({ write: true })}
-          >
-            <span>리뷰 등록하기</span>
-          </styled.WriteReviewButton>
           <ReviewContainer
             write={this.state.write}
             onCloseWriteModal={() => this.setState({ write: false })}

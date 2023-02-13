@@ -62,8 +62,36 @@ const reviewdummy = [
     ],
   },
 ];
+const WriteReviewButton = styled.button`
+  border: none;
+  outline: none;
+  background: none;
+  margin-top: 15px;
+
+  width: max-content;
+  height: 55px;
+  background: #ee00001f 0% 0% no-repeat padding-box;
+  border: 1px solid #ee0000;
+  border-radius: 4px;
+  opacity: 1;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  padding: 0px 10px;
+  > span {
+    text-align: center;
+    // font: normal normal 500 25px/29px Pretendard;
+    font-size: 25px;
+    letter-spacing: 2.23px;
+    color: #ee0000;
+    text-transform: uppercase;
+    opacity: 1;
+    margin-left: 17px;
+  }
+`;
 const ReviewContainer = styled.div`
-  width: ${window.innerWidth - 310}px;
+  // width: ${window.innerWidth - 310}px;
+  width: calc(100% - 100px);
   height: 430px;
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 6px 7px 9px #00000029;
@@ -226,8 +254,8 @@ class ReviewList extends React.Component {
   }
 
   render() {
-    const { reviews = reviewdummy, userInfo, write } = this.props;
-    const { modify } = this.state;
+    const { reviews = reviewdummy, userInfo } = this.props;
+    const { modify, write } = this.state;
     console.log(reviews);
 
     return (
@@ -247,6 +275,11 @@ class ReviewList extends React.Component {
         )}
 
         <ReviewContainer>
+          {userInfo && (
+            <WriteReviewButton onClick={() => this.setState({ write: true })}>
+              <span>리뷰 등록하기</span>
+            </WriteReviewButton>
+          )}
           {reviews &&
             reviews.map(
               ({

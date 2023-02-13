@@ -19,7 +19,10 @@ class MyDetail extends Component {
   tab = (tab) => {
     goto(tab);
   };
-
+  onClickLogout = async () => {
+    await this.props.SignOutRequest();
+    goto("MAIN");
+  };
   render() {
     const { modal } = this.state;
     console.log(this.props);
@@ -70,7 +73,7 @@ class MyDetail extends Component {
             </styled.ModalWrapper>
           </>
         )}
-        {modal === NOTI && <></>}
+        {modal === NOTI && <>;</>}
         {/* // <Wrapper url={this.props.userInfo?.l_img || null}>
       //   <div className="header">
       //     <div className="searchbox">
@@ -218,7 +221,7 @@ class MyDetail extends Component {
               <div></div>
               <styled.TabButton onClick={this.tab("")}>관심</styled.TabButton>
               <div></div>
-              <styled.TabButton onClick={this.tab("")}>
+              <styled.TabButton onClick={() => this.onClickLogout()}>
                 로그아웃
               </styled.TabButton>
             </styled.CategoryBox>
