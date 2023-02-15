@@ -14,11 +14,15 @@ class MessageGroupContainer extends React.Component {
   }
 
   render() {
-    const { groups } = this.props;
+    const { groups, group_id } = this.props;
     console.log(groups);
     return (
       <>
-        <MesssGroupList groups={groups} getMore={this.GetList} />
+        <MesssGroupList
+          groups={groups}
+          group_id={group_id}
+          getMore={this.GetList}
+        />
       </>
     );
   }

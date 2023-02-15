@@ -1,5 +1,8 @@
 export const goto = (type, offset = null) => {
   switch (type) {
+    case "EXP":
+      window.location.href = "/exp/" + offset;
+      break;
     case "PRIVACY":
       window.location.href = "/privacy";
       break;

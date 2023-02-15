@@ -143,11 +143,12 @@ class ExpDetail extends React.Component {
             </styled.NameAndTagsDiv>
 
             <styled.Price>
-              {expDetail.price !== undefined
-                ? expDetail.price === 0
-                  ? "무료"
-                  : expDetail.price + "원"
-                : ""}
+              {expDetail.price > 0
+                ? new Intl.NumberFormat("ko-KR", {
+                    style: "currency",
+                    currency: "KRW",
+                  }).format(expDetail.price) + "원"
+                : "무료"}
             </styled.Price>
             <NumRate />
           </styled.ExpInnerDiv>

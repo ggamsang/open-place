@@ -351,7 +351,14 @@ const ProfileCard = ({ uid, title, category, price, score, url }) => {
             ? "만들기"
             : "카테고리"}
         </Category>
-        <Price>{price}원</Price>
+        <Price>
+          {price > 0
+            ? new Intl.NumberFormat("ko-KR", {
+                style: "currency",
+                currency: "KRW",
+              }).format(price) + "원"
+            : "무료"}
+        </Price>
         <ReviewWrapper score={score} />
         {/* <NumRate /> */}
       </TopLists>

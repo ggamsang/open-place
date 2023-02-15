@@ -8,14 +8,16 @@ class SearchContainer extends React.Component {
     super(props);
     this.state = { list: null };
   }
-  componentDidMount() {}
+  componentDidMount() {
+
+  }
   render() {
     console.log(this.props);
     const { list } = this.state;
     return (
       <SearchList
         {...this.props}
-        list={list}
+        // list={list}
         sort={this.props.sort}
         category={this.props.category}
         keyword={this.props.keyword}

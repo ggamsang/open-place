@@ -23,6 +23,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   // align-items: center;
+
 `;
 
 export const AddThumbnail = styled.div`
@@ -104,7 +105,6 @@ export const TitleDiv = styled.div`
   div:nth-child(2) {
     margin: 0;
     width: max-content;
-    border: 1px solid red;
     font: normal normal normal 20px/24px Pretendard;
     letter-spacing: 0px;
     color: #000000;
@@ -368,9 +368,13 @@ export const CategoryBox = styled.div`
   border: 2px solid #efefef;
   box-shadow: 2px 2px 5px #00000029;
   border-radius: 25px;
-  // margin-left: 47px;
+  box-sizing: border-box;
   margin-top: 26px;
   padding-top: 10px;
+  padding-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
   > p {
     text-align: center;
     font: normal normal 900 44px/52px Pretendard;
@@ -383,7 +387,7 @@ export const CategoryBox = styled.div`
 
 export const ExpDetailBox = styled.div`
   width: 1329px;
-  height: 280px;
+  min-height: 280px;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 2px solid #efefef;
   box-shadow: 2px 2px 5px #00000029;
@@ -391,6 +395,7 @@ export const ExpDetailBox = styled.div`
   margin-left: 40px;
   margin-top: 26px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   > span {
@@ -405,7 +410,7 @@ export const ExpDetailBox = styled.div`
 
 export const AddFile = styled.div`
   width: 1786px;
-  height: 665px;
+  min-height: 265px;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 2px solid #efefef;
   box-shadow: 2px 2px 5px #00000029;

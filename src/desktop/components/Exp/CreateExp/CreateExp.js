@@ -158,7 +158,6 @@ class CreateExp extends React.Component {
     };
 
     console.log(data);
-
     let file = {
       value: this.state.thumbnail,
       name: this.state.thumbnail_name,
@@ -172,8 +171,9 @@ class CreateExp extends React.Component {
     if (info === null || info === "") return alert("내용을 입력하세요");
 
     this.props.createExpRequest(data, this.props.token).then((data) => {
-      // console.log(data);
-      // window.history.go(-1);
+      alert("새로생성된 경험아이템으로 이동합니다.");
+      // goto("EXP", data.id);
+      goto("PLAY");
     });
   };
 
@@ -214,79 +214,125 @@ class CreateExp extends React.Component {
           <styled.InfoBox>
             <styled.TitleDiv>
               <div>제목</div>
-              <div>
-                <InputNormal
-                  onChangeValue={this.onChangeTitle}
-                  value={this.state.title}
-                  placeholder={"제목을 입력하세요"}
-                  radius={10}
-                  width={350}
-                  height={31}
-                  fontSize={20}
-                  color={"#E9E9E9"}
-                />
-              </div>
+              <InputNormal
+                onChangeValue={this.onChangeTitle}
+                value={this.state.title}
+                placeholder={"제목을 입력하세요"}
+                radius={10}
+                width={350}
+                height={31}
+                fontSize={20}
+                color={"#E9E9E9"}
+              />
             </styled.TitleDiv>
 
             <styled.CategoryDiv>
               <div>카테고리</div>
-              <styled.CategoryButton1>
+              <DropDownNormal
+                value={this.state.category}
+                onChangeValue={this.onChangeCategory}
+                width={250}
+                height={51}
+                radius={10}
+                color={"#E9E9E9"}
+                options={this.props.category.slice(0, 3)}
+              />
+
+              <DropDownNormal
+                // value={}
+                // margin={"100px"}
+                color={"#E9E9E9"}
+                onChangeValue={() => alert("개발중입니다.")}
+                width={250}
+                height={51}
+                radius={10}
+                options={this.props.category.slice(
+                  3,
+                  this.props.category.length - 1
+                )}
+              />
+              {/* <styled.CategoryButton1>
                 <span>대분류</span>
               </styled.CategoryButton1>
               <styled.CategoryButton2>
                 <span>소분류</span>
-              </styled.CategoryButton2>
+              </styled.CategoryButton2> */}
             </styled.CategoryDiv>
 
             <styled.TagDiv>
               <div>태그</div>
               <div>
-                <InputTag getValue={this.handleAddTag} width={"350"} />
+                <InputTag
+                  placeholder={"태그를 입력하세요."}
+                  getValue={this.handleAddTag}
+                  width={"350"}
+                />
               </div>
             </styled.TagDiv>
 
             <styled.DescriptionDiv>
               <div>설명</div>
-              <div>설명을 입력하세요</div>
+              <TextAreaNormal
+                onChangeValue={this.onChangeInfo}
+                width={245}
+                height={100}
+                color={"#E9E9E9"}
+                fontSize={15}
+                radius={10}
+                placeholder="설명을 입력하세요"
+                value={this.state.info}
+              />
             </styled.DescriptionDiv>
-            <styled.ExpTypeDiv>
+            {/* <styled.ExpTypeDiv>
               <div>경험유형</div>
               <styled.InputPriceDiv>
                 <span>가격을 입력하세요.</span>
               </styled.InputPriceDiv>
-            </styled.ExpTypeDiv>
+            </styled.ExpTypeDiv> */}
             <styled.PriceDiv>
               <styled.PriceDivText>가격</styled.PriceDivText>
-              <styled.PriceBox>10000</styled.PriceBox>
-              <span>원</span>
-              <styled.AddPrice>
+              {/* <styled.PriceBox>10000</styled.PriceBox> */}
+              {/* <span>원</span> */}
+              {/* <styled.AddPrice>
                 <styled.AddPriceButton>+ 1천</styled.AddPriceButton>
                 <styled.AddPriceButton>+ 1만</styled.AddPriceButton>
                 <styled.AddPriceButton>+ 5만</styled.AddPriceButton>
                 <styled.AddPriceButton>+ 10만</styled.AddPriceButton>
                 <styled.AddPriceButton>+ 100만</styled.AddPriceButton>
-              </styled.AddPrice>
+              </styled.AddPrice> */}
+              <InputPrice onChangeValue={this.onChangePrice} name="price" />
             </styled.PriceDiv>
           </styled.InfoBox>
         </styled.Wrapper>
         <styled.Wrapper>
           <styled.CategoryBox>
-            <p>일반</p>
-            <p>자문/상담</p>
-            <p>강의/강좌</p>
-            <p>모임</p>
-            <p>게임</p>
+            <p>경험 유형</p>{" "}
+            <DropDownNormal
+              value={this.state.exp_type}
+              onChangeValue={this.onChangeExpType}
+              width={250}
+              height={50}
+              radius={10}
+              color={"#CCC"}
+              options={this.props.exp_type}
+            />
           </styled.CategoryBox>
           <styled.ExpDetailBox>
             <span>경험유형 상세</span>
+            <ExpType
+              type={this.state.exp_type}
+              getContent={this.onChangeContent}
+              getFiles={this.onFileChange}
+              return={(value) => this.setState({ exp_type_detail: value })}
+            />
           </styled.ExpDetailBox>
         </styled.Wrapper>
-        <styled.AddFile></styled.AddFile>
+        {/* <styled.AddFile></styled.AddFile> */}
         <styled.Wrapper>
-          <styled.AddButton>
+          <styled.AddButton onClick={this.onClickOK}>
             <span>등록하기</span>
           </styled.AddButton>
-          <styled.CancelButton>
+          <styled.CancelButton onClick={() => goto("BACK")}>
             <span>취소하기</span>
           </styled.CancelButton>
         </styled.Wrapper>
@@ -296,157 +342,3 @@ class CreateExp extends React.Component {
   }
 }
 export default CreateExp;
-
-// <Wrapper>
-//   <div className="header">
-
-//     <div className="title">경험등록하기</div>
-//   </div>
-//   <div className="content">
-//     <div className="whitebox">
-//       {this.state.thumbnail === null ? (
-//         <div className="img_" />
-//       ) : (
-//         <img src={this.state.thumbnail} className="img_" alt="profile" />
-//       )}
-
-//       <div className="wrap">
-//         <input
-//           hidden
-//           onChange={this.onChangeThumbnail}
-//           id="file"
-//           type="file"
-//           accept="image/png, image/bmp, image/jpeg, image/jpg"
-//         />
-//         <label htmlFor="file">
-//           <ButtonNormal
-//             disabled={true}
-//             width={194}
-//             height={30}
-//             radius={10}
-//             fontSize={15}
-//             color={"red"}
-//             bgColor={"white"}
-//             border={"2px solid red"}
-//             text="썸네일 등록"
-//           />
-//         </label>
-//       </div>
-//     </div>
-
-//     <div className="row">
-//       <div className="label">
-//         제목<sup style={{ color: "red" }}>*</sup>
-//       </div>
-//       <InputNormal
-//         onChangeValue={this.onChangeTitle}
-//         value={this.state.title}
-//         placeholder={"제목을 입력하세요"}
-//         radius={10}
-//         width={245}
-//         height={31}
-//         fontSize={14}
-//         color={"#E9E9E9"}
-//       />
-//     </div>
-
-//     <div className="row">
-//       <div className="label">
-//         태그<sup style={{ color: "red" }}>*</sup>
-//       </div>
-//       <div>
-//         <InputTag getValue={this.handleAddTag} width={"245"} />
-//       </div>
-//     </div>
-
-//     <div className="row">
-//       <div className="label">
-//         카테고리<sup style={{ color: "red" }}>*</sup>
-//       </div>
-//       <DropDownNormal
-//         value={this.state.category - 1}
-//         onChangeValue={this.onChangeCategory}
-//         width={150}
-//         height={31}
-//         radius={10}
-//         options={this.props.category}
-//       />
-//     </div>
-
-//     <div className="row">
-//       <div className="label">설명</div>
-//       <TextAreaNormal
-//         onChangeValue={this.onChangeInfo}
-//         width={245}
-//         height={100}
-//         color={"#E9E9E9"}
-//         fontSize={15}
-//         radius={10}
-//         placeholder="설명을 입력하세요"
-//         value={this.state.info}
-//       />
-//     </div>
-
-//     <div className="row">
-//       <div className="label">가격</div>
-//       <div>
-//         <InputPrice onChangeValue={this.onChangePrice} name="price" />
-//       </div>
-//     </div>
-
-//     <div className="row">
-//       <div className="label">
-//         경험 유형<sup style={{ color: "red" }}>*</sup>
-//       </div>
-//       <DropDownNormal
-//         value={this.state.exp_type}
-//         onChangeValue={this.onChangeExpType}
-//         width={150}
-//         height={31}
-//         radius={10}
-//         options={this.props.exp_type}
-//       />
-//     </div>
-
-//     <div className="row">
-//       <ExpType
-//         type={this.state.exp_type}
-//         getContent={this.onChangeContent}
-//         getFiles={this.onFileChange}
-//         return={(value) => this.setState({ exp_type_detail: value })}
-//       />
-//     </div>
-
-//     {/* <div className='row' style={{ flexDirection: "column" }}>
-//       <div className='label'>경험 컨텐츠</div>
-//       <div style={{ backgroundColor: "white" }}>
-//         <Editor value={this.state.content} config={config} onChange={(value) => this.onChangeContent(value)} />
-//       </div>
-//     </div>
-
-//     <div className=''>
-//       <InputFile display={true} getValue={this.onFileChange} accept="" />
-//     </div> */}
-//     <div className="buttonWrap">
-//       <ButtonNormal
-//         onClickEvent={() => goto("BACK")}
-//         width={165}
-//         height={35}
-//         radius={10}
-//         fontSize={15}
-//         bgColor={"#707070"}
-//         text="취소하기"
-//         style={{ marginRight: "25px" }}
-//       />
-//       <ButtonNormal
-//         onClickEvent={this.onClickOK}
-//         width={165}
-//         height={35}
-//         radius={10}
-//         fontSize={15}
-//         bgColor={"red"}
-//         text="등록하기"
-//       />
-//     </div>
-//   </div>
-// </Wrapper>

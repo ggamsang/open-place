@@ -47,9 +47,9 @@ const MessageWrapper = styled.div`
     margin: auto;
     width: calc(100% - 10px);
     min-height: 451px;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 2px 2px 5px #00000029;
-    border: 0.5px solid #E9E9E9;
+    // background: #FFFFFF 0% 0% no-repeat padding-box;
+    // box-shadow: 2px 2px 5px #00000029;
+    // border: 0.5px solid #E9E9E9;
     border-radius: 10px;
 
     margin-bottom: 100px;

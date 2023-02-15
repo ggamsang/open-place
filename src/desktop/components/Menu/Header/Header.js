@@ -8,7 +8,9 @@ import email from "resources/email.png";
 import NotificationContainer from "desktop/containers/NotificationContainer";
 // import zoom from "resources/zoom.png";
 // import { Icon } from "semantic-ui-react";
-import LoginProfileIcon from "resources/profile_icon_183860.svg"
+import LoginProfileIcon from "resources/profile_icon_183860.svg";
+import GetQueryString from "modules/GetQueryString";
+
 const Container = styled.div`
   width: 100%;
   max-width: 1920px;
@@ -223,7 +225,9 @@ const NicknameText = styled.div`
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { keyword: "" };
+    this.state = {
+      keyword: decodeURIComponent(GetQueryString("keyword") || ""),
+    };
   }
   setKeyword = (keyword) => this.setState({ keyword: keyword });
   render() {

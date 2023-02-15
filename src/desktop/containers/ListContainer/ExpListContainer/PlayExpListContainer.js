@@ -33,8 +33,8 @@ class PlayExpListContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
   list: state.ExpList.status.exp_list,
-  list_added: state.ExpList.status.exp_list_added,
   tag_list: state.ExpList.status.exp_tag_list,
+  list_added: state.ExpList.status.exp_list_added,
   userInfo: state.Authentication.status.userInfo,
   token: state.Authentication.status.token,
 });

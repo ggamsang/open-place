@@ -90,7 +90,6 @@ export const MessageText = styled.div`
   margin-top: 10px;
 `;
 
-
 export const ChatList = styled.ul`
   width: 400px;
   min-height: 1000px;
@@ -249,7 +248,7 @@ export const SendMessageDiv = styled.div`
 export const ChatInputBox = styled.div`
   width: 1136px;
   height: 60px;
-  background: #E9E9E9 0% 0% no-repeat padding-box;
+  background: #e9e9e9 0% 0% no-repeat padding-box;
   border-radius: 10px;
   opacity: 1;
   outline: 1px solid gray;
@@ -278,16 +277,36 @@ export const SendButton = styled.button`
   }
 `;
 
-
-
 export const MessageContainer = styled.div`
   // display: flex;
   // flex-direction: row;
   display: grid;
   grid-template-columns: 25% 75%;
   width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
 `;
 export const Groups = styled.div`
+  border: 2px solid #efefef;
+  box-shadow: 2px 2px 5px #00000029;
+  border-radius: 25px;
+  box-sizing: border-box;
+  padding-top: 20px;
 `;
 export const ChatDetail = styled.div`
+  border: 2px solid #efefef;
+  box-shadow: 2px 2px 5px #00000029;
+  border-radius: 25px;
+  margin-left: 20px;
+  height: calc(100vh - 29vh);
+
+  .select-user {
+    width: max-content;
+    font-size: 3rem;
+    color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+  }
 `;

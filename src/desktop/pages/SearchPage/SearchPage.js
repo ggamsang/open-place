@@ -4,6 +4,7 @@ import GetQueryString from "modules/GetQueryString";
 // <Route path="search/:category/:sort/:keyword" element={<SearchPage />} />;
 
 function SearchPage() {
+  
   return (
     <ClientTemplate>
       <SearchContainer

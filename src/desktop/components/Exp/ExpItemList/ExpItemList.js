@@ -22,6 +22,7 @@ class ExpItemList extends React.Component {
       sortType: this.props.sort || "update",
       filter: { sort: "", tags: [] },
       sort: "update",
+      fold: false,
     };
   }
   componentDidMount() {
@@ -48,7 +49,7 @@ class ExpItemList extends React.Component {
 
   render() {
     const { type, tag_list } = this.props;
-    const { filter } = this.state;
+    const { filter, fold } = this.state;
     let tags = new Set();
     tag_list &&
       tag_list.map((item) => {
@@ -62,22 +63,42 @@ class ExpItemList extends React.Component {
       });
     // console.clear();
     console.log(this.props);
+
     return (
       <ListWrapper>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        {" "}
+        <div
+          style={{
+            margin: "auto",
+            display: "flex",
+            justifyContent: "center",
+            maxWidth: "50vw",
+            flexWrap: "wrap",
+            gap: "1rem",
+            height: fold ? "25px" : "100%",
+            overflow: "hidden",
+          }}
+        >
+          {" "}
+          <button onClick={() => this.setState({ fold: !this.state.fold })}>
+            {fold ? "펴기" : "접기"}
+          </button>
           {[...tags].sort().map((tag, index) => (
             <div
               key={index}
               style={{
                 marginLeft: "5px",
                 borderRadius: "5px",
-                width: "max-content",
+                minWidth: "max-content",
                 padding: "3px 7px",
                 backgroundColor: "#CCC",
                 color: "gray",
               }}
             >
-              {tag.replace(new RegExp('"', "gi"), "")}
+              {tag
+                .replace(new RegExp('"', "gi"), "")
+                .replace("\\", "")
+                .replace("\\", "")}
             </div>
           ))}
         </div>

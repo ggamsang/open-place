@@ -15,7 +15,7 @@ export const getExpListRequest = (
   return (dispatch) => {
     dispatch(getExpList());
     const url = `${host}/item/${page}/${category}/${sort}/${keyword}`;
-    // console.log("getExpListRequest", url);
+    console.log("getExpListRequest", url);
     return fetch(url, GET)
       .then((res) => res.json())
       .then((data) => {

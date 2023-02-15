@@ -5,7 +5,7 @@ import DateFormat from "modules/DateFormat";
 import * as styled from "./styles";
 import noprofile from "resources/Profile.svg";
 
-const SearchBox = ({onNewGroupId}) => {
+const SearchBox = ({ onNewGroupId }) => {
   return (
     <MemberSearchForm
       onNewGroupId={onNewGroupId}
@@ -19,7 +19,7 @@ const SearchBox = ({onNewGroupId}) => {
 class MessageGroupList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { group_id: null };
+    this.state = { group_id: this.props.group_id };
   }
 
   render() {
@@ -77,7 +77,7 @@ class MessageGroupList extends React.Component {
             {this.state.group_id ? (
               <MessageDetailContainer group_id={this.state.group_id} />
             ) : (
-              <div>대화상대를 선택해주세요</div>
+              <div className="select-user">대화상대를 선택해주세요</div>
             )}
           </styled.ChatDetail>
         </styled.MessageContainer>
