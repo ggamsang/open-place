@@ -15,7 +15,7 @@ export const updateUserRequest = (user_id, data, token) => {
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((res) => res && dispatch(updateUserSuccess()))
+      .then((res) => dispatch(updateUserSuccess()))
       .catch((err) => dispatch(updateUserFailure(err)));
   };
 };

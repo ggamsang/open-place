@@ -83,6 +83,23 @@ export const Buttons = styled.div`
 `;
 export const TabButton = styled.button`
   border: 1px solid red;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #eee;
+  border-bottom-width: thin;
+  padding: 25px;
+  background: none;
+  :hover {
+    background: rgba(200, 150, 150, 0.2);
+  }
+  text-align: center;
+  font: normal normal 300 19px/22px Pretendard;
+  letter-spacing: 0px;
+  color: #000000;
+  &.selected {
+    font: normal normal 500 19px/22px Pretendard;
+  }
 `;
 
 export const ScoreAndReview = styled.div`
@@ -446,6 +463,9 @@ export const ThumbnailImg = styled.div`
   background: #eeeeee 0% 0% no-repeat padding-box;
   opacity: 1;
   border-radius: 50%;
+  background-image: url(${(props) => props.url});
+  background-size: cover;
+  background-position: center center;
 `;
 
 export const NicknameDiv = styled.div`

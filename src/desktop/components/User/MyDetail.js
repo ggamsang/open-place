@@ -11,8 +11,111 @@ const NONE = "";
 class MyDetail extends Component {
   constructor(props) {
     super(props);
-    this.state = { modal: NONE };
+    this.state = {
+      modal: NONE,
+      editName: false,
+      nick_name: null,
+      thumbnail: this.props.userInfo?.l_img || null,
+      thumbnail_name: null,
+      phone: null,
+      password: null,
+      password_checked: null,
+    };
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onChangeNickname = this.onChangeNickname.bind(this);
+    this.onChangeThumbnail = this.onChangeThumbnail.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangePassword_checked = this.onChangePassword_checked.bind(this);
   }
+  componentDidUpdate(prevProps) {
+    if (prevProps.userInfo !== this.props.userInfo) {
+      this.setState({
+        nick_name: this.props.userInfo.nick_name,
+        thumbnail: this.props.userInfo.l_img,
+      });
+    }
+  }
+  onChangeNickname = (event) => {
+    this.setState({ nick_name: event.target.value });
+  };
+  onChangePassword = (event) => {
+    this.setState({ password: event.target.value });
+  };
+  onChangePassword_checked = (evnet) => {
+    this.setState({ password_checked: evnet.target.value });
+  };
+  onChangeThumbnail = async (event) => {
+    event.preventDefault();
+    const reader = new FileReader();
+    const file = event.target.files[0];
+    const regExp = /.(jpe?g|png|bmp)$/i;
+    if (regExp && !regExp.test(file.name)) {
+      await alert("파일의 확장자가 올바른지 확인해주세요.", "확인");
+      return;
+    }
+    reader.onload = () => {
+      var image = new Image();
+      image.src = reader.result;
+      image.onload = () => {
+        this.setState({
+          is_rectangle: false,
+          ratio: image.width / image.height,
+          cropper: image.width / image.height !== 1.0,
+        });
+      };
+    };
+    reader.onloadend = () => {
+      this.setState({ thumbnail: reader.result, thumbnail_name: file.name });
+    };
+    if (event.target.files[0]) {
+      reader.readAsDataURL(file);
+    }
+  };
+  onSubmit = async () => {
+    if (this.state.nick_name !== this.props.userInfo.nick_name) {
+      await this.props.CheckNickNameRequest(
+        this.props.token,
+        this.state.nick_name
+      );
+      if (this.state.nick_name === null || this.state.nick_name === "") {
+        alert("닉네임을 입력해주세요");
+        return;
+      } else if (
+        this.props.checkNickName === true &&
+        this.state.nick_name !== this.props.userInfo.nick_name
+      ) {
+        alert("중복된 닉네임입니다");
+        return;
+      }
+    } else if (this.state.password !== this.state.password_checked) {
+      alert("비밀번호가 일치하지 않습니다");
+      return;
+    }
+
+    let data = {
+      nick_name: this.state.nick_name,
+      password: this.state.password,
+      files: [],
+    };
+    let file = {
+      value: this.state.thumbnail,
+      name: this.state.thumbnail_name,
+      key: 0,
+    };
+    if (this.state.thumbnail !== this.props.userInfo.l_img) {
+      await data.files.push(file);
+    } // thumbnail 썸네일이 있을 경우에만
+    await this.props.updateUserRequest(
+      this.props.userInfo.uid,
+      data,
+      this.props.token
+    );
+    // .then((data) => {
+    //   console.log(data);
+    //   // window.location.href = "/myDetail/sub";
+    // });
+    window.location.href = "/mypage";
+  };
   showModal = (type) => {
     this.setState({ modal: type });
   };
@@ -43,29 +146,60 @@ class MyDetail extends Component {
                 <styled.ModalHorizonLine />
                 <styled.Wrapper>
                   <styled.AddThumbnail>
-                    <styled.ThumbnailImg />
-                    <div>썸네일 등록</div>
+                    <label htmlFor="file">
+                      <styled.ThumbnailImg url={this.state.thumbnail} />
+                      {/* {this.state.thumbnail === null ? (
+                      <div className="img_" />
+                    ) : (
+                      <img
+                        src={this.state.thumbnail}
+                        className="img_"
+                        alt="profile"
+                      />
+                    )} */}
+
+                      <div>썸네일 등록</div>
+                    </label>
+                    <input
+                      hidden
+                      onChange={this.onChangeThumbnail}
+                      id="file"
+                      type="file"
+                      accept="image/png, image/bmp, image/jpeg, image/jpg"
+                    />
                   </styled.AddThumbnail>
                   <styled.VerticalWrapper>
                     <styled.NicknameDiv>
                       <div>닉네임</div>
-                      <styled.InputBox placeholder="닉네임을 입력하세요." />
+                      <styled.InputBox
+                        onChange={this.onChangeNickname}
+                        value={this.state.nick_name || ""}
+                        placeholder="닉네임을 입력하세요."
+                      />
                     </styled.NicknameDiv>
                     <styled.PasswordDiv>
                       <div>비밀번호</div>
-                      <styled.InputBox placeholder="비밀번호를 입력하세요." />
+                      <styled.InputBox
+                        type="password"
+                        onChange={this.onChangePassword}
+                        value={this.state.password || ""}
+                        placeholder="비밀번호를 입력하세요."
+                      />
                     </styled.PasswordDiv>
                     <styled.PasswordCheckDiv>
                       <div>비밀번호 확인</div>
-                      <styled.InputBox placeholder="비밀번호를 한 번 더 입력하세요." />
+                      <styled.InputBox
+                        type="password"
+                        onChange={this.onChangePassword_checked}
+                        value={this.state.password_checked || ""}
+                        placeholder="변경할 비밀번호를 한 번 더 입력하세요"
+                      />
                     </styled.PasswordCheckDiv>
                     <styled.ModalButtons>
                       <button onClick={() => this.showModal(NONE)}>
                         취소하기
                       </button>
-                      <button onClick={() => this.showModal(NONE)}>
-                        수정하기
-                      </button>
+                      <button onClick={this.onSubmit}>수정하기</button>
                     </styled.ModalButtons>
                   </styled.VerticalWrapper>
                 </styled.Wrapper>
@@ -205,22 +339,24 @@ class MyDetail extends Component {
           </styled.Wrapper>
           <styled.Wrapper>
             <styled.CategoryBox>
-              <styled.TabButton onClick={this.tab("")}>포인트</styled.TabButton>
-              <div></div>
+              <styled.TabButton className="selected" onClick={this.tab("")}>
+                포인트
+              </styled.TabButton>
+              {/* <div></div> */}
               <styled.TabButton onClick={this.tab("")}>
                 등록경험
               </styled.TabButton>
-              <div></div>
+              {/* <div></div> */}
               <styled.TabButton onClick={this.tab("")}>
                 판매경험
               </styled.TabButton>
-              <div></div>
+              {/* <div></div> */}
               <styled.TabButton onClick={this.tab("")}>
                 구매경험
               </styled.TabButton>
-              <div></div>
+              {/* <div></div> */}
               <styled.TabButton onClick={this.tab("")}>관심</styled.TabButton>
-              <div></div>
+              {/* <div></div> */}
               <styled.TabButton onClick={() => this.onClickLogout()}>
                 로그아웃
               </styled.TabButton>

@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import { goto } from "navigator";
 import { getSharerRequest } from "actions/Sharer/Sharer";
 import MyDetail from "desktop/components/User/MyDetail";
-import { SignOutRequest } from 'actions/Authentication';
+import { SignOutRequest, CheckNickNameRequest } from "actions/Authentication";
+import { updateUserRequest } from "actions/User/User";
+
 class MyDetailContainer extends Component {
   componentDidMount() {
     if (this.props.isLoggedIn) {
@@ -32,6 +34,11 @@ const mapStateToProps = (state) => ({
   active: state.Authentication.status.active,
   userInfo: state.Authentication.status.userInfo,
   sharer: state.User.status.sharer,
+
+  token: state.Authentication.status.token,
+  userInfo: state.Authentication.status.userInfo,
+  user_detail: state.User.status.user_detail,
+  checkNickName: state.Authentication.checkStatus.checkNickName,
 });
 const mapDispatchToProps = (dispatch) => ({
   getSharerRequest: (user_id) => {
@@ -40,6 +47,11 @@ const mapDispatchToProps = (dispatch) => ({
   SignOutRequest: () => {
     dispatch(SignOutRequest());
   },
+  updateUserRequest: (user_id, data, token) => {
+    dispatch(updateUserRequest(user_id, data, token));
+  },
+  CheckNickNameRequest: (token, nickname) =>
+    dispatch(CheckNickNameRequest(token, nickname)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyDetailContainer);
