@@ -24,6 +24,7 @@ export const TopListText = styled.div`
 `;
 
 export const TopListContainer = styled.div`
+border:1px solid red;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 84px;

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import ExpItemList from "desktop/components/Exp/ExpItemList";
-import { getExpListRequest } from "actions/Exp/ExpList";
+import { getExpListRequest, setEmptyExpListRequest } from "actions/Exp/ExpList";
 
 const dummy = [
   {
@@ -35,6 +35,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getExpListRequest: (page, category, sort, keyword) =>
     dispatch(getExpListRequest(page, category, sort, keyword)),
+  setEmptyExpListRequest: () => dispatch(setEmptyExpListRequest()),
 });
 
 export default connect(

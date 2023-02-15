@@ -43,8 +43,27 @@ class MessageDetailContainer extends React.Component {
   componentWillUnmount() {
     this.socket = null;
   }
+  componentDidUpdate(props) {
+    if (props.group_id != this.props.group_id) {
+      const { token, userInfo, group_id } = this.props;
+      console.log(
+        props.group_id != this.props.group_id,
+        props.group_id,
+        this.props.group_id,
+        token,
+        userInfo,
+        group_id
+      );
+      if (userInfo && token != null) {
+        this.GetDetail(0);
+        this.props.GetMessageOpponentInfoRequest(token, group_id);
+      }
+      return;
+    }
+  }
 
   GetDetail = (page) => {
+    console.log("GETDETAIL");
     const { token, group_id } = this.props;
     if (token) {
       this.props.GetMessageDetailRequest(token, page, group_id);

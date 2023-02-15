@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { GetSORTYPE } from "desktop/components/Commons/Define";
-import ExpList from "desktop/components/ExpList";
+// import ExpList from "desktop/components/ExpList";
 import ListPageFilter from "desktop/components/ListPageFilter";
+import ScrollList from "desktop/components/Commons/ScrollList";
 
 const ListWrapper = styled.div`
   // max-width: 1920px;
@@ -20,41 +21,37 @@ class ExpItemList extends React.Component {
     this.state = {
       sortType: this.props.sort || "update",
       filter: { sort: "", tags: [] },
+      sort: "update",
     };
   }
   componentDidMount() {
     this.getList(0);
   }
-  handleChange = (data) => {
-    // return this.props.getExpListRequest(
-    //   0,
-    //   this.props.type,
-    //   data.sort,
-    //   this.props.keyword
-    // );
-    // return;
-    // this.setState({ sortType: data.sort }, () => {
-    //   console.log(this.state);
-    // });
-    // this.getList(0);
-    this.setState({ ...this.state.filter, ...data });
+  handleSortChange = async (data) => {
+    await this.setState({ sort: data.sort });
+    // await this.getList(0);
+    return;
   };
 
-  getList = (page) => {
+  getList = async (page) => {
+    if (page === 0) {
+      await this.props.setEmptyExpListRequest();
+    }
+
     return this.props.getExpListRequest(
       page,
       this.props.type,
-      this.state.sortType, //GetSORTYPE(this.state.sortType),
+      this.state.sort, //GetSORTYPE(this.state.sortType),
       this.props.keyword
     );
   };
 
   render() {
-    const { list_added, type } = this.props;
+    const { type, tag_list } = this.props;
     const { filter } = this.state;
     let tags = new Set();
-    list_added &&
-      list_added.map((item) => {
+    tag_list &&
+      tag_list.map((item) => {
         item.taglist &&
           item.taglist
             .replace("[", "")
@@ -63,8 +60,8 @@ class ExpItemList extends React.Component {
             .split(",")
             .map((word) => tags.has(word) === false && tags.add(word));
       });
-    console.log([...tags]);
-
+    // console.clear();
+    console.log(this.props);
     return (
       <ListWrapper>
         <div style={{ display: "flex", justifyContent: "center" }}>
@@ -88,11 +85,15 @@ class ExpItemList extends React.Component {
         <ListPageFilter
           tags={[...tags]}
           type={type}
-          onChange={(d) => this.handleChange(d)}
+          onSortChange={(d) => this.handleSortChange(d)}
         />
         {/* list */}
         <ListContainer>
-          <ExpList type={type} {...filter} />
+          <ScrollList
+            {...this.props}
+            sort={this.state.sort}
+            getList={this.getList}
+          />
         </ListContainer>
       </ListWrapper>
     );

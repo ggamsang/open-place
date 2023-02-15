@@ -281,8 +281,11 @@ export const SendButton = styled.button`
 
 
 export const MessageContainer = styled.div`
-  display: flex;
-  flex-direction: row;
+  // display: flex;
+  // flex-direction: row;
+  display: grid;
+  grid-template-columns: 25% 75%;
+  width: 100%;
 `;
 export const Groups = styled.div`
 `;

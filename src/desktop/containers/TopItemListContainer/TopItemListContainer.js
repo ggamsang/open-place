@@ -9,10 +9,11 @@ class TopItemListContainer extends React.Component {
       console.log(this.props);
     });
   }
+  getList = (page) => this.props.getTopExpListRequest(page);
   render() {
     return (
       <React.Fragment>
-        <ScrollList list_added={this.props.top_exp} />
+        <ScrollList getList={this.getList} list_added={this.props.top_exp} />
       </React.Fragment>
     );
   }

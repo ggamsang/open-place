@@ -60,13 +60,14 @@ class MemberSearchForm extends Component {
   }
 
   render() {
-    const { token } = this.props;
+    const { token, onNewGroupId } = this.props;
     return (
       <React.Fragment>
         <styled.MessageBox>
           <span>닉네임/메일주소</span>
           <styled.FindPeople>
             <Search
+              onNewGroupId={onNewGroupId}
               token={token}
               width={642}
               keyword={this.props.keyword}

@@ -122,14 +122,17 @@ export class MemberSearch extends React.Component {
     console.log(e);
   };
   getMessageGroupId = (user_id) => {
-    const { token } = this.props;
+    const { token, onNewGroupId } = this.props;
     if (token) {
       fetch(`${host}/message/group/${user_id}`, authGET(token))
         .then((res) => res.json())
         .then((data) => {
           if (data.success) {
+            console.log(data);
+            onNewGroupId(data.detail);
+            this.setState({ list: [] });
             // if (data.detail) {
-            goto("MESSAGE", data.detail);
+            // goto("MESSAGE", data.detail);
             // } else {
             //
             // }

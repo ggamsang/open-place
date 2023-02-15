@@ -6,12 +6,12 @@ import Navbar from "desktop/components/Navbar";
 
 const Wrapper = styled.div`
   width: ${1920}px;
-  // height: ${window.innerHeight}px;
+  // min-height: 100%;
+  // height: 100%;
   margin: auto;
   position: relative;
   border: 1px solid #eee;
   background-color: white;
-
 `;
 class ClientTemplate extends Component {
   render() {

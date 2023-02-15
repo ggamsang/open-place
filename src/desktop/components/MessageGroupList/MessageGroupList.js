@@ -1,19 +1,27 @@
 import React from "react";
-import { goto } from "navigator";
 import MemberSearchForm from "desktop/components/Commons/Search/MemberSearchForm";
+import MessageDetailContainer from "desktop/containers/MessageDetailContainer";
 import DateFormat from "modules/DateFormat";
 import * as styled from "./styles";
 import noprofile from "resources/Profile.svg";
-const SearchBox = () => {
+
+const SearchBox = ({onNewGroupId}) => {
   return (
     <MemberSearchForm
+      onNewGroupId={onNewGroupId}
       placeholder={"대화상대 찾아보기"}
       disabled_filter
       keyword={null}
     />
   );
 };
+
 class MessageGroupList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { group_id: null };
+  }
+
   render() {
     const { groups = [] } = this.props;
     const PeerElement = function ({
@@ -23,10 +31,11 @@ class MessageGroupList extends React.Component {
       nick_name,
       message,
       create_at,
+      onClickedGroupId,
     }) {
       return (
         <styled.Peer
-          onClick={() => goto("MESSAGE", message_group_id)}
+          onClick={() => onClickedGroupId(message_group_id)}
           url={url}
           className="row"
         >
@@ -42,19 +51,35 @@ class MessageGroupList extends React.Component {
         </styled.Peer>
       );
     };
+
     return (
       <styled.Container>
         <styled.MessageText>메시지</styled.MessageText>
-        <SearchBox />
+        <SearchBox onNewGroupId={(gid) => this.setState({ group_id: gid })} />
         <styled.MessageContainer>
           <styled.Groups>
             {groups && groups.length > 0 ? (
-              groups.map((item, index) => <PeerElement key={index} {...item} />)
+              groups.map((item, index) => (
+                <PeerElement
+                  onClickedGroupId={(group_id) => {
+                    this.setState({ group_id: group_id });
+                    console.log(group_id);
+                  }}
+                  key={index}
+                  {...item}
+                />
+              ))
             ) : (
               <div className="no-data">대화 내역 없습니다.</div>
             )}
           </styled.Groups>
-          <styled.ChatDetail></styled.ChatDetail>
+          <styled.ChatDetail>
+            {this.state.group_id ? (
+              <MessageDetailContainer group_id={this.state.group_id} />
+            ) : (
+              <div>대화상대를 선택해주세요</div>
+            )}
+          </styled.ChatDetail>
         </styled.MessageContainer>
       </styled.Container>
     );

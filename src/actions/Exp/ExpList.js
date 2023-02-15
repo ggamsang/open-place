@@ -15,7 +15,7 @@ export const getExpListRequest = (
   return (dispatch) => {
     dispatch(getExpList());
     const url = `${host}/item/${page}/${category}/${sort}/${keyword}`;
-    console.log(url);
+    // console.log("getExpListRequest", url);
     return fetch(url, GET)
       .then((res) => res.json())
       .then((data) => {
@@ -39,5 +39,33 @@ const getExpListSuccess = (data) => ({
 });
 const getExpListFailure = (err) => ({
   type: types.GET_EXP_LIST_FAILURE,
+  list: [],
+});
+export const setEmptyExpListRequest = () => {
+  return (dispatch) => {
+    dispatch(setEmptyExpList());
+  };
+};
+const setEmptyExpList = () => ({ type: types.SET_EMPTY_EXP_LIST });
+export const getExpTagListRequest = (category = 1) => {
+  return (dispatch) => {
+    dispatch(getExpTagList());
+    const url = `${host}/item/tags/${category}`;
+    console.log(url);
+    return fetch(url, GET)
+      .then((res) => res.json())
+      .then((data) =>
+        dispatch(getExpTagListSuccess(data?.map((tag) => tag) || []))
+      )
+      .catch((error) => dispatch(getExpTagListFailure(error)));
+  };
+};
+const getExpTagList = () => ({ type: types.GET_EXP_TAG_LIST });
+const getExpTagListSuccess = (data) => ({
+  type: types.GET_EXP_TAG_LIST_SUCCESS,
+  list: data,
+});
+const getExpTagListFailure = (err) => ({
+  type: types.GET_EXP_TAG_LIST_FAILURE,
   list: [],
 });

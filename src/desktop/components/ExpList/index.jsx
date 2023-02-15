@@ -11,31 +11,55 @@ const ExpList = ({
   tags = [],
 }) => {
   const [list, setList] = useState([]);
-  const getExpListRequest = () => {
-    const url = `${host}/item/${page}/${category}/${
-      sort || "update"
-    }/${keyword}`;
+  const [_page, setPage] = useState(0);
+
+  const getExpListRequest = (_) => {
+    const url = `${host}/item/${_}/${category}/${sort || "update"}/${keyword}`;
+    console.log(url);
     fetch(url, {
       headers: { "Content-Type": "application/json" },
       method: "GET",
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setList(data);
+        if (_ === 0) {
+          //   console.log("set", data);
+          setList(data);
+        } else {
+          console.log("push", data);
+          setList([...list, ...data]);
+          setPage(_);
+        }
+        // // console.log(...list, data);
+        // const newlist = [...list, ...data];
+        // setList(newlist);
       })
       .catch((e) => console.error(e));
   };
+
   useEffect(() => {
-    getExpListRequest();
+    getExpListRequest(0);
+    const a = document.getElementById("scroll-div");
+    window.addEventListener("load", (e) => {
+      a.addEventListener("scroll", function (e) {
+        console.log(e, e.target);
+      });
+    });
   }, []);
+
   useEffect(() => {
-    getExpListRequest();
+    getExpListRequest(0);
   }, [sort, keyword, page]);
+
+  const getMore = async () => {
+    getExpListRequest(_page + 1);
+    // await setPage(_page + 1).then(getExpListRequest(_page));
+  };
 
   return (
     <styled.Container>
-      <styled.TopListContainer>
+      <button onClick={getMore}>more</button>
+      <styled.TopListContainer id="scroll-div">
         {list?.length > 0 &&
           list.map((item) => <ProfileCard key={item.uid} {...item} />)}
       </styled.TopListContainer>

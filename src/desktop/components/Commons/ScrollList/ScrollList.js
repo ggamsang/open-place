@@ -48,10 +48,7 @@ class ScrollList extends React.Component {
         .getList(page)
         .then(() => {
           this.setState({
-            hasMore:
-              this.props.list === null || this.props.list.length < 10
-                ? false
-                : true,
+            hasMore: this.props.list?.length < 10 ? false : true,
             loading: true,
           });
         })
@@ -60,6 +57,16 @@ class ScrollList extends React.Component {
           this.setState({ hasMore: false });
         });
   };
+  componentDidUpdate(props) {
+    if (props.sort != this.props.sort) {
+      this.setState({ hasMore: true });
+      this.getLoadData(0);
+      return;
+    }
+    if (props.list != this.props.list) {
+      return true;
+    }
+  }
 
   render() {
     const { list_added } = this.props;

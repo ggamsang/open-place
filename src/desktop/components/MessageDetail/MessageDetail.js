@@ -266,13 +266,6 @@ class MessageDetail extends React.Component {
         const { text, nowlist } = this.state;
 
         return (<Wrapper>
-            {mode === "COUNSELING"
-                ? null
-                : <div className='gradient'>
-                    <div className='blanker'>&nbsp;</div>
-                    <SearchForm
-                        placeholder={"대화상대 찾아보기"} disabled_filter keyword={null} />
-                </div>}
 
             <MessageWrapper url={(header && header.url) || profile} online={online}>
                 <div className="header">

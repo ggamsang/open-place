@@ -1,21 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import ExpItemList from "desktop/components/Exp/ExpItemList";
-import { getExpListRequest } from "actions/Exp/ExpList";
+import { getExpListRequest, setEmptyExpListRequest } from "actions/Exp/ExpList";
+import { dummydata } from "constant";
 
-const dummy = [
-  {
-    type: "item",
-    title: "결혼은 이렇게!",
-    score: 4.0,
-    tags: ["tag1", "tag2", "tag3"],
-    url: "https://i.picsum.photos/id/1065/3744/5616.jpg?hmac=V64psST3xnjnVwmIogHI8krnL3edsh_sy4HNc3dJ_xY",
-  },
-];
 class MakeExpListContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { list: dummy };
+    this.state = { list: dummydata };
   }
   render() {
     return (
@@ -35,6 +27,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getExpListRequest: (page, category, sort, keyword) =>
     dispatch(getExpListRequest(page, category, sort, keyword)),
+  setEmptyExpListRequest: () => dispatch(setEmptyExpListRequest()),
 });
 
 export default connect(
