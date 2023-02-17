@@ -124,7 +124,8 @@ const ReviewWrapper = styled.div`
   background: white;
   margin-bottom: 21px;
   // *{border: 1px solid red;}
-
+  position: relative;
+  
   .review-wrapper-top {
     // height: 60px;
     display: flex;

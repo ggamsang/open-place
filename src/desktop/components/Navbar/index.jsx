@@ -49,23 +49,22 @@ const Navbar = () => {
                 }
               />
             )}
-            <styled.MenuButton onClick={() => goto("MAKE", "")}>
-              <styled.SideBarIcon1 />
-              <styled.SideBarText>만들기</styled.SideBarText>
+            <styled.MenuButton onClick={() => goto("PLAY", "")}>
+              <styled.SideBarIcon3 />
+              <styled.SideBarText>놀기</styled.SideBarText>
             </styled.MenuButton>
             <styled.MenuButton onClick={() => goto("LEARN", "")}>
               <styled.SideBarIcon2 />
               <styled.SideBarText>배우기</styled.SideBarText>
             </styled.MenuButton>
-            <styled.MenuButton onClick={() => goto("PLAY", "")}>
-              <styled.SideBarIcon3 />
-              <styled.SideBarText>놀기</styled.SideBarText>
+            <styled.MenuButton onClick={() => goto("MAKE", "")}>
+              <styled.SideBarIcon1 />
+              <styled.SideBarText>만들기</styled.SideBarText>
             </styled.MenuButton>
             <styled.MenuButton onClick={() => goto("COMMUNITY")}>
               <styled.SideBarIcon4 />
               <styled.SideBarText>커뮤니티</styled.SideBarText>
             </styled.MenuButton>
-
             <styled.MenuButton onClick={() => goto("INTRO")}>
               <styled.SideBarIcon5 />
               <styled.SideBarText>ABOUT</styled.SideBarText>

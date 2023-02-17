@@ -209,7 +209,7 @@ class ExpDetail extends React.Component {
           />
         </div>
         {/*  */}
-        <styled.ReviewText>게시판</styled.ReviewText>
+        {/* <styled.ReviewText>게시판</styled.ReviewText> */}
       </>
     ) : (
       <Dimmer>

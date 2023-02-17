@@ -42,7 +42,7 @@ class ExpItemList extends React.Component {
     return this.props.getExpListRequest(
       page,
       this.props.type,
-      this.state.sort, //GetSORTYPE(this.state.sortType),
+      this.state.sort, // GetSORTYPE(this.state.sortType),
       this.props.keyword
     );
   };

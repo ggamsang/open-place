@@ -6,6 +6,7 @@ export const updateUserRequest = (user_id, data, token) => {
   return (dispatch) => {
     dispatch(updateUser());
     const url = `${host}/user/update/${user_id}`;
+    console.log(url, data);
     return fetch(url, {
       headers: {
         "x-access-token": token,

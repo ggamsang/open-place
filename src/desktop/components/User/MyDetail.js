@@ -72,6 +72,8 @@ class MyDetail extends Component {
     }
   };
   onSubmit = async () => {
+    // console.log(this.state);
+    // return;
     if (this.state.nick_name !== this.props.userInfo.nick_name) {
       await this.props.CheckNickNameRequest(
         this.props.token,
@@ -110,11 +112,10 @@ class MyDetail extends Component {
       data,
       this.props.token
     );
-    // .then((data) => {
-    //   console.log(data);
-    //   // window.location.href = "/myDetail/sub";
-    // });
-    window.location.href = "/mypage";
+
+    setTimeout(() => {
+      window.location.href = "/mypage";
+    }, 1500);
   };
   showModal = (type) => {
     this.setState({ modal: type });
@@ -148,25 +149,15 @@ class MyDetail extends Component {
                   <styled.AddThumbnail>
                     <label htmlFor="file">
                       <styled.ThumbnailImg url={this.state.thumbnail} />
-                      {/* {this.state.thumbnail === null ? (
-                      <div className="img_" />
-                    ) : (
-                      <img
-                        src={this.state.thumbnail}
-                        className="img_"
-                        alt="profile"
-                      />
-                    )} */}
-
                       <div>썸네일 등록</div>
+                      <input
+                        hidden
+                        onChange={this.onChangeThumbnail}
+                        id="file"
+                        type="file"
+                        accept="image/png, image/bmp, image/jpeg, image/jpg"
+                      />
                     </label>
-                    <input
-                      hidden
-                      onChange={this.onChangeThumbnail}
-                      id="file"
-                      type="file"
-                      accept="image/png, image/bmp, image/jpeg, image/jpg"
-                    />
                   </styled.AddThumbnail>
                   <styled.VerticalWrapper>
                     <styled.NicknameDiv>
@@ -339,23 +330,46 @@ class MyDetail extends Component {
           </styled.Wrapper>
           <styled.Wrapper>
             <styled.CategoryBox>
-              <styled.TabButton className="selected" onClick={this.tab("")}>
+              <styled.TabButton
+                className="selected"
+                onClick={() => {
+                  window.location.href = `/mypage/point`;
+                }}
+              >
                 포인트
               </styled.TabButton>
               {/* <div></div> */}
-              <styled.TabButton onClick={this.tab("")}>
+              <styled.TabButton
+                onClick={() => {
+                  window.location.href = `/mypage/regExp`;
+                }}
+              >
                 등록경험
               </styled.TabButton>
               {/* <div></div> */}
-              <styled.TabButton onClick={this.tab("")}>
+              <styled.TabButton
+                onClick={() => {
+                  window.location.href = `/mypage/sellExp`;
+                }}
+              >
                 판매경험
               </styled.TabButton>
               {/* <div></div> */}
-              <styled.TabButton onClick={this.tab("")}>
+              <styled.TabButton
+                onClick={() => {
+                  window.location.href = `/mypage/buyExp`;
+                }}
+              >
                 구매경험
               </styled.TabButton>
               {/* <div></div> */}
-              <styled.TabButton onClick={this.tab("")}>관심</styled.TabButton>
+              <styled.TabButton
+                onClick={() => {
+                  window.location.href = `/mypage/likeExp`;
+                }}
+              >
+                관심
+              </styled.TabButton>
               {/* <div></div> */}
               <styled.TabButton onClick={() => this.onClickLogout()}>
                 로그아웃

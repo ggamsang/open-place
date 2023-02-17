@@ -304,9 +304,11 @@ class MyDetailChild extends Component {
         <Wrapper>
           <Fade>
             <Menu
-              style={{
-                display: `${this.state.main_menu === true ? "block" : "none"}`,
-              }}
+              style={
+                {
+                  // display: `${this.state.main_menu === true ? "block" : "none"}`,
+                }
+              }
             >
               <div className="menu_wrap">
                 <div className="label">내정보</div>
@@ -355,9 +357,11 @@ class MyDetailChild extends Component {
             <SubMenu>
               <div
                 className="menu_wrap"
-                style={{
-                  display: `${this.state.sub_menu1 === true ? "flex" : "none"}`,
-                }}
+                style={
+                  {
+                    // display: `${this.state.sub_menu1 === true ? "flex" : "none"}`,
+                  }
+                }
               >
                 <div onClick={this.onClickHome} className="label">
                   {" "}
@@ -382,9 +386,11 @@ class MyDetailChild extends Component {
               </div>
               <div
                 className="menu_wrap"
-                style={{
-                  display: `${this.state.sub_menu2 === true ? "flex" : "none"}`,
-                }}
+                style={
+                  {
+                    // display: `${this.state.sub_menu2 === true ? "flex" : "none"}`,
+                  }
+                }
               >
                 <div onClick={this.onClickHome} className="label">
                   {" "}
