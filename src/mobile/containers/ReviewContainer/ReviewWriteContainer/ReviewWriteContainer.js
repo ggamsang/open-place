@@ -15,9 +15,9 @@ class ReviewWriteContainer extends React.Component {
             });
 
     render() {
-        return (<>
+        return (<React.Fragment>
             <ReviewWriteModal submit={this.submit} {...this.props} />
-        </>);
+        </React.Fragment>);
     }
 }
 const mapStateToProps = (state) => ({

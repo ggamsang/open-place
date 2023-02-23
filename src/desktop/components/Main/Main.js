@@ -39,10 +39,10 @@ function Main({ userInfo }) {
         <Banner />
       </Fade>
       {userInfo && (
-        <>
+        <React.Fragment>
           <Shortcut>바로가기</Shortcut>
           <ShortCutListContainer />
-        </>
+        </React.Fragment>
       )}
       <MainContainer>
         <TopItemList />

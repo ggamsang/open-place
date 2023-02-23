@@ -53,7 +53,7 @@ const ProfileCard = ({ uid, title, category, price, score, url }) => {
   //   user_id: 11;
 
   return (
-    <>
+    <React.Fragment>
       <styled.TopLists onClick={() => (window.location.href = `/exp/${uid}`)}>
         <styled.Profile>
           <styled.ProfileImg src={url} />
@@ -73,7 +73,7 @@ const ProfileCard = ({ uid, title, category, price, score, url }) => {
         <ReviewWrapper score={score} />
         {/* <NumRate /> */}
       </styled.TopLists>
-    </>
+    </React.Fragment>
   );
 };
 

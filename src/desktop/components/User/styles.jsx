@@ -25,6 +25,8 @@ export const VerticalWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  border: 1px solid red;
+  
 `;
 
 export const ProfileBox = styled.div`
@@ -300,7 +302,7 @@ export const CheckNotificationBtn = styled.button`
   }
 `;
 
-export const CategoryBox = styled.div`
+export const MyDetailTabMenuBox = styled.div`
   width: 329px;
   height: 489px;
   background: #ffffff 0% 0% no-repeat padding-box;

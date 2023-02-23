@@ -17,13 +17,13 @@ class BuyExpDetailContainer extends React.Component {
     }
     render() {
 
-        return (<>
+        return (<React.Fragment>
             {this.props.detail
                 ? <BoughtExpDetail {...this.props} />
                 : <Dimmer>
                     <Loader />
                 </Dimmer>}
-        </>);
+        </React.Fragment>);
     }
 }
 

@@ -80,7 +80,7 @@ class MessageDetailContainer extends React.Component {
     const { detail, opponent, userInfo } = this.props;
 
     return (
-      <>
+      <React.Fragment>
         {/* {(detail && detail.length > 0) */}
         {/*  ?  */}
         <MessageDetail
@@ -93,7 +93,7 @@ class MessageDetailContainer extends React.Component {
           newchat={newchat}
         />
         {/* : null} */}
-      </>
+      </React.Fragment>
     );
   }
 }

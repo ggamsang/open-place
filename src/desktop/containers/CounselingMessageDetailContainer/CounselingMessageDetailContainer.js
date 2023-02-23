@@ -77,7 +77,7 @@ class CounselingMessageDetailContainer extends React.Component {
         const { online, newchat } = this.state;
         const { chats, opponent, userInfo, group_id } = this.props;
 
-        return (<>
+        return (<React.Fragment>
             <CounselingMessageDetail
                 group_id={group_id}
                 title={null}
@@ -89,7 +89,7 @@ class CounselingMessageDetailContainer extends React.Component {
                 online={online}
                 newchat={newchat}
             />
-        </>);
+        </React.Fragment>);
     }
 }
 

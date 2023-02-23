@@ -12,13 +12,13 @@ function PlayGame(props) {
         }
     }, [props, url]);
 
-    return (<>
+    return (<React.Fragment>
         {/* {url} */}
         {url
             ? <iframe width="100%" src={url} />
             : <div>{url}</div>
         }
-    </>);
+    </React.Fragment>);
 }
 
 export default PlayGame;

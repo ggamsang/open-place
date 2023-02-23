@@ -125,7 +125,7 @@ class ExpDetail extends React.Component {
       expDetail && expDetail.exp_files && JSON.parse(expDetail.exp_files);
 
     return expDetail ? (
-      <>
+      <React.Fragment>
         <styled.ExpInfoText>경험정보</styled.ExpInfoText>
         <styled.ExpInfoDiv>
           <styled.ExpImg url={expDetail?.thumbnail} />
@@ -181,7 +181,7 @@ class ExpDetail extends React.Component {
 
         {/*  */}
         {expDetail && expDetail.content && (
-          <>
+          <React.Fragment>
             <styled.ReviewText>상세정보</styled.ReviewText>
             <styled.DetailsDiv>
               <div className="content">
@@ -198,7 +198,7 @@ class ExpDetail extends React.Component {
                 {exp_files != null && <InputFile files={exp_files} />}
               </div>
             </styled.DetailsDiv>
-          </>
+          </React.Fragment>
         )}
         {/*  */}
         <styled.ReviewText>리뷰</styled.ReviewText>
@@ -210,7 +210,7 @@ class ExpDetail extends React.Component {
         </div>
         {/*  */}
         {/* <styled.ReviewText>게시판</styled.ReviewText> */}
-      </>
+      </React.Fragment>
     ) : (
       <Dimmer>
         <Loader />

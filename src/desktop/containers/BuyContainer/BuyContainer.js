@@ -22,7 +22,7 @@ class BuyContainer extends React.Component {
   }
   render() {
     return (
-      <>
+      <React.Fragment>
         {this.props.expDetail ? (
           <Buy {...this.props} buy={BuyExpRequest} />
         ) : (
@@ -30,7 +30,7 @@ class BuyContainer extends React.Component {
             <Loader />
           </Dimmer>
         )}
-      </>
+      </React.Fragment>
     );
   }
 }
