@@ -9,7 +9,10 @@ class Socket {
     //       path: "/socket.io",
     //       transports: ["websocket", "polling", "flashsocket"],
     //     });
-    this.socket = io("http://3.34.100.61/");
+    this.socket = io("https://place.opensrcdesign.com/", {
+      path: "/socket.io",
+      transports: ["websocket", "polling", "flashsocket"],
+    });
   }
   emit = (e, cf) => this.socket.emit(e, cf);
   on = (e, cf) => this.socket.on(e, cf);
