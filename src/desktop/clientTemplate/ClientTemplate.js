@@ -5,7 +5,8 @@ import Header from "desktop/components/Menu/Header";
 import Navbar from "desktop/components/Navbar";
 
 const Wrapper = styled.div`
-  width: ${1920}px;
+  /* width: ${1920}px; */
+  width: auto;
   // min-height: 100%;
   // height: 100%;
   margin: auto;

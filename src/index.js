@@ -17,6 +17,7 @@ const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 root.render(
   // <React.StrictMode>
-  <Provider store={store}>{!ismobile() ? <Desktop /> : <Mobile />}</Provider>
+  // <Provider store={store}>{!ismobile() ? <Desktop /> : <Mobile />}</Provider>
+  <Provider store={store}>{ <Desktop />}</Provider>
   // </React.StrictMode>
 );
