@@ -283,7 +283,7 @@ class ModifyUser extends Component {
               </Content>
 
             </Wrapper>
-            : <>정보를 가져오고 있습니다.</>}
+            : <React.Fragment>정보를 가져오고 있습니다.</React.Fragment>}
       </React.Fragment>
     );
   }

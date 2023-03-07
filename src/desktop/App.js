@@ -38,7 +38,7 @@ const Wrapper = styled.main``;
 
 function App() {
   return (
-    <>
+    <React.Fragment>
       <Wrapper>
         <Router>
           <Routes>
@@ -75,12 +75,15 @@ function App() {
             <Route path="terms" element={<TermsOfServicePage />} />
             <Route path="privacy" element={<PrivacyPolicyPage />} />
 
+            {/* will be removed. */}
             <Route path="createSharer" element={<CreateSharerPage />} />
             <Route path="modifySharer" element={<ModifySharerPage />} />
             <Route path="SharerDetail" element={<SharerDetailPage />}>
               <Route path=":id" element={<SharerDetailPage />} />
             </Route>
             <Route path="modifyUser" element={<ModifyUserPage />} />
+            {/* will be removed. */}
+
             <Route path="modifyExp">
               <Route path=":id" element={<ModifyExpPage />} />
             </Route>
@@ -92,7 +95,7 @@ function App() {
         </Router>
       </Wrapper>
       <Footer />
-    </>
+    </React.Fragment>
   );
 }
 

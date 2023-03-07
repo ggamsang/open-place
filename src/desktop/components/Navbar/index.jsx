@@ -40,7 +40,7 @@ const Navbar = () => {
         {fold ? (
           <styled.SideBarTextFolded>메뉴</styled.SideBarTextFolded>
         ) : (
-          <>
+          <React.Fragment>
             {fixed && (
               <Logo
                 type={"tiny"}
@@ -69,7 +69,7 @@ const Navbar = () => {
               <styled.SideBarIcon5 />
               <styled.SideBarText>ABOUT</styled.SideBarText>
             </styled.MenuButton>
-          </>
+          </React.Fragment>
         )}
       </styled.SideBarInner>
     </styled.SideBar>

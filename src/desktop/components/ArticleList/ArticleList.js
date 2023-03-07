@@ -45,7 +45,7 @@ class ArticleList extends React.Component {
     console.log(this.props);
 
     return (
-      <>
+      <React.Fragment>
         <styled.TitleUserDate>
           <span>제목</span>
           <span>글쓴이</span>
@@ -72,7 +72,7 @@ class ArticleList extends React.Component {
             }}
           />
         </styled.PaginationWrapper>
-      </>
+      </React.Fragment>
     );
   }
 }

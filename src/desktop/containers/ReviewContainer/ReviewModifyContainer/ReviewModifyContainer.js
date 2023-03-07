@@ -17,9 +17,9 @@ class ReviewModifyContainer extends React.Component {
             });
 
     render() {
-        return (<>
+        return (<React.Fragment>
             <ReviewModifyModal submit={this.submit} {...this.props} />
-        </>);
+        </React.Fragment>);
     }
 }
 const mapStateToProps = (state) => ({

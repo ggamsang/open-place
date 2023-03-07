@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import ArticleListContainer from "mobile/containers/ArticleListContainer"
-import NoticeListContainer from "mobile/containers/NoticeListContainer"
-import { WIDTH } from 'constant';
-import SearchForm from 'mobile/components_mobile/Commons/Search/SearchForm';
+import React from "react";
+import styled from "styled-components";
+import ArticleListContainer from "mobile/containers/ArticleListContainer";
+import NoticeListContainer from "mobile/containers/NoticeListContainer";
+import { WIDTH } from "constant";
+import SearchForm from "mobile/components_mobile/Commons/Search/SearchForm";
 
 const Wrapper = styled.div`
   .blanker {
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   .gradient {
     width: 100%;
     height: 131px;
-    background: linear-gradient(69deg, #501B1B, #655FFA, #D30E0E);
+    background: linear-gradient(69deg, #501b1b, #655ffa, #d30e0e);
     background-size: 200% 200%;
     background-position: top right;
 
@@ -20,7 +20,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+
     .title {
       margin: auto;
       margin-top: 18px;
@@ -52,7 +52,7 @@ const Button = styled.button`
   margin: auto;
   width: 155px;
   height: 35px;
-  background: ${prop => prop.active ? "#FF0000" : "#707070"};
+  background: ${(prop) => (prop.active ? "#FF0000" : "#707070")};
   box-shadow: 2px 2px 3px #00000019;
   border-radius: 10px;
   border: none;
@@ -68,7 +68,7 @@ const Button = styled.button`
     line-height: 18px;
     font-family: Pretendard;
     letter-spacing: 0px;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 `;
 // const WriteForm = styled.form`
@@ -89,7 +89,7 @@ const Button = styled.button`
 //     -webkit-box-shadow: 2px 3px 5px -3px rgba(0,0,0,0.65);
 
 //     input {
-//       background-color: #E9E9E9; 
+//       background-color: #E9E9E9;
 //       width: 275px;
 //       height: 31px;
 //       border: none;
@@ -101,7 +101,7 @@ const Button = styled.button`
 //       margin: auto;
 //       margin-top: 13px;
 //       resize: none;
-//       background-color: #E9E9E9; 
+//       background-color: #E9E9E9;
 //       min-width: 311px;
 //       width: 311px;
 //       min-height: 237px;
@@ -142,55 +142,55 @@ const Button = styled.button`
 //   }
 // `;
 
-
-
 class Community extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      boardType: "free", /* "notice" */
+      boardType: "free" /* "notice" */,
     };
   }
   clickedButtonBSD = () => {
     this.setState({ boardType: "free" });
-  }
+  };
   clickedButtonNotice = () => {
     this.setState({ boardType: "notice" });
-  }
+  };
 
   render() {
     const { boardType } = this.state;
 
-    return (<Wrapper>
-
-      <div className='gradient'>
-        <div className='blanker'>&nbsp;</div>
-        <SearchForm />
-        {boardType === "free" && <div className='title'>커뮤니티</div>}
-        {boardType === "notice" && <div className='title'>공지사항</div>}
-      </div>
-
-      <>
-        <div className='top13 rows'>
-          <Button
-            active={boardType === "free"}
-            onClick={this.clickedButtonBSD}>
-            <div className="text">자유게시판</div>
-          </Button>
-          <Button
-            active={boardType === "notice"}
-            onClick={this.clickedButtonNotice}>
-            <div className="text">공지사항</div>
-          </Button>
+    return (
+      <Wrapper>
+        <div className="gradient">
+          <div className="blanker">&nbsp;</div>
+          <SearchForm />
+          {boardType === "free" && <div className="title">커뮤니티</div>}
+          {boardType === "notice" && <div className="title">공지사항</div>}
         </div>
 
-        <div className='article-list-wrapper'>
-          {boardType === "free" && <ArticleListContainer />}
-          {boardType === "notice" && <NoticeListContainer />}
-        </div>
-      </>
+        <React.Fragment>
+          <div className="top13 rows">
+            <Button
+              active={boardType === "free"}
+              onClick={this.clickedButtonBSD}
+            >
+              <div className="text">자유게시판</div>
+            </Button>
+            <Button
+              active={boardType === "notice"}
+              onClick={this.clickedButtonNotice}
+            >
+              <div className="text">공지사항</div>
+            </Button>
+          </div>
 
-    </Wrapper>);
+          <div className="article-list-wrapper">
+            {boardType === "free" && <ArticleListContainer />}
+            {boardType === "notice" && <NoticeListContainer />}
+          </div>
+        </React.Fragment>
+      </Wrapper>
+    );
   }
 }
 

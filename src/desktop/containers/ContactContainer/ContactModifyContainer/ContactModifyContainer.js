@@ -17,9 +17,9 @@ class ContactModifyContainer extends React.Component {
             });
 
     render() {
-        return (<>
+        return (<React.Fragment>
             <ContactModifyModal submit={this.submit} {...this.props} />
-        </>);
+        </React.Fragment>);
     }
 }
 const mapStateToProps = (state) => ({

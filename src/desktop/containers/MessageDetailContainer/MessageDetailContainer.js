@@ -10,7 +10,7 @@ import Socket from "modules/socket";
 class MessageDetailContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.socket = new Socket("message");
+    this.socket = new Socket("");
     this.state = { online: false, more: true, newchat: null };
     this.send = this.send.bind(this);
   }
@@ -80,7 +80,7 @@ class MessageDetailContainer extends React.Component {
     const { detail, opponent, userInfo } = this.props;
 
     return (
-      <>
+      <React.Fragment>
         {/* {(detail && detail.length > 0) */}
         {/*  ?  */}
         <MessageDetail
@@ -93,7 +93,7 @@ class MessageDetailContainer extends React.Component {
           newchat={newchat}
         />
         {/* : null} */}
-      </>
+      </React.Fragment>
     );
   }
 }

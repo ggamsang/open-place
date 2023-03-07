@@ -2,9 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { goto } from "navigator";
 import { getSharerRequest } from "actions/Sharer/Sharer";
-import MyDetail from "desktop/components/User/MyDetail";
 import { SignOutRequest, CheckNickNameRequest } from "actions/Authentication";
 import { updateUserRequest } from "actions/User/User";
+import {
+  getBankCodeListReqeust,
+  getLocationListRequest,
+} from "actions/Commons/DefaultList";
+import { updateSharerProfileRequest } from "actions/Sharer/UpdateSharer";
+
+import MyDetail from "desktop/components/User/MyDetail";
 
 class MyDetailContainer extends Component {
   componentDidMount() {
@@ -36,9 +42,11 @@ const mapStateToProps = (state) => ({
   sharer: state.User.status.sharer,
 
   token: state.Authentication.status.token,
-  userInfo: state.Authentication.status.userInfo,
   user_detail: state.User.status.user_detail,
   checkNickName: state.Authentication.checkStatus.checkNickName,
+
+  bank_code: state.DefaultList.status.bank_code,
+  location: state.DefaultList.status.location,
 });
 const mapDispatchToProps = (dispatch) => ({
   getSharerRequest: (user_id) => {
@@ -52,6 +60,15 @@ const mapDispatchToProps = (dispatch) => ({
   },
   CheckNickNameRequest: (token, nickname) =>
     dispatch(CheckNickNameRequest(token, nickname)),
+  getBankCodeListReqeust: () => {
+    dispatch(getBankCodeListReqeust());
+  },
+  getLocationListRequest: () => {
+    dispatch(getLocationListRequest());
+  },
+  updateSharerProfileRequest: (user_id, data, token) => {
+    dispatch(updateSharerProfileRequest(user_id, data, token));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyDetailContainer);

@@ -260,7 +260,7 @@ class ReviewList extends React.Component {
     console.log(reviews);
 
     return (
-      <>
+      <React.Fragment>
         {write && (
           <ReviewWriteContainer
             open={write}
@@ -389,7 +389,7 @@ class ReviewList extends React.Component {
               )
             )}
         </ReviewContainer>
-      </>
+      </React.Fragment>
     );
   }
 }

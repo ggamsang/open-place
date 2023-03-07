@@ -179,7 +179,7 @@ class ContactList extends React.Component {
         const { modify, write } = this.state;
         console.log(contacts);
 
-        return (<>
+        return (<React.Fragment>
             <ButtonNormal
                 onClickEvent={() => this.setState({ write: true })}
                 width={155}
@@ -285,7 +285,7 @@ class ContactList extends React.Component {
                         </ContactWrapper>)}
             </ContactContainer>
 
-        </>);
+        </React.Fragment>);
     }
 
 }

@@ -141,7 +141,7 @@ class CreateSharer extends React.Component {
             </Detail>
           </Wrapper>
 
-          : <>공유자 정보를 가져오고 있습니다.</>}
+          : <React.Fragment>공유자 정보를 가져오고 있습니다.</React.Fragment>}
 
       </React.Fragment>
     )

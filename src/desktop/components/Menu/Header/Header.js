@@ -147,7 +147,7 @@ class Header extends React.Component {
         </div>  */}
 
         {loggedIn ? (
-          <>
+          <React.Fragment>
             {/* <NotificationIcon /> */}
             {userInfo && <NotificationContainer />}
             <styled.EmailIcon onClick={() => goto("MESSAGE")} />
@@ -161,7 +161,7 @@ class Header extends React.Component {
                 <styled.NicknameText>{userInfo?.nick_name || "닉네임"}</styled.NicknameText>
               </styled.Nickname>
             </styled.RegistBox>
-          </>
+          </React.Fragment>
         ) : (
           <styled.RegistBox>
             <styled.Register onClick={() => goto("SIGNUP")}>

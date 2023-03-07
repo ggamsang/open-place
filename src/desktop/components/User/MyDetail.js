@@ -138,9 +138,9 @@ class MyDetail extends Component {
     } = this.props.userInfo;
     const ProfileModal = () => {};
     return (
-      <>
+      <React.Fragment>
         {modal === PROFILE && (
-          <>
+          <React.Fragment>
             <styled.ModalWrapper>
               <styled.ModalContainer>
                 <styled.ModalTitle>내 정보 수정</styled.ModalTitle>
@@ -196,9 +196,9 @@ class MyDetail extends Component {
                 </styled.Wrapper>
               </styled.ModalContainer>
             </styled.ModalWrapper>
-          </>
+          </React.Fragment>
         )}
-        {modal === NOTI && <>;</>}
+        {modal === NOTI && <React.Fragment>;</React.Fragment>}
         {/* // <Wrapper url={this.props.userInfo?.l_img || null}>
       //   <div className="header">
       //     <div className="searchbox">
@@ -329,7 +329,7 @@ class MyDetail extends Component {
             </styled.ProfileInfo>
           </styled.Wrapper>
           <styled.Wrapper>
-            <styled.CategoryBox>
+            <styled.MyDetailTabMenuBox>
               <styled.TabButton
                 className="selected"
                 onClick={() => {
@@ -374,10 +374,11 @@ class MyDetail extends Component {
               <styled.TabButton onClick={() => this.onClickLogout()}>
                 로그아웃
               </styled.TabButton>
-            </styled.CategoryBox>
+            </styled.MyDetailTabMenuBox>
+            
             <styled.VerticalWrapper>
               {<Outlet />}
-              <styled.SortAs>
+              {/* <styled.SortAs>
                 <div>최신순</div>
                 <div>인기순</div>
               </styled.SortAs>
@@ -394,11 +395,11 @@ class MyDetail extends Component {
                 <styled.ProfileCardDiv>
                   <ListPageProfileCard />
                 </styled.ProfileCardDiv>
-              </styled.ExpList>
+              </styled.ExpList> */}
             </styled.VerticalWrapper>
           </styled.Wrapper>
         </styled.Container>
-      </>
+      </React.Fragment>
     );
   }
 }
