@@ -269,9 +269,10 @@ export const DescriptionDiv = styled.div`
 
 export const ExpTypeDiv = styled.div`
   display: flex;
-  // justify-content: center;
+  justify-content: center;
   align-items: center;
-  margin-top: 63px;
+  margin: auto;
+  margin-top: 35px;
   div:nth-child(1) {
     width: 197px;
     font: normal normal bold 20px/24px Pretendard;

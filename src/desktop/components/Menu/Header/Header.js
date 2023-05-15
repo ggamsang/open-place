@@ -285,7 +285,7 @@ class Header extends React.Component {
             <RegistBox>
               <Register onClick={() => goto("CREATE-ITEM-DESKTOP")}>
                 {/* <RegisterIcon /> */}
-                <RegisterText>경험등록</RegisterText>
+                <RegisterText>등록하기</RegisterText>
               </Register>
               <Nickname onClick={() => goto("MY-PAGE")}>
                 <NicknameIcon src={userInfo?.l_img} />

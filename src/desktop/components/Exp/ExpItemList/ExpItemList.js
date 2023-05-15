@@ -22,7 +22,7 @@ class ExpItemList extends React.Component {
       sortType: this.props.sort || "update",
       filter: { sort: "", tags: [] },
       sort: "update",
-      fold: false,
+      fold: true,
     };
   }
   componentDidMount() {
@@ -75,7 +75,7 @@ class ExpItemList extends React.Component {
             maxWidth: "50vw",
             flexWrap: "wrap",
             gap: "1rem",
-            height: fold ? "25px" : "100%",
+            height: fold ? "27px" : "100%",
             overflow: "hidden",
           }}
         >

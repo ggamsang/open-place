@@ -318,7 +318,7 @@ class BoughtExpDetail extends React.Component {
                         <StarRating score={detail.score || 0} />
                         <div className='nick lm10'>{detail.nick_name}</div>
                     </div>
-
+                {/*
                     <div className='row'>
                         <div>{detail.price} ₩</div>
                         <div className='row center lm20'>
@@ -332,6 +332,7 @@ class BoughtExpDetail extends React.Component {
                             {detail.like || 0}
                         </div>
                     </div>
+                 */}
                     {/* tag absolute */}
                     <div className='taglist'>
                         <div className='inner'>

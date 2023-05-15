@@ -357,14 +357,14 @@ class CreateExp extends React.Component {
               value={this.state.info}
             />
           </div>
-
+        {/*
           <div className="row">
             <div className="label">가격</div>
             <div>
               <InputPrice onChangeValue={this.onChangePrice} name="price" />
             </div>
           </div>
-
+*/}
           <div className="row">
             <div className="label">
               경험 유형<sup style={{ color: "red" }}>*</sup>

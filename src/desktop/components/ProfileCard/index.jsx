@@ -69,7 +69,7 @@ const ProfileCard = ({ uid, title, category, price, score, url }) => {
             ? "만들기"
             : "카테고리"}
         </styled.Category>
-        <styled.Price>{price}원</styled.Price>
+        {/*  <styled.Price>{price}원</styled.Price> */}
         <ReviewWrapper score={score} />
         {/* <NumRate /> */}
       </styled.TopLists>

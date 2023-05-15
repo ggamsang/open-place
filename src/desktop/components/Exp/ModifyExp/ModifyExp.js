@@ -300,7 +300,7 @@ class ModifyExp extends React.Component {
                 value={this.state.info}
               />
             </styled.DescriptionDiv>
-            <styled.PriceDiv>
+        {/*   <styled.PriceDiv>
               <styled.PriceDivText>가격</styled.PriceDivText>
 
               <InputPrice
@@ -309,12 +309,14 @@ class ModifyExp extends React.Component {
                 name="price"
               />
             </styled.PriceDiv>
+            */}
           </styled.InfoBox>
         </styled.Wrapper>
 
         <styled.Wrapper>
           <styled.CategoryBox>
             <p>경험 유형</p>{" "}
+            <div>
             <DropDownNormal
               value={this.state.exp_type}
               onChangeValue={this.onChangeExpType}
@@ -324,9 +326,10 @@ class ModifyExp extends React.Component {
               color={"#CCC"}
               options={this.props.exp_type}
             />
+            </div>
           </styled.CategoryBox>
           <styled.ExpDetailBox>
-            <span>경험유형 상세</span>
+            <span>경험상세</span>
             <ExpType
               content={this.state.content}
               exp_files={this.state.exp_files}

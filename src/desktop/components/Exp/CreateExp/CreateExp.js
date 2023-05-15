@@ -289,8 +289,8 @@ class CreateExp extends React.Component {
                 <span>가격을 입력하세요.</span>
               </styled.InputPriceDiv>
             </styled.ExpTypeDiv> */}
-            <styled.PriceDiv>
-              <styled.PriceDivText>가격</styled.PriceDivText>
+            {/*  <styled.PriceDiv>
+              <styled.PriceDivText>가격</styled.PriceDivText> */}
               {/* <styled.PriceBox>10000</styled.PriceBox> */}
               {/* <span>원</span> */}
               {/* <styled.AddPrice>
@@ -300,8 +300,8 @@ class CreateExp extends React.Component {
                 <styled.AddPriceButton>+ 10만</styled.AddPriceButton>
                 <styled.AddPriceButton>+ 100만</styled.AddPriceButton>
               </styled.AddPrice> */}
-              <InputPrice onChangeValue={this.onChangePrice} name="price" />
-            </styled.PriceDiv>
+            {/*    <InputPrice onChangeValue={this.onChangePrice} name="price" />
+            </styled.PriceDiv> */}
           </styled.InfoBox>
         </styled.Wrapper>
         <styled.Wrapper>
@@ -318,7 +318,7 @@ class CreateExp extends React.Component {
             />
           </styled.CategoryBox>
           <styled.ExpDetailBox>
-            <span>경험유형 상세</span>
+            <span>경험 상세</span>
             <ExpType
               type={this.state.exp_type}
               getContent={this.onChangeContent}

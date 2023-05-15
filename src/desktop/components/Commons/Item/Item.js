@@ -1,122 +1,3 @@
-// import React from "react";
-// import styled from "styled-components";
-// import noimage from "resources/sample-image-01.png";
-// import StarRating from "desktop/commons/StarRating";
-// import Tags from "desktop/commons/Tags";
-// import { resolution } from "desktop/commons/resolution";
-// import heart from "resources/Iconly-heart-red.svg";
-
-// const Wrapper = styled.div`
-//   box-sizing: border-box;
-//   * {
-//     box-sizing: border-box;
-//   }
-//   position: relative;
-//   height: ${resolution(165)}px;
-//   background-image: url(${(prop) => prop.bg});
-//   background-position: center center;
-//   background-size: cover;
-//   padding: 16px 21px;
-//   display: flex;
-//   align-items: flex-end;
-//   * {
-//     z-index: 1;
-//   }
-//   .summary_wrap {
-//     width: 100%;
-//   }
-//   .gradient-cover {
-//     position: absolute;
-//     bottom: 0;
-//     left: 0;
-//     width: 100%;
-//     height: ${resolution(103)}px;
-//     background: transparent linear-gradient(180deg, #00000000 0%, #000000 100%)
-//       0% 0% no-repeat padding-box;
-//     opacity: 0.78;
-//     z-index: 0;
-//   }
-//   .row {
-//     width: 100%;
-//     display: flex;
-//   }
-//   .space-between {
-//     justify-content: space-between;
-//   }
-//   .item-title {
-//     width: ${resolution(132)}px;
-//     font: normal normal bold 16px/19px Pretendard;
-//     color: white;
-//     font-weight: bold;
-//     overflow: hidden;
-//     text-overflow: ellipsis;
-//     white-space: nowrap;
-//   }
-//   .imgheart {
-//     width: 23px;
-//     height: 23px;
-//   }
-//   .price {
-//     margin-left: 20px;
-//     width: ${resolution(80)}px;
-//     font: normal normal bold 16px/19px Pretendard;
-//     color: white;
-//     font-weight: bold;
-//   }
-//   .like {
-//     width: 22px;
-//     text-align: center;
-//     font: normal normal bold 12px/15px Pretendard;
-//     color: white;
-//     font-weight: bold;
-//   }
-//   .rate-and-tags {
-//     display: flex;
-//   }
-// `;
-
-// class Item extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.onClickItem = this.onClickItem.bind(this);
-//   }
-//   onClickItem = (event) => {
-//     if (this.props.onClick) {
-//       this.props.onClick(this.props.sid);
-//     } else {
-//       window.location.href = `/exp/${this.props.uid}`;
-//     }
-//   };
-//   render() {
-//     const { url, title, score, tags, taglist, price, like_count, like_id } =
-//       this.props;
-//     return (
-//       <Wrapper bg={url || noimage} onClick={this.onClickItem}>
-//         <div className="summary_wrap">
-//           <div className="row space-between">
-//             <div className="row">
-//               <div className="item-title">{title || "title"}</div>
-//               <div className="price">₩{price || "58000"}</div>
-//             </div>
-//             <img alt="icon" className="imgheart" src={heart} />
-//           </div>
-//           <div className="row space-between">
-//             <div className="rate-and-tags">
-//               <StarRating score={score || 0} />
-//               <Tags
-//                 prestyle={{ marginLeft: "16px" }}
-//                 tags={tags || taglist || ["tag1", "tag2", "tag3"]}
-//               />
-//             </div>
-//             <div className="like">{like_id == null ? 0 : like_count}</div>
-//           </div>
-//         </div>
-//         <div className="gradient-cover">&nbsp;</div>
-//       </Wrapper>
-//     );
-//   }
-// }
-// export default Item;
 import React from "react";
 import styled from "styled-components";
 import star from "resources/star.svg";
@@ -314,26 +195,6 @@ const ReviewWrapper = ({
 );
 
 const ProfileCard = ({ uid, title, category, price, score, url }) => {
-  //   category: 2;
-  //   content: null;
-  //   create_time: "2022-06-23T10:51:58.000Z";
-  //   exp_files: "null";
-  //   info: '콜라주(영어: collage)는 시각 예술에서 주로 쓰이며 질(質)이 다른 여러 가지 헝겊, 비닐, 타일, 나뭇조각, 종이, 상표 등을 붙여 화면을 구성하는 기법이다. 어원은 "to glue(접착하다)"는 의미의 프랑스어 coller에서 파생되었다.';
-  //   is_sold_out: 0;
-  //   nick_name: "카네이션핑크";
-  //   order: 1;
-  //   price: 500;
-  //   score: 4.5;
-  //   taglist: "[콜라주,포토샵,만들기,재미,놀이]";
-  //   thumbnail_id: 32;
-  //   title: "포토샵으로 콜라주";
-  //   type: "item";
-  //   type_detail: null;
-  //   uid: 57;
-  //   update_time: "2022-06-23T10:51:58.000Z";
-  //   url: "https://s3.ap-northeast-2.amazonaws.com/osd.uploads.com/dev/thumbnails/1655948262044-x600.jpg";
-  //   user_id: 11;
-
   return (
     <React.Fragment>
       <TopLists onClick={() => (window.location.href = `/exp/${uid}`)}>
@@ -351,7 +212,7 @@ const ProfileCard = ({ uid, title, category, price, score, url }) => {
             ? "만들기"
             : "카테고리"}
         </Category>
-        <Price>
+      {/*<Price>
           {price > 0
             ? new Intl.NumberFormat("ko-KR", {
                 style: "currency",
@@ -359,6 +220,7 @@ const ProfileCard = ({ uid, title, category, price, score, url }) => {
               }).format(price) + "원"
             : "무료"}
         </Price>
+        */}
         <ReviewWrapper score={score} />
         {/* <NumRate /> */}
       </TopLists>
