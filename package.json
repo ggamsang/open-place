@@ -21,6 +21,7 @@
     "react-addons-update": "^15.6.3",
     "react-awesome-modal": "^2.0.5",
     "react-cache-buster": "^0.1.6",
+    "react-calendar": "^4.2.1",
     "react-cookie": "^4.1.1",
     "react-cookies": "^0.1.1",
     "react-dom": "^18.1.0",

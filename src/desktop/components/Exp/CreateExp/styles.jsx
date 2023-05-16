@@ -388,7 +388,8 @@ export const CategoryBox = styled.div`
 
 export const ExpDetailBox = styled.div`
   width: 1329px;
-  min-height: 280px;
+  padding: 30px;
+  // min-height: 280px;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 2px solid #efefef;
   box-shadow: 2px 2px 5px #00000029;
@@ -398,7 +399,7 @@ export const ExpDetailBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  // align-items: center;
   > span {
     text-align: center;
     font: normal normal 900 44px/52px Pretendard;
@@ -407,6 +408,7 @@ export const ExpDetailBox = styled.div`
     opacity: 1;
     margin: 0;
   }
+  // *{border:1px solid red;}
 `;
 
 export const AddFile = styled.div`

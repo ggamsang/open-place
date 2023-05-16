@@ -13,6 +13,9 @@ import { Editor } from "desktop/commons/Editor/Editor";
 import { InputGameFile } from "desktop/components/Commons/Input";
 import { goto } from "navigator";
 import ExpType from "../Common/ExpType";
+import ImageGame from 'resources/gamemeet.avif';
+import ImageReading from 'resources/readingmeet.avif';
+
 
 const config = {
   readonly: false,
@@ -47,6 +50,7 @@ class CreateExp extends React.Component {
       category: 1,
       info: null,
       exp_files: [],
+      meet_type: null,
     };
     this.onChangeThumbnail = this.onChangeThumbnail.bind(this);
     this.onChangeTitle = this.onChangeTitle.bind(this);
@@ -55,7 +59,7 @@ class CreateExp extends React.Component {
     this.onChangeInfo = this.onChangeInfo.bind(this);
     this.onChangePrice = this.onChangePrice.bind(this);
     this.onClickOK = this.onClickOK.bind(this);
-
+    this.onChangeMeetType = this.onChangeMeetType.bind(this);
     this.onChangeContent = this.onChangeContent.bind(this);
     this.onFileChange = this.onFileChange.bind(this);
     this.onChangeExpType = this.onChangeExpType.bind(this);
@@ -128,8 +132,11 @@ class CreateExp extends React.Component {
     this.setState({
       exp_type: event.target.value,
     });
+    console.log(typeof this.state.exp_type, this.state.exp_type);
   };
-
+  onChangeMeetType = (type) => {
+    console.clear(); console.log(type); this.setState({ meet_type: type });
+  };
   onClickOK = async (event) => {
     const {
       thumbnail,
@@ -220,11 +227,67 @@ class CreateExp extends React.Component {
                 placeholder={"제목을 입력하세요"}
                 radius={10}
                 width={350}
-                height={31}
+                height={45}
                 fontSize={20}
                 color={"#E9E9E9"}
               />
             </styled.TitleDiv>
+
+            {/* <styled.DescriptionDiv>
+              <div>설명</div>
+              <TextAreaNormal
+                onChangeValue={this.onChangeInfo}
+                width={245}
+                height={100}
+                color={"#E9E9E9"}
+                fontSize={15}
+                radius={10}
+                placeholder="설명을 입력하세요"
+                value={this.state.info}
+              />
+            </styled.DescriptionDiv> */}
+
+            <styled.CategoryDiv>
+              <div>경험유형</div>
+              <DropDownNormal
+                value={this.state.exp_type}
+                onChangeValue={this.onChangeExpType}
+                width={250}
+                height={50}
+                radius={10}
+                color={"#CCC"}
+                options={this.props.exp_type}
+              />
+
+            </styled.CategoryDiv>
+
+
+            {this.state.exp_type === '3' &&
+              <styled.CategoryDiv>
+                <div className="active item">모임선택</div>
+
+                <div className="ui link horizontal list">
+                  <div style={{ display: "flex", flexDirection: "ro" }}>
+
+                    <a className="item" onClick={() => this.onChangeMeetType(1)}>
+                      <div>
+                        <img 
+                        style={{ border: this.state.meet_type === 1 ? "1px solid red" : "", width: "250px" }} 
+                        alt='online-game' src={ImageGame} />
+                        {this.state.meet_type === 1 && "✅"}{"온라인게임"}</div>
+
+                    </a>
+                    <a className="item" onClick={() => this.onChangeMeetType(2)}>
+                      <div>
+                        <img 
+                        style={{ border: this.state.meet_type === 2 ? "1px solid red" : "", width: "250px" }} 
+                        alt='book-club' src={ImageReading} />
+                        {this.state.meet_type === 2 && "✅"}{"독서모임"}</div>
+
+                    </a>
+                  </div>
+                </div>
+              </styled.CategoryDiv>}
 
             <styled.CategoryDiv>
               <div>카테고리</div>
@@ -238,25 +301,6 @@ class CreateExp extends React.Component {
                 options={this.props.category.slice(0, 3)}
               />
 
-              <DropDownNormal
-                // value={}
-                // margin={"100px"}
-                color={"#E9E9E9"}
-                onChangeValue={() => alert("개발중입니다.")}
-                width={250}
-                height={51}
-                radius={10}
-                options={this.props.category.slice(
-                  3,
-                  this.props.category.length - 1
-                )}
-              />
-              {/* <styled.CategoryButton1>
-                <span>대분류</span>
-              </styled.CategoryButton1>
-              <styled.CategoryButton2>
-                <span>소분류</span>
-              </styled.CategoryButton2> */}
             </styled.CategoryDiv>
 
             <styled.TagDiv>
@@ -269,57 +313,15 @@ class CreateExp extends React.Component {
                 />
               </div>
             </styled.TagDiv>
-
-            <styled.DescriptionDiv>
-              <div>설명</div>
-              <TextAreaNormal
-                onChangeValue={this.onChangeInfo}
-                width={245}
-                height={100}
-                color={"#E9E9E9"}
-                fontSize={15}
-                radius={10}
-                placeholder="설명을 입력하세요"
-                value={this.state.info}
-              />
-            </styled.DescriptionDiv>
-            {/* <styled.ExpTypeDiv>
-              <div>경험유형</div>
-              <styled.InputPriceDiv>
-                <span>가격을 입력하세요.</span>
-              </styled.InputPriceDiv>
-            </styled.ExpTypeDiv> */}
-            {/*  <styled.PriceDiv>
-              <styled.PriceDivText>가격</styled.PriceDivText> */}
-              {/* <styled.PriceBox>10000</styled.PriceBox> */}
-              {/* <span>원</span> */}
-              {/* <styled.AddPrice>
-                <styled.AddPriceButton>+ 1천</styled.AddPriceButton>
-                <styled.AddPriceButton>+ 1만</styled.AddPriceButton>
-                <styled.AddPriceButton>+ 5만</styled.AddPriceButton>
-                <styled.AddPriceButton>+ 10만</styled.AddPriceButton>
-                <styled.AddPriceButton>+ 100만</styled.AddPriceButton>
-              </styled.AddPrice> */}
-            {/*    <InputPrice onChangeValue={this.onChangePrice} name="price" />
-            </styled.PriceDiv> */}
           </styled.InfoBox>
         </styled.Wrapper>
+
         <styled.Wrapper>
-          <styled.CategoryBox>
-            <p>경험 유형</p>{" "}
-            <DropDownNormal
-              value={this.state.exp_type}
-              onChangeValue={this.onChangeExpType}
-              width={250}
-              height={50}
-              radius={10}
-              color={"#CCC"}
-              options={this.props.exp_type}
-            />
-          </styled.CategoryBox>
+
           <styled.ExpDetailBox>
             <span>경험 상세</span>
             <ExpType
+              meet_type={this.state.meet_type}
               type={this.state.exp_type}
               getContent={this.onChangeContent}
               getFiles={this.onFileChange}
@@ -327,6 +329,7 @@ class CreateExp extends React.Component {
             />
           </styled.ExpDetailBox>
         </styled.Wrapper>
+
         {/* <styled.AddFile></styled.AddFile> */}
         <styled.Wrapper>
           <styled.AddButton onClick={this.onClickOK}>
@@ -342,3 +345,42 @@ class CreateExp extends React.Component {
   }
 }
 export default CreateExp;
+/*
+              <DropDownNormal
+                // value={}
+                // margin={"100px"}
+                color={"#E9E9E9"}
+                onChangeValue={() => alert("개발중입니다.")}
+                width={250}
+                height={51}
+                radius={10}
+                options={this.props.category.slice(
+                  3,
+                  this.props.category.length - 1
+                )}
+              />
+              <styled.CategoryButton1>
+                <span>대분류</span>
+              </styled.CategoryButton1>
+              <styled.CategoryButton2>
+                <span>소분류</span>
+              </styled.CategoryButton2> */
+{/* <styled.ExpTypeDiv>
+              <div>경험유형</div>
+              <styled.InputPriceDiv>
+                <span>가격을 입력하세요.</span>
+              </styled.InputPriceDiv>
+            </styled.ExpTypeDiv> */}
+{/*  <styled.PriceDiv>
+              <styled.PriceDivText>가격</styled.PriceDivText> */}
+{/* <styled.PriceBox>10000</styled.PriceBox> */ }
+{/* <span>원</span> */ }
+{/* <styled.AddPrice>
+                <styled.AddPriceButton>+ 1천</styled.AddPriceButton>
+                <styled.AddPriceButton>+ 1만</styled.AddPriceButton>
+                <styled.AddPriceButton>+ 5만</styled.AddPriceButton>
+                <styled.AddPriceButton>+ 10만</styled.AddPriceButton>
+                <styled.AddPriceButton>+ 100만</styled.AddPriceButton>
+              </styled.AddPrice> */}
+{/*    <InputPrice onChangeValue={this.onChangePrice} name="price" />
+            </styled.PriceDiv> */}

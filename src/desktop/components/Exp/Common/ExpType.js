@@ -7,6 +7,13 @@ import DropDownNormal from "desktop/components/Commons/DropDown/DropDownNormal";
 import InputNormal from "desktop/components/Commons/Input/InputNormal";
 import { InputCalendar } from "desktop/components/Commons/Input";
 import Jodit from "desktop/commons/Jodit";
+
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+
+
+
+
 //일반:1 자문/상담:2 강의/강좌:3 모임:4 게임5
 const TYPE_NORMAL = 0;
 const TYPE_TALK = 1;
@@ -48,6 +55,8 @@ const Wrapper = styled.div`
     margin-bottom: 15px;
     box-shadow: 2px 2px 5px #00000029;
   }
+
+
 `
 const OnOfflinelist = [
   { uid: 1, name: "온라인" },
@@ -197,11 +206,40 @@ class ExpType extends Component {
 
   render() {
     const type = parseInt(this.props.type);
+    const meet_type = parseInt(this.props.meet_type);
 
     return (
       <Wrapper>
         <div className="add_content">
-          {
+
+          {meet_type === 2 && <div style={{border: "1px solid blue",}}>
+
+            {/* reading */}
+
+
+
+            <div style={{ border: "1px solid red", width: "max-content", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              <div>참여가능인원을 선택해주세요.</div>
+              <div>
+                <button>-</button>
+                <input />
+                <button>+</button>
+              </div>
+
+            </div>
+
+            <div>
+              <Calendar onClickDay={(v, e) => console.log({e}, {v})} />
+            </div>
+            <div></div>
+          </div>}
+
+
+          {meet_type === 1 && <>game</>}
+
+
+
+          {/* {
             type === TYPE_TALK &&
             <React.Fragment>
               <div className="row">
@@ -313,23 +351,24 @@ class ExpType extends Component {
                   2) 폴더로 업로드, 파일 내 index.html이 반드시 있어야 함.<br />
                 </div>
               </div>
-            </React.Fragment>}
+            </React.Fragment>} */}
 
         </div>
 
 
-        <div className='row' style={{ flexDirection: "column" }}>
+        {/* <div className='row' style={{ flexDirection: "column" }}>
           <div className='label'>경험 컨텐츠</div>
           <div className="whiteBox">
             <Jodit value={this.state.content} config={config} onChange={(value) => {
               this.onChangeContent(value)
             }} />
           </div>
-        </div>
+        </div>*/}
 
-        <div className='whiteBox'>
+
+        {/*<div className='whiteBox'>
           <InputFile files={this.state.exp_files} display={true} getValue={(value) => this.onChangeFile(value)} accept="" />
-        </div>
+        </div> */}
 
 
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import Header from "desktop/components/Menu/Header";
-import Navbar from "desktop/components/Navbar";
+// import Navbar from "desktop/components/Navbar";
 
 const Wrapper = styled.div`
   width: ${1920}px;
@@ -23,7 +23,7 @@ class ClientTemplate extends Component {
           loggedIn={isLoggedIn}
           userInfo={userInfo}
         />
-        <Navbar />
+        {/* <Navbar /> */}
         {this.props.children &&
           React.cloneElement(this.props.children, {
             loggedIn: isLoggedIn,
