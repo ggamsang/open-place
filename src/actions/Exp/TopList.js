@@ -7,6 +7,7 @@ import { GET } from "constant";
 export const getTopExpListRequest = (page = 0) => {
   return (dispatch) => {
     const url = `${host}/item/TopList/${page}`;
+    console.log(url)
     return fetch(url, GET)
       .then((res) => res.json())
       .then((data) => {

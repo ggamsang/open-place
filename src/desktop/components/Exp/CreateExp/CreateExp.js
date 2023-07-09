@@ -13,9 +13,8 @@ import { Editor } from "desktop/commons/Editor/Editor";
 import { InputGameFile } from "desktop/components/Commons/Input";
 import { goto } from "navigator";
 import ExpType from "../Common/ExpType";
-import ImageGame from 'resources/gamemeet.avif';
-import ImageReading from 'resources/readingmeet.avif';
-
+import ImageGame from "resources/gamemeet.avif";
+import ImageReading from "resources/readingmeet.avif";
 
 const config = {
   readonly: false,
@@ -135,7 +134,9 @@ class CreateExp extends React.Component {
     console.log(typeof this.state.exp_type, this.state.exp_type);
   };
   onChangeMeetType = (type) => {
-    console.clear(); console.log(type); this.setState({ meet_type: type });
+    console.clear();
+    console.log(type);
+    this.setState({ meet_type: type });
   };
   onClickOK = async (event) => {
     const {
@@ -174,13 +175,19 @@ class CreateExp extends React.Component {
     if (thumbnail != null) {
       await data.files.push(file);
     } // thumbnail 썸네일이 있을 경우에만
-    if (title === null || title === "") return alert("제목을 입력하세요");
-    if (info === null || info === "") return alert("내용을 입력하세요");
-
-    this.props.createExpRequest(data, this.props.token).then((data) => {
-      alert("새로생성된 경험아이템으로 이동합니다.");
-      // goto("EXP", data.id);
-      goto("PLAY");
+    if (title === null || title === "") {
+      return alert("제목을 입력하세요");
+    }
+    // if (info === null || info === "") {
+    //   return alert("내용을 입력하세요");
+    // }
+    console.log({ data });
+    // return;
+    this.props.createExpRequest(data, this.props.token).then((result) => {
+      console.log({ result });
+      //      alert("등록되었습니다. 해당경험페이지로 이동합니다.");
+      //     goto("EXP", data.id);
+      // goto("PLAY");
     });
   };
 
@@ -258,36 +265,54 @@ class CreateExp extends React.Component {
                 color={"#CCC"}
                 options={this.props.exp_type}
               />
-
             </styled.CategoryDiv>
 
-
-            {this.state.exp_type === '3' &&
+            {this.state.exp_type === "3" && (
               <styled.CategoryDiv>
                 <div className="active item">모임선택</div>
 
                 <div className="ui link horizontal list">
                   <div style={{ display: "flex", flexDirection: "ro" }}>
-
-                    <a className="item" onClick={() => this.onChangeMeetType(1)}>
+                    <a
+                      className="item"
+                      onClick={() => this.onChangeMeetType(1)}
+                    >
                       <div>
-                        <img 
-                        style={{ border: this.state.meet_type === 1 ? "1px solid red" : "", width: "250px" }} 
-                        alt='online-game' src={ImageGame} />
-                        {this.state.meet_type === 1 && "✅"}{"온라인게임"}</div>
-
+                        <img
+                          style={{
+                            border:
+                              this.state.meet_type === 1 ? "1px solid red" : "",
+                            width: "250px",
+                          }}
+                          alt="online-game"
+                          src={ImageGame}
+                        />
+                        {this.state.meet_type === 1 && "✅"}
+                        {"온라인게임"}
+                      </div>
                     </a>
-                    <a className="item" onClick={() => this.onChangeMeetType(2)}>
+                    <a
+                      className="item"
+                      onClick={() => this.onChangeMeetType(2)}
+                    >
                       <div>
-                        <img 
-                        style={{ border: this.state.meet_type === 2 ? "1px solid red" : "", width: "250px" }} 
-                        alt='book-club' src={ImageReading} />
-                        {this.state.meet_type === 2 && "✅"}{"독서모임"}</div>
-
+                        <img
+                          style={{
+                            border:
+                              this.state.meet_type === 2 ? "1px solid red" : "",
+                            width: "250px",
+                          }}
+                          alt="book-club"
+                          src={ImageReading}
+                        />
+                        {this.state.meet_type === 2 && "✅"}
+                        {"독서모임"}
+                      </div>
                     </a>
                   </div>
                 </div>
-              </styled.CategoryDiv>}
+              </styled.CategoryDiv>
+            )}
 
             <styled.CategoryDiv>
               <div>카테고리</div>
@@ -300,7 +325,6 @@ class CreateExp extends React.Component {
                 color={"#E9E9E9"}
                 options={this.props.category.slice(0, 3)}
               />
-
             </styled.CategoryDiv>
 
             <styled.TagDiv>
@@ -317,16 +341,15 @@ class CreateExp extends React.Component {
         </styled.Wrapper>
 
         <styled.Wrapper>
-
           <styled.ExpDetailBox>
             <span>경험 상세</span>
-            <ExpType
+            {/* <ExpType
               meet_type={this.state.meet_type}
               type={this.state.exp_type}
               getContent={this.onChangeContent}
               getFiles={this.onFileChange}
               return={(value) => this.setState({ exp_type_detail: value })}
-            />
+            /> */}
           </styled.ExpDetailBox>
         </styled.Wrapper>
 
@@ -365,22 +388,34 @@ export default CreateExp;
               <styled.CategoryButton2>
                 <span>소분류</span>
               </styled.CategoryButton2> */
-{/* <styled.ExpTypeDiv>
+{
+  /* <styled.ExpTypeDiv>
               <div>경험유형</div>
               <styled.InputPriceDiv>
                 <span>가격을 입력하세요.</span>
               </styled.InputPriceDiv>
-            </styled.ExpTypeDiv> */}
-{/*  <styled.PriceDiv>
-              <styled.PriceDivText>가격</styled.PriceDivText> */}
-{/* <styled.PriceBox>10000</styled.PriceBox> */ }
-{/* <span>원</span> */ }
-{/* <styled.AddPrice>
+            </styled.ExpTypeDiv> */
+}
+{
+  /*  <styled.PriceDiv>
+              <styled.PriceDivText>가격</styled.PriceDivText> */
+}
+{
+  /* <styled.PriceBox>10000</styled.PriceBox> */
+}
+{
+  /* <span>원</span> */
+}
+{
+  /* <styled.AddPrice>
                 <styled.AddPriceButton>+ 1천</styled.AddPriceButton>
                 <styled.AddPriceButton>+ 1만</styled.AddPriceButton>
                 <styled.AddPriceButton>+ 5만</styled.AddPriceButton>
                 <styled.AddPriceButton>+ 10만</styled.AddPriceButton>
                 <styled.AddPriceButton>+ 100만</styled.AddPriceButton>
-              </styled.AddPrice> */}
-{/*    <InputPrice onChangeValue={this.onChangePrice} name="price" />
-            </styled.PriceDiv> */}
+              </styled.AddPrice> */
+}
+{
+  /*    <InputPrice onChangeValue={this.onChangePrice} name="price" />
+            </styled.PriceDiv> */
+}

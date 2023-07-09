@@ -50,6 +50,7 @@
     "webpack": "^5.72.0"
   },
   "scripts": {
+    "local": "REACT_APP_TYPE=local react-scripts start",
     "start": "HTTPS=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

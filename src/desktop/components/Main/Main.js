@@ -33,6 +33,7 @@ const Shortcut = styled.div`
 `;
 
 function Main({ userInfo }) {
+  console.log(process.env.REACT_APP_AWS_URL)
   return (
     <MainWrapper>
       <Fade>
