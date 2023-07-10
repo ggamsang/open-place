@@ -112,3 +112,6 @@ export const TYPEs = [
   EXP_TYPE_NORM,
   EXP_TYPE_GAME,
 ];
+export const FILE = "FILE";
+export const TEXT = "TEXT";
+export const LINK = "LINK";
