@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {
   /*FileUploadRequest,*/ GameFileUploadRequest,
 } from "actions/Uploader/Uploader";
-import ButtonNormal from "desktop/components/Commons/Button/ButtonNormal";
+import ButtonNormal from "desktop/components/Commons/Button/ButtonNormal";
 import { Dimmer, Loader } from "semantic-ui-react";
 // import { SPLITOR } from "constant";
 

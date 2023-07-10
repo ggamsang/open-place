@@ -1,4 +1,4 @@
-import ButtonNormal from "mobile/components_mobile/Commons/Button/ButtonNormal";
+import ButtonNormal from "mobile/components_mobile/Commons/Button/ButtonNormal";
 import { WIDTH } from "constant";
 import React from "react";
 import styled from 'styled-components';

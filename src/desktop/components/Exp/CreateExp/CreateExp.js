@@ -2,7 +2,7 @@ import React from "react";
 import * as styled from "./styles";
 import { resolution } from "desktop/commons/resolution";
 import SearchForm from "desktop/components/Commons/Search/SearchForm";
-import ButtonNormal from "desktop/components/Commons/Button/ButtonNormal";
+import ButtonNormal from "desktop/components/Commons/Button/ButtonNormal";
 import { InputTag } from "desktop/components/Commons/Input";
 import InputNormal from "desktop/components/Commons/Input/InputNormal";
 import DropDownNormal from "desktop/components/Commons/DropDown/DropDownNormal";

@@ -4,7 +4,7 @@ import { resolution } from 'desktop/commons/resolution';
 import SearchForm from 'desktop/components/Commons/Search/SearchForm';
 import Heart from "resources/Iconly-heart-white.svg"
 import Heart_red from "resources/Iconly-heart-red.svg"
-import ButtonNormal from 'desktop/components/Commons/Button/ButtonNormal';
+import ButtonNormal from 'desktop/components/Commons/Button/ButtonNormal';
 import SharerItemListContainer from 'desktop/containers/ListContainer/SellItemListContainer';
 import { WIDTH } from 'constant';
 

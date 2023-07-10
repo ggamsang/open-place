@@ -4,7 +4,7 @@ import { resolution } from 'desktop/commons/resolution';
 import profile from 'resources/Profile.svg';
 import SearchForm from 'desktop/components/Commons/Search/SearchForm';
 import SharerForm from './SharerForm';
-import ButtonNormal from 'desktop/components/Commons/Button/ButtonNormal';
+import ButtonNormal from 'desktop/components/Commons/Button/ButtonNormal';
 
 const Wrapper = styled.div`
   width:100%;

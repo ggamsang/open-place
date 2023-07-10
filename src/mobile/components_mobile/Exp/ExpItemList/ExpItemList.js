@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ScrollList from "mobile/components_mobile/Commons/ScrollList";
 // import Search from 'components_mobile/Commons/Search';
 import SearchForm from "mobile/components_mobile/Commons/Search/SearchForm";
-import ButtonNormal from "mobile/components_mobile/Commons/Button/ButtonNormal";
+import ButtonNormal from "mobile/components_mobile/Commons/Button/ButtonNormal";
 // import { WIDTH } from "constant";
 import { goto } from "navigator";
 import Item from "mobile/components_mobile/Commons/Item";

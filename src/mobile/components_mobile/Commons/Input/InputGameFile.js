@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { FileUploadRequest, GameFileUploadRequest } from "actions/Uploader/Uploader";
-import ButtonNormal from 'mobile/components_mobile/Commons/Button/ButtonNormal';
+import ButtonNormal from 'mobile/components_mobile/Commons/Button/ButtonNormal';
 import { Dimmer, Loader } from "semantic-ui-react";
 import { SPLITOR } from "constant";
 

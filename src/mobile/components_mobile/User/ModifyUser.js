@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import ButtonNormal from "mobile/components_mobile/Commons/Button/ButtonNormal";
+import ButtonNormal from "mobile/components_mobile/Commons/Button/ButtonNormal";
 import { resolution } from "mobile/commons/resolution";
 import SearchForm from "mobile/components_mobile/Commons/Search/SearchForm";
 import profile from "resources/Profile.svg";

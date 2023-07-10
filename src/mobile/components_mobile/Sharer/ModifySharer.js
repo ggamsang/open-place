@@ -4,7 +4,7 @@ import { resolution } from "mobile/commons/resolution";
 import profile from "resources/Profile.svg";
 import SearchForm from "mobile/components_mobile/Commons/Search/SearchForm";
 import SharerForm from "./SharerForm";
-import ButtonNormal from "mobile/components_mobile/Commons/Button/ButtonNormal";
+import ButtonNormal from "mobile/components_mobile/Commons/Button/ButtonNormal";
 import { goto } from "navigator";
 // import { WIDTH } from 'constant';
 

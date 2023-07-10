@@ -1,7 +1,7 @@
 import React from "react";
 import star from "resources/Iconly-Bold-Star-red.svg";
 import heart from "resources/Iconly-Bold-Heart-white.svg";
-import ButtonNormal from "desktop/components/Commons/Button/ButtonNormal";
+import ButtonNormal from "desktop/components/Commons/Button/ButtonNormal";
 import { InputFile } from "desktop/components/Commons/Input";
 import { Fade } from "react-reveal";
 import ReviewContainer from "desktop/containers/ReviewContainer";

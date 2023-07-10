@@ -4,7 +4,7 @@ import { resolution } from 'mobile/commons/resolution';
 import SearchForm from 'mobile/components_mobile/Commons/Search/SearchForm';
 import Heart from "resources/Iconly-heart-white.svg"
 import Heart_red from "resources/Iconly-heart-red.svg"
-import ButtonNormal from 'mobile/components_mobile/Commons/Button/ButtonNormal';
+import ButtonNormal from 'mobile/components_mobile/Commons/Button/ButtonNormal';
 import SharerItemListContainer from 'mobile/containers/ListContainer/SellItemListContainer';
 import { WIDTH } from 'constant';
 

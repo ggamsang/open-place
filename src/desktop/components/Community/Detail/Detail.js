@@ -5,7 +5,7 @@ import { WIDTH } from "constant";
 import CommentListContainer from "desktop/containers/CommentListContainer";
 import DateFormat from "modules/DateFormat";
 import { InputFile } from "desktop/components/Commons/Input";
-import ButtonNormal from "desktop/components/Commons/Button/ButtonNormal";
+import ButtonNormal from "desktop/components/Commons/Button/ButtonNormal";
 
 const Wrapper = styled.div`
   margin-bottom: 150px; // 임시로 입력된 값입니다.

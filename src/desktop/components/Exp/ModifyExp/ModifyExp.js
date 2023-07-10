@@ -9,7 +9,7 @@ import TextAreaNormal from "desktop/components/Commons/TextArea/TextAreaNormal";
 import { InputPrice } from "desktop/components/Commons/Input";
 import { goto } from "navigator";
 import ExpType from "../Common/ExpType";
-import ButtonNormal from "desktop/components/Commons/Button/ButtonNormal";
+import ButtonNormal from "desktop/components/Commons/Button/ButtonNormal";
 
 class ModifyExp extends React.Component {
   constructor(props) {

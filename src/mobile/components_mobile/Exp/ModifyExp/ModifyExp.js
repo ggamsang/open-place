@@ -9,7 +9,7 @@ import TextAreaNormal from 'mobile/components_mobile/Commons/TextArea/TextAreaNo
 import { InputPrice } from 'mobile/components_mobile/Commons/Input';
 import { goto } from 'navigator';
 import ExpType from '../Common/ExpType';
-import ButtonNormal from 'mobile/components_mobile/Commons/Button/ButtonNormal';
+import ButtonNormal from 'mobile/components_mobile/Commons/Button/ButtonNormal';
 const Wrapper = styled.div`
     *{
       box-sizing:border-box;

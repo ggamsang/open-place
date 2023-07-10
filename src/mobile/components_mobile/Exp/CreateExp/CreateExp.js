@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { resolution } from "mobile/commons/resolution";
 import SearchForm from "mobile/components_mobile/Commons/Search/SearchForm";
-import ButtonNormal from "mobile/components_mobile/Commons/Button/ButtonNormal";
+import ButtonNormal from "mobile/components_mobile/Commons/Button/ButtonNormal";
 import { InputTag } from "mobile/components_mobile/Commons/Input";
 import InputNormal from "mobile/components_mobile/Commons/Input/InputNormal";
 import DropDownNormal from "mobile/components_mobile/Commons/DropDown/DropDownNormal";

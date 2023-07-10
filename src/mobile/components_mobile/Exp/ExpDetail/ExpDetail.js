@@ -4,7 +4,7 @@ import SearchForm from 'mobile/components_mobile/Commons/Search/SearchForm';
 import { resolution } from 'mobile/commons/resolution';
 import star from "resources/Iconly-Bold-Star-red.svg";
 import heart from "resources/Iconly-Bold-Heart-white.svg";
-import ButtonNormal from 'mobile/components_mobile/Commons/Button/ButtonNormal';
+import ButtonNormal from 'mobile/components_mobile/Commons/Button/ButtonNormal';
 import { InputFile } from 'mobile/components_mobile/Commons/Input';
 import { Fade } from 'react-reveal';
 import ReviewContainer from "mobile/containers/ReviewContainer";
