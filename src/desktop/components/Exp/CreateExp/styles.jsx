@@ -73,15 +73,16 @@ export const ThumbnailImg = styled.div`
 `;
 
 export const InfoBox = styled.div`
-  width: 1329px;
+  // width: 1329px;
   min-height: 665px;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 2px solid #efefef;
   box-shadow: 2px 2px 5px #00000029;
   border-radius: 25px;
-  margin-left: 40px;
+  margin-left: 20px;
   margin-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px 50px;
+  // *{border:1px solid red;}
 `;
 
 export const InfoBoxInnerDiv = styled.div`
@@ -100,7 +101,7 @@ export const TitleDiv = styled.div`
     font: normal normal bold 20px/24px Pretendard;
     letter-spacing: 0px;
     color: #707070;
-    margin-left: 70px;
+    // margin-left: 70px;
   }
   div:nth-child(2) {
     margin: 0;
@@ -144,7 +145,7 @@ export const CategoryDiv = styled.div`
     font: normal normal bold 20px/24px Pretendard;
     letter-spacing: 0px;
     color: #707070;
-    margin-left: 70px;
+    // margin-left: 70px;
   }
 `;
 
@@ -193,7 +194,7 @@ export const TagDiv = styled.div`
     font: normal normal bold 20px/24px Pretendard;
     letter-spacing: 0px;
     color: #707070;
-    margin-left: 70px;
+    // margin-left: 70px;
   }
 `;
 
@@ -250,7 +251,7 @@ export const DescriptionDiv = styled.div`
     font: normal normal bold 20px/24px Pretendard;
     letter-spacing: 0px;
     color: #707070;
-    margin-left: 70px;
+    // margin-left: 70px;
   }
   div:nth-child(2) {
     width: 741px;
@@ -278,7 +279,7 @@ export const ExpTypeDiv = styled.div`
     font: normal normal bold 20px/24px Pretendard;
     letter-spacing: 0px;
     color: #707070;
-    margin-left: 70px;
+    // margin-left: 70px;
   }
 `;
 
@@ -318,7 +319,7 @@ export const PriceDivText = styled.div`
   font: normal normal bold 20px/24px Pretendard;
   letter-spacing: 0px;
   color: #707070;
-  margin-left: 70px;
+  // margin-left: 70px;
 `;
 
 export const PriceBox = styled.div`

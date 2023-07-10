@@ -15,6 +15,8 @@ import { goto } from "navigator";
 import ExpType from "../Common/ExpType";
 import ImageGame from "resources/gamemeet.avif";
 import ImageReading from "resources/readingmeet.avif";
+import { CATEs, TYPEs } from "constant";
+import ContentMaker from "desktop/components/ContentMaker/ContentMaker";
 
 const config = {
   readonly: false,
@@ -46,7 +48,7 @@ class CreateExp extends React.Component {
       thumbnail: null,
       thumbnail_name: null,
       title: null,
-      category: 1,
+      category: 0,
       info: null,
       exp_files: [],
       meet_type: null,
@@ -90,8 +92,12 @@ class CreateExp extends React.Component {
   };
 
   onChangeCategory = (event) => {
+    if (parseInt(event.target.value, 10) === 0) {
+      // alert("카테고리를 선택해주세요.");
+      return;
+    }
     this.setState({
-      category: event.target.value,
+      category: parseInt(event.target.value, 10),
     });
   };
   onChangeInfo = (event) => {
@@ -128,10 +134,13 @@ class CreateExp extends React.Component {
   };
 
   onChangeExpType = (event) => {
+    if (parseInt(event.target.value, 10) === 0) {
+      return;
+    }
     this.setState({
-      exp_type: event.target.value,
+      exp_type: parseInt(event.target.value, 10),
     });
-    console.log(typeof this.state.exp_type, this.state.exp_type);
+    // console.log(typeof this.state.exp_type, this.state.exp_type);
   };
   onChangeMeetType = (type) => {
     console.clear();
@@ -171,76 +180,87 @@ class CreateExp extends React.Component {
       name: this.state.thumbnail_name,
       key: 0,
     };
-
     if (thumbnail != null) {
       await data.files.push(file);
     } // thumbnail 썸네일이 있을 경우에만
     if (title === null || title === "") {
       return alert("제목을 입력하세요");
     }
+    if (thumbnail === null) {
+      return alert("섬네일을 선택해주세요.");
+    }
+    if (category === null || category === 0) {
+      return alert("카테고리를 선택해주세요.");
+    }
+    if (exp_type === null || exp_type === 0) {
+      return alert("경험유형을 선택주세요.");
+    }
     // if (info === null || info === "") {
     //   return alert("내용을 입력하세요");
     // }
-    console.log({ data });
+    // console.log({ data });
     // return;
     this.props.createExpRequest(data, this.props.token).then((result) => {
-      console.log({ result });
-      //      alert("등록되었습니다. 해당경험페이지로 이동합니다.");
-      //     goto("EXP", data.id);
+      // console.log({ result });
+      alert("등록되었습니다. 해당페이지로 이동합니다.");
+      goto("EXP", result.data.id);
       // goto("PLAY");
     });
   };
 
   render() {
-    console.log(this.state);
+    console.log(this.state, this.props);
 
     return (
       <styled.Main>
         <styled.AddExpText>경험 등록</styled.AddExpText>
+
         <styled.Wrapper>
-          <styled.AddThumbnail>
-            <span>썸네일 이미지 등록</span>
-            <div className="wrap">
-              <input
-                hidden
-                onChange={this.onChangeThumbnail}
-                id="file"
-                type="file"
-                accept="image/png, image/bmp, image/jpeg, image/jpg"
-              />
-              <label htmlFor="file">
-                <styled.ThumbnailImg>
-                  {this.state.thumbnail === null ? (
-                    <span>
-                      첨부
-                      <br />
-                      (여기를 클릭하여 <br />
-                      섬네일을 선택해주세요.)
-                    </span>
-                  ) : (
-                    <img alt="thumbnail" src={this.state.thumbnail} />
-                  )}
-                </styled.ThumbnailImg>
-              </label>
-            </div>
-          </styled.AddThumbnail>
+          <styled.Wrapper>
+            <styled.AddThumbnail>
+              <span>썸네일 이미지 등록</span>
+              <div className="wrap">
+                <input
+                  hidden
+                  onChange={this.onChangeThumbnail}
+                  id="file"
+                  type="file"
+                  accept="image/png, image/bmp, image/jpeg, image/jpg"
+                />
+                <label htmlFor="file">
+                  <styled.ThumbnailImg>
+                    {this.state.thumbnail === null ? (
+                      <span>
+                        첨부
+                        <br />
+                        (여기를 클릭하여 <br />
+                        섬네일을 선택해주세요.)
+                      </span>
+                    ) : (
+                      <img alt="thumbnail" src={this.state.thumbnail} />
+                    )}
+                  </styled.ThumbnailImg>
+                </label>
+              </div>
+            </styled.AddThumbnail>
 
-          <styled.InfoBox>
-            <styled.TitleDiv>
-              <div>제목</div>
-              <InputNormal
-                onChangeValue={this.onChangeTitle}
-                value={this.state.title}
-                placeholder={"제목을 입력하세요"}
-                radius={10}
-                width={350}
-                height={45}
-                fontSize={20}
-                color={"#E9E9E9"}
-              />
-            </styled.TitleDiv>
+            <styled.InfoBox>
+              <styled.TitleDiv>
+                <div>제목</div>
+                <InputNormal
+                  onChangeValue={this.onChangeTitle}
+                  value={this.state.title}
+                  placeholder={"제목을 입력하세요"}
+                  radius={10}
+                  width={350}
+                  height={45}
+                  fontSize={20}
+                  color={"#E9E9E9"}
+                />
+              </styled.TitleDiv>
 
-            {/* <styled.DescriptionDiv>
+              {/*
+            <styled.DescriptionDiv>
               <div>설명</div>
               <TextAreaNormal
                 onChangeValue={this.onChangeInfo}
@@ -252,97 +272,104 @@ class CreateExp extends React.Component {
                 placeholder="설명을 입력하세요"
                 value={this.state.info}
               />
-            </styled.DescriptionDiv> */}
+            </styled.DescriptionDiv>
+*/}
 
-            <styled.CategoryDiv>
-              <div>경험유형</div>
-              <DropDownNormal
-                value={this.state.exp_type}
-                onChangeValue={this.onChangeExpType}
-                width={250}
-                height={50}
-                radius={10}
-                color={"#CCC"}
-                options={this.props.exp_type}
-              />
-            </styled.CategoryDiv>
-
-            {this.state.exp_type === "3" && (
               <styled.CategoryDiv>
-                <div className="active item">모임선택</div>
-
-                <div className="ui link horizontal list">
-                  <div style={{ display: "flex", flexDirection: "ro" }}>
-                    <a
-                      className="item"
-                      onClick={() => this.onChangeMeetType(1)}
-                    >
-                      <div>
-                        <img
-                          style={{
-                            border:
-                              this.state.meet_type === 1 ? "1px solid red" : "",
-                            width: "250px",
-                          }}
-                          alt="online-game"
-                          src={ImageGame}
-                        />
-                        {this.state.meet_type === 1 && "✅"}
-                        {"온라인게임"}
-                      </div>
-                    </a>
-                    <a
-                      className="item"
-                      onClick={() => this.onChangeMeetType(2)}
-                    >
-                      <div>
-                        <img
-                          style={{
-                            border:
-                              this.state.meet_type === 2 ? "1px solid red" : "",
-                            width: "250px",
-                          }}
-                          alt="book-club"
-                          src={ImageReading}
-                        />
-                        {this.state.meet_type === 2 && "✅"}
-                        {"독서모임"}
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </styled.CategoryDiv>
-            )}
-
-            <styled.CategoryDiv>
-              <div>카테고리</div>
-              <DropDownNormal
-                value={this.state.category}
-                onChangeValue={this.onChangeCategory}
-                width={250}
-                height={51}
-                radius={10}
-                color={"#E9E9E9"}
-                options={this.props.category.slice(0, 3)}
-              />
-            </styled.CategoryDiv>
-
-            <styled.TagDiv>
-              <div>태그</div>
-              <div>
-                <InputTag
-                  placeholder={"태그를 입력하세요."}
-                  getValue={this.handleAddTag}
-                  width={"350"}
+                <div>경험유형</div>
+                <DropDownNormal
+                  value={this.state.exp_type}
+                  onChangeValue={this.onChangeExpType}
+                  width={250}
+                  height={50}
+                  radius={10}
+                  color={"#CCC"}
+                  options={TYPEs}
+                  // options={this.props.exp_type}
                 />
-              </div>
-            </styled.TagDiv>
-          </styled.InfoBox>
-        </styled.Wrapper>
+              </styled.CategoryDiv>
 
+              {/* {this.state.exp_type === "3" && (
+                <styled.CategoryDiv>
+                  <div className="active item">모임선택</div>
+
+                  <div className="ui link horizontal list">
+                    <div style={{ display: "flex", flexDirection: "ro" }}>
+                      <a
+                        className="item"
+                        onClick={() => this.onChangeMeetType(1)}
+                      >
+                        <div>
+                          <img
+                            style={{
+                              border:
+                                this.state.meet_type === 1
+                                  ? "1px solid red"
+                                  : "",
+                              width: "250px",
+                            }}
+                            alt="online-game"
+                            src={ImageGame}
+                          />
+                          {this.state.meet_type === 1 && "✅"}
+                          {"온라인게임"}
+                        </div>
+                      </a>
+                      <a
+                        className="item"
+                        onClick={() => this.onChangeMeetType(2)}
+                      >
+                        <div>
+                          <img
+                            style={{
+                              border:
+                                this.state.meet_type === 2
+                                  ? "1px solid red"
+                                  : "",
+                              width: "250px",
+                            }}
+                            alt="book-club"
+                            src={ImageReading}
+                          />
+                          {this.state.meet_type === 2 && "✅"}
+                          {"독서모임"}
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </styled.CategoryDiv>
+              )} */}
+              <styled.CategoryDiv>
+                <div>카테고리</div>
+                <DropDownNormal
+                  value={this.state.category}
+                  onChangeValue={this.onChangeCategory}
+                  width={250}
+                  height={51}
+                  radius={10}
+                  color={"#E9E9E9"}
+                  options={CATEs}
+                  // options={this.props.category.slice(0, 3)}
+                />
+              </styled.CategoryDiv>
+
+              <styled.TagDiv>
+                <div>태그</div>
+                <div>
+                  <InputTag
+                    placeholder={"태그를 입력하세요."}
+                    getValue={this.handleAddTag}
+                    width={"350"}
+                  />
+                </div>
+              </styled.TagDiv>
+            </styled.InfoBox>
+          </styled.Wrapper>
+        </styled.Wrapper>
         <styled.Wrapper>
           <styled.ExpDetailBox>
             <span>경험 상세</span>
+            <ContentMaker />
             {/* <ExpType
               meet_type={this.state.meet_type}
               type={this.state.exp_type}
@@ -352,7 +379,6 @@ class CreateExp extends React.Component {
             /> */}
           </styled.ExpDetailBox>
         </styled.Wrapper>
-
         {/* <styled.AddFile></styled.AddFile> */}
         <styled.Wrapper>
           <styled.AddButton onClick={this.onClickOK}>

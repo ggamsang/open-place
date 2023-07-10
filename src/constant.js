@@ -59,8 +59,6 @@ export const ExpTypes = {
   MEETUP: 5, // 모임
 };
 
-
-
 export const dummydata = [
   {
     type: "item",
@@ -90,4 +88,27 @@ export const dummydata = [
     tags: ["tag1", "tag2", "tag3"],
     url: "https://i.picsum.photos/id/1065/3744/5616.jpg?hmac=V64psST3xnjnVwmIogHI8krnL3edsh_sy4HNc3dJ_xY",
   },
+];
+
+const CATE_PLAY = { value: 1, name: "놀기" };
+const CATE_LEARN = { value: 2, name: "배우기" };
+const CATE_MAKE = { value: 3, name: "만들기" };
+export const CATEs = [
+  { value: 0, name: "카테고리(필수)" },
+  CATE_PLAY,
+  CATE_LEARN,
+  CATE_MAKE,
+];
+const EXP_TYPE_MEET = { value: 1, name: "모임" };
+const EXP_TYPE_LECT = { value: 2, name: "강의/강좌" };
+const EXP_TYPE_CONS = { value: 3, name: "자문/상담" };
+const EXP_TYPE_NORM = { value: 4, name: "일반" };
+const EXP_TYPE_GAME = { value: 5, name: "게임" };
+export const TYPEs = [
+  { value: 0, name: "경험유형(필수)" },
+  EXP_TYPE_MEET,
+  EXP_TYPE_LECT,
+  EXP_TYPE_CONS,
+  EXP_TYPE_NORM,
+  EXP_TYPE_GAME,
 ];

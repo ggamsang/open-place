@@ -7,8 +7,8 @@ export const createExpRequest = (data, token) => {
     dispatch(createExp());
     const url = `${host}/exp/create`;
     return fetch(url, POST(token, data))
-      .then(res => res.json)
-      .then(res => res && dispatch(createExpSuccess()))
+      .then(res => res.json())
+      .then(res => res && dispatch(createExpSuccess(res)))
       .catch(err => dispatch(createExpFailure()));
   }
 };
@@ -22,7 +22,7 @@ export const updateExpRequest = (id, data, token) => {
     dispatch(updateExp());
     const url = `${host}/exp/${id}`;
     return fetch(url, PUT(token, data))
-      .then(res => res.json)
+      .then(res => res.json())
       .then(res => res && dispatch(updateExpSuccess()))
       .catch(err => dispatch(updateExpFailure()))
   }

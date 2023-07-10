@@ -217,7 +217,7 @@ export default ModifySharer;
 // import SearchForm from 'components_mobile/Commons/Search/SearchForm';
 // import SharerForm from './SharerForm';
 
-// import ButtonNormal from 'components_mobile/Commons/Button/\bButtonNormal';
+// import ButtonNormal from 'components_mobile/Commons/Button/ButtonNormal';
 // import { WIDTH } from 'constant';
 
 // const Wrapper = styled.div`

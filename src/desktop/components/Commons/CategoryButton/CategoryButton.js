@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import ButtonNormal from '../Button/\bButtonNormal';
+import ButtonNormal from '../Button/ButtonNormal';
 import { CATEGORY } from '../Define';
 const Category = styled.div`
     box-sizing:border-box;
