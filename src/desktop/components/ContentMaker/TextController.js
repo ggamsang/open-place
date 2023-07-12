@@ -43,38 +43,6 @@
 //   Indent,
 //   IndentBlock,
 // ];
-// ClassicEditor.defaultConfig = {
-//   startupFocus: true,
-//   alignment: { options: ["left", "center", "justify", "right"] },
-//   toolbar: {
-//     items: [
-//       "heading",
-//       "|",
-//       "fontSize",
-//       /*'fontFamily',*/ "fontColor",
-//       "fontBackgroundColor",
-//       "bold",
-//       "italic",
-//       "alignment",
-//       "|",
-//       "outdent",
-//       "indent",
-//       "|",
-//       "link",
-//       "blockQuote",
-//       "insertTable",
-//       "undo",
-//       "redo",
-//     ],
-//   },
-//   table: { contentToolbar: ["tableColumn", "tableRow", "mergeTableCells"] },
-//   indentBlock: {
-//     offset: 5,
-//     unit: "em",
-//   },
-//   fontSize: { options: [14, 16, 18, 22, 24, 30, 36, 48] },
-//   language: "en",
-// };
 
 // class TextController extends Component {
 //   render() {
@@ -92,13 +60,43 @@
 import React, { Component } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-
+ClassicEditor.defaultConfig = {
+  startupFocus: true,
+  alignment: { options: ["left", "center", "justify", "right"] },
+  toolbar: {
+    items: [
+      "heading",
+      "|",
+      "fontSize",
+      /*'fontFamily',*/ "fontColor",
+      "fontBackgroundColor",
+      "bold",
+      "italic",
+      "alignment",
+      "|",
+      "outdent",
+      "indent",
+      "|",
+      "link",
+      "blockQuote",
+      "insertTable",
+      "undo",
+      "redo",
+    ],
+  },
+  table: { contentToolbar: ["tableColumn", "tableRow", "mergeTableCells"] },
+  indentBlock: {
+    offset: 5,
+    unit: "em",
+  },
+  fontSize: { options: [14, 16, 18, 22, 24, 30, 36, 48] },
+  language: "en",
+};
 class App extends Component {
   render() {
     const { item } = this.props;
     return (
       <div className="App">
-        {/* <h2>Using CKEditor 5 build in React</h2> */}
         <CKEditor
           editor={ClassicEditor}
           data={item.content}
@@ -113,7 +111,7 @@ class App extends Component {
           }}
           onBlur={(event, editor) => {
             const data = editor.getData();
-            console.log("Blur.",{ event, editor, data });
+            console.log("Blur.", { event, editor, data });
             this.props.getValue(data);
             this.props.onBlur();
           }}

@@ -10,12 +10,12 @@ const ControllerWrap = styled.div`
   width: 100%;
   position: relative;
   text-align: center;
-  border: 1px solid #707070;
+  border: 1px dashed #eee;
   // padding: 25px;
   margin-bottom: 30px;
   .innerBox {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
   & .initWrap {
     & > ul {
@@ -43,12 +43,12 @@ const ControllerWrap = styled.div`
   }
   .icons {
     position: absolute;
-    right: 10%;
+    right: 5%;
     top: 10%;
   }
 `;
 const NewController = styled.div`
-  font-family: Spoqa Han Sans Neo;
+  // font-family: Spoqa Han Sans Neo;
   font-weight: 500;
   font-size: 22px;
   color: black;
@@ -115,12 +115,14 @@ class AddContent extends React.Component {
           >
             텍스트 입력하기
           </NewController>
+          {/*
           <NewController
             onClick={() => this.addContent(LINK)}
             style={{ width: "max-content", height: "29px", minWidth: "134px" }}
           >
             하이퍼링크 등록하기
-          </NewController>
+          </NewController> 
+          */}
 
           {this.props.order === 0 ? (
             <NewController
@@ -210,14 +212,15 @@ export default class ContentMaker extends React.Component {
     // await this.setState({ contents: newContent });
   };
   onChangeValue = async (data, order) => {
-    this.setState({
-      contents: update(this.state.contents, {
-        [order]: { contents: { $set: data.content } },
-      }),
-    });
+    const { contents } = this.state;
+    const item = contents.filter((item) => order === item.order)[0];
+    item.content = data;
+    contents.splice(order, 1, item);
+    this.setState({ contents: contents });
   };
   handleTextContBlur = async () => {
     this.setState({ current_order: null });
+    this.props.getcontents(this.state.contents);
   };
   handleClickedTextViewer = (e) => {
     const target = e.targetNode.parentNode.parentNode.id;
@@ -227,7 +230,7 @@ export default class ContentMaker extends React.Component {
   };
   render() {
     const { contents, is_project, current_order } = this.state;
-
+    console.log(contents);
     return (
       <>
         <div
@@ -258,20 +261,28 @@ export default class ContentMaker extends React.Component {
                         setController={this.setController}
                       />
                     ) : null}
-                    {order},{current_order},{item.content}
+
                     {item.type === TEXT &&
                       (current_order == order ? (
                         <TextController
+                          onClick={console.log}
                           item={item}
-                          // name={item.name}
-                          // initClick={this.state.click}
-                          getValue={(data) => this.onChangeValue(data, order)}
+                          getValue={(data) => {
+                            this.onChangeValue(data, order);
+                          }}
                           onBlur={this.handleTextContBlur}
                         />
                       ) : (
                         <div
-                          onClick={this.j}
-                          style={{ height: "10px", backgroundColor: "red" }}
+                          onClick={() => {
+                            this.setState({ current_order: order });
+                          }}
+                          style={{
+                            textAlign: "left",
+                            minHeight: "50px",
+                            backgroundColor: "#FCFCFC",
+                            padding: "1rem",
+                          }}
                           dangerouslySetInnerHTML={{
                             __html: item.content,
                           }}

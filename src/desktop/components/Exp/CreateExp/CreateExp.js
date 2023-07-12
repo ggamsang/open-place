@@ -1,22 +1,23 @@
 import React from "react";
 import * as styled from "./styles";
-import { resolution } from "desktop/commons/resolution";
-import SearchForm from "desktop/components/Commons/Search/SearchForm";
-import ButtonNormal from "desktop/components/Commons/Button/ButtonNormal";
 import { InputTag } from "desktop/components/Commons/Input";
 import InputNormal from "desktop/components/Commons/Input/InputNormal";
 import DropDownNormal from "desktop/components/Commons/DropDown/DropDownNormal";
+import { goto } from "navigator";
+import { CATEs, TYPEs } from "constant";
+import ContentMaker from "desktop/components/ContentMaker/ContentMaker";
+
+import { resolution } from "desktop/commons/resolution";
+import SearchForm from "desktop/components/Commons/Search/SearchForm";
+import ButtonNormal from "desktop/components/Commons/Button/ButtonNormal";
 import TextAreaNormal from "desktop/components/Commons/TextArea/TextAreaNormal";
 import { InputPrice } from "desktop/components/Commons/Input";
 import AddContent from "desktop/components/Commons/AddContent/AddContent";
 import { Editor } from "desktop/commons/Editor/Editor";
 import { InputGameFile } from "desktop/components/Commons/Input";
-import { goto } from "navigator";
 import ExpType from "../Common/ExpType";
 import ImageGame from "resources/gamemeet.avif";
 import ImageReading from "resources/readingmeet.avif";
-import { CATEs, TYPEs } from "constant";
-import ContentMaker from "desktop/components/ContentMaker/ContentMaker";
 
 const config = {
   readonly: false,
@@ -52,6 +53,8 @@ class CreateExp extends React.Component {
       info: null,
       exp_files: [],
       meet_type: null,
+      //
+      contents: [],
     };
     this.onChangeThumbnail = this.onChangeThumbnail.bind(this);
     this.onChangeTitle = this.onChangeTitle.bind(this);
@@ -159,6 +162,7 @@ class CreateExp extends React.Component {
       exp_files,
       exp_type,
       exp_type_detail,
+      contents,
     } = this.state;
     const data = {
       user_id: this.props.userInfo.uid,
@@ -172,6 +176,7 @@ class CreateExp extends React.Component {
       content: content,
       files: [],
       exp_files: JSON.stringify(exp_files),
+      contents: contents || [],
     };
 
     console.log(data);
@@ -206,6 +211,11 @@ class CreateExp extends React.Component {
       goto("EXP", result.data.id);
       // goto("PLAY");
     });
+  };
+
+  handleGotData = async (data) => {
+    console.log("handle got data:", data);
+    await this.setState({ contents: data });
   };
 
   render() {
@@ -369,7 +379,7 @@ class CreateExp extends React.Component {
         <styled.Wrapper>
           <styled.ExpDetailBox>
             <span>경험 상세</span>
-            <ContentMaker />
+            <ContentMaker getcontents={this.handleGotData} />
             {/* <ExpType
               meet_type={this.state.meet_type}
               type={this.state.exp_type}
