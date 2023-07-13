@@ -224,15 +224,18 @@ class ModifyExp extends React.Component {
 
     data.news =
       (newContents?.length > 0 && (await Promise.all(newContents))) || [];
+
     // data.old = this.props.expDetail?.contents?.map((item) => item).uid;
     // console.log(data.news, data.old);
     // return;
+
     this.props
       .updateExpRequest(this.props.item_id, data, this.props.token)
       .then(async (result) => {
-        console.log(result);
-        // alert("수정이 완료되었습니다. 해당페이지로 이동합니다.");
-        // goto("EXP", this.props.item_id);
+        if (result.success) {
+          alert("수정이 완료되었습니다. 해당페이지로 이동합니다.");
+          goto("EXP", this.props.item_id);
+        }
       });
   };
 
