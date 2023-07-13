@@ -73,15 +73,16 @@ export const ThumbnailImg = styled.div`
 `;
 
 export const InfoBox = styled.div`
-  width: 1329px;
+  // width: 1329px;
   min-height: 665px;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 2px solid #efefef;
   box-shadow: 2px 2px 5px #00000029;
   border-radius: 25px;
-  margin-left: 40px;
+  margin-left: 20px;
   margin-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px 50px;
+  // *{border:1px solid red;}
 `;
 
 export const InfoBoxInnerDiv = styled.div`
@@ -100,7 +101,7 @@ export const TitleDiv = styled.div`
     font: normal normal bold 20px/24px Pretendard;
     letter-spacing: 0px;
     color: #707070;
-    margin-left: 70px;
+    // margin-left: 70px;
   }
   div:nth-child(2) {
     margin: 0;
@@ -144,7 +145,7 @@ export const CategoryDiv = styled.div`
     font: normal normal bold 20px/24px Pretendard;
     letter-spacing: 0px;
     color: #707070;
-    margin-left: 70px;
+    // margin-left: 70px;
   }
 `;
 
@@ -193,7 +194,7 @@ export const TagDiv = styled.div`
     font: normal normal bold 20px/24px Pretendard;
     letter-spacing: 0px;
     color: #707070;
-    margin-left: 70px;
+    // margin-left: 70px;
   }
 `;
 
@@ -250,7 +251,7 @@ export const DescriptionDiv = styled.div`
     font: normal normal bold 20px/24px Pretendard;
     letter-spacing: 0px;
     color: #707070;
-    margin-left: 70px;
+    // margin-left: 70px;
   }
   div:nth-child(2) {
     width: 741px;
@@ -269,15 +270,16 @@ export const DescriptionDiv = styled.div`
 
 export const ExpTypeDiv = styled.div`
   display: flex;
-  // justify-content: center;
+  justify-content: center;
   align-items: center;
-  margin-top: 63px;
+  margin: auto;
+  margin-top: 35px;
   div:nth-child(1) {
     width: 197px;
     font: normal normal bold 20px/24px Pretendard;
     letter-spacing: 0px;
     color: #707070;
-    margin-left: 70px;
+    // margin-left: 70px;
   }
 `;
 
@@ -317,7 +319,7 @@ export const PriceDivText = styled.div`
   font: normal normal bold 20px/24px Pretendard;
   letter-spacing: 0px;
   color: #707070;
-  margin-left: 70px;
+  // margin-left: 70px;
 `;
 
 export const PriceBox = styled.div`
@@ -387,7 +389,8 @@ export const CategoryBox = styled.div`
 
 export const ExpDetailBox = styled.div`
   width: 1329px;
-  min-height: 280px;
+  padding: 30px;
+  // min-height: 280px;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 2px solid #efefef;
   box-shadow: 2px 2px 5px #00000029;
@@ -397,7 +400,7 @@ export const ExpDetailBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  // align-items: center;
   > span {
     text-align: center;
     font: normal normal 900 44px/52px Pretendard;
@@ -406,6 +409,7 @@ export const ExpDetailBox = styled.div`
     opacity: 1;
     margin: 0;
   }
+  // *{border:1px solid red;}
 `;
 
 export const AddFile = styled.div`

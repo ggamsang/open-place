@@ -10,6 +10,9 @@ import { InputPrice } from "desktop/components/Commons/Input";
 import { goto } from "navigator";
 import ExpType from "../Common/ExpType";
 import ButtonNormal from "desktop/components/Commons/Button/ButtonNormal";
+import ContentMaker from "desktop/components/ContentMaker/ContentMaker";
+import { CATEs, FILE, TYPEs } from "constant";
+import { FileUploadRequest } from "actions/Uploads";
 
 class ModifyExp extends React.Component {
   constructor(props) {
@@ -190,161 +193,167 @@ class ModifyExp extends React.Component {
     }
     // if (title === null || title === "") return alert("제목을 입력하세요");
     // if (info === null || info === "") return alert("내용을 입력하세요");
+    const { contents } = this.state;
+    const newContents = await contents?.map(async (item) => {
+      // let newitem = { ...item };
+      let newitem = {
+        uid: item.uid,
+        user_id: item.user_id,
+        parent_id: item.parent_id,
+        content: item.content,
+        type: item.type,
+        data_type: item.data_type,
+        extension: item.extension,
+        order: item.order,
+        file_name: item.file_name,
+        create_time: item.create_time,
+        update_time: item.update_time,
+        thumbnail: item.thumbnail,
+        title: item.title,
+        option: item.option,
+      };
+      if (!item.uid && item.type === FILE) {
+        const url = await FileUploadRequest(item.file);
+        newitem.content = url.success ? url.path : "";
+        newitem.file_name = item.file[0].name;
+        newitem.option = item.option;
+        newitem.data_type = item.file[0].type;
+      }
+      return newitem;
+    });
 
-    this.props.updateExpRequest(this.props.item_id, data, this.props.token);
-    window.history.go(-1);
+    data.news =
+      (newContents?.length > 0 && (await Promise.all(newContents))) || [];
+    // data.old = this.props.expDetail?.contents?.map((item) => item).uid;
+    // console.log(data.news, data.old);
+    // return;
+    this.props
+      .updateExpRequest(this.props.item_id, data, this.props.token)
+      .then(async (result) => {
+        console.log(result);
+        // alert("수정이 완료되었습니다. 해당페이지로 이동합니다.");
+        // goto("EXP", this.props.item_id);
+      });
   };
+
+  handleGotData = async (data) => {
+    console.log("handle got data:", data);
+    await this.setState({ contents: data });
+  };
+
   render() {
     console.log(this.props);
+
     return this.props.expDetail ? (
       <styled.Main>
         <styled.AddExpText>경험 수정</styled.AddExpText>
+
         <styled.Wrapper>
-          <styled.AddThumbnail>
-            <span>썸네일 이미지 등록</span>
-            <div className="wrap">
-              <input
-                hidden
-                onChange={this.onChangeThumbnail}
-                id="file"
-                type="file"
-                accept="image/png, image/bmp, image/jpeg, image/jpg"
-              />
-              <label htmlFor="file">
-                <styled.ThumbnailImg>
-                  {this.state.thumbnail === null ? (
-                    <span>
-                      첨부
-                      <br />
-                      (여기를 클릭하여 <br />
-                      섬네일을 선택해주세요.)
-                    </span>
-                  ) : (
-                    <img alt="thumbnail" src={this.state.thumbnail} />
-                  )}
-                </styled.ThumbnailImg>
-              </label>
-            </div>
-          </styled.AddThumbnail>
-
-          <styled.InfoBox>
-            <styled.TitleDiv>
-              <div>제목</div>
-              <InputNormal
-                onChangeValue={this.onChangeTitle}
-                value={this.state.title}
-                placeholder={"제목을 입력하세요"}
-                radius={10}
-                width={350}
-                height={31}
-                fontSize={20}
-                color={"#E9E9E9"}
-              />
-            </styled.TitleDiv>
-
-            <styled.TagDiv>
-              <div>태그</div>
-              <div>
-                <InputTag
-                  taglist={this.state.tag}
-                  placeholder={"태그를 입력하세요."}
-                  getValue={this.handleAddTag}
-                  width={"350"}
+          <styled.Wrapper>
+            <styled.AddThumbnail>
+              <span>썸네일 이미지 등록</span>
+              <div className="wrap">
+                <input
+                  hidden
+                  onChange={this.onChangeThumbnail}
+                  id="file"
+                  type="file"
+                  accept="image/png, image/bmp, image/jpeg, image/jpg"
                 />
+                <label htmlFor="file">
+                  <styled.ThumbnailImg>
+                    {this.state.thumbnail === null ? (
+                      <span>
+                        첨부
+                        <br />
+                        (여기를 클릭하여 <br />
+                        섬네일을 선택해주세요.)
+                      </span>
+                    ) : (
+                      <img alt="thumbnail" src={this.state.thumbnail} />
+                    )}
+                  </styled.ThumbnailImg>
+                </label>
               </div>
-            </styled.TagDiv>
+            </styled.AddThumbnail>
 
-            <styled.CategoryDiv>
-              <div>카테고리</div>
-              <DropDownNormal
-                value={this.state.category}
-                onChangeValue={this.onChangeCategory}
-                width={250}
-                height={51}
-                radius={10}
-                color={"#E9E9E9"}
-                options={this.props.category.slice(0, 3)}
-              />
+            <styled.InfoBox>
+              <styled.TitleDiv>
+                <div>제목</div>
+                <InputNormal
+                  onChangeValue={this.onChangeTitle}
+                  value={this.state.title}
+                  placeholder={"제목을 입력하세요"}
+                  radius={10}
+                  width={350}
+                  height={45}
+                  fontSize={20}
+                  color={"#E9E9E9"}
+                />
+              </styled.TitleDiv>
 
-              <DropDownNormal
-                // value={}
-                // margin={"100px"}
-                color={"#E9E9E9"}
-                onChangeValue={() => alert("개발중입니다.")}
-                width={250}
-                height={51}
-                radius={10}
-                options={this.props.category.slice(
-                  3,
-                  this.props.category.length - 1
-                )}
-              />
-              {/* <styled.CategoryButton1>
-                <span>대분류</span>
-              </styled.CategoryButton1>
-              <styled.CategoryButton2>
-                <span>소분류</span>
-              </styled.CategoryButton2> */}
-            </styled.CategoryDiv>
+              <styled.CategoryDiv>
+                <div>경험유형</div>
+                <DropDownNormal
+                  value={this.state.exp_type}
+                  onChangeValue={this.onChangeExpType}
+                  width={250}
+                  height={50}
+                  radius={10}
+                  color={"#CCC"}
+                  options={TYPEs}
+                  // options={this.props.exp_type}
+                />
+              </styled.CategoryDiv>
 
-            <styled.DescriptionDiv>
-              <div>설명</div>
-              <TextAreaNormal
-                onChangeValue={this.onChangeInfo}
-                width={245}
-                height={100}
-                color={"#E9E9E9"}
-                fontSize={15}
-                radius={10}
-                placeholder="설명을 입력하세요"
-                value={this.state.info}
-              />
-            </styled.DescriptionDiv>
-        {/*   <styled.PriceDiv>
-              <styled.PriceDivText>가격</styled.PriceDivText>
+              <styled.CategoryDiv>
+                <div>카테고리</div>
+                <DropDownNormal
+                  value={this.state.category}
+                  onChangeValue={this.onChangeCategory}
+                  width={250}
+                  height={51}
+                  radius={10}
+                  color={"#E9E9E9"}
+                  options={CATEs}
+                  // options={this.props.category.slice(0, 3)}
+                />
+              </styled.CategoryDiv>
 
-              <InputPrice
-                price={this.state.price}
-                onChangeValue={this.onChangePrice}
-                name="price"
-              />
-            </styled.PriceDiv>
-            */}
-          </styled.InfoBox>
+              <styled.TagDiv>
+                <div>태그</div>
+                <div>
+                  <InputTag
+                    taglist={this.state.tag}
+                    placeholder={"태그를 입력하세요."}
+                    getValue={this.handleAddTag}
+                    width={"350"}
+                  />
+                </div>
+              </styled.TagDiv>
+            </styled.InfoBox>
+          </styled.Wrapper>
         </styled.Wrapper>
-
         <styled.Wrapper>
-          <styled.CategoryBox>
-            <p>경험 유형</p>{" "}
-            <div>
-            <DropDownNormal
-              value={this.state.exp_type}
-              onChangeValue={this.onChangeExpType}
-              width={250}
-              height={50}
-              radius={10}
-              color={"#CCC"}
-              options={this.props.exp_type}
-            />
-            </div>
-          </styled.CategoryBox>
           <styled.ExpDetailBox>
-            <span>경험상세</span>
-            <ExpType
-              content={this.state.content}
-              exp_files={this.state.exp_files}
-              typeDetail={this.state.exp_type_detail || null}
+            <span>경험 상세</span>
+            <ContentMaker
+              origin={this.props.expDetail?.contents?.map((item) => item) || []}
+              getcontents={this.handleGotData}
+            />
+            {/* <ExpType
+              meet_type={this.state.meet_type}
               type={this.state.exp_type}
               getContent={this.onChangeContent}
               getFiles={this.onFileChange}
               return={(value) => this.setState({ exp_type_detail: value })}
-            />
+            /> */}
           </styled.ExpDetailBox>
         </styled.Wrapper>
 
         <styled.Wrapper>
           <styled.AddButton onClick={this.onClickOK}>
-            <span>등록하기</span>
+            <span>수정하기</span>
           </styled.AddButton>
           <styled.CancelButton onClick={() => goto("BACK")}>
             <span>취소하기</span>

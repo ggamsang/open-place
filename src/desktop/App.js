@@ -33,6 +33,7 @@ import MyPaidExpDetailPage from "desktop/pages/MyPaidExpDetailPage";
 import BuyPage from "desktop/pages/BuyPage";
 import NoticePage, { NoticeDetailPage } from "desktop/pages/NoticePage";
 import Footer from "desktop/components/Footer";
+import PdfViewPage from "desktop/pages/PdfViewPage";
 
 const Wrapper = styled.main``;
 
@@ -42,6 +43,8 @@ function App() {
       <Wrapper>
         <Router>
           <Routes>
+            <Route path="/pdfview/:uri" component={PdfViewPage} />
+
             <Route path="" element={<MainPage />} />
             <Route path="play" element={<PlayExpListPage />} />
             <Route path="learn" element={<LearnExpListPage />} />

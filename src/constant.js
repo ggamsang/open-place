@@ -115,3 +115,5 @@ export const TYPEs = [
 export const FILE = "FILE";
 export const TEXT = "TEXT";
 export const LINK = "LINK";
+
+export const PDFVIEWER_VERSION = "3.8.162";

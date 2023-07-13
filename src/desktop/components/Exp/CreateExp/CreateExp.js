@@ -4,7 +4,7 @@ import { InputTag } from "desktop/components/Commons/Input";
 import InputNormal from "desktop/components/Commons/Input/InputNormal";
 import DropDownNormal from "desktop/components/Commons/DropDown/DropDownNormal";
 import { goto } from "navigator";
-import { CATEs, TYPEs } from "constant";
+import { CATEs, FILE, TYPEs } from "constant";
 import ContentMaker from "desktop/components/ContentMaker/ContentMaker";
 
 import { resolution } from "desktop/commons/resolution";
@@ -18,6 +18,7 @@ import { InputGameFile } from "desktop/components/Commons/Input";
 import ExpType from "../Common/ExpType";
 import ImageGame from "resources/gamemeet.avif";
 import ImageReading from "resources/readingmeet.avif";
+import { FileUploadRequest } from "actions/Uploads";
 
 const config = {
   readonly: false,
@@ -55,6 +56,7 @@ class CreateExp extends React.Component {
       meet_type: null,
       //
       contents: [],
+      loading: false,
     };
     this.onChangeThumbnail = this.onChangeThumbnail.bind(this);
     this.onChangeTitle = this.onChangeTitle.bind(this);
@@ -151,6 +153,7 @@ class CreateExp extends React.Component {
     this.setState({ meet_type: type });
   };
   onClickOK = async (event) => {
+    await this.setState({ loading: true });
     const {
       thumbnail,
       title,
@@ -164,6 +167,7 @@ class CreateExp extends React.Component {
       exp_type_detail,
       contents,
     } = this.state;
+
     const data = {
       user_id: this.props.userInfo.uid,
       type: exp_type,
@@ -205,12 +209,39 @@ class CreateExp extends React.Component {
     // }
     // console.log({ data });
     // return;
-    this.props.createExpRequest(data, this.props.token).then((result) => {
-      // console.log({ result });
+
+    console.clear();
+    console.log(this.state);
+
+    // modal message "파일을 업로드 및 업로드url 요청중입니다."
+    // uid, user_id, parent_id, content, type, data_type, extension, order, file_name, create_time, update_time, option, thumbnail, title
+    // content, type, data_type, extension, order, file_name, create_time, update_time, option, thumbnail, title
+    const newContents = await contents.map(async (item) => {
+      let newitem = {
+        type: item.type,
+        order: item.order,
+        content: item.content,
+      };
+      if (item.type === FILE) {
+        const url = await FileUploadRequest(item.file);
+        newitem.content = url.success ? url.path : "";
+        newitem.file_name = item.file[0].name;
+        newitem.option = item.option;
+        newitem.data_type = item.file[0].type;
+      }
+      return newitem;
+    });
+    data.contents = await Promise.all(newContents);
+
+    this.props.createExpRequest(data, this.props.token).then(async (result) => {
+      console.log({ result });
       alert("등록되었습니다. 해당페이지로 이동합니다.");
+      await this.setState({ loading: false });
+
       goto("EXP", result.data.id);
       // goto("PLAY");
     });
+    await this.setState({ loading: false });
   };
 
   handleGotData = async (data) => {
@@ -269,22 +300,6 @@ class CreateExp extends React.Component {
                 />
               </styled.TitleDiv>
 
-              {/*
-            <styled.DescriptionDiv>
-              <div>설명</div>
-              <TextAreaNormal
-                onChangeValue={this.onChangeInfo}
-                width={245}
-                height={100}
-                color={"#E9E9E9"}
-                fontSize={15}
-                radius={10}
-                placeholder="설명을 입력하세요"
-                value={this.state.info}
-              />
-            </styled.DescriptionDiv>
-*/}
-
               <styled.CategoryDiv>
                 <div>경험유형</div>
                 <DropDownNormal
@@ -299,56 +314,6 @@ class CreateExp extends React.Component {
                 />
               </styled.CategoryDiv>
 
-              {/* {this.state.exp_type === "3" && (
-                <styled.CategoryDiv>
-                  <div className="active item">모임선택</div>
-
-                  <div className="ui link horizontal list">
-                    <div style={{ display: "flex", flexDirection: "ro" }}>
-                      <a
-                        className="item"
-                        onClick={() => this.onChangeMeetType(1)}
-                      >
-                        <div>
-                          <img
-                            style={{
-                              border:
-                                this.state.meet_type === 1
-                                  ? "1px solid red"
-                                  : "",
-                              width: "250px",
-                            }}
-                            alt="online-game"
-                            src={ImageGame}
-                          />
-                          {this.state.meet_type === 1 && "✅"}
-                          {"온라인게임"}
-                        </div>
-                      </a>
-                      <a
-                        className="item"
-                        onClick={() => this.onChangeMeetType(2)}
-                      >
-                        <div>
-                          <img
-                            style={{
-                              border:
-                                this.state.meet_type === 2
-                                  ? "1px solid red"
-                                  : "",
-                              width: "250px",
-                            }}
-                            alt="book-club"
-                            src={ImageReading}
-                          />
-                          {this.state.meet_type === 2 && "✅"}
-                          {"독서모임"}
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                </styled.CategoryDiv>
-              )} */}
               <styled.CategoryDiv>
                 <div>카테고리</div>
                 <DropDownNormal
@@ -379,7 +344,7 @@ class CreateExp extends React.Component {
         <styled.Wrapper>
           <styled.ExpDetailBox>
             <span>경험 상세</span>
-            <ContentMaker getcontents={this.handleGotData} />
+            <ContentMaker origin={[]} getcontents={this.handleGotData} />
             {/* <ExpType
               meet_type={this.state.meet_type}
               type={this.state.exp_type}
@@ -391,7 +356,9 @@ class CreateExp extends React.Component {
         </styled.Wrapper>
         {/* <styled.AddFile></styled.AddFile> */}
         <styled.Wrapper>
-          <styled.AddButton onClick={this.onClickOK}>
+          <styled.AddButton
+            onClick={() => this.state.loading == false && this.onClickOK()}
+          >
             <span>등록하기</span>
           </styled.AddButton>
           <styled.CancelButton onClick={() => goto("BACK")}>
@@ -404,54 +371,3 @@ class CreateExp extends React.Component {
   }
 }
 export default CreateExp;
-/*
-              <DropDownNormal
-                // value={}
-                // margin={"100px"}
-                color={"#E9E9E9"}
-                onChangeValue={() => alert("개발중입니다.")}
-                width={250}
-                height={51}
-                radius={10}
-                options={this.props.category.slice(
-                  3,
-                  this.props.category.length - 1
-                )}
-              />
-              <styled.CategoryButton1>
-                <span>대분류</span>
-              </styled.CategoryButton1>
-              <styled.CategoryButton2>
-                <span>소분류</span>
-              </styled.CategoryButton2> */
-{
-  /* <styled.ExpTypeDiv>
-              <div>경험유형</div>
-              <styled.InputPriceDiv>
-                <span>가격을 입력하세요.</span>
-              </styled.InputPriceDiv>
-            </styled.ExpTypeDiv> */
-}
-{
-  /*  <styled.PriceDiv>
-              <styled.PriceDivText>가격</styled.PriceDivText> */
-}
-{
-  /* <styled.PriceBox>10000</styled.PriceBox> */
-}
-{
-  /* <span>원</span> */
-}
-{
-  /* <styled.AddPrice>
-                <styled.AddPriceButton>+ 1천</styled.AddPriceButton>
-                <styled.AddPriceButton>+ 1만</styled.AddPriceButton>
-                <styled.AddPriceButton>+ 5만</styled.AddPriceButton>
-                <styled.AddPriceButton>+ 10만</styled.AddPriceButton>
-                <styled.AddPriceButton>+ 100만</styled.AddPriceButton>
-              </styled.AddPrice> */
-}
-{
-  /*    <InputPrice onChangeValue={this.onChangePrice} name="price" />
-            </styled.PriceDiv> */
-}

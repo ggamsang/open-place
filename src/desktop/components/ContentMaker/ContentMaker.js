@@ -124,7 +124,7 @@ class AddContent extends React.Component {
           </NewController> 
           */}
 
-          {this.props.order === 0 ? (
+          {/* {this.props.order === 0 ? (
             <NewController
               className="txt complecated"
               width="max-content"
@@ -139,9 +139,9 @@ class AddContent extends React.Component {
                   <div className="tip-txt">
                     <font style={{ color: "pink" }}>*&nbsp;</font>...</div>
                 </div>
-              </Tip> */}
+              </Tip> * /}
             </NewController>
-          ) : null}
+          ) : null} */}
         </div>
         {this.state.type === FILE && (
           <FileController item={this.state} getValue={this.returnData} />
@@ -155,7 +155,7 @@ export default class ContentMaker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      contents: [],
+      contents: this.props.origin || [],
       is_project: false,
       current_order: null,
     };
@@ -169,9 +169,15 @@ export default class ContentMaker extends React.Component {
     await contents.splice(idx, 1);
     const _contents = contents.map((content, i) => ({ ...content, order: i }));
     this.setState({ contents: _contents });
+    this.props.getcontents(this.state.contents);
   };
   onClickedReset = (e) => {
-    this.setState({ contents: [], is_project: false, current_order: null });
+    console.log(this.props.origin);
+    this.setState({
+      contents: this.props.origin,
+      is_project: false,
+      current_order: null,
+    });
   };
   onAddValue = async (data) => {
     const { contents } = this.state;
@@ -182,34 +188,7 @@ export default class ContentMaker extends React.Component {
     if (data.type === TEXT) {
       this.setState({ current_order: contents.length - 1 });
     }
-    // let copyContent = [...this.state.contents];
-    // let copyData = { ...data };
-
-    // copyData.initClick = true;
-    // for (let item of copyContent) {
-    //   if (
-    //     item.type === FILE &&
-    //     item.fileUrl == null &&
-    //     item.type === FILE &&
-    //     item.content === ""
-    //   ) {
-    //     await copyContent.splice(item.order, 1, null);
-    //   }
-    // }
-    // await copyContent.splice(copyData.order, 0, copyData);
-    // let newContent = copyContent.filter((item) => {
-    //   return item !== null;
-    // });
-    // newContent = await Promise.all(
-    //   newContent.map(async (item, index) => {
-    //     item.order = await index;
-    //     delete item.target;
-    //     if (item.type === FILE) delete item.initClick;
-    //     if (item.order !== copyData.order) delete item.initClick;
-    //     return item;
-    //   })
-    // );
-    // await this.setState({ contents: newContent });
+    this.props.getcontents(this.state.contents);
   };
   onChangeValue = async (data, order) => {
     const { contents } = this.state;
@@ -228,12 +207,17 @@ export default class ContentMaker extends React.Component {
     return;
     this.setState({ current_order: null });
   };
+  // componentDidUpdate(_, state) {
+  //   console.log("component did update: ", state.contents, this.state.contents);
+  //   //}
+  //   // if(JSON.stringify(state.contents)!==JSON.stringify(this.state.contents)
+  // }
   render() {
     const { contents, is_project, current_order } = this.state;
     console.log(contents);
     return (
       <>
-        <div
+        {/* <div
           onClick={this.onClickedReset}
           style={{
             width: "max-content",
@@ -243,7 +227,7 @@ export default class ContentMaker extends React.Component {
           }}
         >
           <FaRedo size="1.5rem" /> 작업취소
-        </div>
+        </div> */}
         <div>
           {is_project ? (
             <></>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import FileIcon from "./FileIcon";
 import { FormControl } from "./FormControl";
-import { alert } from "./Alert";
+// import { alert } from "./Alert";
 import alignment_middle from "./alignment_middle.png";
 import alignment_right from "./alignment_right.png";
 import alignment_left from "./alignment_left.png";
@@ -51,10 +51,10 @@ const File = styled.div`
 const MediaOptionWrapper = styled.div`
   display: none;
   position: absolute;
-  top: 25px; 
+  top: 25px;
   right: 5%;
-  border: 1px solid rgba( 255, 255, 255, 0.66);
-  background-color: rgba( 255, 255, 255, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.66);
+  background-color: rgba(255, 255, 255, 0.34);
   padding: 5px;
   border-radius: 10px;
   z-index: 1000;
@@ -77,13 +77,13 @@ const MediaOptionWrapper = styled.div`
     padding: 1px;
     font-size: 11px;
     :hover {
-      background-color: rgba(100,100,100, 0.5);
+      background-color: rgba(100, 100, 100, 0.5);
     }
     img {
       width: 25px;
       height: 25px;
       :hover {
-        background-color: rgba(100,100,100, 0.5);
+        background-color: rgba(100, 100, 100, 0.5);
       }
     }
   }
@@ -114,6 +114,18 @@ class FileController extends Component {
         this.state.target.click();
       }
     }
+    if (this.props.item.file) {
+      console.clear();
+      if (this.props.item.file[0].type.includes("image")) {
+        const reader = new FileReader();
+        const file = this.props.item.file[0];
+        reader.onloadend = () => {
+          this.setState({ contentImg: reader.result });
+        };
+        reader.readAsDataURL(file);
+        // this.setState({contentImg:})
+      }
+    }
   }
 
   async shouldComponentUpdate(nextProps) {
@@ -128,7 +140,7 @@ class FileController extends Component {
         is_image: false,
         extension: "",
         type: "",
-        ...nextProps.item
+        ...nextProps.item,
       };
       if (!copyProps.uid) {
         obj.uid = null;
@@ -151,29 +163,29 @@ class FileController extends Component {
     return true;
   }
 
-  setInit = async item => {
+  setInit = async (item) => {
     await this.setState({
       ...item,
-      target: this.input
+      target: this.input,
     });
     if (!item.content) return;
     if (item.option == null) {
       await this.setState({ option: "center,scale" });
     }
-    if (item.data_type.split("/")[0] === "image") {
+    if (item?.data_type?.split("/")[0] === "image") {
       await this.setState({
-        file_type: item.data_type.split("/")[0],
-        is_image: true
+        file_type: item?.data_type?.split("/")[0],
+        is_image: true,
       });
     } else {
       await this.setState({
-        file_type: item.data_type.split("/")[0],
-        is_image: false
+        file_type: item?.data_type?.split("/")[0],
+        is_image: false,
       });
     }
   };
 
-  readUploadedFileAsText = inputFile => {
+  readUploadedFileAsText = (inputFile) => {
     const temporaryFileReader = new FileReader();
 
     return new Promise((resolve, reject) => {
@@ -202,11 +214,11 @@ class FileController extends Component {
 
       await this.setState({ file: this.input.files });
       if (
-        data[0].type.search("jpeg") > -1
-        || data[0].type.search("jpg") > -1
-        || data[0].type.search("gif") > -1
-        || data[0].type.search("png") > -1
-        || data[0].type.search("bmp") > -1
+        data[0].type.search("jpeg") > -1 ||
+        data[0].type.search("jpg") > -1 ||
+        data[0].type.search("gif") > -1 ||
+        data[0].type.search("png") > -1 ||
+        data[0].type.search("bmp") > -1
       ) {
         const fileUrl = await this.readUploadedFileAsText(data[0]);
         await this.setState({
@@ -214,26 +226,24 @@ class FileController extends Component {
           is_image: true,
           file_type: type,
           extension: extension,
-          file_name: data[0].name
+          file_name: data[0].name,
         });
-      }
-      else {
+      } else {
         await this.setState({
           // fileUrl: fileUrl,
           is_image: false,
           file_type: type,
           extension: extension,
-          file_name: data[0].name
+          file_name: data[0].name,
         });
       }
-    }
-    else {
+    } else {
       await this.setState({
         fileUrl: "",
         is_image: false,
         file_type: "",
         extension: "",
-        file_name: null
+        file_name: null,
       });
     }
     await this.setState({ ...data });
@@ -241,10 +251,10 @@ class FileController extends Component {
       const target = event.currentTarget;
       await this.setState({ value: target.files, target });
       FormControl(this.state)
-        .then(data => {
+        .then((data) => {
           this.returnData();
         })
-        .catch(err => {
+        .catch((err) => {
           //console.log("formFile", err);
           alert(err.message);
         });
@@ -255,130 +265,196 @@ class FileController extends Component {
     this.state.target.click();
   };
 
-  returnData = async e => {
+  returnData = async (e) => {
     if (this.props.getValue) {
       await this.props.getValue(this.state);
     }
     if (e && this.props.onBlur) await this.props.onBlur();
   };
 
-  handleClickedScaleOption = async scale => {
+  handleClickedScaleOption = async (scale) => {
     if (scale === "scale") {
       await this.setState({ option: "center,scale" });
     } else {
-      await this.setState({ option: `${this.state.option.split(",")[0]},${scale}` });
+      await this.setState({
+        option: `${this.state.option.split(",")[0]},${scale}`,
+      });
     }
     this.returnData(null);
   };
-  handleClickedAlignOption = async align => {
-    await this.setState({ option: `${align},${this.state.option.split(",")[1]}` });
+  handleClickedAlignOption = async (align) => {
+    await this.setState({
+      option: `${align},${this.state.option.split(",")[1]}`,
+    });
     this.returnData(null);
   };
 
   render() {
     // console.log("FileController:", this.props.item);
     // console.log("THIS-STATE", this.state.option);
-
+    // console.log(this.props, this.state);
     const { item } = this.props;
-    const { is_image } = this.state;
+    const is_image = item?.file?.[0].type.includes("image");
+    // this.state;
 
-    const contentImg = item.fileUrl || item.content;
+    const contentImg =
+      item.fileUrl || item.content !== "" || this.state.contentImg;
 
-    const MediaOpts = ({ onClickedAlign, onClickedScale, align, scale, extended }) =>
+    const MediaOpts = ({
+      onClickedAlign,
+      onClickedScale,
+      align,
+      scale,
+      extended,
+    }) => (
       <MediaOptionWrapper className="OptionPanel fixed">
         <ul>
           <label>정렬</label>
-          <li onClick={() => onClickedAlign("left")} className={`${align === "left" ? "selected" : ""}`}>
+          <li
+            onClick={() => onClickedAlign("left")}
+            className={`${align === "left" ? "selected" : ""}`}
+          >
             <img src={alignment_left} title="왼쪽" />
           </li>
-          <li onClick={() => onClickedAlign("center")} className={`${align === "center" ? "selected" : ""}`}>
+          <li
+            onClick={() => onClickedAlign("center")}
+            className={`${align === "center" ? "selected" : ""}`}
+          >
             <img src={alignment_middle} title="가운데" />
           </li>
-          <li onClick={() => onClickedAlign("right")} className={`${align === "right" ? "selected" : ""}`}>
+          <li
+            onClick={() => onClickedAlign("right")}
+            className={`${align === "right" ? "selected" : ""}`}
+          >
             <img src={alignment_right} title="오른쪽" />
           </li>
         </ul>
-        {extended
-          ? <ul>
+        {extended ? (
+          <ul>
             <label>크기</label>
-            <li onClick={() => onClickedScale("origin")} className={`${scale === "origin" ? "selected" : ""}`}> 원본크기 </li>
-            <li onClick={() => onClickedScale("scale")} className={`${scale === "scale" ? "selected" : ""}`}> 폭에맞춤 </li>
+            <li
+              onClick={() => onClickedScale("origin")}
+              className={`${scale === "origin" ? "selected" : ""}`}
+            >
+              {" "}
+              원본크기{" "}
+            </li>
+            <li
+              onClick={() => onClickedScale("scale")}
+              className={`${scale === "scale" ? "selected" : ""}`}
+            >
+              {" "}
+              폭에맞춤{" "}
+            </li>
           </ul>
-          : null}
+        ) : null}
       </MediaOptionWrapper>
+    );
 
     const { option } = this.state;
-    return (<FileWrap >
-
-      {/* <br />
+    return (
+      <FileWrap>
+        {/* <br />
       is_image: {(is_image || item.is_image) ? "yes" : "no"}<br />
       contentImg: {contentImg != "" ? "yes" : "no"}<br />
       <br /> */}
-
-      {/* image */}
-      {(contentImg != "" && is_image)
-        ? <div style={{ position: "relative" }}>
-          <MediaOpts
-            align={((option && option.split(",")[0]) || "center")}
-            scale={((option && option.split(",")[1]) || "")}
-            onClickedScale={this.handleClickedScaleOption}
-            onClickedAlign={this.handleClickedAlignOption}
-            extended />
-          <div style={{ display: "flex", flexDirection: "row", justifyContent: `${(option && option.split(",")[0]) || "center"}` }}>
-            {(option && option.split(",")[1] === "scale")
-              ? <img style={{ width: "100%", objectFit: "contain" }} src={contentImg} alt="이미지" />
-              : <img style={{ objectFit: "contain" }} src={contentImg} alt="이미지" />
-            }
+        {/* image */}
+        {contentImg != "" && is_image ? (
+          <div style={{ position: "relative" }}>
+            <MediaOpts
+              align={(option && option.split(",")[0]) || "center"}
+              scale={(option && option.split(",")[1]) || ""}
+              onClickedScale={this.handleClickedScaleOption}
+              onClickedAlign={this.handleClickedAlignOption}
+              extended
+            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: `${
+                  (option && option.split(",")[0]) || "center"
+                }`,
+              }}
+            >
+              {option && option.split(",")[1] === "scale" ? (
+                <img
+                  style={{ width: "100%", objectFit: "contain" }}
+                  src={contentImg}
+                  alt="이미지"
+                />
+              ) : (
+                <img
+                  style={{ objectFit: "contain" }}
+                  src={contentImg}
+                  alt="이미지"
+                />
+              )}
+            </div>
           </div>
-        </div>
-        : null}
+        ) : null}
 
-      {/* video */}
-      {(item.content && item.data_type === "video")
-        ? <div style={{ position: "relative" }}>
-          <MediaOpts
-            align={((option && option.split(",")[0]) || "center")}
-            scale={((option && option.split(",")[1]) || "")}
-            onClickedScale={this.handleClickedScaleOption}
-            onClickedAlign={this.handleClickedAlignOption}
-          // extended 
-          />
+        {/* video */}
+        {item.content && item?.data_type?.includes("video") ? (
+          <div style={{ position: "relative" }}>
+            <MediaOpts
+              align={(option && option.split(",")[0]) || "center"}
+              scale={(option && option.split(",")[1]) || ""}
+              onClickedScale={this.handleClickedScaleOption}
+              onClickedAlign={this.handleClickedAlignOption}
+              // extended
+            />
 
-          {/* <span className="LinkFileName">{item.file_name}</span> */}
-          <div style={{ display: "flex", flexDirection: "row", justifyContent: `${(option && option.split(",")[0]) || "center"}` }}>
-            <video
-              key={item.content}
-              className="iconWrap"
-              width={`${window.innerWidth > 480 ? "975" : window.innerWidth - 55}`}
-              height={`${window.innerWidth > 480 ? "600" : (window.innerWidth - 55) * .55}`}
-              controls="controls">
-              <source src={item.content} type="video/mp4" download={item.file_name}></source>
-            </video>
+            {/* <span className="LinkFileName">{item.file_name}</span> */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: `${
+                  (option && option.split(",")[0]) || "center"
+                }`,
+              }}
+            >
+              <video
+                key={item.content}
+                className="iconWrap"
+                width={`${
+                  window.innerWidth > 480 ? "975" : window.innerWidth - 55
+                }`}
+                height={`${
+                  window.innerWidth > 480
+                    ? "600"
+                    : (window.innerWidth - 55) * 0.55
+                }`}
+                controls="controls"
+              >
+                <source
+                  src={item.content}
+                  type="video/mp4"
+                  download={item.file_name}
+                ></source>
+              </video>
+            </div>
           </div>
-        </div>
-        : null}
+        ) : null}
 
-      {/* file */}
-      {(
-        ((item.content && item.content.length > 0) || (item.file && item.file.length > 0))
-        &&
-        (item.data_type !== "video" && item.data_type !== "image")
-      )
-        ? <div className="iconWrap">
-          <FileIcon
-            type={item.file_type}
-            extension={item.extension}
-          />
-          <span className="LinkFileName">{item.file_name}</span>
-        </div>
-        : null}
+        {/* file */}
+        {((item.content && item.content.length > 0) ||
+          (item.file && item.file.length > 0)) &&
+        item.data_type !== "video" &&
+        !is_image ? (
+          <div className="iconWrap">
+            <FileIcon type={item.file_type} extension={item.extension} />
+            <span className="LinkFileName">{item.file_name}</span>
+          </div>
+        ) : null}
 
-      {/* {<form action="" enctype="multipart/form-data" method="post">
+        {/* {<form action="" enctype="multipart/form-data" method="post">
           <input type="file" name="file-to-upload" />
           <input type="submit" value="Upload" />
         </form>} */}
 
-      {/* 
+        {/* 
         <FilePond
           // name="file-to-upload"
           ref={ref => (this.pond = ref)}
@@ -396,17 +472,17 @@ class FileController extends Component {
           }}
         /> */}
 
-      <File>
-        <input
-          type="file"
-          name="source"
-          onChange={this.onChangeValue}
-          ref={ref => (this.input = ref)}
-          accept={this.props.accept == null ? null : this.props.accept}
-        />
-        <span></span>
-      </File>
-    </FileWrap>
+        <File>
+          <input
+            type="file"
+            name="source"
+            onChange={this.onChangeValue}
+            ref={(ref) => (this.input = ref)}
+            accept={this.props.accept == null ? null : this.props.accept}
+          />
+          <span></span>
+        </File>
+      </FileWrap>
     );
   }
 }

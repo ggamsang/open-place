@@ -5,7 +5,102 @@ import firstpage from "resources/firstpage.svg";
 import prevpage from "resources/prevpage.svg";
 import nextpage from "resources/nextpage.svg";
 import lastpage from "resources/lastpage.svg";
-
+const grayScale = {
+  scale0: "#F8FAFB",
+  scale1: "#F1F5F5",
+  scale2: "#EAEEEF",
+  scale3: "#E1E4E6",
+  scale4: "#CED3D6",
+  scale5: "#A9AFB3",
+  scale6: "#878D91",
+  scale7: "#4D5256",
+  scale8: "#363A3C",
+  scale9: "#292A2B",
+};
+export const ViewContent = styled.div`
+  position: relative;
+  border: 1px solid transparent;
+  &:hover {
+    border: 1px dashed ${grayScale.scale3};
+    background-color: ${grayScale.scale0};
+    .editBtn {
+      display: block;
+    }
+  }
+  .imgContent {
+    img {
+      object-fit: scale-down;
+      max-width: 100%;
+      // max-width: 100%;
+      // width: 450px;
+    }
+    text-align: center;
+    margin-bottom: 2rem;
+    p {
+      // text-align: right;
+      font-size: 0.75rem;
+      line-height: 0.9rem;
+      font-family: Noto Sans KR;
+      font-weight: 500;
+      color: #707070;
+    }
+  }
+  .centering {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .LinkFileName {
+    line-height: 70px;
+    font-size: 20px;
+  }
+  .iconWrap {
+    display: flex;
+    &::after {
+      display: block;
+      content: "";
+      clear: both;
+    }
+    margin-bottom: 2rem;
+  }
+  .textWrap {
+    margin-bottom: 2rem;
+    word-break: break-all;
+    line-height: 25px;
+    color: inherit;
+  }
+  .linkWrap {
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+    font-family: Noto Sans KR;
+  }
+  & .goEdit {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  &:hover .goEdit {
+    display: block;
+  }
+  .mouse-on {
+    :hover {
+      color: #0000ff;
+      opacity: 0.75;
+    }
+  }
+  .align-right {
+    margin-left: auto;
+  }
+  .align-left {
+    margin-right: auto;
+  }
+  .align-center {
+    margin: auto;
+  }
+`;
 export const Main = styled.div`
   display: flex;
   flex-direction: column;
@@ -258,6 +353,10 @@ export const DetailsDiv = styled.div`
   justify-content: center;
   align-items: center;
   margin: auto;
+  .content {
+    padding: 10px;
+    width: 100%;
+  }
 `;
 
 export const DetailsText = styled.div`
