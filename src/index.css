@@ -1,0 +1,113 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700&display=swap&subset=korean");
+/* Noto Sans KR
+  (100, Thin) 
+  (300, Light) 
+  (400, Regular) 
+  (500, Medium) 
+  (700, Bold) 
+*/
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+
+html,
+body {
+  height: 100%;
+  width: 100vw;
+  /* overflow-x: hidden;
+  overflow-y: hidden; */
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* div {  */
+/* border: 1px solid black; */
+/* } */
+code {
+  font-family: source-code-pro, Menlo, Monaco, monospace, "Courier New",
+    Consolas;
+}
+a {
+  color: inherit;
+}
+
+.partial-scroll-on {
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.partical-scroll-none::-webkit-scrollbar {
+  position: block;
+  width: 0px;
+}
+.partical-scroll-none::-webkit-scrollbar * {
+  background: transparent;
+}
+.partical-scroll-none::-webkit-scrollbar-thumb {
+  background: rgba(255, 0, 0, 0.45) !important;
+  /* background: transparent; */
+}
+.partial-scroll-on::-webkit-scrollbar {
+  position: block;
+  width: 4px;
+}
+.partial-scroll-on::-webkit-scrollbar * {
+  background: transparent;
+}
+.partial-scroll-on::-webkit-scrollbar-thumb {
+  background: rgba(255, 0, 0, 0.45) !important;
+}
+
+.card-detail-scroll::-webkit-scrollbar {
+  position: absolute;
+  width: 3px;
+}
+.card-detail-scroll::-webkit-scrollbar-thumb {
+  background: #707070 !important;
+}
+/* ck editor classic global */
+.ck-editor__editable {
+  min-height: 120px;
+  height: 120px;
+}
+.ui.dimmer {
+  position: fixed !important;
+}
+/* .partical-scroll-none::-webkit-scrollbar {
+  position: absolute;
+  width: 0px;
+}
+.partical-scroll-none::-webkit-scrollbar * {
+  background: transparent; 
+}
+.partical-scroll-none::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+.partial-scroll-on::-webkit-scrollbar {
+  position: absolute;
+  width: 3.9px;
+}
+.partial-scroll-on::-webkit-scrollbar * {
+  background: transparent;
+}
+.partial-scroll-on::-webkit-scrollbar-thumb {
+  background: rgba(255, 0, 0, 0.45) !important;
+}
+
+.card-detail-scroll::-webkit-scrollbar {
+  position: absolute;
+  width: 3px;
+}
+.card-detail-scroll::-webkit-scrollbar-thumb {
+  background: #707070 !important;
+} */

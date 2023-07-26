@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="78" height="31" viewBox="0 0 78 31">
+  <g id="Light_Chips_1._Input_B._Text_only_Focused" data-name="Light 🌕/ Chips/1. Input/B. Text only / Focused" transform="translate(0.5 0.5)">
+    <g id="Container" transform="translate(-60 -374)">
+      <rect id="_Elevation" data-name="☁️ Elevation" width="77" height="30" rx="15" transform="translate(60 374)" fill="#fff"/>
+      <rect id="_Color_l_Container" data-name="🎨 Color l Container" width="77" height="30" rx="15" transform="translate(60 374)" fill="rgba(0,0,0,0.87)" opacity="0.12"/>
+      <rect id="_States" data-name="💡States" width="77" height="30" rx="15" transform="translate(60 374)" fill="rgba(0,0,0,0.12)" stroke="#fff" stroke-width="1"/>
+      <g id="_Trailing_Icon" data-name="📍Trailing Icon" transform="translate(114 380)">
+        <rect id="Boundary" width="18" height="18" fill="none"/>
+        <path id="_Color" data-name=" ↳Color" d="M7,14A7,7,0,0,1,2.048,2.048a7,7,0,0,1,9.9,9.9A6.956,6.956,0,0,1,7,14ZM7,7.987H7L9.513,10.5l.987-.987L7.987,7,10.5,4.487,9.513,3.5,7,6.013,4.487,3.5,3.5,4.487,6.013,7,3.5,9.513l.987.987L7,7.988Z" transform="translate(2 2)" fill="rgba(0,0,0,0.6)"/>
+      </g>
+    </g>
+    <text id="_Label" data-name="✏️ Label" transform="translate(12 20)" fill="rgba(0,0,0,0.87)" font-size="14" font-family="Pretendard-Regular, Pretendard" letter-spacing="0.018em"><tspan x="0" y="0">Tag1</tspan></text>
+  </g>
+</svg>

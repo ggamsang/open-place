@@ -1,0 +1,134 @@
+        <SliderWrapper width={width} height={height}>
+          <NaviBox top={height - 98} left={width - 158}>
+            <div className="arrow-prev" onClick={this.prev}></div>
+            <div className="arrow-pause" onClick={this.gostop}></div>
+            <div className="arrow-next" onClick={this.next}></div>
+          </NaviBox>
+          <Slider ref={(slider) => (this.slider = slider)} {...settings}>
+            {/* tech pocket */}
+            <Banner height={height}>
+              <img src={new_banner_step2} />
+              <ButtonOnImage
+                onClick={() => {
+                  window.location.href = "/exp/5344";
+                }}
+                src={main_banner_2_button}
+                {...{
+                  width: 870, //952 * width / 1920,
+                  height: 410, //397 * height / 1080,
+                  top: height - 516, //(1080 - 516) * (h / 1080),
+                  left: width - 965, //(1920 - 965) * (w / 1920),
+                }}
+              />
+            </Banner>
+
+            {/* open source design */}
+            <Banner height={height}>
+              <img src={new_banner_step1} />
+              <ButtonOnImage
+                onClick={() => {
+                  window.location.href = "/exp/5157";
+                }}
+                src={main_banner_1_button}
+                {...{
+                  width: 952,
+                  height: 397,
+                  top: height - 500, //(h / 1080) * (1080 - 600),
+                  left: width - 1000, // (w / 1920) * (1920 - 1000),
+                }}
+              />
+            </Banner>
+
+            {/* crc */}
+            <Banner height={height}>
+              <img src={new_banner_step3} />
+              <ButtonOnImage
+                onClick={() => {
+                  window.location.href = "/exp/5343";
+                }}
+                src={main_banner_3_button}
+                {...{
+                  width: 884,
+                  height: 346,
+                  top: height - 490,
+                  left: 126,
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    left: "73px",
+                    bottom: "0px",
+                    padding: "0px",
+                    width: "208px",
+                    height: "55px",
+                    backgroundColor: "rgba(84,134,199,0.52)",
+                    alignItems: "center",
+                    textAlign: "center",
+                    color: "#fff",
+                    fontSize: "33px",
+                    lineHeight: "55px",
+                    fontFamily: "Spoqa Han Sans Neo",
+                    fontWeight: "700",
+                  }}
+                >
+                  자세히 보기
+                </div>
+              </ButtonOnImage>
+            </Banner>
+
+            {/* PWS */}
+            <Banner height={height}>
+              <img src={new_banner_step4} />
+              <ButtonOnImage
+                onClick={() => {
+                  window.location.href = "/exp/5369";
+                }}
+                // src={main_banner_4_button}
+                {...{
+                  width: 400,
+                  height: 250,
+                  top: height - window.innerHeight * 0.3,
+                  left: 10,
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    left: "173px",
+                    bottom: "100px",
+                    padding: "0px 15px",
+                    width: "238px",
+                    height: "55px",
+                    backgroundColor: "black", //rgba(84,134,199,0.52)",
+                    alignItems: "center",
+                    textAlign: "center",
+                    color: "#fff",
+                    fontSize: "33px",
+                    lineHeight: "55px",
+                    fontFamily: "Spoqa Han Sans Neo",
+                    fontWeight: "700",
+                  }}
+                >
+                  {"자세히 보기 →"}
+                </div>
+              </ButtonOnImage>
+            </Banner>
+          </Slider>
+        </SliderWrapper>
+
+        <MainScrollWrapper width={widthScroll} marginTop={height}>
+          <div style={{ marginLeft: "10px" }}>
+            {this.props.userInfo != null ? (
+              <MainMyDesignListContainer width={widthScroll} Head={Head} />
+            ) : null}
+
+            {this.props.userInfo != null ? (
+              <MainMyGroupListContainer width={widthScroll} Head={Head} />
+            ) : null}
+
+            <TopGroupListContainer width={widthScroll} Head={Head} />
+
+            <TopExpItemListContainer width={widthScroll} Head={Head} />
+          </div>
+        </MainScrollWrapper>
