@@ -1,0 +1,14 @@
+<svg id="구성_요소_11_1" data-name="구성 요소 11 – 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="351" height="43" viewBox="0 0 351 43">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.013" y1="0.568" x2="0.991" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#424242"/>
+    </linearGradient>
+  </defs>
+  <path id="사각형_6303" data-name="사각형 6303" d="M0,0H329.5A21.5,21.5,0,0,1,351,21.5v0A21.5,21.5,0,0,1,329.5,43H0a0,0,0,0,1,0,0V0A0,0,0,0,1,0,0Z" fill="url(#linear-gradient)"/>
+  <g id="구성_요소_12_1" data-name="구성 요소 12 – 1" transform="translate(11.365 9.705)">
+    <path id="패스_11511" data-name="패스 11511" d="M102.363,87.468a11.282,11.282,0,1,1-15.955,0A11.283,11.283,0,0,1,102.363,87.468Z" transform="translate(-83.102 -84.164)" fill="none" stroke="#666" stroke-linecap="round" stroke-width="1"/>
+    <line id="선_1970" data-name="선 1970" x2="4.331" y2="4.332" transform="translate(19.261 19.259)" fill="none" stroke="#666" stroke-linecap="round" stroke-width="1"/>
+  </g>
+  <text id="경험_찾아보기" data-name="경험 찾아보기" transform="translate(220.657 27.5)" fill="#fff" font-size="18" font-family="Pretendard-Black, Pretendard" font-weight="800"><tspan x="0" y="0">경험 찾아보기</tspan></text>
+</svg>
