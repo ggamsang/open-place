@@ -1,6 +1,6 @@
 ## Introduction
-본 프로젝트는 경험을 공유할 수 있는 플랫폼에 대한 저장소입니다.
-
+본 프로젝트는 경험을 공유할 수 있는 플랫폼에 대한 저장소입니다.<br/>
+현재 개발중인 [사이트](https://place23.opensrcdesign.com)입니다.
 ## Branches
 Git flow 방식으로 개발을 진행합니다.<br/>
 `master` - 배포용 브런치입니다.<br/>
