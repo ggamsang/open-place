@@ -30,6 +30,7 @@ import {
   RateReview,
   RateStarIcon,
   RateNumRate,
+  RateNumRate2,
   RateIcon,
   RateBar,
   Wrapper,
@@ -38,6 +39,16 @@ import {
   ExpInnerDiv,
   ExpName,
   ExpImg,
+  NameAndTagsDiv,
+  CateType,
+  TagButton,
+  TagButtonText,
+  Price,
+  StarIcon,
+  LikeButton,
+  PurchaseButton,
+  ManageButton,
+  ReviewText,
 } from "./styles";
 
 const NumRate = ({ rate = 0, count = 0, freq = [40, 30, 20, 10, 0] }) => {
@@ -241,7 +252,7 @@ class DesignDetail extends Component {
         </Wrapper>
       );
 
-    console.clear();
+    // console.clear();
     console.log(this.props, this.state);
     const isGroupExp =
       [1, 2, 3].includes(DesignDetail.design_type) &&
