@@ -1,27 +1,14 @@
 import React, { Component } from "react";
-import DesignInfo from "components/Designs/DesignInfo";
-import DesignDetailStepContainer from "containers/ExpItem/DesignDetailStepContainer";
 import Loading from "components/Commons/Loading";
-import DesignDetailViewContainer from "containers/ExpItem/DesignDetailViewContainer";
 
-import {
-  CATEs,
-  TYPEs,
-  EXP_TYPE_LECT,
-  EXP_TYPE_MEET,
-  EXP_TYPE_CONS,
-} from "constant";
 import { alert } from "components/Commons/Alert/Alert";
 import { confirm } from "components/Commons/Confirm/Confirm";
-import { goto } from "navigator";
-import Design from "components/Designs/Design";
 import {
   DenyForkDesignRequest,
   AcceptForkDesignRequest,
   KickOutForkDesignReques,
 } from "redux/modules/expitem";
 import { DESIGN_NOT_FOUND } from "redux/modules/expitem/design";
-import GroupNoticeContainer from "containers/Groups/GroupNoticeContainer";
 import host from "config";
 import {
   RateExpDiv,
@@ -51,40 +38,11 @@ import {
   ReviewText,
 } from "./styles";
 
-const NumRate = ({ rate = 0, count = 0, freq = [40, 30, 20, 10, 0] }) => {
-  return (
-    <RateExpDiv>
-      <RateDiv>
-        <Rate>{rate}</Rate>
-        <RateReview>리뷰 {count}개</RateReview>
-      </RateDiv>
-      <RateStarIcon />
-      {/* <NumRate /> */}
-      <RateNumRate>
-        <RateNumRate2>
-          5<RateIcon />
-          <RateBar per={freq[0]} />
-        </RateNumRate2>
-        <RateNumRate2>
-          4<RateIcon />
-          <RateBar per={freq[1]} />
-        </RateNumRate2>
-        <RateNumRate2>
-          3<RateIcon />
-          <RateBar per={freq[2]} />
-        </RateNumRate2>
-        <RateNumRate2>
-          2<RateIcon />
-          <RateBar per={freq[3]} />
-        </RateNumRate2>
-        <RateNumRate2>
-          1<RateIcon />
-          <RateBar per={freq[4]} />
-        </RateNumRate2>
-      </RateNumRate>
-    </RateExpDiv>
-  );
-};
+import ExpTypeCons from "./ExpTypeCons";
+import ExpTypeGame from "./ExpTypeGame";
+import ExpTypeLect from "./ExpTypeLect";
+import ExpTypeMeet from "./ExpTypeMeet";
+import ExpTypeNorm from "./ExpTypeNorm";
 
 class DesignDetail extends Component {
   constructor(props) {
@@ -138,6 +96,24 @@ class DesignDetail extends Component {
   //     ? true
   //     : false;
   // };
+  onClickChat = async (event) => {
+    const { DesignDetail } = this.props;
+    const options = `toolbar=no,status=no,menubar=no,resizable=no,location=no,top=100,left=100,width=496,height=600,scrollbars=no`;
+    this.chatwindow = window.open(`/chat/${DesignDetail.uid}`, "chat", options);
+  };
+  onClickVChat = async (event) => {
+    // const url = `${process.env.REACT_APP_VCHAT_URL}?auth=${this.props.token}&room=${this.props.DesignDetail.uid}`;
+    const REACT_APP_VCHAT_URL =
+      "https://s3.ap-northeast-2.amazonaws.com/depot.opensrcdesign.com/meet/index.html";
+    const options = `toolbar=no,status=no,menubar=no,resizable=0,location=no,scrollbars=no,\
+        top=0,left=0,width=${window.screen.width},height=${
+      window.screen.height - 100
+    }`;
+    const url = `${REACT_APP_VCHAT_URL}?auth=${this.props.token}&room=${this.props.DesignDetail.uid}`;
+    console.log(url, options);
+    // return;
+    this.vchatwindow = window.open(url, "vchat", options);
+  };
   onClickBuy = async (event) => {
     const { userInfo, DesignDetail, token } = this.props;
     // // joinMember = async () => {
@@ -206,6 +182,9 @@ class DesignDetail extends Component {
   onClickModify = () => {
     window.location.href = `/expModify/${this.props.DesignDetail.uid}`;
   };
+  onClickLike = () => {
+    alert("");
+  };
   request = () => {
     return new Promise(async (resolve, reject) => {
       fetch(
@@ -239,7 +218,6 @@ class DesignDetail extends Component {
       });
     }
   };
-
   render() {
     const { DesignDetail, userInfo, forkDesignList } = this.props;
     const { manage } = this.state;
@@ -266,280 +244,34 @@ class DesignDetail extends Component {
 
     return (
       <Wrapper>
-        {/* -head- */}
-        <React.Fragment>
-          <ExpInfoText>경험정보</ExpInfoText>
-          <ExpInfoDiv>
-            <ExpImg url={DesignDetail?.img?.l_img} />
-
-            <ExpInnerDiv>
-              <NameAndTagsDiv>
-                <div>
-                  <ExpName>{DesignDetail?.title}</ExpName>
-                  <CateType>
-                    (
-                    {
-                      CATEs.filter(
-                        (cate) => cate.value === DesignDetail.category_level1
-                      )[0]?.name
-                    }
-                    ) x (
-                    {
-                      TYPEs.filter(
-                        (type) => type.value === DesignDetail.design_type
-                      )[0]?.name
-                    }
-                    )
-                  </CateType>
-                </div>
-                {DesignDetail.taglist &&
-                  DesignDetail.taglist.length > 0 &&
-                  DesignDetail.taglist.split("|").map((tag, index) => (
-                    <TagButton key={index}>
-                      <TagButtonText>{tag}</TagButtonText>
-                    </TagButton>
-                  ))}
-              </NameAndTagsDiv>
-
-              <Price>
-                {/* {DesignDetail.price > 0
-                      ? new Intl.NumberFormat("ko-KR", {
-                          style: "currency",
-                          currency: "KRW",
-                        }).format(DesignDetail.price) + "원"
-                      : "무료"} */}
-              </Price>
-              <NumRate />
-            </ExpInnerDiv>
-
-            <StarIcon liked={DesignDetail.isLike !== 0} />
-
-            <div
-              style={{
-                marginRight: "15px",
-                marginBottom: "15px",
-                position: "absolute",
-                width: "max-content",
-                right: "0%",
-                bottom: "0%",
-                display: "flex",
-              }}
-            >
-              {/* {this.props.token &&
-                  DesignDetail.user_id !== this.props.userInfo?.uid && (
-                    <PurchaseButton onClick={this.onClickBuy}>
-                      <span>구매하기</span>
-                    </PurchaseButton>
-                  )} */}
-
-              {DesignDetail.user_id !== this.props.userInfo?.uid && (
-                <LikeButton onClick={this.onClickLike}>
-                  {/* {DesignDetail.isLike} */}
-                  {/* bgColor={this.state.like === true ? "red" : "#dd5035"} text= */}
-                  <span>{DesignDetail.isLike !== 0 ? "❤️" : ""}좋아요</span>
-                </LikeButton>
-              )}
-
-              {this.props.token &&
-                isGroupExp &&
-                this.state.applied === false &&
-                DesignDetail.user_id !== this.props.userInfo?.uid && (
-                  <PurchaseButton onClick={this.onClickBuy}>
-                    <span>강의신청하기</span>
-                  </PurchaseButton>
-                )}
-
-              {DesignDetail && (
-                <GroupNoticeContainer
-                  owner_id={DesignDetail.user_id}
-                  id={DesignDetail.uid}
-                  token={this.props.token}
-                  user_id={userInfo?.uid}
-                />
-              )}
-
-              {this.props.token &&
-                forkDesignList?.length > 0 &&
-                DesignDetail.is_parent && (
-                  <ManageButton
-                    onClick={() =>
-                      this.setState({ manage: !this.state.manage })
-                    }
-                  >
-                    <span>관리모드</span>
-                  </ManageButton>
-                )}
-
-              {this.props.token &&
-                DesignDetail.user_id === this.props.userInfo?.uid && (
-                  <LikeButton onClick={this.onClickModify}>
-                    <span>수정하기</span>
-                  </LikeButton>
-                )}
-            </div>
-          </ExpInfoDiv>
-
-          {/* detail */}
-          {/*  */}
-          {/* <ReviewText>게시판</ReviewText> */}
-        </React.Fragment>
-
-        {/* -body- */}
-        <React.Fragment>
-          {isGroupExp ? (
-            <>
-              {manage && (
-                <>
-                  <ExpInfoText>그룹관리</ExpInfoText>
-                  {forkDesignList &&
-                    forkDesignList.filter((item) => item.d_flag === 0)
-                      .length === 0 && <h3>가입신청내역없음</h3>}
-                  <div
-                    style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      width: "100%",
-                    }}
-                  >
-                    {forkDesignList &&
-                      forkDesignList
-                        .filter((item) => item.d_flag === 0)
-                        .map((item) => (
-                          <div key={item.uid}>
-                            <button
-                              style={{
-                                backgroundColor: "red",
-                                color: "white",
-                                fontSize: "1.5rem",
-                                padding: "5px 10px",
-                                borderRadius: "15%",
-                              }}
-                              onClick={() =>
-                                this.onClickForkDesignAccept(item.uid)
-                              }
-                            >
-                              수락
-                            </button>
-                            <button
-                              style={{
-                                backgroundColor: "black",
-                                color: "white",
-                                fontSize: "1.5rem",
-                                padding: "5px 10px",
-                                borderRadius: "15%",
-                              }}
-                              onClick={() =>
-                                this.onClickForkDesignDeny(item.uid)
-                              }
-                            >
-                              거절
-                            </button>
-                            <Design {...item} />
-                          </div>
-                        ))}
-                  </div>
-                </>
-              )}
-              {this.props.token &&
-                forkDesignList?.length > 0 &&
-                DesignDetail.is_parent && (
-                  <>
-                    {/* <ExpInfoText>가입목록</ExpInfoText> */}
-
-                    <div
-                      style={{
-                        marginTop: "25px",
-                        display: "flex",
-                        flexWrap: "wrap",
-                        width: "100%",
-                      }}
-                    >
-                      {forkDesignList
-                        .filter((item) => item.d_flag !== 0)
-                        .map((item) => (
-                          <div key={item.uid}>
-                            <Design
-                              {...item}
-                              onClick={() => goto("EXP", item.uid)}
-                            />
-                            <button
-                              style={{
-                                backgroundColor: "black",
-                                color: "white",
-                                fontSize: "1.5rem",
-                                padding: "5px 10px",
-                                borderRadius: "15%",
-                              }}
-                              onClick={() =>
-                                this.onClickForkDesignKickOut(item.uid)
-                              }
-                            >
-                              퇴출
-                            </button>
-                          </div>
-                        ))}
-                    </div>
-                  </>
-                )}
-            </>
-          ) : (
-            <></>
-          )}
-
-          {isGroupMember && DesignDetail.d_flag === 0 ? (
-            <>
-              {" "}
-              <p
-                style={{
-                  fontSize: "2rem",
-                  padding: "50px",
-                  textAlign: "center",
-                  width: "100%",
-                }}
-              >
-                가입신청 중입니다.
-              </p>
-            </>
-          ) : (
-            <>
-              {/* design detail */}
-              <ExpInfoText>상세정보</ExpInfoText>
-
-              {DesignDetail && DesignDetail.is_project === 1 ? (
-                <DesignDetailStepContainer
-                  design={DesignDetail}
-                  {...this.state}
-                />
-              ) : (
-                <div className="marginLeft">
-                  <DesignDetailViewContainer
-                    id={this.props.id}
-                    {...this.state}
-                    history={this.props.history}
-                  />
-                </div>
-              )}
-            </>
-          )}
-          {!isGroupMember && (
-            <>
-              {/*  */}
-              <ReviewText>리뷰</ReviewText>
-              <div className="reviewWrap">
-                {/* <ReviewContainer
-                write={this.state.write}
-                onCloseWriteModal={() => this.setState({ write: false })}
-              /> */}
-              </div>
-            </>
-          )}
-        </React.Fragment>
+        {DesignDetail.design_type === 1 && <ExpTypeMeet />}
+        {DesignDetail.design_type === 2 && (
+          <ExpTypeLect
+            {...this.props}
+            {...this.state}
+            onClickVChat={this.onClickVChat}
+            onClickChat={this.onClickChat}
+            onClickLike={this.onClickLike}
+            onClickBuy={this.onClickBuy}
+            onClickModify={this.onClickModify}
+            isGroupExp={isGroupExp}
+            isGroupMember={isGroupMember}
+          />
+        )}
+        {DesignDetail.design_type === 3 && <ExpTypeCons />}
+        {DesignDetail.design_type === 4 && <ExpTypeNorm />}
+        {DesignDetail.design_type === 5 && <ExpTypeGame />}
       </Wrapper>
     );
   }
 }
 
 export default DesignDetail;
+
+
+
+
+
 // DesignDetail.is_parent === false &&
 // isMyDesign &&
 // DesignDetail.d_flag === 0 ? (

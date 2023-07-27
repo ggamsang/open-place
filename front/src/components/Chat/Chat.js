@@ -249,7 +249,9 @@ const Chatting = styled.div`
     right: 0;
     background-color: ivory;
   }
-
+  .chat-element {
+    margin-bottom: 10px;
+  }
   .headerBox {
     width: 100%;
     height: 100%;
@@ -460,7 +462,8 @@ export default class Chat extends React.Component {
       ghostspace: null,
     };
     // variable
-    this.serviceIP = `${host}/webrtcPeerChat`;
+    // this.serviceIP = `${host}/webrtcPeerChat`;
+    this.serviceIP = `https://place23.opensrcdesign.com/webrtcPeerChat`;
     // functions
     this.sendMessage = this.sendMessage.bind(this);
     this.closeChat = this.closeChat.bind(this);
@@ -490,7 +493,7 @@ export default class Chat extends React.Component {
           roomNum: this.props.id,
           memberName: this.props.userInfo.nickName,
           memberId: this.props.userInfo.uid,
-          thumbnail: this.props.userInfo.thumbnail.s_img,
+          thumbnail: this.props.userInfo.thumbnail?.s_img,
         },
       });
       this.socket.on("read", (data) => {
@@ -518,7 +521,7 @@ export default class Chat extends React.Component {
           ) &&
           this.props.DesignDetail.member.find(
             (mem) => mem.user_id === data.user_id
-          ).thumbnail.s_img;
+          ).thumbnail?.s_img;
         data.thumbnail = thumbnail;
         // console.log('on chat', data);
         const copy = [...this.state.chat];
@@ -739,8 +742,7 @@ export default class Chat extends React.Component {
           <div onScroll={this.handleScroll} id="scroll" className="scroll">
             {/* <div>&nbsp;</div> */}
 
-            {chat &&
-              chat.length > 0 &&
+            {chat?.length > 0 &&
               chat.map((chat, index) => {
                 beforeChat = nowChat;
                 nowChat = chat.user_id;

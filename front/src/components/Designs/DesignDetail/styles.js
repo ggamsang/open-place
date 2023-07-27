@@ -279,8 +279,8 @@ export const TagButtonDelete = styled.div`
 //     height: 57px;
 // `;
 export const Price = styled.div`
-  // font: normal normal 400 16px/14px Pretendard;
-  font-size: 40px;
+  font: normal normal 400 16px/14px Pretendard;
+  // font-size: 40px;
   letter-spacing: 0px;
   color: #4136f1;
   opacity: 1;
@@ -717,12 +717,19 @@ export const SimilarExpList = styled.div`
 `;
 
 export const ReviewText = styled.div`
+  // text-align: center;
+  // font: normal normal 900 44px/52px Pretendard;
+  // letter-spacing: 0px;
+  // color: #000000;
+  // opacity: 1;
+  // margin-top: 28px;
   text-align: center;
-  font: normal normal 900 44px/52px Pretendard;
+  font: normal normal 900 36px/48px Pretendard;
   letter-spacing: 0px;
   color: #000000;
   opacity: 1;
-  margin-top: 28px;
+  margin-top: 20px;
+  position: relative;
 `;
 
 export const ReviewDiv = styled.div`
@@ -740,6 +747,7 @@ export const ReviewDiv = styled.div`
 export const Wrapper = styled.div`
   max-width: 1740px;
   min-width: 1000px;
+  min-height: 50vh;
   .marginLeft {
     // margin-left: 38px;
   }
