@@ -40,11 +40,17 @@ const ExpTypeLect = ({
   history,
   onClickModify,
   applied,
+  isMyDesign,
+
+  onClickForkDesignKickOut,
+  onClickForkDesignAccept,
+  onClickForkDesignDeny,
+  onClickManage,
 }) => {
   return (
     <>
       {/* 경험.강의/강좌 */}
-
+      {isGroupMember && <>member</>}
       {/* -head- */}
       <React.Fragment>
         <ExpInfoText>경험정보</ExpInfoText>
@@ -81,7 +87,11 @@ const ExpTypeLect = ({
             </NameAndTagsDiv>
 
             <Price>
+              {isMyDesign
+              ?<>내 경험아이템</>
+              :<>
               작성자: {DesignDetail.userName}
+              </>}
               {/* {DesignDetail.price > 0
                       ? new Intl.NumberFormat("ko-KR", {
                           style: "currency",
@@ -139,14 +149,14 @@ const ExpTypeLect = ({
                   <span>강의신청하기</span>
                 </PurchaseButton>
               )}
-            {token &&
+            {/* {token &&
               // isGroupExp &&
               applied === true &&
               DesignDetail.user_id !== userInfo?.uid && (
                 <LikeButton onClick={onClickBuy}>
                   <span>신청하기</span>
                 </LikeButton>
-              )}
+              )} */}
 
             {DesignDetail && (
               <GroupNoticeContainer
@@ -158,9 +168,7 @@ const ExpTypeLect = ({
             )}
 
             {token && forkDesignList?.length > 0 && DesignDetail.is_parent && (
-              <ManageButton
-                onClick={() => this.setState({ manage: !this.state.manage })}
-              >
+              <ManageButton onClick={onClickManage}>
                 <span>관리모드</span>
               </ManageButton>
             )}
@@ -204,9 +212,7 @@ const ExpTypeLect = ({
                               padding: "5px 10px",
                               borderRadius: "15%",
                             }}
-                            onClick={() =>
-                              this.onClickForkDesignAccept(item.uid)
-                            }
+                            onClick={() => onClickForkDesignAccept(item.uid)}
                           >
                             수락
                           </button>
@@ -218,7 +224,7 @@ const ExpTypeLect = ({
                               padding: "5px 10px",
                               borderRadius: "15%",
                             }}
-                            onClick={() => this.onClickForkDesignDeny(item.uid)}
+                            onClick={() => onClickForkDesignDeny(item.uid)}
                           >
                             거절
                           </button>
@@ -256,9 +262,7 @@ const ExpTypeLect = ({
                             padding: "5px 10px",
                             borderRadius: "15%",
                           }}
-                          onClick={() =>
-                            this.onClickForkDesignKickOut(item.uid)
-                          }
+                          onClick={() => onClickForkDesignKickOut(item.uid)}
                         >
                           퇴출
                         </button>

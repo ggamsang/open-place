@@ -231,7 +231,6 @@ class DesignDetail extends Component {
       );
 
     // console.clear();
-    console.log(this.props, this.state);
     const isGroupExp =
       [1, 2, 3].includes(DesignDetail.design_type) &&
       DesignDetail.is_parent &&
@@ -241,14 +240,20 @@ class DesignDetail extends Component {
       // DesignDetail.d_flag === 1 &&
       DesignDetail.parent_design !== null;
     console.log(isGroupExp);
+    console.log(this.props, this.state);
 
     return (
       <Wrapper>
         {DesignDetail.design_type === 1 && <ExpTypeMeet />}
+
         {DesignDetail.design_type === 2 && (
           <ExpTypeLect
             {...this.props}
             {...this.state}
+            onClickForkDesignKickOut={this.onClickForkDesignKickOut}
+            onClickForkDesignAccept={this.onClickForkDesignAccept}
+            onClickForkDesignDeny={this.onClickForkDesignDeny}
+            onClickManage={() => this.setState({ manage: !this.state.manage })}
             onClickVChat={this.onClickVChat}
             onClickChat={this.onClickChat}
             onClickLike={this.onClickLike}
@@ -258,8 +263,11 @@ class DesignDetail extends Component {
             isGroupMember={isGroupMember}
           />
         )}
+
         {DesignDetail.design_type === 3 && <ExpTypeCons />}
+
         {DesignDetail.design_type === 4 && <ExpTypeNorm />}
+
         {DesignDetail.design_type === 5 && <ExpTypeGame />}
       </Wrapper>
     );
@@ -267,10 +275,6 @@ class DesignDetail extends Component {
 }
 
 export default DesignDetail;
-
-
-
-
 
 // DesignDetail.is_parent === false &&
 // isMyDesign &&

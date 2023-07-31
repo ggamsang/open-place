@@ -20,7 +20,10 @@ class AlarmContainer extends React.Component {
   handleAlarmConfirm = (userID, alarmID) => {
     try {
       if (isOpen(this.props.Socket))
-        this.props.Socket.emit("confirm", { user_id: userID, alarmId: alarmID });
+        this.props.Socket.emit("confirm", {
+          user_id: userID,
+          alarmId: alarmID,
+        });
     } catch (err) {
       console.error(err);
     }
@@ -28,7 +31,9 @@ class AlarmContainer extends React.Component {
   handleAllAlarmConfirm = () => {
     try {
       if (isOpen(this.props.Socket))
-        this.props.Socket.emit("allConfirm", { user_id: this.props.userInfo.uid });
+        this.props.Socket.emit("allConfirm", {
+          user_id: this.props.userInfo.uid,
+        });
     } catch (err) {
       console.error(err);
     }

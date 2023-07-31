@@ -32,24 +32,31 @@ const NotificationModal = styled(Modal)`
     letter-spacing: 0px;
     color: #000000;
     opacity: 1;
-  }
-  a {
-    margin-left: auto;
-    margin-right: 25px;
-    cursor: pointer;
-    color: red;
-    text-align: center;
-    :hover {
-      color: white;
-      background-color: #808080;
-      border-radius: 100%;
+    display: flex;
+    flex-direction: rows;
+    justify-content: center;
+
+    & a {
+      position: absolute;
+      // margin-left: auto;
+      right: 25px;
+      cursor: pointer;
+      color: red;
+      text-align: center;
+      font: 1rem;
+      line-height: 1rem;
+      :hover {
+        color: white;
+        background-color: #808080;
+        border-radius: 100%;
+      }
     }
   }
   .list {
     width: 100%;
     height: calc(100% - 100px);
     padding: 20px;
-    overflow: hidden;
+    overflow: auto;
     // scroll
     ::-webkit-scrollbar {
       width: 4px;
@@ -76,6 +83,16 @@ const NotificationModal = styled(Modal)`
       }
     }
   }
+`;
+const Element = styled.div`
+  opacity: ${(props) => (props.confirm ? "0.75" : "1")};
+  border: 1px solid transparent;
+
+  :hover {
+    border: 1px dashed #aaa;
+  }
+  display: flex;
+  flex-diretion: rows;
 `;
 
 let alarmlist = [];
@@ -816,7 +833,7 @@ class Alarm extends Component {
           onClose={() => this.setState({ active: false })}
         >
           <div className="header">
-            알림({alarms?.length})
+            <span>알림({alarms?.length})</span>
             <a onClick={() => this.setState({ active: false })}>
               <i className="material-icons">close</i>
             </a>
@@ -824,13 +841,13 @@ class Alarm extends Component {
           <div className="list">
             {alarms?.length > 0 ? (
               alarms.map((item) => (
-                <div
+                <Element
                   key={item.uid}
-                  style={{
-                    display: "flex",
-                    marginBottom: "5px",
-                    opacity: item.confirm ? 0.75 : 1,
-                  }}
+                  confirm={item.confirm}
+                  onClick={() =>
+                    item.confirm === 0 &&
+                    this.alarmConfirm(item.user_id, item.uid)
+                  }
                 >
                   <img
                     src={item.thumbnail}
@@ -863,7 +880,7 @@ class Alarm extends Component {
                     </div>
                     <TextFormat txt={this.getMessageText(item)} />
                   </div>
-                </div>
+                </Element>
               ))
             ) : (
               // let msg = this.getMessageText(item);
