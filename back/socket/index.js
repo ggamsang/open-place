@@ -180,7 +180,7 @@ const appendThumbnail = (obj) => {
         `;
         connection.query(sql, (err, row) => {
           if (!err) {
-            resolve(row ? row[0]['thumbnail'] : "");
+            resolve(row[0] ? row[0]['thumbnail'] : "");
           } else {
             reject(err);
           }
@@ -423,35 +423,33 @@ function SocketConnection() {
       })
     })
 
-let players = {};
-let gameState = {
-  calledNumbers: [],
-  currentPlayer: null,
-  
-};
 
-  io.of("/webgame")
-.on('connection', (socket) => {
-  const currentTime = new Date();
-  //console.log(`A user connected at ${currentTime}`);
-  players[socket.id] = socket;
+    /*************************
+    ***  web game socket   ***
+    **************************/
 
-  if (!gameState.currentPlayer) {
-    gameState.currentPlayer = socket.id;
-  }
+    let players = {};
+    let gameState = { calledNumbers: [], currentPlayer: null, };
 
-  socket.emit('gameState', gameState);
-
-  socket.on('disconnect', () => {
-    //console.log('a user disconnected');
+ io
+    .of("/webgame")
+    .on('connection', (socket) => {
+      const currentTime = new Date();
+      console.log(`A user connected at ${currentTime}`);
+      players[socket.id] = socket;
+      if (!gameState.currentPlayer) {
+        gameState.currentPlayer = socket.id;
+      }
+      socket.emit('gameState', gameState);
+      socket.on('disconnect', () => {
+    console.log('a user disconnected');
     delete players[socket.id];
 
     if (gameState.currentPlayer === socket.id) {
       gameState.currentPlayer = Object.keys(players)[0];
     }
   });
-
-  socket.on('numberCalled', (number) => {
+      socket.on('numberCalled', (number) => {
     if (gameState.currentPlayer === socket.id) {
       gameState.calledNumbers.push(number);
       gameState.currentPlayer = Object.keys(players)[(Object.keys(players).indexOf(socket.id) + 1) % Object.keys(players).length];
@@ -461,7 +459,18 @@ let gameState = {
       }
     }
   });
-});
+      socket.on('bingo', () => {
+    for (const id in players) {
+      players[id].emit('gameOver', socket.id);
+    }
+    gameState = {
+      calledNumbers: [],
+      currentPlayer: null,
+    };
+  });
+  
+    });
+
 
   // socket communication
   io

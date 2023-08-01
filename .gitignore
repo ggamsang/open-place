@@ -10,7 +10,8 @@ pm2.sh
 */node_modules
 */.pnp
 */.pnp.js
-
+*.swp
+*.swo
 # testing
 /coverage
 
