@@ -1,0 +1,13 @@
+            <styled.MyDetailTabMenuBox>
+              <styled.TabButton
+                onClick={() => {
+                  window.location.href = `/mypage/mydesign`;
+                }}
+              >
+                관심
+              </styled.TabButton>
+              {/* <div></div> */}
+              <styled.TabButton onClick={() => this.onClickLogout()}>
+                로그아웃
+              </styled.TabButton>
+            </styled.MyDetailTabMenuBox>

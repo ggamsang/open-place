@@ -4,6 +4,8 @@
 todo.md
 
 # dev
+.vscode
+*/.vscode
 pm2.sh
 
 # dependencies

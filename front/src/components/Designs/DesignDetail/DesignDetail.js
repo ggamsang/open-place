@@ -38,6 +38,14 @@ import {
   ReviewText,
 } from "./styles";
 
+import {
+  EXP_TYPE_CONS,
+  EXP_TYPE_GAME,
+  EXP_TYPE_LECT,
+  EXP_TYPE_MEET,
+  EXP_TYPE_NORM,
+} from "constant";
+
 import ExpTypeCons from "./ExpTypeCons";
 import ExpTypeGame from "./ExpTypeGame";
 import ExpTypeLect from "./ExpTypeLect";
@@ -63,16 +71,16 @@ class DesignDetail extends Component {
           window.history.go(-1);
         }
         this.CheckYouAlreadyApplied();
+        this.props.ForkDesignListRequest(
+          this.props.DesignDetail.parent_design || this.props.DesignDetail.uid,
+          // this.props.userInfo.uid,
+          this.props.token
+        );
         if (this.props.userInfo === null) this.setState({ isMyDesign: false });
         else if (this.props.userInfo.uid === this.props.DesignDetail.user_id) {
           this.props.DesignWaitingListRequest(this.props.id, this.props.token);
           this.props.GetCountDesignCommentRequest(this.props.id);
           this.setState({ isMyDesign: true });
-          this.props.ForkDesignListRequest(
-            this.props.DesignDetail.uid,
-            // this.props.userInfo.uid,
-            this.props.token
-          );
         } else {
           this.setState({ isMyDesign: false });
         }
@@ -99,7 +107,11 @@ class DesignDetail extends Component {
   onClickChat = async (event) => {
     const { DesignDetail } = this.props;
     const options = `toolbar=no,status=no,menubar=no,resizable=no,location=no,top=100,left=100,width=496,height=600,scrollbars=no`;
-    this.chatwindow = window.open(`/chat/${DesignDetail.uid}`, "chat", options);
+    this.chatwindow = window.open(
+      `/chat/${DesignDetail.parent_design || DesignDetail.uid}`,
+      "chat",
+      options
+    );
   };
   onClickVChat = async (event) => {
     // const url = `${process.env.REACT_APP_VCHAT_URL}?auth=${this.props.token}&room=${this.props.DesignDetail.uid}`;
@@ -109,7 +121,9 @@ class DesignDetail extends Component {
         top=0,left=0,width=${window.screen.width},height=${
       window.screen.height - 100
     }`;
-    const url = `${REACT_APP_VCHAT_URL}?auth=${this.props.token}&room=${this.props.DesignDetail.uid}`;
+    const url = `${REACT_APP_VCHAT_URL}?auth=${this.props.token}&room=${
+      this.props.DesignDetail.parent_design || this.props.DesignDetail.uid
+    }`;
     console.log(url, options);
     // return;
     this.vchatwindow = window.open(url, "vchat", options);
@@ -159,15 +173,17 @@ class DesignDetail extends Component {
         )
       );
   };
-  onClickForkDesignKickOut = (id) => {
-    KickOutForkDesignReques(id, this.props.token)
-      .then(console.log)
-      .then(() =>
-        this.props.ForkDesignListRequest(
-          this.props.DesignDetail.uid,
-          this.props.token
-        )
-      );
+  onClickForkDesignKickOut = async (id) => {
+    if (await confirm("선택하신 경험을 삭제하시겠습니까?", "예", "아니오")) {
+      KickOutForkDesignReques(id, this.props.token)
+        .then(console.log)
+        .then(() =>
+          this.props.ForkDesignListRequest(
+            this.props.DesignDetail.uid,
+            this.props.token
+          )
+        );
+    }
   };
   onClickForkDesignDeny = (id) => {
     DenyForkDesignRequest(id, this.props.token)
@@ -231,10 +247,10 @@ class DesignDetail extends Component {
       );
 
     // console.clear();
-    const isGroupExp =
-      [1, 2, 3].includes(DesignDetail.design_type) &&
-      DesignDetail.is_parent &&
-      DesignDetail.parent_design === null; // this.props.DesignDetail?.design_type)
+    const isGroupExp = [1, 2, 3].includes(DesignDetail.design_type);
+    //  &&
+    // DesignDetail.is_parent &&
+    // DesignDetail.parent_design === null; // this.props.DesignDetail?.design_type)
     const isGroupMember =
       [1, 2, 3].includes(DesignDetail.design_type) &&
       // DesignDetail.d_flag === 1 &&
@@ -244,9 +260,25 @@ class DesignDetail extends Component {
 
     return (
       <Wrapper>
-        {DesignDetail.design_type === 1 && <ExpTypeMeet />}
+        {DesignDetail.design_type === EXP_TYPE_MEET.value && (
+          <ExpTypeMeet
+            {...this.props}
+            {...this.state}
+            onClickForkDesignKickOut={this.onClickForkDesignKickOut}
+            onClickForkDesignAccept={this.onClickForkDesignAccept}
+            onClickForkDesignDeny={this.onClickForkDesignDeny}
+            onClickManage={() => this.setState({ manage: !this.state.manage })}
+            onClickVChat={this.onClickVChat}
+            onClickChat={this.onClickChat}
+            onClickLike={this.onClickLike}
+            onClickBuy={this.onClickBuy}
+            onClickModify={this.onClickModify}
+            isGroupExp={isGroupExp}
+            isGroupMember={isGroupMember}
+          />
+        )}
 
-        {DesignDetail.design_type === 2 && (
+        {DesignDetail.design_type === EXP_TYPE_LECT.value && (
           <ExpTypeLect
             {...this.props}
             {...this.state}
@@ -264,11 +296,44 @@ class DesignDetail extends Component {
           />
         )}
 
-        {DesignDetail.design_type === 3 && <ExpTypeCons />}
+        {DesignDetail.design_type === EXP_TYPE_CONS.value && (
+          <ExpTypeCons
+            {...this.props}
+            {...this.state}
+            onClickForkDesignKickOut={this.onClickForkDesignKickOut}
+            onClickForkDesignAccept={this.onClickForkDesignAccept}
+            onClickForkDesignDeny={this.onClickForkDesignDeny}
+            onClickManage={() => this.setState({ manage: !this.state.manage })}
+            onClickVChat={this.onClickVChat}
+            onClickChat={this.onClickChat}
+            onClickLike={this.onClickLike}
+            onClickBuy={this.onClickBuy}
+            onClickModify={this.onClickModify}
+            isGroupExp={isGroupExp}
+            isGroupMember={isGroupMember}
+          />
+        )}
 
-        {DesignDetail.design_type === 4 && <ExpTypeNorm />}
+        {DesignDetail.design_type === EXP_TYPE_NORM.value && (
+          <ExpTypeNorm {...this.props} {...this.state} />
+        )}
 
-        {DesignDetail.design_type === 5 && <ExpTypeGame />}
+        {DesignDetail.design_type === EXP_TYPE_GAME.value && (
+          <ExpTypeGame {...this.props} {...this.state} />
+        )}
+
+        {!isGroupMember && (
+          <>
+            {/*  */}
+            {/* <ReviewText>리뷰</ReviewText>
+            <div className="reviewWrap">
+              <ReviewContainer
+                write={this.state.write}
+                onCloseWriteModal={() => this.setState({ write: false })}
+              />
+            </div> */}
+          </>
+        )}
       </Wrapper>
     );
   }

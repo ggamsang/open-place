@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import {
   // GetLastestGroupNoticeRequest, GetTotalCountGroupNoticeRequest,
   // CreateGroupNoticeRequest, UpdateGroupNoticeRequest, DeleteGroupNoticeRequest,
-  checkHaveProgrammingDesign,
+  // checkHaveProgrammingDesign,
   GetHaveGroupInDesignRequest,
 } from "redux/modules/group";
 import GroupNotice from "components/Groups/GroupNotice";
@@ -23,9 +23,9 @@ class GroupNoticeContainer extends Component {
     // });
   }
   init() {
-    checkHaveProgrammingDesign(this.props.id, this.props.token)
-      .then((res) => this.setState({ hasProgrammingDesign: res }))
-      .catch((e) => console.error(e));
+    // checkHaveProgrammingDesign(this.props.id, this.props.token)
+    //   .then((res) => this.setState({ hasProgrammingDesign: res }))
+    //   .catch((e) => console.error(e));
   }
 
   render() {

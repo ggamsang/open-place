@@ -226,7 +226,6 @@ const ProfileCard = ({ ...props }) => {
               }).format(price) + "원"
             : "무료"}
         </Price> */}
-
         <ReviewWrapper score={score} />
         <NumRate />
       </TopLists>

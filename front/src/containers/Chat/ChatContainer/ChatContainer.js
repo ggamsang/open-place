@@ -23,19 +23,19 @@ class ChatContainer extends Component {
       this.props
         .GetDesignDetailRequest(this.props.id, this.props.token)
         .then((data) => {
-          if (data && data.member) {
-            const found = data.member.filter(
-              (mem) => mem.user_id === this.props.userInfo.uid
-            );
-            if (found.length === 0) {
-              this.close("회원이 아닙니다.");
-            }
-            this.setState({ design: data });
-            this.setState({ valid: true });
-            console.log("validated");
-          } else {
-            this.close("디자인정보가 잘못되었습니다.");
-          }
+          // if (data && data.member) {
+          //   const found = data.member.filter(
+          //     (mem) => mem.user_id === this.props.userInfo.uid
+          //   );
+          //   if (found.length === 0) {
+          //     this.close("회원이 아닙니다.");
+          //   }
+          this.setState({ design: data });
+          this.setState({ valid: true });
+          console.log("validated");
+          // } else {
+          // this.close("디자인정보가 잘못되었습니다.");
+          // }
         });
   }
   render() {

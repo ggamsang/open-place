@@ -450,8 +450,6 @@ export function GetMyDetailRequest(token) {
           //console.log("no data")
           data = [];
         }
-        console.clear();
-        console.log(data);
         return dispatch(GetMyDetail(data));
       })
       .catch((error) => {

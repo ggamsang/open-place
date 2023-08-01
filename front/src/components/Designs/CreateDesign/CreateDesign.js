@@ -309,7 +309,7 @@ class CreateExp extends React.Component {
     } = this.state;
     console.clear();
     console.log(this.state);
-
+    // return;
     // uid, user_id, title, explanation, thumbnail,
     // category_level1, design_type, category_level2,
     // category_level3, is_commercial, is_public,
