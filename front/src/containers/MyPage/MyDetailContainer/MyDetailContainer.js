@@ -1,9 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import MypageHeader from "components/MypageHeader";
-// import MypageBody from "components/MypageBody";
-// import MypageHeaderMobile from "components/MypageHeader_mobile";
-// import MypageBodyMobile from "components/MypageBody_mobile";
 import { GetMyDetailRequest } from "redux/modules/personal";
 import {
   GetDesignerCountRequest,
@@ -21,7 +17,7 @@ import MyDetail from "components/Users/MyDetail/NewMyDetail";
 class MyDetailContainer extends Component {
   componentWillMount() {
     this.props.GetMyDetailRequest(this.props.token);
-    this.props.GetDesignerCountRequest(this.props.userInfo.uid);
+    // this.props.GetDesignerCountRequest(this.props.userInfo.uid);
   }
 
   render() {

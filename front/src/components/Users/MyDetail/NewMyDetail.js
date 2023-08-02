@@ -1,14 +1,14 @@
 import React from "react";
 import { goto } from "navigator";
-// import NotificationContainer from "desktop/containers/NotificationContainer";
 import * as styled from "./styles";
-// import ListPageProfileCard from "./ListPageProfileCard";
-// import { Outlet } from "react-router";
 import { SetSession } from "modules/Sessions";
+import host from "config";
+import Design from "components/Designs/Design";
 
 const PROFILE = "Profile";
 const NOTI = "Noti";
 const NONE = "";
+
 class MyDetail extends React.Component {
   constructor(props) {
     super(props);
@@ -21,6 +21,7 @@ class MyDetail extends React.Component {
       phone: null,
       password: null,
       password_checked: null,
+      mydesigns: [],
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChangeNickname = this.onChangeNickname.bind(this);
@@ -131,15 +132,68 @@ class MyDetail extends React.Component {
       goto("MAIN");
     });
   };
+  GetMyDesignListRequest = (token) => {
+    return new Promise(async (resolve, reject) => {
+      const url = `${host}/users/myPage/bring-all-myDesign`;
+      await fetch(url, {
+        headers: {
+          "x-access-token": token,
+          "Content-Type": "application/json",
+        },
+        method: "GET",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("sdflksjdljdflskjf", data);
+          resolve(data);
+        })
+        .catch((e) => {
+          console.error(e);
+          reject(e);
+        });
+      // 디자이너의 디자인 리스트 가져오기
+      // export function GetMyDesignInDesignerRequest(id, page, sort) {
+      //   const url = `${host}/designer/designerDetail/${id}/allDesignDesigner/${page}/${sort}`;
+      //   //console.log("sql:", url);
+      //   return (dispatch) => {
+      //       return fetch(url, {
+      //           headers: { "Content-Type": "application/json" },
+      //           method: "get"
+      //       }).then((response) => {
+      //           return response.json()
+      //       }).then((data) => {
+      //           //console.log("designer's design list data >>", data)
+      //           if (!data) {
+      //               //console.log("no data")
+      //               data = []
+      //           }
+      //           if (page === 0) {
+      //               dispatch(MyDesignInDesignerClear(data))
+      //               return
+      //           }
+      //           dispatch(GetMyDesignInDesigner(data))
+      //       }).catch((error) => {
+      //           dispatch(MyDesignInDesignerFail())
+      //           console.error("err", error)
+      //       })
+      //   }
+      // }
+    });
+  };
+  setMyDesignList = (list) => this.setState({ mydesigns: list || [] });
+  componentDidMount() {
+    this.GetMyDesignListRequest(this.props.token).then(this.setMyDesignList);
+  }
   render() {
-    const { modal } = this.state;
-    console.log(this.props);
+    const { modal, mydesigns } = this.state;
     const {
       nick_name,
       create_time,
       update_time,
       l_img: thumbnail,
     } = this.props.userInfo;
+    console.log(this.props, this.state);
+
     const ProfileModal = () => {};
     return (
       <React.Fragment>
@@ -202,7 +256,7 @@ class MyDetail extends React.Component {
             </styled.ModalWrapper>
           </React.Fragment>
         )}
-        {modal === NOTI && <React.Fragment>;</React.Fragment>}
+        {/* {modal === NOTI && <React.Fragment>;</React.Fragment>} */}
         {/* // <Wrapper url={this.props.userInfo?.l_img || null}>
       //   <div className="header">
       //     <div className="searchbox">
@@ -273,12 +327,12 @@ class MyDetail extends React.Component {
                   <span>프로필 편집</span>
                 </styled.EditProfileBtn>
                 <styled.RegisterBtn onClick={() => this.tab("sharer")}>
-                  <span>공유자등록/수정</span>
+                  <span>버튼</span>
                 </styled.RegisterBtn>
                 <styled.CheckNotificationBtn
                   onClick={() => this.showModal(NOTI)}
                 >
-                  <span>알림확인</span>
+                  <span>알림목록</span>
                 </styled.CheckNotificationBtn>
               </styled.Buttons>
               <styled.Wrapper>
@@ -332,75 +386,102 @@ class MyDetail extends React.Component {
               </styled.DateInfo>
             </styled.ProfileInfo>
           </styled.Wrapper>
-          <styled.Wrapper>
-            <styled.MyDetailTabMenuBox>
-              <styled.TabButton
-                className="selected"
-                onClick={() => {
-                  window.location.href = `/mypage/point`;
-                }}
-              >
-                포인트
-              </styled.TabButton>
-              {/* <div></div> */}
-              <styled.TabButton
-                onClick={() => {
-                  window.location.href = `/mypage/regExp`;
-                }}
-              >
-                등록경험
-              </styled.TabButton>
-              {/* <div></div> */}
-              <styled.TabButton
-                onClick={() => {
-                  window.location.href = `/mypage/sellExp`;
-                }}
-              >
-                판매경험
-              </styled.TabButton>
-              {/* <div></div> */}
-              <styled.TabButton
-                onClick={() => {
-                  window.location.href = `/mypage/buyExp`;
-                }}
-              >
-                구매경험
-              </styled.TabButton>
-              {/* <div></div> */}
-              <styled.TabButton
-                onClick={() => {
-                  window.location.href = `/mypage/likeExp`;
-                }}
-              >
-                관심
-              </styled.TabButton>
-              {/* <div></div> */}
-              <styled.TabButton onClick={() => this.onClickLogout()}>
-                로그아웃
-              </styled.TabButton>
-            </styled.MyDetailTabMenuBox>
 
-            <styled.VerticalWrapper>
-              {/* {<Outlet />} */}
-              {/* <styled.SortAs>
-                <div>최신순</div>
-                <div>인기순</div>
-              </styled.SortAs>
-              <styled.ExpList>
-                <styled.ProfileCardDiv>
-                  <ListPageProfileCard />
-                </styled.ProfileCardDiv>
-                <styled.ProfileCardDiv>
-                  <ListPageProfileCard />
-                </styled.ProfileCardDiv>
-                <styled.ProfileCardDiv>
-                  <ListPageProfileCard />
-                </styled.ProfileCardDiv>
-                <styled.ProfileCardDiv>
-                  <ListPageProfileCard />
-                </styled.ProfileCardDiv>
-              </styled.ExpList> */}
-            </styled.VerticalWrapper>
+          <styled.Wrapper>
+            <div style={{ margin: "auto", width: "95vw", padding: "15px" }}>
+              <p
+                style={{
+                  width: "100vw",
+                  textAlign: "center",
+                  fontSize: "2rem",
+                  marginTop: "1rem",
+                }}
+              >
+                등록아이템
+              </p>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  gap: "15px",
+                }}
+              >
+                {mydesigns
+                  .filter((design) => !design.parent_design)
+                  .map((design) => (
+                    <>
+                      <Design
+                        {...design}
+                        onClick={() => goto("EXP", design.uid)}
+                      />
+                    </>
+                  ))}
+              </div>
+
+              <p
+                style={{
+                  width: "100vw",
+                  textAlign: "center",
+                  fontSize: "2rem",
+                  marginTop: "1rem",
+                }}
+              >
+                신청아이템: 활동중
+              </p>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  gap: "15px",
+                }}
+              >
+                {mydesigns
+                  .filter(
+                    (design) => design.parent_design && design.d_flag === 1
+                  )
+                  .map((design) => (
+                    <>
+                      <Design
+                        {...design}
+                        onClick={() => goto("EXP", design.uid)}
+                      />
+                    </>
+                  ))}
+              </div>
+              <p
+                style={{
+                  width: "100vw",
+                  textAlign: "center",
+                  fontSize: "2rem",
+                  marginTop: "1rem",
+                }}
+              >
+                신청아이템: 수락대기중
+              </p>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  gap: "15px",
+                }}
+              >
+                {mydesigns
+                  .filter(
+                    (design) => design.parent_design && design.d_flag === 0
+                  )
+                  .map((design) => (
+                    <>
+                      <Design
+                        {...design}
+                        onClick={() => goto("EXP", design.uid)}
+                      />
+                    </>
+                  ))}
+              </div>
+            </div>
           </styled.Wrapper>
         </styled.Container>
       </React.Fragment>

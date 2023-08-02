@@ -315,7 +315,9 @@ export const ManageButton = styled.button`
   outline: none;
   background: none;
 
-  width: 131px;
+  width: max-content;
+  max-width: 250px;
+  min-width: 131px;
   height: 55px;
   border: 1px solid #000000;
   border-radius: 4px;
@@ -747,7 +749,7 @@ export const ReviewDiv = styled.div`
 export const Wrapper = styled.div`
   max-width: 1740px;
   min-width: 1000px;
-  min-height: 50vh;
+  min-height: 75vh;
   .marginLeft {
     // margin-left: 38px;
   }

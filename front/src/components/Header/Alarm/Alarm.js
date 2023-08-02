@@ -189,20 +189,20 @@ class Alarm extends Component {
       } else if (item.kinds === "COMMENT") {
         msg = `${from}님이 경험아이템에 댓글을 달았습니다.📋`;
       } else if (item.kinds === "CARD_COMMENT") {
-        msg = `${from}님이 경험아이템 카드에 댓글을 달았습니다.`;
+        msg = `${from}님이 경험아이템 카드에 댓글을 달았습니다.📋`;
       } else if (item.kinds === "COMMENT_COMMENT") {
-        msg = `${to}님의 경험아이템 댓글에 답변이 달렸습니다.`;
+        msg = `${to}님의 경험아이템 댓글에 답변이 달렸습니다.📋`;
       } else if (item.kinds === "LIVE_CHAT") {
         // const date = new Date();
         msg = `${from}님이 회의를 개설하였습니다.`;
       } else if (item.kinds === "APPLIED") {
         msg = `${from}님이 ${title}에 가입신청을 하였습니다.✍️`;
       } else if (item.kinds === "ACCEPTED") {
-        msg = `${from}님이 ${title}에 가입을 승인하였습니다.`;
+        msg = `${from}님이 ${title}에 가입을 승인하였습니다.✅`;
       } else if (item.kinds === "DENIDED") {
-        msg = `${from}님이 ${title}에 가입을 거절하였습니다.`;
+        msg = `${from}님이 ${title}에 가입을 거절하였습니다.🚫`;
       } else if (item.kinds === "KICKOUT") {
-        msg = `${from}님이 ${title}에서 퇴출되었습니다.`;
+        msg = `${from}님이 ${title}에서 퇴출되었습니다.🚫`;
       }
     } else if (item.type === "GROUP") {
       if (item.kinds === "JOIN") {
@@ -833,7 +833,10 @@ class Alarm extends Component {
           onClose={() => this.setState({ active: false })}
         >
           <div className="header">
-            <span>알림({alarms?.length})</span>
+            <span>
+              알림{" "}({alarms?.filter((alarm) => alarm.confirm === 0)?.lenth || 0}/
+              {alarms?.length})
+            </span>
             <a onClick={() => this.setState({ active: false })}>
               <i className="material-icons">close</i>
             </a>

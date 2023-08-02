@@ -25,6 +25,7 @@ import new_logo_favorite from "source/new_logo_favorite.svg";
 import new_logo_share from "source/new_logo_share.svg";
 import new_logo_plus from "source/new_logo_plus.png";
 import osdcss from "opendesign_style";
+import { goto } from "navigator";
 
 const Section = styled.div`
   display: ${(props) =>
@@ -1124,7 +1125,8 @@ class ModifyDesign extends Component {
     this.checkFinishBasic();
   };
   gotoPrevStep = () => {
-    this.setState({ step: this.state.step - 1 });
+    goto("BACK");
+    // this.setState({ step: this.state.step - 1 });
   };
   gotoNextStep = () => {
     this.setState({ step: this.state.step + 1 });

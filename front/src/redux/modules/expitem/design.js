@@ -763,7 +763,10 @@ export function ForkDesignListRequest(design_id, token) {
   return (dispatch) => {
     dispatch(ForkDesignList());
     return fetch(`${host}/design/forkDesignList/${design_id}`, {
-      headers: { "x-access-token": token, "Content-Type": "application/json" },
+      headers: {
+        // "x-access-token": token,
+        "Content-Type": "application/json",
+      },
       method: "GET",
     })
       .then((res) => res.json())
@@ -925,7 +928,7 @@ export function CancelInvitedUserRequest(id, token) {
       });
   });
 }
-export function KickOutForkDesignReques(id, token){
+export function KickOutForkDesignReques(id, token) {
   return new Promise((resolve, reject) => {
     const url = `${host}/design/forkdesign/kickout/${id}`;
     fetch(url, {

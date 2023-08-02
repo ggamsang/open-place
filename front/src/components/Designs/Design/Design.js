@@ -234,20 +234,28 @@ class Design extends Component {
   }
   onClick = (e) => {};
   render() {
-    // const data = this.state.data;
-    // const thumbnail = data.thumbnailUrl;
     const isForked = this.props.forked || this.props.parent_design;
-    // console.log(this.state, this.props);
     console.log(this.props);
-    const { m_img, p_m_img, title, key, userName } = this.props;
+    const {
+      uid,
+      img,
+      m_img,
+      p_m_img,
+      title,
+      keyindex,
+      userName,
+      nick_name,
+      kickout,
+      thumbnailUrl,
+    } = this.props;
     return (
       <React.Fragment>
         {this.props.empty == null ? (
           <DesignElement
-            key={key}
+            key={keyindex}
             onClick={this.props.onClick || this.onClick}
             // onClick={this.gotoDetailPage}
-            img={m_img || p_m_img}
+            img={thumbnailUrl?.m_img || img?.m_img || m_img || p_m_img}
           >
             {/* <div className="cover" /> */}
             {isForked && <div className="forked" />}
@@ -266,7 +274,7 @@ class Design extends Component {
                     width: "200px",
                   }}
                 >
-                  <TextFormat tip txt={userName} width="100%" />
+                  <TextFormat tip txt={userName || nick_name} width="100%" />
                 </div>
                 <div
                   style={{
