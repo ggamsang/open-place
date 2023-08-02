@@ -19,13 +19,13 @@ import ReactCrop from "react-image-crop";
 // import { confirm } from "components/Commons/Confirm/Confirm";
 import { alert } from "components/Commons/Alert/Alert";
 import { confirm } from "components/Commons/Confirm/Confirm";
-
 import new_logo_view from "source/new_logo_view.svg";
 import new_logo_favorite from "source/new_logo_favorite.svg";
 import new_logo_share from "source/new_logo_share.svg";
 import new_logo_plus from "source/new_logo_plus.png";
 import osdcss from "opendesign_style";
 import { goto } from "navigator";
+import { CATEs } from "constant";
 
 const Section = styled.div`
   display: ${(props) =>
@@ -248,9 +248,9 @@ const Wrapper = styled.div`
     width: 100%;
   }
   .navi_menu {
-    min-width: 264px;
-    width: 264px;
-    height: 100%;
+    // min-width: 264px;
+    // width: 264px;
+    // height: 100%;
     padding: 36px 38px;
     display: flex;
     flex-direction: column;
@@ -287,7 +287,7 @@ const Wrapper = styled.div`
       color: #1262ab;
     }
     .delete {
-      margin-top: 531px;
+      // margin-top: 531px;
       cursor: pointer;
     }
     .borderBottom {
@@ -1374,7 +1374,8 @@ class ModifyDesign extends Component {
       this.props
         .DeleteDesignRequest(this.props.id, this.props.token)
         .then(async () => {
-          window.location.href = geturl() + `/design`;
+          const cate = this.props.DesignDetail.category_level1;
+          goto(cate === 1 ? "PLAY" : cate === 2 ? "LEARN" : "MAKE");
         })
         .catch(async () => {
           await alert("삭제에 실패하였습니다.", "확인");
@@ -1648,35 +1649,6 @@ class ModifyDesign extends Component {
           ) : (
             <>경험아이템수정하기</>
           )}
-          {/* <div className="navi_menu">
-            <div
-              className={`navi_label borderBottom ${
-                this.state.step == 0 ? "select" : "black"
-              }`}
-              onClick={() => this.gotoStep(scrollmenu[0])}
-            >
-              {scrollmenu[0].txt}
-            </div>
-            <div
-              className={`navi_label borderBottom ${
-                this.state.step == 1 ? "select" : "black"
-              }`}
-              onClick={() => this.gotoStep(scrollmenu[1])}
-            >
-              {scrollmenu[1].txt}
-            </div>
-            <div
-              className={`navi_label ${
-                this.state.step == 2 ? "select" : "black"
-              }`}
-              onClick={() => this.gotoStep(scrollmenu[2])}
-            >
-              {scrollmenu[2].txt}
-            </div>
-            <div onClick={this.deleteDesign} className="navi_label red delete">
-              디자인 삭제하기
-            </div>
-          </div> */}
           {/* <div className="vLine" /> */}
           <ContentWrapper>
             <Section isNone={step === 0}>
@@ -1744,6 +1716,14 @@ class ModifyDesign extends Component {
                       value={this.state.explanation}
                       onBlur={this.checkFinishBasic}
                     />
+                  </div>
+                  <div className="navi_menu">
+                    <div
+                      onClick={this.deleteDesign}
+                      className="navi_label red delete"
+                    >
+                      디자인 삭제하기
+                    </div>
                   </div>
                 </div>
                 <div className="grid_buttonWrap">

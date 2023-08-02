@@ -463,7 +463,7 @@ export default class Chat extends React.Component {
     };
     // variable
     // this.serviceIP = `${host}/webrtcPeerChat`;
-    this.serviceIP = `https://place23.opensrcdesign.com/webrtcPeerChat`;
+    this.serviceIP = `https://place.opensrcdesign.com/webrtcPeerChat`;
     // functions
     this.sendMessage = this.sendMessage.bind(this);
     this.closeChat = this.closeChat.bind(this);

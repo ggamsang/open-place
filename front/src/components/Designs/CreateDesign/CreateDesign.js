@@ -12,6 +12,7 @@ import noface from "source/thumbnail.png";
 import Cross from "components/Commons/Cross";
 import CheckBox2 from "components/Commons/CheckBox";
 import { Dropdown, Modal } from "semantic-ui-react";
+import Loading from "components/Commons/Loading";
 
 import templateImgDesign from "source/template-image-design.png";
 import templateImgSofware from "source/template-image-software.png";
@@ -297,73 +298,81 @@ class CreateExp extends React.Component {
     goto("BACK");
   };
   onClickOK = async (event) => {
-    if(this.state.loading){
-      alert("처리중입니다.");
-      return;
-    }
-    await this.setState({ loading: true });
-    const {
-      contents,
-      exp_type,
-      category,
-      title,
-      is_project,
-      thumbnail,
-      thumbnail_name,
-    } = this.state;
-    console.clear();
-    console.log(this.state);
-    // return;
-    // uid, user_id, title, explanation, thumbnail,
-    // category_level1, design_type, category_level2,
-    // category_level3, is_commercial, is_public,
-    // is_modify, is_display_creater, is_problem,
-    // parent_design, create_time, update_time, is_project,
-    // is_members, d_flag
-
-    contents &&
-      contents.map((content) => {
-        delete content.initClick;
-        return content;
-      });
-    // return;
-    let data = {
-      title: title,
-      // uid: this.props.userInfo.uid,
-      is_project: is_project,
-      contents: contents, // [*]
-      category_level1: category,
-      design_type: exp_type,
-      files: [{ key: "thumbnail[]", value: thumbnail, name: thumbnail_name }],
-      // is_commercial: license1 ? 1 : 0,
-      // is_display_creater: license2 ? 1 : 0,
-      // is_modify: license3 ? 1 : 0,
-      //  is_problem: is_problem ? 1 : 0,
-      // members: {
-      //   add: this.state.addmem,
-      //   del: this.state.delmem,
-      // },
-
-      // added
-      type: this.state.type,
-      steps: this.state.steps,
-    };
-    // console.log(data);
-    // return;
     let designId = null;
-    this.props
-      .CreateDesignRequest(data, this.props.token)
-      .then(async (res) => {
-        if (res.success) {
-          designId = res.design_id;
-          window.location.href = `/exp/${designId}`;
-        }
-      })
-      .catch((err) =>
-        alert(err + "와 같은 이유로 다음 단계로 진행할 수 없습니다.")
-      );
+    await this.setState({ loading: true });
 
-    await this.setState({ loading: false });
+    try {
+      const {
+        contents,
+        exp_type,
+        category,
+        title,
+        is_project,
+        thumbnail,
+        thumbnail_name,
+      } = this.state;
+      console.clear();
+      console.log(this.state);
+      if (
+        title === "" ||
+        exp_type === 0 ||
+        category === 0 ||
+        thumbnail_name === ""
+      ) {
+        alert("필수항목을 완성해주세요.");
+        this.setState({ loading: false });
+        return;
+      }
+      // return;
+      // uid, user_id, title, explanation, thumbnail,
+      // category_level1, design_type, category_level2,
+      // category_level3, is_commercial, is_public,
+      // is_modify, is_display_creater, is_problem,
+      // parent_design, create_time, update_time, is_project,
+      // is_members, d_flag
+
+      contents &&
+        contents.map((content) => {
+          delete content.initClick;
+          return content;
+        });
+      // return;
+      let data = {
+        title: title,
+        // uid: this.props.userInfo.uid,
+        is_project: is_project,
+        contents: contents, // [*]
+        category_level1: category,
+        design_type: exp_type,
+        files: [{ key: "thumbnail[]", value: thumbnail, name: thumbnail_name }],
+        // is_commercial: license1 ? 1 : 0,
+        // is_display_creater: license2 ? 1 : 0,
+        // is_modify: license3 ? 1 : 0,
+        //  is_problem: is_problem ? 1 : 0,
+        // members: {
+        //   add: this.state.addmem,
+        //   del: this.state.delmem,
+        // },
+
+        // added
+        type: this.state.type,
+        steps: this.state.steps,
+      };
+
+      this.props
+        .CreateDesignRequest(data, this.props.token)
+        .then(async (res) => {
+          if (res.success) {
+            designId = res.design_id;
+            window.location.href = `/exp/${designId}`;
+          }
+          await this.setState({ loading: false });
+        });
+    } catch (e) {
+      alert(e + "와 같은 이유로 다음 단계로 진행할 수 없습니다.");
+      await this.setState({ loading: false });
+    } finally {
+    }
     // await this.setState({ loading: true });
     // const {
     //   thumbnail,
@@ -492,13 +501,13 @@ class CreateExp extends React.Component {
   };
 
   render() {
-    console.log(this.state, this.props);
+    // console.log(this.state, this.props);
     const { step, is_project, contents } = this.state;
-    console.log(this.props.DesignDetail);
+    // console.log(this.props.DesignDetail);
     return (
       <styled.Main>
         <styled.AddExpText>경험 등록</styled.AddExpText>
-
+        {this.state.loading && <Loading />}
         <styled.Wrapper>
           <styled.Wrapper>
             <styled.AddThumbnail>
@@ -739,7 +748,20 @@ class CreateExp extends React.Component {
         </styled.Wrapper>
 
         <styled.Wrapper>
-          <styled.AddButton disabled={this.state.loading} onClick={this.onClickOK}>
+          <styled.AddButton
+            disabled={this.state.loading}
+            onClick={async (e) => {
+              if (this.state.loading) {
+                alert("처리중입니다.");
+                return;
+              }
+              await this.onClickOK(e);
+              // console.log("job");
+
+              // await this.setState({ loading: false });
+              // console.log(4);
+            }}
+          >
             <span>등록하기</span>
           </styled.AddButton>
           <styled.CancelButton onClick={this.onClickCancel}>

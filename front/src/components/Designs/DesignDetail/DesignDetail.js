@@ -315,11 +315,21 @@ class DesignDetail extends Component {
         )}
 
         {DesignDetail.design_type === EXP_TYPE_NORM.value && (
-          <ExpTypeNorm {...this.props} {...this.state} />
+          <ExpTypeNorm
+            {...this.props}
+            {...this.state}
+            onClickLike={this.onClickLike}
+            onClickModify={this.onClickModify}
+          />
         )}
 
         {DesignDetail.design_type === EXP_TYPE_GAME.value && (
-          <ExpTypeGame {...this.props} {...this.state} />
+          <ExpTypeGame
+            {...this.props}
+            {...this.state}
+            onClickLike={this.onClickLike}
+            onClickModify={this.onClickModify}
+          />
         )}
 
         {!isGroupMember && (

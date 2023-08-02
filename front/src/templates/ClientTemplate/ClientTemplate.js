@@ -24,7 +24,7 @@ class Header extends React.Component {
   activateNotification = () => {
     if (this.props.userInfo == null) return;
 
-    this.socket = io("https://place23.opensrcdesign.com")
+    this.socket = io("https://place.opensrcdesign.com")
       .on("conn", (msg) => {
         console.log(msg);
       })
