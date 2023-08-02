@@ -703,7 +703,7 @@ export const AddFile = styled.div`
 export const AddButton = styled.button`
   width: 210px;
   height: 42px;
-  background: #ff0000 0% 0% no-repeat padding-box;
+  background: ${props=>props.disabled?"#777":"#ff0000"} 0% 0% no-repeat padding-box;
   opacity: 1;
   margin-top: 50px;
   margin-bottom: 236px;

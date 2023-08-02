@@ -34,7 +34,7 @@ export const msSec = 10 * 1000;
 export const CATEGORY1_SOFTWARE = 6;
 export const CATEGORY1_PRODUCT = 2;
 
-export const PDFVIEWER_VERSION = "3.1.81";
+export const PDFVIEWER_VERSION = "2.9"//"3.1.81";
 
 const CATE_PLAY = { value: 1, name: "놀기" };
 const CATE_LEARN = { value: 2, name: "배우기" };

@@ -78,7 +78,7 @@
     "mediasoup-client": "^3.6.21",
     "mini-css-extract-plugin": "0.8.0",
     "optimize-css-assets-webpack-plugin": "5.0.3",
-    "pdfjs-dist": "^3.1.81",
+    "pdfjs-dist": "2.9",
     "peerjs": "^1.3.1",
     "pnp-webpack-plugin": "1.5.0",
     "postcss-flexbugs-fixes": "4.1.0",
@@ -150,18 +150,18 @@
     "webpack": "4.41.0",
     "webpack-dev-server": "3.2.1",
     "webpack-manifest-plugin": "2.1.1",
-    "workbox-webpack-plugin": "^7.0.0",
+    "workbox-webpack-plugin": "4.3.1",
     "yarn": "^1.22.15"
   },
   "scripts": {
     "generate-build-version": "node generate-build-version",
     "generate-meta-tag": "node ./node_modules/react-cache-buster/dist/generate-meta-tag.js",
     "prebuild": "npm run generate-build-version",
-    "start": "HTTPS=true REACT_APP_TYPE=aws node --openssl-legacy-provider scripts/start.js",
+    "start": "HTTPS=true REACT_APP_TYPE=aws node scripts/start.js",
     "local": "REACT_APP_TYPE=local node scripts/start.js",
     "dev": "HTTPS=true REACT_APP_TYPE=aws_dev node scripts/start.js",
     "build": "yarn generate-meta-tag && REACT_APP_VERSION=$npm_package_version REACT_APP_BUILD=true REACT_APP_TYPE=aws HTTPS=true node scripts/build.js",
-    "DevBuild": "HTTPS=true REACT_APP_BUILD=true REACT_APP_TYPE=aws_dev node scripts/build.js",
+    "DevBuild": "HTTPS=true REACT_APP_BUILD=true REACT_APP_TYPE=aws node scripts/build.js",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
@@ -223,6 +223,12 @@
     ]
   },
   "devDependencies": {
-    "react-git-info": "^1.0.1"
+    "react-git-info": "^1.0.1",
+    "webpack-cli": "^5.1.4"
   }
 }
+
+
+
+
+

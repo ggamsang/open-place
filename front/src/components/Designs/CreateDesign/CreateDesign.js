@@ -297,6 +297,10 @@ class CreateExp extends React.Component {
     goto("BACK");
   };
   onClickOK = async (event) => {
+    if(this.state.loading){
+      alert("처리중입니다.");
+      return;
+    }
     await this.setState({ loading: true });
     const {
       contents,
@@ -735,7 +739,7 @@ class CreateExp extends React.Component {
         </styled.Wrapper>
 
         <styled.Wrapper>
-          <styled.AddButton onClick={this.onClickOK}>
+          <styled.AddButton disabled={this.state.loading} onClick={this.onClickOK}>
             <span>등록하기</span>
           </styled.AddButton>
           <styled.CancelButton onClick={this.onClickCancel}>
