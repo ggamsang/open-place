@@ -99,7 +99,8 @@ class AddContent extends React.Component {
               height="29px"
             >
               <div onClick={this.changeType} className="txt">
-                템플릿 선택하기
+                {/* 템플릿 선택하기 */}
+                단계추가로 시작하기
               </div>
               {/* <Tip>
                 <sup>&nbsp;?</sup>
@@ -691,14 +692,15 @@ class CreateExp extends React.Component {
                     <AddContent
                       getValue={this.onAddValue}
                       order={0}
-                      change={() =>
-                        this.setState({ type: "grid", is_project: 1 })
-                      }
+                      change={async () => {
+                        this.setState({ type: "grid", is_project: 1 });
+                        await this.setState({ template: "empty" });
+                      }}
                     />
                   )}
                 </React.Fragment>
               ) : null}
-              {this.state.type === "grid" ? (
+              {/* {this.state.type === "grid" ? (
                 <styled.DesignTemplateSelector>
                   <div className="title">
                     템플릿을 선택하시면 보다 편하게 작업을 시작하실 수 있습니다!
@@ -723,7 +725,7 @@ class CreateExp extends React.Component {
                       ))}
                   </div>
                 </styled.DesignTemplateSelector>
-              ) : null}
+              ) : null} */}
 
               {this.state.type === "grid" &&
               this.state.template != null &&
@@ -737,10 +739,10 @@ class CreateExp extends React.Component {
                       type={this.state.template}
                     />
                   </div>
-                  <div className="title">
+                  {/* <div className="title">
                     선택하신 템플릿으로 시작하시고 싶으시다면 완성된 경험아이템
                     등록하기 버튼을 클릭해주세요.
-                  </div>
+                  </div> */}
                 </styled.EditorWrapper>
               ) : null}
             </div>

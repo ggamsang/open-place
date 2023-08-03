@@ -7,6 +7,15 @@ import prevpage from "resources/place/prevpage.svg";
 import nextpage from "resources/place/nextpage.svg";
 import lastpage from "resources/place/lastpage.svg";
 
+export const ExpInnerButtonBox = styled.div`
+  margin-right: 15px;
+  margin-bottom: 15px;
+  position: absolute;
+  width: max-content;
+  right: 0%;
+  bottom: 0%;
+  display: flex;
+`;
 export const RateExpDiv = styled.div`
   display: flex;
   align-items: center;
@@ -755,4 +764,51 @@ export const Wrapper = styled.div`
   }
   // border: 1px solid red;
   margin: auto;
+`;
+
+export const RejectButton = styled.button`
+  background-color: black;
+  color: white;
+  font-size: 1.5rem;
+  padding: 5px 10px;
+  border-radius: 15%;
+  position: absolute;
+  z-index: 701;
+  top: 10px;
+  left: 75px;
+`;
+export const AcceptButton = styled.button`
+  background-color: red;
+  color: white;
+  font-size: 1.5rem;
+  padding: 5px 10px;
+  border-radius: 15%;
+  position: absolute;
+  z-index: 701;
+  top: 10px;
+  left: 10px;
+`;
+
+
+export const KickoutButton = styled.button`
+  background-color: black;
+  color: white;
+  font-size: 1.5rem;
+  padding: 5px 10px;
+  border-radius: 15%;
+  position: absolute;
+  z-index: 701;
+  top: 10px;
+  left: 10px;
+`;
+export const MyDesignLabel = styled.p`
+  z-index: 701;
+  position: absolute;
+  background-color: #A0A0A0;
+  color: white;
+  font-size: 1.5rem;
+  top: 5px;
+  left: 10px;
+  border-radius: 25px;
+  padding: 10px;
 `;

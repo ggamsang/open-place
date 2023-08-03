@@ -4,11 +4,10 @@ import {
   GetDesignerTotalCountRequest,
 } from "redux/modules/designer";
 import { GetCategoryAllRequest } from "redux/modules/category";
-
 import styled from "styled-components";
-import Category from "components/Commons/Category";
-import OrderOption_mobile from "components/Commons/OrderOption_mobile";
-import ScrollList_mobile from "components/Commons/ScrollList_mobile";
+// import Category from "components/Commons/Category";
+import OrderOptionMobile from "components/Commons/OrderOption_mobile";
+import ScrollListMobile from "components/Commons/ScrollList_mobile";
 import Loading from "components/Commons/Loading";
 import { connect } from "react-redux";
 import opendesign_mobile_style from "opendesign_mobile_style";
@@ -286,7 +285,7 @@ class DesignerListContainer_mobile extends Component {
                   : this_category.text) || "디자이너"}
                 &nbsp;({Count})
               </div>
-              <OrderOption_mobile
+              <OrderOptionMobile
                 type="designer"
                 order_clicked={this.handleChangeOrderOps}
                 selected={this_order}
@@ -296,7 +295,7 @@ class DesignerListContainer_mobile extends Component {
               {status === "INIT" ? (
                 <Loading />
               ) : (
-                <ScrollList_mobile
+                <ScrollListMobile
                   {...opendesign_mobile_style.designer_margin}
                   type="designer"
                   reload={reload}

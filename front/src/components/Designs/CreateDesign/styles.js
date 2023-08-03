@@ -1,11 +1,15 @@
 import styled from "styled-components";
 import osdcss from "opendesign_style";
-import { Dropdown, Modal } from "semantic-ui-react";
-
+import { Dropdown,  } from "semantic-ui-react";
 
 export const EditorWrapper = styled.div`
 // max-width:853px;
-width: 100%;
+// width: 100%; 
+// display: flex;
+// justify-contents: center;
+width: max-content;
+margin: auto;
+
 .title {
   width: 100%;
   text-align: center;

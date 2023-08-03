@@ -46,8 +46,8 @@ export const CATEs = [
   CATE_MAKE,
 ];
 export const EXP_TYPE_MEET = { value: 1, name: "모임" };
-export const EXP_TYPE_LECT = { value: 2, name: "강의/강좌" };
-export const EXP_TYPE_CONS = { value: 3, name: "자문/상담" };
+export const EXP_TYPE_LECT = { value: 2, name: "강의" };
+export const EXP_TYPE_CONS = { value: 3, name: "상담" };
 export const EXP_TYPE_NORM = { value: 4, name: "일반" };
 export const EXP_TYPE_GAME = { value: 5, name: "게임" };
 export const TYPEs = [
