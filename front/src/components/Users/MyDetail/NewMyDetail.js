@@ -4,6 +4,7 @@ import * as styled from "./styles";
 import { SetSession } from "modules/Sessions";
 import host from "config";
 import Design from "components/Designs/Design";
+import { confirm } from "components/Commons/Confirm/Confirm";
 
 const PROFILE = "Profile";
 const NOTI = "Noti";
@@ -126,6 +127,9 @@ class MyDetail extends React.Component {
     goto(tab);
   };
   onClickLogout = async () => {
+    if ((await confirm("로그아웃하시겠습니까?", "예", "아니오")) === false) {
+      return;
+    }
     SetSession("opendesign_token", null).then(async (data) => {
       await this.props.SignOutRequest();
       window.location.href = "/";
@@ -330,9 +334,10 @@ class MyDetail extends React.Component {
                   <span>버튼</span>
                 </styled.RegisterBtn>
                 <styled.CheckNotificationBtn
-                  onClick={() => this.showModal(NOTI)}
+                  // onClick={() => this.showModal(NOTI)}
+                  onClick={() => this.onClickLogout()}
                 >
-                  <span>알림목록</span>
+                  <span>로그아웃</span>
                 </styled.CheckNotificationBtn>
               </styled.Buttons>
               <styled.Wrapper>

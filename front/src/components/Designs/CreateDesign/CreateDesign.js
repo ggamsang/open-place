@@ -311,9 +311,8 @@ class CreateExp extends React.Component {
         is_project,
         thumbnail,
         thumbnail_name,
+        tag,
       } = this.state;
-      console.clear();
-      console.log(this.state);
       if (
         title === "" ||
         exp_type === 0 ||
@@ -356,6 +355,7 @@ class CreateExp extends React.Component {
         // },
 
         // added
+        tag: tag,
         type: this.state.type,
         steps: this.state.steps,
       };

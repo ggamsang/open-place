@@ -317,7 +317,7 @@ export const StarIcon = styled.img.attrs({
   position: absolute;
   top: 23px;
   right: 24px;
-  opacity: ${(props) => (props.liked ? "1" : "0.5")};
+  opacity: ${(props) => (props.like ? "1" : "0.5")};
 `;
 export const ManageButton = styled.button`
   border: none;

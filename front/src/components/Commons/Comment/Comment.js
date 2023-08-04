@@ -198,7 +198,7 @@ const CommentInputTextContainer = styled.div`
       font-size: 20px;
       font-weight: 500;
       text-align: left;
-      color: #707070;
+      color: ${(props) => (props.submitable ? "#FF0000" : "#707070")};
       cursor: pointer;
       letter-spacing: 0;
       margin-left: 44px;
@@ -292,7 +292,10 @@ class Comment extends Component {
     this.setState({ this_comment: "" });
   }
   requestReply(where) {
-    if (this.checkPermission() === false) return;
+    if (this.checkPermission() === false) {
+      alert("댓글작성 권한이 없습니다.");
+      return;
+    }
     if (this.state.this_reply.length > 0) {
       const comment = this.state.this_reply.replace(/\n/g, "<br/>");
       this.props.comment({ comment: comment, d_flag: where });
@@ -301,7 +304,14 @@ class Comment extends Component {
     this.reset();
   }
   requestComment() {
-    if (this.checkPermission() === false) return;
+    if (this.checkPermission() === false) {
+      alert("댓글작성 권한이 없습니다.");
+      return;
+    }
+    if (this.state.this_comment.length === 0) {
+      alert("내용을 입력해주세요.");
+      return;
+    }
     if (this.state.this_comment.length > 0) {
       const comment = this.state.this_comment.replace(/\n/g, "<br/>");
       this.props.comment({ comment: comment, d_flag: null });
@@ -461,9 +471,9 @@ class Comment extends Component {
                           >
                             게시
                           </div>
-                          <div className="cancel" onClick={this.undoReply}>
+                          {/* <div className="cancel" onClick={this.undoReply}>
                             취소
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </CommentInputTextContainer>
@@ -474,7 +484,10 @@ class Comment extends Component {
           })}
 
         {/* input-text of comment */}
-        <CommentInputTextContainer face={myface}>
+        <CommentInputTextContainer
+          face={myface}
+          submitable={this_comment.length > 0}
+        >
           <div className="face" />
           <div className="flex_Input">
             <div className="wrapper">
@@ -488,9 +501,9 @@ class Comment extends Component {
               <div className="submit" onClick={this.requestComment}>
                 게시
               </div>
-              <div className="cancel" onClick={this.undoComment}>
+              {/* <div className="cancel" onClick={this.undoComment}>
                 취소
-              </div>
+              </div> */}
             </div>
           </div>
         </CommentInputTextContainer>

@@ -110,7 +110,18 @@ class Header extends React.Component {
             <styled.RegistBox>
               <styled.Register onClick={() => goto("CREATE-ITEM-DESKTOP")}>
                 {/* <RegisterIcon /> */}
-                <styled.RegisterText>등록하기</styled.RegisterText>
+                {/* <i
+                  style={{
+                    color: "#FFFFFF",
+                    zIndex: "997",
+                    opacity: ".9",
+                    fontSize: "10px",
+                  }}
+                  className="material-icons"
+                >
+                  plus
+                </i> */}
+                <styled.RegisterText>+ 등록하기</styled.RegisterText>
               </styled.Register>
               <styled.Nickname onClick={() => goto("MY-PAGE")}>
                 <styled.NicknameIcon src={userInfo?.l_img} />

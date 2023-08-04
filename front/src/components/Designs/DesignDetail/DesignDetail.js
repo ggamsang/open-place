@@ -215,7 +215,13 @@ class DesignDetail extends Component {
       await alert("로그인 해주세요.", "확인");
       return;
     }
-    alert("thanks!!");
+    this.props
+      .LikeDesignRequest(DesignDetail.uid, token)
+      .then(
+        (rst) =>
+          rst?.success &&
+          this.props.GetLikeDesignRequest(DesignDetail.uid, token)
+      );
   };
   onClickManage = () => this.setState({ manage: !this.state.manage });
   request = () => {
@@ -237,11 +243,6 @@ class DesignDetail extends Component {
     });
   };
   CheckYouAlreadyApplied = async () => {
-    // console.clear();
-    // alert(this.props.DesignDetail.uid);
-    // alert(this.props.token);
-    // alert(this.props.userInfo.uid);
-    // console.log("check you are already applied");
     const { userInfo, DesignDetail } = this.props;
     if (userInfo && DesignDetail) {
       await this.request().then((data) => {
@@ -257,7 +258,7 @@ class DesignDetail extends Component {
   render() {
     const { DesignDetail, token, userInfo, forkDesignList } = this.props;
     const { manage, fold } = this.state;
-
+    console.log(this.props);
     if (DesignDetail == null)
       return (
         <Wrapper>
@@ -278,12 +279,15 @@ class DesignDetail extends Component {
       (type) => type.value === DesignDetail.design_type
     )[0]?.name;
     // [놀기, 배우기, 만들기] x [모임, 강의, 상담, 일반, 게임]
+
+    // 그룹인가? 개설자인가? 신청인가?
+    // 폈는가? 펴지 않았는가?
     return (
       <Wrapper>
         <ExpInfoText>경험정보</ExpInfoText>
         {/* head */}
         <ExpInfoDiv>
-          <StarIcon liked={DesignDetail.is_like !== 0} />
+          <StarIcon like={this.props.like} />
 
           <ExpImg url={DesignDetail?.img?.l_img} />
           <ExpInnerDiv>
@@ -302,13 +306,30 @@ class DesignDetail extends Component {
                   </TagButton>
                 ))}
             </NameAndTagsDiv>
-
             <Price>
               {this.state.isMyDesign ? (
                 <>내 경험아이템</>
               ) : (
                 <>작성자: {DesignDetail.userName}</>
               )}
+              <br />
+              <br />
+              {DesignDetail.tag?.length > 0 && "태그"}
+              {DesignDetail.tag?.slice(0, 5).map((tag) => (
+                <span
+                  key={tag.uid}
+                  style={{
+                    padding: "5px 10px",
+                    backgroundColor: "gray",
+                    color: "white",
+                    marginLeft: "5px",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                  }}
+                >
+                  &nbsp;&nbsp;{tag.tag}
+                </span>
+              ))}
             </Price>
             <NumRate />
           </ExpInnerDiv>
@@ -522,27 +543,26 @@ class DesignDetail extends Component {
               가입신청 중입니다.
             </p>
           )}
-        {(!isGroupExp || (isGroupExp && DesignDetail.d_flag === 1)) &&
-          DesignDetail?.uid && (
-            <>
-              {DesignDetail.is_project === 1 ? (
-                <DesignDetailStepContainer
+        {!isGroupExp && DesignDetail.d_flag === 1 && DesignDetail?.uid && (
+          <>
+            {DesignDetail.is_project === 1 ? (
+              <DesignDetailStepContainer
+                editor={DesignDetail.user_id === userInfo?.uid}
+                design={DesignDetail}
+                // {...this.state}
+              />
+            ) : (
+              <div className="marginLeft">
+                <DesignDetailViewContainer
                   editor={DesignDetail.user_id === userInfo?.uid}
-                  design={DesignDetail}
+                  id={DesignDetail.uid}
                   // {...this.state}
+                  history={this.props.history}
                 />
-              ) : (
-                <div className="marginLeft">
-                  <DesignDetailViewContainer
-                    editor={DesignDetail.user_id === userInfo?.uid}
-                    id={DesignDetail.uid}
-                    // {...this.state}
-                    history={this.props.history}
-                  />
-                </div>
-              )}
-            </>
-          )}
+              </div>
+            )}
+          </>
+        )}
       </Wrapper>
     );
   }

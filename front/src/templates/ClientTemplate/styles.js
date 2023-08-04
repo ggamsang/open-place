@@ -121,7 +121,7 @@ export const Register = styled.button`
   cursor: pointer;
   border: 0;
   outline: 0;
-  margin-right: 4px;
+  margin-right: 10px;
 `;
 export const RegisterText = styled.div`
   font: normal normal 900 18px/21px Pretendard;
