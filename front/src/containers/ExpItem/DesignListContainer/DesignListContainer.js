@@ -152,13 +152,13 @@ class DesignListContainer extends Component {
     this.changeCategory = this.changeCategory.bind(this);
     this.handleResize = this.handleResize.bind(this);
   }
-  componentDidMount() {
-    this.props.GetDesignListRequest(
-      0,
-      "update",
-      this.props.cate1,
-      this.props.keyword
-    );
+  async componentDidMount() {
+    // await this.props.GetDesignListRequest(
+    //   0,
+    //   "update",
+    //   this.props.cate1,
+    //   this.props.keyword
+    // );
     window.addEventListener("resize", this.handleResize, false);
     this.GetDesignTagListRequest();
   }
@@ -330,7 +330,8 @@ class DesignListContainer extends Component {
   async getList(page) {
     const { main_category, sub_category, third_category, keyword, this_order } =
       this.state;
-    return this.props.GetDesignListRequest(
+    console.log("get ::", page);
+    this.props.GetDesignListRequest(
       page,
       this_order || "update",
       this.props.cate1,
@@ -417,15 +418,6 @@ class DesignListContainer extends Component {
               <Loading />
             ) : (
               <ScrollList
-                // {...opendesign_style.design_margin}
-                // reload={reload}
-                // handleReload={this.handleReload}
-                // type="design"
-                // dataList={this.props.DesignList}
-                // dataListAdded={this.props.DesignListAdded}
-                // getListRequest={this.getList}
-                // width={width}
-                // {...opendesign_style.design_margin}
                 ListComponent={Item}
                 type="design"
                 height={"max-content"}
