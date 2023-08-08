@@ -5,15 +5,54 @@ import notifications from "resources/place/Iconly-Bold-Notification.svg";
 // import notifications from "resources/place/notifications.png";
 import email from "resources/place/email.png";
 import LoginProfileIcon from "resources/place/profile_icon_183860.svg";
+import opendesign_style from "opendesign_style"
 
 export const Container = styled.div`
+
   width: 100%;
   max-width: 1920px;
   height: 103px;
   display: flex;
   justify-content: center;
   align-items: center;
-  // *{border: 1px solid red;}
+  .row {
+    display: flex;
+    flex-direction: row;
+    justdify-content: center;
+  }
+  * {
+    // border: 1px solid red;
+  }
+  .hamburger {
+    display: none;
+    // background: green;
+  }
+  .mainmenu {
+    display: flex;
+  }
+  @media only screen and (min-width: 1919px){
+    width: ${opendesign_style.gridContent.largeScreen};
+    // background-color: skyblue;
+  }
+  @media only screen and (max-width: 1919) and (min-width: 992px){
+    width: ${opendesign_style.gridContent.computer};
+    // background-color: orange;
+  }
+  @media only screen and (max-width: 991px) and (min-width: 768px) and (min-height: 320px){
+    width: ${opendesign_style.gridContent.tablet};
+    // background-color: blue;
+    .hamburger { display: inline; }
+    .mainmenu { display: none; }
+  }
+  @media only screen and (max-width: 767px) and (min-width: 320px){
+    width: ${opendesign_style.gridContent.mobile};
+    // background-color: pink;
+    .hamburger { display: inline; }
+    .mainmenu { display: none; }
+    .search { display: none; }
+    .hide-when-narrow { display: none; };
+    .smaller { margin: auto;width: 50px; display: flex; justify-content: center; &>div{ top:0;left:0;position: relative; margin: auto;}}
+  }
 `;
 export const Logo = styled.img.attrs({
   src: logoRed,
@@ -87,7 +126,8 @@ export const SearchExp = styled.input`
   border: 1px solid #848484;
   border-radius: 22px;
   opacity: 1;
-  width: 740px;
+  width: 100%;
+  max-width: 740px;
   height: 43px;
   cursor: pointer;
   // border: 0;
@@ -122,6 +162,9 @@ export const Register = styled.button`
   border: 0;
   outline: 0;
   margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 export const RegisterText = styled.div`
   font: normal normal 900 18px/21px Pretendard;
@@ -141,8 +184,11 @@ export const Login = styled.button`
   cursor: pointer;
   border: 0;
   outline: 0;
-  margin-right: 27px;
-  position: relative;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 25px;
 `;
 export const LoginText = styled.div`
   font: normal normal 900 18px/21px Pretendard;
@@ -223,7 +269,8 @@ export const NicknameText = styled.div`
   margin-left: 31.38px;
 `;
 export const Wrapper = styled.div`
-  width: ${1920}px;
+  width: 100%;
+  max-width: ${1920}px;
   margin: auto;
   border: 1px solid #eee;
 

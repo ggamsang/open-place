@@ -20,6 +20,17 @@ export const ScrollWrap = styled(List)`
     margin-bottom: 77px;
     text-align: center;
     align-items: center;
+
+    // @media only screen and (min-width: 1919px) {grid-template-columns:; }
+    @media only screen and (max-width: 1919) and (min-width: 992px) {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    @media only screen and (max-width: 991px) and (min-width: 768px) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    @media only screen and (max-width: 767px) and (min-width: 320px) {
+      grid-template-columns: 1fr;
+    }
   }
   justify-content: center;
   align-items: center;

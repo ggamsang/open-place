@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { TabMenu } from "components/Commons/About"
-import new_banner_intro from "source/new_banner_intro.png";
+// import new_banner_intro from "source/new_banner_intro.png";
 const Wrapper = styled.div`
   display:flex;
   padding:20px;
@@ -103,7 +103,7 @@ export const Intro = () =>
     <div className="content">
       {/* <Content /> */}
       <div>
-      <img src={new_banner_intro} className="banner"/>
+      {/* <img src={new_banner_intro} className="banner"/> */}
       <div className="head">
         오픈 디자인은 “쉬운 디자인, 함께하는 디자인”을 추구하는 웹 사이트입니다.
         <br/> 누구나 쉽고, 재미있게, 시간과 장소에 구애 받지 않고 함께 어울리며 디자인할 수 있는 환경을 만들고자 합니다.
