@@ -225,6 +225,7 @@ export function CheckTokenRequest(token) {
     dispatch(CheckToken());
     return fetch(`${host}/users/check`, {
       headers: { "x-access-token": token, "Content-Type": "application/json" },
+      method: "GET",
     })
       .then((res) => res.json())
       .then((res) =>

@@ -11,15 +11,6 @@ import {
 import { DESIGN_NOT_FOUND } from "redux/modules/expitem/design";
 import host from "config";
 import {
-  RateExpDiv,
-  RateDiv,
-  Rate,
-  RateReview,
-  RateStarIcon,
-  RateNumRate,
-  RateNumRate2,
-  RateIcon,
-  RateBar,
   Wrapper,
   ExpInfoDiv,
   ExpInfoText,
@@ -29,8 +20,7 @@ import {
   ExpInnerButtonBox,
   NameAndTagsDiv,
   CateType,
-  TagButton,
-  TagButtonText,
+  Tags,
   Price,
   StarIcon,
   LikeButton,
@@ -298,13 +288,6 @@ class DesignDetail extends Component {
                   ({cateName}) x ({typeName})
                 </CateType>
               </div>
-              {DesignDetail.taglist &&
-                DesignDetail.taglist.length > 0 &&
-                DesignDetail.taglist.split("|").map((tag, index) => (
-                  <TagButton key={index}>
-                    <TagButtonText>{tag}</TagButtonText>
-                  </TagButton>
-                ))}
             </NameAndTagsDiv>
             <Price>
               {this.state.isMyDesign ? (
@@ -312,25 +295,48 @@ class DesignDetail extends Component {
               ) : (
                 <>작성자: {DesignDetail.userName}</>
               )}
-              <br />
-              <br />
-              {DesignDetail.tag?.length > 0 && "태그"}
-              {DesignDetail.tag?.slice(0, 5).map((tag) => (
-                <span
-                  key={tag.uid}
-                  style={{
-                    padding: "5px 10px",
-                    backgroundColor: "gray",
-                    color: "white",
-                    marginLeft: "5px",
-                    borderRadius: "5px",
-                    cursor: "pointer",
-                  }}
-                >
-                  &nbsp;&nbsp;{tag.tag}
-                </span>
-              ))}
             </Price>
+            <Tags>
+              {DesignDetail.tag?.length > 0 && "태그"}
+              <div className="fold">
+                {DesignDetail.tag?.slice(0, 5).map((tag) => (
+                  <span
+                    key={tag.uid}
+                    style={{
+                      padding: "5px 10px",
+                      backgroundColor: "gray",
+                      color: "white",
+                      marginLeft: "5px",
+                      borderRadius: "5px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    &nbsp;&nbsp;{tag.tag}
+                  </span>
+                ))}
+              </div>
+              <div className="box">
+                {DesignDetail.tag?.length > 0 && (
+                  <select>
+                    {DesignDetail.tag?.slice(0, 5).map((tag) => (
+                      <option
+                        key={tag.uid}
+                        style={{
+                          padding: "5px 10px",
+                          backgroundColor: "gray",
+                          color: "white",
+                          marginLeft: "5px",
+                          borderRadius: "5px",
+                          cursor: "pointer",
+                        }}
+                      >
+                        &nbsp;&nbsp;{tag.tag}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
+            </Tags>
             <NumRate />
           </ExpInnerDiv>
 
@@ -369,6 +375,7 @@ class DesignDetail extends Component {
             {/* group notice / board */}
             {isGroupExp && (
               <GroupNoticeContainer
+                ButtonStyled={LikeButton}
                 user_id={userInfo?.uid}
                 owner_id={DesignDetail.user_id}
                 id={
@@ -406,6 +413,7 @@ class DesignDetail extends Component {
             )}
           </ExpInnerButtonBox>
         </ExpInfoDiv>
+
         {isGroupExp && DesignDetail?.parent_design === null && (
           <>
             {/* manage and child-list */}
@@ -569,40 +577,3 @@ class DesignDetail extends Component {
 }
 
 export default DesignDetail;
-
-/*
-{DesignDetail.price > 0
-? new Intl.NumberFormat("ko-KR", { 
-  style: "currency",
-  currency: "KRW",
-}).format(DesignDetail.price) + "원" 
-: "무료"} 
-*/
-
-// DesignDetail.is_parent === false &&
-// isMyDesign &&
-// DesignDetail.d_flag === 0 ? (
-//   <React.Fragment>
-//     <div
-//       style={{
-//         width: "100wh",
-//         height: "100vh",
-//         display: "flex",
-//         alignItems: "center",
-//         justifyContent: "center",
-//         // verticalAlign: "center",
-//         textAlign: "center",
-//         flexDirection: "column",
-//       }}
-//     >
-//       <h1>가입승낙 대기중입니다.</h1>
-//       <br />
-//       <button
-//         style={{ padding: "25px", color: "red", fontWeight: "bold" }}
-//         onClick={() => window.history.go(-1)}
-//       >
-//         뒤로가기
-//       </button>
-//     </div>
-//   </React.Fragment>
-// ) : (

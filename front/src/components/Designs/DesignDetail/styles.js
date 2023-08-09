@@ -15,6 +15,14 @@ export const ExpInnerButtonBox = styled.div`
   right: 0%;
   bottom: 0%;
   display: flex;
+
+  @media only screen and (max-width: 1100px) {
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: right;
+    align-items: flex-end;
+  }
 `;
 export const RateExpDiv = styled.div`
   display: flex;
@@ -212,16 +220,23 @@ export const ExpInfoDiv = styled.div`
   border: 1px solid #979797;
   border-radius: 32px;
   opacity: 1;
-  width: 1722px;
-  height: 302px;
+  max-width: 1722px;
+  width: 100%;
+  height: 310px;
   margin: auto;
   margin-top: 40px;
   // align-items: center;
   position: relative;
+
+  @media only screen and (max-width: 700px) {
+    height: 350px;
+  }
 `;
 export const ExpImg = styled.img.attrs({
   // src: expimg,
 })`
+  min-width: 271px;
+  min-height: 271px;
   width: 271px;
   height: 271px;
   margin-left: 16px;
@@ -229,6 +244,12 @@ export const ExpImg = styled.img.attrs({
   background-image: url(${(props) => props.url || expimg});
   background-size: cover;
   background-position: center;
+  @media only screen and (max-width: 700px) {
+    min-width: 176px;
+    min-height: 176px;
+    width: 176px;
+    height: 176px;
+  }
 `;
 export const ExpInnerDiv = styled.div`
   display: inline-block;
@@ -249,6 +270,8 @@ export const ExpName = styled.div`
   letter-spacing: 0px;
   color: #000000;
   opacity: 1;
+  width: 100% inherit;
+  text-overflow: ellipsis;
 `;
 export const TagButton = styled.div`
   width: 94px;
@@ -277,16 +300,29 @@ export const TagButtonDelete = styled.div`
   margin-top: 8px;
   margin-left: 3px;
 `;
-// export const ExpPrice = styled.div`
-//     text-align: left;
-//     font: normal normal 500 40px Pretendard;
-//     letter-spacing: 0px;
-//     color: #4136F1;
-//     opacity: 1;
-//     margin-top: 5px;
-//     width: 249px;
-//     height: 57px;
-// `;
+export const Tags = styled.div`
+  font: normal normal 400 16px/14px Pretendard;
+  // font-size: 40px;
+  letter-spacing: 0px;
+  color: #4136f1;
+  opacity: 1;
+  margin-top: 10px;
+  margin-bottom: 13px;
+  .fold {
+    display: flex;
+  }
+  .box {
+    display: none;
+  }
+  @media only screen and (max-width: 700px) {
+    .fold {
+      display: none;
+    }
+    .box {
+      display: inline;
+    }
+  }
+`;
 export const Price = styled.div`
   font: normal normal 400 16px/14px Pretendard;
   // font-size: 40px;
@@ -319,7 +355,20 @@ export const StarIcon = styled.img.attrs({
   right: 24px;
   opacity: ${(props) => (props.like ? "1" : "0.5")};
 `;
-export const ManageButton = styled.button`
+
+const NormalButton = styled.button`
+  
+  @media only screen and (max-width: 700px) {
+    width: max-content;
+    padding: 5px 15px !important;
+    height: 3rem;
+
+    & > span {
+      font: normal normal 500 1.5rem/2rem Pretendard !important;
+    }
+  }
+`;
+export const ManageButton = styled(NormalButton)`
   border: none;
   outline: none;
   background: none;
@@ -331,13 +380,8 @@ export const ManageButton = styled.button`
   border: 1px solid #000000;
   border-radius: 4px;
   opacity: 1;
-  // margin-top: 224px;
-  // margin-left: 555px;
   display: flex;
   margin-right: 15px;
-  // position: absolute;
-  // right: 160px;
-  // bottom: 20px;
 
   > span {
     width: max-content;
@@ -347,7 +391,7 @@ export const ManageButton = styled.button`
     opacity: 1;
   }
 `;
-export const LikeButton = styled.button`
+export const LikeButton = styled(NormalButton)`
   border: none;
   outline: none;
   background: none;
@@ -373,7 +417,7 @@ export const LikeButton = styled.button`
     opacity: 1;
   }
 `;
-export const EditButton = styled.button`
+export const EditButton = styled(NormalButton)`
   border: none;
   outline: none;
   background: none;
@@ -395,13 +439,11 @@ export const EditButton = styled.button`
     opacity: 1;
   }
 `;
-
-export const PurchaseButton = styled.button`
+export const PurchaseButton = styled(NormalButton)`
   border: none;
   outline: none;
   background: none;
   padding: 10px 15px;
-  // width: 130px;
   width: max-content;
   height: 55px;
   background: #ee00001f 0% 0% no-repeat padding-box;
@@ -411,11 +453,6 @@ export const PurchaseButton = styled.button`
   display: flex;
   text-align: center;
   align-items: center;
-  // margin-top: 224px;
-  // margin-left: 20px;
-
-  // position: absolute;
-  // bottom: 20px;
   margin-right: 15px;
 
   right: ${130 + 20 + 15}px;
@@ -431,7 +468,7 @@ export const PurchaseButton = styled.button`
     margin-left: 17px;
   }
 `;
-export const WriteReviewButton = styled.button`
+export const WriteReviewButton = styled(NormalButton)`
   border: none;
   outline: none;
   background: none;
@@ -457,8 +494,43 @@ export const WriteReviewButton = styled.button`
     margin-left: 17px;
   }
 `;
+export const RejectButton = styled(NormalButton)`
+  background-color: black;
+  color: white;
+  font-size: 1.5rem;
+  padding: 5px 10px;
+  border-radius: 15%;
+  position: absolute;
+  z-index: 701;
+  top: 10px;
+  left: 75px;
+`;
+export const AcceptButton = styled(NormalButton)`
+  background-color: red;
+  color: white;
+  font-size: 1.5rem;
+  padding: 5px 10px;
+  border-radius: 15%;
+  position: absolute;
+  z-index: 701;
+  top: 10px;
+  left: 10px;
+`;
+export const KickoutButton = styled(NormalButton)`
+  background-color: black;
+  color: white;
+  font-size: 1.5rem;
+  padding: 5px 10px;
+  border-radius: 15%;
+  position: absolute;
+  z-index: 701;
+  top: 10px;
+  left: 10px;
+`;
+
 export const DetailsDiv = styled.div`
-  width: 1722px;
+  max-width: 1722px;
+  width: 100%;
   min-height: 168px;
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 6px 7px 9px #00000029;
@@ -475,7 +547,6 @@ export const DetailsDiv = styled.div`
     width: 100%;
   }
 `;
-
 export const DetailsText = styled.div`
   font: normal normal 900 44px/52px Pretendard;
   letter-spacing: 0px;
@@ -483,7 +554,6 @@ export const DetailsText = styled.div`
   opacity: 1;
   vertical-align: middle;
 `;
-
 export const BoardText = styled.div`
   text-align: center;
   font: normal normal 900 44px/52px Pretendard;
@@ -492,9 +562,9 @@ export const BoardText = styled.div`
   opacity: 1;
   margin-top: 106px;
 `;
-
 export const BoardDiv = styled.div`
-  width: 1722px;
+  max-width: 1722px;
+  width: 100%;
   height: 979px;
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 6px 7px 9px #00000029;
@@ -506,7 +576,6 @@ export const BoardDiv = styled.div`
   // display: flex;
   // justify-content: center;
 `;
-
 export const Post = styled.div`
   // width: 1650px;
   display: flex;
@@ -536,7 +605,6 @@ export const Post = styled.div`
     }
   }
 `;
-
 export const PostLine = styled.div`
   width: 1650px;
   height: 0px;
@@ -545,7 +613,6 @@ export const PostLine = styled.div`
   margin-top: 17px;
   margin-left: 36px;
 `;
-
 export const UnderArrow = styled.div`
   width: 13px;
   height: 14px;
@@ -555,7 +622,6 @@ export const UnderArrow = styled.div`
   // margin-top: 12px;
   margin-left: 154px;
 `;
-
 export const AnswerTitle = styled.div`
   display: flex;
   align-items: center;
@@ -580,7 +646,6 @@ export const AnswerTitle = styled.div`
     }
   }
 `;
-
 export const AnswerBody = styled.div`
   width: 1478px;
   height: 248px;
@@ -614,7 +679,6 @@ export const AnswerBody = styled.div`
     }
   }
 `;
-
 export const PageNumbers = styled.div`
   display: flex;
   margin-top: 25px;
@@ -642,14 +706,12 @@ export const PageNumbers = styled.div`
     }
   }
 `;
-
 export const FirstPage = styled.img.attrs({
   src: firstpage,
 })`
   width: 12px;
   height: 12px;
 `;
-
 export const PrevPage = styled.img.attrs({
   src: prevpage,
 })`
@@ -657,7 +719,6 @@ export const PrevPage = styled.img.attrs({
   height: 13px;
   margin-left: 33px;
 `;
-
 export const NextPage = styled.img.attrs({
   src: nextpage,
 })`
@@ -665,7 +726,6 @@ export const NextPage = styled.img.attrs({
   height: 13px;
   margin-left: 56px;
 `;
-
 export const LastPage = styled.img.attrs({
   src: lastpage,
 })`
@@ -673,13 +733,11 @@ export const LastPage = styled.img.attrs({
   height: 12px;
   margin-left: 33px;
 `;
-
 export const OtherExp = styled.div`
   width: 100%;
   margin-top: 109px;
   display: flex;
 `;
-
 export const OtherExpList = styled.div`
   width: 50%;
   text-align: center;
@@ -693,7 +751,6 @@ export const OtherExpList = styled.div`
     opacity: 1;
   }
 `;
-
 export const ProfileCardDiv = styled.div`
   width: 800px;
   height: 567px;
@@ -713,7 +770,6 @@ export const ProfileCardDiv = styled.div`
     margin-right: 84px;
   }
 `;
-
 export const SimilarExpList = styled.div`
   width: 50%;
   text-align: center;
@@ -726,7 +782,6 @@ export const SimilarExpList = styled.div`
     opacity: 1;
   }
 `;
-
 export const ReviewText = styled.div`
   // text-align: center;
   // font: normal normal 900 44px/52px Pretendard;
@@ -742,7 +797,6 @@ export const ReviewText = styled.div`
   margin-top: 20px;
   position: relative;
 `;
-
 export const ReviewDiv = styled.div`
   width: 1695px;
   height: 430px;
@@ -754,10 +808,9 @@ export const ReviewDiv = styled.div`
   margin-top: 22px;
   margin: auto;
 `;
-
 export const Wrapper = styled.div`
-  max-width: 1740px;
-  min-width: 1000px;
+  max-width: 1920px;
+  width: 100%;
   min-height: 75vh;
   .marginLeft {
     // margin-left: 38px;
@@ -765,46 +818,10 @@ export const Wrapper = styled.div`
   // border: 1px solid red;
   margin: auto;
 `;
-
-export const RejectButton = styled.button`
-  background-color: black;
-  color: white;
-  font-size: 1.5rem;
-  padding: 5px 10px;
-  border-radius: 15%;
-  position: absolute;
-  z-index: 701;
-  top: 10px;
-  left: 75px;
-`;
-export const AcceptButton = styled.button`
-  background-color: red;
-  color: white;
-  font-size: 1.5rem;
-  padding: 5px 10px;
-  border-radius: 15%;
-  position: absolute;
-  z-index: 701;
-  top: 10px;
-  left: 10px;
-`;
-
-
-export const KickoutButton = styled.button`
-  background-color: black;
-  color: white;
-  font-size: 1.5rem;
-  padding: 5px 10px;
-  border-radius: 15%;
-  position: absolute;
-  z-index: 701;
-  top: 10px;
-  left: 10px;
-`;
 export const MyDesignLabel = styled.p`
   z-index: 701;
   position: absolute;
-  background-color: #A0A0A0;
+  background-color: #a0a0a0;
   color: white;
   font-size: 1.5rem;
   top: 5px;
