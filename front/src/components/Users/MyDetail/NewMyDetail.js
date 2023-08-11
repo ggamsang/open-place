@@ -5,6 +5,7 @@ import { SetSession } from "modules/Sessions";
 import host from "config";
 import Design from "components/Designs/Design";
 import { confirm } from "components/Commons/Confirm/Confirm";
+import { Modal } from "semantic-ui-react";
 
 const PROFILE = "Profile";
 const NOTI = "Noti";
@@ -28,7 +29,7 @@ class MyDetail extends React.Component {
     this.onChangeNickname = this.onChangeNickname.bind(this);
     this.onChangeThumbnail = this.onChangeThumbnail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
-    this.onChangePassword_checked = this.onChangePassword_checked.bind(this);
+    this.onChangePasswordChecked = this.onChangePasswordChecked.bind(this);
   }
   componentDidUpdate(prevProps) {
     if (prevProps.userInfo !== this.props.userInfo) {
@@ -44,7 +45,7 @@ class MyDetail extends React.Component {
   onChangePassword = (event) => {
     this.setState({ password: event.target.value });
   };
-  onChangePassword_checked = (evnet) => {
+  onChangePasswordChecked = (evnet) => {
     this.setState({ password_checked: evnet.target.value });
   };
   onChangeThumbnail = async (event) => {
@@ -79,7 +80,7 @@ class MyDetail extends React.Component {
     // return;
     if (this.state.nick_name !== this.props.userInfo.nick_name) {
       await this.props.CheckNickNameRequest(
-        this.props.token,
+        // this.props.token,
         this.state.nick_name
       );
       if (this.state.nick_name === null || this.state.nick_name === "") {
@@ -110,15 +111,16 @@ class MyDetail extends React.Component {
     if (this.state.thumbnail !== this.props.userInfo.l_img) {
       await data.files.push(file);
     } // thumbnail 썸네일이 있을 경우에만
-    await this.props.updateUserRequest(
-      this.props.userInfo.uid,
-      data,
-      this.props.token
-    );
-
-    setTimeout(() => {
-      window.location.href = "/mypage";
-    }, 1500);
+    await this.props
+      .UpdateUserDetailRequest(
+        // this.props.userInfo.uid,
+        data,
+        this.props.token
+      )
+      .then(console.log);
+    // setTimeout(() => {
+    //   window.location.href = "/mypage";
+    // }, 1500);
   };
   showModal = (type) => {
     this.setState({ modal: type });
@@ -155,33 +157,6 @@ class MyDetail extends React.Component {
           console.error(e);
           reject(e);
         });
-      // 디자이너의 디자인 리스트 가져오기
-      // export function GetMyDesignInDesignerRequest(id, page, sort) {
-      //   const url = `${host}/designer/designerDetail/${id}/allDesignDesigner/${page}/${sort}`;
-      //   //console.log("sql:", url);
-      //   return (dispatch) => {
-      //       return fetch(url, {
-      //           headers: { "Content-Type": "application/json" },
-      //           method: "get"
-      //       }).then((response) => {
-      //           return response.json()
-      //       }).then((data) => {
-      //           //console.log("designer's design list data >>", data)
-      //           if (!data) {
-      //               //console.log("no data")
-      //               data = []
-      //           }
-      //           if (page === 0) {
-      //               dispatch(MyDesignInDesignerClear(data))
-      //               return
-      //           }
-      //           dispatch(GetMyDesignInDesigner(data))
-      //       }).catch((error) => {
-      //           dispatch(MyDesignInDesignerFail())
-      //           console.error("err", error)
-      //       })
-      //   }
-      // }
     });
   };
   setMyDesignList = (list) => this.setState({ mydesigns: list || [] });
@@ -190,137 +165,119 @@ class MyDetail extends React.Component {
   }
   render() {
     const { modal, mydesigns } = this.state;
-    const {
-      nick_name,
-      create_time,
-      update_time,
-      l_img: thumbnail,
-    } = this.props.userInfo;
+    const { nick_name, l_img: thumbnail, rate } = this.props.userInfo;
+    const { update_time, create_time } = this.props.MyDetail;
     console.log(this.props, this.state);
+    // const NumRate = ({ rate = 0, count = 0, freq = [40, 30, 20, 10, 0] }) => {
+    //   return (
+    //       <styled.RateNumRate>
+    //         {[5, 4, 3, 2, 1].map((item, index) => (
+    //           <styled.RateNumRate2 key={item}>
+    //             {item}
+    //             <styled.RateIcon />
+    //             <styled.RateBar per={freq[index]} />
+    //           </styled.RateNumRate2>
+    //         ))}
+    //       </styled.RateNumRate>
+    //     </styled.RateExpDiv>
+    //   );
+    // };
+    const NumRate = ({
+      rate = 0,
+      cntReview = 0,
+      freq = [40, 30, 20, 10, 0],
+    }) => (
+      <styled.WrapperNumRate>
+        <styled.ScoreAndReview>
+          <styled.Score>{rate}</styled.Score>
+          <styled.Review>
+            <div>리뷰 {cntReview}개</div>
+          </styled.Review>
+        </styled.ScoreAndReview>
+        <styled.ScoreBox>
+          {[5, 4, 3, 2, 1].map((item, index) => (
+            <styled.Score5 key={index}>
+              <styled.ScoreGrey />
+              <styled.ScoreCircleIcon1 />
+              <styled.ScoreRed per={freq[index]} />
+              <styled.ScoreCircleIcon2 per={freq[index]} />
+              <span>{item}({freq[index]}%)</span>
+            </styled.Score5>
+          ))}
+        </styled.ScoreBox>
+      </styled.WrapperNumRate>
+    );
 
-    const ProfileModal = () => {};
     return (
       <React.Fragment>
         {modal === PROFILE && (
           <React.Fragment>
             <styled.ModalWrapper>
               <styled.ModalContainer>
-                <styled.ModalTitle>내 정보 수정</styled.ModalTitle>
                 <styled.ModalHorizonLine />
-                <styled.Wrapper>
-                  <styled.AddThumbnail>
-                    <label htmlFor="file">
-                      <styled.ThumbnailImg url={this.state.thumbnail} />
-                      <div>썸네일 등록</div>
-                      <input
-                        hidden
-                        onChange={this.onChangeThumbnail}
-                        id="file"
-                        type="file"
-                        accept="image/png, image/bmp, image/jpeg, image/jpg"
-                      />
-                    </label>
-                  </styled.AddThumbnail>
-                  <styled.VerticalWrapper>
-                    <styled.NicknameDiv>
-                      <div>닉네임</div>
-                      <styled.InputBox
-                        onChange={this.onChangeNickname}
-                        value={this.state.nick_name || ""}
-                        placeholder="닉네임을 입력하세요."
-                      />
-                    </styled.NicknameDiv>
-                    <styled.PasswordDiv>
-                      <div>비밀번호</div>
-                      <styled.InputBox
-                        type="password"
-                        onChange={this.onChangePassword}
-                        value={this.state.password || ""}
-                        placeholder="비밀번호를 입력하세요."
-                      />
-                    </styled.PasswordDiv>
-                    <styled.PasswordCheckDiv>
-                      <div>비밀번호 확인</div>
-                      <styled.InputBox
-                        type="password"
-                        onChange={this.onChangePassword_checked}
-                        value={this.state.password_checked || ""}
-                        placeholder="변경할 비밀번호를 한 번 더 입력하세요"
-                      />
-                    </styled.PasswordCheckDiv>
-                    <styled.ModalButtons>
-                      <button onClick={() => this.showModal(NONE)}>
-                        취소하기
-                      </button>
-                      <button onClick={this.onSubmit}>수정하기</button>
-                    </styled.ModalButtons>
-                  </styled.VerticalWrapper>
-                </styled.Wrapper>
               </styled.ModalContainer>
             </styled.ModalWrapper>
           </React.Fragment>
         )}
-        {/* {modal === NOTI && <React.Fragment>;</React.Fragment>} */}
-        {/* // <Wrapper url={this.props.userInfo?.l_img || null}>
-      //   <div className="header">
-      //     <div className="searchbox">
-      //       <SearchForm />
-      //     </div>
-      //     <div className="profile">
-      //       <div className="thumbnail" />
-      //       <div className="user_name">
-      //         {this.props.userInfo?.nick_name || "국민대학교 CRC"}
-      //       </div>
-      //       <div className="button_wrap">
-      //         <div
-      //           className="button borderRight"
-      //           onClick={() =>
-      //             goto(
-      //               this.props.sharer === null
-      //                 ? "CREATE-SHARER"
-      //                 : "MODIFY-SHARER"
-      //             )
-      //           }
-      //         >
-      //           공유자
-      //           <br />
-      //           등록수정
-      //         </div>
-      //         <div
-      //           className="button borderRight"
-      //           onClick={() => goto("MODIFY-USER")}
-      //         >
-      //           프로필
-      //           <br />
-      //           편집
-      //         </div>
-      //         <div className="button">
-      //           <NotificationContainer active={this.props.active} />
-      //         </div>
-      //       </div>
-      //     </div>
-      //   </div>
-      //   <this.props.Outlet {...this.props} />
-      // </Wrapper>
 
-      // certification : null
-      // create_time : "2022-06-23T12:27:50.000Z"
-      // d_flag : null
-      // id : "user01"
-      // l_img : "https://s3.ap-northeast-2.amazonaws.com/osd.uploads.com/dev/thumbnails/1657775946887-x600.jpg"
-      // like : 0
-      // nick_name : "카네이션핑크"
-      // optional_term : null
-      // phone : "01022223333"
-      // point : 2147463647
-      // socket_id : null
-      // sso : null
-      // thumbnail_id : 60
-      // uid : 11
-      // update_time : "2022-06-23T12:27:50.000Z" */}
+        <styled.CustomModal
+          open={modal === PROFILE}
+          onClose={() => this.setState({ modal: false })}
+        >
+          <styled.ModalTitle>내 정보 수정</styled.ModalTitle>
+          <Modal.Content>
+            <styled.Wrapper>
+              <styled.AddThumbnail>
+                <label htmlFor="file">
+                  <styled.ThumbnailImg url={this.state.thumbnail} />
+                  <div className="title">썸네일 등록</div>
+                  <input
+                    hidden
+                    onChange={this.onChangeThumbnail}
+                    id="file"
+                    type="file"
+                    accept="image/png, image/bmp, image/jpeg, image/jpg"
+                  />
+                </label>
+              </styled.AddThumbnail>
+              <styled.VerticalWrapper>
+                <styled.NicknameDiv>
+                  <div>닉네임</div>
+                  <styled.InputBox
+                    onChange={this.onChangeNickname}
+                    value={this.state.nick_name || ""}
+                    placeholder="닉네임을 입력하세요."
+                  />
+                </styled.NicknameDiv>
+                <styled.PasswordDiv>
+                  <div>비밀번호</div>
+                  <styled.InputBox
+                    type="password"
+                    onChange={this.onChangePassword}
+                    value={this.state.password || ""}
+                    placeholder="비밀번호를 입력하세요."
+                  />
+                </styled.PasswordDiv>
+                <styled.PasswordCheckDiv>
+                  <div>비밀번호 확인</div>
+                  <styled.InputBox
+                    type="password"
+                    onChange={this.onChangePasswordChecked}
+                    value={this.state.password_checked || ""}
+                    placeholder="변경할 비밀번호를 한 번 더 입력하세요"
+                  />
+                </styled.PasswordCheckDiv>
+                <styled.ModalButtons>
+                  <button onClick={() => this.showModal(NONE)}>취소하기</button>
+                  <button onClick={this.onSubmit}>수정하기</button>
+                </styled.ModalButtons>
+              </styled.VerticalWrapper>
+            </styled.Wrapper>
+          </Modal.Content>
+        </styled.CustomModal>
 
         <styled.Container>
-          <styled.Wrapper>
+          <styled.WrapperHeader>
             <styled.ProfileBox>
               <styled.ProfileImg url={thumbnail} />
               <span>{nick_name}</span>
@@ -340,155 +297,59 @@ class MyDetail extends React.Component {
                   <span>로그아웃</span>
                 </styled.CheckNotificationBtn>
               </styled.Buttons>
-              <styled.Wrapper>
-                <styled.ScoreAndReview>
-                  <styled.Score>4.7</styled.Score>
-                  <styled.Review>
-                    <div>리뷰 140</div>
-                  </styled.Review>
-                </styled.ScoreAndReview>
-                <styled.ScoreBox>
-                  <styled.Score5>
-                    <styled.ScoreGrey />
-                    <styled.ScoreCircleIcon1 />
-                    <styled.ScoreRed />
-                    <styled.ScoreCircleIcon2 />
-                    <span>5</span>
-                  </styled.Score5>
-                  <styled.Score5>
-                    <styled.ScoreGrey />
-                    <styled.ScoreCircleIcon1 />
-                    <styled.ScoreRed />
-                    <styled.ScoreCircleIcon2 />
-                    <span>4</span>
-                  </styled.Score5>
-                  <styled.Score5>
-                    <styled.ScoreGrey />
-                    <styled.ScoreCircleIcon1 />
-                    <styled.ScoreRed />
-                    <styled.ScoreCircleIcon2 />
-                    <span>3</span>
-                  </styled.Score5>
-                  <styled.Score5>
-                    <styled.ScoreGrey />
-                    <styled.ScoreCircleIcon1 />
-                    <styled.ScoreRed />
-                    <styled.ScoreCircleIcon2 />
-                    <span>2</span>
-                  </styled.Score5>
-                  <styled.Score5>
-                    <styled.ScoreGrey />
-                    <styled.ScoreCircleIcon1 />
-                    <styled.ScoreRed />
-                    <styled.ScoreCircleIcon2 />
-                    <span>1</span>
-                  </styled.Score5>
-                </styled.ScoreBox>
-              </styled.Wrapper>
+              <NumRate rate={rate || 0} />
               <styled.DateInfo>
-                <div>등록일 : {create_time?.split("T")[0]}</div>
-                <div>갱신일 : {update_time?.split("T")[0]}</div>
+                <div>등록일 :{create_time?.split("T")[0]}</div>
+                <div>갱신일 :{update_time?.split("T")[0]}</div>
               </styled.DateInfo>
             </styled.ProfileInfo>
-          </styled.Wrapper>
-
-          <styled.Wrapper>
-            <div style={{ margin: "auto", width: "95vw", padding: "15px" }}>
-              <p
-                style={{
-                  width: "100vw",
-                  textAlign: "center",
-                  fontSize: "2rem",
-                  marginTop: "1rem",
-                }}
-              >
-                등록아이템
-              </p>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                  gap: "15px",
-                }}
-              >
-                {mydesigns
-                  .filter((design) => !design.parent_design)
-                  .map((design) => (
-                    <>
-                      <Design
-                        {...design}
-                        onClick={() => goto("EXP", design.uid)}
-                      />
-                    </>
-                  ))}
-              </div>
-
-              <p
-                style={{
-                  width: "100vw",
-                  textAlign: "center",
-                  fontSize: "2rem",
-                  marginTop: "1rem",
-                }}
-              >
-                신청아이템: 활동중
-              </p>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                  gap: "15px",
-                }}
-              >
-                {mydesigns
-                  .filter(
-                    (design) => design.parent_design && design.d_flag === 1
-                  )
-                  .map((design) => (
-                    <>
-                      <Design
-                        {...design}
-                        onClick={() => goto("EXP", design.uid)}
-                      />
-                    </>
-                  ))}
-              </div>
-              <p
-                style={{
-                  width: "100vw",
-                  textAlign: "center",
-                  fontSize: "2rem",
-                  marginTop: "1rem",
-                }}
-              >
-                신청아이템: 수락대기중
-              </p>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                  gap: "15px",
-                }}
-              >
-                {mydesigns
-                  .filter(
-                    (design) => design.parent_design && design.d_flag === 0
-                  )
-                  .map((design) => (
-                    <>
-                      <Design
-                        {...design}
-                        onClick={() => goto("EXP", design.uid)}
-                      />
-                    </>
-                  ))}
-              </div>
-            </div>
-          </styled.Wrapper>
+          </styled.WrapperHeader>
         </styled.Container>
+
+        <styled.WrapperItemList>
+          <div className="row">
+            <p>등록아이템</p>
+            <div className="item-wrapper">
+              {mydesigns
+                .filter((design) => !design.parent_design)
+                .map((design) => (
+                  <div key={design.uid}>
+                    <Design
+                      {...design}
+                      onClick={() => goto("EXP", design.uid)}
+                    />
+                  </div>
+                ))}
+            </div>
+
+            <p>신청아이템: 활동중</p>
+            <div className="item-wrapper">
+              {mydesigns
+                .filter((design) => design.parent_design && design.d_flag === 1)
+                .map((design) => (
+                  <div key={design.uid}>
+                    <Design
+                      {...design}
+                      onClick={() => goto("EXP", design.uid)}
+                    />
+                  </div>
+                ))}
+            </div>
+            <p>신청아이템: 수락대기중</p>
+            <div className="item-wrapper">
+              {mydesigns
+                .filter((design) => design.parent_design && design.d_flag === 0)
+                .map((design) => (
+                  <div key={design.uid}>
+                    <Design
+                      {...design}
+                      onClick={() => goto("EXP", design.uid)}
+                    />
+                  </div>
+                ))}
+            </div>
+          </div>
+        </styled.WrapperItemList>
       </React.Fragment>
     );
   }

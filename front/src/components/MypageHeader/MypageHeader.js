@@ -16,17 +16,13 @@ import { SetSession } from 'modules/Sessions';
 const Wrapper = styled.div`
     margin-top: 24px;
     margin-left: 38px;
-    // margin-right: 38px;
-
-    // margin-top: ${100 + 24}px;
-    // margin-left: ${100 + 38}px;
-    // *{border: 1px solid red;}
 `;
 const MyInfoBox = styled.div`
     padding: 12px 12px 12px 34px;
 
-    max-width:1740px;
-    min-width: ${1000}px;
+    max-width: 1740px;
+    width: 100%;
+    min-width: 500px;
 
     display: flex;
     flex-direction: row;
@@ -39,6 +35,11 @@ const MyInfoBox = styled.div`
     }
     background-color: #E0E0E0;
     box-shadow: rgba(38, 57, 77, 0.25) 0px 10px 15px -5px;
+
+    @media only screen (max-width: 700px) {
+        display: flex;
+        flex-direction: column;
+    }
 `;
 const Thumbnail = styled.div`
     width: 226px;
@@ -247,7 +248,7 @@ class MypageHeader extends Component {
         return (<Wrapper>
             <MyInfoBox>
                 {/* thumbnail */}
-                <Thumbnail face={thumbnailInfo} />
+                {/* <Thumbnail face={thumbnailInfo} /> */}
 
                 <div className="wrapper">
                     {/* nick, intro, counter */}

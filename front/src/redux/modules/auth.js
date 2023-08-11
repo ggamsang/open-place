@@ -223,17 +223,26 @@ export function SignInRequest(data) {
 export function CheckTokenRequest(token) {
   return (dispatch) => {
     dispatch(CheckToken());
-    return fetch(`${host}/users/check`, {
-      headers: { "x-access-token": token, "Content-Type": "application/json" },
+    // console.log("fn(): check token request: ", token);
+    // return fetch(`${host}/users/check`, {
+    return fetch(`https://13.125.55.195/api/users/check`, {
+      headers: {
+        "X-Access-Token": token,
+        "Content-Type": "application/json",
+      },
       method: "GET",
     })
       .then((res) => res.json())
-      .then((res) =>
-        res.success
-          ? dispatch(CheckTokenSuccess(res.info, token))
-          : dispatch(CheckTokenFailure())
-      )
-      .catch((_) => dispatch(CheckTokenFailure()));
+      .then((data) => {
+        console.log(data);
+        return data.success
+          ? dispatch(CheckTokenSuccess(data.info, token))
+          : dispatch(CheckTokenFailure());
+      })
+      .catch((_) => {
+        console.error(_);
+        return dispatch(CheckTokenFailure());
+      });
   };
 }
 export function CheckEmailRequest(email) {
@@ -245,14 +254,17 @@ export function CheckEmailRequest(email) {
       body: JSON.stringify(email),
     })
       .then((res) => res.json())
-      .then((res) => {
-        if (res.success) {
+      .then((data) => {
+        if (data.success) {
           return dispatch(CheckEmailSuccess());
         } else {
-          return dispatch(CheckEmailFailure(res.error));
+          return dispatch(CheckEmailFailure(data.error));
         }
       })
-      .catch((err) => dispatch(CheckEmailFailure()));
+      .catch((err) => {
+        console.error(err);
+        return dispatch(CheckEmailFailure());
+      });
   };
 }
 export function ReadDevNoticeRequest(id, token) {

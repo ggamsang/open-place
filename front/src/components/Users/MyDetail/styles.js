@@ -1,4 +1,62 @@
 import styled from "styled-components";
+import opendesign_style from "opendesign_style";
+import { Modal } from "semantic-ui-react";
+
+export const CustomModal = styled(Modal)`
+  border: 1px solid ${opendesign_style.color.main.dark};
+  padding: 20px;
+  width: 350px;
+  & .icon.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: ${opendesign_style.color.grayScale.scale9};
+    cursor: pointer;
+  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // width: 100vw;
+  // height: 100vh;
+  background: rgba(112, 112, 112, 0.5);
+  input {
+    outline: none;
+    border: none;
+    padding-left: 10px;
+  }
+`;
+export const ButtonWrapper = styled.div`
+  right: 0px;
+  padding-bottom: 5px;
+  padding-right: 5px;
+  .submit {
+    width: 65px;
+    margin-top: 6px;
+    margin-left: 3px;
+    padding: 0.5em 1.7em;
+    border: 0px;
+    border-color: #e72327;
+    border-radius: 5px 5px 5px 5px;
+    color: #ffffff;
+    font-size: 9pt;
+    line-height: 25px;
+    background-color: #e72327;
+  }
+  .cancel {
+    width: 65px;
+    margin-top: 6px;
+    margin-left: 3px;
+    padding: 0.5em 1.7em;
+    border-color: #e72327;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px 5px 5px 5px;
+    color: #666666;
+    font-size: 9pt;
+    line-height: 25px;
+    background-color: #ffffff;
+  }
+`;
 
 export const Container = styled.div`
   display: flex;
@@ -7,29 +65,92 @@ export const Container = styled.div`
   align-items: center;
   width: 100%;
   max-width: 1920px;
-  min-width: 1300px;
+  // min-width: 1300px;
   * {
     // border: 1px solid red;
   }
 `;
 
-export const Wrapper = styled.div`
+export const WrapperItemList = styled.div`
   display: flex;
+  justfy-content: center;
   align-items: center;
   position: relative;
-  width: max-content;
+  width: 100%;
+  margin: auto;
+  .row {
+    margin: auto;
+    width: 100%;
+    max-width: 95vw;
+    padding: 15px;
+    p {
+      width: 100%;
+      text-align: center;
+      font-size: 2rem;
+      margin-top: 1rem;
+    }
+    .item-wrapper {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+  }
+  @media only screen and (max-width: 1400px) {
+    .item-wrapper {
+      justify-content: center;
+    }
+  }
+`;
+export const WrapperNumRate = styled.div`
+  display: flex;
+  justfy-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  margin: auto;
+  @media only screen and (max-width: 800px) {
+    // flex-direction: column;
+    // gap: 15px;
+  }
+`;
+export const Wrapper = styled.div`
+  display: flex;
+  justfy-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  margin: auto;
+  @media only screen and (max-width: 800px) {
+    flex-direction: column;
+    gap: 15px;
+  }
+`;
+
+export const WrapperHeader = styled.div`
+  position: relative;
+  // width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justfy-content: center;
+  align-items: center;
+
+  @media only screen and (max-width: 800px) {
+    flex-direction: column;
+  }
 `;
 
 export const VerticalWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  border: 1px solid red;
+  // border: 1px solid red;
 `;
 
 export const ProfileBox = styled.div`
-  width: 329px;
-  height: 372px;
+  min-width: 329px;
+  min-height: 372px;
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 3px 3px 5px #4141411a;
   border: 0.25px solid #b7b7b7;
@@ -51,8 +172,8 @@ export const ProfileBox = styled.div`
 `;
 
 export const ProfileImg = styled.div`
-  width: 284px;
-  height: 284px;
+  min-width: 284px;
+  min-height: 284px;
   background: #eeeeee 0% 0% no-repeat padding-box;
   opacity: 1;
   border-radius: 50%;
@@ -63,8 +184,10 @@ export const ProfileImg = styled.div`
 `;
 
 export const ProfileInfo = styled.div`
-  width: 1433px;
-  height: 373px;
+  min-width: 700px;
+  max-width: 1433px;
+  width: 750px;
+  min-height: 373px;
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 3px 3px 5px #0000001a;
   border: 0.25px solid #b7b7b7;
@@ -73,6 +196,23 @@ export const ProfileInfo = styled.div`
   margin-top: 87px;
   margin-left: 27px;
   display: flex;
+  position: relative;
+
+  @media only screen and (min-width: 801px) and (max-width: 1920px) {
+    width: 1100px;
+    // background-color: red;
+  }
+  @media only screen and (min-width: 801px) and (max-width: 1100px) {
+    flex-direction: column;
+    display: flex;
+    width: 900px;
+    // background-color: orange;
+  }
+  @media only screen and (max-width: 800px) {
+    width: 700px;
+    flex-direction: column;
+    // background-color: blue;
+  }
 `;
 
 export const Buttons = styled.div`
@@ -81,7 +221,23 @@ export const Buttons = styled.div`
   margin-top: 33px;
   margin-left: 32px;
 `;
-export const TabButton = styled.button`
+const CommonButton = styled.button`
+  @media only screen and (min-width: 750px) and (max-width: 1200px) {
+    width: 256px !important;
+    height: 64px !important;
+    & > span {
+      font: normal normal 600 20px/25px Pretendard !important;
+    }
+  }
+  @media only screen and (max-width: 749px) {
+    width: 256px !important;
+    height: 64px !important;
+    & > span {
+      font: normal normal 600 20px/25px Pretendard !important;
+    }
+  }
+`;
+export const TabButton = styled(CommonButton)`
   border: 1px solid red;
   width: 100%;
   outline: none;
@@ -117,6 +273,7 @@ export const Score = styled.div`
   letter-spacing: 0px;
   color: #000000;
   opacity: 1;
+  text-align: center;
 `;
 
 export const Review = styled.div`
@@ -129,6 +286,7 @@ export const Review = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
 
   > div {
     font: normal normal 500 31px/36px Pretendard;
@@ -195,11 +353,11 @@ export const ScoreCircleIcon2 = styled.div`
   opacity: 1;
   border-radius: 50%;
   position: absolute;
-  left: 150px;
+  left: ${(props) => parseInt((props.per / 100) * 300, 10)}px;
 `;
 
 export const ScoreRed = styled.div`
-  width: 150px;
+  width: ${(props) => parseInt((props.per / 100) * 300, 10)}px;
   height: 2px;
   border: 1px solid #e4390f;
   background: #e4390f 0% 0% no-repeat padding-box;
@@ -229,7 +387,7 @@ export const DateInfo = styled.div`
   justify-content: center;
 `;
 
-export const EditProfileBtn = styled.button`
+export const EditProfileBtn = styled(CommonButton)`
   width: 346px;
   height: 78px;
   transform: matrix(-1, 0, 0, -1, 0, 0);
@@ -254,7 +412,7 @@ export const EditProfileBtn = styled.button`
   }
 `;
 
-export const RegisterBtn = styled.button`
+export const RegisterBtn = styled(CommonButton)`
   width: 346px;
   height: 78px;
   background: transparent linear-gradient(270deg, #4359ff 0%, #36f17e 100%) 0%
@@ -276,7 +434,7 @@ export const RegisterBtn = styled.button`
   }
 `;
 
-export const CheckNotificationBtn = styled.button`
+export const CheckNotificationBtn = styled(CommonButton)`
   width: 346px;
   height: 78px;
   background: transparent
@@ -318,7 +476,8 @@ export const MyDetailTabMenuBox = styled.div`
 
   > span {
     font-size: 19px;
-    font-family: "Pretendard-normal";
+    font-family: "Pretendard";
+    font-weight: 700;
     letter-spacing: 0px;
     color: #000000;
     opacity: 1;
@@ -415,9 +574,7 @@ export const ModalContainer = styled.div`
 `;
 
 export const ModalTitle = styled.div`
-  // font: normal normal medium 18px/21px Pretendard;
-  font-size: 18px;
-  font-family: "Pretendard-medium";
+  font: normal normal 500 2rem/2.5rem Pretendard !important;
   letter-spacing: 0px;
   color: #000000;
   opacity: 1;
@@ -447,13 +604,18 @@ export const AddThumbnail = styled.div`
   align-items: center;
   margin-right: 31px;
 
-  div:nth-child(2) {
-    font-size: 15px;
-    font-family: "Pretendard-medium";
+  .title {
+    font-size: 25px;
+    font-family: "Pretendard";
+    font-weight: 500;
+    -webkit-letter-spacing: 0px;
+    -moz-letter-spacing: 0px;
+    -ms-letter-spacing: 0px;
     letter-spacing: 0px;
     color: #000000;
     opacity: 1;
     margin-top: 11px;
+    text-align: center;
   }
 `;
 
@@ -467,24 +629,39 @@ export const ThumbnailImg = styled.div`
   background-size: cover;
   background-position: center center;
 `;
-
-export const NicknameDiv = styled.div`
+const ModalCommonWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 
   div:nth-child(1) {
     font-size: 15px;
-    font-family: "Pretendard-medium";
+    font-family: "Pretendard";
+    font-weight: 500;
     letter-spacing: 0px;
     color: #000000;
     opacity: 1;
-    margin-right: 102px;
+    min-width: 125px;
+    width: max-content;
+    // background-color: red;
+  }
+  div:nth-child(2) {
+    min-width: 350px;
+  }
+  @media only screen and (max-width: 950px){
+    flex-direction: column
+    flex-wrap: nowrap
+    align-content: flex-start
+    justify-content: center
+    align-items: flex-start
   }
 `;
+export const NicknameDiv = styled(ModalCommonWrapper)``;
 
 export const InputBox = styled.input`
-  width: 431px;
+  min-width: 350px;
+  width: 100%;
+  // max-width: 400px;
   height: 31px;
   background: #e9e9e9 0% 0% no-repeat padding-box;
   border-radius: 22px;
@@ -503,41 +680,18 @@ export const InputBox = styled.input`
   }
 `;
 
-export const PasswordDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+export const PasswordDiv = styled(ModalCommonWrapper)`
   margin-top: 29px;
-
-  div:nth-child(1) {
-    font-size: 15px;
-    font-family: "Pretendard-medium";
-    letter-spacing: 0px;
-    color: #000000;
-    opacity: 1;
-    margin-right: 89px;
-  }
 `;
 
-export const PasswordCheckDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+export const PasswordCheckDiv = styled(ModalCommonWrapper)`
   margin-top: 29px;
   margin-bottom: 148px;
-
-  div:nth-child(1) {
-    font-size: 15px;
-    font-family: "Pretendard-medium";
-    letter-spacing: 0px;
-    color: #000000;
-    opacity: 1;
-    margin-right: 60px;
-  }
 `;
 
 export const ModalButtons = styled.div`
-  width: 572px;
+  max-width: 572px;
+  width: 100%;
   height: 40px;
   display: flex;
   justify-content: flex-end;

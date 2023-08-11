@@ -138,12 +138,12 @@ class CreateExp extends React.Component {
     super(props);
     this.state = {
       tag: null,
-      exp_type: 0,
+      exp_type: 1,
       exp_type_detail: "",
       thumbnail: null,
       thumbnail_name: null,
       title: null,
-      category: 0,
+      category: 1,
       info: null,
       exp_files: [],
       meet_type: null,
@@ -508,8 +508,10 @@ class CreateExp extends React.Component {
     return (
       <styled.Main>
         <styled.AddExpText>경험 등록</styled.AddExpText>
+
         {this.state.loading && <Loading />}
-        <styled.Wrapper>
+
+        {/* <styled.Wrapper> */}
           <styled.Wrapper>
             <styled.AddThumbnail>
               <span>썸네일 이미지 등록</span>
@@ -582,7 +584,7 @@ class CreateExp extends React.Component {
               </styled.CategoryDiv>
 
               <styled.TagDiv>
-                <div>태그</div>
+                <div >태그</div>
                 <div>
                   <InputTag
                     placeholder={"태그를 입력하세요."}
@@ -593,7 +595,8 @@ class CreateExp extends React.Component {
               </styled.TagDiv>
             </styled.InfoBox>
           </styled.Wrapper>
-        </styled.Wrapper>
+        {/* </styled.Wrapper> */}
+
         <styled.Wrapper>
           <styled.ExpDetailBox>
             <styled.AddExpText>경험상세</styled.AddExpText>
@@ -749,7 +752,7 @@ class CreateExp extends React.Component {
           </styled.ExpDetailBox>
         </styled.Wrapper>
 
-        <styled.Wrapper>
+        <styled.ButtonWrapper>
           <styled.AddButton
             disabled={this.state.loading}
             onClick={async (e) => {
@@ -769,7 +772,7 @@ class CreateExp extends React.Component {
           <styled.CancelButton onClick={this.onClickCancel}>
             <span>취소하기</span>
           </styled.CancelButton>
-        </styled.Wrapper>
+        </styled.ButtonWrapper>
         {/* <styled.Footer /> */}
       </styled.Main>
     );
