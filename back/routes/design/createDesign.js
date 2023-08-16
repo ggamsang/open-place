@@ -59,6 +59,7 @@ exports.createDesign = async (req, res, next) => {
   let contents = req.body.contents;
   let steps = req.body.steps;
   let type = req.body.type;
+  let tag = req.body.tag;
 
   delete req.body.files;
   delete req.body.uid;
@@ -66,6 +67,7 @@ exports.createDesign = async (req, res, next) => {
   delete req.body.contents;
   delete req.body.steps;
   delete req.body.type;
+  delete req.body.tag;
 
   req.body.is_members = 1;
   req.body["is_public"] = 1;
@@ -188,6 +190,18 @@ exports.createDesign = async (req, res, next) => {
     // 6. design counter and user counter
     .then(insertDesignCount)
     .then(updateUserCount)
+    .then(async data => {
+         console.log("tag len:", tag.length);
+         if(tag.length === 0) { 
+            return data; 
+         }
+         const values = tag.map(t => ({tag:t, type: "DESIGN", id: designId, cate: req.body.category_level1}));
+         const sql = `INSERT INTO opendesign.tags (tag, type, id, cate) VALUES ?`;
+         await connection.query(sql, [values.map(item => [item.tag, item.type, item.id, item.cate])], (er, ro) => {
+	    if(!er) { console.log(ro); } else { console.error(er); }
+         });
+         return data;
+     })
     .then(respond)
     .catch(error);
 };

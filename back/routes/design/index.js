@@ -44,6 +44,20 @@ const grade_server = "3.37.39.154"
 
 const { CheckApply } = require("./CheckApply");
 
+
+router.get("/tags/:type/:cate", (req, res, next) => {
+    const { type, cate } = req.params;
+    
+    const get = () => 
+      new Promise((resolve, reject) => {
+        const sql = `SELECT * FROM opendesign.tags T WHERE T.type = \"${type}\" AND T.cate = ${cate};`;
+        connection.query(sql, (e,r)=>{ if(!e) { resolve(r);} else {console.error(e); reject(e);}});
+      });
+    const respond = (list) => res.status(200).json({success:true, detail: list});
+    const error = (er) => {console.error(er);res.status(400).json({success:false,detail: er});}
+    get().then(respond).catch(error);
+});
+
 router.get("/checkapply/:id/:uid", CheckApply);
 
 router.get("/designList/:page/:sorting?/:cate1?/:cate2?/:keyword?", designList, getDesignList);

@@ -44,7 +44,7 @@ app.use("/vchat", function (req, res, next) {
 });
 app.use("/api", routers);
 
-app.use("/check", function (req, res, next) {
+app.use("/api/check", function (req, res, next) {
   res.status(200).json({ message: "success" });
 });
 

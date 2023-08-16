@@ -10,6 +10,7 @@ const check = (req, res, next) => {
           if (err) {
             reject(err);
           } else {
+	console.log("thumbnail:", rows[0]);
             decoded.thumbnail = rows[0]==undefined?null:rows[0];
             resolve(decoded);
           }
@@ -80,13 +81,14 @@ const check = (req, res, next) => {
   }
 
   const respond = data => {
+     console.log(data);
     res.status(200).json({
       success: true,
-			//exp: req.decoded.exp 
+      // exp: req.decoded.exp 
       info: req.decoded
     });
   };
-
+try{
   isUserDetail(req.decoded.uid)
     .then(isDetail => {
       req.decoded.isDetail = isDetail;
@@ -96,7 +98,10 @@ const check = (req, res, next) => {
     .then(getUserCategory)
     .then(getIsDesigner)
     .then(respond)
-    .catch(next);
+    .catch(e=>{console.error(e);next()});
+} catch (e) {
+  console.error(e);
+}
 };
 
 module.exports = check;

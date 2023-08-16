@@ -80,6 +80,12 @@ exports.designDetail = (req, res, next) => {
     });
     return p;
   }
+  function getTags(data) {
+    return new Promise((resolve)=> {
+      const sql = `SELECT * FROM opendesign.tags T WHERE T.type=\"DESIGN\" and id=${data.uid};`;
+      connection.query(sql, (e, r) => { if(!e){ data.tag = r; resolve(data);}else{resolve(data);}});
+    });
+  }
 
   // 디자인 썸네일 가져오기 (GET)
   function getThumnbail(data) {
@@ -359,6 +365,7 @@ exports.designDetail = (req, res, next) => {
   getDesignInfo(designId)
     .then(getName)
     .then(getCategory)
+    .then(getTags)
     .then(getThumnbail)
     .then(getMemberList)
     .then(getChildrenCount)
