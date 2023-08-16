@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { resolution } from "resolution";
 
 const FormStyle = styled.input.attrs({ type: "text" })`
   * {
@@ -115,7 +116,38 @@ const WarningBox = styled.div`
     display: none;
   }
 `;
-
+const InputField = styled.input`
+  box-sizing: border-box;
+  width: ${resolution((props) =>
+    props.width === null ? "100%" : props.width + "px"
+  )};
+  height: ${resolution((props) => props.height)}px;
+  max-width: ${resolution((props) =>
+    props.width === null ? "100%" : props.width + "px"
+  )};
+  max-height: ${resolution((props) => props.height)}px;
+  background-color: ${(props) =>
+    props.color === null ? "white" : props.color};
+  display: flex;
+  align-items: center;
+  font-size: ${resolution((props) =>
+    props.fontSize === null ? "17" : props.fontSize
+  )}px;
+  color: ${(props) =>
+    props.warning === true
+      ? "red"
+      : props.fontColor === null
+      ? "black"
+      : props.fontColor};
+  border-radius: ${(props) => (props.radius === null ? "0" : props.radius)}px;
+  padding-left: 10px;
+  outline: none;
+  border: ${(props) => (props.warning === true ? "1px solid red" : "none")};
+  ::placeholder {
+    color: ${(props) =>
+      props.placeholderColor === null ? "#C3CCDB" : props.placeholderColor};
+  }
+`;
 const CheckedCharLength = (text) => {
   let str = text;
   let charLength = 0;
@@ -231,12 +263,24 @@ export class InputTag extends Component {
     };
     return (
       <React.Fragment>
-        <FormStyle
+        {/* <FormStyle
           width={this.props.width}
           placeholder={this.props.placeholder}
           onKeyDown={this.onEnterKeyDown}
           onChange={this.onChangeValue}
           value={this.state.value}
+        /> */}
+        <InputField
+          onChangeValue={this.onChangeValue}
+          onChange={this.onChangeValue}
+          onKeyDown={this.onEnterKeyDown}
+          value={this.state.value}
+          placeholder={this.props.placeholder}
+          radius={10}
+          width={this.props.width}
+          height={45}
+          fontSize={20}
+          color={"#E9E9E9"}
         />
         <ShowWarning />
         <TagList>{TagBox}</TagList>

@@ -34,7 +34,7 @@ export const msSec = 10 * 1000;
 export const CATEGORY1_SOFTWARE = 6;
 export const CATEGORY1_PRODUCT = 2;
 
-export const PDFVIEWER_VERSION = "3.1.81";
+export const PDFVIEWER_VERSION = "2.9"//"3.1.81";
 
 const CATE_PLAY = { value: 1, name: "놀기" };
 const CATE_LEARN = { value: 2, name: "배우기" };
@@ -46,8 +46,8 @@ export const CATEs = [
   CATE_MAKE,
 ];
 export const EXP_TYPE_MEET = { value: 1, name: "모임" };
-export const EXP_TYPE_LECT = { value: 2, name: "강의/강좌" };
-export const EXP_TYPE_CONS = { value: 3, name: "자문/상담" };
+export const EXP_TYPE_LECT = { value: 2, name: "강의" };
+export const EXP_TYPE_CONS = { value: 3, name: "상담" };
 export const EXP_TYPE_NORM = { value: 4, name: "일반" };
 export const EXP_TYPE_GAME = { value: 5, name: "게임" };
 export const TYPEs = [

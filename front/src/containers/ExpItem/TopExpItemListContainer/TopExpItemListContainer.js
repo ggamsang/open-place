@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { GetTopExpItemListRequest } from "redux/modules/expitem";
-import ScrollList from "components/Commons/ScrollListNew";
+import ScrollList from "components/Commons/ScrollListNew/ScrollListAgainNew";
 import Loading from "components/Commons/Loading";
 import Item from "components/Item/Item";
 import opendesign_style from "opendesign_style";
@@ -36,14 +36,20 @@ class TopExpItemListContainer extends Component {
           <Loading />
         ) : (
           <ScrollList
-            // width={width}
             ListComponent={Item}
             type="design"
             height={"max-content"}
-            // {...opendesign_style.design_margin}
             dataList={this.props.dataList}
             dataListAdded={this.props.dataListAdded}
-            getListRequest={this.getList}
+            getList={this.getList}
+            // // width={width}
+            // ListComponent={Item}
+            // type="design"
+            // height={"max-content"}
+            // // {...opendesign_style.design_margin}
+            // dataList={this.props.dataList}
+            // dataListAdded={this.props.dataListAdded}
+            // getListRequest={this.getList}
           />
         )}
       </React.Fragment>

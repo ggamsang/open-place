@@ -12,6 +12,7 @@ import noface from "source/thumbnail.png";
 import Cross from "components/Commons/Cross";
 import CheckBox2 from "components/Commons/CheckBox";
 import { Dropdown, Modal } from "semantic-ui-react";
+import Loading from "components/Commons/Loading";
 
 import templateImgDesign from "source/template-image-design.png";
 import templateImgSofware from "source/template-image-software.png";
@@ -98,7 +99,8 @@ class AddContent extends React.Component {
               height="29px"
             >
               <div onClick={this.changeType} className="txt">
-                템플릿 선택하기
+                {/* 템플릿 선택하기 */}
+                단계추가로 시작하기
               </div>
               {/* <Tip>
                 <sup>&nbsp;?</sup>
@@ -136,12 +138,12 @@ class CreateExp extends React.Component {
     super(props);
     this.state = {
       tag: null,
-      exp_type: 0,
+      exp_type: 1,
       exp_type_detail: "",
       thumbnail: null,
       thumbnail_name: null,
       title: null,
-      category: 0,
+      category: 1,
       info: null,
       exp_files: [],
       meet_type: null,
@@ -297,69 +299,81 @@ class CreateExp extends React.Component {
     goto("BACK");
   };
   onClickOK = async (event) => {
-    await this.setState({ loading: true });
-    const {
-      contents,
-      exp_type,
-      category,
-      title,
-      is_project,
-      thumbnail,
-      thumbnail_name,
-    } = this.state;
-    console.clear();
-    console.log(this.state);
-    // return;
-    // uid, user_id, title, explanation, thumbnail,
-    // category_level1, design_type, category_level2,
-    // category_level3, is_commercial, is_public,
-    // is_modify, is_display_creater, is_problem,
-    // parent_design, create_time, update_time, is_project,
-    // is_members, d_flag
-
-    contents &&
-      contents.map((content) => {
-        delete content.initClick;
-        return content;
-      });
-    // return;
-    let data = {
-      title: title,
-      // uid: this.props.userInfo.uid,
-      is_project: is_project,
-      contents: contents, // [*]
-      category_level1: category,
-      design_type: exp_type,
-      files: [{ key: "thumbnail[]", value: thumbnail, name: thumbnail_name }],
-      // is_commercial: license1 ? 1 : 0,
-      // is_display_creater: license2 ? 1 : 0,
-      // is_modify: license3 ? 1 : 0,
-      //  is_problem: is_problem ? 1 : 0,
-      // members: {
-      //   add: this.state.addmem,
-      //   del: this.state.delmem,
-      // },
-
-      // added
-      type: this.state.type,
-      steps: this.state.steps,
-    };
-    // console.log(data);
-    // return;
     let designId = null;
-    this.props
-      .CreateDesignRequest(data, this.props.token)
-      .then(async (res) => {
-        if (res.success) {
-          designId = res.design_id;
-          window.location.href = `/exp/${designId}`;
-        }
-      })
-      .catch((err) =>
-        alert(err + "와 같은 이유로 다음 단계로 진행할 수 없습니다.")
-      );
+    await this.setState({ loading: true });
 
-    await this.setState({ loading: false });
+    try {
+      const {
+        contents,
+        exp_type,
+        category,
+        title,
+        is_project,
+        thumbnail,
+        thumbnail_name,
+        tag,
+      } = this.state;
+      if (
+        title === "" ||
+        exp_type === 0 ||
+        category === 0 ||
+        thumbnail_name === ""
+      ) {
+        alert("필수항목을 완성해주세요.");
+        this.setState({ loading: false });
+        return;
+      }
+      // return;
+      // uid, user_id, title, explanation, thumbnail,
+      // category_level1, design_type, category_level2,
+      // category_level3, is_commercial, is_public,
+      // is_modify, is_display_creater, is_problem,
+      // parent_design, create_time, update_time, is_project,
+      // is_members, d_flag
+
+      contents &&
+        contents.map((content) => {
+          delete content.initClick;
+          return content;
+        });
+      // return;
+      let data = {
+        title: title,
+        // uid: this.props.userInfo.uid,
+        is_project: is_project,
+        contents: contents, // [*]
+        category_level1: category,
+        design_type: exp_type,
+        files: [{ key: "thumbnail[]", value: thumbnail, name: thumbnail_name }],
+        // is_commercial: license1 ? 1 : 0,
+        // is_display_creater: license2 ? 1 : 0,
+        // is_modify: license3 ? 1 : 0,
+        //  is_problem: is_problem ? 1 : 0,
+        // members: {
+        //   add: this.state.addmem,
+        //   del: this.state.delmem,
+        // },
+
+        // added
+        tag: tag,
+        type: this.state.type,
+        steps: this.state.steps,
+      };
+
+      this.props
+        .CreateDesignRequest(data, this.props.token)
+        .then(async (res) => {
+          if (res.success) {
+            designId = res.design_id;
+            window.location.href = `/exp/${designId}`;
+          }
+          await this.setState({ loading: false });
+        });
+    } catch (e) {
+      alert(e + "와 같은 이유로 다음 단계로 진행할 수 없습니다.");
+      await this.setState({ loading: false });
+    } finally {
+    }
     // await this.setState({ loading: true });
     // const {
     //   thumbnail,
@@ -488,14 +502,16 @@ class CreateExp extends React.Component {
   };
 
   render() {
-    console.log(this.state, this.props);
+    // console.log(this.state, this.props);
     const { step, is_project, contents } = this.state;
-    console.log(this.props.DesignDetail);
+    // console.log(this.props.DesignDetail);
     return (
       <styled.Main>
         <styled.AddExpText>경험 등록</styled.AddExpText>
 
-        <styled.Wrapper>
+        {this.state.loading && <Loading />}
+
+        {/* <styled.Wrapper> */}
           <styled.Wrapper>
             <styled.AddThumbnail>
               <span>썸네일 이미지 등록</span>
@@ -568,7 +584,7 @@ class CreateExp extends React.Component {
               </styled.CategoryDiv>
 
               <styled.TagDiv>
-                <div>태그</div>
+                <div >태그</div>
                 <div>
                   <InputTag
                     placeholder={"태그를 입력하세요."}
@@ -579,7 +595,8 @@ class CreateExp extends React.Component {
               </styled.TagDiv>
             </styled.InfoBox>
           </styled.Wrapper>
-        </styled.Wrapper>
+        {/* </styled.Wrapper> */}
+
         <styled.Wrapper>
           <styled.ExpDetailBox>
             <styled.AddExpText>경험상세</styled.AddExpText>
@@ -678,14 +695,15 @@ class CreateExp extends React.Component {
                     <AddContent
                       getValue={this.onAddValue}
                       order={0}
-                      change={() =>
-                        this.setState({ type: "grid", is_project: 1 })
-                      }
+                      change={async () => {
+                        this.setState({ type: "grid", is_project: 1 });
+                        await this.setState({ template: "empty" });
+                      }}
                     />
                   )}
                 </React.Fragment>
               ) : null}
-              {this.state.type === "grid" ? (
+              {/* {this.state.type === "grid" ? (
                 <styled.DesignTemplateSelector>
                   <div className="title">
                     템플릿을 선택하시면 보다 편하게 작업을 시작하실 수 있습니다!
@@ -710,7 +728,7 @@ class CreateExp extends React.Component {
                       ))}
                   </div>
                 </styled.DesignTemplateSelector>
-              ) : null}
+              ) : null} */}
 
               {this.state.type === "grid" &&
               this.state.template != null &&
@@ -724,24 +742,37 @@ class CreateExp extends React.Component {
                       type={this.state.template}
                     />
                   </div>
-                  <div className="title">
+                  {/* <div className="title">
                     선택하신 템플릿으로 시작하시고 싶으시다면 완성된 경험아이템
                     등록하기 버튼을 클릭해주세요.
-                  </div>
+                  </div> */}
                 </styled.EditorWrapper>
               ) : null}
             </div>
           </styled.ExpDetailBox>
         </styled.Wrapper>
 
-        <styled.Wrapper>
-          <styled.AddButton onClick={this.onClickOK}>
+        <styled.ButtonWrapper>
+          <styled.AddButton
+            disabled={this.state.loading}
+            onClick={async (e) => {
+              if (this.state.loading) {
+                alert("처리중입니다.");
+                return;
+              }
+              await this.onClickOK(e);
+              // console.log("job");
+
+              // await this.setState({ loading: false });
+              // console.log(4);
+            }}
+          >
             <span>등록하기</span>
           </styled.AddButton>
           <styled.CancelButton onClick={this.onClickCancel}>
             <span>취소하기</span>
           </styled.CancelButton>
-        </styled.Wrapper>
+        </styled.ButtonWrapper>
         {/* <styled.Footer /> */}
       </styled.Main>
     );

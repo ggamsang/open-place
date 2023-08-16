@@ -8,16 +8,14 @@ import Loading from "components/Commons/Loading";
 import CardSourceContainer from "containers/ExpItem/CardSourceContainer";
 import { confirm } from "components/Commons/Confirm/Confirm";
 import { alert } from "components/Commons/Alert/Alert";
-// css styling
+// import new_logo_chat from "source/new_logo_chat.svg";
+// import new_logo_msg from "source/new_logo_msg.svg";
 
-import new_logo_chat from "source/new_logo_chat.svg";
-import new_logo_msg from "source/new_logo_msg.svg";
+// css styling
 const Wrapper = styled.div`
   width: 100%;
-  min-width: 1000px;
-  max-width: 1740px;
-  // padding-left: 38px;
-  // padding-right: 38px;
+  // min-width: 1000px;
+  max-width: 1920px;
   margin: auto;
 `;
 const ViewWrapper = styled(Grid)`

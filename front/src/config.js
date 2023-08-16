@@ -5,6 +5,7 @@ if (process.env.REACT_APP_TYPE === "local") {
     host = process.env.REACT_APP_LOCAL_URL;
 } else if (process.env.REACT_APP_TYPE === "aws") {
     host = process.env.REACT_APP_AWS_URL;
+    // host = "https://13.125.55.195/api";
 } else if (process.env.REACT_APP_TYPE === "aws_dev") {
     host = process.env.REACT_APP_DEV_URL;
 } else;

@@ -1,11 +1,15 @@
 import styled from "styled-components";
 import osdcss from "opendesign_style";
-import { Dropdown, Modal } from "semantic-ui-react";
-
+import { Dropdown,  } from "semantic-ui-react";
 
 export const EditorWrapper = styled.div`
 // max-width:853px;
-width: 100%;
+// width: 100%; 
+// display: flex;
+// justify-contents: center;
+width: max-content;
+margin: auto;
+
 .title {
   width: 100%;
   text-align: center;
@@ -272,6 +276,10 @@ export const NewController = styled.div`
   cursor: pointer;
   margin-left: 10px;
   margin-right: 10px;
+
+  @media only screen and (max-width: 680px) {
+    font-size: 1rem !important;
+  }
 `;
 
 export const Main = styled.div`
@@ -281,7 +289,7 @@ export const Main = styled.div`
   //   align-items: center;
   width: 100%;
   max-width: 1920px;
-  min-width: 1300px;
+  // min-width: 1300px;
 `;
 
 export const AddExpText = styled.div`
@@ -297,7 +305,18 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   // align-items: center;
+  
+  @media only screen and (max-width: 1000px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 
 export const AddThumbnail = styled.div`
   width: 457px;
@@ -349,8 +368,9 @@ export const ThumbnailImg = styled.div`
 export const InfoBox = styled.div`
   // width: 1329px;
   // min-height: 665px;
-  height: 510px;
-  width: 750px;
+  height: 510px;  
+  width: 100%;
+  max-width: 750px;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 2px solid #efefef;
   box-shadow: 2px 2px 5px #00000029;
@@ -358,7 +378,13 @@ export const InfoBox = styled.div`
   margin-left: 20px;
   margin-top: 20px;
   padding: 20px 50px;
-  // *{border:1px solid red;}
+  // *{ border: 1px solid red; }
+  @media only screen (max-width: 800px) {
+    margin: 0px;
+    margin-left: 0px;
+    padding: 5px 15px;
+    width: 100%;
+  }
 `;
 
 export const InfoBoxInnerDiv = styled.div`
@@ -373,11 +399,13 @@ export const TitleDiv = styled.div`
   align-items: center;
   margin-top: 46px;
   div:nth-child(1) {
+    min-width: 50px;
     width: 197px;
     font: normal normal bold 20px/24px Pretendard;
     letter-spacing: 0px;
     color: #707070;
     // margin-left: 70px;
+    @media only screen and (max-width: 700px) { width: max-content; margin-right: 35px;}
   }
   div:nth-child(2) {
     margin: 0;
@@ -422,6 +450,7 @@ export const CategoryDiv = styled.div`
     letter-spacing: 0px;
     color: #707070;
     // margin-left: 70px;
+    @media only screen and (max-width: 700px) { width: max-content; margin-right: 15px;}
   }
 `;
 
@@ -464,13 +493,23 @@ export const TagDiv = styled.div`
   display: flex;
   // justify-content: center;
   align-items: center;
-  margin-top: 28px;
+  margin-top: 46px;
   div:nth-child(1) {
+    min-width: 50px;
     width: 197px;
     font: normal normal bold 20px/24px Pretendard;
     letter-spacing: 0px;
     color: #707070;
     // margin-left: 70px;
+    @media only screen and (max-width: 700px) { width: max-content; margin-right: 35px;}
+  }
+  div:nth-child(2) {
+    margin: 0;
+    width: max-content;
+    font: normal normal normal 20px/24px Pretendard;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
   }
 `;
 
@@ -664,7 +703,9 @@ export const CategoryBox = styled.div`
 `;
 
 export const ExpDetailBox = styled.div`
-  width: 1250px;
+  min-width: 450px;
+  width: 100%;
+  max-width: 1250px;
   padding: 30px;
   // min-height: 280px;
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -703,7 +744,7 @@ export const AddFile = styled.div`
 export const AddButton = styled.button`
   width: 210px;
   height: 42px;
-  background: #ff0000 0% 0% no-repeat padding-box;
+  background: ${props=>props.disabled?"#777":"#ff0000"} 0% 0% no-repeat padding-box;
   opacity: 1;
   margin-top: 50px;
   margin-bottom: 236px;

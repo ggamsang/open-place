@@ -168,7 +168,7 @@ export function GetDesignListRequest(
 ) {
   //   const url = `${host}/design/designList_newversion/${page}/${sort}/${cate1}/${cate2}/${cate3}/${keyword}`;
   const url = `${host}/design/explist/${page}/${sort}/${cate1}/${keyword}`;
-  // console.log("url:", url);
+  console.log("url:", url);
   return (dispatch) => {
     return fetch(url, {
       headers: { "Content-Type": "application/json" },

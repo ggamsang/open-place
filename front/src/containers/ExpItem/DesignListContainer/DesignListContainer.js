@@ -7,7 +7,7 @@ import {
 import { GetCategoryAllRequest } from "redux/modules/category";
 import Category from "components/Commons/Category";
 import OrderOption2 from "components/Commons/OrderOption/OrderOption2";
-import ScrollList from "components/Commons/ScrollListNew";
+import ScrollList from "components/Commons/ScrollListNew/ScrollListAgainNew";
 import Loading from "components/Commons/Loading";
 import styled from "styled-components";
 import opendesign_style from "opendesign_style";
@@ -18,8 +18,9 @@ const Wrapper = styled.div`
   // margin-top:90px;
   .category_wrapper {
     width: 100%;
-    padding-left: 41px;
-    padding-top: 19px;
+    align-items: center;
+    // padding-left: 41px;
+    // padding-top: 19px;
   }
   .content {
     // padding-left: 41px;
@@ -48,6 +49,85 @@ const Wrapper = styled.div`
     }
   }
 `;
+const TagsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding-right: 30px;
+  position: relative;
+  button {
+    background-color: gray;
+    // border: 1px solid black;
+    position: absolute;
+    bottom: -35px;
+    color: white;
+    font-size: 1.5rem;
+    padding: 5px 10px;
+    border-radius: 15px;
+  }
+  .category {
+  }
+  .main_category {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .sub_category {
+    width: 100%;
+    max-width: max-content;
+    margin-top: 9px;
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 41px;
+    height: max-content;
+    padding: 6px 26px 7px 26px;
+    border: 1px solid #eaeaea;
+    background-color: white;
+    box-shadow: 8px 8px 8px #4141411a;
+    margin-right: 30px;
+  }
+  .selected {
+    color: red;
+  }
+
+  .button {
+    min-width: 174px;
+    height: 41px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    font-family: Spoqa Han Sans Neo;
+    font-weight: medium;
+    box-shadow: 8px 8px 8px #0000002b;
+    cursor: pointer;
+    margin-right: 51px;
+  }
+  .blue {
+    background-color: #1262ab;
+  }
+  .purple {
+    background-color: #7e1e9b;
+  }
+  .green {
+    background-color: #1e9b79;
+  }
+`;
+const MainElement = styled.div`
+  min-width: max-content;
+  height: 41px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-family: Spoqa Han Sans Neo;
+  font-weight: Medium;
+  cursor: pointer;
+  margin-right: 26px;
+`;
 class DesignListContainer extends Component {
   constructor(props) {
     super(props);
@@ -60,6 +140,8 @@ class DesignListContainer extends Component {
       sub_category: { text: null, value: null },
       third_category: { text: null, value: null },
       category2: [],
+      tags: [],
+      tags_fold: true,
     };
     this.handleReload = this.handleReload.bind(this);
     this.handleChangeCategory = this.handleChangeCategory.bind(this);
@@ -70,15 +152,27 @@ class DesignListContainer extends Component {
     this.changeCategory = this.changeCategory.bind(this);
     this.handleResize = this.handleResize.bind(this);
   }
-  componentDidMount() {
-    this.props.GetDesignListRequest(
-      0,
-      "update",
-      this.props.cate1,
-      this.props.keyword
-    );
+  async componentDidMount() {
+    // await this.props.GetDesignListRequest(
+    //   0,
+    //   "update",
+    //   this.props.cate1,
+    //   this.props.keyword
+    // );
     window.addEventListener("resize", this.handleResize, false);
+    this.GetDesignTagListRequest();
   }
+  GetDesignTagListRequest = () => {
+    const url = `https://place.opensrcdesign.com/api/design/tags/design/${this.props.cate1}`;
+    fetch(url, {
+      header: { "Content-Type": "application/json" },
+      method: "GET",
+    })
+      .then((r) => r.json())
+      // .then(console.log)
+      .then((r) => this.setState({ tags: r.detail || [] }))
+      .catch(console.error);
+  };
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleResize, false);
   }
@@ -236,7 +330,8 @@ class DesignListContainer extends Component {
   async getList(page) {
     const { main_category, sub_category, third_category, keyword, this_order } =
       this.state;
-    return this.props.GetDesignListRequest(
+    console.log("get ::", page);
+    this.props.GetDesignListRequest(
       page,
       this_order || "update",
       this.props.cate1,
@@ -254,7 +349,18 @@ class DesignListContainer extends Component {
     }
     this.handleChangeCategory(category);
   }
-
+  ToggleFoldTagList = () => {
+    this.setState({ tags_fold: !this.state.tags_fold });
+  };
+  removeDuplicates = (arr) => {
+    let unique = [];
+    arr.forEach((element) => {
+      if (!unique.includes(element)) {
+        unique.push(element);
+      }
+    });
+    return unique;
+  };
   render() {
     const {
       main_category,
@@ -263,24 +369,36 @@ class DesignListContainer extends Component {
       third_category,
       reload,
       this_order,
+      tags,
+      tags_fold,
     } = this.state;
     const { category1, category2, category3, Count, status } = this.props;
-    console.log(this.props);
+    console.log(this.props, tags);
     return (
       <Wrapper>
-        {/* <div className="category_wrapper">
-            <Category
-              thirdcategory_clicked={this.handleChangeThirdCategory}
-              subcategory_clicked={this.handleChangeSubCategory}
-              category_clicked={this.handleChangeCategory}
-              category1={category1}
-              category2={this.state.category2}
-              category3={this.state.category3}
-              main_selected={main_category}
-              sub_selected={sub_category}
-              third_selected={third_category}
-            />
-          </div> */}
+        <div className="category_wrapper">
+          {tags.length > 0 && (
+            <TagsContainer>
+              {[...new Set(tags.map((item) => item.tag))]
+                ?.slice(0, tags_fold ? 10 : undefined)
+                .map((item, index) => (
+                  <MainElement key={index}>{item}</MainElement>
+                ))}
+              <button onClick={this.ToggleFoldTagList}>
+                {tags_fold ? "펼쳐보기" : "접기"}
+              </button>
+            </TagsContainer>
+          )}
+          {/* // thirdcategory_clicked={this.handleChangeThirdCategory}
+            // subcategory_clicked={this.handleChangeSubCategory}
+            // category_clicked={this.handleChangeCategory}
+            // category1={category1}
+            // category2={this.state.category2}
+            // category3={this.state.category3}
+            // main_selected={main_category}
+            // sub_selected={sub_category}
+            // third_selected={third_category} * /} */}
+        </div>
 
         <div className="content">
           <div className="header_box">
@@ -300,18 +418,9 @@ class DesignListContainer extends Component {
               <Loading />
             ) : (
               <ScrollList
-                // {...opendesign_style.design_margin}
-                // reload={reload}
-                // handleReload={this.handleReload}
-                // type="design"
-                // dataList={this.props.DesignList}
-                // dataListAdded={this.props.DesignListAdded}
-                // getListRequest={this.getList}
-                // width={width}
                 ListComponent={Item}
                 type="design"
                 height={"max-content"}
-                // {...opendesign_style.design_margin}
                 dataList={this.props.DesignList}
                 dataListAdded={this.props.DesignListAdded}
                 getList={this.getList}

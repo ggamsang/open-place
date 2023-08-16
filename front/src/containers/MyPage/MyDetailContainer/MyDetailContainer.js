@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { GetMyDetailRequest } from "redux/modules/personal";
+import {
+  UpdateUserDetailRequest,
+  GetMyDetailRequest,
+} from "redux/modules/personal";
 import {
   GetDesignerCountRequest,
   GetGroupInDesignerRequest,
@@ -11,33 +14,16 @@ import {
   GetLikeDesignerInDesignerRequest,
   GetTheBestDesignDesignerRequest,
 } from "redux/modules/designer";
-import { SignOutRequest } from "redux/modules/auth";
+import { SignOutRequest, CheckNickNameRequest } from "redux/modules/auth";
 import MyDetail from "components/Users/MyDetail/NewMyDetail";
 
 class MyDetailContainer extends Component {
   componentWillMount() {
     this.props.GetMyDetailRequest(this.props.token);
-    // this.props.GetDesignerCountRequest(this.props.userInfo.uid);
   }
 
   render() {
-    return (
-      <MyDetail {...this.props} />
-      // <React.Fragment>
-
-      //   {/* {window.innerWidth < 500 ? (
-      //     <React.Fragment>
-      //       <MypageHeaderMobile {...this.props} />
-      //       <MypageBodyMobile {...this.props} id={this.props.userInfo.uid} />
-      //     </React.Fragment>
-      //   ) : (
-      //     <React.Fragment>
-      //       <MypageHeader {...this.props} />
-      //       <MypageBody {...this.props} id={this.props.userInfo.uid} />
-      //     </React.Fragment>
-      //   )} */}
-      // </React.Fragment>
-    );
+    return <MyDetail {...this.props} />;
   }
 }
 
@@ -83,6 +69,9 @@ const mapDispatchToProps = (dispatch) => ({
   GetTheBestDesignDesignerRequest: (id) =>
     dispatch(GetTheBestDesignDesignerRequest(id)),
   SignOutRequest: () => dispatch(SignOutRequest()),
+  CheckNickNameRequest: (nick) => dispatch(CheckNickNameRequest(nick)),
+  UpdateUserDetailRequest: (data, token) =>
+    dispatch(UpdateUserDetailRequest(data, token)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyDetailContainer);

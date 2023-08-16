@@ -11,46 +11,44 @@ import {
 import { DESIGN_NOT_FOUND } from "redux/modules/expitem/design";
 import host from "config";
 import {
-  RateExpDiv,
-  RateDiv,
-  Rate,
-  RateReview,
-  RateStarIcon,
-  RateNumRate,
-  RateNumRate2,
-  RateIcon,
-  RateBar,
   Wrapper,
   ExpInfoDiv,
   ExpInfoText,
   ExpInnerDiv,
   ExpName,
   ExpImg,
+  ExpInnerButtonBox,
   NameAndTagsDiv,
   CateType,
-  TagButton,
-  TagButtonText,
+  Tags,
   Price,
   StarIcon,
   LikeButton,
   PurchaseButton,
   ManageButton,
   ReviewText,
+  RejectButton,
+  AcceptButton,
+  KickoutButton,
+  MyDesignLabel,
 } from "./styles";
-
+import NumRate from "./NumRate";
 import {
+  CATEs,
+  TYPEs,
   EXP_TYPE_CONS,
   EXP_TYPE_GAME,
   EXP_TYPE_LECT,
   EXP_TYPE_MEET,
   EXP_TYPE_NORM,
 } from "constant";
+import Design from "components/Designs/Design";
 
-import ExpTypeCons from "./ExpTypeCons";
-import ExpTypeGame from "./ExpTypeGame";
-import ExpTypeLect from "./ExpTypeLect";
-import ExpTypeMeet from "./ExpTypeMeet";
-import ExpTypeNorm from "./ExpTypeNorm";
+import DesignDetailStepContainer from "containers/ExpItem/DesignDetailStepContainer";
+import DesignDetailViewContainer from "containers/ExpItem/DesignDetailViewContainer";
+import GroupNoticeContainer from "containers/Groups/GroupNoticeContainer";
+
+import { goto } from "navigator";
 
 class DesignDetail extends Component {
   constructor(props) {
@@ -60,6 +58,7 @@ class DesignDetail extends Component {
       editor: false,
       manage: false,
       applied: null,
+      fold: true,
     };
   }
   componentDidMount() {
@@ -131,9 +130,11 @@ class DesignDetail extends Component {
   onClickBuy = async (event) => {
     const { userInfo, DesignDetail, token } = this.props;
     // // joinMember = async () => {
-    // if (!userInfo || !token) {
-    //   await alert("로그인 해주세요.", "확인");
-    // } else if (DesignDetail.waitingStatus === 1) {
+    if (!userInfo || !token) {
+      await alert("로그인 해주세요.", "확인");
+      return;
+    }
+    //else if (DesignDetail.waitingStatus === 1) {
     //   await alert("가입 대기중인 디자인입니다.", "확인");
     // } else {
     //   const data = [{ uid: userInfo.uid }];
@@ -198,9 +199,21 @@ class DesignDetail extends Component {
   onClickModify = () => {
     window.location.href = `/expModify/${this.props.DesignDetail.uid}`;
   };
-  onClickLike = () => {
-    alert("");
+  onClickLike = async () => {
+    const { userInfo, DesignDetail, token } = this.props;
+    if (!userInfo || !token) {
+      await alert("로그인 해주세요.", "확인");
+      return;
+    }
+    this.props
+      .LikeDesignRequest(DesignDetail.uid, token)
+      .then(
+        (rst) =>
+          rst?.success &&
+          this.props.GetLikeDesignRequest(DesignDetail.uid, token)
+      );
   };
+  onClickManage = () => this.setState({ manage: !this.state.manage });
   request = () => {
     return new Promise(async (resolve, reject) => {
       fetch(
@@ -220,11 +233,6 @@ class DesignDetail extends Component {
     });
   };
   CheckYouAlreadyApplied = async () => {
-    // console.clear();
-    // alert(this.props.DesignDetail.uid);
-    // alert(this.props.token);
-    // alert(this.props.userInfo.uid);
-    // console.log("check you are already applied");
     const { userInfo, DesignDetail } = this.props;
     if (userInfo && DesignDetail) {
       await this.request().then((data) => {
@@ -234,11 +242,13 @@ class DesignDetail extends Component {
       });
     }
   };
+  setFold = () => {
+    this.setState({ fold: !this.state.fold });
+  };
   render() {
-    const { DesignDetail, userInfo, forkDesignList } = this.props;
-    const { manage } = this.state;
-    // const { isMyDesign } = this.state;
-
+    const { DesignDetail, token, userInfo, forkDesignList } = this.props;
+    const { manage, fold } = this.state;
+    console.log(this.props);
     if (DesignDetail == null)
       return (
         <Wrapper>
@@ -246,92 +256,319 @@ class DesignDetail extends Component {
         </Wrapper>
       );
 
-    // console.clear();
     const isGroupExp = [1, 2, 3].includes(DesignDetail.design_type);
-    //  &&
-    // DesignDetail.is_parent &&
-    // DesignDetail.parent_design === null; // this.props.DesignDetail?.design_type)
     const isGroupMember =
       [1, 2, 3].includes(DesignDetail.design_type) &&
-      // DesignDetail.d_flag === 1 &&
-      DesignDetail.parent_design !== null;
-    console.log(isGroupExp);
-    console.log(this.props, this.state);
+      forkDesignList?.filter(
+        (design) => design.user_id === userInfo?.uid && design.d_flag === 1
+      )?.length > 0;
+    const cateName = CATEs.filter(
+      (cate) => cate.value === DesignDetail.category_level1
+    )[0]?.name;
+    const typeName = TYPEs.filter(
+      (type) => type.value === DesignDetail.design_type
+    )[0]?.name;
+    // [놀기, 배우기, 만들기] x [모임, 강의, 상담, 일반, 게임]
 
+    // 그룹인가? 개설자인가? 신청인가?
+    // 폈는가? 펴지 않았는가?
     return (
       <Wrapper>
-        {DesignDetail.design_type === EXP_TYPE_MEET.value && (
-          <ExpTypeMeet
-            {...this.props}
-            {...this.state}
-            onClickForkDesignKickOut={this.onClickForkDesignKickOut}
-            onClickForkDesignAccept={this.onClickForkDesignAccept}
-            onClickForkDesignDeny={this.onClickForkDesignDeny}
-            onClickManage={() => this.setState({ manage: !this.state.manage })}
-            onClickVChat={this.onClickVChat}
-            onClickChat={this.onClickChat}
-            onClickLike={this.onClickLike}
-            onClickBuy={this.onClickBuy}
-            onClickModify={this.onClickModify}
-            isGroupExp={isGroupExp}
-            isGroupMember={isGroupMember}
-          />
-        )}
+        <ExpInfoText>경험정보</ExpInfoText>
+        {/* head */}
+        <ExpInfoDiv>
+          <StarIcon like={this.props.like} />
 
-        {DesignDetail.design_type === EXP_TYPE_LECT.value && (
-          <ExpTypeLect
-            {...this.props}
-            {...this.state}
-            onClickForkDesignKickOut={this.onClickForkDesignKickOut}
-            onClickForkDesignAccept={this.onClickForkDesignAccept}
-            onClickForkDesignDeny={this.onClickForkDesignDeny}
-            onClickManage={() => this.setState({ manage: !this.state.manage })}
-            onClickVChat={this.onClickVChat}
-            onClickChat={this.onClickChat}
-            onClickLike={this.onClickLike}
-            onClickBuy={this.onClickBuy}
-            onClickModify={this.onClickModify}
-            isGroupExp={isGroupExp}
-            isGroupMember={isGroupMember}
-          />
-        )}
+          <ExpImg url={DesignDetail?.img?.l_img} />
+          <ExpInnerDiv>
+            <NameAndTagsDiv>
+              <div>
+                <ExpName>{DesignDetail?.title}</ExpName>
+                <CateType>
+                  ({cateName}) x ({typeName})
+                </CateType>
+              </div>
+            </NameAndTagsDiv>
+            <Price>
+              {this.state.isMyDesign ? (
+                <>내 경험아이템</>
+              ) : (
+                <>작성자: {DesignDetail.userName}</>
+              )}
+            </Price>
+            <Tags>
+              {DesignDetail.tag?.length > 0 && "태그"}
+              <div className="fold">
+                {DesignDetail.tag?.slice(0, 5).map((tag) => (
+                  <span
+                    key={tag.uid}
+                    style={{
+                      padding: "5px 10px",
+                      backgroundColor: "gray",
+                      color: "white",
+                      marginLeft: "5px",
+                      borderRadius: "5px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    &nbsp;&nbsp;{tag.tag}
+                  </span>
+                ))}
+              </div>
+              <div className="box">
+                {DesignDetail.tag?.length > 0 && (
+                  <select>
+                    {DesignDetail.tag?.slice(0, 5).map((tag) => (
+                      <option
+                        key={tag.uid}
+                        style={{
+                          padding: "5px 10px",
+                          backgroundColor: "gray",
+                          color: "white",
+                          marginLeft: "5px",
+                          borderRadius: "5px",
+                          cursor: "pointer",
+                        }}
+                      >
+                        &nbsp;&nbsp;{tag.tag}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
+            </Tags>
+            <NumRate />
+          </ExpInnerDiv>
 
-        {DesignDetail.design_type === EXP_TYPE_CONS.value && (
-          <ExpTypeCons
-            {...this.props}
-            {...this.state}
-            onClickForkDesignKickOut={this.onClickForkDesignKickOut}
-            onClickForkDesignAccept={this.onClickForkDesignAccept}
-            onClickForkDesignDeny={this.onClickForkDesignDeny}
-            onClickManage={() => this.setState({ manage: !this.state.manage })}
-            onClickVChat={this.onClickVChat}
-            onClickChat={this.onClickChat}
-            onClickLike={this.onClickLike}
-            onClickBuy={this.onClickBuy}
-            onClickModify={this.onClickModify}
-            isGroupExp={isGroupExp}
-            isGroupMember={isGroupMember}
-          />
-        )}
+          <ExpInnerButtonBox>
+            {/* like */}
+            {DesignDetail.user_id !== userInfo?.uid && (
+              <LikeButton onClick={this.onClickLike}>
+                <span>{DesignDetail.isLike !== 0 ? "❤️" : ""}좋아요</span>
+              </LikeButton>
+            )}
 
-        {DesignDetail.design_type === EXP_TYPE_NORM.value && (
-          <ExpTypeNorm {...this.props} {...this.state} />
-        )}
+            {/* chat & vchat */}
+            {isGroupExp &&
+              (isGroupMember || DesignDetail.user_id === userInfo?.uid) &&
+              token && (
+                <React.Fragment>
+                  <ManageButton onClick={this.onClickVChat}>
+                    <span>화상회의</span>
+                  </ManageButton>
+                  <ManageButton onClick={this.onClickChat}>
+                    <span>채팅</span>
+                  </ManageButton>
+                </React.Fragment>
+              )}
 
-        {DesignDetail.design_type === EXP_TYPE_GAME.value && (
-          <ExpTypeGame {...this.props} {...this.state} />
-        )}
+            {/* apply */}
+            {isGroupExp &&
+              DesignDetail.parent_design === null &&
+              this.state.applied === false &&
+              DesignDetail.user_id !== userInfo?.uid && (
+                <PurchaseButton onClick={this.onClickBuy}>
+                  <span>{typeName}신청하기</span>
+                </PurchaseButton>
+              )}
 
-        {!isGroupMember && (
-          <>
-            {/*  */}
-            {/* <ReviewText>리뷰</ReviewText>
-            <div className="reviewWrap">
-              <ReviewContainer
-                write={this.state.write}
-                onCloseWriteModal={() => this.setState({ write: false })}
+            {/* group notice / board */}
+            {isGroupExp && (
+              <GroupNoticeContainer
+                ButtonStyled={LikeButton}
+                user_id={userInfo?.uid}
+                owner_id={DesignDetail.user_id}
+                id={
+                  isGroupMember ? DesignDetail.parent_design : DesignDetail.uid
+                }
+                token={this.props.token}
               />
-            </div> */}
+            )}
+
+            {/* goto parent design */}
+            {DesignDetail.parent_design && (
+              <PurchaseButton
+                onClick={() => goto("EXP", DesignDetail.parent_design)}
+              >
+                <span>개설자페이지로 이동</span>
+              </PurchaseButton>
+            )}
+
+            {/* group manage */}
+            {token &&
+              isGroupExp &&
+              DesignDetail.parent_design === null &&
+              DesignDetail.user_id === userInfo?.uid && (
+                <ManageButton onClick={this.onClickManage}>
+                  <span>관리모드</span>
+                  {forkDesignList?.filter((item) => item.d_flag === 0).length >
+                    0 && <b style={{ color: "red" }}>new!!</b>}
+                </ManageButton>
+              )}
+            {/* edit */}
+            {token && DesignDetail.user_id === userInfo?.uid && (
+              <LikeButton onClick={this.onClickModify}>
+                <span>수정하기</span>
+              </LikeButton>
+            )}
+          </ExpInnerButtonBox>
+        </ExpInfoDiv>
+
+        {isGroupExp && DesignDetail?.parent_design === null && (
+          <>
+            {/* manage and child-list */}
+            {manage && (
+              <>
+                <ExpInfoText>그룹관리</ExpInfoText>
+                {forkDesignList &&
+                  forkDesignList.filter((item) => item.d_flag === 0).length ===
+                    0 && <h3>가입신청내역없음</h3>}
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    width: "100%",
+                  }}
+                >
+                  {forkDesignList &&
+                    forkDesignList
+                      .filter((item) => item.d_flag === 0)
+                      .map((item) => (
+                        <div key={item.uid} style={{ position: "relative" }}>
+                          <AcceptButton
+                            onClick={() =>
+                              this.onClickForkDesignAccept(item.uid)
+                            }
+                          >
+                            수락
+                          </AcceptButton>
+                          <RejectButton
+                            onClick={() => this.onClickForkDesignDeny(item.uid)}
+                          >
+                            거절
+                          </RejectButton>
+                          <Design {...item} />
+                        </div>
+                      ))}
+                </div>
+              </>
+            )}
+            <br />
+            {fold && DesignDetail?.parent_design === null && (
+              <div
+                style={{
+                  marginTop: "25px",
+                  display: "flex",
+                  flexWrap: "wrap",
+                  width: "100%",
+                  gap: "10px",
+                }}
+              >
+                <div style={{ width: "330px" }}>
+                  <Design {...DesignDetail} onClick={this.setFold} />
+                </div>
+                {forkDesignList?.length > 0 && (
+                  // DesignDetail.is_parent &&
+                  <>
+                    {forkDesignList
+                      .filter((item) => item.d_flag !== 0)
+                      .filter((item) =>
+                        DesignDetail.user_id !== userInfo?.uid &&
+                        DesignDetail.design_type === EXP_TYPE_CONS.value
+                          ? item.user_id === userInfo?.uid
+                          : item
+                      )
+                      .map((item) => (
+                        <div key={item.uid} style={{ position: "relative" }}>
+                          {DesignDetail.user_id === userInfo?.uid && (
+                            <KickoutButton
+                              onClick={() =>
+                                this.onClickForkDesignKickOut(DesignDetail.uid)
+                              }
+                            >
+                              퇴출
+                            </KickoutButton>
+                          )}
+                          {item.user_id === userInfo?.uid && (
+                            <MyDesignLabel>내 디자인</MyDesignLabel>
+                          )}
+                          <Design
+                            kickout={this.onClickForkDesignKickOut}
+                            {...item}
+                            onClick={() => goto("EXP", item.uid)}
+                          />
+                        </div>
+                      ))}
+                  </>
+                )}
+              </div>
+            )}
+            {!fold && (
+              <div style={{ marginTop: "10px" }}>
+                <ManageButton onClick={this.setFold}>
+                  <span>목록으로</span>
+                </ManageButton>
+                <ExpInfoText>상세정보</ExpInfoText>
+              </div>
+            )}
+            <>
+              {fold ? (
+                <></>
+              ) : (
+                <>
+                  {DesignDetail.is_project === 1 ? (
+                    <DesignDetailStepContainer
+                      editor={DesignDetail.user_id === userInfo?.uid}
+                      design={DesignDetail}
+                      // {...this.state}
+                    />
+                  ) : (
+                    <div className="marginLeft">
+                      <DesignDetailViewContainer
+                        editor={DesignDetail.user_id === userInfo?.uid}
+                        id={DesignDetail.uid}
+                        // {...this.state}
+                        history={this.props.history}
+                      />
+                    </div>
+                  )}
+                </>
+              )}
+            </>
+          </>
+        )}
+        {isGroupExp &&
+          DesignDetail.d_flag === 0 &&
+          DesignDetail.parent_design !== null && (
+            <p
+              style={{
+                fontSize: "2rem",
+                padding: "50px",
+                textAlign: "center",
+                width: "100%",
+              }}
+            >
+              가입신청 중입니다.
+            </p>
+          )}
+        {!isGroupExp && DesignDetail.d_flag === 1 && DesignDetail?.uid && (
+          <>
+            {DesignDetail.is_project === 1 ? (
+              <DesignDetailStepContainer
+                editor={DesignDetail.user_id === userInfo?.uid}
+                design={DesignDetail}
+                // {...this.state}
+              />
+            ) : (
+              <div className="marginLeft">
+                <DesignDetailViewContainer
+                  editor={DesignDetail.user_id === userInfo?.uid}
+                  id={DesignDetail.uid}
+                  // {...this.state}
+                  history={this.props.history}
+                />
+              </div>
+            )}
           </>
         )}
       </Wrapper>
@@ -340,31 +577,3 @@ class DesignDetail extends Component {
 }
 
 export default DesignDetail;
-
-// DesignDetail.is_parent === false &&
-// isMyDesign &&
-// DesignDetail.d_flag === 0 ? (
-//   <React.Fragment>
-//     <div
-//       style={{
-//         width: "100wh",
-//         height: "100vh",
-//         display: "flex",
-//         alignItems: "center",
-//         justifyContent: "center",
-//         // verticalAlign: "center",
-//         textAlign: "center",
-//         flexDirection: "column",
-//       }}
-//     >
-//       <h1>가입승낙 대기중입니다.</h1>
-//       <br />
-//       <button
-//         style={{ padding: "25px", color: "red", fontWeight: "bold" }}
-//         onClick={() => window.history.go(-1)}
-//       >
-//         뒤로가기
-//       </button>
-//     </div>
-//   </React.Fragment>
-// ) : (

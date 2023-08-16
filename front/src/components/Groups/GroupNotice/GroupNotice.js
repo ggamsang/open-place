@@ -157,8 +157,14 @@ export default class GroupNotice extends Component {
   };
 
   render() {
-    const { owner_id, GroupDetail, userInfo, token, hasProgrammingDesign } =
-      this.props;
+    const {
+      owner_id,
+      GroupDetail,
+      userInfo,
+      token,
+      ButtonStyled,
+      hasProgrammingDesign,
+    } = this.props;
     const { /*dialog*/ notice, board, /**/ submitStatus, data, due } =
       this.state;
     const user_id = userInfo && userInfo.uid;
@@ -186,16 +192,28 @@ export default class GroupNotice extends Component {
         ) : null}
 
         <Wrapper>
-          <ButtonPlaceStyle
+          <ButtonStyled
             onClick={() => this.setState({ notice: true, board: false })}
           >
             <span>공지사항</span>
-          </ButtonPlaceStyle>
+          </ButtonStyled>
+          <ButtonStyled
+            onClick={() => this.setState({ notice: false, board: true })}
+          >
+            <span>게시판</span>
+          </ButtonStyled>
+          {/*
+          <ButtonPlaceStyle
+            onClick={() => this.setState({ notice: true, board: false })}>
+            <span>공지사항</span>
+          </ButtonPlaceStyle> 
+          */}
+          {/* 
           <ButtonPlaceStyle
             onClick={() => this.setState({ notice: false, board: true })}
           >
             <span>게시판</span>
-          </ButtonPlaceStyle>
+          </ButtonPlaceStyle> */}
           {/* className="button_ bg_green marginRight2" */}
         </Wrapper>
       </React.Fragment>

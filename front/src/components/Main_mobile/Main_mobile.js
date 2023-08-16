@@ -10,9 +10,9 @@ import new_logo_arrow_left from "source/new_logo_arrow_left.svg"
 import new_logo_arrow_right from "source/new_logo_arrow_right.svg";
 import new_logo_pause from "source/new_logo_pause.svg";
 
-import new_banner_step1 from "source/new_banner_step1x.png";
-import new_banner_step2 from "source/new_banner_step2x.png";
-import new_banner_step3 from "source/new_banner_step3x.png";
+// import new_banner_step1 from "source/new_banner_step1x.png";
+// import new_banner_step2 from "source/new_banner_step2x.png";
+// import new_banner_step3 from "source/new_banner_step3x.png";
 import main_banner_1_button from "source/main-banner-1-button.png";
 import main_banner_2_button from "source/main-banner-2-button.png";
 import main_banner_3_button from "source/main-banner-3-button.png";
@@ -160,7 +160,7 @@ export default class Main_mobile extends Component {
           <SliderWrapper>
             <Slider ref={slider => (this.slider = slider)} {...settings}>
               <Banner height={360} >
-                <img src={new_banner_step2} />
+                {/* <img src={new_banner_step2} /> */}
                 <ButtonOnImage
                   onClick={() => { window.location.href = "/exp/5344" }}
                   src={main_banner_2_button}
@@ -174,7 +174,7 @@ export default class Main_mobile extends Component {
               </Banner>
 
               <Banner height={360} >
-                <img src={new_banner_step1} />
+                {/* <img src={new_banner_step1} /> */}
                 <ButtonOnImage
                   onClick={() => { window.location.href = "/exp/5157" }}
                   src={main_banner_1_button}
@@ -188,7 +188,7 @@ export default class Main_mobile extends Component {
               </Banner>
 
               <Banner height={360}>
-                <img src={new_banner_step3} />
+                {/* <img src={new_banner_step3} /> */}
                 <ButtonOnImage
                   onClick={() => { window.location.href = "/exp/5343" }}
                   src={main_banner_3_button}
