@@ -324,12 +324,11 @@ export const Tags = styled.div`
   }
 `;
 export const Price = styled.div`
-  font: normal normal 400 16px/14px Pretendard;
-  // font-size: 40px;
+  font: ${(props) => props.font || "normal normal 400 16px/14px Pretendard"};
   letter-spacing: 0px;
-  color: #4136f1;
+  color: ${(props) => props.color || "#4136f1"};
   opacity: 1;
-  margin-top: 10px;
+  // margin-top: 10px;
   margin-bottom: 13px;
 `;
 export const CateType = styled.div`
@@ -357,7 +356,6 @@ export const StarIcon = styled.img.attrs({
 `;
 
 const NormalButton = styled.button`
-  
   @media only screen and (max-width: 700px) {
     width: max-content;
     padding: 5px 15px !important;

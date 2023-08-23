@@ -175,7 +175,7 @@ class JoinGroup extends Component {
                   style={{}}
                   onClick={() => this.handleChangeTab("design")}
                 >
-                  디자인
+                  경험
                 </TabItem>
                 <TabItem
                   className={active === "group" && "active"}

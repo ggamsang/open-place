@@ -96,7 +96,7 @@ class ModifyStatus extends Component {
                     className={this.state.active === "design" && "active"}
                     onClick={() => this.handleChangeTab("design")}
                   >
-                    디자인
+                    경험
                 </TabItem>
                   <TabItem
                     className={this.state.active === "group" && "active"}

@@ -555,7 +555,7 @@ class GridEditor extends Component {
                 </GridEditorWrapper>
               </ReactHeight>
             </React.Fragment>
-          ) : null //<div>디자인정보를 가져오고 있습니다.</div>
+          ) : null //<div>경험정보를 가져오고 있습니다.</div>
         }
       </div>
     );

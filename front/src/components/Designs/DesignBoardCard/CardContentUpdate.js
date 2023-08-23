@@ -65,7 +65,7 @@ export class CardContentUpdate extends Component {
               name="content"
               maxLength="1000"
               value={this.props.content}
-              placeholder="디자인의 설명을 입력해주세요. (1000자 이내)"
+              placeholder="경험의 설명을 입력해주세요. (1000자 이내)"
             />
             <Button type="submit">저장</Button>
             <Button

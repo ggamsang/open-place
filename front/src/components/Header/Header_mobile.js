@@ -194,7 +194,7 @@ class Header extends Component {
             visible={1}
           />
         </MenuElement>
-        {/* 로그인 / 디자인 등록 */}
+        {/* 로그인 / 경험 등록 */}
         {this.props.userInfo == null ? ( //유저정보o
           <a onClick={() => this.props.onClickLogin()}>
             <MenuElement className="login-button">

@@ -548,7 +548,7 @@ class Navigation extends Component {
                         isSelect={!(loc[3] || loc[4] || loc[5])}
                         className="menu_tag marginTop1 border-top border-bottom"
                       >
-                        디자인
+                        경험
                       </MenuItem>
                     </a>
 
@@ -715,7 +715,7 @@ class Navigation extends Component {
                     }
                     className="menu_tag marginTop1"
                   >
-                    디자인
+                    경험
                   </MenuItem>
                 </a>
 
@@ -810,7 +810,7 @@ class Navigation extends Component {
               className="menu_tag marginTop1"
             >
               <a className="link_tag" href="/design">
-                디자인
+                경험
               </a>
             </MenuItem>
 
@@ -907,7 +907,7 @@ export default Navigation;
 //                 <li className="IconItem"><Message noti={this.state.alarm} /></li>
 //                 <li className="IconItem"><AlarmContainer {...this.props} alarm={this.state.alarm} /></li>
 //                 <li className="redItem">
-//                 <div onClick={this.gotoCreateDesignPage}>디자인 등록</div></li>
+//                 <div onClick={this.gotoCreateDesignPage}>경험 등록</div></li>
 //             </React.Fragment>
 //         ) : null}
 
@@ -924,7 +924,7 @@ export default Navigation;
 //                 || window.location.pathname.search("/exp/") > -1 ? true : false
 //                     || window.location.pathname.search("/createDesign/") > -1 ? true : false
 //                         || window.location.pathname.search("/modifyDesign/") > -1 ? true : false}>
-//             <a className="link_tag" href="/design">디자인</a></MenuItem>
+//             <a className="link_tag" href="/design">경험</a></MenuItem>
 //         <MenuItem isSelect={window.location.pathname === '/group'
 //             || window.location.pathname.search("/group/") > -1 ? true : false
 //                 || (window.location.pathname.search('/groupDetail/') > -1 ? true : false)

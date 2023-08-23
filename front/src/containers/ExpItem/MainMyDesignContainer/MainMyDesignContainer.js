@@ -66,7 +66,7 @@ class MainMyDesignContainer extends Component {
         {/* title */}
         {this.props.MyMainDesignAdded &&
           (this.props.MyMainDesignAdded.length > 0)
-          ? <HeadMobile>내 디자인 | 관심 디자인</HeadMobile>
+          ? <HeadMobile>내 경험 | 관심 경험</HeadMobile>
           : null}
 
         {/* scroll */}
@@ -90,7 +90,7 @@ class MainMyDesignContainer extends Component {
         {/* title */}
         {this.props.MyMainDesignAdded &&
           (this.props.MyMainDesignAdded.length > 0)
-          ? <Head>내 디자인 | 관심 디자인</Head>
+          ? <Head>내 경험 | 관심 경험</Head>
           : null}
 
         {/* scroll */}

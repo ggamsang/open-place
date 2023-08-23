@@ -14,7 +14,7 @@ class ModifyDesignFormContainer extends Component {
     this.props.GetDesignDetailRequest(this.props.id, this.props.token)
       .then(async ()=>{
         if(this.props.userInfo.uid !== this.props.DesignDetail.user_id){
-          await alert("이 디자인에 대한 수정권한이 없습니다. 이전페이지로 돌아갑니다.","확인")
+          await alert("이 경험에 대한 수정권한이 없습니다. 이전페이지로 돌아갑니다.","확인")
           this.props.history.go(-1)
         } else { this.setState({isAuthor:true})}
       })

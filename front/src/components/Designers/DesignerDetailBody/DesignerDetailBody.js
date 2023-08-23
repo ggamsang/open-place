@@ -237,7 +237,7 @@ class DesignerPageBody extends Component {
                     {/* Count.total_group Count.joined_group Count.total_design + Count.joined_design Count.total_favorite */}
                     <a onClick={() => this.changeCategory(0)}><div className={`tab ${this.state.cateIndex === 0 ? "selected" : ""}`}>그룹({NumberFormat(Count.total_group || 0)})</div></a>
                     <a onClick={() => this.changeCategory(1)}><div className={`tab ${this.state.cateIndex === 1 ? "selected" : ""}`}>참여그룹({NumberFormat(Count.joined_group || 0)})</div></a>
-                    <a onClick={() => this.changeCategory(2)}><div className={`tab ${this.state.cateIndex === 2 ? "selected" : ""}`}>디자인({NumberFormat((Count.total_design || 0) + (Count.joined_design || 0))})</div></a>
+                    <a onClick={() => this.changeCategory(2)}><div className={`tab ${this.state.cateIndex === 2 ? "selected" : ""}`}>경험({NumberFormat((Count.total_design || 0) + (Count.joined_design || 0))})</div></a>
                     <a onClick={() => this.changeCategory(3)}><div className={`tab ${this.state.cateIndex === 3 ? "selected" : ""}`}>관심항목({NumberFormat(Count.total_favorite || 0)})</div></a>
                     <a onClick={() => this.changeCategory(4)}><div className={`tab ${this.state.cateIndex === 4 ? "selected" : ""}`}>경험</div></a>
                 </TabMenu>
@@ -309,7 +309,7 @@ class DesignerPageBody extends Component {
                             : null}
                         {Count.like_design > 0
                             ? <React.Fragment>
-                                <div className="interested second">관심있는 디자인({NumberFormat(Count.like_design)})</div>
+                                <div className="interested second">관심있는 경험({NumberFormat(Count.like_design)})</div>
                                 {this.props.status === "INIT" ?
                                     <Loading /> :
                                     <ScrollList {...opendesign_style.design_margin} handleReload={this.handleReload} reloader={reload}

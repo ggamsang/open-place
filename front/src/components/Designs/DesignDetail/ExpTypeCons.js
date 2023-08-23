@@ -170,7 +170,7 @@ const ExpTypeCons = ({
                                 padding: "10px",
                               }}
                             >
-                              내 디자인
+                              내 경험
                             </p>
                           )}
                           <Design

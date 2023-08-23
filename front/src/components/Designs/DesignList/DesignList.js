@@ -107,7 +107,7 @@ class DesignList extends Component {
           : null;
         return (
           <Head>
-            <span>디자인 </span>
+            <span>경험 </span>
             {this.props.cate1 && this.props.cate1 !== "null" &&
               <span> > {cate1Name.text} </span>
             }

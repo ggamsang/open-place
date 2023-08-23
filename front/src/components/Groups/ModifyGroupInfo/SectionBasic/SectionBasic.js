@@ -174,7 +174,7 @@ export default GroupBasicInfo;
 </TitleBox>
 <ExplainBox>
     <div className="title">설명</div>
-    <textarea id="explainBox" className="inputTextareaBox" placeholder="디자인에 대한 설명을 입력하세요." onChange={this.handleOnChangeExplain} value={this.props.groupExplain} />
+    <textarea id="explainBox" className="inputTextareaBox" placeholder="경험에 대한 설명을 입력하세요." onChange={this.handleOnChangeExplain} value={this.props.groupExplain} />
 </ExplainBox>
 </ContentsBox> */}
 

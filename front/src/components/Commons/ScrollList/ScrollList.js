@@ -397,7 +397,7 @@ class ScrollList extends Component {
         )}
       </FlexContainer>
     ) : null;
-    // <NoData>{type === "design" ? "디자인이" : type === "group" ? "그룹이" : "디자이너가"} 없습니다.</NoData>)
+    // <NoData>{type === "design" ? "경험이" : type === "group" ? "그룹이" : "디자이너가"} 없습니다.</NoData>)
   }
 }
 
@@ -462,6 +462,6 @@ width: ${props => props.type == "design" ? "1780px" : props.type == "group" ? "1
 //       {hasMore&&
 //         <div className="addList" onClick={this.getLoadData}><img className="icon" src={new_logo_arrow_down} /></div>}
 //     </FlexContainer> : null
-//     // <NoData>{type === "design" ? "디자인이" : type === "group" ? "그룹이" : "디자이너가"} 없습니다.</NoData>)
+//     // <NoData>{type === "design" ? "경험이" : type === "group" ? "그룹이" : "디자이너가"} 없습니다.</NoData>)
 //   )
 // }

@@ -165,7 +165,7 @@ class Category extends Component {
             className="button blue"
             onClick={() => (window.location.href = "/createDesign")}
           >
-            디자인 등록하기
+            경험 등록하기
           </div>
         ) : null}
         {isGroup == true ? (

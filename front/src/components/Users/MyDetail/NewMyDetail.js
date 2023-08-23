@@ -6,6 +6,7 @@ import host from "config";
 import Design from "components/Designs/Design";
 import { confirm } from "components/Commons/Confirm/Confirm";
 import { Modal } from "semantic-ui-react";
+import { alert } from "components/Commons/Alert/Alert";
 
 const PROFILE = "Profile";
 const NOTI = "Noti";
@@ -17,12 +18,12 @@ class MyDetail extends React.Component {
     this.state = {
       modal: NONE,
       editName: false,
-      nick_name: null,
+      nick_name: "",
       thumbnail: this.props.userInfo?.l_img || null,
       thumbnail_name: null,
       phone: null,
-      password: null,
-      password_checked: null,
+      password: "",
+      password_checked: "",
       mydesigns: [],
     };
     this.onSubmit = this.onSubmit.bind(this);
@@ -83,44 +84,64 @@ class MyDetail extends React.Component {
         // this.props.token,
         this.state.nick_name
       );
-      if (this.state.nick_name === null || this.state.nick_name === "") {
-        alert("닉네임을 입력해주세요");
-        return;
-      } else if (
+      if (this.state.nick_name === "") {
+        // alert("닉네임을 입력해주세요");
+        // return;
+      }
+      if (
         this.props.checkNickName === true &&
         this.state.nick_name !== this.props.userInfo.nick_name
       ) {
-        alert("중복된 닉네임입니다");
+        await alert("중복된 닉네임입니다");
         return;
       }
-    } else if (this.state.password !== this.state.password_checked) {
-      alert("비밀번호가 일치하지 않습니다");
+    }
+    if (this.state.password !== this.state.password_checked) {
+      await alert("비밀번호가 일치하지 않습니다");
       return;
     }
-
+    if (
+      this.state.password.length != 0 &&
+      this.state.password_checked.length != 0 &&
+      (this.state.password.length < 4 || this.state.password_checked.length < 4)
+    ) {
+      await alert("비밀번호가 너무 짧습니다.");
+      return;
+    }
     let data = {
       nick_name: this.state.nick_name,
       password: this.state.password,
-      files: [],
+      // files: [],
     };
+
     let file = {
       value: this.state.thumbnail,
       name: this.state.thumbnail_name,
       key: 0,
     };
-    if (this.state.thumbnail !== this.props.userInfo.l_img) {
-      await data.files.push(file);
+    if (this.state.thumbnail) {
+      data.files = [file];
     } // thumbnail 썸네일이 있을 경우에만
+    console.log(data);
+    // return;
+    if (
+      data.nick_name === "" &&
+      data.password === "" &&
+      data.files === undefined
+    ) {
+      await alert("변경사항이 없습니다.");
+      return;
+    }
     await this.props
-      .UpdateUserDetailRequest(
-        // this.props.userInfo.uid,
-        data,
-        this.props.token
-      )
-      .then(console.log);
-    // setTimeout(() => {
-    //   window.location.href = "/mypage";
-    // }, 1500);
+      .UpdateUserDetailRequest(data, this.props.token)
+      .then(async (res) => {
+        console.log(res);
+        if (res.success) {
+          await alert("유저정보가 변경되었습니다. 화면을 다시 불러옵니다.");
+          window.location.href = "/mypage";
+        }
+      });
+    // setTimeout(() => {}, 1500);
   };
   showModal = (type) => {
     this.setState({ modal: type });
@@ -166,7 +187,7 @@ class MyDetail extends React.Component {
   render() {
     const { modal, mydesigns } = this.state;
     const { nick_name, l_img: thumbnail, rate } = this.props.userInfo;
-    const { update_time, create_time } = this.props.MyDetail;
+    const { update_time, create_time, profile } = this.props.MyDetail;
     console.log(this.props, this.state);
     // const NumRate = ({ rate = 0, count = 0, freq = [40, 30, 20, 10, 0] }) => {
     //   return (
@@ -201,13 +222,16 @@ class MyDetail extends React.Component {
               <styled.ScoreCircleIcon1 />
               <styled.ScoreRed per={freq[index]} />
               <styled.ScoreCircleIcon2 per={freq[index]} />
-              <span>{item}({freq[index]}%)</span>
+              <span>
+                {item}({freq[index]}%)
+              </span>
             </styled.Score5>
           ))}
         </styled.ScoreBox>
       </styled.WrapperNumRate>
     );
 
+    console.log(this.props.userInfo);
     return (
       <React.Fragment>
         {modal === PROFILE && (
@@ -229,7 +253,7 @@ class MyDetail extends React.Component {
             <styled.Wrapper>
               <styled.AddThumbnail>
                 <label htmlFor="file">
-                  <styled.ThumbnailImg url={this.state.thumbnail} />
+                  <styled.ThumbnailImg url={this.state.thumbnail || profile} />
                   <div className="title">썸네일 등록</div>
                   <input
                     hidden
@@ -245,7 +269,11 @@ class MyDetail extends React.Component {
                   <div>닉네임</div>
                   <styled.InputBox
                     onChange={this.onChangeNickname}
-                    value={this.state.nick_name || ""}
+                    value={
+                      this.state.nick_name ||
+                      this.props.MyDetail.nick_name ||
+                      ""
+                    }
                     placeholder="닉네임을 입력하세요."
                   />
                 </styled.NicknameDiv>
@@ -279,7 +307,7 @@ class MyDetail extends React.Component {
         <styled.Container>
           <styled.WrapperHeader>
             <styled.ProfileBox>
-              <styled.ProfileImg url={thumbnail} />
+              <styled.ProfileImg url={thumbnail || profile} />
               <span>{nick_name}</span>
             </styled.ProfileBox>
             <styled.ProfileInfo>

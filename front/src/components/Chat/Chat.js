@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import host from "config";
+// import host from "config";
 import { alert } from "components/Commons/Alert/Alert";
 import io from "socket.io-client";
 import who from "source/thumbnail.png";
-// import exiticon from "source/exiticon.svg";
+// import exiticon from "components/Commons/Cross";//"source/exiticon.svg";
 import downicon from "source/saveicon.svg";
 import isEqual from "lodash/isEqual";
+import Cross from "components/Commons/Cross";
 
 const DateBox = styled.div`
   width: 100%;
@@ -434,7 +435,7 @@ const You = (data) => {
   // console.log(data);
   return (
     <YouMessage thumbnail={data.thumbnail || who}>
-      <div className="userName">{data.memberName || "디자인멤버"}</div>
+      <div className="userName">{data.memberName || "경험멤버"}</div>
       <div className="messageWrapper">
         <div className="thumbnail"></div>
         <div className="message">{data.message}</div>
@@ -697,6 +698,7 @@ export default class Chat extends React.Component {
     let nowDate = new Date();
     const { empty, newchat, chat, ghostspace } = this.state;
     const TITLE_MAX_LENGTH = 30;
+
     return (
       <Chatting>
         {/* NEW CHAT */}
@@ -719,13 +721,22 @@ export default class Chat extends React.Component {
         {/* HEADER */}
         <div className="header">
           <div className="headerBox displayflex Hcentering Vcentering">
-            {/* <div onClick={() => this.closeChat()} className="exitButton displayflex Hcentering Vcentering"> */}
-            {/* <Shape imgURL={exiticon} width={15} height={15} /> */}
-            {/* </div> */}
+            <div
+              onClick={() => this.closeChat()}
+              className="exitButton displayflex Hcentering Vcentering"
+            >
+              <Cross
+                angle={45}
+                color={"#707070"}
+                weight={2}
+                width={25}
+                height={25}
+              />
+            </div>
             <div>
               <div className="fontRed">
                 {(this.props.DesignDetail && this.props.DesignDetail.title) ||
-                  "디자인"}
+                  "경험"}
               </div>
             </div>
             <div

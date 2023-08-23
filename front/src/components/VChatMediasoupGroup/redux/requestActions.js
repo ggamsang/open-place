@@ -15,7 +15,7 @@ export const notify = ({ type = 'info', text, title, timeout }) => {
 
   const notification =
   {
-    id: "디자인유저",
+    id: "경험유저",
     type,
     title,
     text,

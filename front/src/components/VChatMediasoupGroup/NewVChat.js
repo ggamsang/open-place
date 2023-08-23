@@ -84,7 +84,7 @@ async function run(props) {
   // Otherwise pick a random name and mark as "not set".
   else {
     displayNameSet = false;
-    displayName = "디자인 유저";
+    displayName = "경험 유저";
   }
 
   // Get current device info.

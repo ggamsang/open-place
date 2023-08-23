@@ -657,9 +657,9 @@ const EditorWrapper = styled.div`
 `;
 const template = [
   { type: "empty", text: "빈 템플릿", img: templateImgEmpty },
-  { type: "fashion", text: "일반디자인 템플릿", img: templateImgDesign },
-  { type: "engineering", text: "공학디자인 템플릿", img: templateImgEngineering },
-  { type: "software", text: "소프트웨어디자인 템플릿", img: templateImgSofware },
+  { type: "fashion", text: "일반경험 템플릿", img: templateImgDesign },
+  { type: "engineering", text: "공학경험 템플릿", img: templateImgEngineering },
+  { type: "software", text: "소프트웨어경험 템플릿", img: templateImgSofware },
 ];
 const STEP_BASIC = 0;
 const STEP_ADDITIONAL = 1;
@@ -967,9 +967,9 @@ export default
           {/* 기본정보 */}
           {step === STEP_BASIC
             && <BasicForm>
-              {/* 1. 디자인 이미지 */}
+              {/* 1. 경험 이미지 */}
               <div className=" fadein design-image-title">
-                <p>1.디자인 이미지</p>
+                <p>1.경험 이미지</p>
                 <img src={required} alt="image" title="필수항목입니다:)" />
               </div>
 
@@ -984,7 +984,7 @@ export default
                   id="file"
                   type="file"
                   accept="image/png, image/bmp, image/jpeg, image/jpg" />
-                <div className="tip">디자인 이미지는 대표적으로 보이게 되는 사진으로,<br />
+                <div className="tip">경험 이미지는 대표적으로 보이게 되는 사진으로,<br />
                   JPG/JPEG/PNG/BMP 파일을 등록 가능합니다.</div>
               </div>
 
@@ -1003,22 +1003,22 @@ export default
                     maxLength="100"
                     onKeyDown={this.onKeyDownEnter}
                     onChange={this.onChangeValueTitle}
-                    placeholder="디자인의 제목을 입력해주세요.(100자이내)"
+                    placeholder="경험의 제목을 입력해주세요.(100자이내)"
                   />
                 </div>
               </div>}
 
-              {/* 3. 디자인 설명 */}
+              {/* 3. 경험 설명 */}
               {thumbnailURL != thumbnailSVG && <div className="fadein separator " />}
               {thumbnailURL != thumbnailSVG && <div className="fadein design-title">
-                <p>3. 디자인 설명</p>
+                <p>3. 경험 설명</p>
                 <div className="textarea-wrapper">
                   <textarea
                     value={explanation}
                     id="explainBox"
                     onChange={this.onChangeValueExplanation}
                     maxLength="350"
-                    placeholder="디자인 설명을 입력해주세요. (350자 이내)" />
+                    placeholder="경험 설명을 입력해주세요. (350자 이내)" />
                 </div>
               </div>}
 
@@ -1149,9 +1149,9 @@ export default
                   <div className="member-tip-wrapper top15">
                     <img src={helpIcon} />
                     <p>
-                      함께 디자인을 만들어 갈 멤버를 초대해 주세요.<br />
+                      함께 경험을 만들어 갈 멤버를 초대해 주세요.<br />
                       초대된 멤버는 함께 정보에 뜨며, 수정할 권한이 주어집니다.<br />
-                      디자인 개설자가 언제든 추후에 멤버 리스트를 수정할 수 있습니다.<br />
+                      경험 개설자가 언제든 추후에 멤버 리스트를 수정할 수 있습니다.<br />
                     </p>
                   </div>
                 </React.Fragment>
@@ -1304,7 +1304,7 @@ export default
                   ? this.goStep1()
                   : thumbnailURL === thumbnailSVG
                     ? alert("섬네일을 선택해주세요.")
-                    : alert("디자인제목을 입력해주세요.")}
+                    : alert("경험제목을 입력해주세요.")}
               className={`${basic ? "" : "impossible"} next`}>
               {strButtonNext}</button>}
 

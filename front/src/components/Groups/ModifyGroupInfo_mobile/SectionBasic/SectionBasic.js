@@ -250,7 +250,7 @@ class GroupBasicInfo extends Component {
         return (
 
           <BasicForm>
-          {/* 1. 디자인 이미지 */}
+          {/* 1. 경험 이미지 */}
           <div className=" fadein design-image-title">
             <p>1.그룹 이미지</p>
             <img src={required} alt="image" title="필수항목입니다:)" />
@@ -292,7 +292,7 @@ class GroupBasicInfo extends Component {
             </div>
           </div>}
     
-          {/* 3. 디자인 설명 */}
+          {/* 3. 경험 설명 */}
           {thumbnailURL != thumbnailSVG && <div className="fadein separator " />}
           {thumbnailURL != thumbnailSVG && 
           <div className="fadein design-title">

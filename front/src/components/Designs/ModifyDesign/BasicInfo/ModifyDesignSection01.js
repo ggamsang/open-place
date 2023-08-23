@@ -60,7 +60,7 @@ class ModifyDesignSection01 extends Component
             <section style={BasicSecBox} >
             {/* thumbnail */}
                 <div style={BasicSec_thumb_Box}>
-                    <div style={BasicSecTitle}>디자인 이미지
+                    <div style={BasicSecTitle}>경험 이미지
                     {/* <input hidden type="file" value={null} /> */}
                     </div>
                     <div style={{marginLeft: "67px", width: "210px", height: "210px", borderRadius: "10px", 
@@ -82,9 +82,9 @@ class ModifyDesignSection01 extends Component
                 </div>
                 {/* description */}
                 <div style={BasicSec_explain_Box}>
-                <div style={BasicSecTitle}>디자인 설명</div>
+                <div style={BasicSecTitle}>경험 설명</div>
                 <div style={BasicSec_explain_InputBox}>
-                    <textarea style={BasicSec_explain_Input} placeholder="디자인에 대한 설명을 입력하세요." onChange = {this.handleOnChangeExplain} value={this.props.designExplain}/>
+                    <textarea style={BasicSec_explain_Input} placeholder="경험에 대한 설명을 입력하세요." onChange = {this.handleOnChangeExplain} value={this.props.designExplain}/>
                 </div>
                 </div>
             </section>

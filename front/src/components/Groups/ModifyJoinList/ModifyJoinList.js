@@ -108,13 +108,13 @@ class ModifyJoinList extends Component {
             <Grid.Column as="ul" widescreen={11} largeScreen={11} computer={12} tablet={10} mobile={10}>
               <li id="design"
                   className={this.props.type === "design" || this.props.type === null || this.props.type === "null" ? "onSelected" : ""}
-                  onClick={this.typeChange}>가입 디자인</li>
+                  onClick={this.typeChange}>가입 경험</li>
               <li id="group"
                   className={this.props.type === "group"? "onSelected" : ""}
                   onClick={this.typeChange}>가입 그룹</li>
               <li id="waitingDesign"
                   className={this.props.type === "waitingDesign"? "onSelected" : ""}
-                  onClick={this.typeChange}>가입 신청한 디자인</li>
+                  onClick={this.typeChange}>가입 신청한 경험</li>
               <li id="waitingGroup"
                   className={this.props.type === "waitingGroup"? "onSelected" : ""}
                   onClick={this.typeChange}>가입 신청한 그룹</li>

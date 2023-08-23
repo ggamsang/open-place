@@ -412,7 +412,7 @@ const You = (data) => {
   // console.log(data);
   return (<YouMessage thumbnail={data.thumbnail || who}>
     <div className="userName">
-      {data.memberName || "디자인멤버"}
+      {data.memberName || "경험멤버"}
     </div>
     <div className="messageWrapper">
       <div className="thumbnail" ></div>
@@ -679,7 +679,7 @@ export default class ChatGroup extends React.Component {
           {/* <Shape imgURL={exiticon} width={15} height={15} /> */}
           {/* </div> */}
           <div>
-            <div className="fontRed">{(this.props.group && this.props.group.title) || "디자인"}</div>
+            <div className="fontRed">{(this.props.group && this.props.group.title) || "경험"}</div>
           </div>
           <div onClick={() => this.saveChatLog()} className="downloadButton displayflex Hcentering Vend">
             <Shape imgURL={downicon} width={25} height={25} />

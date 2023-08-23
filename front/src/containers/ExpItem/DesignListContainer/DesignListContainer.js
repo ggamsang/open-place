@@ -404,8 +404,8 @@ class DesignListContainer extends Component {
           <div className="header_box">
             <div className="category_title">
               {/* {(this_category && this_category.text === "전체"
-                  ? "디자인"
-                  : this_category.text) || "디자인"}
+                  ? "경험"
+                  : this_category.text) || "경험"}
                 &nbsp;({Count}) */}
             </div>
             <OrderOption2
@@ -493,7 +493,7 @@ export default connect(
 //     <JoinDesignContainer>
 //     </JoinDesignContainer>
 //     <TextWrapper centerPos={this.state.screenWidth} onClick={() => this.changeCategory(main_category)}>
-//       <div className="title"> {(this_category && this_category.text === "전체" ? "디자인" : this_category.text) || "디자인"}&nbsp;({Count})</div>
+//       <div className="title"> {(this_category && this_category.text === "전체" ? "경험" : this_category.text) || "경험"}&nbsp;({Count})</div>
 //     </TextWrapper>
 //     <div className="orderBox">
 //       <OrderOption order_clicked={this.handleChangeOrderOps} selected={this_order} />

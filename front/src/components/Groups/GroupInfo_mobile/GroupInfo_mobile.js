@@ -571,7 +571,7 @@ export default GroupInfo_mobile;
 //             <div className="icon_label">화상회의</div>
 //         </div>
 //         <div
-//             title="디자인 멤버들과 채팅을 시작합니다."
+//             title="경험 멤버들과 채팅을 시작합니다."
 //             className="notice icon_wrap" onClick={this.openChat}>
 //             <img src={new_logo_chat} className="icon" />
 //             <div className="icon_label">채팅</div>

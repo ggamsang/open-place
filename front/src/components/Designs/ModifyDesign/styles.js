@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import osdcss from "opendesign_style";
-import { Dropdown } from "semantic-ui-react";
+import { Dropdown,  } from "semantic-ui-react";
 
 export const InputTextArea = styled.textarea`
   width: ${(props) => props.width || 300}px;
@@ -14,27 +14,27 @@ export const InputTextArea = styled.textarea`
   font-size: 22px;
 `;
 export const EditorWrapper = styled.div`
-  // max-width:853px;
-  // width: 100%;
-  // display: flex;
-  // justify-contents: center;
-  width: max-content;
-  margin: auto;
+// max-width:853px;
+// width: 100%; 
+// display: flex;
+// justify-contents: center;
+width: max-content;
+margin: auto;
 
-  .title {
-    width: 100%;
-    text-align: center;
-    margin: auto;
-    color: #707070;
-    padding: 10px 5px;
-    font-size: 1.5rem;
-    font-weight: 300;
-    line-height: 2rem;
-  }
-  .editor {
-    opacity: 0.75;
-    overflow: auto;
-  }
+.title {
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  color: #707070;
+  padding: 10px 5px;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 2rem;
+}
+.editor {
+  opacity: 0.75;
+  overflow: auto;
+}
 `;
 export const DesignElement = styled.div`
   * {
@@ -316,7 +316,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   // align-items: center;
-
+  
   @media only screen and (max-width: 1000px) {
     display: flex;
     flex-direction: column;
@@ -327,6 +327,7 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
 `;
+
 
 export const AddThumbnail = styled.div`
   width: 457px;
@@ -378,7 +379,7 @@ export const ThumbnailImg = styled.div`
 export const InfoBox = styled.div`
   // width: 1329px;
   // min-height: 665px;
-  height: 510px;
+  height: 510px;  
   width: 100%;
   max-width: 750px;
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -407,7 +408,7 @@ export const TitleDiv = styled.div`
   display: flex;
   // justify-content: center;
   align-items: center;
-  margin-top: 23px;
+  margin-top: 46px;
   div:nth-child(1) {
     min-width: 50px;
     width: 197px;
@@ -415,10 +416,7 @@ export const TitleDiv = styled.div`
     letter-spacing: 0px;
     color: #707070;
     // margin-left: 70px;
-    @media only screen and (max-width: 700px) {
-      width: max-content;
-      margin-right: 35px;
-    }
+    @media only screen and (max-width: 700px) { width: max-content; margin-right: 35px;}
   }
   div:nth-child(2) {
     margin: 0;
@@ -463,10 +461,7 @@ export const CategoryDiv = styled.div`
     letter-spacing: 0px;
     color: #707070;
     // margin-left: 70px;
-    @media only screen and (max-width: 700px) {
-      width: max-content;
-      margin-right: 15px;
-    }
+    @media only screen and (max-width: 700px) { width: max-content; margin-right: 15px;}
   }
 `;
 
@@ -509,7 +504,7 @@ export const TagDiv = styled.div`
   display: flex;
   // justify-content: center;
   align-items: center;
-  margin-top: 23px;
+  margin-top: 46px;
   div:nth-child(1) {
     min-width: 50px;
     width: 197px;
@@ -517,10 +512,7 @@ export const TagDiv = styled.div`
     letter-spacing: 0px;
     color: #707070;
     // margin-left: 70px;
-    @media only screen and (max-width: 700px) {
-      width: max-content;
-      margin-right: 35px;
-    }
+    @media only screen and (max-width: 700px) { width: max-content; margin-right: 35px;}
   }
   div:nth-child(2) {
     margin: 0;
@@ -763,8 +755,7 @@ export const AddFile = styled.div`
 export const AddButton = styled.button`
   width: 210px;
   height: 42px;
-  background: ${(props) => (props.disabled ? "#777" : "#ff0000")} 0% 0%
-    no-repeat padding-box;
+  background: ${props=>props.disabled?"#777":"#ff0000"} 0% 0% no-repeat padding-box;
   opacity: 1;
   margin-top: 50px;
   margin-bottom: 236px;

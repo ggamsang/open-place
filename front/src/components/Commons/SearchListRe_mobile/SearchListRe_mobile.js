@@ -83,7 +83,7 @@ class SearchListRe extends Component {
         this.state = {
             keyword: "",
             searchKeyword: "",
-            mainCate: [{ value: 1, text: "디자인" }, { value: 2, text: "그룹" }, { value: 3, text: "디자이너" }],
+            mainCate: [{ value: 1, text: "경험" }, { value: 2, text: "그룹" }, { value: 3, text: "디자이너" }],
             selectCate: null,
             this_order: { text: "등록순", keyword: "update" },
             urlCate: "design",

@@ -6,13 +6,13 @@ import styled from "styled-components";
 const MemberItem = styled.div`
   display: inline-block;
   padding: 10px 10px;
-  background-color: #4D5256;
-  color: #F8FAFB;
+  background-color: #4d5256;
+  color: #f8fafb;
   border-radius: 3px;
   margin-right: 5px;
   margin-bottom: 5px;
   font-size: 12px;
-`
+`;
 const DeleteBtn = styled.button`
   background-color: transparent;
   border: 0;
@@ -20,17 +20,17 @@ const DeleteBtn = styled.button`
   font-size: 12px;
   color: white;
   margin-left: 5px;
-`
+`;
 const MemberWrap = styled.div`
   margin-top: 1rem;
-`
+`;
 const SearchWrap = styled.div`
-  width:100%;
-  max-width:400px;
-  display: ${props => props.display};
+  width: 100%;
+  max-width: 400px;
+  display: ${(props) => props.display};
   position: relative;
   .input-style {
-    box-shadow: 0px 2px 10px 2px rgba(0,0,0,0.1);
+    box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     // padding-left: 10px;
     outline: none;
@@ -40,51 +40,60 @@ const SearchWrap = styled.div`
     font-size: 18px;
     // margin-left: 50px;
   }
-`
+`;
 const MemberList = styled.ul`
-  display: ${props => props.display};
-  width:100%;
+  display: ${(props) => props.display || "none"};
+  width: 100%;
   padding: 0.5rem;
   min-height: 0px;
   max-height: 300px;
-  overflow-Y: scroll;
+  overflow-y: scroll;
   box-sizing: border-box;
   background: white;
   border-radius: 10px;
-  box-shadow:0px 2px 10px 2px rgba(0,0,0,0.1);
-  position:absolute;
-  left:0px;
-  top:40px;
-`
+  box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  left: 0px;
+  top: 40px;
+`;
 const MemberListItem = styled.li`
   width: 100%;
   padding: 10px;
-  background:#EFEFEF;
-  color:#707070;
+  background: #efefef;
+  color: #707070;
   border-radius: 10px;
   margin-bottom: 5px;
-  cursor:pointer;
-  opacity:0.8;
-  &:hover{
-    opacity:1;
+  cursor: pointer;
+  opacity: 0.8;
+  &:hover {
+    opacity: 1;
   }
-`
+`;
 const SearchInputText = styled(FormInput)`
-    box-shadow: 0px 1px 2px #000000;
-    // border-radius:10px;
-    padding-left:10px;
-    outline:none;
-    border:none;
-    width:${props => props.InputWidth == null ? "350px" : props.InputWidth + "%"};
-    height:40px;
-    // font-size:18px;
-    margin-left: ${props => props.marginLeft == null ? "20px" : props.marginLeft + "px"};
+  // box-shadow: 0px 1px 2px #000000;
+  // // border-radius:10px;
+  // padding-left:10px;
+  // width:${(props) =>
+    props.InputWidth == null ? "350px" : props.InputWidth + "%"};
+  // height:40px;
+  // // font-size:18px;
+  // margin-left: ${(props) =>
+    props.marginLeft == null ? "20px" : props.marginLeft + "px"};
 
-`
-
+  border: none;
+  outline: none;
+  margin: auto;
+  min-width: 300px;
+  width: 100%;
+  max-width: 642px;
+  height: 31px;
+  background: #e9e9e9 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+  opacity: 1;
+`;
 
 class SearchMember extends Component {
-  state = { member: [], open: false }
+  state = { member: [], open: false };
 
   componentDidMount() {
     if (this.props.originalMember) {
@@ -99,57 +108,98 @@ class SearchMember extends Component {
       this.setState({ open: false });
       return;
     }
-    this.props.SearchMemberRequest(null, { key: value }, this.props.token).then(data => { })
-  }
+    this.props
+      .SearchMemberRequest(null, { key: value }, this.props.token)
+      .then((data) => {});
+  };
 
   addMember = async (data) => {
     //console.log("ADDMEMBER:", data)
-    await this.props.addMemberItem && this.props.addMemberItem(data.uid, data.nick_name);
-    await this.props.setMsgID && this.props.setMsgID(data.group_id == null ? -1 : data.group_id, data.uid, data.nick_name);
-  }
+    (await this.props.addMemberItem) &&
+      this.props.addMemberItem(data.uid, data.nick_name);
+    (await this.props.setMsgID) &&
+      this.props.setMsgID(
+        data.group_id == null ? -1 : data.group_id,
+        data.uid,
+        data.nick_name
+      );
+  };
   closeList = () => {
     //console.log("close")
     this.setState({ open: false });
-  }
+  };
 
   deleteMember = (index) => {
     let newArray = [...this.state.member];
     newArray.splice(index, 1);
     this.setState({
-      member: newArray
+      member: newArray,
     });
     this.returnData();
-  }
+  };
 
   returnData = () => {
     setTimeout(() => {
-      if (this.props.onChangeMembers) this.props.onChangeMembers(this.state.member);
-    }, 100)
-  }
+      if (this.props.onChangeMembers)
+        this.props.onChangeMembers(this.state.member);
+    }, 100);
+  };
 
   render() {
+    const { members } = this.props;
     return (
       <SearchWrap id="searchRect" style={{ display: "inline-block" }}>
-        <SearchInputText InputWidth={this.props.inputWidth} marginLeft={this.props.marginLeft} id="searchRect" type="text"
-          name="search" placeholder="회원 검색" validates={this.props.validates} getValue={this.getValue} />
-        <MemberList id="searchRect" style={this.state.open ? { display: "block" } : { display: "none" }}>
-          {this.props.members && this.props.members.map((item, index) => {
-            return (<MemberListItem key={`member${index}`} onClick={() => this.addMember(item)}>{item.nick_name}</MemberListItem>);
-          })}
+        <SearchInputText
+          InputWidth={this.props.inputWidth}
+          marginLeft={this.props.marginLeft}
+          id="searchRect"
+          type="text"
+          name="search"
+          placeholder="회원 검색"
+          validates={this.props.validates}
+          getValue={this.getValue}
+        />
+
+        <MemberList
+          id="searchRect"
+          style={this.state.open ? { display: "block" } : { display: "none" }}
+        >
+          {members?.length > 0 ? (
+            members.map((item, index) => {
+              return (
+                <MemberListItem
+                  key={`member${index}`}
+                  onClick={() => this.addMember(item)}
+                >
+                  {item.nick_name}
+                </MemberListItem>
+              );
+            })
+          ) : (
+            <>검색결과없음</>
+          )}
         </MemberList>
-        <MemberWrap id="searchRect">
+
+        {/* <MemberWrap id="searchRect">
           {this.state.member.map((data, index) => {
             console.log(data);
-            return (<MemberItem id="searchRect" key={index}>
-              {data.nick_name}
-              <span>
-                <DeleteBtn id="searchRect" type="button" onClick={() => this.deleteMember(index)}>
-                  <Icon id="searchRect" name="remove" />
-                </DeleteBtn>
-              </span>
-            </MemberItem>)
+            return (
+              <MemberItem id="searchRect" key={index}>
+                {data.nick_name}
+                <span>
+                  <DeleteBtn
+                    id="searchRect"
+                    type="button"
+                    onClick={() => this.deleteMember(index)}
+                  >
+                    <Icon id="searchRect" name="remove" />
+                  </DeleteBtn>
+                </span>
+              </MemberItem>
+            );
           })}
         </MemberWrap>
+         */}
       </SearchWrap>
     );
   }

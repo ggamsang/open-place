@@ -146,7 +146,7 @@ export default class MainSlide extends Component {
           //     <Content>
           //       <h1 className="title">사용자 가이드</h1>
           //       <p>
-          //         오픈디자인에서 제공하는 사용자 설명서입니다.
+          //         오픈경험에서 제공하는 사용자 설명서입니다.
           //         <br />각 기능에 대하여 사용법이 정리되어있습니다.
           //       </p>
           //       <LinkBtn to="/exp/2494">보러가기</LinkBtn>
@@ -155,13 +155,13 @@ export default class MainSlide extends Component {
           // </Slide>
         }
           <Slide className="open">
-            <span>오픈 디자인</span>
+            <span>오픈 경험</span>
           </Slide>
           <Slide className="easy">
-            <span>쉬운 디자인</span>
+            <span>쉬운 경험</span>
           </Slide>
           <Slide className="together">
-            <span>함께하는 디자인</span>
+            <span>함께하는 경험</span>
           </Slide>
         </Carousel>
       </SlideWrap>

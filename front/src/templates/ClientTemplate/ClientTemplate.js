@@ -15,6 +15,7 @@ import { common } from "@mui/material/colors";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
+import noface from "source/thumbnail.png";
 
 const style = {
   position: "absolute",
@@ -164,7 +165,8 @@ class Header extends React.Component {
                   className="smaller"
                   onClick={() => goto("CREATE-ITEM-DESKTOP")}
                 >
-                  <PlusOne fontSize="large" sx={{ color: common.white }} />
+                  {/* <PlusOne fontSize="large" sx={{ color: common.white }} /> */}
+                  <b style={{ color: "white" }}>+</b>
                   <styled.RegisterText className="hide-when-narrow">
                     등록하기
                   </styled.RegisterText>
@@ -173,7 +175,9 @@ class Header extends React.Component {
                   className="smaller"
                   onClick={() => goto("MY-PAGE")}
                 >
-                  <styled.NicknameIcon src={userInfo?.l_img} />
+                  <styled.NicknameIcon
+                    src={userInfo?.thumbnail?.l_img || noface}
+                  />
                   <styled.NicknameText className="hide-when-narrow">
                     {userInfo?.nickName || "닉네임"}
                   </styled.NicknameText>

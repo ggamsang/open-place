@@ -366,7 +366,7 @@ export default ScrollList;
 //         )}
 //       </FlexContainer>
 //     ) : null;
-//     // <NoData>{type === "design" ? "디자인이" : type === "group" ? "그룹이" : "디자이너가"} 없습니다.</NoData>)
+//     // <NoData>{type === "design" ? "경험이" : type === "group" ? "그룹이" : "디자이너가"} 없습니다.</NoData>)
 //   }
 // }
 

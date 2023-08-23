@@ -76,7 +76,7 @@ class MyDesignList extends Component {
     return (
       <ValidateForm ignore={true} onSubmit={this.handleSubmit}>
         <Field>
-          <label style={{fontSize:"20px",fontFamily:"Spoqa Han Sans Neo"}}>내 디자인 리스트</label>
+          <label style={{fontSize:"20px",fontFamily:"Spoqa Han Sans Neo"}}>내 경험 리스트</label>
           <Dropdown style={{marginTop:"11px",width:"100%"}} name="join_design" ref="dropdown" selection multiple onChange={this.handleChange} options={this.props.designList} />
           <label style={{height:"30px",marginTop:"20px",display:"flex",alignItems:"center",fontWeight:"300",fontSize:"15px"}}><input style={{ verticalAlign: "middle",borderRadius:"0px !important", width:"30px",height:"30px",marginRight:"10px" }} type="checkbox" onChange={this.selectAll} value={this.state.joinList} />모두선택 </label>
         </Field>

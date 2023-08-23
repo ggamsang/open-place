@@ -620,7 +620,7 @@ export default class ModifyDesignMobile extends React.Component {
   componentDidMount() {
     const { DesignDetail: detail } = this.props;
     if (!detail) {
-      alert("디자인정보를 가져오지 못하였습니다.");
+      alert("경험정보를 가져오지 못하였습니다.");
       window.history.go(-1);
       return;
     }
@@ -672,7 +672,7 @@ export default class ModifyDesignMobile extends React.Component {
         loading: false,
       });
     } else {
-      alert("디자인 정보가 없습니다.");
+      alert("경험 정보가 없습니다.");
       window.history.go(-1);
     }
   }
@@ -909,13 +909,13 @@ export default class ModifyDesignMobile extends React.Component {
         console.log(data, data.res && data.res.success);
         if (data.res && data.res.success) {
           await alert(
-            "디자인 정보 수정이 완료되었습니다. 디자인보기 화면으로 이동합니다.",
+            "경험 정보 수정이 완료되었습니다. 경험보기 화면으로 이동합니다.",
             "확인"
           );
           window.location.href =
             geturl() + "/exp/" + this.props.DesignDetail.uid;
         } else {
-          await alert("디자인 정보 수정에 실패하였습니다.", "확인");
+          await alert("경험 정보 수정에 실패하였습니다.", "확인");
         }
       });
     this.setState({ loading: false });
@@ -970,7 +970,7 @@ export default class ModifyDesignMobile extends React.Component {
     await this.setState({ contents: newContent });
   };
   deleteDesign = async () => {
-    const answer = await confirm("디자인을 삭제하시겠습니까?", "확인", "취소");
+    const answer = await confirm("경험을 삭제하시겠습니까?", "확인", "취소");
     answer &&
       this.props
         .DeleteDesignRequest(this.props.id, this.props.token)
@@ -1032,9 +1032,9 @@ export default class ModifyDesignMobile extends React.Component {
             {/* 기본정보 */}
             {step === STEP_BASIC && (
               <BasicForm>
-                {/* 1. 디자인 이미지 */}
+                {/* 1. 경험 이미지 */}
                 <div className=" fadein design-image-title">
-                  <p>1.디자인 이미지</p>
+                  <p>1.경험 이미지</p>
                   <img src={required} alt="image" title="필수항목입니다:)" />
                 </div>
 
@@ -1058,7 +1058,7 @@ export default class ModifyDesignMobile extends React.Component {
                     accept="image/png, image/bmp, image/jpeg, image/jpg"
                   />
                   <div className="tip">
-                    디자인 이미지는 대표적으로 보이게 되는 사진으로,
+                    경험 이미지는 대표적으로 보이게 되는 사진으로,
                     <br />
                     JPG/JPEG/PNG/BMP 파일을 등록 가능합니다.
                   </div>
@@ -1083,24 +1083,24 @@ export default class ModifyDesignMobile extends React.Component {
                         maxLength="100"
                         onKeyDown={this.onKeyDownEnter}
                         onChange={this.onChangeValueTitle}
-                        placeholder="디자인의 제목을 입력해주세요.(100자이내)"
+                        placeholder="경험의 제목을 입력해주세요.(100자이내)"
                       />
                     </div>
                   </div>
                 }
 
-                {/* 3. 디자인 설명 */}
+                {/* 3. 경험 설명 */}
                 {<div className="fadein separator " />}
                 {
                   <div className="fadein design-title">
-                    <p>3. 디자인 설명</p>
+                    <p>3. 경험 설명</p>
                     <div className="textarea-wrapper">
                       <textarea
                         value={explanation}
                         id="explainBox"
                         onChange={this.onChangeValueExplanation}
                         maxLength="350"
-                        placeholder="디자인 설명을 입력해주세요. (350자 이내)"
+                        placeholder="경험 설명을 입력해주세요. (350자 이내)"
                       />
                     </div>
                   </div>
@@ -1271,12 +1271,12 @@ export default class ModifyDesignMobile extends React.Component {
                     <div className="member-tip-wrapper top15">
                       <img src={helpIcon} />
                       <p>
-                        함께 디자인을 만들어 갈 멤버를 초대해 주세요.
+                        함께 경험을 만들어 갈 멤버를 초대해 주세요.
                         <br />
                         초대된 멤버는 함께 정보에 뜨며, 수정할 권한이
                         주어집니다.
                         <br />
-                        디자인 개설자가 언제든 추후에 멤버 리스트를 수정할 수
+                        경험 개설자가 언제든 추후에 멤버 리스트를 수정할 수
                         있습니다.
                         <br />
                       </p>
@@ -1389,7 +1389,7 @@ export default class ModifyDesignMobile extends React.Component {
                       ? this.goStep1()
                       : thumbnailURL === thumbnailSVG
                         ? alert("섬네일을 선택해주세요.")
-                        : alert("디자인제목을 입력해주세요.")
+                        : alert("경험제목을 입력해주세요.")
                   }
                   className={`${basic ? "" : "impossible"} next`}
                 >
@@ -1461,7 +1461,7 @@ export default class ModifyDesignMobile extends React.Component {
 // import { confirm } from "components/Commons/Confirm/Confirm";
 // import opendesign_style from "opendesign_style";
 
-// const designImageText = "디자인 이미지";
+// const designImageText = "경험 이미지";
 // const MainBanner = styled.div`
 //   width: 100%;
 //   height: 140px;
@@ -2011,7 +2011,7 @@ export default class ModifyDesignMobile extends React.Component {
 //       this.props.GetDesignBoardRequest(this.props.id)
 //       this.setState({ content: true, designId: this.props.id, grid: true, loading: false });
 //     } else {
-//       alert("디자인 정보가 없습니다.");
+//       alert("경험 정보가 없습니다.");
 //       window.history.go(-1);
 //     }
 //   }
@@ -2099,10 +2099,10 @@ export default class ModifyDesignMobile extends React.Component {
 //       .then(async (data) => {
 //         console.log(data, data.res && data.res.success);
 //         if (data.res && data.res.success) {
-//           await alert("디자인 정보 수정이 완료되었습니다. 디자인보기 화면으로 이동합니다.", "확인");
+//           await alert("경험 정보 수정이 완료되었습니다. 경험보기 화면으로 이동합니다.", "확인");
 //           window.location.href = geturl() + '/exp/' + this.props.DesignDetail.uid;
 //         } else {
-//           await alert("디자인 정보 수정에 실패하였습니다.", "확인");
+//           await alert("경험 정보 수정에 실패하였습니다.", "확인");
 //         }
 //       })
 //     this.setState({ loading: false });
@@ -2184,11 +2184,11 @@ export default class ModifyDesignMobile extends React.Component {
 //         {loading ? <Loading /> : null}
 //         <div onClick={this.handleCloseMember}>
 //           <MainBanner>
-//             <div className="title">디자인 수정하기</div>
+//             <div className="title">경험 수정하기</div>
 //           </MainBanner>
 //           <MainSection>
 //             <MenuItem className="white" onClick={this.deleteDesign}>
-//               <div className="deleteText">디자인 삭제하기</div>
+//               <div className="deleteText">경험 삭제하기</div>
 //             </MenuItem>
 
 //             {/* FORM */}
@@ -2215,14 +2215,14 @@ export default class ModifyDesignMobile extends React.Component {
 //                 <TitleBox>
 //                   <div className="title">제목<sup style={{ color: "red" }}>*</sup></div>
 //                   <input onChange={this.onChangeValueTitle} onKeyDown={this.onKeyDownEnter}
-//                     className="inputText" name="title" maxLength="100" value={this.state.title} placeholder="디자인의 제목을 입력해주세요. (100자 이내)"
+//                     className="inputText" name="title" maxLength="100" value={this.state.title} placeholder="경험의 제목을 입력해주세요. (100자 이내)"
 //                     onBlur={this.checkFinishBasic} />
 //                 </TitleBox>
 //                 {/* EXPLANATION */}
 //                 <ExplainBox>
-//                   <div className="title">디자인 설명</div>
+//                   <div className="title">경험 설명</div>
 //                   <textarea id="explainBox" className="inputTextareaBox" onChange={this.onChangeValueExplanation}
-//                     name="explanation" maxLength="350" placeholder="디자인 설명을 입력해주세요. (350자 이내)"
+//                     name="explanation" maxLength="350" placeholder="경험 설명을 입력해주세요. (350자 이내)"
 //                     value={this.state.explanation} onBlur={this.checkFinishBasic} />
 //                 </ExplainBox>
 //               </ContentsBox>
@@ -2258,9 +2258,9 @@ export default class ModifyDesignMobile extends React.Component {
 //                   </div>
 //                   <div className="tipTitle">TIP</div>
 //                   <div className="tipDescription">
-//                     함께 디자인을 만들어 갈 멤버를 초대해 주세요.<br />
+//                     함께 경험을 만들어 갈 멤버를 초대해 주세요.<br />
 //                     초대된 멤버는 함께 정보에 뜨며, 수정할 권한이 주어집니다.<br />
-//                     디자인 개설자가 언제든 추후에 멤버 리스트를 수정할 수 있습니다.</div>
+//                     경험 개설자가 언제든 추후에 멤버 리스트를 수정할 수 있습니다.</div>
 //                 </InviteMemberBox>
 //                 {/* INVITED MEMBER */}
 //                 {arrSummaryList && arrSummaryList.length > 0 &&
@@ -2304,7 +2304,7 @@ export default class ModifyDesignMobile extends React.Component {
 //               {/* DESIGN CONTENTS */}
 //               <ContentsBox>
 //                 <TitleBox>
-//                   <div className="title">디자인 컨텐츠</div>
+//                   <div className="title">경험 컨텐츠</div>
 //                 </TitleBox>
 //                 {this.state.grid ?
 //                   this.props.DesignDetail &&

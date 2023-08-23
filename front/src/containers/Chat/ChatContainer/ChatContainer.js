@@ -34,7 +34,7 @@ class ChatContainer extends Component {
           this.setState({ valid: true });
           console.log("validated");
           // } else {
-          // this.close("디자인정보가 잘못되었습니다.");
+          // this.close("경험정보가 잘못되었습니다.");
           // }
         });
   }

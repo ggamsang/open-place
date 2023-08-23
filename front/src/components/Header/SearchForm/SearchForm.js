@@ -187,7 +187,7 @@ class SearchForm extends Component {
                         className="searchbox"
                         id="searchbox"
                         type="text"
-                        placeholder={this.props.transparent ? "" : "새로운 디자인을 찾아보세요!"}
+                        placeholder={this.props.transparent ? "" : "새로운 경험을 찾아보세요!"}
                         maxLength="100"
                         onChange={this.handleKeyDown}
                         onKeyDown={this.submitEnter}
@@ -205,7 +205,7 @@ class SearchForm extends Component {
                         className="searchbox"
                         id="searchbox"
                         type="text"
-                        placeholder="새로운 디자인을 찾아보세요!"
+                        placeholder="새로운 경험을 찾아보세요!"
                         maxLength="100"
                         onChange={this.handleKeyDown}
                         onKeyDown={this.submitEnter}

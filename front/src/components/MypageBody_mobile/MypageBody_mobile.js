@@ -177,7 +177,7 @@ class MypageBody_mobile extends Component {
                     <MenuBox>
                     <a onClick={() => this.changeCategory(0)}><div className={`tab ${this.state.cateIndex === 0 ? "selected" : ""}`}>그룹({NumberFormat(Count.total_group || 0)})</div></a>
                     <a onClick={() => this.changeCategory(1)}><div className={`tab ${this.state.cateIndex === 1 ? "selected" : ""}`}>참여그룹({NumberFormat(Count.joined_group || 0)})</div></a>
-                    <a onClick={() => this.changeCategory(2)}><div className={`tab ${this.state.cateIndex === 2 ? "selected" : ""}`}>디자인({NumberFormat((Count.total_design || 0) + (Count.joined_design || 0))})</div></a>
+                    <a onClick={() => this.changeCategory(2)}><div className={`tab ${this.state.cateIndex === 2 ? "selected" : ""}`}>경험({NumberFormat((Count.total_design || 0) + (Count.joined_design || 0))})</div></a>
                     <a onClick={() => this.changeCategory(3)}><div className={`tab ${this.state.cateIndex === 3 ? "selected" : ""}`}>관심항목({NumberFormat(Count.total_favorite || 0)})</div></a>
                     <a onClick={() => this.changeCategory(4)}><div className={`tab ${this.state.cateIndex === 4 ? "selected" : ""}`}>경험</div></a>
                     </MenuBox>
@@ -211,7 +211,7 @@ class MypageBody_mobile extends Component {
                 <div className="list">
                 {Count.like_design > 0
                     ? <React.Fragment>
-                        <div className="interested">관심있는 디자인({NumberFormat(Count.like_design)})</div>
+                        <div className="interested">관심있는 경험({NumberFormat(Count.like_design)})</div>
                         {this.props.status === "INIT"
                             ? <Loading />
                             : <ScrollList_mobile manual {...opendesign_mobile_style.design_my_margin} type="design_my" dataList={MyLikeDesign} dataListAdded={MyLikeDesignAdded} getListRequest={this.getLikeDesignList} />}
@@ -270,7 +270,7 @@ export default MypageBody_mobile;
 //     <TabMenu>
 //         <a onClick={() => this.changeCategory(0)}><div className={`tab ${this.state.cateIndex === 0 ? "selected" : ""}`}>그룹({NumberFormat(Count.total_group || 0)})</div></a>
 //         <a onClick={() => this.changeCategory(1)}><div className={`tab ${this.state.cateIndex === 1 ? "selected" : ""}`}>참여그룹({NumberFormat(Count.joined_group || 0)})</div></a>
-//         <a onClick={() => this.changeCategory(2)}><div className={`tab ${this.state.cateIndex === 2 ? "selected" : ""}`}>디자인({NumberFormat((Count.total_design || 0) + (Count.joined_design || 0))})</div></a>
+//         <a onClick={() => this.changeCategory(2)}><div className={`tab ${this.state.cateIndex === 2 ? "selected" : ""}`}>경험({NumberFormat((Count.total_design || 0) + (Count.joined_design || 0))})</div></a>
 //         <a onClick={() => this.changeCategory(3)}><div className={`tab ${this.state.cateIndex === 3 ? "selected" : ""}`}>관심항목({NumberFormat(Count.total_favorite || 0)})</div></a>
 //         <a onClick={() => this.changeCategory(4)}><div className={`tab ${this.state.cateIndex === 4 ? "selected" : ""}`}>경험</div></a>
 //     </TabMenu>
@@ -330,7 +330,7 @@ export default MypageBody_mobile;
 //     <div style={{ paddingTop: "37px" }}>
 //         {Count.like_design > 0
 //             ? <React.Fragment>
-//                 <div className="interested">관심있는 디자인({NumberFormat(Count.like_design)})</div>
+//                 <div className="interested">관심있는 경험({NumberFormat(Count.like_design)})</div>
 //                 {this.props.status === "INIT"
 //                     ? <Loading />
 //                     : <ScrollList manual {...opendesign_style.design_margin} type="design" dataList={MyLikeDesign} dataListAdded={MyLikeDesignAdded} getListRequest={this.getLikeDesignList} />}

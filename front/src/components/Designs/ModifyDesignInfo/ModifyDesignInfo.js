@@ -141,22 +141,22 @@ class ModifyDesignInfo extends Component {
 
   render() {
     const currentDesign = this.props.DesignDetail
-    const disabledTxt = `파생된 디자인은 라이센스 수정권한이 없습니다.`
+    const disabledTxt = `파생된 경험은 라이센스 수정권한이 없습니다.`
     return (
       <InfoWrapper>
         {currentDesign.length === 0 ?
           <div></div>
           :
           <form onSubmit={this.onSubmit}>
-            {currentDesign.parent_design ? <div style={{ color: "#FEE" }}>파생된 디자인을 수정합니다.</div> : null}
+            {currentDesign.parent_design ? <div style={{ color: "#FEE" }}>파생된 경험을 수정합니다.</div> : null}
             <FromFieldCard>
               <Grid>
                 <Grid.Column mobile={16} computer={4}>
-                  <FormHeader as="h2">디자인 정보</FormHeader>
+                  <FormHeader as="h2">경험 정보</FormHeader>
                 </Grid.Column>
                 <Grid.Column mobile={16} computer={12}>
                   <Form.Group widths="equal">
-                    <Label>디자인 제목</Label>
+                    <Label>경험 제목</Label>
                     <FormInput
                       name="title"
                       maxLength="100"
@@ -167,7 +167,7 @@ class ModifyDesignInfo extends Component {
                     />
                   </Form.Group>
                   <Form.Group widths="equal">
-                    <Label>디자인 설명</Label>
+                    <Label>경험 설명</Label>
                     <FormInput
                       name="explanation"
                       maxLength="1000"

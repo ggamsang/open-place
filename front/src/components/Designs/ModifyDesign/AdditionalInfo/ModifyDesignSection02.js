@@ -105,9 +105,9 @@ class ModifyDesignSection02 extends Component {
             <div style={Additional_invite_Search} ><input type="text" style={Additional_invite_SearchText} placeholder="닉네임을 검색해 주세요" /></div>
             <div style={Additional_invite_Tip}>TIP</div>
             <div style={Additional_invite_Tip_explain}>
-              함께 디자인을 만들어 갈 멤버를 초대해 주세요.<br />
+              함께 경험을 만들어 갈 멤버를 초대해 주세요.<br />
               초대된 멤버는 함께 정보에 뜨며, 수정할 권한이 주어집니다.<br />
-              디자인 개설자가 언제든 추후에 멤버 리스트를 수정할 수 있습니다.</div>
+              경험 개설자가 언제든 추후에 멤버 리스트를 수정할 수 있습니다.</div>
           </div>
           {/* invited member*/}
           <div style={{ marginTop: "20px", marginLeft: "167px" }}>
@@ -117,7 +117,7 @@ class ModifyDesignSection02 extends Component {
           {/* hr line */}
           <div style={Additional_invite_Hrline} />
           <div style={Additional_ExplainBox} >마지막 단계만이 남아있습니다!<br />
-            단계 / 컨텐츠 정보 탭에서 기본적인 디자인의 뼈대를 구성해 주세요</div>
+            단계 / 컨텐츠 정보 탭에서 기본적인 경험의 뼈대를 구성해 주세요</div>
         </section>
         : <p>카테고리를 가져오고 있습니다.</p>
     );

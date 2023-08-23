@@ -42,7 +42,7 @@ class VChat2Container extends Component {
         if (this.props.userInfo == null) {
             this.close("로그인 후 가능합니다.");
         }
-        // 디자인 맴버인지 체크
+        // 경험 맴버인지 체크
         this.props.token &&
             this.props.GetDesignDetailRequest(this.props.id, this.props.token)
                 .then(async data => {
@@ -57,7 +57,7 @@ class VChat2Container extends Component {
                             this.close("화상회의에 입장하실 수 없습니다.");
                         }
                     } else {
-                        this.close("디자인정보가 잘못되었습니다.");
+                        this.close("경험정보가 잘못되었습니다.");
                     }
                 })
         // .then(async () => {

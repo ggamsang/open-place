@@ -244,6 +244,9 @@ export const Nickname = styled.button`
   outline: 0;
   // margin-right: 27px;
   position: relative;
+  @media only screen and (max-width: 700px) {
+    background: transparent;
+  }
 `;
 export const NicknameIcon = styled.img.attrs({
   // src: nicknameprofileimg,
@@ -253,7 +256,7 @@ export const NicknameIcon = styled.img.attrs({
   position: absolute;
   top: 0px;
   left: 0px;
-  // background-color: white;
+  background-color: white;
   border-radius: 100%;
   background-image: url(${(props) => props.src || nicknameprofileimg});
 `;

@@ -72,13 +72,13 @@ class CreateDesingFormContent extends Component {
         <FromFieldCard>
           <Grid>
             <Grid.Column mobile={16} computer={4}>
-              <FormHeader as="h2">디자인 정보</FormHeader>
+              <FormHeader as="h2">경험 정보</FormHeader>
             </Grid.Column>
             <Grid.Column mobile={16} computer={12}>
               <FormField
                 name="design_file"
-                label="디자인 파일"
-                placeholder="디자인 이미지를 등록해 주세요."
+                label="경험 파일"
+                placeholder="경험 이미지를 등록해 주세요."
                 validates={["required", "onlyImages"]}
                 RenderComponent={FileUploader}
                 onChange={this.props.onChangeDesing}
@@ -101,14 +101,14 @@ class CreateDesingFormContent extends Component {
         <FromFieldCard>
           <Grid>
             <Grid.Column mobile={16} computer={4}>
-              <FormHeader as="h2">디자인 정보</FormHeader>
+              <FormHeader as="h2">경험 정보</FormHeader>
             </Grid.Column>
             <Grid.Column mobile={16} computer={12}>
               <Form.Group widths="equal">
                 <FormField
                   name="title"
-                  label="디자인 제목"
-                  placeholder="디자인의 제목을 입력해주세요."
+                  label="경험 제목"
+                  placeholder="경험의 제목을 입력해주세요."
                   type="text"
                   validates={["required"]}
                   RenderComponent={FormInput}
@@ -117,8 +117,8 @@ class CreateDesingFormContent extends Component {
               <Form.Group widths="equal">
                 <FormField
                   name="explanation"
-                  placeholder="디자인 설명을 입력해주세요."
-                  label="디자인 설명"
+                  placeholder="경험 설명을 입력해주세요."
+                  label="경험 설명"
                   RenderComponent={FormTextArea}
                 />
               </Form.Group>
@@ -153,7 +153,7 @@ class CreateDesingFormContent extends Component {
                   />
                   <FormField
                     name="is_project"
-                    placeholder="단계가지는 디자인 형태"
+                    placeholder="단계가지는 경험 형태"
                     value="1"
                     currentValue={this.state.currentValue}
                     onChange={this.onChangeRadio}
@@ -195,7 +195,7 @@ class CreateDesingFormContent extends Component {
                 />
                 {/* <FormField
                   name="is_public"
-                  label="디자인 공개 여부"
+                  label="경험 공개 여부"
                   placeholder="공개"
                   checked="1"
                   RenderComponent={FormCheckBox}

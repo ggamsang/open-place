@@ -315,7 +315,7 @@ class MypageBody extends Component {
                   this.state.cateIndex === 2 ? "selected" : ""
                 }`}
               >
-                디자인(
+                경험(
                 {NumberFormat(
                   (Count.total_design || 0) + (Count.joined_design || 0)
                 )}
@@ -479,7 +479,7 @@ class MypageBody extends Component {
             {Count.like_design > 0 ? (
               <React.Fragment>
                 <div className="interested">
-                  관심있는 디자인({NumberFormat(Count.like_design)})
+                  관심있는 경험({NumberFormat(Count.like_design)})
                 </div>
                 {this.props.status === "INIT" ? (
                   <Loading />
@@ -577,7 +577,7 @@ export default MypageBody;
 
                 {this.state.cateIndex === 3 &&
                     <div className="compWrapper">
-                        <div className="interested">관심있는 디자인({NumberFormat(Count.like_group)})</div>
+                        <div className="interested">관심있는 경험({NumberFormat(Count.like_group)})</div>
                         {this.props.status === "INIT" ?
                             <Loading /> :
                             <ScrollList manual {...opendesign_style.design_margin} type="design" dataList={MyLikeDesign} dataListAdded={MyLikeDesignAdded} getListRequest={this.getLikeDesignList} />

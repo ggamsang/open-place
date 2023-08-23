@@ -38,7 +38,7 @@ class TopExpItemListContainer_mobile extends Component {
     render() {
         const {  width } = this.props;
         return (<React.Fragment>
-            <Head>인기 디자인</Head>
+            <Head>인기 경험</Head>
             <Board height={355}>
             <div className="list_box">
             {this.props.status === "INIT" ?

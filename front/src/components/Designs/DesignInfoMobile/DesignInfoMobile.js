@@ -798,10 +798,10 @@ export default
         if (!this.props.userInfo || !this.props.token) {
             await alert("로그인 해주세요.", "확인");
         } else if (this.props.DesignDetail.waitingStatus === 1) {
-            await alert("가입 대기중인 디자인입니다.", "확인");
+            await alert("가입 대기중인 경험입니다.", "확인");
         } else {
             const data = [{ uid: this.props.userInfo.uid }];
-            if (await confirm("해당 디자인에 멤버로 가입 신청하시겠습니까?", "예", "아니오")) {
+            if (await confirm("해당 경험에 멤버로 가입 신청하시겠습니까?", "예", "아니오")) {
                 this.props.JoinDesignRequest(this.props.id, data, 0, this.props.token)
                     .then(res => {
                         if (res && res.data && res.data.success) {
@@ -824,7 +824,7 @@ export default
             return this.props.history.push("/myModify")
         }
         if (await confirm(`${this.props.DesignDetail.title.slice(0, 16)}${this.props.DesignDetail.title.length > 16 ? "..." : ""})
-        파생 디자인을 생성하시겠습니까?`, "확인") === true) {
+        파생 경험을 생성하시겠습니까?`, "확인") === true) {
             await this.setState({ forkDialog: 1 });
             this.doFork();
         }
@@ -906,7 +906,7 @@ export default
         if (this.props.DesignDetail && this.props.DesignDetail.member) {
             const found = this.props.DesignDetail.member.filter(mem => mem.user_id === this.props.userInfo.uid)
             if (found.length === 0) {
-                alert("이 디자인의 멤버가 아닙니다.")
+                alert("이 경험의 멤버가 아닙니다.")
                 return false
             }
         }
@@ -971,7 +971,7 @@ export default
                 <div className="close-box" onClick={() => this.setState({ memberList: false })} >
                     <Cross angle={45} width={30} height={30} />
                 </div>
-                <div className="header-txt">디자인 멤버 목록</div>
+                <div className="header-txt">경험 멤버 목록</div>
                 <div className="list" style={{ display: "flex", width: "100%", flexWrap: "wrap" }}>
                     {detail.member && detail.member.length > 0 &&
                         detail.member.map((mem, i) =>
@@ -996,7 +996,7 @@ export default
                         <Cross angle={45} color={"#000000"} weight={3} width={30} height={30} />
                     </div>
 
-                    <div className="header-txt">파생된 디자인</div>
+                    <div className="header-txt">파생된 경험</div>
 
                     <div style={{ overflowY: "auto" }}>
                         {this.props.forkDesignList && this.props.forkDesignList.map((item, idx) => {
@@ -1023,7 +1023,7 @@ export default
             return (<LikeDialogContainer>
                 <div className="likeDialog">
                     <div className="txt">
-                        관심 디자인으로 등록되었습니다.<br />
+                        관심 경험으로 등록되었습니다.<br />
                         내 정보에서 확인 가능합니다.
                     </div>
                 </div>
@@ -1067,7 +1067,7 @@ export default
                             <span
                                 style={{ textAlign: "right" }}
                                 onClick={() => this.goParentDesign(detail.parent_design)}>
-                                원본디자인 바로가기
+                                원본경험 바로가기
                             </span>}
                         {detail.parent_design && detail.children_count["count(*)"] > 0 && <span style={{ color: "black" }}>&nbsp;|&nbsp;</span>}
                         {detail.children_count["count(*)"] > 0 &&
@@ -1134,7 +1134,7 @@ export default
                                                 style={{
                                                     background: "none", color: "red", padding: "3px"
                                                 }}>
-                                                디자인 가입신청</button >
+                                                경험 가입신청</button >
                                         : null}
                                 </div>
                                 <div className="box">
@@ -1155,7 +1155,7 @@ export default
                             <div className="box" style={{ display: "flex", flexDirection: "column" }}>
                                 {isMyDesign !== true ?
                                     <a onClick={this.like} style={{ display: "flex" }}>
-                                        <div className="modi">관심 디자인</div>
+                                        <div className="modi">관심 경험</div>
                                         {isMyDesign !== true && like ?
                                             <Icon style={{ fontSize: "18px", color: "red" }}>favorite</Icon>
                                             :
@@ -1166,7 +1166,7 @@ export default
                                     null
                                 }
                                 {/* <a onClick={this.like} style={{display:"flex"}}>
-                                    <div className="modi">관심 디자인</div>
+                                    <div className="modi">관심 경험</div>
                                     {isMyDesign !== true&&like?
                                     <Icon style={{ fontSize: "18px", color:"red"}}>favorite</Icon>
                                     :
@@ -1177,7 +1177,7 @@ export default
                                     &&
                                     <a onClick={this.gotoDesignModify} >
                                         <div style={{ width: "max-content", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                                            <div className="modi">디자인 수정</div>
+                                            <div className="modi">경험 수정</div>
                                             <Icon style={{ fontSize: "18px", color: "black" }}>create</Icon>
                                         </div>
                                     </a>}
@@ -1206,7 +1206,7 @@ export default
                         }}
                     >
                         <Icon style={{ fontSize: "18px", color: "black" }}>share</Icon>
-                        <span>&nbsp;디자인 파생</span>
+                        <span>&nbsp;경험 파생</span>
                     </a>
 
                     <a

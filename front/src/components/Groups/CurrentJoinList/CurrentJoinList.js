@@ -104,7 +104,7 @@ class CurrentJoinList extends Component {
             <Grid.Column as="ul">
               <li id="design"
                   className={this.props.type === "design" || this.props.type === null || this.props.type === "null" ? "onSelected" : ""}
-                  onClick={this.typeChange}>가입한 디자인</li>
+                  onClick={this.typeChange}>가입한 경험</li>
               <li id="group"
                   className={this.props.type === "group"? "onSelected" : ""}
                   onClick={this.typeChange}>가입한 그룹</li>

@@ -440,7 +440,7 @@ export function GetMyDetailRequest(token) {
         "Content-Type": "application/json",
         "x-access-token": token,
       },
-      method: "get",
+      method: "GET",
     })
       .then((response) => {
         return response.json();
@@ -457,7 +457,7 @@ export function GetMyDetailRequest(token) {
       });
   };
 }
-// 내 디자인 리스트 불러오기
+// 내 경험 리스트 불러오기
 export function GetMyDesignListRequest(token, page) {
   const url = `${host}/users/myPage/allDesign/${page}`;
   // const url = `${host}/users/myPage/design/${page}`;
@@ -520,7 +520,7 @@ export function GetMyGroupListRequest(token, page) {
       });
   };
 }
-// 내 좋아요 디자인 불러오기
+// 내 좋아요 경험 불러오기
 export function GetMyLikeDesignRequest(token, page) {
   //console.log("designer" + page);
   return (dispatch) => {
@@ -695,7 +695,8 @@ export function UpdateUserDetailRequest(data, token) {
   //console.log("UpdateUserDetailRequest", data);
   return (dispatch) => {
     dispatch(UpdateUserDetail());
-    return fetch(`${host}/users/modifyDetail_newversion`, {
+    return fetch(`${host}/users/modifyplaceuser`, {
+      // return fetch(`${host}/users/modifyDetail_newversion`, {
       headers: { "x-access-token": token, "Content-Type": "application/json" },
       method: "POST",
       body: JSON.stringify(data),

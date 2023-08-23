@@ -54,9 +54,9 @@ class ModifyDesignInfoContainer extends Component {
 
   async componentDidMount() {
     await this.setState({ valid: 1 });
-    if (this.props.userInfo.is_designer === 0) {
-      this.gotoMyModify();
-    }
+    // if (this.props.userInfo.is_designer === 0) {
+    //   this.gotoMyModify();
+    // }
 
     await this.setState({ valid: 2, loading: true });
     // this.props.GetCategoryAllRequest().then(() => {
@@ -80,7 +80,7 @@ class ModifyDesignInfoContainer extends Component {
     this.props.history.push("/myModify");
   }
   async goBack() {
-    await alert("디자인 수정 권한이 없습니다", "확인");
+    await alert("경험 수정 권한이 없습니다", "확인");
     window.location.href = geturl() + "/exp/" + this.props.id;
   }
   componentDidUpdate(prevProps) {
@@ -99,16 +99,14 @@ class ModifyDesignInfoContainer extends Component {
         {/* verification  */}
         {valid === 0 && (
           <ValidationWrapper>
-            인증을 거쳐야 디자인 정보를 수정할 수 있습니다.
+            인증을 거쳐야 경험 정보를 수정할 수 있습니다.
           </ValidationWrapper>
         )}
         {valid === 1 && (
           <ValidationWrapper>수정 권한을 체크합니다.</ValidationWrapper>
         )}
         {valid === 2 && (
-          <ValidationWrapper>
-            디자인 정보를 가져오고 있습니다.
-          </ValidationWrapper>
+          <ValidationWrapper>경험 정보를 가져오고 있습니다.</ValidationWrapper>
         )}
 
         {/* rendering after verifying */}
@@ -117,7 +115,7 @@ class ModifyDesignInfoContainer extends Component {
             <ModifyDesignMobile {...this.props} />
           ) : (
             <Wrapper>
-              <ModifyDesign {...this.props} />
+              {this.props.DesignDetail && <ModifyDesign {...this.props} />}
             </Wrapper>
           )
         ) : null}

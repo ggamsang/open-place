@@ -271,7 +271,7 @@ export class InputTag extends Component {
           value={this.state.value}
         /> */}
         <InputField
-          onChangeValue={this.onChangeValue}
+          // onChangeValue={this.onChangeValue}
           onChange={this.onChangeValue}
           onKeyDown={this.onEnterKeyDown}
           value={this.state.value}

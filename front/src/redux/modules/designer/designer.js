@@ -173,7 +173,7 @@ export function Designer(state, action) {
     }
 }
 
-// 디자이너가 좋아요 한 디자인 가져오기
+// 디자이너가 좋아요 한 경험 가져오기
 export function GetLikeInDesignerRequest(id, page, sort) {
     return (dispatch) => {
         return fetch(`${host}/designer/designerDetail/` + id + "/like/" + page + "/" + sort, {
@@ -327,7 +327,7 @@ export function GetLikeDesignerInDesignerRequest(id, page, sort) {
     }
 }
 
-// 디자이너의 디자인 리스트 가져오기
+// 디자이너의 경험 리스트 가져오기
 export function GetMyDesignInDesignerRequest(id, page, sort) {
     const url = `${host}/designer/designerDetail/${id}/allDesignDesigner/${page}/${sort}`;
     //console.log("sql:", url);

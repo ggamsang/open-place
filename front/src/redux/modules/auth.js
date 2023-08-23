@@ -224,8 +224,8 @@ export function CheckTokenRequest(token) {
   return (dispatch) => {
     dispatch(CheckToken());
     // console.log("fn(): check token request: ", token);
-    // return fetch(`${host}/users/check`, {
-    return fetch(`https://13.125.55.195/api/users/check`, {
+    return fetch(`${host}/users/check`, {
+    // return fetch(`https://13.125.55.195/api/users/check`, {
       headers: {
         "X-Access-Token": token,
         "Content-Type": "application/json",

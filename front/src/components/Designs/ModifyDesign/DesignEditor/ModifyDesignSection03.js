@@ -18,7 +18,7 @@ class ModifyDesignSection03 extends Component{
                 <div style={{ display: "flex" }}>
                   <CreateStep marginRight={73} /*onClick={() => { alert("??") }}*/ step={"단계"} />
                   <CreateStep marginRight={48} disabled /*onClick={() => { alert("??") }}*/ step={"단계"} />
-                  <TipDiv txt="디자인을 등록 후에도 단계 / 컨텐츠를 수정할 수 있습니다." />
+                  <TipDiv txt="경험을 등록 후에도 단계 / 컨텐츠를 수정할 수 있습니다." />
                 </div>
               </div>
               <div style={DesignEditor_Step_ArrowBox}>

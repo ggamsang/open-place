@@ -115,7 +115,7 @@ class AlarmMobile extends React.Component {
     };
     allAlarmConfirm = async () => {
         if (this.state.alarm && this.state.alarm.count) {
-            await alert('초대받은 디자인 및 그룹에 대한 알림을 제외한 모든 알림을 읽음으로 표시합니다.', "확인");
+            await alert('초대받은 경험 및 그룹에 대한 알림을 제외한 모든 알림을 읽음으로 표시합니다.', "확인");
             this.props.handleAllAlarmConfirm(this.props.uid);
         }
     };
@@ -141,13 +141,13 @@ class AlarmMobile extends React.Component {
         const title = item.title && item.title.length > 32 ? item.title.slice(0, 32) + "..." : item.title;
         if (item.type === "DESIGN") {
             if (item.kinds === "INVITE") {
-                msg = `${item.title}디자인 멤버로 초대되었습니다.`;
+                msg = `${item.title}경험 멤버로 초대되었습니다.`;
             } else if (item.kinds === "REQUEST") {
                 msg = `${from}님이 멤버 가입 신청을 하였습니다.`
             } else if (item.kinds === "INVITE_TRUE") {
                 msg = `${from}님이 ${to}님의 초대를 수락했습니다.`
             } else if (item.kinds === "REQUEST_TRUE") {
-                msg = `${to}님이 아래 디자인의 멤버가 되었습니다.`
+                msg = `${to}님이 아래 경험의 멤버가 되었습니다.`
             } else if (item.kinds === "GETOUT") {
                 msg = `${title}에서 탈퇴되셨습니다.`;
             } else if (item.kinds === "REFUSE") {
@@ -155,14 +155,14 @@ class AlarmMobile extends React.Component {
             } else if (item.kinds === "INVITE_REJECT") {
                 msg = `${from}님이 초대를 거절하였습니다.`;
             } else if (item.kinds === "LIKE") {
-                if (item.count > 1) msg = `${from}님외 ${item.count - 1}명이 디자인을 좋아합니다.`;
-                else msg = `${from}님이 디자인을 좋아합니다.`;
+                if (item.count > 1) msg = `${from}님외 ${item.count - 1}명이 경험을 좋아합니다.`;
+                else msg = `${from}님이 경험을 좋아합니다.`;
             } else if (item.kinds === "COMMENT") {
-                msg = `${from}님이 디자인에 댓글을 달았습니다.`;
+                msg = `${from}님이 경험에 댓글을 달았습니다.`;
             } else if (item.kinds === "CARD_COMMENT") {
-                msg = `${from}님이 디자인 카드에 댓글을 달았습니다.`;
+                msg = `${from}님이 경험 카드에 댓글을 달았습니다.`;
             } else if (item.kinds === "COMMENT_COMMENT") {
-                msg = `${to}님의 디자인 댓글에 답변이 달렸습니다.`;
+                msg = `${to}님의 경험 댓글에 답변이 달렸습니다.`;
             } else if (item.kinds === "LIVE_CHAT") {
                 // const date = new Date();
                 msg = `${from}님이 회의를 개설하였습니다.`
@@ -187,7 +187,7 @@ class AlarmMobile extends React.Component {
                 if (item.count > 1) msg = `${from}님외 ${item.count - 1}명이 그룹을 좋아합니다.`;
                 else msg = `${from}님이 그룹을 좋아합니다.`;
             } else if (item.kinds === "GROUP_DESIGN_OUT") {
-                msg = `${title}그룹에서 디자인이 삭제되었습니다.`;
+                msg = `${title}그룹에서 경험이 삭제되었습니다.`;
             } else if (item.kinds === "GROUP_GROUP_OUT") {
                 msg = `${title}그룹에서 그룹이 삭제되었습니다.`;
             }

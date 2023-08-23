@@ -19,7 +19,7 @@ import MyDetail from "components/Users/MyDetail/NewMyDetail";
 
 class MyDetailContainer extends Component {
   componentWillMount() {
-    this.props.GetMyDetailRequest(this.props.token);
+    this.props.GetMyDetailRequest(this.props.token).then(console.log)
   }
 
   render() {

@@ -653,7 +653,9 @@ export default class BoardDialog extends Component {
                         </div>
                         <div className="name ellipsis">
                           {item.title}
-                          {item.comments > 0 ? `(${item.comments})` : null}
+                          {item.comments > 0
+                            ? `(댓글: ${item.comments}개)`
+                            : null}
                         </div>
                         <div className="user ellipsis">{item.nick_name}</div>
                         <div className="time ellipsis">
@@ -852,7 +854,11 @@ export default class BoardDialog extends Component {
                         </div>
                         <div className="row-title ellipsis">
                           {item.title}
-                          {item.comments > 0 ? `(${item.comments})` : null}
+                          {item.comments > 0 ? (
+                            <b style={{ verticalAlign: "super" }}>
+                              &nbsp;&nbsp;(댓글: {item.comments}개)
+                            </b>
+                          ) : null}
                         </div>
                         <div className="nick-name ellipsis">
                           {item.nick_name}

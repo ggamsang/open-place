@@ -138,7 +138,7 @@ class CreateExp extends React.Component {
     super(props);
     this.state = {
       tag: null,
-      exp_type: 1,
+      exp_type: 4,
       exp_type_detail: "",
       thumbnail: null,
       thumbnail_name: null,
@@ -183,6 +183,7 @@ class CreateExp extends React.Component {
       type: null,
       template: null,
       is_problem: false,
+      explanation: null,
     };
     this.onChangeThumbnail = this.onChangeThumbnail.bind(this);
     this.onChangeTitle = this.onChangeTitle.bind(this);
@@ -201,6 +202,9 @@ class CreateExp extends React.Component {
     this.setState({
       title: event.target.value,
     });
+  };
+  handleExplanation = (e) => {
+    this.setState({ explanation: e.target.value });
   };
   onChangeContent = (value) => {
     this.setState({ content: value });
@@ -312,6 +316,7 @@ class CreateExp extends React.Component {
         thumbnail,
         thumbnail_name,
         tag,
+        explanation,
       } = this.state;
       if (
         title === "" ||
@@ -358,6 +363,7 @@ class CreateExp extends React.Component {
         tag: tag,
         type: this.state.type,
         steps: this.state.steps,
+        explanation,
       };
 
       this.props
@@ -512,89 +518,106 @@ class CreateExp extends React.Component {
         {this.state.loading && <Loading />}
 
         {/* <styled.Wrapper> */}
-          <styled.Wrapper>
-            <styled.AddThumbnail>
-              <span>썸네일 이미지 등록</span>
-              <div className="wrap">
-                <input
-                  hidden
-                  onChange={this.onChangeThumbnail}
-                  id="file"
-                  type="file"
-                  accept="image/png, image/bmp, image/jpeg, image/jpg"
-                />
-                <label htmlFor="file">
-                  <styled.ThumbnailImg>
-                    {this.state.thumbnail === null ? (
-                      <span>
-                        첨부
-                        <br />
-                        (여기를 클릭하여 <br />
-                        섬네일을 선택해주세요.)
-                      </span>
-                    ) : (
-                      <img alt="thumbnail" src={this.state.thumbnail} />
-                    )}
-                  </styled.ThumbnailImg>
-                </label>
+        <styled.Wrapper>
+          <styled.AddThumbnail>
+            <span>
+              썸네일 이미지 등록<b style={{ color: "red" }}>*</b>
+            </span>
+            <div className="wrap">
+              <input
+                hidden
+                onChange={this.onChangeThumbnail}
+                id="file"
+                type="file"
+                accept="image/png, image/bmp, image/jpeg, image/jpg"
+              />
+              <label htmlFor="file">
+                <styled.ThumbnailImg>
+                  {this.state.thumbnail === null ? (
+                    <span>
+                      첨부
+                      <br />
+                      (여기를 클릭하여 <br />
+                      섬네일을 선택해주세요.)
+                    </span>
+                  ) : (
+                    <img alt="thumbnail" src={this.state.thumbnail} />
+                  )}
+                </styled.ThumbnailImg>
+              </label>
+            </div>
+          </styled.AddThumbnail>
+
+          <styled.InfoBox>
+            <styled.TitleDiv>
+              <div>
+                제목<b style={{ color: "red" }}>*</b>
               </div>
-            </styled.AddThumbnail>
+              <InputNormal
+                onChangeValue={this.onChangeTitle}
+                value={this.state.title}
+                placeholder={"제목을 입력하세요"}
+                radius={10}
+                width={350}
+                height={45}
+                fontSize={20}
+                color={"#E9E9E9"}
+              />
+            </styled.TitleDiv>
 
-            <styled.InfoBox>
-              <styled.TitleDiv>
-                <div>제목</div>
-                <InputNormal
-                  onChangeValue={this.onChangeTitle}
-                  value={this.state.title}
-                  placeholder={"제목을 입력하세요"}
-                  radius={10}
-                  width={350}
-                  height={45}
-                  fontSize={20}
-                  color={"#E9E9E9"}
+            <styled.CategoryDiv>
+              <div>
+                경험유형<b style={{ color: "red" }}>*</b>
+              </div>
+              <DropDownNormal
+                value={this.state.exp_type}
+                onChangeValue={this.onChangeExpType}
+                width={250}
+                height={50}
+                radius={10}
+                color={"#CCC"}
+                options={TYPEs}
+                // options={this.props.exp_type}
+              />
+            </styled.CategoryDiv>
+            <styled.CategoryDiv>
+              <div>
+                카테고리<b style={{ color: "red" }}>*</b>
+              </div>
+              <DropDownNormal
+                value={this.state.category}
+                onChangeValue={this.onChangeCategory}
+                width={250}
+                height={51}
+                radius={10}
+                color={"#E9E9E9"}
+                options={CATEs}
+                // options={this.props.category.slice(0, 3)}
+              />
+            </styled.CategoryDiv>
+            <styled.CategoryDiv>
+              <div>설명</div>
+              <styled.InputTextArea
+                value={this.state.explanation}
+                onChange={this.handleExplanation}
+                placeholder={"제목을 입력하세요"}
+                width={350}
+                height={90}
+              />
+            </styled.CategoryDiv>
+
+            <styled.TagDiv>
+              <div>태그</div>
+              <div>
+                <InputTag
+                  placeholder={"태그를 입력하세요."}
+                  getValue={this.handleAddTag}
+                  width={"350"}
                 />
-              </styled.TitleDiv>
-
-              <styled.CategoryDiv>
-                <div>경험유형</div>
-                <DropDownNormal
-                  value={this.state.exp_type}
-                  onChangeValue={this.onChangeExpType}
-                  width={250}
-                  height={50}
-                  radius={10}
-                  color={"#CCC"}
-                  options={TYPEs}
-                  // options={this.props.exp_type}
-                />
-              </styled.CategoryDiv>
-
-              <styled.CategoryDiv>
-                <div>카테고리</div>
-                <DropDownNormal
-                  value={this.state.category}
-                  onChangeValue={this.onChangeCategory}
-                  width={250}
-                  height={51}
-                  radius={10}
-                  color={"#E9E9E9"}
-                  options={CATEs}
-                  // options={this.props.category.slice(0, 3)}
-                />
-              </styled.CategoryDiv>
-
-              <styled.TagDiv>
-                <div >태그</div>
-                <div>
-                  <InputTag
-                    placeholder={"태그를 입력하세요."}
-                    getValue={this.handleAddTag}
-                    width={"350"}
-                  />
-                </div>
-              </styled.TagDiv>
-            </styled.InfoBox>
-          </styled.Wrapper>
+              </div>
+            </styled.TagDiv>
+          </styled.InfoBox>
+        </styled.Wrapper>
         {/* </styled.Wrapper> */}
 
         <styled.Wrapper>
@@ -703,32 +726,6 @@ class CreateExp extends React.Component {
                   )}
                 </React.Fragment>
               ) : null}
-              {/* {this.state.type === "grid" ? (
-                <styled.DesignTemplateSelector>
-                  <div className="title">
-                    템플릿을 선택하시면 보다 편하게 작업을 시작하실 수 있습니다!
-                  </div>
-
-                  <div className="template-wrapper">
-                    {template &&
-                      template.length > 0 &&
-                      template.map((item) => (
-                        <label
-                          className="element"
-                          key={item.type}
-                          onClick={async () =>
-                            await this.setState({ template: item.type })
-                          }
-                        >
-                          {item.text}
-                          <styled.DesignElement>
-                            <img alt="" src={item.img} />
-                          </styled.DesignElement>
-                        </label>
-                      ))}
-                  </div>
-                </styled.DesignTemplateSelector>
-              ) : null} */}
 
               {this.state.type === "grid" &&
               this.state.template != null &&
@@ -742,10 +739,6 @@ class CreateExp extends React.Component {
                       type={this.state.template}
                     />
                   </div>
-                  {/* <div className="title">
-                    선택하신 템플릿으로 시작하시고 싶으시다면 완성된 경험아이템
-                    등록하기 버튼을 클릭해주세요.
-                  </div> */}
                 </styled.EditorWrapper>
               ) : null}
             </div>

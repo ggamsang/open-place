@@ -427,7 +427,7 @@ export function GetDesignCountRequest(id) {
         dispatch(GetDesignCount(data));
       })
       .catch((err) => {
-        // alert("디자인 정보를 가져오지 못했습니다. 메인페이지로 돌아갑니다.");
+        // alert("경험 정보를 가져오지 못했습니다. 메인페이지로 돌아갑니다.");
         window.location.href = "/notfound";
         console.error("err", err);
       });
@@ -696,7 +696,7 @@ export function GetoutDesignRequest(id, memberId, token, refuse) {
         return response.json();
       })
       .then((data) => {
-        //console.log("디자인 탈퇴 >>>", data);
+        //console.log("경험 탈퇴 >>>", data);
         if (!data) {
           //console.log("no data");
         }
@@ -928,7 +928,24 @@ export function CancelInvitedUserRequest(id, token) {
       });
   });
 }
-export function KickOutForkDesignReques(id, token) {
+export function IWantToOutForkDesignRequest(id, token) {
+  return new Promise((resolve, reject) => {
+    const url = `${host}/design/forkdesign/iwanttoout/${id}`;
+    fetch(url, {
+      headers: { "x-access-token": token },
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        resolve(data);
+      })
+      .catch((error) => {
+        console.error(error);
+        reject(false);
+      });
+  });
+}
+export function KickIOutForkDesignRequest(id, token) {
   return new Promise((resolve, reject) => {
     const url = `${host}/design/forkdesign/kickout/${id}`;
     fetch(url, {

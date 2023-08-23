@@ -565,12 +565,12 @@ class DesignInfo extends Component {
     if (!this.props.userInfo || !this.props.token) {
       await alert("로그인 해주세요.", "확인");
     } else if (this.props.DesignDetail.waitingStatus === 1) {
-      await alert("가입 대기중인 디자인입니다.", "확인");
+      await alert("가입 대기중인 경험입니다.", "확인");
     } else {
       const data = [{ uid: this.props.userInfo.uid }];
       if (
         await confirm(
-          "해당 디자인에 멤버로 가입 신청하시겠습니까?",
+          "해당 경험에 멤버로 가입 신청하시겠습니까?",
           "예",
           "아니오"
         )
@@ -608,7 +608,7 @@ class DesignInfo extends Component {
         `${this.props.DesignDetail.title.slice(0, 16)}${
           this.props.DesignDetail.title.length > 16 ? "..." : ""
         })
-        파생 디자인을 생성하시겠습니까?`,
+        파생 경험을 생성하시겠습니까?`,
         "확인"
       )) === true
     ) {
@@ -725,7 +725,7 @@ class DesignInfo extends Component {
         (mem) => mem.user_id === this.props.userInfo.uid
       );
       if (found.length === 0) {
-        alert("이 디자인의 멤버가 아닙니다.");
+        alert("이 경험의 멤버가 아닙니다.");
         return false;
       }
     }
@@ -854,7 +854,7 @@ class DesignInfo extends Component {
           >
             <Cross angle={45} width={30} height={30} />
           </div>
-          <div className="header-txt">디자인 멤버 목록</div>
+          <div className="header-txt">경험 멤버 목록</div>
           <div
             className="list"
             style={{ display: "flex", width: "100%", flexWrap: "wrap" }}
@@ -904,7 +904,7 @@ class DesignInfo extends Component {
             />
           </div>
 
-          <div className="header-txt">파생된 디자인</div>
+          <div className="header-txt">파생된 경험</div>
 
           <div style={{ overflowY: "auto" }}>
             {this.props.forkDesignList &&
@@ -938,7 +938,7 @@ class DesignInfo extends Component {
         <LikeDialogContainer>
           <div className="likeDialog">
             <div className="txt">
-              관심 디자인으로 등록되었습니다.
+              관심 경험으로 등록되었습니다.
               <br />내 정보에서 확인 가능합니다.
             </div>
           </div>
@@ -1013,7 +1013,7 @@ class DesignInfo extends Component {
                     <div className="red_label pointer">
                       {DesignDetail.children_count["count(*)"] > 0 && (
                         <div onClick={this.openForkList}>
-                          파생된 디자인&nbsp;
+                          파생된 경험&nbsp;
                           <span className="font_red">
                             {DesignDetail.children_count["count(*)"]}
                           </span>
@@ -1059,7 +1059,7 @@ class DesignInfo extends Component {
                   className="fork_label pointer"
                   onClick={() => this.forkDesign()}
                 >
-                  파생디자인 생성
+                  파생경험 생성
                 </div>
                 {editor === false ? (
                   DesignDetail && DesignDetail.waitingStatus === 1 ? (
@@ -1079,12 +1079,12 @@ class DesignInfo extends Component {
                       className="button_wrap pointer"
                       onClick={this.gotoDesignModify}
                     >
-                      디자인 수정하기
+                      경험 수정하기
                       <img alt="icon" src={iEdit} className="icon" />
                     </div>
                   ) : (
                     <div className="button_wrap pointer" onClick={this.like}>
-                      관심 디자인 {like ? "취소하기" : "등록하기"}
+                      관심 경험 {like ? "취소하기" : "등록하기"}
                       <img
                         alt="icon"
                         src={thumbup}
@@ -1159,7 +1159,7 @@ class DesignInfo extends Component {
             <ChatWrapper>
               <div className="row">
                 <div
-                  title="디자인 멤버들과 화상회의를 시작합니다."
+                  title="경험 멤버들과 화상회의를 시작합니다."
                   className="icon_wrap"
                   onClick={this.openVideoChat}
                 >
@@ -1167,7 +1167,7 @@ class DesignInfo extends Component {
                   <div className="icon_label">화상회의</div>
                 </div>
                 <div
-                  title="디자인 멤버들과 채팅을 시작합니다."
+                  title="경험 멤버들과 채팅을 시작합니다."
                   className="icon_wrap"
                   onClick={this.openChat}
                 >

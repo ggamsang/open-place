@@ -313,7 +313,7 @@ class SectionBuziness extends Component {
   render() {
 
     let description = [];
-    description[0] = "디자이너로서 디자인과 그룹을 만들고 수정할 수 있으며"
+    description[0] = "디자이너로서 경험과 그룹을 만들고 수정할 수 있으며"
     description[1] = "디자이너 리스트에 올라가게 됩니다."
     description[2] = "추후에 직업에 대한 부가적인 정보를 입력하여 많은 사람들과 소통하게 됩니다."
 
@@ -321,7 +321,7 @@ class SectionBuziness extends Component {
     return (
       <React.Fragment>
         let description = [];
-    description[0] = "디자이너로서 디자인과 그룹을 만들고 수정할 수 있으며"
+    description[0] = "디자이너로서 경험과 그룹을 만들고 수정할 수 있으며"
     description[1] = "디자이너 리스트에 올라가게 됩니다."
     description[2] = "추후에 직업에 대한 부가적인 정보를 입력하여 많은 사람들과 소통하게 됩니다."
     return (

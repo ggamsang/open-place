@@ -277,8 +277,8 @@ class DesignListContainer extends Component {
             <div style={{ width: "67px" }} />
             <div className="category_name">
               {(this_category && this_category.text === "전체"
-                ? "디자인"
-                : this_category.text) || "디자인"}
+                ? "경험"
+                : this_category.text) || "경험"}
               &nbsp;({Count})
             </div>
             <OrderOption_mobile
@@ -367,7 +367,7 @@ export default connect(
 
   <div className="content">
     <div className="header_box">
-        <div className="category_title">{(this_category && this_category.text === "전체" ? "디자인" : this_category.text) || "디자인"}&nbsp;({Count})</div>
+        <div className="category_title">{(this_category && this_category.text === "전체" ? "경험" : this_category.text) || "경험"}&nbsp;({Count})</div>
         <OrderOption order_clicked={this.handleChangeOrderOps} selected={this_order} />
     </div>
     <div className="scroll_wrapper">

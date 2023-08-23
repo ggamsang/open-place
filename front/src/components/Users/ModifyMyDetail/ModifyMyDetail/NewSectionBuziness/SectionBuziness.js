@@ -330,7 +330,7 @@ class SectionBuziness extends Component {
           <IconDiv width={42} height={42} icon={iHelp} style={{ marginLeft: "17px" }} />
           <div className="tip" style={{ marginTop: "20px", marginLeft: "6px" }}>
             <div className="text">
-              디자이너로서 디자인과 그룹을 만들고 수정할 수 있으며<br />
+              디자이너로서 경험과 그룹을 만들고 수정할 수 있으며<br />
               디자이너 리스트에 올라가게 됩니다.<br />
               추후에 직업에 대한 부가적인 정보를 입력하여 많은 사람들과 소통하게 됩니다.
             </div>

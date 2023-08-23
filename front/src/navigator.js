@@ -1,5 +1,5 @@
 export const goto = (type, offset = null) => {
-  switch (type) {
+  switch (String(type).toUpperCase()) {
     case "EXP":
       window.location.href = "/exp/" + offset;
       break;

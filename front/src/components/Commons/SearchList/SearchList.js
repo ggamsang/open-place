@@ -96,7 +96,7 @@ const MenuWrap = styled.div`
 `;
 
 const type = [
-  { key: "design", value: "design", text: "디자인" },
+  { key: "design", value: "design", text: "경험" },
   { key: "group", value: "group", text: "그룹" },
   { key: "designer", value: "designer", text: "디자이너" }
 ];
@@ -194,7 +194,7 @@ class SearchList extends Component {
                       ? "디자이너"
                       : this.props.type && this.props.type === "group"
                         ? "그룹"
-                        : "디자인"}
+                        : "경험"}
                       options={type}
                       onChange={this.typeChange} />
                   </Grid.Column>

@@ -311,7 +311,7 @@ class Navigation extends Component {
             level1: [],
             level0:
                 [
-                    { max: 2, text: "디자인", id: "design", },
+                    { max: 2, text: "경험", id: "design", },
                     { max: 1, text: "그룹", id: "group", },
                     { max: 2, text: "디자이너", id: "designer", },
                     {

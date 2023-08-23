@@ -37,7 +37,7 @@ class DesignInGroupContainer extends Component {
         {this.props.dataListAdded && this.props.dataListAdded.length === 0
         ? <div></div>
         : <DesignBox>
-            <div className="boxTitle">디자인 ({NumberFormat(this.props.count)})</div>
+            <div className="boxTitle">경험 ({NumberFormat(this.props.count)})</div>
             <ScrollList getListRequest={this.getList}
                         type="design"
                         dataList={this.props.dataList} dataListAdded={this.props.dataListAdded}

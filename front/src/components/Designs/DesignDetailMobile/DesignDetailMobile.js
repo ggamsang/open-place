@@ -36,9 +36,9 @@ class DesignDetail extends Component {
           this.setState({ isMyDesign: false });
         }
         await this.setState({ editor: this.checkEditorPermission() });
-      }); // 디자인에 대한 정보
+      }); // 경험에 대한 정보
     this.props.UpdateDesignViewRequest(this.props.id)
-      .then(this.props.GetDesignCountRequest(this.props.id)); // 디자인 조회수 업데이트 후 카운트 정보 가져옴
+      .then(this.props.GetDesignCountRequest(this.props.id)); // 경험 조회수 업데이트 후 카운트 정보 가져옴
     if (this.props.token) {
       this.props.GetLikeDesignRequest(this.props.id, this.props.token);
     } // 로그인 한 경우 좋아요 했는지 여부 가져오기
@@ -126,7 +126,7 @@ export default DesignDetail;
 //                 <div className="red_label pointer">
 //                     {DesignDetail.children_count["count(*)"] > 0 &&
 //                         <div onClick={this.openForkList}>
-//                             파생된 디자인&nbsp;<span className="font_red">{DesignDetail.children_count["count(*)"]}</span>
+//                             파생된 경험&nbsp;<span className="font_red">{DesignDetail.children_count["count(*)"]}</span>
 //                         </div>}
 //                 </div>
 //                 <div className="red_label pointer" onClick={this.getDesignComment}>덧글 작성</div>
@@ -151,7 +151,7 @@ export default DesignDetail;
 // </div>
 // <div className="menuBox">
 //     <div>
-//         <div className="fork_label pointer" onClick={() => this.forkDesign()}>파생디자인 생성</div>
+//         <div className="fork_label pointer" onClick={() => this.forkDesign()}>파생경험 생성</div>
 //         {editor === false ? DesignDetail && DesignDetail.waitingStatus === 1 ?
 //             <div className="fork_label pointer">
 //                 <div>가입승인 대기중</div>
@@ -167,12 +167,12 @@ export default DesignDetail;
 //         <div className="button_wrap">
 //             {isMyDesign === true ?
 //                 <div className="button_wrap pointer" onClick={this.gotoDesignModify} >
-//                     디자인 수정하기
+//                     경험 수정하기
 //                     <img src={iEdit} className="icon" />
 //                 </div>
 //                 :
 //                 <div className="button_wrap pointer" onClick={this.like}>
-//                     관심 디자인 {like ? "취소하기" : "등록하기"}
+//                     관심 경험 {like ? "취소하기" : "등록하기"}
 //                     <img src={thumbup} className="icon" />
 //                 </div>
 //             }
@@ -206,13 +206,13 @@ export default DesignDetail;
 // ? <ChatWrapper>
 //     <div className="row">
 //         <div
-//             title="디자인 멤버들과 화상회의를 시작합니다."
+//             title="경험 멤버들과 화상회의를 시작합니다."
 //             className="icon_wrap" onClick={this.openVideoChat}>
 //             <img src={new_logo_msg} className="icon" />
 //             <div className="icon_label">화상회의</div>
 //         </div>
 //         <div
-//             title="디자인 멤버들과 채팅을 시작합니다."
+//             title="경험 멤버들과 채팅을 시작합니다."
 //             className="icon_wrap" onClick={this.openChat}>
 //             <img src={new_logo_chat} className="icon" />
 //             <div className="icon_label">채팅</div>

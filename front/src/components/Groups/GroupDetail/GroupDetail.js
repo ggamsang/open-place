@@ -223,7 +223,7 @@ class GroupDetail extends Component {
               <div className="menu-container">
                 <TabMenu>
                   <a onClick={() => this.switchTab("group")}> <div className={`tab ${currentTab === "group" ? "selected" : ""}`}>그룹({NumberFormat(Count.group)})</div></a>
-                  <a onClick={() => this.switchTab("design")}><div className={`tab ${currentTab === "design" ? "selected" : ""}`}>디자인({NumberFormat(Count.design)})</div></a>
+                  <a onClick={() => this.switchTab("design")}><div className={`tab ${currentTab === "design" ? "selected" : ""}`}>경험({NumberFormat(Count.design)})</div></a>
                 </TabMenu>
                 <OrderOption style={{ marginBottom: "15px" }} order_clicked={(order) => this.handleChangeOrderOps(order, currentTab === "group" ? this.getGroupList : this.getDesignList)} selected={this_order} />
               </div>

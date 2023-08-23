@@ -60,7 +60,7 @@ class ScrollDesignListContainer extends Component {
     return (
       <React.Fragment>
         {dataListAdded.length <= 0 ?
-          <NoDataMsg>{this.props.message || "등록된 디자인이 없습니다."}</NoDataMsg>
+          <NoDataMsg>{this.props.message || "등록된 경험이 없습니다."}</NoDataMsg>
           :
           this.props.isMobile==true?
           this.props.display == false?

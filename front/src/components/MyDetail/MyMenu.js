@@ -157,7 +157,7 @@ export class MyMenu extends React.Component {
         {/* CREATE DESIGN */}
         <div className="create-design">
           <a onClick={this.gotoCreateDesign}>
-            <div className="text">디자인 등록하기</div>
+            <div className="text">경험 등록하기</div>
           </a>
         </div>
 
@@ -175,7 +175,7 @@ export class MyMenu extends React.Component {
             </div> */}
         {/* manage my design */}
         {/* <div className={`menu border`}>
-                <a className={`${tab === "manage" ? "active" : ""}`} onClick={this.modifyMyDesign}>내 디자인 관리</a>
+                <a className={`${tab === "manage" ? "active" : ""}`} onClick={this.modifyMyDesign}>내 경험 관리</a>
             </div> */}
         {/* modify myinfo */}
         <div className="menu border default">

@@ -60,7 +60,7 @@ export default class DetailViewMobile extends Component {
 
   onActiveStep = async () => {
     const isconfirm = await confirm(
-      "단계를 가지는 디자인 형식으로 변경하시겠습니까? 변경 후에는 이전으로 돌아갈 수 없습니다. (현재 등록된 디자인 내 모든 데이터들은 저장됩니다)", "예", "아니오"
+      "단계를 가지는 경험 형식으로 변경하시겠습니까? 변경 후에는 이전으로 돌아갈 수 없습니다. (현재 등록된 경험 내 모든 데이터들은 저장됩니다)", "예", "아니오"
     );
     if (isconfirm) {
       this.props
@@ -118,7 +118,7 @@ export default class DetailViewMobile extends Component {
     return (<DetailViewMobileWrapper>
       {this.props.token && this.props.userInfo.uid === view.user_id
         ? <button className="transform-button" onClick={this.onActiveStep}>
-          디자인 형식 변경
+          경험 형식 변경
         </button>
         : null}
 

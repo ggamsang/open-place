@@ -327,7 +327,7 @@ export class MyProfile extends React.Component {
                 </a>
                 <a onClick={this.gotoDesign}>
                     <div className="menu border">
-                        <div className={`design ${tab=="design"&&"active"}`}>디자인</div>
+                        <div className={`design ${tab=="design"&&"active"}`}>경험</div>
                     </div>
                 </a>
                 <a onClick={this.gotoLikePage}>

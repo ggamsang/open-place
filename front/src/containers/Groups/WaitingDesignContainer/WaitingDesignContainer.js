@@ -67,7 +67,7 @@ class WaitingDesignContainer extends Component {
         {
           window.innerWidth<500?
           <DesignBox_mobile style={{marginBottom:`${this.props.waitingDesign&&this.props.waitingDesign.length==0?"0px":"75px"}`}}>
-          <div className="boxTitle">가입 신청중인 디자인 ({this.props.waitingDesign.length})</div>
+          <div className="boxTitle">가입 신청중인 경험 ({this.props.waitingDesign.length})</div>
           <div className="boxContent">
           <ScrollList_mobile
               id="scroll-list"
@@ -97,7 +97,7 @@ class WaitingDesignContainer extends Component {
         </DesignBox_mobile>
         :
         <DesignBox style={{marginBottom:`${this.props.waitingDesign&&this.props.waitingDesign.length==0?"0px":"75px"}`}}>
-        <div className="boxTitle">가입 신청중인 디자인 ({this.props.waitingDesign.length})</div>
+        <div className="boxTitle">가입 신청중인 경험 ({this.props.waitingDesign.length})</div>
         <div className="boxContent">
         <ScrollList
           reload={this.state.reload}

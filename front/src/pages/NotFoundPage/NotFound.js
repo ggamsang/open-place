@@ -35,7 +35,7 @@ class NotFound extends Component {
                     <Link to="/"><b>메인페이지</b></Link>로 이동합니다.
                 </div>
                 {/* <div className="recommendation"> */}
-                {/* <h3>이 디자인은 어떠세요?</h3> */}
+                {/* <h3>이 경험은 어떠세요?</h3> */}
                 {/* </div> */}
             </NotFoundContainer>
         </ClientTemplate>)

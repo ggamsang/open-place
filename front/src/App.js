@@ -81,10 +81,10 @@ class App extends Component {
               path="/insertUserDetail"
               component={RequiresAuth(InsertUserDetailPage)}
             />
-            <Route
+            {/* <Route
               path="/myPage/:type?/:type2?"
               component={RequiresAuth(MyDetailPage)}
-            />
+            /> */}
             <Route
               path="/myModify"
               component={RequiresAuth(MyDetailModifyPage)}

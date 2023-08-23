@@ -31,7 +31,7 @@
 //                 {columns.map((col, index) => {
 //                     return <ExcelColumn label={`${col}`} value={`${index}`} />
 //                 })}
-//                 {/* <ExcelColumn label="디자인" value="design_title" /> */}
+//                 {/* <ExcelColumn label="경험" value="design_title" /> */}
 //                 {/* <ExcelColumn label="보드" value="board_title" /> */}
 //                 {/* <ExcelColumn label="카드" value="card_title" /> */}
 //                 {/* <ExcelColumn label="문제" value="problem_name" /> */}

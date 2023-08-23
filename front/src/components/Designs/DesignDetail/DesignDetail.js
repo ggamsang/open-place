@@ -6,7 +6,8 @@ import { confirm } from "components/Commons/Confirm/Confirm";
 import {
   DenyForkDesignRequest,
   AcceptForkDesignRequest,
-  KickOutForkDesignReques,
+  KickIOutForkDesignRequest,
+  IWantToOutForkDesignRequest,
 } from "redux/modules/expitem";
 import { DESIGN_NOT_FOUND } from "redux/modules/expitem/design";
 import host from "config";
@@ -85,10 +86,10 @@ class DesignDetail extends Component {
         }
 
         // await this.setState({ editor: this.checkEditorPermission() });
-      }); // 디자인에 대한 정보
+      }); // 경험에 대한 정보
     this.props
       .UpdateDesignViewRequest(this.props.id)
-      .then(this.props.GetDesignCountRequest(this.props.id)); // 디자인 조회수 업데이트 후 카운트 정보 가져옴
+      .then(this.props.GetDesignCountRequest(this.props.id)); // 경험 조회수 업데이트 후 카운트 정보 가져옴
     if (this.props.token) {
       this.props.GetLikeDesignRequest(this.props.id, this.props.token);
     } // 로그인 한 경우 좋아요 했는지 여부 가져오기
@@ -135,7 +136,7 @@ class DesignDetail extends Component {
       return;
     }
     //else if (DesignDetail.waitingStatus === 1) {
-    //   await alert("가입 대기중인 디자인입니다.", "확인");
+    //   await alert("가입 대기중인 경험입니다.", "확인");
     // } else {
     //   const data = [{ uid: userInfo.uid }];
     //   if (await confirm("강의 신청하시겠습니까?", "예", "아니오")) {
@@ -174,9 +175,22 @@ class DesignDetail extends Component {
         )
       );
   };
+  onClickIWannaOutHere = async (item) => {
+    if (await confirm("이 그룹에서 탈퇴하시겠습니까?", "예", "아니오")) {
+      await alert("백엔드 개발중");
+      // IWantToOutForkDesignRequest(id, this.props.token)
+      //   .then(console.log)
+      //   .then(() =>
+      //     this.props.ForkDesignListRequest(
+      //       this.props.DesignDetail.uid,
+      //       this.props.token
+      //     )
+      //   );
+    }
+  };
   onClickForkDesignKickOut = async (id) => {
     if (await confirm("선택하신 경험을 삭제하시겠습니까?", "예", "아니오")) {
-      KickOutForkDesignReques(id, this.props.token)
+      KickIOutForkDesignRequest(id, this.props.token)
         .then(console.log)
         .then(() =>
           this.props.ForkDesignListRequest(
@@ -245,6 +259,7 @@ class DesignDetail extends Component {
   setFold = () => {
     this.setState({ fold: !this.state.fold });
   };
+
   render() {
     const { DesignDetail, token, userInfo, forkDesignList } = this.props;
     const { manage, fold } = this.state;
@@ -272,8 +287,11 @@ class DesignDetail extends Component {
 
     // 그룹인가? 개설자인가? 신청인가?
     // 폈는가? 펴지 않았는가?
+    const isGroup = "모임강의상담".includes(typeName) && "그룹";
+    console.log(DesignDetail);
     return (
       <Wrapper>
+        {isGroupMember}
         <ExpInfoText>경험정보</ExpInfoText>
         {/* head */}
         <ExpInfoDiv>
@@ -284,11 +302,64 @@ class DesignDetail extends Component {
             <NameAndTagsDiv>
               <div>
                 <ExpName>{DesignDetail?.title}</ExpName>
-                <CateType>
-                  ({cateName}) x ({typeName})
-                </CateType>
+                <div style={{ display: "flex" }}>
+                  <CateType>
+                    ({cateName}) x ({typeName})
+                  </CateType>
+                  <Tags style={{ display: "flex" }}>
+                    {/* {DesignDetail.tag?.length > 0 && "태그"} */}
+                    <div className="fold">
+                      {DesignDetail.tag?.slice(0, 5).map((tag) => (
+                        <span
+                          key={tag.uid}
+                          style={{
+                            padding: "5px 10px",
+                            backgroundColor: "gray",
+                            color: "white",
+                            marginLeft: "5px",
+                            borderRadius: "5px",
+                            cursor: "pointer",
+                          }}
+                        >
+                          &nbsp;&nbsp;{tag.tag}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="box">
+                      {DesignDetail.tag?.length > 0 && (
+                        <select>
+                          {DesignDetail.tag?.slice(0, 5).map((tag) => (
+                            <option
+                              key={tag.uid}
+                              style={{
+                                padding: "5px 10px",
+                                backgroundColor: "gray",
+                                color: "white",
+                                marginLeft: "5px",
+                                borderRadius: "5px",
+                                cursor: "pointer",
+                              }}
+                            >
+                              &nbsp;&nbsp;{tag.tag}
+                            </option>
+                          ))}
+                        </select>
+                      )}
+                    </div>
+                  </Tags>
+                </div>
               </div>
             </NameAndTagsDiv>
+
+            {DesignDetail?.explanation && (
+              <Price
+                font="normal normal 400 1.5rem/1.5rem Pretendard"
+                color="#707070"
+              >
+                설명: {DesignDetail?.explanation}
+              </Price>
+            )}
+
             <Price>
               {this.state.isMyDesign ? (
                 <>내 경험아이템</>
@@ -296,50 +367,9 @@ class DesignDetail extends Component {
                 <>작성자: {DesignDetail.userName}</>
               )}
             </Price>
-            <Tags>
-              {DesignDetail.tag?.length > 0 && "태그"}
-              <div className="fold">
-                {DesignDetail.tag?.slice(0, 5).map((tag) => (
-                  <span
-                    key={tag.uid}
-                    style={{
-                      padding: "5px 10px",
-                      backgroundColor: "gray",
-                      color: "white",
-                      marginLeft: "5px",
-                      borderRadius: "5px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    &nbsp;&nbsp;{tag.tag}
-                  </span>
-                ))}
-              </div>
-              <div className="box">
-                {DesignDetail.tag?.length > 0 && (
-                  <select>
-                    {DesignDetail.tag?.slice(0, 5).map((tag) => (
-                      <option
-                        key={tag.uid}
-                        style={{
-                          padding: "5px 10px",
-                          backgroundColor: "gray",
-                          color: "white",
-                          marginLeft: "5px",
-                          borderRadius: "5px",
-                          cursor: "pointer",
-                        }}
-                      >
-                        &nbsp;&nbsp;{tag.tag}
-                      </option>
-                    ))}
-                  </select>
-                )}
-              </div>
-            </Tags>
+
             <NumRate />
           </ExpInnerDiv>
-
           <ExpInnerButtonBox>
             {/* like */}
             {DesignDetail.user_id !== userInfo?.uid && (
@@ -347,44 +377,64 @@ class DesignDetail extends Component {
                 <span>{DesignDetail.isLike !== 0 ? "❤️" : ""}좋아요</span>
               </LikeButton>
             )}
-
+            {token &&
+              isGroupExp &&
+              DesignDetail.parent_design === null &&
+              this.props.forkDesignList
+                ?.filter((item) => item.nick_name === userInfo?.nickName)
+                ?.map((item) => (
+                  <div key={item.uid} style={{ display: "flex" }}>
+                    <ManageButton
+                      onClick={() => this.onClickIWannaOutHere(item.uid)}
+                    >
+                      <span>그룹탈퇴</span>
+                    </ManageButton>
+                  </div>
+                ))}
             {/* chat & vchat */}
-            {isGroupExp &&
-              (isGroupMember || DesignDetail.user_id === userInfo?.uid) &&
-              token && (
-                <React.Fragment>
-                  <ManageButton onClick={this.onClickVChat}>
-                    <span>화상회의</span>
-                  </ManageButton>
+            {token &&
+              isGroupExp &&
+              DesignDetail.parent_design === null &&
+              (DesignDetail.user_id === userInfo?.uid ||
+                this.props.forkDesignList?.filter(
+                  (item) => item.nick_name === userInfo?.nickName
+                ).length > 0) && (
+                // group creator or group member
+                <div style={{ display: "flex" }}>
                   <ManageButton onClick={this.onClickChat}>
                     <span>채팅</span>
                   </ManageButton>
-                </React.Fragment>
+                  <ManageButton onClick={this.onClickVChat}>
+                    <span>화상회의</span>
+                  </ManageButton>
+                </div>
               )}
-
             {/* apply */}
             {isGroupExp &&
               DesignDetail.parent_design === null &&
               this.state.applied === false &&
               DesignDetail.user_id !== userInfo?.uid && (
                 <PurchaseButton onClick={this.onClickBuy}>
-                  <span>{typeName}신청하기</span>
+                  {/* <span>{typeName}신청하기</span> */}
+                  <span>신청하기</span>
                 </PurchaseButton>
               )}
-
             {/* group notice / board */}
-            {isGroupExp && (
-              <GroupNoticeContainer
-                ButtonStyled={LikeButton}
-                user_id={userInfo?.uid}
-                owner_id={DesignDetail.user_id}
-                id={
-                  isGroupMember ? DesignDetail.parent_design : DesignDetail.uid
-                }
-                token={this.props.token}
-              />
-            )}
-
+            {isGroupExp &&
+              DesignDetail.parent_design == null &&
+              DesignDetail.user_id === userInfo?.uid && (
+                <GroupNoticeContainer
+                  ButtonStyled={LikeButton}
+                  user_id={userInfo?.uid}
+                  owner_id={DesignDetail.user_id}
+                  id={
+                    isGroupMember
+                      ? DesignDetail.parent_design
+                      : DesignDetail.uid
+                  }
+                  token={this.props.token}
+                />
+              )}
             {/* goto parent design */}
             {DesignDetail.parent_design && (
               <PurchaseButton
@@ -393,7 +443,6 @@ class DesignDetail extends Component {
                 <span>개설자페이지로 이동</span>
               </PurchaseButton>
             )}
-
             {/* group manage */}
             {token &&
               isGroupExp &&
@@ -413,48 +462,47 @@ class DesignDetail extends Component {
             )}
           </ExpInnerButtonBox>
         </ExpInfoDiv>
-
-        {isGroupExp && DesignDetail?.parent_design === null && (
+        {/* body - group */}
+        {manage && (
           <>
-            {/* manage and child-list */}
-            {manage && (
-              <>
-                <ExpInfoText>그룹관리</ExpInfoText>
-                {forkDesignList &&
-                  forkDesignList.filter((item) => item.d_flag === 0).length ===
-                    0 && <h3>가입신청내역없음</h3>}
-                <div
-                  style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    width: "100%",
-                  }}
-                >
-                  {forkDesignList &&
-                    forkDesignList
-                      .filter((item) => item.d_flag === 0)
-                      .map((item) => (
-                        <div key={item.uid} style={{ position: "relative" }}>
-                          <AcceptButton
-                            onClick={() =>
-                              this.onClickForkDesignAccept(item.uid)
-                            }
-                          >
-                            수락
-                          </AcceptButton>
-                          <RejectButton
-                            onClick={() => this.onClickForkDesignDeny(item.uid)}
-                          >
-                            거절
-                          </RejectButton>
-                          <Design {...item} />
-                        </div>
-                      ))}
-                </div>
-              </>
-            )}
-            <br />
-            {fold && DesignDetail?.parent_design === null && (
+            <ExpInfoText>그룹관리</ExpInfoText>
+            {forkDesignList &&
+              forkDesignList.filter((item) => item.d_flag === 0).length ===
+                0 && <h3>가입신청내역없음</h3>}
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                width: "100%",
+              }}
+            >
+              {forkDesignList &&
+                forkDesignList
+                  .filter((item) => item.d_flag === 0)
+                  .map((item) => (
+                    <div key={item.uid} style={{ position: "relative" }}>
+                      <AcceptButton
+                        onClick={() => this.onClickForkDesignAccept(item.uid)}
+                      >
+                        수락
+                      </AcceptButton>
+                      <RejectButton
+                        onClick={() => this.onClickForkDesignDeny(item.uid)}
+                      >
+                        거절
+                      </RejectButton>
+                      <Design {...item} />
+                    </div>
+                  ))}
+            </div>
+          </>
+        )}
+        {/* body - group and creator content */}
+        {/* list or content toggle with fold */}
+        {isGroup &&
+          DesignDetail.parent_design == null &&
+          (fold ? (
+            <>
               <div
                 style={{
                   marginTop: "25px",
@@ -480,7 +528,7 @@ class DesignDetail extends Component {
                       )
                       .map((item) => (
                         <div key={item.uid} style={{ position: "relative" }}>
-                          {DesignDetail.user_id === userInfo?.uid && (
+                          {DesignDetail.user_id === userInfo?.uid && manage && (
                             <KickoutButton
                               onClick={() =>
                                 this.onClickForkDesignKickOut(DesignDetail.uid)
@@ -490,7 +538,7 @@ class DesignDetail extends Component {
                             </KickoutButton>
                           )}
                           {item.user_id === userInfo?.uid && (
-                            <MyDesignLabel>내 디자인</MyDesignLabel>
+                            <MyDesignLabel>내 경험</MyDesignLabel>
                           )}
                           <Design
                             kickout={this.onClickForkDesignKickOut}
@@ -502,56 +550,60 @@ class DesignDetail extends Component {
                   </>
                 )}
               </div>
-            )}
-            {!fold && (
+            </>
+          ) : (
+            <>
               <div style={{ marginTop: "10px" }}>
                 <ManageButton onClick={this.setFold}>
                   <span>목록으로</span>
                 </ManageButton>
                 <ExpInfoText>상세정보</ExpInfoText>
-              </div>
-            )}
-            <>
-              {fold ? (
-                <></>
-              ) : (
-                <>
-                  {DesignDetail.is_project === 1 ? (
-                    <DesignDetailStepContainer
-                      editor={DesignDetail.user_id === userInfo?.uid}
-                      design={DesignDetail}
-                      // {...this.state}
-                    />
-                  ) : (
-                    <div className="marginLeft">
+                {DesignDetail.is_project === 1 ? (
+                  <DesignDetailStepContainer
+                    editor={DesignDetail.user_id === userInfo?.uid}
+                    design={DesignDetail}
+                    // {...this.state}
+                  />
+                ) : (
+                  <div className="marginLeft">
+                    {DesignDetail.uid && (
                       <DesignDetailViewContainer
                         editor={DesignDetail.user_id === userInfo?.uid}
                         id={DesignDetail.uid}
                         // {...this.state}
                         history={this.props.history}
                       />
-                    </div>
-                  )}
-                </>
+                    )}
+                  </div>
+                )}
+              </div>
+            </>
+          ))}
+        {/* body - group but not creator */}
+        {isGroup && DesignDetail.parent_design && (
+          <>
+            <>
+              {DesignDetail.is_project === 1 ? (
+                <DesignDetailStepContainer
+                  editor={DesignDetail.user_id === userInfo?.uid}
+                  design={DesignDetail}
+                  // {...this.state}
+                />
+              ) : (
+                <div className="marginLeft">
+                  <DesignDetailViewContainer
+                    editor={DesignDetail.user_id === userInfo?.uid}
+                    id={DesignDetail.uid}
+                    // {...this.state}
+                    history={this.props.history}
+                  />
+                </div>
               )}
             </>
           </>
         )}
-        {isGroupExp &&
-          DesignDetail.d_flag === 0 &&
-          DesignDetail.parent_design !== null && (
-            <p
-              style={{
-                fontSize: "2rem",
-                padding: "50px",
-                textAlign: "center",
-                width: "100%",
-              }}
-            >
-              가입신청 중입니다.
-            </p>
-          )}
-        {!isGroupExp && DesignDetail.d_flag === 1 && DesignDetail?.uid && (
+        {/* body - not group, just display content */}
+        {!isGroup && (
           <>
             {DesignDetail.is_project === 1 ? (
               <DesignDetailStepContainer
@@ -561,12 +613,14 @@ class DesignDetail extends Component {
               />
             ) : (
               <div className="marginLeft">
-                <DesignDetailViewContainer
-                  editor={DesignDetail.user_id === userInfo?.uid}
-                  id={DesignDetail.uid}
-                  // {...this.state}
-                  history={this.props.history}
-                />
+                {DesignDetail.uid && (
+                  <DesignDetailViewContainer
+                    editor={DesignDetail.user_id === userInfo?.uid}
+                    id={DesignDetail.uid}
+                    // {...this.state}
+                    history={this.props.history}
+                  />
+                )}
               </div>
             )}
           </>

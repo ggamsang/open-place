@@ -692,7 +692,7 @@ class Room extends React.Component {
 
 				<h2>화상회의 초대</h2>
 
-				<span style={{ width: "max-content", marginLeft: "auto", marginRight: "10px" }}>(디자인 맴버가 아닌 오픈소스사이트 사용자를 회의에 초대합니다.)</span>
+				<span style={{ width: "max-content", marginLeft: "auto", marginRight: "10px" }}>(경험 맴버가 아닌 오픈소스사이트 사용자를 회의에 초대합니다.)</span>
 
 				<div className="close-box" onClick={() => this.setState({ invite: false })} >
 					<Cross angle={45} color={"#707070"} weight={3} width={35} height={35} />

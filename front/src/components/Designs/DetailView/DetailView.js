@@ -128,7 +128,7 @@ class DetailView extends Component {
 
   onActiveStep = async () => {
     const isconfirm = await confirm(
-      "단계를 가지는 디자인 형식으로 변경하시겠습니까? 변경 후에는 이전으로 돌아갈 수 없습니다. (현재 등록된 디자인 내 모든 데이터들은 저장됩니다)",
+      "단계를 가지는 경험 형식으로 변경하시겠습니까? 변경 후에는 이전으로 돌아갈 수 없습니다. (현재 등록된 경험 내 모든 데이터들은 저장됩니다)",
       "예",
       "아니오"
     );
@@ -195,6 +195,8 @@ class DetailView extends Component {
     const { token, userInfo, DesignDetailView: view } = this.props;
     console.log(view, "view");
     const len = Object.keys(view).length;
+    console.clear();
+    console.log(this.props);
 
     return (
       <React.Fragment>
@@ -207,7 +209,7 @@ class DetailView extends Component {
           {token && userInfo.uid === view.user_id && (
             <BtnWrap>
               <GoStepBtn onClick={this.onActiveStep} size="small">
-                디자인 형식 변경
+                경험 형식 변경
               </GoStepBtn>
 
               {/* <div className="row">
