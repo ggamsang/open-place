@@ -42,14 +42,6 @@ class TopExpItemListContainer extends Component {
             dataList={this.props.dataList}
             dataListAdded={this.props.dataListAdded}
             getList={this.getList}
-            // // width={width}
-            // ListComponent={Item}
-            // type="design"
-            // height={"max-content"}
-            // // {...opendesign_style.design_margin}
-            // dataList={this.props.dataList}
-            // dataListAdded={this.props.dataListAdded}
-            // getListRequest={this.getList}
           />
         )}
       </React.Fragment>

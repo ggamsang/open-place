@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import star from "resources/place/star.svg";
-import profileimg from "resources/place/profileimg.jpg";
+// import profileimg from "resources/place/profileimg.jpg";
+import Diversity3Icon from "@mui/icons-material/Diversity3";
 
 const Profile = styled.div`
   display: inline-block;
@@ -199,14 +200,35 @@ const ReviewWrapper = ({
 
 const ProfileCard = ({ ...props }) => {
   // console.log(props);
-  const { uid, title, category_level1: category, rate: score } = props;
+  const {
+    uid,
+    title,
+    design_type: type,
+    category_level1: category,
+    rate: score,
+  } = props;
   const url = props?.thumbnailUrl?.m_img;
   return (
     <React.Fragment>
       <TopLists onClick={() => (window.location.href = `/exp/${uid}`)}>
         <Profile>
           <ProfileImg src={url} />
-          <ProfileImgStar />
+          {[1, 2, 3].includes(type) && (
+            <div
+              style={{
+                position: "absolute",
+                left: "-5",
+                top: "0",
+                padding: "5px",
+                borderRadius: "100%",
+                backgroundColor: "white",
+                boxShadow: "0px 0px 5px 0px #ABABAB",
+              }}
+            >
+              <Diversity3Icon />
+            </div>
+          )}
+          {/* <ProfileImgStar /> */}
         </Profile>
         <Name>{title || "경험이름"}</Name>
         <Category>
@@ -227,7 +249,7 @@ const ProfileCard = ({ ...props }) => {
             : "무료"}
         </Price> */}
         <ReviewWrapper score={score} />
-        <NumRate />
+        {/* <NumRate /> */}
       </TopLists>
     </React.Fragment>
   );

@@ -1,16 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import Main from "components/Main";
-import MainMobile from "components/Main_mobile";
-import { isMobile } from "constant";
 
-class MainContainer extends Component {
+class MainContainer extends React.Component {
   render() {
-    return isMobile() ? (
-      <MainMobile {...this.props} />
-    ) : (
-      <Main {...this.props} />
-    );
+    return <Main {...this.props} />;
   }
 }
 
