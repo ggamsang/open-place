@@ -420,14 +420,15 @@ class GridEditorMobile extends Component {
                 <div
                   key={cidx}
                   onClick={async () =>
-                    card.private === 1
-                      ? userInfo &&
-                        (userInfo.uid === card.user_id || userInfo.uid === 77)
-                        ? await this.setState({ card: card })
-                        : alert(
-                          "이 컨텐츠는 비공개입니다.\n컨텐츠 작성자만 열람할 수 있습니다."
-                        )
-                      : await this.setState({ card: card })
+                    // card.private === 1
+                    //   ? userInfo &&
+                    //     (userInfo.uid === card.user_id || userInfo.uid === 77)
+                    //     ? await this.setState({ card: card })
+                    //     : alert(
+                    //       "이 컨텐츠는 비공개입니다.\n컨텐츠 작성자만 열람할 수 있습니다."
+                    //     )
+                    //   : 
+                      await this.setState({ card: card })
                   }
                   style={{
                     marginTop: cidx === 0 ? "7px" : "29px",
@@ -446,7 +447,7 @@ class GridEditorMobile extends Component {
                   }}
                 >
                   {/* {card.first_img} */}
-                  {card.private === 1 ? (
+                  {/* {card.private === 1 ? (
                     <div
                       style={{
                         top: "6px",
@@ -476,7 +477,7 @@ class GridEditorMobile extends Component {
                         비공개
                       </p>
                     </div>
-                  ) : null}
+                  ) : null} */}
 
                   <div
                     style={{

@@ -277,14 +277,14 @@ export const ContentCard = (props) => {
 
         <CardContainer editor={props.editor} uid={props.uid} id={props.id} onClick={props.onClick} marginTop={props.marginTop} marginLeft={props.marginLeft} marginRight={props.marginRight} marginBottom={props.marginBottom} first_img={props.card.first_img}>
 
-            {props.card.private === 1 ?
+            {/* {props.card.private === 1 ?
                 <LockContainer>
                     <div className="icon-wrapper">
                         <img src={new_logo_lock} className="icon"/>
                         <div className="text">비공개</div>
                     </div>
                 </LockContainer>
-                : null}
+                : null} */}
 
             <div className="icon-area">{props.children}</div>
             {props.card.first_img ?

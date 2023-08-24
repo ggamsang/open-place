@@ -663,20 +663,20 @@ class CardModal extends Component {
 
                             : <React.Fragment>
                                 <EditCardHeaderContainer>
-                                    {(card.user_id === (this.props.userInfo && this.props.userInfo.uid)) ?
+                                    {/* {(card.user_id === (this.props.userInfo && this.props.userInfo.uid)) ?
                                         <div className="private-box-toggle" >
                                             <div className={`icon-wrapper ${this.state.private ? "lock" : "unlock"}`} onClick={() => this.setState({ private: !this.state.private })}>
                                                 {this.state.private
                                                     ? <i className="lock big icon" />
                                                     : <i className="unlock big icon" />}
-                                                {/* {card.private !== 1 ? */}
-                                                {/* } */}
+                                                {/* {card.private !== 1 ? * /}
+                                                {/* } * /}
                                             </div>
                                             <div>
                                                 {this.state.private ? "비공개" : "공개"}
                                             </div>
                                         </div>
-                                        : null}
+                                        : null} */}
 
                                     <div className="edit-header-container">
                                         <div className="edit-card-info">컨텐츠 정보 수정</div>

@@ -6,7 +6,7 @@ import LearnExpListPage from "mobile/pages/ExpPage/LearnExpListPage";
 import MakeExpListPage from "mobile/pages/ExpPage/MakeExpListPage";
 import NotFoundPage from "mobile/pages/NotFoundPage";
 
-export default class AppMobile extends React.Component {
+class AppMobile extends React.Component {
   render() {
     return (
       <BrowserRouter>
@@ -21,4 +21,5 @@ export default class AppMobile extends React.Component {
       </BrowserRouter>
     );
   }
-}
+};
+export default AppMobile;
