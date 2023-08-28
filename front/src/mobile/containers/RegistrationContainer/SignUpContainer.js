@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { SignUpRequest } from 'actions/Registration';
+import { SignUpRequest } from 'redux/modules/account';
 import SignUp from 'mobile/components_mobile/Registration/SignUp';
 
 class SignUpContainer extends React.Component {

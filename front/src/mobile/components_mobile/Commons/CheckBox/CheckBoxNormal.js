@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { resolution } from 'mobile/commons/resolution';
-import CheckIcon from 'resources/check_green.svg';
+import CheckIcon from 'resources/mobiles/check_green.svg';
 const Wrapper = styled.div`
   display:flex;
   align-items:center;

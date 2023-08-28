@@ -1,16 +1,23 @@
-import React from 'react';
-import ClientTemplate from 'mobile/clientTemplate';
+// import React from 'react';
+// import ClientTemplate from 'mobile/clientTemplate';
+// import TermsOfServiceContainer from 'mobile/containers/TermsOfServiceContainer/TermsOfServiceContainer';
 
-import TermsOfServiceContainer from 'mobile/containers/TermsOfServiceContainer/TermsOfServiceContainer';
+// class TermsOfServicePage extends React.Component {
+//   render() {
+//     return (
+//       <ClientTemplate i_dont_need_footer={true}>
+//         <TermsOfServiceContainer />
+//       </ClientTemplate>
+//     )
+//   }
+// }
 
-class TermsOfServicePage extends React.Component {
-  render() {
-    return (
-      <ClientTemplate i_dont_need_footer={true}>
-        <TermsOfServiceContainer />
-      </ClientTemplate>
-    )
-  }
+// export default TermsOfServicePage;
+
+import React from "react";
+import ClientTemplate from "mobile/clientTemplate";
+
+function TermsOfServicePage() {
+  return <ClientTemplate>terms</ClientTemplate>;
 }
-
 export default TermsOfServicePage;

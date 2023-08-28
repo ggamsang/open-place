@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { resolution } from 'mobile/commons/resolution';
-import OWD_logo_small from 'resources/OWD_logo_small.png';
+import OWD_logo_small from 'resources/mobiles/OWD_logo_small.png';
 const Wrapper = styled.div`
     width:${resolution(259)}px;
     height:${resolution(309)}px;

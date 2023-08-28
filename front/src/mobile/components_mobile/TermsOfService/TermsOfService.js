@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { WIDTH } from 'constant';
 import SearchForm from 'mobile/components_mobile/Commons/Search/SearchForm';
-import back_arrow from 'resources/Iconly-Bold-left-arrow.svg';
+import back_arrow from 'resources/mobiles/Iconly-Bold-left-arrow.svg';
 import { resolution } from 'mobile/commons/resolution';
 
 const Wrapper = styled.div`

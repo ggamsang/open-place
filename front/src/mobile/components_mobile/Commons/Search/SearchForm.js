@@ -51,6 +51,7 @@ class SearchForms extends Component {
 
   render() {
     const { isLoggedIn: active } = this.props;
+
     return (
       <React.Fragment>
         <SearchBox>
@@ -76,6 +77,7 @@ class SearchForms extends Component {
 }
 const mapStateToProps = (state) => {
   return {
+    userInfo: state.Authentication.status.userInfo,
     isLoggedIn: state.Authentication.status.isLoggedIn,
   }
 };

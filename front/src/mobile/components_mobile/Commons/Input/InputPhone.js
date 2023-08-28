@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { resolution } from 'mobile/commons/resolution';
 import { keyframes } from 'styled-components';
-import CheckIcon from 'resources/check_green.svg';
+import CheckIcon from 'resources/mobiles/check_green.svg';
 
 const Wrap = styled.div`
     width:${resolution(props => props.width === null ? 300 : props.width)}px;
