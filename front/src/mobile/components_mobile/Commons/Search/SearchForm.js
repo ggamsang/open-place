@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { resolution } from 'mobile/commons/resolution';
 
 import Search from 'mobile/components_mobile/Search';
-import back_arrow from 'resources/mobiles/Iconly-Bold-left-arrow.svg';
+import back_arrow from 'resources/mobiles/Iconly-Bold-left-arrow_another.svg';
 import alarm from 'resources/mobiles/Iconly-alarm-white.svg'
 import { useNavigate } from 'react-router';
 import { connect } from 'react-redux';

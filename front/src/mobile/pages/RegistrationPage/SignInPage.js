@@ -1,11 +1,11 @@
 import React from "react";
+import SignInContainer from "mobile/containers/RegistrationContainer/SignInContainer";
 
 export default function SignInPage() {
-  return <div>sign in</div>;
+  return <SignInContainer />;
 }
 
 // import React, { Component } from "react";
-// import SignInContainer from "mobile/containers/RegistrationContainer/SignInContainer";
 // class SignInPage extends Component {
 //   render() {
 //     return (

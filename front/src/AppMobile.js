@@ -6,8 +6,10 @@ import LearnExpListPage from "mobile/pages/ExpPage/LearnExpListPage";
 import MakeExpListPage from "mobile/pages/ExpPage/MakeExpListPage";
 import NotFoundPage from "mobile/pages/NotFoundPage";
 import TermsOfServicePage from "mobile/pages/TermsOfServicePage";
+import PrivacyPolicyPage from "mobile/pages/PrivacyPolicyPage";
 import SignInPage from "mobile/pages/RegistrationPage/SignInPage";
-// import SignUpPage from "mobile/pages/RegistrationPage/SignUpPage";
+import SignUpPage from "mobile/pages/RegistrationPage/SignUpPage";
+import ExpDetailPage from "mobile/pages/ExpPage/ExpDetailPage/ExpDetailPage";
 
 class AppMobile extends React.Component {
   render() {
@@ -18,16 +20,19 @@ class AppMobile extends React.Component {
           <Route path="/play" component={PlayExpListPage} />
           <Route path="/learn" component={LearnExpListPage} />
           <Route path="/make" component={MakeExpListPage} />
-          <Route path="/k" element={SignInPage} />
+          <Route path="/signin" component={SignInPage} />
+          <Route path="/signup" component={SignUpPage} />
+          <Route path="/exp/:id" component={ExpDetailPage} />
 
           {/* - */}
-          {/* - */}
-          {/* <Route path="/signup" element={SignUpPage} /> */}
-          <Route path="/terms" element={TermsOfServicePage} />
+          <Route path="/terms" component={TermsOfServicePage} />
+          <Route path="/privacy" component={PrivacyPolicyPage} />
           <Route path="*" component={NotFoundPage} />
+          {/* - */}
         </Routes>
       </BrowserRouter>
     );
   }
 }
+
 export default AppMobile;

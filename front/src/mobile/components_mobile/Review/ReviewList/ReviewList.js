@@ -212,7 +212,7 @@ class ReviewList extends React.Component {
   }
 
   render() {
-    const { reviews = reviewdummy, userInfo, write } = this.props;
+    const { reviews /*= reviewdummy*/, userInfo, write } = this.props;
     const { modify } = this.state;
     console.log(reviews);
 
@@ -249,113 +249,112 @@ class ReviewList extends React.Component {
         )}
 
         <ReviewContainer>
-          {reviews &&
-            reviews.map(
-              ({
-                uid,
-                user_id,
-                create_at,
-                text,
-                review_image_list: images,
-                nick_name,
-                exp_name,
-                option,
-                score,
-              }) => (
-                <ReviewWrapper key={uid}>
-                  <div className="review-wrapper-top">
-                    <div className="reviewlist-row">
-                      <div className="nickname">{nick_name}</div>
-                      <div className="expname">
-                        {exp_name}
-                        {option ? "-" + option : ""}
-                      </div>
-                      {user_id != null &&
-                        user_id === (userInfo && userInfo.uid) && (
-                          <React.Fragment>
-                            <button
-                              className="+"
-                              style={{
-                                marginRight: "15px",
-                                border: "none",
-                                outline: "none",
-                                backgroundColor: "transparent",
-                              }}
-                              onClick={() =>
-                                this.setState({
-                                  modify: {
-                                    uid,
-                                    user_id,
-                                    create_at,
-                                    text,
-                                    review_image_list: images,
-                                    nick_name,
-                                    exp_name,
-                                    option,
-                                    score,
-                                  },
-                                })
-                              }
-                              // onClick={() => this.props.edit(uid)}>
-                              // onClick={() => this.edit(uid)}
-                            >
-                              <Cross
-                                angle={0}
-                                color={"#A0A0FF"}
-                                weight={5}
-                                width={20}
-                                height={20}
-                              />
-                            </button>
-
-                            <button
-                              className="x"
-                              style={{
-                                marginRight: "15px",
-                                border: "none",
-                                outline: "none",
-                                backgroundColor: "transparent",
-                              }}
-                              onClick={() => this.props.delete(uid)}
-                            >
-                              <Cross
-                                angle={45}
-                                color={"#FFA0A0"}
-                                weight={5}
-                                width={20}
-                                height={20}
-                              />
-                            </button>
-                          </React.Fragment>
-                        )}
+          {reviews?.map(
+            ({
+              uid,
+              user_id,
+              create_at,
+              text,
+              review_image_list: images,
+              nick_name,
+              exp_name,
+              option,
+              score,
+            }) => (
+              <ReviewWrapper key={uid}>
+                <div className="review-wrapper-top">
+                  <div className="reviewlist-row">
+                    <div className="nickname">{nick_name}</div>
+                    <div className="expname">
+                      {exp_name}
+                      {option ? "-" + option : ""}
                     </div>
-                    <div className="reviewlist-row ">
-                      <div className="date">{create_at}</div>
-                      <div className="score">
-                        <span>⭑</span>
-                        {score}
-                      </div>
+                    {user_id != null &&
+                      user_id === (userInfo && userInfo.uid) && (
+                        <React.Fragment>
+                          <button
+                            className="+"
+                            style={{
+                              marginRight: "15px",
+                              border: "none",
+                              outline: "none",
+                              backgroundColor: "transparent",
+                            }}
+                            onClick={() =>
+                              this.setState({
+                                modify: {
+                                  uid,
+                                  user_id,
+                                  create_at,
+                                  text,
+                                  review_image_list: images,
+                                  nick_name,
+                                  exp_name,
+                                  option,
+                                  score,
+                                },
+                              })
+                            }
+                            // onClick={() => this.props.edit(uid)}>
+                            // onClick={() => this.edit(uid)}
+                          >
+                            <Cross
+                              angle={0}
+                              color={"#A0A0FF"}
+                              weight={5}
+                              width={20}
+                              height={20}
+                            />
+                          </button>
+
+                          <button
+                            className="x"
+                            style={{
+                              marginRight: "15px",
+                              border: "none",
+                              outline: "none",
+                              backgroundColor: "transparent",
+                            }}
+                            onClick={() => this.props.delete(uid)}
+                          >
+                            <Cross
+                              angle={45}
+                              color={"#FFA0A0"}
+                              weight={5}
+                              width={20}
+                              height={20}
+                            />
+                          </button>
+                        </React.Fragment>
+                      )}
+                  </div>
+                  <div className="reviewlist-row ">
+                    <div className="date">{create_at}</div>
+                    <div className="score">
+                      <span>⭑</span>
+                      {score}
                     </div>
                   </div>
-                  {images && (
-                    <ul className="images reviewlist-row">
-                      {images.split(",").map((url, index) => (
-                        // onclick="window.open(this.src, '_blank');"
-                        <li
-                          onClick={() => window.open(url, "_blank")}
-                          key={index}
-                        >
-                          <ReivewImageElement>
-                            <img alt="이미지" src={url} />
-                          </ReivewImageElement>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                  <div className="review">{text}</div>
-                </ReviewWrapper>
-              )
-            )}
+                </div>
+                {images && (
+                  <ul className="images reviewlist-row">
+                    {images.split(",").map((url, index) => (
+                      // onclick="window.open(this.src, '_blank');"
+                      <li
+                        onClick={() => window.open(url, "_blank")}
+                        key={index}
+                      >
+                        <ReivewImageElement>
+                          <img alt="이미지" src={url} />
+                        </ReivewImageElement>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <div className="review">{text}</div>
+              </ReviewWrapper>
+            )
+          )}
         </ReviewContainer>
       </React.Fragment>
     );

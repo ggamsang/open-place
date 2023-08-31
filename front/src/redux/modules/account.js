@@ -43,6 +43,7 @@ const SignUpFailure = () => ({ type: AUTH_SIGNUP_FAILURE });
 const initialState = {
   FindPw: { status: "INIT" },
   signUp: { status: "INIT" },
+  signIn: { status: "INIT" },
   status: { success: false, massege: null },
   // ,status: { message: "" }
 };
@@ -176,7 +177,7 @@ export function SignInRequest(data) {
         if (res.isMember && res.isPassword) {
           const { TokenName } = require("constant");
           SetSession(TokenName, res.token);
-          return dispatch(SignInSuccess());
+          return dispatch(SignInSuccess()) && res;
         } else {
           if (!res.isMember) {
             return dispatch(SignInIsNotMember());

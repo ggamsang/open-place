@@ -1,6 +1,6 @@
 {
   "name": "osd_front",
-  "version": "2.19.5",
+  "version": "2.20.4",
   "private": true,
   "dependencies": {
     "@babel/core": "7.6.0",
@@ -126,6 +126,7 @@
     "react-router-redux": "^4.0.8",
     "react-scripts": "^3.2.0",
     "react-scroll": "^1.7.12",
+    "react-simple-star-rating": "^5.1.7",
     "react-slick": "^0.29.0",
     "react-sortable-hoc": "^1.9.1",
     "react-spinner": "^0.2.7",

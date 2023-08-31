@@ -1,14 +1,7 @@
-import React, { Component } from 'react';
-import SignUpContainer from 'mobile/containers/RegistrationContainer/SignUpContainer';
+import React from "react";
+import SignUpContainer from "mobile/containers/RegistrationContainer/SignUpContainer";
 
-class SignUpPage extends Component {
-  render() {
-    return (
-      <React.Fragment>
-        <SignUpContainer />
-      </React.Fragment>
-    );
-  }
+function SignUpPage() {
+  return <SignUpContainer />;
 }
-
 export default SignUpPage;
