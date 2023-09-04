@@ -18,6 +18,17 @@ const TopListText = styled.div`
   color: #000000;
   opacity: 1;
 `;
+const WrapScrollList = styled.div`
+  width: 100%;
+  overflow: hidden;
+  
+  overflow-x: auto;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+  ::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+  }
+`;
 class TopExpItemListContainer extends Component {
   componentDidMount() {
     this.props.GetTopExpItemListRequest(0);
@@ -32,18 +43,20 @@ class TopExpItemListContainer extends Component {
     return (
       <React.Fragment>
         <TopListText>인기아이템</TopListText>
-        {this.props.status === "INIT" ? (
-          <Loading />
-        ) : (
-          <ScrollList
-            ListComponent={Item}
-            type="design"
-            height={"max-content"}
-            dataList={this.props.dataList}
-            dataListAdded={this.props.dataListAdded}
-            getList={this.getList}
-          />
-        )}
+        <WrapScrollList>
+          {this.props.status === "INIT" ? (
+            <Loading />
+          ) : (
+            <ScrollList
+              ListComponent={Item}
+              type="design"
+              height={"max-content"}
+              dataList={this.props.dataList}
+              dataListAdded={this.props.dataListAdded}
+              getList={this.getList}
+            />
+          )}
+        </WrapScrollList>
       </React.Fragment>
     );
   }
