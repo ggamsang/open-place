@@ -440,7 +440,7 @@ class DesignDetail extends Component {
               <PurchaseButton
                 onClick={() => goto("EXP", DesignDetail.parent_design)}
               >
-                <span>개설자페이지로 이동</span>
+                <span>그룹페이지</span>
               </PurchaseButton>
             )}
             {/* group manage */}

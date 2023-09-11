@@ -9,6 +9,8 @@ import Fade from "react-reveal/Fade";
 import { goto } from "navigator";
 import CheckBoxNormal from "components/Commons/CheckBox/CheckBoxNormal";
 import cookie from "react-cookies";
+import { TokenName } from "constant";
+import { SetSession } from "modules/Sessions";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -151,7 +153,7 @@ class SignIn extends Component {
         .then((data) => {
           // console.log(data);
           if (data.type === "opendesign/authentication/AUTH_SIGNIN_SUCCESS") {
-            // SetSession(TokenName);
+            SetSession(TokenName, data.token);
             this.setState({ login: Login.success });
             goto("BACK");
           } else {
