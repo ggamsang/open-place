@@ -427,9 +427,9 @@ class GroupInfoComponent extends Component {
                             <img src={new_logo_note} className="asset_icon" />
                             <div className="asset_text">{NumberFormat(GroupDetail.design || 0 + GroupDetail.group || 0)}</div>
                             <div style={{ marginLeft: "38px" }}>
-                                {GroupDetail.uid
+                                {/* {GroupDetail.uid
                                     ? <GroupNoticeContainer loading={this.props.loading} id={GroupDetail.uid} />
-                                    : ""}
+                                    : ""} */}
                             </div>
                         </div>
                     </div>

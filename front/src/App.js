@@ -94,8 +94,8 @@ class App extends Component {
               component={RequiresAuth(MessagePage)}
             />
             {/* GROUP B - design */}
-
-            {/* GROUP C - group */}
+            {/* 
+            // GROUP C - group
             <Route path="/group/:sorting?" component={GroupListPage} />
             <Route path="/groupDetail/:id/" component={GroupDetailPage} />
             <Route
@@ -106,7 +106,7 @@ class App extends Component {
               path="/modifygroup/:id"
               component={RequiresAuth(ModifyGroupPage)}
             />
-            {/* GROUP D - designer */}
+            // GROUP D - designer
             <Route path="/designerDetail/:id" component={DesignerDetailPage} />
             <Route
               path="/designer/:sorting?/:cate1?/:cate2?/:cate3?"
@@ -115,7 +115,8 @@ class App extends Component {
             <Route
               path="/createdesigner"
               component={RequiresAuth(CreateDesigner)}
-            />
+            /> 
+            */}
 
             {/* About */}
             <Route path="/aboutPrivacyPolicy" component={PrivacyPolicyPage} />
@@ -123,12 +124,12 @@ class App extends Component {
             <Route path="/aboutIntro" component={IntroPage} />
             {/* no client template */}
             <Route path="/chat/:id" component={CheckAuth(ChatDesignPage)} />
-            <Route path="/chatg/:id" component={CheckAuth(ChatGroupPage)} />
+            {/* <Route path="/chatg/:id" component={CheckAuth(ChatGroupPage)} /> */}
             {/* <Route path="/vchat2/:id" component={CheckAuth(VChatDesignPage)} /> */}
             {/* <Route path="/vchat2" component={VChatDesignPage} /> */}
-            <Route path="/vchatg/:id" component={CheckAuth(VChatGroupPage)} />
-            <Route path="/codeview" component={CheckAuth(CodeViewPage)} />
-            <Route path="/pdfview/:uri" component={CheckAuth(PdfViewPage)} />
+            {/* <Route path="/vchatg/:id" component={CheckAuth(VChatGroupPage)} /> */}
+            {/* <Route path="/codeview" component={CheckAuth(CodeViewPage)} /> */}
+            {/* <Route path="/pdfview/:uri" component={CheckAuth(PdfViewPage)} /> */}
             {/* only Mobile */}
             <Route component={AlarmPage} path="/alarm" />
 

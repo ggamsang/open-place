@@ -161,12 +161,14 @@ class Alarm extends Component {
   };
   getMessageText = (item) => {
     let msg = "";
-    const from = item.from;
-    const to = item.to;
-    const title =
-      item.title && item.title.length > 32
-        ? item.title.slice(0, 32) + "..."
-        : item.title;
+    const { from, to, title } = item;
+    // const from = item.from;
+    // const to = item.to;
+    // const title =
+    // item.title && item.title.length > 32
+    //   ? item.title.slice(0, 32) + "..."
+    //   : item.title;
+    
     if (item.type === "DESIGN") {
       if (item.kinds === "INVITE") {
         msg = `${item.title}경험아이템 멤버로 초대되었습니다.`;
@@ -203,6 +205,8 @@ class Alarm extends Component {
         msg = `${from}님이 ${title}에 가입을 거절하였습니다.🚫`;
       } else if (item.kinds === "KICKOUT") {
         msg = `${from}님이 ${title}에서 퇴출되었습니다.🚫`;
+      } else if (item.kinds === "OUTOFGROUP") {
+        msg = `${from}님이 ${title} 그룹에서 나가셨습니다.😭`;
       }
     } else if (item.type === "GROUP") {
       if (item.kinds === "JOIN") {
@@ -834,8 +838,8 @@ class Alarm extends Component {
         >
           <div className="header">
             <span>
-              알림{" "}({alarms?.filter((alarm) => alarm.confirm === 0)?.lenth || 0}/
-              {alarms?.length})
+              알림 ({alarms?.filter((alarm) => alarm.confirm === 0)?.lenth || 0}
+              /{alarms?.length})
             </span>
             <a onClick={() => this.setState({ active: false })}>
               <i className="material-icons">close</i>

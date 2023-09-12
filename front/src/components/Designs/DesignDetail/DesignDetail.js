@@ -177,15 +177,10 @@ class DesignDetail extends Component {
   };
   onClickIWannaOutHere = async (item) => {
     if (await confirm("이 그룹에서 탈퇴하시겠습니까?", "예", "아니오")) {
-      await alert("백엔드 개발중");
-      // IWantToOutForkDesignRequest(id, this.props.token)
-      //   .then(console.log)
-      //   .then(() =>
-      //     this.props.ForkDesignListRequest(
-      //       this.props.DesignDetail.uid,
-      //       this.props.token
-      //     )
-      //   );
+      // await alert("백엔드 개발중");
+      IWantToOutForkDesignRequest(item, this.props.token)
+        // .then(console.log)
+        .then(() => this.props.ForkDesignListRequest(item, this.props.token));
     }
   };
   onClickForkDesignKickOut = async (id) => {
@@ -271,7 +266,10 @@ class DesignDetail extends Component {
         </Wrapper>
       );
 
-    const isGroupExp = [1, 2, 3].includes(DesignDetail.design_type);
+    const isGroupExp =
+      [1, 2, 3].includes(DesignDetail.design_type) &&
+      DesignDetail.parent_design === null &&
+      DesignDetail.d_flag === 0;
     const isGroupMember =
       [1, 2, 3].includes(DesignDetail.design_type) &&
       forkDesignList?.filter(
@@ -379,7 +377,6 @@ class DesignDetail extends Component {
             )}
             {token &&
               isGroupExp &&
-              DesignDetail.parent_design === null &&
               this.props.forkDesignList
                 ?.filter((item) => item.nick_name === userInfo?.nickName)
                 ?.map((item) => (
@@ -394,7 +391,6 @@ class DesignDetail extends Component {
             {/* chat & vchat */}
             {token &&
               isGroupExp &&
-              DesignDetail.parent_design === null &&
               (DesignDetail.user_id === userInfo?.uid ||
                 this.props.forkDesignList?.filter(
                   (item) => item.nick_name === userInfo?.nickName
@@ -411,7 +407,6 @@ class DesignDetail extends Component {
               )}
             {/* apply */}
             {isGroupExp &&
-              DesignDetail.parent_design === null &&
               this.state.applied === false &&
               DesignDetail.user_id !== userInfo?.uid && (
                 <PurchaseButton onClick={this.onClickBuy}>
@@ -444,16 +439,13 @@ class DesignDetail extends Component {
               </PurchaseButton>
             )}
             {/* group manage */}
-            {token &&
-              isGroupExp &&
-              DesignDetail.parent_design === null &&
-              DesignDetail.user_id === userInfo?.uid && (
-                <ManageButton onClick={this.onClickManage}>
-                  <span>관리모드</span>
-                  {forkDesignList?.filter((item) => item.d_flag === 0).length >
-                    0 && <b style={{ color: "red" }}>new!!</b>}
-                </ManageButton>
-              )}
+            {token && isGroupExp && DesignDetail.user_id === userInfo?.uid && (
+              <ManageButton onClick={this.onClickManage}>
+                <span>관리모드</span>
+                {forkDesignList?.filter((item) => item.d_flag === 0).length >
+                  0 && <b style={{ color: "red" }}>new!!</b>}
+              </ManageButton>
+            )}
             {/* edit */}
             {token && DesignDetail.user_id === userInfo?.uid && (
               <LikeButton onClick={this.onClickModify}>
