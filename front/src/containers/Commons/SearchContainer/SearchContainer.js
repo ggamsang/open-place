@@ -139,7 +139,7 @@ class SearchList extends React.Component {
     const { keyword = null } = this.props;
     return (
       <Wrapper>
-        <DesignListContainer cate1={1} keyword={keyword} />
+        <DesignListContainer selector cate1={null} keyword={keyword} />
       </Wrapper>
     );
   }

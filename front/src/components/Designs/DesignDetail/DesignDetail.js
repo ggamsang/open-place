@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Loading from "components/Commons/Loading";
+import { Rating, Box } from "@mui/material";
 
 import { alert } from "components/Commons/Alert/Alert";
 import { confirm } from "components/Commons/Confirm/Confirm";
@@ -50,7 +51,86 @@ import DesignDetailViewContainer from "containers/ExpItem/DesignDetailViewContai
 import GroupNoticeContainer from "containers/Groups/GroupNoticeContainer";
 
 import { goto } from "navigator";
+function BasicRating(props) {
+  const [value, setValue] = React.useState(props.rate || 2);
 
+  return (
+    <Box
+      sx={{
+        "& > legend": { mt: 20 },
+      }}
+    >
+      {/* <Typography component="legend">Controlled</Typography> */}
+      {/* <Rating
+        name="simple-controlled"
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue);
+        }}
+      /> */}
+      <Rating
+        name="read-only"
+        value={value}
+        readOnly
+        defaultValue={2}
+        size="large"
+        style={{ fontSize: "1rem" }}
+      />
+      {/* <Typography component="legend">Disabled</Typography> */}
+      {/* <Rating name="disabled" value={value} disabled /> */}
+      {/* <Typography component="legend">No rating given</Typography> */}
+      {/* <Rating name="no-value" value={null} /> */}
+    </Box>
+  );
+}
+
+const NumRateNew = ({
+  rate = 5,
+  cntReview = 0,
+  freq = [40, 30, 20, 10, 0],
+}) => (
+  <div
+    style={{
+      width: "max-content",
+      // margin: "left",
+      display: "flex",
+      flexDirection: "row",
+      // border: "1px solid red",
+      justifyContent: "center",
+    }}
+  >
+    {/* <div style={{ display: "flex" }}> */}
+    <span
+      style={{
+        padding: 0,
+        marginLeft: "5px",
+        marginBottom: "1rem",
+        fontSize: "1rem",
+        fontFamily: "Noto Sans KR",
+        textAlign: "center",
+        alignItems: "center",
+        lineHeight: "1rem",
+      }}
+    >
+      평점:{parseInt(rate).toFixed(1)}
+    </span>
+    <BasicRating rate={rate} />
+    <p>{"(리뷰:0개)"}</p>
+    {/* </div> */}
+    {/* <p
+      style={{
+        margin: "auto",
+        border: "1px solid gray",
+        padding: "5px 7px",
+        width: "max-content",
+        borderRadius: "5px",
+        fontSize: "1rem",
+      }}
+    >
+      리뷰: 0개
+    </p> */}
+  </div>
+);
 class DesignDetail extends Component {
   constructor(props) {
     super(props);
@@ -293,7 +373,7 @@ class DesignDetail extends Component {
         <ExpInfoText>경험정보</ExpInfoText>
         {/* head */}
         <ExpInfoDiv>
-          <StarIcon like={this.props.like} />
+          {/* <StarIcon like={this.props.like} /> */}
 
           <ExpImg url={DesignDetail?.img?.l_img} />
           <ExpInnerDiv>
@@ -365,8 +445,8 @@ class DesignDetail extends Component {
                 <>작성자: {DesignDetail.userName}</>
               )}
             </Price>
-
-            <NumRate />
+            <NumRateNew />
+            {/* <NumRate /> */}
           </ExpInnerDiv>
           <ExpInnerButtonBox>
             {/* like */}

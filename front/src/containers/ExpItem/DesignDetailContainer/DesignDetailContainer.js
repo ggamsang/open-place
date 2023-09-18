@@ -27,7 +27,7 @@ class DesignDetailContainer extends Component {
       <DesignDetailMobile {...this.props} />
     ) : (
       <DesignDetail {...this.props} />
-    );
+    )
   }
 }
 const mapStateToProps = (state) => ({

@@ -15,10 +15,10 @@ const Wrapper = styled.div`
   }
 `;
 const CheckBox = styled.div`
-  width: 20px;
-  height: 16px;
-  min-width: 20px;
-  min-height: 16px;
+  width: ${(props) => props.width | 20}px;
+  height: ${(props) => props.height | 16}px;
+  min-width: ${(props) => props.width | 20}px;
+  min-height: ${(props) => props.height | 16}px;
   position: relative;
 
   .nemo {

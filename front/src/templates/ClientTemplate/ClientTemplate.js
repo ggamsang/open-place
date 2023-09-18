@@ -88,7 +88,9 @@ class Header extends React.Component {
 
         <styled.Container>
           <div style={{ marginLeft: "20px" }}>
-            <styled.Logo type="mini" onClick={() => goto("MAIN")} />
+            <a onClick={() => goto("MAIN")} style={{ cursor: "pointer" }}>
+              <styled.Logo type="mini" />
+            </a>
           </div>
           <div className="hamburger">
             <Menu

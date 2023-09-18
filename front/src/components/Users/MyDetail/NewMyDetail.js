@@ -7,6 +7,41 @@ import Design from "components/Designs/Design";
 import { confirm } from "components/Commons/Confirm/Confirm";
 import { Modal } from "semantic-ui-react";
 import { alert } from "components/Commons/Alert/Alert";
+import DateFormat from "modules/DateFormat";
+import { Rating, Box } from "@mui/material";
+
+function BasicRating(props) {
+  const [value, setValue] = React.useState(props.rate || 2);
+
+  return (
+    <Box
+      sx={{
+        "& > legend": { mt: 20 },
+      }}
+    >
+      {/* <Typography component="legend">Controlled</Typography> */}
+      {/* <Rating
+        name="simple-controlled"
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue);
+        }}
+      /> */}
+      <Rating
+        name="read-only"
+        value={value}
+        readOnly
+        defaultValue={2}
+        size="large"
+        style={{ fontSize: "5rem" }}
+      />
+      {/* <Typography component="legend">Disabled</Typography> */}
+      {/* <Rating name="disabled" value={value} disabled /> */}
+      {/* <Typography component="legend">No rating given</Typography> */}
+      {/* <Rating name="no-value" value={null} /> */}
+    </Box>
+  );
+}
 
 const PROFILE = "Profile";
 const NOTI = "Noti";
@@ -203,32 +238,71 @@ class MyDetail extends React.Component {
     //     </styled.RateExpDiv>
     //   );
     // };
+    // <styled.WrapperNumRate>
+    //   <styled.ScoreAndReview>
+    //     <styled.Score>{rate}</styled.Score>
+    //     <styled.Review>
+    //       <div>리뷰 {cntReview}개</div>
+    //     </styled.Review>
+    //   </styled.ScoreAndReview>
+    //   <styled.ScoreBox>
+    //     {[5, 4, 3, 2, 1].map((item, index) => (
+    //       <styled.Score5 key={index}>
+    //         <styled.ScoreGrey />
+    //         <styled.ScoreCircleIcon1 />
+    //         <styled.ScoreRed per={freq[index]} />
+    //         <styled.ScoreCircleIcon2 per={freq[index]} />
+    //         <span>
+    //           {item}({freq[index]}%)
+    //         </span>
+    //       </styled.Score5>
+    //     ))}
+    //   </styled.ScoreBox>
+    // </styled.WrapperNumRate>
     const NumRate = ({
-      rate = 0,
+      rate = 5,
       cntReview = 0,
       freq = [40, 30, 20, 10, 0],
     }) => (
-      <styled.WrapperNumRate>
-        <styled.ScoreAndReview>
-          <styled.Score>{rate}</styled.Score>
-          <styled.Review>
-            <div>리뷰 {cntReview}개</div>
-          </styled.Review>
-        </styled.ScoreAndReview>
-        <styled.ScoreBox>
-          {[5, 4, 3, 2, 1].map((item, index) => (
-            <styled.Score5 key={index}>
-              <styled.ScoreGrey />
-              <styled.ScoreCircleIcon1 />
-              <styled.ScoreRed per={freq[index]} />
-              <styled.ScoreCircleIcon2 per={freq[index]} />
-              <span>
-                {item}({freq[index]}%)
-              </span>
-            </styled.Score5>
-          ))}
-        </styled.ScoreBox>
-      </styled.WrapperNumRate>
+      <div
+        style={{
+          margin: "auto",
+          display: "flex",
+          flexDirection: "column",
+          // border: "1px solid red",
+          justifyContent: "center",
+        }}
+      >
+        {/* <div style={{ display: "flex" }}> */}
+        <span
+          style={{
+            padding: 0,
+            marginLeft: "5px",
+            marginBottom: "1rem",
+            fontSize: "4.5rem",
+            fontFamily: "Noto Sans KR",
+            textAlign: "center",
+            alignItems: "center",
+            lineHeight: "5rem",
+          }}
+        >
+          {parseInt(rate).toFixed(1)}
+        </span>
+        <BasicRating rate={rate} />
+        {/* </div> */}
+        <p
+          style={{
+            margin: "auto",
+            border: "1px solid gray",
+            padding: "15px 25px",
+            width: "max-content",
+            borderRadius: "5px",
+            fontSize: "1.5rem",
+          }}
+        >
+          리뷰: 0개
+        </p>
+      </div>
     );
 
     console.log(this.props.userInfo);
@@ -325,10 +399,12 @@ class MyDetail extends React.Component {
                   <span>로그아웃</span>
                 </styled.CheckNotificationBtn>
               </styled.Buttons>
-              <NumRate rate={rate || 0} />
+              <NumRate rate={5} />
               <styled.DateInfo>
-                <div>등록일 :{create_time?.split("T")[0]}</div>
-                <div>갱신일 :{update_time?.split("T")[0]}</div>
+                {/* <div>등록일 :{create_time?.split("T")[0]}</div> */}
+                {/* <div>갱신일 :{update_time?.split("T")[0]}</div> */}
+                <div>등록일: {DateFormat(create_time)}</div>
+                <div>갱신일: {DateFormat(update_time)}</div>
               </styled.DateInfo>
             </styled.ProfileInfo>
           </styled.WrapperHeader>

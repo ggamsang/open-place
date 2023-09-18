@@ -12,6 +12,7 @@ import Loading from "components/Commons/Loading";
 import styled from "styled-components";
 import opendesign_style from "opendesign_style";
 import Item from "components/Item/Item";
+import CheckBoxNormal from "components/Commons/CheckBox/CheckBoxNormal";
 
 const Wrapper = styled.div`
   // margin-left:100px;
@@ -404,11 +405,35 @@ class DesignListContainer extends Component {
 
         <div className="content">
           <div className="header_box">
-            <div className="category_title">
+            <div style={{ display: "flex", marginLeft: "25px" }}>
+              {/* <CheckBoxNormal
+                width={18}
+                height={18}
+                style={{ marginRight: "5px" }}
+                text="놀기"
+                value={this.state.selector_play}
+                onClickEvent={this.onClickSelectorPlay}
+              />
+              <CheckBoxNormal
+                width={18}
+                height={18}
+                style={{ marginRight: "5px" }}
+                text="배우기"
+                value={this.state.selector_play}
+                onClickEvent={this.onClickSelectorPlay}
+              />
+              <CheckBoxNormal
+                width={18}
+                height={18}
+                style={{ marginRight: "5px" }}
+                text="만들기"
+                value={this.state.selector_play}
+                onClickEvent={this.onClickSelectorPlay}
+              /> */}
               {/* {(this_category && this_category.text === "전체"
-                  ? "경험"
-                  : this_category.text) || "경험"}
-                &nbsp;({Count}) */}
+                ? "경험"
+                : this_category.text) || "경험"}
+              &nbsp;({Count}) */}
             </div>
             <OrderOption2
               onChange={this.handleChangeOrderOps}

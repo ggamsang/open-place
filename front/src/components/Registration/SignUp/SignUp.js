@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import Logo from "components/Commons/Logo";
+import Fade from "react-reveal/Fade";
 import styled from "styled-components";
 import { resolution } from "resolution";
+import Logo from "components/Commons/Logo";
 import InputNormal from "components/Commons/Input/InputNormal";
-// import InputLine from "components/Commons/Input/InputLine";
-// import InputPhone from "components/Commons/Input/InputPhone";
 import CheckBoxNormal from "components/Commons/CheckBox/CheckBoxNormal";
 import GradientButton from "components/Commons/Button/GradientButton";
-import Fade from "react-reveal/Fade";
-// import { goto } from "navigator";
 import { alert } from "components/Commons/Alert/Alert";
+import { goto } from "navigator";
 
 const Wrapper = styled.div`
   // width: ${window.innerWidth}px;
@@ -140,13 +138,14 @@ class SignUp extends Component {
     };
 
     this.props.SignUpRequest &&
-      this.props.SignUpRequest(data).then((res) => {
-        if (res.type === "AUTH_SIGNUP_SUCCESS") {
-          alert("회원가입을 축하드립니다.");
-
-          window.location.href = "/";
+      this.props.SignUpRequest(data).then(async (res) => {
+        if (res?.success) {
+          await alert("회원가입을 축하드립니다.");
+          goto("MAIN");
         } else {
-          alert(res.detail + "와 같은 이유로 회원가입을 하지 못하였습니다.");
+          if(res.error){
+            await alert(res.error)
+          }
         }
       });
   };
@@ -320,6 +319,7 @@ class SignUp extends Component {
                   fontSize={17}
                   color={"#EAF2FE"}
                   radius={3}
+                  type={"password"}
                 />
 
                 <InputNormal
@@ -332,6 +332,7 @@ class SignUp extends Component {
                   fontSize={17}
                   color={"#EAF2FE"}
                   radius={3}
+                  type={"password"}
                 />
 
                 <InputNormal
@@ -348,24 +349,24 @@ class SignUp extends Component {
               </div>
               <div className="checkBoxWrap">
                 <CheckBoxNormal
-                  width={12}
-                  height={12}
+                  width={18}
+                  height={18}
                   style={{ marginBottom: "13px" }}
                   text="전체동의"
                   value={this.state.agreeAll}
                   onClickEvent={this.onClickAllAgree}
                 />
                 <CheckBoxNormal
-                  width={12}
-                  height={12}
+                  width={18}
+                  height={18}
                   style={{ marginBottom: "13px" }}
                   text="이용약관"
                   value={this.state.agree1}
                   onClickEvent={this.onClickAgree1}
                 />
                 <CheckBoxNormal
-                  width={12}
-                  height={12}
+                  width={18}
+                  height={18}
                   style={{ marginBottom: "13px" }}
                   text="개인정보 수집 및 이용"
                   value={this.state.agree2}

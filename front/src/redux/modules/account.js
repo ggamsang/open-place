@@ -1,6 +1,7 @@
 import host from "config";
 import update from "react-addons-update";
 import { SetSession } from "modules/Sessions";
+import { TokenName } from "constant";
 
 const AUTH_SIGNIN = "AUTH_SIGNIN";
 const AUTH_SIGNIN_SUCCESS = "AUTH_SIGNIN_SUCCESS";
@@ -140,15 +141,14 @@ export function SignUpRequest(data) {
       method: "POST",
       body: JSON.stringify(data),
     })
+      .then((res) => res.json())
       .then(function (res) {
-        return res.json();
-      })
-      .then(function (res) {
+        console.log(res);
         if (res.success) {
-          const { TokenName } = require("constant");
           SetSession(TokenName, res.token);
+          return dispatch(SignUpSuccess()) && res;
         }
-        return dispatch(SignUpSuccess());
+        return dispatch(SignUpFailure()) && res;
       })
       .catch((error) => {
         //console.log("ERROR:"+error);
