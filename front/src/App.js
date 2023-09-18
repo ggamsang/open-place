@@ -3,7 +3,6 @@ import CacheBuster from "react-cache-buster";
 import Loading from "components/Commons/Loading";
 import { version } from "../package.json";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-
 import MainPage from "pages/MainPage";
 import SignUpPage from "pages/SignUpPage";
 import InsertUserDetailPage from "pages/InsertUserDetailPage";
@@ -16,34 +15,35 @@ import MessagePage from "pages/MessagePage";
 import { DesignDetailPage } from "pages/DesignPage";
 import CreateDesignPage from "pages/CreateDesignPage";
 import ModifyDesignPage from "pages/ModifyDesignPage";
+import RequiresAuth from "containers/Commons/RequiresAuth";
+import NotFoundPage from "pages/NotFoundPage";
+import CheckAuth from "containers/Commons/CheckAuth";
+import ChatDesignPage from "pages/ChatPage";
+import PrivacyPolicyPage from "pages/PrivacyPolicyPage";
+import TermsOfUsePage from "pages/TermsOfUsePage";
+import IntroPage from "pages/IntroPage";
+import AlarmPage from "pages/AlarmPage";
+import PlayExpListPage from "pages/PlayExpListPage";
+import LearnExpListPage from "pages/LearnExpListPage";
+import MakeExpListPage from "pages/MakeExpListPage";
+
+
 import GroupListPage, { GroupDetailPage } from "pages/GroupPage";
 import CreateGroupPage from "pages/CreateGroupPage";
 import ModifyGroupPage from "pages/ModifyGroupPage";
 import DesignerListPage, { DesignerDetailPage } from "pages/DesignerPage";
 import CreateDesigner from "containers/Designer/CreateDesignerContainer/CreateDesignerContainer";
-
-import RequiresAuth from "containers/Commons/RequiresAuth";
-import NotFoundPage from "pages/NotFoundPage";
-import CheckAuth from "containers/Commons/CheckAuth";
 import VChatDesignPage from "pages/VChat2Page";
 import VChatGroupPage from "pages/VChatGroupPage";
-import ChatDesignPage from "pages/ChatPage";
 import ChatGroupPage from "pages/ChatGroupPage";
 import CodeViewPage from "pages/CodeViewPage";
 import PdfViewPage from "pages/PdfViewPage";
-import PrivacyPolicyPage from "pages/PrivacyPolicyPage";
-import TermsOfUsePage from "pages/TermsOfUsePage";
-import IntroPage from "pages/IntroPage";
 
-import AlarmPage from "pages/AlarmPage";
-
-import PlayExpListPage from "pages/PlayExpListPage";
-import LearnExpListPage from "pages/LearnExpListPage";
-import MakeExpListPage from "pages/MakeExpListPage";
 
 class App extends Component {
   render() {
     const isProduction = process.env.NODE_ENV === "production";
+    
     return (
       <CacheBuster
         currentVersion={version}
