@@ -14,7 +14,8 @@ class ChatPage extends Component {
   }
   render() {
     return (
-      <ChatContainer id={this.props.match.params.id} />
+      <>{this.props.id} chat page</>
+      // <ChatContainer id={this.props.match.params.id} />
     );
   }
 }

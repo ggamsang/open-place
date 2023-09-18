@@ -367,7 +367,7 @@ class SignUp extends Component {
                   width={12}
                   height={12}
                   style={{ marginBottom: "13px" }}
-                  text="개인정보 수집 및 이용 (선택)"
+                  text="개인정보 수집 및 이용"
                   value={this.state.agree2}
                   onClickEvent={this.onClickAgree2}
                 />

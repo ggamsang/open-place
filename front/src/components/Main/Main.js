@@ -18,7 +18,6 @@ export default class Main extends Component {
   render() {
     return (
       <React.Fragment>
-
         <Fade>
           <Banner />
         </Fade>
@@ -26,7 +25,6 @@ export default class Main extends Component {
         <MainContainer>
           <TopExpItemListContainer />
         </MainContainer>
-
       </React.Fragment>
     );
   }

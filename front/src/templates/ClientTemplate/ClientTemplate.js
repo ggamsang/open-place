@@ -16,7 +16,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import noface from "source/thumbnail.png";
-
+import { version } from "../../../package.json";
 const style = {
   position: "absolute",
   top: "50%",
@@ -234,6 +234,11 @@ class ClientTemplate extends Component {
             loggedIn: isLoggedIn,
             userInfo: userInfo,
           })}
+        <span
+          style={{ width: "max-content", marginLeft: "auto", color: "#777" }}
+        >
+          v.{version}
+        </span>
       </styled.Wrapper>
     );
   }

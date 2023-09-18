@@ -995,7 +995,9 @@ class Messages extends React.Component {
                       >
                         <span className="nick">{chat.friend_name}</span>
                         <span className="date">
-                          {chat.update_time?.split("T")[0].replaceAll("-", ".")}
+                          {chat.update_time}
+                          {DateFormat(chat.update_time)}
+                          {/* {chat.update_time?.split("T")[0].replaceAll("-", ".")} */}
                         </span>
                       </div>
                       <div className="recent">{chat.recent}</div>

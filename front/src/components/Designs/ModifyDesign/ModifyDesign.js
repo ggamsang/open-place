@@ -237,6 +237,7 @@ class ModifyExp extends React.Component {
         "취소"
       )
     ) {
+      await alert("삭제 기능은 점검 중.");
     } else {
     }
   };

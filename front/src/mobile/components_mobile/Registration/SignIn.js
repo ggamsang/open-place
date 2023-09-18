@@ -9,6 +9,9 @@ import Fade from "react-reveal/Fade";
 import { goto } from "navigator";
 import CheckBoxNormal from "mobile/components_mobile/Commons/CheckBox/CheckBoxNormal";
 import cookie from "react-cookies";
+import { SetSession } from "modules/Sessions";
+import { TokenName } from "constant";
+
 const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
@@ -141,7 +144,7 @@ class SignIn extends Component {
       .SignInRequest({ email: user_id, password: password })
       .then((data) => {
         if (data.success) {
-          // SetSession(TokenName);
+          SetSession(TokenName, data.token);
           this.setState({ login: Login.success });
           goto("MAIN");
         } else {

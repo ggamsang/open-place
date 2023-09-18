@@ -3,10 +3,11 @@ import styled from "styled-components";
 import { List } from "semantic-ui-react";
 
 export const ScrollWrap = styled(List)`
-  width: 100%;
+  width: ${window.innerWidth}px;
   max-width: 1920px;
   margin: 0px;
   margin-top: 35px;
+
   .wrapper_ {
     padding-bottom: 10px;
     width: 100%;
@@ -39,7 +40,6 @@ export const ScrollWrap = styled(List)`
 `;
 export const NoData = styled.div`
   width: 100%;
-  //   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;

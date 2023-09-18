@@ -384,12 +384,13 @@ class DesignListContainer extends Component {
                 .map((item, index) => (
                   <MainElement key={index}>{item}</MainElement>
                 ))}
-              <button onClick={this.ToggleFoldTagList}>
-                {tags_fold ? "펼쳐보기" : "접기"}
-              </button>
+              {/* <button onClick={this.ToggleFoldTagList}> */}
+              {/* {tags_fold ? "펼쳐보기" : "접기"} */}
+              {/* </button> */}
             </TagsContainer>
           )}
-          {/* // thirdcategory_clicked={this.handleChangeThirdCategory}
+          {/* 
+            // thirdcategory_clicked={this.handleChangeThirdCategory}
             // subcategory_clicked={this.handleChangeSubCategory}
             // category_clicked={this.handleChangeCategory}
             // category1={category1}
@@ -397,7 +398,8 @@ class DesignListContainer extends Component {
             // category3={this.state.category3}
             // main_selected={main_category}
             // sub_selected={sub_category}
-            // third_selected={third_category} * /} */}
+            // third_selected={third_category} 
+          * /} */}
         </div>
 
         <div className="content">

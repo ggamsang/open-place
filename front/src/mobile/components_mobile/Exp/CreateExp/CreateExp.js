@@ -12,6 +12,7 @@ import AddContent from "mobile/components_mobile/Commons/AddContent/AddContent";
 import { Editor } from "mobile/commons/Editor/Editor";
 import { InputGameFile } from "mobile/components_mobile/Commons/Input";
 import { goto } from "navigator";
+import { CATEs, FILE, TYPEs } from "constant";
 
 import ExpType from "../Common/ExpType";
 
@@ -172,8 +173,11 @@ class CreateExp extends React.Component {
   };
 
   onChangeCategory = (event) => {
+    if (parseInt(event.target.value, 10) === 0) {
+      return;
+    }
     this.setState({
-      category: event.target.value,
+      category: parseInt(event.target.value, 10),
     });
   };
   onChangeInfo = (event) => {
@@ -335,12 +339,12 @@ class CreateExp extends React.Component {
               카테고리<sup style={{ color: "red" }}>*</sup>
             </div>
             <DropDownNormal
-              value={this.state.category - 1}
+              value={this.state.category}
               onChangeValue={this.onChangeCategory}
               width={150}
               height={31}
               radius={10}
-              options={this.props.category}
+              options={CATEs}
             />
           </div>
 
@@ -357,7 +361,7 @@ class CreateExp extends React.Component {
               value={this.state.info}
             />
           </div>
-        {/*
+          {/*
           <div className="row">
             <div className="label">가격</div>
             <div>

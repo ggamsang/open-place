@@ -595,12 +595,13 @@ class CreateExp extends React.Component {
                 // options={this.props.category.slice(0, 3)}
               />
             </styled.CategoryDiv>
+            
             <styled.CategoryDiv>
               <div>설명</div>
               <styled.InputTextArea
                 value={this.state.explanation}
                 onChange={this.handleExplanation}
-                placeholder={"제목을 입력하세요"}
+                placeholder={"설명을 입력하세요"}
                 width={350}
                 height={90}
               />
