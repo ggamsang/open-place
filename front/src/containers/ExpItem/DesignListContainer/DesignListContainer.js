@@ -160,6 +160,7 @@ class DesignListContainer extends Component {
     //   this.props.cate1,
     //   this.props.keyword
     // );
+    await this.getList(0);
     window.addEventListener("resize", this.handleResize, false);
     this.GetDesignTagListRequest();
   }
@@ -331,7 +332,7 @@ class DesignListContainer extends Component {
   async getList(page) {
     const { main_category, sub_category, third_category, keyword, this_order } =
       this.state;
-    console.log("get ::", page);
+    console.log("get list ::", page);
     this.props.GetDesignListRequest(
       page,
       this_order || "update",

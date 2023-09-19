@@ -6,12 +6,15 @@ import { Loader } from "semantic-ui-react";
 
 const ScrollList = (props) => {
   const [more, setMore] = React.useState(true);
+
   useEffect(() => {
-    props.getList(0);
+    // props.getList(0);
   }, []);
+
   const getLoadData = (page) => {
     props.getList(page);
     console.log("get:", page, props);
+
     if (props.dataList.length < 10) {
       setMore(false);
     }

@@ -497,7 +497,8 @@ class DesignDetail extends Component {
             {/* group notice / board */}
             {isGroupExp &&
               DesignDetail.parent_design == null &&
-              DesignDetail.user_id === userInfo?.uid && (
+              // DesignDetail.user_id === userInfo?.uid && 
+                (
                 <GroupNoticeContainer
                   ButtonStyled={LikeButton}
                   user_id={userInfo?.uid}

@@ -19,7 +19,7 @@ class ModifyExp extends React.Component {
       exp_type_detail: "",
       thumbnail: null,
       thumbnail_name: null,
-      title: null,
+      title: this.props.DesignDetail.title,
       category: this.props.DesignDetail.category_level1,
       info: null,
       exp_files: [],
@@ -60,7 +60,7 @@ class ModifyExp extends React.Component {
       type: null,
       template: null,
       is_problem: false,
-      explanation: null,
+      explanation: this.props.DesignDetail.explanation,
     };
     this.onChangeThumbnail = this.onChangeThumbnail.bind(this);
     this.onChangeTitle = this.onChangeTitle.bind(this);
@@ -314,8 +314,8 @@ class ModifyExp extends React.Component {
               <div>제목</div>
               <InputNormal
                 onChangeValue={this.onChangeTitle}
-                value={this.state.title || DesignDetail?.title}
-                placeholder={"제목을 입력하세요"}
+                value={this.state.title}
+                placeholder={DesignDetail?.title}
                 radius={10}
                 width={350}
                 height={45}
@@ -355,9 +355,9 @@ class ModifyExp extends React.Component {
             <styled.CategoryDiv>
               <div>설명</div>
               <styled.InputTextArea
-                value={this.state.explanation || DesignDetail?.explanation}
+                value={this.state.explanation}
                 onChange={this.onChangeExplanation}
-                placeholder={"설명을 입력하세요"}
+                placeholder={DesignDetail?.explanation || "설명을 입력하세요."}
                 width={350}
                 height={90}
               />
