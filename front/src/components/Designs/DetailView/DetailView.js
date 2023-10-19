@@ -63,7 +63,7 @@ const GoStepBtn = styled(Button)`
   padding: 7px;
   color: white;
   font-size: 30px;
-  border-radius: 0px;
+  border-radius: 5px;
 `;
 const BtnWrap = styled.div`
   width: 100%;
@@ -208,9 +208,11 @@ class DetailView extends Component {
             ) : null} */}
           {token && userInfo.uid === view.user_id && (
             <BtnWrap>
-              <GoStepBtn onClick={this.onActiveStep} size="small">
-                경험 형식 변경
-              </GoStepBtn>
+              <div style={{ marginLeft: "auto", width: "max-content" }}>
+                <GoStepBtn onClick={this.onActiveStep} size="small">
+                  주제추가
+                </GoStepBtn>
+              </div>
 
               {/* <div className="row">
                 <div className="icon_wrap">

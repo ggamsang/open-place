@@ -168,7 +168,7 @@ class Alarm extends Component {
     // item.title && item.title.length > 32
     //   ? item.title.slice(0, 32) + "..."
     //   : item.title;
-    
+
     if (item.type === "DESIGN") {
       if (item.kinds === "INVITE") {
         msg = `${item.title}경험아이템 멤버로 초대되었습니다.`;
@@ -186,8 +186,8 @@ class Alarm extends Component {
         msg = `${from}님이 초대를 거절하였습니다.`;
       } else if (item.kinds === "LIKE") {
         if (item.count > 1)
-          msg = `${from}님외 ${item.count - 1}명이 경험아이템을 좋아합니다.♥️`;
-        else msg = `${from}님이 경험아이템을 좋아합니다.♥️`;
+          msg = `♥️ ${from}님외 ${item.count - 1}명이 경험아이템을 좋아합니다.`;
+        else msg = `♥️ ${from}님이 경험아이템을 좋아합니다.`;
       } else if (item.kinds === "COMMENT") {
         msg = `${from}님이 경험아이템에 댓글을 달았습니다.📋`;
       } else if (item.kinds === "CARD_COMMENT") {
@@ -198,15 +198,15 @@ class Alarm extends Component {
         // const date = new Date();
         msg = `${from}님이 회의를 개설하였습니다.`;
       } else if (item.kinds === "APPLIED") {
-        msg = `${from}님이 ${title}에 가입신청을 하였습니다.✍️`;
+        msg = `✍️ ${from}님이 ${title}에 가입신청을 하였습니다.`;
       } else if (item.kinds === "ACCEPTED") {
-        msg = `${from}님이 ${title}에 가입을 승인하였습니다.✅`;
+        msg = `✅ ${from}님이 ${title}에 가입을 승인하였습니다.`;
       } else if (item.kinds === "DENIDED") {
-        msg = `${from}님이 ${title}에 가입을 거절하였습니다.🚫`;
+        msg = `🚫 ${from}님이 ${title}에 가입을 거절하였습니다.`;
       } else if (item.kinds === "KICKOUT") {
-        msg = `${from}님이 ${title}에서 퇴출되었습니다.🚫`;
+        msg = `🚫 ${from}님이 ${title}에서 퇴출되었습니다.`;
       } else if (item.kinds === "OUTOFGROUP") {
-        msg = `${from}님이 ${title} 그룹에서 나가셨습니다.😭`;
+        msg = `😭 ${from}님이 ${title} 그룹에서 나가셨습니다.`;
       }
     } else if (item.type === "GROUP") {
       if (item.kinds === "JOIN") {
@@ -851,10 +851,10 @@ class Alarm extends Component {
                 <Element
                   key={item.uid}
                   confirm={item.confirm}
-                  onClick={() =>
-                    item.confirm === 0 &&
-                    this.alarmConfirm(item.user_id, item.uid)
-                  }
+                  // onClick={() =>
+                  // item.confirm === 0 &&
+                  // this.alarmConfirm(item.user_id, item.uid)
+                  // }
                 >
                   <img
                     src={item.thumbnail}
@@ -883,9 +883,28 @@ class Alarm extends Component {
                       <div>
                         <TextFormat txt={item.from} />
                       </div>
-                      <div>{DateFormat(item.create_time)}</div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyItems: "space-between",
+                        }}
+                      >
+                        {DateFormat(item.create_time)}
+                        
+                        <div
+                          onClick={() =>
+                            item.confirm === 0 &&
+                            this.alarmConfirm(item.user_id, item.uid)
+                          }
+                        >
+                          확인
+                        </div>
+                      </div>
                     </div>
-                    <TextFormat txt={this.getMessageText(item)} />
+                    <div>
+                      <TextFormat txt={this.getMessageText(item)} />
+                    </div>
                   </div>
                 </Element>
               ))

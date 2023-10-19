@@ -495,22 +495,18 @@ class DesignDetail extends Component {
                 </PurchaseButton>
               )}
             {/* group notice / board */}
-            {isGroupExp &&
-              DesignDetail.parent_design == null &&
-              // DesignDetail.user_id === userInfo?.uid && 
-                (
-                <GroupNoticeContainer
-                  ButtonStyled={LikeButton}
-                  user_id={userInfo?.uid}
-                  owner_id={DesignDetail.user_id}
-                  id={
-                    isGroupMember
-                      ? DesignDetail.parent_design
-                      : DesignDetail.uid
-                  }
-                  token={this.props.token}
-                />
-              )}
+            {isGroupExp && DesignDetail.parent_design == null && (
+              // DesignDetail.user_id === userInfo?.uid &&
+              <GroupNoticeContainer
+                ButtonStyled={LikeButton}
+                user_id={userInfo?.uid}
+                owner_id={DesignDetail.user_id}
+                id={
+                  isGroupMember ? DesignDetail.parent_design : DesignDetail.uid
+                }
+                token={this.props.token}
+              />
+            )}
             {/* goto parent design */}
             {DesignDetail.parent_design && (
               <PurchaseButton
@@ -630,7 +626,7 @@ class DesignDetail extends Component {
                 <ManageButton onClick={this.setFold}>
                   <span>목록으로</span>
                 </ManageButton>
-                <ExpInfoText>상세정보</ExpInfoText>
+                {/* <ExpInfoText>상세정보</ExpInfoText> */}
                 {DesignDetail.is_project === 1 ? (
                   <DesignDetailStepContainer
                     editor={DesignDetail.user_id === userInfo?.uid}
@@ -639,6 +635,7 @@ class DesignDetail extends Component {
                   />
                 ) : (
                   <div className="marginLeft">
+                    <div style={{ marginTop: "15px" }}>
                     {DesignDetail.uid && (
                       <DesignDetailViewContainer
                         editor={DesignDetail.user_id === userInfo?.uid}
@@ -646,7 +643,7 @@ class DesignDetail extends Component {
                         // {...this.state}
                         history={this.props.history}
                       />
-                    )}
+                    )}</div>
                   </div>
                 )}
               </div>

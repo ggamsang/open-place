@@ -412,7 +412,7 @@ class MyDetail extends React.Component {
 
         <styled.WrapperItemList>
           <div className="row">
-            <p>등록아이템</p>
+            <p>등록한 경험아이템</p>
             <div className="item-wrapper">
               {mydesigns
                 .filter((design) => !design.parent_design)
@@ -426,7 +426,7 @@ class MyDetail extends React.Component {
                 ))}
             </div>
 
-            <p>신청아이템: 활동중</p>
+            <p>참여중인 경험아이템</p>
             <div className="item-wrapper">
               {mydesigns
                 .filter((design) => design.parent_design && design.d_flag === 1)
@@ -439,7 +439,7 @@ class MyDetail extends React.Component {
                   </div>
                 ))}
             </div>
-            <p>신청아이템: 수락대기중</p>
+            {/* <p>신청아이템: 수락대기중</p>
             <div className="item-wrapper">
               {mydesigns
                 .filter((design) => design.parent_design && design.d_flag === 0)
@@ -451,7 +451,7 @@ class MyDetail extends React.Component {
                     />
                   </div>
                 ))}
-            </div>
+            </div> */}
           </div>
         </styled.WrapperItemList>
       </React.Fragment>

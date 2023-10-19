@@ -118,7 +118,7 @@ export default class DetailViewMobile extends Component {
     return (<DetailViewMobileWrapper>
       {this.props.token && this.props.userInfo.uid === view.user_id
         ? <button className="transform-button" onClick={this.onActiveStep}>
-          경험 형식 변경
+          주제추가
         </button>
         : null}
 

@@ -811,6 +811,7 @@ export const Wrapper = styled.div`
   width: 100%;
   min-height: 75vh;
   .marginLeft {
+    margin-top: 10px;
     // margin-left: 38px;
   }
   // border: 1px solid red;
