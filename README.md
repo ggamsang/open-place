@@ -1,17 +1,17 @@
-## nvm, pm2 설치\n
-(https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-nvm install 8
-nvm use 8
-npm install -g pm2
-
-## github clone
-git clone https://github.com/ggamsang/open-place place
-cd place
-
+## nvm, pm2 설치
+(https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating) <br />
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash <br />
+nvm install 8 <br />
+nvm use 8 <br />
+npm install -g pm2 <br />
+<br />
+## github clone <br />
+git clone https://github.com/ggamsang/open-place place <br />
+cd place <br />
+<br />
 ### 백엔드설치
-cd ~/place/back
-nano .env
+cd ~/place/back <br />
+nano .env <br />
 ```
   PORT=3001
   # aws
@@ -35,18 +35,19 @@ nano .env
   NAVER=네이버아이디 _ 비밀번호발급위한 NAVER STMP프로토콜이용
   NAVER_PW=네이버비밀번호
 ```
-npm install
-sh pm2.sh 또는 OPERATION=true pm2 start bin/www.js --name placeback
-
+npm install <br />
+sh pm2.sh 또는 OPERATION=true pm2 start bin/www.js --name placeback <br />
+<br />
 ### 프론트설치
-cd ~/place/front
-nvm install 16
-nvm use 16
-npm install
-npm build
-
-
+cd ~/place/front <br />
+nvm install 16 <br />
+nvm use 16 <br />
+npm install <br />
+npm build <br />
+<br />
+<br />
 ## nginx 설정
+```
 server {
   listen 80;
   server_name place.opensrcdesign.com;
@@ -99,3 +100,5 @@ server {
   gzip_min_length 10000000000;
   gzip_disable "MSIE [1-6]\." gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
 }
+```
+
