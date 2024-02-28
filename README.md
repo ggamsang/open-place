@@ -1,4 +1,5 @@
-## nvm, pm2 설치 (https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
+## nvm, pm2 설치\n
+(https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 nvm install 8
 nvm use 8
